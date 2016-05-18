@@ -1,0 +1,20 @@
+root = true
+
+[*.py]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_withespace = true
+end_of_line = lf
+charset = utf-8
+
+[*.html]
+indent_size = 2
+
+[**/admin/js/vendor/**]
+indent_style = ignore
+indent_size = ignore
+
+[**.min.js]
+indent_style = ignore
+insert_final_newline = ignore
