@@ -1,0 +1,6 @@
+<h1>{{ scenario.name }}</h1>
+<ul>
+{% for scenario in category.scenario_set.all %}
+    <li>{{ scenario.name }}</li>
+{% endfor %}
+</ul>

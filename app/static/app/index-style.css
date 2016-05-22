@@ -1,0 +1,11 @@
+.white{
+    color:seashell;
+}
+
+md-dialog.fullscreen-dialog {
+    max-width: 60%;
+    max-height: 80%;
+    width: 60%;
+    height: 80%;
+    border-radius: 0;
+}

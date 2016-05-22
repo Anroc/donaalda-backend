@@ -1,0 +1,28 @@
+<script type="text/ng-template" id="loginTemplate.tmpl.html">
+    <md-dialog aria-label="Login" class="fullscreen-dialog">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button ng-click="closeDialog()" class="md-icon-button">
+                    <md-icon class="fa fa-times fa-2x" aria-hidden="false"></md-icon>
+                </md-button>
+                <h2 flex="flex">Login</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <form name="userForm">
+                <div layout="layout" layout-sm="column"></div>
+                <md-input-container flex="flex">
+                    <label>User name</label>
+                    <input ng-model="user.name"/>
+                </md-input-container>
+                <md-input-container flex="flex">
+                    <label>Password</label>
+                    <input ng-model="user.password"/>
+                </md-input-container>
+                <md-button layout-align="center">
+                    Submit
+                </md-button>
+            </form>
+        </md-dialog-content>
+    </md-dialog>
+</script>
