@@ -21,11 +21,11 @@
   <ng-include src="'{% static 'app/loginTemplate.tmpl.html' %}'"></ng-include>
   <ng-include src="'{% static 'app/registrationTemplate.tmpl.html' %}'"></ng-include>
 </head>
-<body ng-app="{% block ng-app %}donAALdApplication{% endblock %}"
-      ng-controller="{% block ng_controller %}themeController{% endblock %}" ng-cloak>
+<body ng-app="{% block ng_app %}donAALdApplication{% endblock %}"
+      ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
 <md-toolbar class="md-primary md-tall" layout="row" layout-align="center end">
   <div flex flex-sm="100" flex-gt-sm="95" flex-gt-md="80" layout="column">
-    <div layout="row" ng-controller="authenticationController">
+    <div layout="row" ng-controller="{% block ng_controller_authenticator %} authenticationController{% endblock %}">
       <h1 class="white">donAALd-Advisor</h1>
       <span flex></span>
 
@@ -82,7 +82,7 @@
     </md-sidenav>
 </div>
 -->
-<div id="gridContainer" ng-controller="gridController as ctrl" ng-cloak>
+<div id="gridContainer" ng-controller="{% block ng_controller_grid %}gridController as ctrl{% endblock %}" ng-cloak>
 
   <md-content layout-padding>
     <md-grid-list
@@ -94,7 +94,8 @@
                      'background': 'seashell'
                   }">
         <md-button>
-          <i class="material-icons" ng-style="{color: 'green', 'font-size':'100px', height:'100px'}">tv</i>
+          <img src={{category.picture.url}} alt="Smiley face" height="42" width="42">
+          <!--i class="material-icons" ng-style="{color: 'green', 'font-size':'100px', height:'100px'}">tv</i-->
         </md-button>
       </md-grid-tile>
       {% endfor %}

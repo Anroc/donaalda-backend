@@ -25,3 +25,4 @@ class DetailView(generic.DetailView):
 
     def get_queryset(self):
         return Scenario.objects.all()
+
