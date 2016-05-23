@@ -28,7 +28,7 @@
     <div layout="row" ng-controller="{% block ng_controller_authenticator %} authenticationController{% endblock %}">
       <h1 class="white">donAALd-Advisor</h1>
       <span flex></span>
-
+      <!--TODO: link to actual django template in templates -->
       <md-button style="color:seashell" ng-click="showLoginForm($event)">
         Log In
       </md-button>
@@ -52,6 +52,7 @@
   </div>
 </md-toolbar>
 <md-sidenav style="background:lightgreen;" md-component-id="profile" class="md-sidenav-left">
+  <!--TODO: create foreach to get these categories from backend-->
   <div><h1>Profile </h1></div>
   <div>
     <md-checkbox>Remote Desktop</md-checkbox>
@@ -94,6 +95,7 @@
                      'background': 'seashell'
                   }">
         <md-button>
+          <!--TODO: fix alternative image, add static alternative image-->
           <img src={{category.picture.url}} alt="Smiley face" height="42" width="42">
           <!--i class="material-icons" ng-style="{color: 'green', 'font-size':'100px', height:'100px'}">tv</i-->
         </md-button>

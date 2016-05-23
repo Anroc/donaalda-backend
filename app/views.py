@@ -1,8 +1,5 @@
-from django.shortcuts import render
-
-from django.http import HttpResponse
 from django.views import generic
-from django.utils import timezone
+
 
 from .models import Category, Scenario
 
@@ -26,3 +23,4 @@ class DetailView(generic.DetailView):
     def get_queryset(self):
         return Scenario.objects.all()
 
+# TODO: create register and login view
