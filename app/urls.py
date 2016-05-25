@@ -19,8 +19,8 @@ from . import views
 app_name = 'app'
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index_frontend'),
-    url(r'^login$', views.login_user, name='login'),
-    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+    url(r'^login$', views.login_view, name='login'),
+    # url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
 
 
     # TODO: register media urls here to deliver to index_frontend?

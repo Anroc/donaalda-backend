@@ -4,12 +4,12 @@ from django.views import generic
 from .models import Category, Scenario
 from django.views.generic.edit import FormView
 from .forms import LoginForm
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login, user_login_failed
+from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.http import *
-
+from django.core.urlresolvers import reverse, reverse_lazy
 
 class IndexView(generic.ListView):
     template_name = 'app/index_frontend.html'
@@ -47,6 +47,21 @@ def login_user(request):
             state = "Your username and/or password were incorrect."
 
     return render(request, 'app/loginTemplate.tmpl.html', {'state': state, 'username': username})
+
+@csrf_protect
+@require_http_methods(["GET","POST"])
+def login_view(request):
+    form = LoginForm(request.POST or None)
+    if request.POST:
+        if form.is_valid():
+            user = form.login(request)
+            if user is not None:
+                login(request, user)
+                print("HALLO")
+                return HttpResponseRedirect("/admin")
+        else:
+            return HttpResponseRedirect("/app")
+    return render(request,'app/loginTemplate.tmpl.html', {'login_form': form})
 
 
 class LoginView(FormView):
