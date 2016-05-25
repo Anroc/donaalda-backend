@@ -29,6 +29,9 @@
       <h1 class="white">donAALd-Advisor</h1>
       <span flex></span>
       <!--TODO: link to actual django template in templates -->
+        <md-button style="color:seashell" md-align="center-center">
+            {{ state }}
+        </md-button>
       <md-button style="color:seashell" ng-click="showLoginForm($event)">
         Log In
       </md-button>
@@ -92,7 +95,7 @@
       {% for category in latest_category_list %}
       <md-grid-tile
         ng-style="{
-                     'background': 'seashell'
+                     'background': 'white'
                   }">
         <md-button>
           <!--DONE: fix alternative image, add static alternative image-->

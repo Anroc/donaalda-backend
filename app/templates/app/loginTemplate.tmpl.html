@@ -10,7 +10,6 @@
             </div>
         </md-toolbar>
         <md-dialog-content>
-            {{ state }}
             <form action={%  url 'app:login' %} method="post">
                 {% csrf_token %}
                 <div layout="layout" layout-sm="column"></div>
@@ -25,16 +24,9 @@
                     <label>Password</label>
                     <input ng-model="user.password" type="password" name="password" value="{{ password }}"/>
                 </md-input-container>
-                <input type="submit" value="Log In" md-button layout-align="center">
-                    Submit
-                </inputmd-button>
-                {% if form.non_field_errors %}
-                    <ul class = 'form-errors'>
-                        {% for error in form.non_field_errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+                <md-button type ="submit" layout-align="center">
+                    <!--input type="submit" value="Log In" md-buttonlayout-align="center"-->Submit
+                </md-button>
             </form>
         </md-dialog-content>
     </md-dialog>

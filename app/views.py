@@ -18,6 +18,20 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Category.objects.all()
 
+    def get(self, request):
+        login_status = request.GET.get('login')
+        if login_status == 'failed':
+            print('Login failed')
+            return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
+                                                               'state': 'Login gibts heute nicht, bist du Dumm oder was?'})
+        if login_status == 'success':
+            print('Login successful')
+            return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
+                                                               'state': 'Welcome %s' %request.user.username})
+        return render(request, 'app/index_frontend.html', {'latest_category_list':Category.objects.all()})
+
+
+
 
 class DetailView(generic.DetailView):
     model = Scenario
@@ -57,10 +71,11 @@ def login_view(request):
             user = form.login(request)
             if user is not None:
                 login(request, user)
-                print("HALLO")
-                return HttpResponseRedirect("/admin")
+                print("Login successful")
+                return HttpResponseRedirect("/app/?login=success")
         else:
-            return HttpResponseRedirect("/app")
+            # print("login fehlgeschlagen")
+            return HttpResponseRedirect("/app/?login=failed")
     return render(request,'app/loginTemplate.tmpl.html', {'login_form': form})
 
 
