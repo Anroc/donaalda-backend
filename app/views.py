@@ -35,20 +35,27 @@ class IndexView(generic.ListView):
     template_name = 'app/index_frontend.html'
     context_object_name = 'latest_category_list'
 
-    def get_queryset(self):
-        return Category.objects.all()
+#    def get_queryset(self):
+ #       return Category.objects.all()
 
     def get(self, request):
         login_status = request.GET.get('login')
         if login_status == 'failed':
             print('Login failed')
             return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
-                                                               'state': 'Login gibts heute nicht, bist du Dumm oder was?'})
+                                                               'state': 'failed',
+                                                               'message': 'alter, bist du so unfähig deine Daten richtig einzugeben?',
+                                                               })
         if login_status == 'success':
             print('Login successful')
             return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
-                                                               'state': 'Welcome %s' %request.user.username})
-        return render(request, 'app/index_frontend.html', {'latest_category_list':Category.objects.all()})
+                                                               'state': 'success',
+                                                               # If the user type 'app/?login=success' in the url the
+                                                               # 'message' will be empty. The toolbar is
+                                                               # looking for this empty String and will not show 'Welcome'
+                                                                'message': request.user.username,
+                                                               })
+        return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all()})
 
 
 
