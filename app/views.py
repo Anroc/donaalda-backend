@@ -12,48 +12,10 @@ from django.views.decorators.http import require_http_methods
 from django.http import *
 from django.core.urlresolvers import reverse, reverse_lazy
 
-
-class ScenariosView(generic.ListView):
-    template_name = 'app/templates/scenariosTemplate.html'
-    context_object_name = 'scenario_list_from_category'
-
-    def get(self, request, *args, **kwargs):
-        category = kwargs.get("category_name")
-        # print(kwargs.get("category_name"))
-        #for kwarg in kwargs:
-            #print("quark: "+kwarg)
-
-        return render(request, 'app/templates/scenariosTemplate.html',
-                      {'scenario_list_from_category' : Category.objects.get(name=category).scenario_set.all(),
-                       'category' : category
-                       })
-
-
-    #def get_queryset(self):
-     #   return Scenario.objects.all()
-
-class ScenarioView(generic.DetailView):
-
-    # TODO: render scenarioTemplate (NOT scenario[S]Template)
-
-    template_name = 'app/templates/scenariosTemplate.html'
-    context_object_name = 'products_from_category_list'
-
-    def get(self, request, *args, **kwargs):
-        #category = kwargs.get("category_name")
-        # print(kwargs.get("category_name"))
-        #for kwarg in kwargs:
-            #print("quark: "+kwarg)
-
-        return render(request, 'app/templates/scenariosTemplate.html')
-
-
 class IndexView(generic.ListView):
     template_name = 'app/index_frontend.html'
     context_object_name = 'latest_category_list'
 
-#    def get_queryset(self):
- #       return Category.objects.all()
 
     def get(self, request):
         login_status = request.GET.get('login')
@@ -66,21 +28,36 @@ class IndexView(generic.ListView):
             return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
                                                                'state': 'success',
                                                                # If the user type 'app/?login=success' in the url the
-                                                               # 'message' will be empty. The toolbar is
-                                                               # looking for this empty String and will not show 'Welcome'
+                                                               # 'message' attribute will be empty. The toolbar template is
+                                                               # looking for this empty String and will not show 'Welcome [NO USER]'
                                                                 'message': request.user.username,
                                                                })
         return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all()})
 
 
+class ScenariosView(generic.ListView):
+    template_name = 'app/scenariosTemplate.html'
+    context_object_name = 'scenario_list_from_category'
+
+    def get(self, request, *args, **kwargs):
+        category = kwargs.get("category_name")
+        return render(request, 'app/scenariosTemplate.html',    {'scenario_list_from_category' : Category.objects.get(name=category).scenario_set.all(),
+                                                                 'category' : category
+                                                                })
 
 
-class DetailView(generic.DetailView):
-    model = Scenario
-    template_name = 'app/detail.html'
+class ScenarioView(generic.DetailView):
 
-    def get_queryset(self):
-        return Scenario.objects.all()
+    # TODO: render scenarioTemplate (NOT scenario[S]Template)
+
+    template_name = 'app/scenariosTemplate.html'
+    context_object_name = 'products_from_category_list'
+
+    def get(self, request, *args, **kwargs):
+
+        return render(request, 'app/scenariosTemplate.html')
+
+    
 """
 @csrf_protect
 @require_http_methods(["GET","POST"])
@@ -102,7 +79,7 @@ def login_user(request):
         else:
             state = "Your username and/or password were incorrect."
 
-    return render(request, 'app/loginTemplate.tmpl.html', {'state': state, 'username': username})"""
+    return render(request, 'app/loginTemplate.html', {'state': state, 'username': username})"""
 
 @csrf_protect
 @require_http_methods(["GET","POST"])
@@ -118,12 +95,12 @@ def login_view(request):
         else:
             print("login fehlgeschlagen")
             return HttpResponseRedirect("/app/?login=failed")
-    return render(request,'app/loginTemplate.tmpl.html', {'login_form': form})
+    return render(request,'app/loginTemplate.html', {'login_form': form})
 
 """
 class LoginView(FormView):
     form_class = LoginForm
-    template_name = 'app/loginTemplate.tmpl.html'
+    template_name = 'app/loginTemplate.html'
     success_url = 'app/index_frontend.html'
 
     def form_valid(self, form):
@@ -158,4 +135,4 @@ def register_user(request):
         user = User.objects.create_user(username, email, password)
     state = "Sie sind angemeldet "
 
-    return render(request, 'app/registrationTemplate.tmpl.html',)
+    return render(request, 'app/registrationTemplate.html',)

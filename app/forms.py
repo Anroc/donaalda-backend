@@ -37,5 +37,5 @@ class LoginForm(forms.Form):
             else:
                 state = "Your username and/or password were incorrect."
 
-        return render_to_response('app/loginTemplate.tmpl.html', {'state': state, 'username': username})
+        return render_to_response('app/loginTemplate.html', {'state': state, 'username': username})
         """

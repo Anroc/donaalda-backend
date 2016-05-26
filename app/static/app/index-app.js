@@ -43,7 +43,7 @@ function authenticationControl($scope, $mdDialog, $mdSidenav) {
                     }
                 });
             },
-            templateUrl: 'loginTemplate.tmpl.html',
+            templateUrl: 'loginTemplate.html',
             targetEvent: evt
         });
     };
@@ -65,7 +65,7 @@ function authenticationControl($scope, $mdDialog, $mdSidenav) {
                     }
                 });
             },
-            templateUrl: 'registrationTemplate.tmpl.html',
+            templateUrl: 'registrationTemplate.html',
             targetEvent: evt
         });
     }
