@@ -1,6 +1,16 @@
 <div>
     SCENARIOS
     <!-- jacke was here -->
+
+    {% if scenarios_from_category_list %}
+        {% for scenario in scenarios_from_category_list %}
+        <div>
+            <md-checkbox>{{ scenario.name}}</md-checkbox>
+        </div>
+        {% endfor %}
+    {% else %}
+      <div>No categories are available</div>
+    {% endif %}
 </div>
 <section id="facts" class="section bg-image-1 facts text-center">
     <div class="container">

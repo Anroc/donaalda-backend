@@ -18,12 +18,12 @@ class ScenarioView(generic.ListView):
     print("in scenario view")
 
     def get(self, request, *args, **kwargs):
-        specific_scenario = kwargs.get("category_name")
+        category = kwargs.get("category_name")
         # print(kwargs.get("category_name"))
         #for kwarg in kwargs:
             #print("quark: "+kwarg)
 
-        return render(request, 'app/templates/scenarioTemplate.html', {'scenarios_from_category_list': Category.objects.get(name=specific_scenario)})
+        return render(request, 'app/templates/scenarioTemplate.html', {'scenarios_from_category_list': Category.objects.get(name=category).scenario_set.all()})
 
 
     #def get_queryset(self):
