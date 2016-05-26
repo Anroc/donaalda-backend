@@ -13,8 +13,8 @@ from django.http import *
 from django.core.urlresolvers import reverse, reverse_lazy
 
 
-class ScenarioView(generic.ListView):
-    template_name = 'app/templates/scenarioTemplate.html'
+class ScenariosView(generic.ListView):
+    template_name = 'app/templates/scenariosTemplate.html'
     context_object_name = 'scenarios_from_category_list'
     print("in scenario view")
 
@@ -24,12 +24,24 @@ class ScenarioView(generic.ListView):
         #for kwarg in kwargs:
             #print("quark: "+kwarg)
 
-        return render(request, 'app/templates/scenarioTemplate.html', {'scenarios_from_category_list': Category.objects.get(name=category).scenario_set.all()})
+        return render(request, 'app/templates/scenariosTemplate.html', {'scenarios_from_category_list': Category.objects.get(name=category).scenario_set.all()})
 
 
     #def get_queryset(self):
      #   return Scenario.objects.all()
 
+class ScenarioView(generic.DetailView):
+    template_name = 'app/templates/scenariosTemplate.html'
+    context_object_name = 'scenarios_from_category_list'
+    print("in scenario view")
+
+    def get(self, request, *args, **kwargs):
+        category = kwargs.get("category_name")
+        # print(kwargs.get("category_name"))
+        #for kwarg in kwargs:
+            #print("quark: "+kwarg)
+
+        return render(request, 'app/templates/scenariosTemplate.html', {'scenarios_from_category_list': Category.objects.get(name=category).scenario_set.all()})
 
 class IndexView(generic.ListView):
     template_name = 'app/index_frontend.html'
