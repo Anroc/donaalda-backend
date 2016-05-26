@@ -27,7 +27,7 @@
   <ng-include src="'{% static 'app/toolbarTemplate.html' %}'"></ng-include>
   <ng-include src="'{% static 'app/gridTemplate.html' %}'"></ng-include>
   <ng-include src="'{% static 'app/goButtonTemplate.html' %}'"></ng-include>
-  <ng-include src="'{% static 'app/scenarioTemoplate.html' %}'"></ng-include>
+  <!--ng-include src="'{% static 'app/scenarioTemplate.html' %}'"></ng-include-->
   <ng-include src="'{% static 'app/productTemplate.html' %}'"></ng-include>
 
 
@@ -78,7 +78,7 @@
     {% if latest_category_list %}
         {% for category in latest_category_list %}
         <div>
-            <md-checkbox>{{ category.name }}</md-checkbox>
+            <md-button href="{% url 'app:scenario'  category.name %}">{{ category.name }}</md-button>
         </div>
         {% endfor %}
     {% else %}
@@ -124,7 +124,7 @@
         ng-style="{
                      'background': 'white'
                   }">
-        <md-button>
+        <md-button href="{% url 'app:scenarios' category.name %}">
           <!--DONE: fix alternative image, add static alternative image-->
           <img src={{category.picture.url}} alt="None" height="200" width="300">
           <!--TODO: Frontend format and center django element below img-->

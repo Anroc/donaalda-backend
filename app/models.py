@@ -8,7 +8,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     picture = models.ImageField(verbose_name="image for category", upload_to='categories')
     description = models.TextField()
-    categories = models.ManyToManyField("Scenario")
+    scenario = models.ManyToManyField("Scenario")
 
     def __str__(self):
         return '%s' % self.name

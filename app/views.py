@@ -11,6 +11,16 @@ from django.views.decorators.http import require_http_methods
 from django.http import *
 from django.core.urlresolvers import reverse, reverse_lazy
 
+
+class ScenarioView(generic.ListView):
+    template_name = 'app/scenarioTemplate.html'
+    context_object_name = 'scenarios_from_category_list'
+
+    print("in scenario view")
+    def get_queryset(self):
+        return Scenario.objects.all()
+
+
 class IndexView(generic.ListView):
     template_name = 'app/index_frontend.html'
     context_object_name = 'latest_category_list'
