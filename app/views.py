@@ -16,8 +16,8 @@ class ScenarioView(generic.ListView):
     template_name = 'app/scenarioTemplate.html'
     context_object_name = 'scenarios_from_category_list'
 
-    print("in scenario view")
-    def get_queryset(self):
+    def get_queryset(self, request):
+        self.request.GET.get('')
         return Scenario.objects.all()
 
 
