@@ -20,6 +20,7 @@ app_name = 'app'
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index_frontend'),
     url(r'^login$', views.login_view, name='login'),
+    url(r'^logout$', views.log_out, name='logout')
     # url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
 
 
