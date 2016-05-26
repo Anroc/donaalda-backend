@@ -1,56 +1,24 @@
-<md-sidenav style="background:green;position:fixed;" style="color:seashell;" md-component-id="profile" class="md-sidenav-left">
-    <div><h1 style="color:seashell">Profile </h1></div>
+<md-sidenav style="background:forestgreen;position:fixed;color:seashell;" md-component-id="profile"
+            class="md-sidenav-left">
+  <!--TODO: create foreach to get these categories from backend-->
+  <div><h1>Profile </h1></div>
+  {% if latest_category_list %}
+  {% for category in latest_category_list %}
+  <div>
+    <md-list>
+      <md-list-item class="md-2-line">
+        <md-checkbox></md-checkbox>
+        <div class="md-list-item-text">
+          <!-- TODO BACKEND: give all attributes regarding a category -->
+          <h3>{{ category.name }}</h3>
+          <p>Description: {{ category.description }} </p>
+        </div>
+      </md-list-item>
+    </md-list>
+  </div>
+  {% endfor %}
+  {% else %}
+  <div>No categories are available</div>
+  {% endif %}
 
-    <div>
-        <md-list>
-            <md-list-item class="md-2-line">
-                <md-checkbox ></md-checkbox>
-                <div class="md-list-item-text">
-                    <h3>Sicherheit</h3>
-                    <p>Great Description</p>
-                </div>
-            </md-list-item>
-            <md-list-item class="md-2-line">
-                <md-checkbox ></md-checkbox>
-                <div class="md-list-item-text">
-                    <h3>Komfort</h3>
-                    <p>Great Description</p>
-                </div>
-            </md-list-item>
-            <md-list-item class="md-2-line">
-                <md-checkbox ></md-checkbox>
-                <div class="md-list-item-text">
-                    <h3>Gesundheit</h3>
-                    <p>Great Health</p>
-                </div>
-            </md-list-item>
-            <md-list-item class="md-2-line">
-                <md-checkbox ></md-checkbox>
-                <div class="md-list-item-text">
-                    <h3>Remote Control</h3>
-                    <p>Great Description</p>
-                </div>
-            </md-list-item>
-            <md-list-item class="md-2-line">
-                <md-checkbox ></md-checkbox>
-                <div class="md-list-item-text">
-                    <h3>Energie</h3>
-                    <p>Smart Security</p>
-                </div>
-            </md-list-item>
-            <md-list-item class="md-2-line">
-                <md-checkbox ></md-checkbox>
-                <div class="md-list-item-text">
-                    <h3>Trump</h3>
-                    <p>Great Description</p>
-                </div>
-            </md-list-item>
-            <md-list-item class="md-2-line">
-                <md-checkbox ></md-checkbox>
-                <div class="md-list-item-text">
-                    <h3>Title</h3>
-                    <p>Great Description</p>
-                </div>
-        </md-list>
-    </div>
 </md-sidenav>

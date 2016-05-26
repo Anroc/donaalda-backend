@@ -1,6 +1,30 @@
 <!-- TODO backend pls put django tags where needed -->
+<div id="gridContainer" ng-controller="{% block ng_controller_grid %}gridController as ctrl{% endblock %}" ng-cloak>
 
-<div id="gridContainer" ng-controller="gridController as ctrl" ng-cloak>
+  <md-content layout-padding>
+    <md-grid-list
+      md-cols-gt-md="2" md-cols-sm="2" md-cols-md="2" md-row-height="2:1" md-gutter="0px">
+      {% if latest_category_list %}
+      {% for category in latest_category_list %}
+      <md-grid-tile
+        ng-style="{
+                     'background': 'white'
+                  }">
+        <md-button href="{% url 'app:scenarios' category.name %}">
+          <!--DONE: fix alternative image, add static alternative image-->
+          <img src={{category.picture.url}} alt="None" height="200" width="300">
+          <!--TODO: Frontend format and center django element below img-->
+          {{category.name}}
+        </md-button>
+      </md-grid-tile>
+      {% endfor %}
+      {% else %}
+      <p>No categories are available</p>
+      {% endif %}
+    </md-grid-list>
+  </md-content>
+</div>
+<div id="gridContainer2" ng-controller="gridController as ctrl" ng-cloak>
     <md-content class="md-padding">
         <md-grid-list
                 md-cols-gt-md="2" md-cols-sm="2" md-cols-md="2" md-row-height="2:1" md-gutter="0px">
