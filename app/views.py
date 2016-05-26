@@ -5,12 +5,31 @@ from django.contrib.auth.models import User
 from .models import Category, Scenario
 from django.views.generic.edit import FormView
 from .forms import LoginForm
-from django.contrib.auth import authenticate, login, user_login_failed
+from django.contrib.auth import authenticate, login, user_login_failed, logout
 from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.http import *
 from django.core.urlresolvers import reverse, reverse_lazy
+
+
+class ScenarioView(generic.ListView):
+    template_name = 'app/templates/scenarioTemplate.html'
+    context_object_name = 'scenarios_from_category_list'
+    print("in scenario view")
+
+    def get(self, request, *args, **kwargs):
+        specific_scenario = kwargs.get("category_name")
+        # print(kwargs.get("category_name"))
+        #for kwarg in kwargs:
+            #print("quark: "+kwarg)
+
+        return render(request, 'app/templates/scenarioTemplate.html', {'scenarios_from_category_list': Category.objects.get(name=specific_scenario)})
+
+
+    #def get_queryset(self):
+     #   return Scenario.objects.all()
+
 
 class IndexView(generic.ListView):
     template_name = 'app/index_frontend.html'
@@ -90,6 +109,14 @@ class LoginView(FormView):
         # It should return an HttpResponse.
         form.login()
         return super(LoginView, self).form_valid(form)"""
+
+# TODO: enable logout
+
+@csrf_protect
+@require_http_methods(["GET","POST"])
+def log_out(request):
+    logout(request)
+    return HttpResponseRedirect("/app/")
 
 # TODO: create register view
 

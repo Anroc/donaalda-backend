@@ -3,26 +3,35 @@
  */
 
 
-var donaaldaApp = angular.module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria']);
-donaaldaApp.controller('themeController', themeControl)
+var donAALdApp = angular.module('donAALdApplication', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria']);
+donAALdApp.controller('themeController', themeControl)
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('green')
             .accentPalette('light-blue')
     });
 
-donaaldaApp.controller('gridController', gridController);
+donAALdApp.controller('gridController', gridController);
 function gridController($scope) {
-    this.aalObjects = (function () {
-        var list = ["Energie", "Gesundheit", "Sicherheit", "Komfort"];
-        return list;
-    })();
-}
+    $scope.isActive = false;
+    $scope.activeButton1 = function() {
+        $scope.isActive1 = !$scope.isActive1;
+    }
+    $scope.activeButton2 = function() {
+        $scope.isActive2 = !$scope.isActive2;
+    }
+    $scope.activeButton3 = function() {
+        $scope.isActive3 = !$scope.isActive3;
+    }
+    $scope.activeButton4 = function() {
+        $scope.isActive4 = !$scope.isActive4;
+    }
+};
 
 function themeControl($scope) {
 }
 
-donaaldaApp.controller('authenticationController', authenticationControl);
+donAALdApp.controller('authenticationController', authenticationControl);
 function authenticationControl($scope, $mdDialog, $mdSidenav) {
     $scope.openProfile = function () {
         console.log("show profile")
@@ -43,7 +52,7 @@ function authenticationControl($scope, $mdDialog, $mdSidenav) {
                     }
                 });
             },
-            templateUrl: 'loginTemplate.tmpl.html',
+            templateUrl: 'loginTemplate.html',
             targetEvent: evt
         });
     };
@@ -54,18 +63,24 @@ function authenticationControl($scope, $mdDialog, $mdSidenav) {
             controller: function ($scope) {
                 return angular.extend($scope, {
                     user: {
-                        username:'',
-                        email: '',
-                        firstname: '',
-                        lastname: '',
-                        password: ''
+                        title: 'Developer',
+                        email: 'ipsum@lorem.com',
+                        firstName: 'Donald',
+                        lastName: '',
+                        company: 'Real Estate Company with big numbers',
+                        address: 'Big Building 101',
+                        city: 'Most beautiful city in the world',
+                        state: 'Best State',
+                        biography: 'I know the best words! \n\nLove kittens, snowboarding and can type' +
+                        ' at 130 WPM.\n\nI like walls!',
+                        postalCode: '10101'
                     },
                     closeDialog: function () {
                         return $mdDialog.hide();
                     }
                 });
             },
-            templateUrl: 'registrationTemplate.tmpl.html',
+            templateUrl: 'registrationTemplate.html',
             targetEvent: evt
         });
     }

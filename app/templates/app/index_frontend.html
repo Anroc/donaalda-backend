@@ -16,100 +16,25 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
   <script src="{% static 'app/index-app.js' %}"></script>
-  <title>donAALd Advisor - Data Organising Native Ambient Assisted Living Distributor </title>
+  <title>DONAALDA - Data Organising Native Ambient Assisted Living Distribution Adviser</title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+  {% include "app/templates/toolbarTemplate.html" %}
+
+  {% include "app/templates/gridTemplate.html" %}
+  {% include "app/templates/profileTemplate.html" %}
+  {% include "app/templates/registrationTemplate.html" %}
+
+  {% include "app/templates/scenarioTemplate.html" %}
+  {% include "app/templates/productTemplate.html" %}
 
   <ng-include src="'{% url 'app:login' %}'"></ng-include>
   <ng-include src="'{% url 'app:register_user' %}'"></ng-include>
-</head>
-<body ng-app="{% block ng_app %}donAALdApplication{% endblock %}"
-      ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
-<md-toolbar class="md-primary md-tall" layout="row" layout-align="center end">
-  <div flex flex-sm="100" flex-gt-sm="95" flex-gt-md="80" layout="column">
-    <div layout="row" ng-controller="{% block ng_controller_authenticator %} authenticationController{% endblock %}">
-      <h1 class="white">donAALd-Advisor</h1>
-      <span flex></span>
-      <!--TODO: link to actual django template in templates -->
-        <md-button style="color:seashell" md-align="center-center">
-            {{ state }}
-        </md-button>
-      <md-button style="color:seashell" ng-click="showLoginForm($event)">
-        Log In
-      </md-button>
-      <md-button style="color:seashell"
-                 ng-click="showRegistrationForm($event)">
-        Register
-      </md-button>
-      <md-button style="color:seashell" ng-click="openProfile()">
-        Profile
-      </md-button>
-    </div>
-    <span flex></span>
-    <md-tabs md-selected="currentTab" md-stretch-tabs="always" class="md-primary md-hue-1">
-      <md-tab id="1">
-        <md-tab-label style="color:seashell">Nutzer</md-tab-label>
-      </md-tab>
-      <md-tab id="2">
-        <md-tab-label style="color:seashell">Hersteller</md-tab-label>
-      </md-tab>
-    </md-tabs>
-  </div>
-</md-toolbar>
-<md-sidenav style="background:lightgreen;" md-component-id="profile" class="md-sidenav-left">
-  <!--TODO: create foreach to get these categories from backend-->
-  <div><h1>Profile </h1></div>
-  <div>
-    <md-checkbox>Remote Desktop</md-checkbox>
-  </div>
-  <div>
-    <md-checkbox>Gesundheit</md-checkbox>
-  </div>
-  <div>
-    <md-checkbox>Sicherheit</md-checkbox>
-  </div>
-  <div>
-    <md-checkbox>Komfort</md-checkbox>
-  </div>
-  <div flex>
-    <md-checkbox layout-align="center">Energie</md-checkbox>
-  </div>
-  <div>
-    <md-checkbox>Trump</md-checkbox>
-  </div>
-</md-sidenav>
-<!--
-<div>
-    <md-sidenav ng-controller="profileController as ctrl" class="md-sidenav-right" ng-cloak>
-        <md-button href="http://google.com">Google</md-button>
-        <div>
-            many many checkboxes
-        </div>
-    </md-sidenav>
-</div>
--->
-<div id="gridContainer" ng-controller="{% block ng_controller_grid %}gridController as ctrl{% endblock %}" ng-cloak>
 
-  <md-content layout-padding>
-    <md-grid-list
-      md-cols-gt-md="2" md-cols-sm="2" md-cols-md="2" md-row-height="2:1" md-gutter="0px">
-      {% if latest_category_list %}
-      {% for category in latest_category_list %}
-      <md-grid-tile
-        ng-style="{
-                     'background': 'white'
-                  }">
-        <md-button>
-          <!--DONE: fix alternative image, add static alternative image-->
-          <img src={{category.picture.url}} alt="None" height="200" width="300">
-          <!--TODO: Frontend format and center django element below img-->
-          {{category.name}}
-        </md-button>
-      </md-grid-tile>
-      {% endfor %}
-      {% else %}
-      <p>No categories are available</p>
-      {% endif %}
-    </md-grid-list>
-  </md-content>
-</div>
+</head>
+<body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
+      ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
+
 </body>
-<!--/html-->

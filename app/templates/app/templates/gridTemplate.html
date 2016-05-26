@@ -1,0 +1,85 @@
+<!-- TODO backend pls put django tags where needed -->
+<div id="gridContainer" ng-controller="{% block ng_controller_grid %}gridController as ctrl{% endblock %}" ng-cloak>
+
+  <md-content layout-padding>
+    <md-grid-list
+      md-cols-gt-md="2" md-cols-sm="2" md-cols-md="2" md-row-height="2:1" md-gutter="0px">
+      {% if latest_category_list %}
+      {% for category in latest_category_list %}
+      <md-grid-tile
+        ng-style="{
+                     'background': 'white'
+                  }">
+        <md-button href="{% url 'app:scenarios' category.name %}">
+          <!--DONE: fix alternative image, add static alternative image-->
+          <img src={{category.picture.url}} alt="None" height="200" width="300">
+          <!--TODO: Frontend format and center django element below img-->
+          {{category.name}}
+        </md-button>
+      </md-grid-tile>
+      {% endfor %}
+      {% else %}
+      <p>No categories are available</p>
+      {% endif %}
+    </md-grid-list>
+  </md-content>
+</div>
+<div id="gridContainer2" ng-controller="gridController as ctrl" ng-cloak>
+    <md-content class="md-padding">
+        <md-grid-list
+                md-cols-gt-md="2" md-cols-sm="2" md-cols-md="2" md-row-height="2:1" md-gutter="0px">
+            <md-grid-tile
+                    ng-style="{
+                     'background': 'white'
+                  }">
+                <md-button class="btn1" ng-class="{'active': isActive1}" ng-click="activeButton1()" type="button">
+                    <i class="material-icons" ng-style="{'font-size':'250px', height:'250px'}"  >tv</i>
+                    <md-tooltip md-direction="bottom">
+                        Komfort
+                    </md-tooltip>
+                </md-button>
+            </md-grid-tile>
+            <md-grid-tile
+                    ng-style="{
+                     'background': 'white'
+                  }">
+                <md-button class="btn1" ng-class="{'active': isActive2}" ng-click="activeButton2()" type="button">
+                    <i class="material-icons" ng-style="{'font-size':'250px', height:'250px'}">favorite</i>
+                    <md-tooltip md-direction="bottom">
+                        Gesundheit
+                    </md-tooltip>
+                </md-button>
+            </md-grid-tile>
+            <md-grid-tile
+                    ng-style="{
+                     'background': 'white'
+                  }">
+                <md-button class="btn1" ng-class="{'active': isActive3}" ng-click="activeButton3()" type="button">
+                    <i class="material-icons" ng-style="{'font-size':'250px', height:'250px'}">lock</i>
+                    <md-tooltip md-direction="top">
+                        Sicherheit
+                    </md-tooltip>
+                </md-button>
+            </md-grid-tile>
+            <md-grid-tile
+                    ng-style="{
+                     'background': 'white'
+                  }">
+                <md-button class="btn1" ng-class="{'active': isActive4}" ng-click="activeButton4()" type="button">
+                    <i class="material-icons" ng-style="{'font-size':'250px', height:'250px'}">lightbulb_outline</i>
+                    <md-tooltip md-direction="top">
+                        Energie
+                    </md-tooltip>
+                </md-button>
+            </md-grid-tile>
+        </md-grid-list>
+        <md-button class="md-fab md-fab-bottom-right btn2">
+            <md-tooltip md-direction="top">
+                LESTS GOO!!! WUHUUUU!
+            </md-tooltip>
+            <i class="material-icons" style="{'font-size': '100px' 'height': '100px'}">
+                forward
+            </i>
+        </md-button>
+    </md-content>
+</div>
