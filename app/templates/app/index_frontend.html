@@ -31,6 +31,7 @@
   {% include "app/templates/productTemplate.html" %}
 
   <ng-include src="'{% url 'app:login' %}'"></ng-include>
+  <ng-include src="'{% url 'app:register_user' %}'"></ng-include>
 
 </head>
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"

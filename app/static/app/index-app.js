@@ -54,17 +54,11 @@ function authenticationControl($scope, $mdDialog, $mdSidenav) {
             controller: function ($scope) {
                 return angular.extend($scope, {
                     user: {
-                        title: 'Developer',
-                        email: 'ipsum@lorem.com',
-                        firstName: 'Donald',
-                        lastName: '',
-                        company: 'Real Estate Company with big numbers',
-                        address: 'Big Building 101',
-                        city: 'Most beautiful city in the world',
-                        state: 'Best State',
-                        biography: 'I know the best words! \n\nLove kittens, snowboarding and can type' +
-                        ' at 130 WPM.\n\nI like walls!',
-                        postalCode: '10101'
+                        username:'',
+                        email: '',
+                        firstname: '',
+                        lastname: '',
+                        password: ''
                     },
                     closeDialog: function () {
                         return $mdDialog.hide();
