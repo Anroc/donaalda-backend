@@ -13,7 +13,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 
 
 class ScenarioView(generic.ListView):
-    template_name = 'app/scenarioTemplate.html'
+    template_name = 'app/templates/scenarioTemplate.html'
     context_object_name = 'scenarios_from_category_list'
     print("in scenario view")
 
@@ -23,7 +23,7 @@ class ScenarioView(generic.ListView):
         #for kwarg in kwargs:
             #print("quark: "+kwarg)
 
-        return render(request, 'app/scenarioTemplate.html', {'scenarios_from_category_list': Category.objects.get(name=specific_scenario)})
+        return render(request, 'app/templates/scenarioTemplate.html', {'scenarios_from_category_list': Category.objects.get(name=specific_scenario)})
 
 
     #def get_queryset(self):
