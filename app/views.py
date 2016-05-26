@@ -2,20 +2,18 @@ from django.views import generic
 
 from django.contrib.auth.models import User
 
-from .models import Category, Scenario
-from django.views.generic.edit import FormView
+from .models import Category
 from .forms import LoginForm
-from django.contrib.auth import authenticate, login, user_login_failed, logout
-from django.shortcuts import render, render_to_response
+from django.contrib.auth import login, logout
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.http import *
-from django.core.urlresolvers import reverse, reverse_lazy
+
 
 class IndexView(generic.ListView):
     template_name = 'app/index_frontend.html'
     context_object_name = 'latest_category_list'
-
 
     def get(self, request):
         login_status = request.GET.get('login')
@@ -30,7 +28,7 @@ class IndexView(generic.ListView):
                                                                # If the user type 'app/?login=success' in the url the
                                                                # 'message' attribute will be empty. The toolbar template is
                                                                # looking for this empty String and will not show 'Welcome [NO USER]'
-                                                                'message': request.user.username,
+                                                               'message': request.user.username,
                                                                })
         return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all()})
 
@@ -41,23 +39,22 @@ class ScenariosView(generic.ListView):
 
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
-        return render(request, 'app/scenariosTemplate.html',    {'scenario_list_from_category' : Category.objects.get(name=category).scenario_set.all(),
-                                                                 'category' : category
-                                                                })
+        return render(request, 'app/scenariosTemplate.html',
+                      {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
+                       'category': category
+                       })
 
 
 class ScenarioView(generic.DetailView):
-
     # TODO: render scenarioTemplate (NOT scenario[S]Template)
 
     template_name = 'app/scenariosTemplate.html'
     context_object_name = 'products_from_category_list'
 
     def get(self, request, *args, **kwargs):
-
         return render(request, 'app/scenariosTemplate.html')
 
-    
+
 """
 @csrf_protect
 @require_http_methods(["GET","POST"])
@@ -81,8 +78,9 @@ def login_user(request):
 
     return render(request, 'app/loginTemplate.html', {'state': state, 'username': username})"""
 
+
 @csrf_protect
-@require_http_methods(["GET","POST"])
+@require_http_methods(["GET", "POST"])
 def login_view(request):
     form = LoginForm(request.POST or None)
     if request.POST:
@@ -97,6 +95,7 @@ def login_view(request):
             return HttpResponseRedirect("/app/?login=failed")
     return render(request, 'app/templates/loginTemplate.html', {'login_form': form})
 
+
 """
 class LoginView(FormView):
     form_class = LoginForm
@@ -107,32 +106,31 @@ class LoginView(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         form.login()
-        return super(LoginView, self).form_valid(form)"""
+        return super(LoginView, self).form_valid(form)
+"""
 
-# TODO: enable logout
 
 @csrf_protect
-@require_http_methods(["GET","POST"])
+@require_http_methods(["GET", "POST"])
 def log_out(request):
     logout(request)
     return HttpResponseRedirect("/app/")
 
-# TODO: create register view
 
 @csrf_protect
-@require_http_methods(["GET","POST"])
+@require_http_methods(["GET", "POST"])
 def register_user(request):
     state = ""
-    username = password = email = firstname = lastname=''
+    username = password = email = firstname = lastname = ''
     if request.POST:
         username = request.POST.get('username')
         password = request.POST.get('password')
         email = request.POST.get('email')
         firstname = request.POST.get('firstname')
         lastname = request.POST.get('lastname')
-    #other attributes still to come
-    #check if user already exists
+        # other attributes still to come
+        # check if user already exists
         user = User.objects.create_user(username, email, password)
     state = "Sie sind angemeldet "
 
-    return render(request, 'app/registrationTemplate.html',)
+    return render(request, 'app/registrationTemplate.html', )

@@ -1,6 +1,5 @@
 from django import forms
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render_to_response
+from django.contrib.auth import authenticate
 
 
 class LoginForm(forms.Form):

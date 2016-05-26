@@ -14,11 +14,11 @@
         {% endif %}
       </md-button>
       {% if not request.user.is_authenticated %}
-      <md-button style="color:seashell" ng-click="showLoginForm($event)">
-        Log In
-      </md-button>
       <md-button style="color:seashell" ng-click="showRegistrationForm($event)">
         Register
+      </md-button>
+      <md-button style="color:seashell" ng-click="showLoginForm($event)">
+        Log In
       </md-button>
       {% else %}
       <md-button style="color:seashell" ng-click="openProfile()">
