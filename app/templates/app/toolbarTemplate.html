@@ -1,0 +1,57 @@
+<md-toolbar class="md-primary md-tall" style="position:fixed;" layout="row" layout-align="center end"
+            md-shrink-speed-factor="0.03" md-scroll-shrink="true">
+    <div flex flex-sm="100" flex-gt-sm="95" flex-gt-md="80" layout="column">
+        <div layout="row" ng-controller="authenticationController">
+            <h1 class="white">DONAALDA</h1>
+            <span flex></span>
+
+            <md-button style="color:seashell" ng-click="showLoginForm($event)">
+                Log In
+            </md-button>
+            <md-button style="color:seashell"
+                       ng-click="showRegistrationForm($event)">
+                Register
+            </md-button>
+            <md-button style="color:seashell" ng-click="openProfile()">
+                Profile
+            </md-button>
+        </div>
+        <span flex></span>
+        <md-tabs md-selected="currentTab" md-stretch-tabs="always" class="md-primary md-hue-1">
+            <md-tab id="1">
+                <md-tab-label style="color:seashell">Nutzer</md-tab-label>
+            </md-tab>
+            <md-tab id="2">
+                <md-tab-label style="color:seashell">Hersteller</md-tab-label>
+            </md-tab>
+        </md-tabs>
+    </div>
+</md-toolbar>
+<md-content>
+    <div flex flex-sm="100" flex-gt-sm="95" flex-gt-md="80" layout="column">
+        <div layout="row" ng-controller="authenticationController">
+            <h1 class="white">DONAALDA</h1>
+            <span flex></span>
+
+            <md-button style="color:seashell" ng-click="showLoginForm($event)">
+                Log In
+            </md-button>
+            <md-button style="color:seashell"
+                       ng-click="showRegistrationForm($event)">
+                Register
+            </md-button>
+            <md-button style="color:seashell" ng-click="openProfile()">
+                Profile
+            </md-button>
+        </div>
+        <span flex></span>
+        <md-tabs md-selected="currentTab" md-stretch-tabs="always" class="md-primary md-hue-1">
+            <md-tab id="1">
+                <md-tab-label style="color:seashell">Nutzer</md-tab-label>
+            </md-tab>
+            <md-tab id="2">
+                <md-tab-label style="color:seashell">Hersteller</md-tab-label>
+            </md-tab>
+        </md-tabs>
+    </div>
+</md-content>

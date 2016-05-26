@@ -16,12 +16,24 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
   <script src="{% static 'app/index-app.js' %}"></script>
-  <title>donAALd Advisor - Data Organising Native Ambient Assisted Living Distributor </title>
+  <title>DONAALDA - Data Organising Native Ambient Assisted Living Distributor Adviser</title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
   <ng-include src="'{% url 'app:login' %}'"></ng-include>
-  <ng-include src="'{% static 'app/registrationTemplate.tmpl.html' %}'"></ng-include>
+  <ng-include src="'{% static 'app/registrationTemplate.html' %}'"></ng-include>
+  <ng-include src="'{% static 'app/profileTemplate.html' %}'"></ng-include>
+  <ng-include src="'{% static 'app/toolbarTemplate.html' %}'"></ng-include>
+  <ng-include src="'{% static 'app/gridTemplate.html' %}'"></ng-include>
+  <ng-include src="'{% static 'app/goButtonTemplate.html' %}'"></ng-include>
+  <!--ng-include src="'{% static 'app/scenarioTemplate.html' %}'"></ng-include-->
+  <ng-include src="'{% static 'app/productTemplate.html' %}'"></ng-include>
+
+
+
 </head>
-<body ng-app="{% block ng_app %}donAALdApplication{% endblock %}"
+<body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
 <md-toolbar class="md-primary md-tall" layout="row" layout-align="center end">
   <div flex flex-sm="100" flex-gt-sm="95" flex-gt-md="80" layout="column">
@@ -66,7 +78,7 @@
     {% if latest_category_list %}
         {% for category in latest_category_list %}
         <div>
-            <md-checkbox>{{ category.name }}</md-checkbox>
+            <md-button href="{% url 'app:scenario'  category.name %}">{{ category.name }}</md-button>
         </div>
         {% endfor %}
     {% else %}
@@ -112,7 +124,7 @@
         ng-style="{
                      'background': 'white'
                   }">
-        <md-button>
+        <md-button href="{% url 'app:scenario' category.name %}">
           <!--DONE: fix alternative image, add static alternative image-->
           <img src={{category.picture.url}} alt="None" height="200" width="300">
           <!--TODO: Frontend format and center django element below img-->

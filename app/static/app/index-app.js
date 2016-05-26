@@ -3,15 +3,15 @@
  */
 
 
-var donAALdApp = angular.module('donAALdApplication', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria']);
-donAALdApp.controller('themeController', themeControl)
+var donaaldaApp = angular.module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria']);
+donaaldaApp.controller('themeController', themeControl)
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('green')
             .accentPalette('light-blue')
     });
 
-donAALdApp.controller('gridController', gridController);
+donaaldaApp.controller('gridController', gridController);
 function gridController($scope) {
     this.aalObjects = (function () {
         var list = ["Energie", "Gesundheit", "Sicherheit", "Komfort"];
@@ -22,7 +22,7 @@ function gridController($scope) {
 function themeControl($scope) {
 }
 
-donAALdApp.controller('authenticationController', authenticationControl);
+donaaldaApp.controller('authenticationController', authenticationControl);
 function authenticationControl($scope, $mdDialog, $mdSidenav) {
     $scope.openProfile = function () {
         console.log("show profile")
