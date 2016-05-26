@@ -23,7 +23,7 @@ class Category(models.Model):
 
 class Scenario(models.Model):
     name = models.CharField(max_length=100)
-    short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="255")
+    short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="255", null=True, blank=True)
     description = models.TextField(verbose_name="Beschreibung")
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True)
 
