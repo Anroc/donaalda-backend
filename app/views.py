@@ -95,7 +95,7 @@ def login_view(request):
         else:
             print("login fehlgeschlagen")
             return HttpResponseRedirect("/app/?login=failed")
-    return render(request,'app/loginTemplate.html', {'login_form': form})
+    return render(request, 'app/templates/loginTemplate.html', {'login_form': form})
 
 """
 class LoginView(FormView):
