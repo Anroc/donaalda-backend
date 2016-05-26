@@ -15,8 +15,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 
 class ScenariosView(generic.ListView):
     template_name = 'app/templates/scenariosTemplate.html'
-    context_object_name = 'scenarios_from_category_list'
-    print("in scenario view")
+    context_object_name = 'scenario_list_from_category'
 
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
@@ -24,24 +23,30 @@ class ScenariosView(generic.ListView):
         #for kwarg in kwargs:
             #print("quark: "+kwarg)
 
-        return render(request, 'app/templates/scenariosTemplate.html', {'scenarios_from_category_list': Category.objects.get(name=category).scenario_set.all()})
+        return render(request, 'app/templates/scenariosTemplate.html',
+                      {'scenario_list_from_category' : Category.objects.get(name=category).scenario_set.all(),
+                       'category' : category
+                       })
 
 
     #def get_queryset(self):
      #   return Scenario.objects.all()
 
 class ScenarioView(generic.DetailView):
+
+    # TODO: render scenarioTemplate (NOT scenario[S]Template)
+
     template_name = 'app/templates/scenariosTemplate.html'
-    context_object_name = 'scenarios_from_category_list'
-    print("in scenario view")
+    context_object_name = 'products_from_category_list'
 
     def get(self, request, *args, **kwargs):
-        category = kwargs.get("category_name")
+        #category = kwargs.get("category_name")
         # print(kwargs.get("category_name"))
         #for kwarg in kwargs:
             #print("quark: "+kwarg)
 
-        return render(request, 'app/templates/scenariosTemplate.html', {'scenarios_from_category_list': Category.objects.get(name=category).scenario_set.all()})
+        return render(request, 'app/templates/scenariosTemplate.html')
+
 
 class IndexView(generic.ListView):
     template_name = 'app/index_frontend.html'
@@ -53,13 +58,11 @@ class IndexView(generic.ListView):
     def get(self, request):
         login_status = request.GET.get('login')
         if login_status == 'failed':
-            print('Login failed')
             return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
                                                                'state': 'failed',
                                                                'message': 'alter, bist du so unfähig deine Daten richtig einzugeben?',
                                                                })
         if login_status == 'success':
-            print('Login successful')
             return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
                                                                'state': 'success',
                                                                # If the user type 'app/?login=success' in the url the
@@ -113,7 +116,7 @@ def login_view(request):
                 print("Login successful")
                 return HttpResponseRedirect("/app/?login=success")
         else:
-            # print("login fehlgeschlagen")
+            print("login fehlgeschlagen")
             return HttpResponseRedirect("/app/?login=failed")
     return render(request,'app/loginTemplate.tmpl.html', {'login_form': form})
 

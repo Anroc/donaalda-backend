@@ -2,14 +2,14 @@
     SCENARIOS
     <!-- jacke was here -->
 
-    {% if scenarios_from_category_list %}
-        {% for scenario in scenarios_from_category_list %}
+    {% if scenario_list_from_category %}
+        {% for scenario in scenario_list_from_category %}
         <div>
-            <md-checkbox>{{ scenario.name}}</md-checkbox>
+            <a href="{% url 'app:scenario' scenario.id%} ">{{ scenario.name}}</a>
         </div>
         {% endfor %}
     {% else %}
-      <div>No categories are available</div>
+      <div>No scenarios are available</div>
     {% endif %}
 </div>
 <section id="facts" class="section bg-image-1 facts text-center">
