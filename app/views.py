@@ -4,7 +4,7 @@ from django.views import generic
 from .models import Category, Scenario
 from django.views.generic.edit import FormView
 from .forms import LoginForm
-from django.contrib.auth import authenticate, login, user_login_failed
+from django.contrib.auth import authenticate, login, user_login_failed, logout
 from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
@@ -90,5 +90,12 @@ class LoginView(FormView):
         form.login()
         return super(LoginView, self).form_valid(form)
 
+# TODO: enable logout
+
+@csrf_protect
+@require_http_methods(["GET","POST"])
+def log_out(request):
+    logout(request)
+    return HttpResponseRedirect("/app/")
 
 # TODO: create register view

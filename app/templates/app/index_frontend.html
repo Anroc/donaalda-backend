@@ -43,7 +43,8 @@
       <md-button style="color:seashell" ng-click="openProfile()">
         Profile
       </md-button>
-      <md-button style="color:seashell" ng-click="logOut($event)">
+          {% csrf_token %}
+      <md-button style="color:seashell; margin:auto" md-align="center-center" href="{% url 'app:logout' %}">
           Logout
       </md-button>
         {% endif %}
