@@ -1,5 +1,6 @@
 from django.views import generic
 
+from django.contrib.auth.models import User
 
 from .models import Category, Scenario
 from django.views.generic.edit import FormView
@@ -39,7 +40,7 @@ class DetailView(generic.DetailView):
 
     def get_queryset(self):
         return Scenario.objects.all()
-
+"""
 @csrf_protect
 @require_http_methods(["GET","POST"])
 def login_user(request):
@@ -60,7 +61,7 @@ def login_user(request):
         else:
             state = "Your username and/or password were incorrect."
 
-    return render(request, 'app/loginTemplate.tmpl.html', {'state': state, 'username': username})
+    return render(request, 'app/loginTemplate.tmpl.html', {'state': state, 'username': username})"""
 
 @csrf_protect
 @require_http_methods(["GET","POST"])
@@ -78,7 +79,7 @@ def login_view(request):
             return HttpResponseRedirect("/app/?login=failed")
     return render(request,'app/loginTemplate.tmpl.html', {'login_form': form})
 
-
+"""
 class LoginView(FormView):
     form_class = LoginForm
     template_name = 'app/loginTemplate.tmpl.html'
@@ -88,7 +89,24 @@ class LoginView(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         form.login()
-        return super(LoginView, self).form_valid(form)
-
+        return super(LoginView, self).form_valid(form)"""
 
 # TODO: create register view
+
+@csrf_protect
+@require_http_methods(["GET","POST"])
+def register_user(request):
+    state = ""
+    username = password = email = firstname = lastname=''
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+    #other attributes still to come
+    #check if user already exists
+        user = User.objects.create_user(username, email, password)
+    state = "Sie sind angemeldet "
+
+    return render(request, 'app/registrationTemplate.tmpl.html',)

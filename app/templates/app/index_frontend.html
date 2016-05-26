@@ -19,7 +19,7 @@
   <title>donAALd Advisor - Data Organising Native Ambient Assisted Living Distributor </title>
 
   <ng-include src="'{% url 'app:login' %}'"></ng-include>
-  <ng-include src="'{% static 'app/registrationTemplate.tmpl.html' %}'"></ng-include>
+  <ng-include src="'{% url 'app:register_user' %}'"></ng-include>
 </head>
 <body ng-app="{% block ng_app %}donAALdApplication{% endblock %}"
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
