@@ -78,7 +78,7 @@
     {% if latest_category_list %}
         {% for category in latest_category_list %}
         <div>
-            <md-button href="{% url 'app:scenario'  category.name %}">{{ category.name }}</md-button>
+            <md-checkbox>{{ category.name }}</md-checkbox>
         </div>
         {% endfor %}
     {% else %}
@@ -124,7 +124,7 @@
         ng-style="{
                      'background': 'white'
                   }">
-        <md-button href="{% url 'app:scenario' category.name %}">
+        <md-button href="{% url 'app:scenarios' category.name %}">
           <!--DONE: fix alternative image, add static alternative image-->
           <img src={{category.picture.url}} alt="None" height="200" width="300">
           <!--TODO: Frontend format and center django element below img-->
