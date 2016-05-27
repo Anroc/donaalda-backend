@@ -55,6 +55,18 @@ class ScenarioView(generic.DetailView):
         return render(request, 'app/scenariosTemplate.html')
 
 
+class ProductView(generic.DetailView):
+    # TODO: render specific ProductTemplate for selected product
+
+    template_name = 'app/productTemplate.html'
+    context_object_name = 'product'
+
+    def get(self, request, *args, **kwargs):
+        product = kwargs.get("product_name")
+        return render(request, 'app/productTemplate.html',
+                      {'product': product.objects.get(name=product).name.all()})
+
+
 """
 @csrf_protect
 @require_http_methods(["GET","POST"])
