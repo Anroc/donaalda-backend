@@ -20,7 +20,7 @@ class IndexView(generic.ListView):
         if login_status == 'failed':
             return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
                                                                'state': 'failed',
-                                                               'message': 'alter, bist du so unfähig deine Daten richtig einzugeben?',
+                                                               'message': 'Wrong login data!',
                                                                })
         if login_status == 'success':
             return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
@@ -100,10 +100,8 @@ def login_view(request):
             user = form.login(request)
             if user is not None:
                 login(request, user)
-                print("Login successful")
                 return HttpResponseRedirect("/app/?login=success")
         else:
-            print("login fehlgeschlagen")
             return HttpResponseRedirect("/app/?login=failed")
     return render(request, 'app/templates/loginTemplate.html', {'login_form': form})
 

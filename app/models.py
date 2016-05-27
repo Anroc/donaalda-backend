@@ -2,7 +2,6 @@ from django.db import models
 
 
 # Create your models here.
-# TODO: create own model for user login, short google search: best practice to not let users access admin panel
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
