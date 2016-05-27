@@ -49,7 +49,7 @@ class ScenarioView(generic.DetailView):
     # TODO: render scenarioTemplate (NOT scenario[S]Template)
 
     template_name = 'app/scenariosTemplate.html'
-    context_object_name = 'products_from_category_list'
+    context_object_name = 'product_set_from_scenario'
 
     def get(self, request, *args, **kwargs):
         return render(request, 'app/scenariosTemplate.html')
