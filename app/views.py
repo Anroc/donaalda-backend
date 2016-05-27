@@ -2,7 +2,7 @@ from django.views import generic
 
 from django.contrib.auth.models import User
 
-from .models import Category
+from .models import Category, Product
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -64,7 +64,7 @@ class ProductView(generic.DetailView):
     def get(self, request, *args, **kwargs):
         product = kwargs.get("product_name")
         return render(request, 'app/productTemplate.html',
-                      {'product': product.objects.get(name=product).name.all()})
+                      {'product': Product.objects.get(name=product)})
 
 
 """
