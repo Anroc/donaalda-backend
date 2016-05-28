@@ -20,14 +20,9 @@ app_name = 'app'
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index_frontend'),
     url(r'^login$', views.login_view, name='login'),
+    url(r'^register$', views.register_user, name='register_user'),
     url(r'^logout$', views.log_out, name='logout'),
-    url(r'^(?P<category_name>[a-zA-Z]+)/scenarios/$', views.ScenarioView.as_view(), name='scenarios'),
-
-    # url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
-
-
-    # TODO: register media urls here to deliver to index_frontend?
+    url(r'^(?P<category_name>[a-zA-Z]+)/scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
+    url(r'^scenarios/scenario/(?P<pk>[0-9]+)/$', views.ScenarioView.as_view(), name='scenario'),
+    url(r'^products/(?P<product_name>[a-zA-Z0-9_-]+)$', views.ProductView.as_view(), name='product'),
 ]
-
-# if settings.DEBUG is True:
-#    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

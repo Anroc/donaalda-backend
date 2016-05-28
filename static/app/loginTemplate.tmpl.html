@@ -10,22 +10,18 @@
             </div>
         </md-toolbar>
         <md-dialog-content>
-            <form action={%  url 'app:login' %} method="post">
-                {% csrf_token %}
+            <form name="userForm">
                 <div layout="layout" layout-sm="column"></div>
-                {% if next %}
-                    <input type="hidden" name="next" value="{{ next }}" />
-                {% endif %}
                 <md-input-container flex="flex">
                     <label>User name</label>
-                    <input ng-model="user.name" type="text" name="username" value="{{ name }}"/>
+                    <input ng-model="user.name"/>
                 </md-input-container>
                 <md-input-container flex="flex">
                     <label>Password</label>
-                    <input ng-model="user.password" type="password" name="password" value="{{ password }}"/>
+                    <input ng-model="user.password"/>
                 </md-input-container>
-                <md-button type ="submit" layout-align="center">
-                    <!--input type="submit" value="Log In" md-buttonlayout-align="center"-->Submit
+                <md-button layout-align="center">
+                    Submit
                 </md-button>
             </form>
         </md-dialog-content>

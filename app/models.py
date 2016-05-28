@@ -5,7 +5,6 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
 # Create your models here.
-# TODO: create own model for user login, short google search: best practice to not let users access admin panel
 
 
 class Category(models.Model):

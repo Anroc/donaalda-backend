@@ -16,61 +16,27 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
   <script src="{% static 'app/index-app.js' %}"></script>
-  <title>DONAALDA - Data Organising Native Ambient Assisted Living Distributor Adviser</title>
+  <title>DONAALDA - Data Organising Native Ambient Assisted Living Distribution Adviser</title>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
   {% include "app/templates/toolbarTemplate.html" %}
 
-  {% include "app/templates/scenarioTemplate.html" %}
   {% include "app/templates/gridTemplate.html" %}
   {% include "app/templates/profileTemplate.html" %}
-  {% include "app/templates/registrationTemplate.html" %}
-  {% include "app/templates/productTemplate.html" %}
+
+
+    <!-- wozu benoetigen wir die hier?? --timo--       -->
+  {#% include "app/templates/registrationTemplate.html" %#}
+  {#% include "app/templates/scenariosTemplate.html" #}
+  {#% include "app/templates/productTemplate.html" %#}
 
   <ng-include src="'{% url 'app:login' %}'"></ng-include>
+  <ng-include src="'{% url 'app:register_user' %}'"></ng-include>
 
 </head>
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
 
-<md-sidenav style="background:lightgreen;" md-component-id="profile" class="md-sidenav-left">
-  <!--TODO: create foreach to get these categories from backend-->
-  <div><h1>Profile </h1></div>
-  {% if latest_category_list %}
-  {% for category in latest_category_list %}
-  <div>
-    <md-checkbox>{{ category.name }}</md-checkbox>
-  </div>
-  {% endfor %}
-  {% else %}
-  <div>No categories are available</div>
-  {% endif %}
-</md-sidenav>
-<div id="gridContainer" ng-controller="{% block ng_controller_grid %}gridController as ctrl{% endblock %}" ng-cloak>
-
-  <md-content layout-padding>
-    <md-grid-list
-      md-cols-gt-md="2" md-cols-sm="2" md-cols-md="2" md-row-height="2:1" md-gutter="0px">
-      {% if latest_category_list %}
-      {% for category in latest_category_list %}
-      <md-grid-tile
-        ng-style="{
-                     'background': 'white'
-                  }">
-        <md-button href="{% url 'app:scenarios' category.name %}">
-          <!--DONE: fix alternative image, add static alternative image-->
-          <img src={{category.picture.url}} alt="None" height="200" width="300">
-          <!--TODO: Frontend format and center django element below img-->
-          {{category.name}}
-        </md-button>
-      </md-grid-tile>
-      {% endfor %}
-      {% else %}
-      <p>No categories are available</p>
-      {% endif %}
-    </md-grid-list>
-  </md-content>
-</div>
 </body>

@@ -1,6 +1,16 @@
 <div>
     SCENARIOS
     <!-- jacke was here -->
+
+    {% if scenario_list_from_category %}
+        {% for scenario in scenario_list_from_category %}
+        <div>
+            <a href="{% url 'app:scenario' scenario.id%} ">{{ scenario.name}}</a>
+        </div>
+        {% endfor %}
+    {% else %}
+      <div>No scenarios are available</div>
+    {% endif %}
 </div>
 <section id="facts" class="section bg-image-1 facts text-center">
     <div class="container">

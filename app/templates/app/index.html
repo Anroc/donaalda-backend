@@ -1,9 +1,0 @@
-{%  if latest_category_list %}
-    <ul>
-        {% for category in latest_category_list %}
-            <li><a href="{% url 'app:detail' category.id %}">{{ category.name }}</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No categories are available</p>
-{% endif %}
