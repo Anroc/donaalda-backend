@@ -30,6 +30,19 @@ class IndexView(generic.ListView):
                                                                # looking for this empty String and will not show 'Welcome [NO USER]'
                                                                'message': request.user.username,
                                                                })
+        registration_status = request.GET.get('registration')
+        if registration_status == 'blank_fields':
+            return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
+                                                               'message': 'Bitte alle Felder ausfüllen!',
+                                                               })
+        if registration_status == 'success':
+            return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
+                                                               'message': 'Registrierung erfolgreich!',
+                                                               })
+        if registration_status == 'taken':
+            return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
+                                                               'message': 'Der Benutzername wird bereits verwendet!',
+                                                               })
         return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all()})
 
 
@@ -130,17 +143,21 @@ def log_out(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def register_user(request):
-    state = ""
-    username = password = email = firstname = lastname = ''
-    if request.POST:
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        email = request.POST.get('email')
-        firstname = request.POST.get('firstname')
-        lastname = request.POST.get('lastname')
-        # other attributes still to come
-        # check if user already exists
-        user = User.objects.create_user(username, email, password)
-    state = "Sie sind angemeldet "
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    email = request.POST.get('email')
+    firstname = request.POST.get('firstname')
+    lastname = request.POST.get('lastname')
 
+    if request.POST:
+        if username and password and email and firstname and lastname:
+            if User.objects.filter(username=username).exists():
+                return HttpResponseRedirect("/app/?registration=taken")
+            user = User.objects.create_user(username, email, password)
+            user.first_name=firstname
+            user.last_name = lastname
+            user.save()
+            return HttpResponseRedirect("/app/?registration=success")
+        else:
+            return HttpResponseRedirect("/app/?registration=blank_fields")
     return render(request, 'app/registrationTemplate.html', )
