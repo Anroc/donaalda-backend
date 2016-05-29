@@ -1,38 +1,74 @@
-<div>
-    SCENARIOS
-    <!-- jacke was here -->
+{% load staticfiles %}
 
-    {% if scenario_list_from_category %}
-        {% for scenario in scenario_list_from_category %}
-        <div>
-            <a href="{% url 'app:scenario' scenario.id%} ">{{ scenario.name}}</a>
-        </div>
-        {% endfor %}
-    {% else %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
+  <script src="{% static 'app/index-app.js' %}"></script>
+  <title>DONAALDA - Data Organising Native Ambient Assisted Living Distribution Adviser</title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+  {% include "app/templates/toolbarTemplate.html" %}
+  {% include "app/templates/loginTemplate.html" %}
+  {% include "app/templates/registrationTemplate.html" %}
+  {% include "app/templates/profileTemplate.html" %}
+
+
+</head>
+<body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
+      ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
+<section style="margin:0px;">
+  SCENARIOS
+
+
+  <div ng-cloak="" class="scenarioCards">
+    <md-content class="md-padding" layout-xs="column" layout="row">
+      {% if scenario_list_from_category %}
+      {% for scenario in scenario_list_from_category %}
+      <div layout="row">
+        <a href="{% url 'app:scenario' scenario.id%} ">{{ scenario.name}}</a>
+
+        <md-card>
+          <md-card-header>
+            MD CARD HEADER
+            <md-card-avatar>
+              <md-icon class="md-avatar-icon" md-svg-icon="assets/resources/ic_pets_black_24px.svg"></md-icon>
+            </md-card-avatar>
+            <md-card-header-text>
+              <span class="md-title">SCENARIO TITLE</span>
+              <span class="md-subhead">SCENARIO SUBHEAD</span>
+            </md-card-header-text>
+          </md-card-header>
+          <img src="">
+          <md-card-title>MD CARD TITLE
+            <md-card-title-text>
+              <span class="md-headline">SCENARIO HEADLINE</span>
+            </md-card-title-text>
+          </md-card-title>
+        </md-card>
+
+      </div>
+      {% endfor %}
+      {% else %}
       <div>No scenarios are available</div>
-    {% endif %}
-</div>
-<section id="facts" class="section bg-image-1 facts text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
+      {% endif %}
+    </md-content>
+  </div>
 
-                <i class="ion-ios-calendar"></i>
-                <h3>Most Important Info <br> Important Info<br>  Less Important Info</h3>
-
-            </div>
-            <div class="col-sm-3">
-
-                <i class="ion-ios-location"></i>
-                <h3>Germany<br>Berlin</h3>
-
-            </div>
-            <div class="col-sm-3">
-
-                <i class="ion-earth"></i>
-                <h3>Smart as your pet!</h3>
-
-            </div>
-        </div><!-- row -->
-    </div><!-- container -->
 </section>
+
+</body>
+</html>
