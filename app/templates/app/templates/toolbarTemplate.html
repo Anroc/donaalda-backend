@@ -31,12 +31,13 @@
       {% endif %}
     </div>
     <span flex></span>
-    <md-tabs md-selected="currentTab" md-stretch-tabs="always" class="md-primary md-hue-1">
-      <md-tab id="1">
-        <md-tab-label style="color:seashell">Nutzer</md-tab-label>
+    <md-tabs md-selected="currentTab" md-stretch-tabs="always" class="md-primary md-hue-1" md-dynamic-height
+             md-border-bottom>
+      <md-tab id="1" label="Nutzer">
+        {% include "app/templates/gridTemplate.html" %}
       </md-tab>
-      <md-tab id="2">
-        <md-tab-label style="color:seashell">Hersteller</md-tab-label>
+      <md-tab id="2" label="Hersteller">
+        {% include "app/templates/producerTemplate.html" %}
       </md-tab>
     </md-tabs>
   </div>
