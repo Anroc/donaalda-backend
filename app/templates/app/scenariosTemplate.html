@@ -42,16 +42,18 @@
               <md-icon class="md-avatar-icon" md-svg-icon="../../../static/app/assets/resources/ic_pets_black_24px.svg"></md-icon>
             </md-card-avatar>
             <md-card-header-text>
-              <span class="md-title">Title: {{ scenario.name }}</span>
-              <span class="md-subhead">Description: {{ scenario.description}}</span>
+              <span class="md-title">Title: {{scenario.name}}</span>
+              <span class="md-subhead">Short Description: {{scenario.short_description}}</span>
             </md-card-header-text>
           </md-card-header>
           <img src="../../../static/app/assets/resources/iolite.JPG" height="192" width="256" class="md-card-image" alt="Washed Out">
+          <img src={{scenario.picture}} height="192" width="256" class="md-card-image" alt="Couldn't find picture">
           <md-card-title>
             <md-card-title-text>
-              <span class="md-headline">SCENARIO HEADLINE</span>
+              <span class="md-headline">Headline: {{scenario.provider}}</span>
             </md-card-title-text>
           </md-card-title>
+          <!-- TODO backend: give scenario category flags to show like this -->
           <md-card-actions layout="row" layout-align="start center">
             <md-card-icon-actions>
               <md-button class="md-icon-button" aria-label="Favorite">
@@ -67,20 +69,47 @@
                 <md-icon md-svg-icon="../../../static/app/assets/resources/ic_important_devices_black_24px.svg"></md-icon>
               </md-button>
             </md-card-icon-actions>
+            <!-- TODO frontend & backend: show popup / new page with the products used in the scenario -->
             <md-button>View Products</md-button>
+            <!-- TODO frontend: show question bar -->
+            <!-- TODO backend: offer specific questions -->
             <md-button>Show questions</md-button>
-
           </md-card-actions>
 
           <md-card-content>
             <p>
-              Great goodness! Tough cookie....
+              Tough cookie description: {{scenario.description}}
             </p>
             <p>
               Important link:
               <br>
               <a href="{% url 'app:scenario' scenario.id%} ">{{ scenario.name}}</a>
 
+            </p>
+            <p>
+              <md-list>
+                <md-list-item class="md-2-line">
+                  <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+                  <label>TITLE</label>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                  <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+                  <label>TITLE</label>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                  <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+                  <label>TITLE</label>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                  <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+                  <label>TITLE</label>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                  <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+                  <label>TITLE</label>
+                </md-list-item>
+
+              </md-list>
             </p>
           </md-card-content>
         </md-card>
