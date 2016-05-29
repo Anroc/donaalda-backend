@@ -19,14 +19,10 @@
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-
   {% include "app/templates/toolbarTemplate.html" %}
   {% include "app/templates/loginTemplate.html" %}
   {% include "app/templates/registrationTemplate.html" %}
   {% include "app/templates/profileTemplate.html" %}
-
-
 </head>
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
@@ -39,25 +35,54 @@
       {% if scenario_list_from_category %}
       {% for scenario in scenario_list_from_category %}
       <div layout="row">
-        <a href="{% url 'app:scenario' scenario.id%} ">{{ scenario.name}}</a>
 
         <md-card>
           <md-card-header>
-            MD CARD HEADER
             <md-card-avatar>
-              <md-icon class="md-avatar-icon" md-svg-icon="assets/resources/ic_pets_black_24px.svg"></md-icon>
+              <md-icon class="md-avatar-icon" md-svg-icon="../../../static/app/assets/resources/ic_pets_black_24px.svg"></md-icon>
             </md-card-avatar>
             <md-card-header-text>
-              <span class="md-title">SCENARIO TITLE</span>
-              <span class="md-subhead">SCENARIO SUBHEAD</span>
+              <span class="md-title">Title: {{ scenario.name }}</span>
+              <span class="md-subhead">Description: {{ scenario.description}}</span>
             </md-card-header-text>
           </md-card-header>
-          <img src="">
-          <md-card-title>MD CARD TITLE
+          <img src="../../../static/app/assets/resources/iolite.JPG" height="192" width="256" class="md-card-image" alt="Washed Out">
+          <md-card-title>
             <md-card-title-text>
               <span class="md-headline">SCENARIO HEADLINE</span>
             </md-card-title-text>
           </md-card-title>
+          <md-card-actions layout="row" layout-align="start center">
+            <md-card-icon-actions>
+              <md-button class="md-icon-button" aria-label="Favorite">
+                <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+              </md-button>
+              <md-button class="md-icon-button" aria-label="Share">
+                <md-icon md-svg-icon="../../../static/app/assets/resources/ic_perm_scan_wifi_black_24px.svg"></md-icon>
+              </md-button>
+              <md-button class="md-icon-button" aria-label="Share">
+                <md-icon md-svg-icon="../../../static/app/assets/resources/ic_pets_black_24px.svg"></md-icon>
+              </md-button>
+              <md-button class="md-icon-button" aria-label="Share">
+                <md-icon md-svg-icon="../../../static/app/assets/resources/ic_important_devices_black_24px.svg"></md-icon>
+              </md-button>
+            </md-card-icon-actions>
+            <md-button>View Products</md-button>
+            <md-button>Show questions</md-button>
+
+          </md-card-actions>
+
+          <md-card-content>
+            <p>
+              Great goodness! Tough cookie....
+            </p>
+            <p>
+              Important link:
+              <br>
+              <a href="{% url 'app:scenario' scenario.id%} ">{{ scenario.name}}</a>
+
+            </p>
+          </md-card-content>
         </md-card>
 
       </div>
