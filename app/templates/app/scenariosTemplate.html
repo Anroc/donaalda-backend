@@ -1,38 +1,132 @@
-<div>
-    SCENARIOS
-    <!-- jacke was here -->
+{% load staticfiles %}
 
-    {% if scenario_list_from_category %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
+  <script src="{% static 'app/index-app.js' %}"></script>
+  <title>DONAALDA - Data Organising Native Ambient Assisted Living Distribution Adviser</title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  {% include "app/templates/toolbarTemplate.html" %}
+  {% include "app/templates/loginTemplate.html" %}
+  {% include "app/templates/registrationTemplate.html" %}
+  {% include "app/templates/profileTemplate.html" %}
+</head>
+<body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
+      ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
+<section style="margin:0px;">
+  SCENARIOS
+
+  <div ng-cloak="" class="scenarioCards">
+    <md-content class="md-padding" layout-xs="column" layout="row">
+
+      <md-grid-list md-cols="2" md-rows="2">
+        {% if scenario_list_from_category %}
         {% for scenario in scenario_list_from_category %}
-        <div>
-            <a href="{% url 'app:scenario' scenario.id%} ">{{ scenario.name}}</a>
-        </div>
+
+          <md-card>
+            <md-card-header>
+              <md-card-avatar>
+                <md-icon class="md-avatar-icon"
+                         md-svg-icon="../../../static/app/assets/resources/ic_pets_black_24px.svg"></md-icon>
+              </md-card-avatar>
+              <md-card-header-text>
+                <span class="md-title">Title: {{scenario.name}}</span>
+                <span class="md-subhead">Short Description: {{scenario.short_description}}</span>
+              </md-card-header-text>
+            </md-card-header>
+            <img src="../../../static/app/assets/resources/iolite.JPG" height="192" width="256" class="md-card-image"
+                 alt="Washed Out">
+            <img src={{scenario.picture}} height="192" width="256" class="md-card-image" alt="Couldn't find picture">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Headline: {{scenario.provider}}</span>
+              </md-card-title-text>
+            </md-card-title>
+            <!-- TODO backend: give scenario category flags to show like this -->
+            <md-card-actions layout="row" layout-align="start center">
+              <md-card-icon-actions>
+                <md-button class="md-icon-button" aria-label="Favorite">
+                  <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Share">
+                  <md-icon
+                    md-svg-icon="../../../static/app/assets/resources/ic_perm_scan_wifi_black_24px.svg"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Share">
+                  <md-icon md-svg-icon="../../../static/app/assets/resources/ic_pets_black_24px.svg"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Share">
+                  <md-icon
+                    md-svg-icon="../../../static/app/assets/resources/ic_important_devices_black_24px.svg"></md-icon>
+                </md-button>
+              </md-card-icon-actions>
+              <!-- TODO frontend & backend: show popup / new page with the products used in the scenario -->
+              <md-button>View Products</md-button>
+              <!-- TODO frontend: show question bar -->
+              <!-- TODO backend: offer specific questions -->
+              <md-button>Show questions</md-button>
+            </md-card-actions>
+
+            <md-card-content>
+              <p>
+                Tough cookie description: {{scenario.description}}
+              </p>
+              <p>
+                Important link:
+                <br>
+                <a href="{% url 'app:scenario' scenario.id%} ">{{ scenario.name}}</a>
+
+              </p>
+              <p>
+                <md-list>
+                  <md-list-item class="md-2-line">
+                    <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+                    <label>TITLE</label>
+                  </md-list-item>
+                  <md-list-item class="md-2-line">
+                    <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+                    <label>TITLE</label>
+                  </md-list-item>
+                  <md-list-item class="md-2-line">
+                    <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+                    <label>TITLE</label>
+                  </md-list-item>
+                  <md-list-item class="md-2-line">
+                    <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+                    <label>TITLE</label>
+                  </md-list-item>
+                  <md-list-item class="md-2-line">
+                    <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
+                    <label>TITLE</label>
+                  </md-list-item>
+
+                </md-list>
+              </p>
+            </md-card-content>
+          </md-card>
         {% endfor %}
-    {% else %}
-      <div>No scenarios are available</div>
-    {% endif %}
-</div>
-<section id="facts" class="section bg-image-1 facts text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
+        {% else %}
+        <div>No scenarios are available</div>
+        {% endif %}
+      </md-grid-list>
 
-                <i class="ion-ios-calendar"></i>
-                <h3>Most Important Info <br> Important Info<br>  Less Important Info</h3>
+    </md-content>
+  </div>
 
-            </div>
-            <div class="col-sm-3">
-
-                <i class="ion-ios-location"></i>
-                <h3>Germany<br>Berlin</h3>
-
-            </div>
-            <div class="col-sm-3">
-
-                <i class="ion-earth"></i>
-                <h3>Smart as your pet!</h3>
-
-            </div>
-        </div><!-- row -->
-    </div><!-- container -->
 </section>
+
+</body>
+</html>

@@ -23,14 +23,11 @@
 
   {% include "app/templates/toolbarTemplate.html" %}
 
-  {% include "app/templates/gridTemplate.html" %}
   {% include "app/templates/profileTemplate.html" %}
 
 
     <!-- wozu benoetigen wir die hier?? --timo--       -->
   {#% include "app/templates/registrationTemplate.html" %#}
-  {#% include "app/templates/scenariosTemplate.html" #}
-  {#% include "app/templates/productTemplate.html" %#}
 
   <ng-include src="'{% url 'app:login' %}'"></ng-include>
   <ng-include src="'{% url 'app:register_user' %}'"></ng-include>
