@@ -1,14 +1,14 @@
 <!-- TODO backend pls put django tags where needed -->
 <div id="gridContainer" ng-controller="{% block ng_controller_grid %}gridController as ctrl{% endblock %}" ng-cloak>
 
-  <md-content layout-padding>
+  <md-content class="md-padding">
     <md-grid-list
       md-cols-gt-md="2" md-cols-sm="2" md-cols-md="2" md-row-height="2:1" md-gutter="0px">
       {% if latest_category_list %}
       {% for category in latest_category_list %}
       <md-grid-tile
         ng-style="{
-                     'background': 'white'
+                     'background': 'seashell'
                   }">
         <md-button href="{% url 'app:scenarios' category.name %}">
           <!--DONE: fix alternative image, add static alternative image-->
