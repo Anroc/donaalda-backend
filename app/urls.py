@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
     url(r'^logout$', views.log_out, name='logout'),
-    url(r'^(?P<category_name>[a-zA-Z]+)/scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
-    url(r'^scenarios/scenario/(?P<pk>[0-9]+)/$', views.ScenarioView.as_view(), name='scenario'),
+    url(r'^(?P<category_name>[a-zA-Z]+)/$', views.CategoryView.as_view(), name='category'),
+    url(r'^(?P<category_name>[a-zA-Z]+)/(?P<pk>[0-9]+)/$', views.ScenarioView.as_view(), name='scenario'),
     url(r'^products/(?P<product_name>[a-zA-Z0-9_-]+)$', views.ProductView.as_view(), name='product'),
 ]

@@ -48,7 +48,7 @@ class IndexView(generic.ListView):
         return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all()})
 
 
-class ScenariosView(generic.ListView):
+class CategoryView(generic.ListView):
     template_name = 'app/scenariosTemplate.html'
     context_object_name = 'scenario_list_from_category'
 
