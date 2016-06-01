@@ -12,13 +12,21 @@
           <!--img src={{category.picture.url}} alt="None" height="200" width="300"-->
           <!--TODO: Frontend format and center django element below img-->
           {% if category.name == "Comfort" %}
-          <i class="material-icons" ng-style="{'color':'forestgreen'}" height = "200" width="300">tv</i>
+          <i class="material-icons" ng-style="{'color':'forestgreen','height' : '1350%', 'font-size':'1350%'}">
+            tv
+          </i>
           {% elif category.name == "Security" %}
-          <i class="material-icons" ng-style="{'color':'forestgreen'}" height = "200" width="300">lock</i>
+          <i class="material-icons" ng-style="{'color':'forestgreen','height' : '1350%', 'font-size':'1350%'}">
+            lock
+          </i>
           {% elif category.name == "Health" %}
-          <i class="material-icons" ng-style="{'color':'forestgreen'}" height = "200" width="300">favorite</i>
+          <i class="material-icons" ng-style="{'color':'forestgreen','height' : '1350%', 'font-size':'1350%'}">
+            favorite
+          </i>
           {% elif category.name == "Energy" %}
-          <i class="material-icons" ng-style="{'color':'forestgreen'}" height = "200" width="300">lightbulb_outline</i>
+          <i class="material-icons" ng-style="{'color':'forestgreen','height' : '1350%', 'font-size':'1350%'}">
+            lightbulb_outline
+          </i>
           {% else %}
           <img src={{category.picture.url}} alt="None" height="200" width="300">
           {% endif %}
