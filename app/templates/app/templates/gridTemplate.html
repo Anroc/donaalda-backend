@@ -7,7 +7,7 @@
       {% if latest_category_list %}
       {% for category in latest_category_list %}
       <md-grid-tile>
-        <md-button href="{% url 'app:scenarios' category.name %}">
+        <md-button href="{% url 'app:category' category.name %}">
           <!--DONE: fix alternative image, add static alternative image-->
           <!--img src={{category.picture.url}} alt="None" height="200" width="300"-->
           <!--TODO: Frontend format and center django element below img-->
