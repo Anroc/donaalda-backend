@@ -6,17 +6,31 @@
       md-cols-gt-md="2" md-cols-sm="2" md-cols-md="2" md-row-height="2:1" md-gutter="0px">
       {% if latest_category_list %}
       {% for category in latest_category_list %}
-      <md-grid-tile
-        ng-style="{
-                     'background': 'seashell'
-                  }">
+      <md-grid-tile>
         <md-button href="{% url 'app:scenarios' category.name %}">
           <!--DONE: fix alternative image, add static alternative image-->
-          <img src={{category.picture.url}} alt="None" height="200" width="300">
+          <!--img src={{category.picture.url}} alt="None" height="200" width="300"-->
           <!--TODO: Frontend format and center django element below img-->
+          {% if category.name == "Comfort" %}
+          <i class="material-icons" ng-style="{'color':'forestgreen'}" height = "200" width="300">tv</i>
+          {% elif category.name == "Security" %}
+          <i class="material-icons" ng-style="{'color':'forestgreen'}" height = "200" width="300">lock</i>
+          {% elif category.name == "Health" %}
+          <i class="material-icons" ng-style="{'color':'forestgreen'}" height = "200" width="300">favorite</i>
+          {% elif category.name == "Energy" %}
+          <i class="material-icons" ng-style="{'color':'forestgreen'}" height = "200" width="300">lightbulb_outline</i>
+          {% else %}
+          <img src={{category.picture.url}} alt="None" height="200" width="300">
+          {% endif %}
+          {% if category.name == "Security" or "Health" %}
+          <md-tooltip md-direction="top">
+            {{category.name}}
+          </md-tooltip>
+          {% else %}
           <md-tooltip md-direction="bottom">
             {{category.name}}
           </md-tooltip>
+          {% endif %}
         </md-button>
       </md-grid-tile>
       {% endfor %}
