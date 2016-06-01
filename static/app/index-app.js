@@ -187,5 +187,4 @@ function layoutController($scope, $mdToast, $document) {
     function mark($scope) {
         $scope.innerHTML = 'hallo';
     }
-
 }
