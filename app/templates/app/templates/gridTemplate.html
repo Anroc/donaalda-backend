@@ -30,7 +30,7 @@
           {% else %}
           <img src={{category.picture.url}} alt="None" height="200" width="300">
           {% endif %}
-          {% if category.name == "Security" or "Health" %}
+          {% if category.name == "Security" or category.name == "Health" %}
           <md-tooltip md-direction="top">
             {{category.name}}
           </md-tooltip>
