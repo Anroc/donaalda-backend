@@ -95,10 +95,11 @@ class ProductType(models.Model):
 
 
 class Provider(models.Model):
-    name = models.CharField(max_length=200, unique=True, )
+    internal_name = models.CharField(max_length=200, unique=True, )
+    is_visible = models.BooleanField(default=False)
 
     def __str__(self):
-        return '%s' % self.name
+        return '%s' % self.internal_name
 
     class Meta:
         verbose_name = "Hersteller"
@@ -116,7 +117,6 @@ class ProviderProfile(models.Model):
 
     def __str__(self):
         return '%s' % self.public_name
-
 
     class Meta:
         verbose_name = "Herstellerprofil"
