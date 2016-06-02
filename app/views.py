@@ -48,13 +48,13 @@ class IndexView(generic.ListView):
         return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all()})
 
 
-class ScenariosView(generic.ListView):
-    template_name = 'app/scenariosTemplate.html'
+class CategoryView(generic.ListView):
+    template_name = 'app/categoryTemplate.html'
     context_object_name = 'scenario_list_from_category'
 
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
-        return render(request, 'app/scenariosTemplate.html',
+        return render(request, 'app/categoryTemplate.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
                        'category': category
                        })
@@ -63,11 +63,11 @@ class ScenariosView(generic.ListView):
 class ScenarioView(generic.DetailView):
     # TODO: render scenarioTemplate (NOT scenario[S]Template)
 
-    template_name = 'app/scenariosTemplate.html'
+    template_name = 'app/categoryTemplate.html'
     context_object_name = 'product_set_from_scenario'
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'app/scenariosTemplate.html')
+        return render(request, 'app/categoryTemplate.html')
 
 
 class ProductView(generic.DetailView):

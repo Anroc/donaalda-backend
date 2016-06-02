@@ -1,4 +1,5 @@
-<md-toolbar class="md-primary md-tall" layout="row" layout-align="center end">
+<md-toolbar class="md-primary" style="position:fixed;" layout="row" layout-align="center end"
+            md-shrink-speed-factor="0.03" md-scroll-shrink="true">
   <div flex flex-sm="100" flex-gt-sm="95" flex-gt-md="80" layout="column">
     <div layout="row" ng-controller="{% block ng_controller_authenticator %}authenticationController{% endblock %}">
       <h1 class="white">DONAALDA</h1>
@@ -31,14 +32,17 @@
       {% endif %}
     </div>
     <span flex></span>
-    <md-tabs md-selected="currentTab" md-stretch-tabs="always" class="md-primary md-hue-1" md-dynamic-height>
-      <md-tab id="1" label="Nutzer">
-        {% include "app/templates/gridTemplate.html" %}
-      </md-tab>
-      <md-tab id="2" label="Hersteller">
-        {% include "app/templates/producerTemplate.html" %}
-      </md-tab>
-    </md-tabs>
+    <div class="md-padding" layout="column" layout-padding style="height: 0px;">
+      <md-tabs md-selected="currentTab" md-stretch-tabs="always" class="md-primary md-hue-1" md-dynamic-height
+      md-border-bottom>
+        <md-tab id="1" label="Nutzer">
+          {% include "app/templates/gridTemplate.html" %}
+        </md-tab>
+        <md-tab id="2" label="Hersteller">
+          {% include "app/templates/producerTemplate.html" %}
+        </md-tab>
+      </md-tabs>
+    </div>
   </div>
 </md-toolbar>
 <!--
