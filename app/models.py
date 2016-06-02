@@ -112,6 +112,9 @@ class Provider(models.Model):
     def __str__(self):
         return '%s' % self.name
 
+    def natural_key(self):
+        return self.name
+
     class Meta:
         verbose_name = "Hersteller"
         verbose_name_plural = "Hersteller"
