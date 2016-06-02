@@ -31,7 +31,7 @@
       {% endif %}
     </div>
     <span flex></span>
-
+    <!--
     <div class="mdl-card mdl-shadow--2dp" layout="row" style="layout-align: center center;">
 
       <div class="mdl-card__supporting-text">
@@ -235,5 +235,63 @@
     </style>
 
 
+  </div>
+  -->
+    <!-- TODO FRONTEND: bower install md-steppers --save , https://jsfiddle.net/vcdbuyru/13/ 
+    https://www.npmjs.com/package/md-steppers -->
+    <!--
+    <script style="text/javascript">
+      var app = angular.module('app', ['ngMaterial', 'md-steppers']);
+    </script>
+
+    <div ng-app="app">
+      <md-card ng-init="step2.disabled = true; selected = 0">
+        <md-steppers md-selected="selected" md-stretch-steppers="always">
+          <md-step label="Step 1" md-complete="step1.completed" ng-disabled="step1.disabled">
+            <md-content>
+              <h1>
+                Einführung
+              </h1>
+              <md-button class="md-raised md-primary" ng-click="step2.disabled = false">Enable Step 2</md-button>
+              <md-button class="md-raised md-primary" ng-click="selected = 1">NEXT</md-button>
+            </md-content>
+          </md-step>
+          <md-step label="Step 2" md-complete="step2.completed" ng-disabled="step2.disabled">
+            <md-content>
+              <h1>
+                Fakten
+              </h1>
+
+              <md-checkbox>Pets</md-checkbox>
+              <md-checkbox>Kids</md-checkbox>
+              <md-checkbox>Eigentumswohnung</md-checkbox>
+              <md-checkbox>Fläche in m²</md-checkbox>
+              <md-button class="md-raised md-primary" ng-click="selected = 0">PREV</md-button>
+              <md-button class="md-raised md-primary" ng-click="step1.completed = true">Complete Step 1</md-button>
+              <md-button class="md-raised md-primary" ng-click="selected = 2">NEXT</md-button>
+            </md-content>
+          </md-step>
+          <md-step label="Step 2" md-complete="step2.completed" ng-disabled="step2.disabled">
+            <md-content>
+              <h1>
+                Präferenzen
+              </h1>
+              <md-checkbox>Remote Control</md-checkbox>
+              <md-button class="md-raised md-primary" ng-click="selected = 0">PREV</md-button>
+              <md-button class="md-raised md-primary" ng-click="step1.completed = true">Complete Step 1</md-button>
+              <md-button class="md-raised md-primary" ng-click="selected = 2">NEXT</md-button>
+            </md-content>
+          </md-step>
+          <md-step label="Finish" md-complete="step3.completed" ng-disabled="step3.disabled">
+            <md-content>
+              <h1>
+                Finish
+              </h1>
+            </md-content>
+          </md-step>
+        </md-steppers>
+      </md-card>
+    </div>
+    -->
   </div>
 </md-toolbar>
