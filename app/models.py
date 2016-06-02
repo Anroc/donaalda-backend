@@ -43,7 +43,7 @@ class Scenario(models.Model):
 
 
 class ScenarioDescription(models.Model):
-    belongs_to_scenario = models.ForeignKey()
+    belongs_to_scenario = models.ForeignKey("Scenario")
     description = models.TextField()
     image = models.ImageField()
     thumbnail = ImageSpecField(source='image',
