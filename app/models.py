@@ -94,6 +94,18 @@ class ProductType(models.Model):
         verbose_name_plural = "Produktarten"
 
 
+class ScenarioDescription(models.Model):
+    belongs_to_scenario = models.ForeignKey()
+    description = models.TextField()
+    image = models.ImageField()
+    thumbnail = ImageSpecField(source='image',
+                               processors=[ResizeToFill(200, 100)],
+                               format='JPEG',)
+    left_right = models.BooleanField()
+    order = models.IntegerField()
+
+
+
 class Provider(models.Model):
     name = models.CharField(max_length=200, unique=True, )
     is_visible = models.BooleanField(default=False)
