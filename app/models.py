@@ -29,7 +29,7 @@ class Category(models.Model):
 class Scenario(models.Model):
     name = models.CharField(max_length=100)
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="255", null=True, blank=True)
-    description = models.TextField(verbose_name="Beschreibung")
+    description = models.TextField(verbose_name="Beschreibung", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True)
     provider = models.ForeignKey("Provider", default="1", )
     scenario_product_set = models.ForeignKey("ProductSet", null=True)
@@ -40,6 +40,17 @@ class Scenario(models.Model):
     class Meta:
         verbose_name = "Szenario"
         verbose_name_plural = "Szenarien"
+
+
+class ScenarioDescription(models.Model):
+    belongs_to_scenario = models.ForeignKey()
+    description = models.TextField()
+    image = models.ImageField()
+    thumbnail = ImageSpecField(source='image',
+                               processors=[ResizeToFill(200, 100)],
+                               format='JPEG',)
+    left_right = models.BooleanField()
+    order = models.IntegerField()
 
 
 class ProductSet(models.Model):
@@ -92,18 +103,6 @@ class ProductType(models.Model):
     class Meta:
         verbose_name = "Produktart"
         verbose_name_plural = "Produktarten"
-
-
-class ScenarioDescription(models.Model):
-    belongs_to_scenario = models.ForeignKey()
-    description = models.TextField()
-    image = models.ImageField()
-    thumbnail = ImageSpecField(source='image',
-                               processors=[ResizeToFill(200, 100)],
-                               format='JPEG',)
-    left_right = models.BooleanField()
-    order = models.IntegerField()
-
 
 
 class Provider(models.Model):
