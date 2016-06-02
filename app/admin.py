@@ -17,7 +17,9 @@ from app.models import (Category,
                         ProductType,
                         Provider,
                         ProviderProfile,
-                        Employee)
+                        Employee,
+                        ScenarioDescription,
+                        )
 
 csrf_protect_m = method_decorator(csrf_protect)
 sensitive_post_parameters_m = method_decorator(sensitive_post_parameters())
@@ -111,7 +113,6 @@ class ProviderProfileAdmin(admin.ModelAdmin):
 
         obj.save()
 
-
 admin.site.register(Category)
 admin.site.register(Scenario, ScenarioAdmin)
 admin.site.register(ProductSet, ProductSetAdmin)
@@ -120,3 +121,4 @@ admin.site.register(Employee)
 admin.site.register(Provider)
 admin.site.register(ProviderProfile, ProviderProfileAdmin)
 admin.site.register(ProductType)
+admin.site.register(ScenarioDescription)
