@@ -1,6 +1,5 @@
 {% load staticfiles %}
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -29,15 +28,17 @@
 <section>
   <div style="height:120px;">
   </div>
+
   <md-content class="md-padding" layout-xs="column" layout="column">
+    <md-grid-list md-cols="2" md-rows="1"
+      md-cols-gt-md="2" md-cols-sm="2" md-cols-md="2" md-row-height="2:1" md-gutter="0px">
 
 
-    {% if scenario_list_from_category %}
-    {% for scenario in scenario_list_from_category %}
+      {% if scenario_list_from_category %}
+      {% for scenario in scenario_list_from_category %}
 
-    <div flex-gt-sm="50" >
 
-      <md-card layout="column">
+      <md-card layout="column" md-theme="black" md-theme-watch="" style="width: 35%;">
 
         <md-card-header>
           <md-card-avatar>
@@ -49,13 +50,16 @@
             <span class="md-subhead">Short Description: {{scenario.short_description}}</span>
           </md-card-header-text>
         </md-card-header>
-        <img src="../../../static/app/assets/resources/iolite.JPG" width="512" height="384" class="md-card-image"
+        <img src="../../../static/app/assets/resources/iolite.JPG" width="512" height="382" class="md-card-image"
              alt="Washed Out">
         <img src={{scenario.picture}} class="md-card-image" alt="Couldn't find picture">
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">Headline: {{scenario.provider}}</span>
           </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"></div>
+          </md-card-title-media>
         </md-card-title>
         <!-- TODO backend: give scenario category flags to show like this -->
         <md-card-actions layout="row" layout-align="start center">
@@ -96,16 +100,15 @@
 
       </md-card>
 
-    </div>
+      {% endfor %}
 
-    {% endfor %}
+      {% else %}
+      <div>No scenarios are available</div>
 
-    {% else %}
-    <div>No scenarios are available</div>
+      {% endif %}
+    </md-grid-list>
 
-    {% endif %}
   </md-content>
-  </div>
 </section>
 </body>
 </html>
