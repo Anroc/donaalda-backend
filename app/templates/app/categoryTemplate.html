@@ -37,10 +37,8 @@
     {% if scenario_list_from_category %}
     {% for scenario in scenario_list_from_category %}
 
-    <md-grid-tile flex>
-
-      <md-card flex="100">
-
+    <md-grid-tile>
+      <md-card layout="column" layout-padding class="card">
         <md-card-header>
           <md-card-avatar>
             <md-icon class="md-avatar-icon"
@@ -53,10 +51,11 @@
         </md-card-header>
         <md-card-title>
           <md-card-title-media>
-            <div class="md-media-lg card-media">
-                <img src="../../../static/app/assets/resources/iolite.JPG" class="md-card-image"
+            <div class="md-media-lg">
+               <!-- <img src="../../../static/app/assets/resources/iolite.JPG" class="md-card-image"
                      alt="Washed Out">
                 <img src={{scenario.picture}} class="md-card-image" alt="Couldn't find picture">
+                -->
             </div>
           </md-card-title-media>
           <md-card-title-text>
@@ -64,7 +63,7 @@
           </md-card-title-text>
         </md-card-title>
         <!-- TODO backend: give scenario category flags to show like this -->
-        <md-card-actions layout="row" layout-align="start center">
+        <md-card-actions layout="row" layout-align="start center" style="margin:1px">
           <md-card-icon-actions>
             <md-button class="md-icon-button" aria-label="Favorite">
               <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
