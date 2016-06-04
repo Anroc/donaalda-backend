@@ -25,187 +25,29 @@
 </head>
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}">
-<!-- TODO FRONTEND: 
-<section>
-
-  <div>
-    PRODUCT SEARCH: WHOLE PAKET
-  </div>
-
-  <div ng-cloak="" class="productCards">
-    <md-content class="md-padding" layout-xs="column" layout="row">
-
-      <div layout="row">
-        {% if product %}
-        <md-card>
-          <md-card-header>
-            <md-card-avatar>
-              <md-icon class="md-avatar-icon"
-                       md-svg-icon="../../../static/app/assets/resources/ic_pets_black_24px.svg"></md-icon>
-            </md-card-avatar>
-            <md-card-header-text>
-              <span class="md-title">{% product.name %}</span>
-              <!--span class="md-subhead">{% product.description %}</span-->
-            </md-card-header-text>
-          </md-card-header>
-          <img src="{% product.image1.url %}" height="384" width="512" class="md-card-image" alt="Washed Out">
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline">{% product.description %}</span>
-              <span class="md-subhead">{% product.end_of_life %}</span>
-            </md-card-title-text>
-          </md-card-title>
-          <md-card-actions layout="row" layout-align="start center">
-            <md-card-icon-actions>
-              <md-button class="md-icon-button" aria-label="Favorite">
-                <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
-              </md-button>
-              <md-button class="md-icon-button" aria-label="Share">
-                <md-icon md-svg-icon="../../../static/app/assets/resources/ic_perm_scan_wifi_black_24px.svg"></md-icon>
-              </md-button>
-              <md-button class="md-icon-button" aria-label="Share">
-                <md-icon md-svg-icon="../../../static/app/assets/resources/ic_pets_black_24px.svg"></md-icon>
-              </md-button>
-              <md-button class="md-icon-button" aria-label="Share">
-                <md-icon md-svg-icon="../../../static/app/assets/resources/ic_important_devices_black_24px.svg"></md-icon>
-              </md-button>
-            </md-card-icon-actions>
-            <!--md-button>Combine with</md-button>
-            <md-button>More information</md-button-->
-          </md-card-actions>
-
-          <md-card-content>
-            <p>
-              Bla bla bla bla bla balb albal balb albal bab albalbalbalb a....
-            </p>
-          </md-card-content>
-        </md-card>
+<!-- TODO FRONTEND: -->
 
 
-        <md-card>
-          <md-card-header>
-            <md-card-avatar>
-              <md-icon class="md-avatar-icon"
-                       md-svg-icon="../../../static/app/assets/resources/ic_pets_black_24px.svg"></md-icon>
-            </md-card-avatar>
-            <md-card-header-text>
-              <span class="md-title">Not so Smart Paket</span>
-              <span class="md-subhead">Random Org</span>
-            </md-card-header-text>
-          </md-card-header>
-          <img src="../../../static/app/assets/resources/not_so_smart.JPG" height="192" width="256" class="md-card-image"
-               alt="Washed Out">
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline">Buy!</span>
-              <span class="md-subhead">Buy, price, smart!</span>
-            </md-card-title-text>
-          </md-card-title>
-          <md-card-actions layout="row" layout-align="start center">
-            <md-card-icon-actions>
-              <md-button class="md-icon-button" aria-label="Favorite">
-                <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
-              </md-button>
-              </md-button>
-              <md-button class="md-icon-button" aria-label="Share">
-                <md-icon md-svg-icon="../../../static/app/assets/resources/ic_important_devices_black_24px.svg"></md-icon>
-              </md-button>
-            </md-card-icon-actions>
-            <md-button>Combine with</md-button>
-            <md-button>More information</md-button>
-          </md-card-actions>
+<script style="text/javascript">
 
-          <md-card-content>
-            <p>
-              Bla bla bla bla bla balb albal balb albal bab albalbalbalb a....
-            </p>
-          </md-card-content>
-        </md-card>
+  def submit() {
+    console.log("submitted");
+  }
+</script>
+<md-button class="submitbutton" onClick="submit()"  style="background-color: aquamarine">k</md-button>
 
-      </div>
-      {% else %}
-      <div>Product not found</div>
-      {% endif %}
-    </md-content>
-  </div>
-  <div style="height:120px;">
-  </div>
-  <md-content class="md-padding" layout-xs="column" layout="row">
-    <md-grid-list>
 
-      {% if scenario_list_from_category %}
-      {% for scenario in scenario_list_from_category %}
+<div>Produktname {% product.name %} </div>
+<div> Produkttyp  {% product.type %} </div>
+<div>ISBN Nummer {% product.number %} </div>
+<div>Provider {% product.provider.name %} </div>
+<div>Provider Logo {% product.provider.logo %} </div>
+<div>End of Life {% product.end_of_life %} </div>
+<div>Image1 {% product.image_1 %} </div>
+<div>Image2 {% product.image_2 %} </div>
+<div>Image3 {% product.image_3 %} </div>
+<div>Description {% product.description %} </div>
 
-      <md-card>
 
-        <md-card-header>
-          <md-card-avatar>
-            <md-icon class="md-avatar-icon"
-                     md-svg-icon="../../../static/app/assets/resources/ic_pets_black_24px.svg"></md-icon>
-          </md-card-avatar>
-          <md-card-header-text>
-            <span class="md-title">Title: {{scenario.name}}</span>
-            <span class="md-subhead">Short Description: {{scenario.short_description}}</span>
-          </md-card-header-text>
-        </md-card-header>
-        <img src="../../../static/app/assets/resources/iolite.JPG" height="192" width="256" class="md-card-image"
-             alt="Washed Out">
-        <img src={{scenario.picture}} height="192" width="256" class="md-card-image" alt="Couldn't find picture">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Headline: {{scenario.provider}}</span>
-          </md-card-title-text>
-        </md-card-title>
-        <!-- TODO backend: give scenario category flags to show like this -->
-        <md-card-actions layout="row" layout-align="start center">
-          <md-card-icon-actions>
-            <md-button class="md-icon-button" aria-label="Favorite">
-              <md-icon md-svg-icon="../../../static/app/assets/resources/ic_lock_black_24px.svg"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Share">
-              <md-icon
-                md-svg-icon="../../../static/app/assets/resources/ic_perm_scan_wifi_black_24px.svg"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Share">
-              <md-icon md-svg-icon="../../../static/app/assets/resources/ic_pets_black_24px.svg"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Share">
-              <md-icon
-                md-svg-icon="../../../static/app/assets/resources/ic_important_devices_black_24px.svg"></md-icon>
-            </md-button>
-          </md-card-icon-actions>
-          <!-- TODO frontend & backend: show popup / new page with the products used in the scenario -->
-          <md-button>In Detail</md-button>
-          <!-- TODO frontend: show question bar -->
-          <!-- TODO backend: offer specific questions -->
-          <!--md-button>Show questions</md-button -->
-        </md-card-actions>
-
-        <md-card-content>
-          <p>
-            Tough cookie description: {{scenario.description}}
-          </p>
-          <p>
-            Important link:
-            <br>
-            <a href="{% url 'app:scenario' scenario.id%} ">{{ scenario.name}}</a>
-
-          </p>
-        </md-card-content>
-
-      </md-card>
-
-      {% endfor %}
-
-      {% else %}
-      <md-grid-tile>
-        <div>No scenarios are available</div>
-      </md-grid-tile>
-
-      {% endif %}
-    </md-grid-list>
-  </md-content>
-  </div>
-</section>
 </body>
 </html>
