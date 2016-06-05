@@ -55,15 +55,25 @@ class ScenarioDescription(models.Model):
     left_right = models.BooleanField()
     order = models.IntegerField()
 
+    def natural_key(self):
+        return [self.belongs_to_scenario.natural_key(), self.order]
+
+    class Meta:
+        verbose_name = "Szenariobeschreibung"
+        verbose_name_plural = "Szenariobeschreibungen"
+
 
 class ProductSet(models.Model):
-    name = models.CharField(blank=True, max_length=100)
+    name = models.CharField(max_length=100, default="------")
     description = models.TextField(blank=True, verbose_name="Beschreibung")
     products = models.ManyToManyField("Product", verbose_name="Dazugehörige Produkte")
     creator = models.ForeignKey("Provider", default="1")
 
     def __str__(self):
         return '%s' % (self.name)
+
+    def natural_key(self):
+        return [self.creator.natural_key(), self.name]
 
     class Meta:
         verbose_name = "Produktsammlung"
@@ -91,6 +101,9 @@ class Product(models.Model):
         self.end_of_life = True
         self.save()
 
+    def natural_key(self):
+        return [self.provider.natural_key(), self.serial_number]
+
     class Meta:
         verbose_name = "Produkt"
         verbose_name_plural = "Produkte"
@@ -98,10 +111,13 @@ class Product(models.Model):
 
 
 class ProductType(models.Model):
-    type_name = models.CharField(max_length=255)
+    type_name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return '%s' % self.type_name
+
+    def natural_key(self):
+        return self.type_name
 
     class Meta:
         verbose_name = "Produktart"
@@ -130,10 +146,13 @@ class ProviderProfile(models.Model):
     introduction = models.TextField()
     contact_email = models.EmailField()
     website = models.URLField()
-    owner = models.OneToOneField("Provider", default="1")
+    owner = models.OneToOneField(Provider, default="1")
 
     def __str__(self):
         return '%s' % self.public_name
+
+    def natural_key(self):
+        return self.owner.natural_key()
 
     class Meta:
         verbose_name = "Herstellerprofil"

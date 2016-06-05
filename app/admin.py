@@ -141,7 +141,7 @@ class EmployeeAdmin(UserAdmin):
 
         obj.is_staff = True
         obj.save()
-        
+
 
 admin.site.register(Category)
 admin.site.register(Scenario, ScenarioAdmin)
