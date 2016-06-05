@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
+
 # Create your models here.
 
 
@@ -51,7 +52,7 @@ class ScenarioDescription(models.Model):
     image = models.ImageField()
     thumbnail = ImageSpecField(source='image',
                                processors=[ResizeToFill(200, 100)],
-                               format='JPEG',)
+                               format='JPEG', )
     left_right = models.BooleanField()
     order = models.IntegerField()
 
@@ -86,12 +87,14 @@ class Product(models.Model):
     product_type = models.ForeignKey("ProductType", default="0")
     serial_number = models.CharField(max_length=255, default="------")
     description = models.TextField()
-    image1 = models.ImageField()
-    image2 = models.ImageField(null=True, blank=True)
-    image3 = models.ImageField(null=True, blank=True)
+    image1 = models.ImageField(verbose_name="Bild 1", upload_to="products")
+    image2 = models.ImageField(null=True, blank=True, verbose_name="Bild 2",
+                               upload_to="products")
+    image3 = models.ImageField(null=True, blank=True, verbose_name="Bild 3",
+                               upload_to="products")
     thumbnail = ImageSpecField(source='image1',
                                processors=[ResizeToFill(200, 100)],
-                               format='JPEG',)
+                               format='JPEG', )
     end_of_life = models.BooleanField(default=False)
 
     def __str__(self):
@@ -140,9 +143,9 @@ class Provider(models.Model):
 
 
 class ProviderProfile(models.Model):
-    public_name = models.CharField(max_length=200, unique=True,)
-    logo_image = models.ImageField()
-    banner_image = models.ImageField()
+    public_name = models.CharField(max_length=200, unique=True, )
+    logo_image = models.ImageField(verbose_name="Provider Logo", upload_to="provider")
+    banner_image = models.ImageField(verbose_name="Provider Banner", upload_to="provider")
     introduction = models.TextField()
     contact_email = models.EmailField()
     website = models.URLField()
