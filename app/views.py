@@ -4,7 +4,7 @@ from django.views import generic
 
 from django.contrib.auth.models import User
 
-from .models import Category, Product
+from .models import Category, Product, Scenario
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -56,18 +56,20 @@ class CategoryView(generic.ListView):
         category = kwargs.get("category_name")
         return render(request, 'app/categoryTemplate.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
-                       'category': category
+                       'category': Category.objects.get(name=category)
                        })
 
 
 class ScenarioView(generic.DetailView):
     # TODO: render scenarioTemplate (NOT scenario[S]Template)
 
-    template_name = 'app/categoryTemplate.html'
-    context_object_name = 'product_set_from_scenario'
+    template_name = 'scenarioTemplate.html'
+
+    # context_object_name = 'scenario'
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'app/categoryTemplate.html')
+        scenario = kwargs.get("current_scenario")
+        return render(request, 'app/scenarioTemplate.html', {'current_scenario': Scenario.objects.get(name=scenario)})
 
 
 class ProductView(generic.DetailView):
@@ -156,7 +158,7 @@ def register_user(request):
             if User.objects.filter(username=username).exists():
                 return HttpResponseRedirect("/app/?registration=taken")
             user = User.objects.create_user(username, email, password)
-            user.first_name=firstname
+            user.first_name = firstname
             user.last_name = lastname
             user.save()
             return HttpResponseRedirect("/app/?registration=success")
