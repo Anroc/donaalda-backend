@@ -28,6 +28,75 @@
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
 
+<div>
+  <md-content class="md-padding" layout-xs="column" layout="row">
+    <div layout="column">
+      <md-card>
+        <img ng-src="{{banner}}" class="md-card-image" alt="Washed Out">
+        <md-card-title style="padding-bottom:50px"> <!--padding damit der title nicht mit dem content überlappt-->
+          <md-card-title-text>
+            <span class="md-headline">Scenario-Title</span>
+          </md-card-title-text>
+        </md-card-title>
+
+        <md-card-content>
+          <div layout="row">
+            <div flex="70">
+              <p style="margin-right:16px"> <!--margin damit der text nicht am bild klebt-->
+                Description:
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
+                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+              </p>
+            </div>
+            <div style="background-color:darkgrey" flex="30">
+            </div>
+          </div>
+
+          <div layout="row">
+            <div style="background-color:darkgrey" flex="30">
+            </div>
+            <div flex="70">
+              <p style="margin-left:16px">
+                Description:
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
+                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+              </p>
+            </div>
+          </div>
+
+          <div layout="row">
+            <div flex="70">
+              <p style="margin-right:16px">
+                Description:
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
+                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+              </p>
+            </div>
+            <div style="background-color:darkgrey" flex="30">
+            </div>
+          </div>
+
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </md-content>
+</div>
 
 
 </body>

@@ -13,7 +13,15 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
+
+  <!-- style sheet -->
+  <link rel="stylesheet" href="{% static 'md-steppers/md-stepper-master/md-stepper-master/src/stepper.css' %}">
+  <!-- module -->
+
+  <script src="{% static 'md-steppers/md-stepper-master/md-stepper-master/src/stepper.js' %}"></script>
+
   <script src="{% static 'app/index-app.js' %}"></script>
+
   <title>DONAALDA - Data Organising Native Ambient Assisted Living Distribution Adviser</title>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -27,6 +35,63 @@
 {% include "app/templates/loginTemplate.html" %}
 {% include "app/templates/registrationTemplate.html" %}
 {% include "app/templates/profileTemplate.html" %}
+
+<div>
+
+</div>
+
+<script style="text/javascript">
+  var app = angular.module('app', ['ngMaterial', 'md-steppers']);
+</script>
+
+<div ng-app="app">
+  <md-card ng-init="step2.disabled = true; selected = 0">
+    <md-steppers md-selected="selected" md-stretch-steppers="always">
+      <md-step label="Step 1" md-complete="step1.completed" ng-disabled="step1.disabled">
+        <md-content>
+          <h1>
+            Einführung
+          </h1>
+          <md-button class="md-raised md-primary" ng-click="step2.disabled = false">Enable Step 2</md-button>
+          <md-button class="md-raised md-primary" ng-click="selected = 1">NEXT</md-button>
+        </md-content>
+      </md-step>
+      <md-step label="Step 2" md-complete="step2.completed" ng-disabled="step2.disabled">
+        <md-content>
+          <h1>
+            Fakten
+          </h1>
+
+          <md-checkbox>Pets</md-checkbox>
+          <md-checkbox>Kids</md-checkbox>
+          <md-checkbox>Eigentumswohnung</md-checkbox>
+          <md-checkbox>Fläche in m²</md-checkbox>
+          <md-button class="md-raised md-primary" ng-click="selected = 0">PREV</md-button>
+          <md-button class="md-raised md-primary" ng-click="step1.completed = true">Complete Step 1</md-button>
+          <md-button class="md-raised md-primary" ng-click="selected = 2">NEXT</md-button>
+        </md-content>
+      </md-step>
+      <md-step label="Step 2" md-complete="step2.completed" ng-disabled="step2.disabled">
+        <md-content>
+          <h1>
+            Präferenzen
+          </h1>
+          <md-checkbox>Remote Control</md-checkbox>
+          <md-button class="md-raised md-primary" ng-click="selected = 0">PREV</md-button>
+          <md-button class="md-raised md-primary" ng-click="step1.completed = true">Complete Step 1</md-button>
+          <md-button class="md-raised md-primary" ng-click="selected = 2">NEXT</md-button>
+        </md-content>
+      </md-step>
+      <md-step label="Finish" md-complete="step3.completed" ng-disabled="step3.disabled">
+        <md-content>
+          <h1>
+            Finish
+          </h1>
+        </md-content>
+      </md-step>
+    </md-steppers>
+  </md-card>
+</div>
 
 
 <section layout="column" layout-fill layout-margin layout-padding style="padding-top: 130px">
