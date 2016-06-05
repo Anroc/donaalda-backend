@@ -23,6 +23,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls)
 ]
 
+admin.site.site_header = 'DONAALDA'
+admin.site.site_title = 'DONAALDA'
+
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

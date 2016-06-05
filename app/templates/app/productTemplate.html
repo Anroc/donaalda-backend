@@ -35,7 +35,8 @@
     <div> Produkttyp {{product.product_type}}</div>
     <div>ISBN Nummer {{product.serial_number}}</div>
     <div>Provider {{product.provider.name}}</div>
-    <div>Provider Logo {{product.provider.logo}}</div>
+    <div><img src={{product.provider.providerprofile.logo_image.url}} alt="None" height="200" weigth="300"</img></div>
+  </div>
   </div>
   <div>End of Life {{product.end_of_life}}</div>
   <div>
