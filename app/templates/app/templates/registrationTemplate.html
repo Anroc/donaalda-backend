@@ -13,19 +13,19 @@
 
             <form action={%  url 'app:register_user' %} method="post">{% csrf_token %}
                 <md-input-container flex="flex">
-                    <label>User name</label>
+                    <label>Username</label>
                     <input ng-model="user.username" type="text" name="username" value="{{ username }}"/>
                 </md-input-container>
                 <md-input-container flex="flex">
-                    <label>Password</label>
+                    <label>Passwort</label>
                     <input ng-model="user.password" type="password" name="password" value="{{ password }}"/>
                 </md-input-container>
                 <md-input-container flex="flex">
-                    <label>First name</label>
+                    <label>Vorname</label>
                     <input ng-model="user.name" type="text" name="firstname" value="{{ firstname }}"/>
                 </md-input-container>
                 <md-input-container flex="flex">
-                    <label>Last name</label>
+                    <label>Nachname</label>
                     <input ng-model="user.lastname" type="text" name="lastname" value="{{ lastname }}"/>
                 </md-input-container>
                 <md-input-container flex="flex">
@@ -33,7 +33,7 @@
                     <input ng-model="user.email" type="text" name="email" value="{{ email }}"/>
                 </md-input-container>
                 <md-button type ="submit">
-                    <!--input type="submit" value="Log In" md-buttonlayout-align="center"-->Submit
+                    <!--input type="submit" value="Log In" md-buttonlayout-align="center"-->Registrieren
                 </md-button>
             </form>
         </md-dialog-content>
