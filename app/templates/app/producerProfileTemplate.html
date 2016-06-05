@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+{% load staticfiles %}
+
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -10,22 +11,27 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-
-  <link rel="stylesheet" href="assets/css/index-style.css">
-  <script src="assets/js/index-app.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <title>DONAALDA - Data Organising Native Ambient Assisted Living Distributor Adviser</title>
+  <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
+  <script src="{% static 'app/index-app.js' %}"></script>
+  <title>DONAALDA - Data Organising Native Ambient Assisted Living Distribution Adviser</title>
 
-  <ng-include src="'loginTemplate.html'"></ng-include>
-  <ng-include src="'registrationTemplate.html'"></ng-include>
-  <ng-include src="'profileTemplate.html'"></ng-include>
-  <ng-include src="'toolbarTemplate.html'"></ng-include>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!-- TODO -->
-  <ng-include src="'scenarioTemplate.html'"></ng-include>
-
+  {% include "app/templates/scenarioToolbarTemplate.html" %}
+  {% include "app/templates/loginTemplate.html" %}
+  {% include "app/templates/registrationTemplate.html" %}
+  {% include "app/templates/profileTemplate.html" %}
 </head>
-<body ng-app="donAALdApplication" ng-controller="themeController" ng-cloak>
+<body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
+      ng-controller="{% block ng_controller_theme %}themeController{% endblock %}">
+<!-- TODO FRONTEND: -->
+
+<div> Hello {% producter.name %} !</div>
+<div>
+  <md-button>Show Products</md-button>
+</div>
+
 
 </body>
 </html>

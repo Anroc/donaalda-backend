@@ -1,15 +1,83 @@
-<md-sidenav style="background:forestgreen;position:fixed;color:seashell;" md-component-id="profile"
+<md-sidenav style="background:forestgreen;position:fixed;color:seashell; padding-left: 10px;" md-component-id="profile"
             class="md-sidenav-left">
   <!--TODO: create foreach to get these categories from backend-->
-  <div><h1>Profile </h1></div>
+  <div>
+    <h1>Profil</h1>
+    <h2>{{ user.first_name }}</h2>
+    <h2>{{ user.last_name }}</h2>
+    <h2>{{ user.email }}</h2>
+  </div>
+
+  <div>
+    <h3>Profileinstellungen</h3>
+    <md-list>
+      <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+          <h3>Vornamen ändern:</h3>
+          <p>Bitte geben Sie den gewünschten Vornamen an.</p>
+          <md-input-container flex="flex">
+            <label>Vorname</label>
+            <input ng-model="user.firstName"/>
+          </md-input-container>
+        </div>
+      </md-list-item>
+
+      <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+          <h3>Nachname ändern:</h3>
+          <p>Bitte geben Sie den gewünschten Nachnamen an.</p>
+          <md-input-container flex="flex">
+            <label>Nachname</label>
+            <input ng-model="user.lastName"/>
+          </md-input-container>
+        </div>
+      </md-list-item>
+      <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+          <h3>Email ändern:</h3>
+          <p>Bitte geben Sie Ihre neue Email-Adresse an.</p>
+          <md-input-container flex="flex">
+            <label>Email</label>
+            <input ng-model="user.email"/>
+          </md-input-container>
+        </div>
+      </md-list-item>
+      <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+          <h3>Passwort ändern:</h3>
+          <p>Bitte geben Sie Ihr altes Passwort ein:</p>
+          <md-input-container flex="flex">
+            <label>Altes Passwort</label>
+            <input ng-model="user.password" type="password" name="password" value="{{ password }}"/>
+          </md-input-container>
+          <p>Bitte geben Sie Ihr neues Passwort ein:</p>
+          <md-input-container flex="flex">
+            <label>Neues Passwort</label>
+            <input ng-model="user.password" type="password" name="password" value="{{ password }}"/>
+          </md-input-container>
+        </div>
+      </md-list-item>
+      <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+          <h3>Konto Löschen</h3>
+          <p>Bitte geben Sie Ihr Passwort ein, um das Löschen des Accounts zu verifizieren.</p>
+          <md-input-container flex="flex">
+            <label>Neues Passwort</label>
+            <input ng-model="user.password" type="password" name="password" value="{{ password }}"/>
+          </md-input-container>
+        </div>
+      </md-list-item>
+    </md-list>
+  </div>
   {% if latest_category_list %}
+  <h3>Kategorien</h3>
   {% for category in latest_category_list %}
   <div>
+
     <md-list>
       <md-list-item class="md-2-line">
         <md-checkbox></md-checkbox>
         <div class="md-list-item-text">
-          <!-- TODO BACKEND: give all attributes regarding a category -->
           <h3>{{ category.name }}</h3>
           <p>Description: {{ category.description }} </p>
         </div>
