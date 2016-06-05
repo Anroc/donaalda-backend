@@ -26,28 +26,30 @@
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}">
 <!-- TODO FRONTEND: -->
-
-
-<script style="text/javascript">
-
-  def submit() {
-    console.log("submitted");
-  }
-</script>
-<md-button class="submitbutton" onClick="submit()"  style="background-color: aquamarine">k</md-button>
-
-
-<div>Produktname {% product.name %} </div>
-<div> Produkttyp  {% product.type %} </div>
-<div>ISBN Nummer {% product.number %} </div>
-<div>Provider {% product.provider.name %} </div>
-<div>Provider Logo {% product.provider.logo %} </div>
-<div>End of Life {% product.end_of_life %} </div>
-<div>Image1 {% product.image_1 %} </div>
-<div>Image2 {% product.image_2 %} </div>
-<div>Image3 {% product.image_3 %} </div>
-<div>Description {% product.description %} </div>
-
+<md-content>
+  <div>
+    <div>
+      <h1> Produktname {{ product.name }}</h1>
+    </div>
+    <div> Produkttyp {% product.type %}</div>
+    <div>ISBN Nummer {% product.number %}</div>
+    <div>Provider {% product.provider.name %}</div>
+    <div>Provider Logo {% product.provider.logo %}</div>
+  </div>
+  <div>End of Life {% product.end_of_life %}</div>
+  <div>
+    <div flex>Image1 {% product.image_1 %}
+      <div class="md-media-lg">
+        <img src="http://jokesforlosers.weebly.com/uploads/5/3/8/8/53885375/4424762_orig.jpg" class="md-card-image" alt="Couldn't find picture">
+      </div>
+    </div>
+    <div flex>Image2 {% product.image_2 %}</div>
+    <div flex>Image3 {% product.image_3 %}</div>
+  </div>
+  <div>
+    <div>Description {% product.description %}</div>
+  </div>
+</md-content>
 
 </body>
 </html>
