@@ -17,8 +17,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
   <script src="{% static 'app/index-app.js' %}"></script>
-  <title>Scenario {% scenario.name %}</title>
-
+  <title>{{ current_scenario.name }}</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   {% include "app/templates/scenarioToolbarTemplate.html" %}
