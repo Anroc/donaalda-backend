@@ -164,4 +164,4 @@ def register_user(request):
             return HttpResponseRedirect("/app/?registration=success")
         else:
             return HttpResponseRedirect("/app/?registration=blank_fields")
-    return render(request, 'app/registrationTemplate.html', )
+    return render(request, 'app/templates/registrationTemplate.html', )
