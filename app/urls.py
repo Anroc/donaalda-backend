@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^(?P<category_name>[a-zA-Z0-9_-]+)/(?P<current_scenario>[a-zA-Z0-9_-]+)/$', views.ScenarioView.as_view(),
         name='scenario'),
     url(r'^products/(?P<product_name>[a-zA-Z0-9_-]+)$', views.ProductView.as_view(), name='product'),
+    url(r'^profile$', views.profile, name='profile'),
 ]

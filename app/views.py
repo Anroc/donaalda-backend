@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.views import generic
-
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
 from .models import Category, Product, Scenario
@@ -45,6 +45,25 @@ class IndexView(generic.ListView):
             return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
                                                                'message': 'Der Benutzername wird bereits verwendet!',
                                                                })
+
+        profile_status = request.GET.get('profile')
+        if profile_status == 'blank_fields':
+            return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
+                                                               'message': 'Zum Ändern des Passwortes altes und neues Passwort angegeben! Restliche Änderungen durchgeführt!',
+                                                               })
+        if profile_status == 'success':
+            return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
+                                                               'message': 'Profil erfolgreich verändert!',
+                                                               })
+        if profile_status == 'wrong_password':
+            return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
+                                                               'message': 'Passwort falsch! Das Passwort bleibt unverändert. Restliche Änderungen durchgeführt!',
+                                                               })
+        if profile_status == 'deleted':
+            return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all(),
+                                                               'message': 'Ihr Account wurde gelöscht!',
+                                                               })
+
         return render(request, 'app/index_frontend.html', {'latest_category_list': Category.objects.all()})
 
 
@@ -165,3 +184,73 @@ def register_user(request):
         else:
             return HttpResponseRedirect("/app/?registration=blank_fields")
     return render(request, 'app/templates/registrationTemplate.html', )
+
+@csrf_protect
+@require_http_methods(["GET", "POST"])
+def profile(request):
+    username = request.POST.get('username')
+    passwordOld = request.POST.get('password_old')
+    passwordNew = request.POST.get('password_new')
+    passwordDelete = request.POST.get('password_delete')
+    email = request.POST.get('email')
+    firstname = request.POST.get('firstname')
+    lastname = request.POST.get('lastname')
+
+    if not User.objects.filter(username=username).exists():#existiert nicht
+        return HttpResponseRedirect("/app/")
+    else:
+        user = User.objects.get(username=username)
+
+    if not (passwordOld or passwordNew or passwordDelete or email or firstname or lastname):
+        return HttpResponseRedirect("/app/")
+
+    if user.check_password(passwordDelete):#delete account
+        user.delete()
+        return HttpResponseRedirect("/app/?profile=deleted")
+
+    if firstname:
+        user.first_name=firstname
+
+    if lastname:
+        user.last_name=lastname
+
+    if email:
+        user.email=email
+
+    user.save()
+
+    print("3333")
+    if passwordOld:
+        print("1111")
+        if user.check_password(passwordOld):#change password
+            if passwordNew:
+                user.set_password(passwordNew)
+                user.save()
+                user=authenticate(username=username,password=passwordNew)
+                login(request, user)
+                return HttpResponseRedirect("/app/?profile=success")
+            else:
+                return HttpResponseRedirect("/app/?profile=blank_fields")
+        else:
+            return HttpResponseRedirect("/app/?profile=wrong_password")
+    else:
+        if passwordNew:
+            return HttpResponseRedirect("/app/?profile=blank_fields")
+
+
+    return HttpResponseRedirect("/app/?profile=success")
+
+"""
+    if request.POST:
+        if username and password and email and firstname and lastname:
+            if User.objects.filter(username=username).exists():
+                return HttpResponseRedirect("/app/?registration=taken")
+            user = User.objects.create_user(username, email, password)
+            user.first_name = firstname
+            user.last_name = lastname
+            user.save()
+            return HttpResponseRedirect("/app/?registration=success")
+        else:
+            return HttpResponseRedirect("/app/?registration=blank_fields")
+    return render(request, 'app/templates/registrationTemplate.html', )
+"""
