@@ -1,10 +1,6 @@
 /*Credit to md-tabs from angular material*/
 /*Angular Material core variables*/
 
-body {
-    background-color: forestgreen;
-}
-
 @-webkit-keyframes md-step-content-hide {
     0% {
         opacity: 1; }
