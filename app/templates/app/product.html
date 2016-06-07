@@ -56,8 +56,10 @@
   <div>
     <div flex style="height: 300px;">
       <img flex src={{product.image1.url}} alt="None">
+      {% if product.image2 %}
       <img flex src={{product.image2.url}} alt="None">
       <img flex src={{product.image3.url}} alt="None">
+      {% endif %}  
     </div>
   </div>
   <div>
