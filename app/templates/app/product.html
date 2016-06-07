@@ -18,20 +18,38 @@
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  {% include "app/templates/scenarioToolbarTemplate.html" %}
-  {% include "app/templates/loginTemplate.html" %}
-  {% include "app/templates/registrationTemplate.html" %}
-  {% include "app/templates/profileTemplate.html" %}
+  {% include "app/html_templates/scenarioGridToolbarTemplate.html" %}
+  {% include "app/html_templates/loginTemplate.html" %}
+  {% include "app/html_templates/registrationTemplate.html" %}
+  {% include "app/html_templates/profileTemplate.html" %}
 </head>
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}">
 <!-- TODO FRONTEND: -->
-
-<div> Hello {% producter.name %} !</div>
-<div>
-  <md-button>Show Products</md-button>
-</div>
-
+<md-content>
+  <div>
+    <div>
+      <h1> Produktname {{ product.name }}</h1>
+      <img src={{product.thumbnail.url}} alt = "None" height ="200" width="300">
+    </div>
+    <div> Produkttyp {{product.product_type}}</div>
+    <div>ISBN Nummer {{product.serial_number}}</div>
+    <div>Provider {{product.provider.name}}</div>
+    <div><img src={{product.provider.providerprofile.logo_image.url}} alt="None" height="200" weigth="300"</img></div>
+  </div>
+  </div>
+  <div>End of Life {{product.end_of_life}}</div>
+  <div>
+    <div flex>Image1
+      <img src={{product.image1.url}} alt="None" height="200" width="300">
+    </div>
+    <div flex><img src={{product.image2.url}} alt="None" height="200" width="300"></div>
+    <div flex><img src={{product.image3.url}} alt="None" height="200" width="300"></div>
+  </div>
+  <div>
+    <div>Description {{product.description}}</div>
+  </div>
+</md-content>
 
 </body>
 </html>

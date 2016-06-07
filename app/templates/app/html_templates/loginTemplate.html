@@ -10,7 +10,7 @@
             </div>
         </md-toolbar>
         <md-dialog-content>
-            <form action={%  url 'app:login' %} method="post">
+            <form action="{%  url 'app:login' %}" method="post">
                 {% csrf_token %}
                 <div layout="layout" layout-sm="column"></div>
                 {% if next %}

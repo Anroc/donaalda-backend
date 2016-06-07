@@ -1,6 +1,4 @@
 {% load staticfiles %}
-<!--link rel="stylesheet" type="text/css" href="{% static 'app/index-style.css' %}" />
-<script type="text/javascript" src="{% static 'app/index-app.js' %}"></script-->
 
 <html lang="en">
 <head>
@@ -20,20 +18,20 @@
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-  {% include "app/templates/indexToolbarTemplate.html" %}
-
-  {% include "app/templates/profileTemplate.html" %}
-
-
-    <!-- wozu benoetigen wir die hier?? --timo--       -->
-  {#% include "app/templates/registrationTemplate.html" %#}
-
-  <ng-include src="'{% url 'app:login' %}'"></ng-include>
-  <ng-include src="'{% url 'app:register_user' %}'"></ng-include>
-
+  {% include "app/html_templates/scenarioGridToolbarTemplate.html" %}
+  {% include "app/html_templates/loginTemplate.html" %}
+  {% include "app/html_templates/registrationTemplate.html" %}
+  {% include "app/html_templates/profileTemplate.html" %}
 </head>
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
-      ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
+      ng-controller="{% block ng_controller_theme %}themeController{% endblock %}">
+<!-- TODO FRONTEND: -->
+
+<div> Hello {% producter.name %} !</div>
+<div>
+  <md-button>Show Products</md-button>
+</div>
+
 
 </body>
+</html>
