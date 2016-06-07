@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from . import views
 
-app_name = 'app'
+app_name = 'welcome'
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
 ]
