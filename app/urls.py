@@ -18,7 +18,7 @@ from . import views
 
 app_name = 'app'
 urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='index_frontend'),
+    url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
     url(r'^logout$', views.log_out, name='logout'),

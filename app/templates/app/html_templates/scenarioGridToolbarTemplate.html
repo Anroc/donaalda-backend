@@ -1,7 +1,7 @@
 <md-toolbar class="md-primary md-tall" style="position:fixed;" layout="row" layout-align="center end">
   <div flex flex-sm="100" flex-gt-sm="95" flex-gt-md="80" layout="column">
     <div layout="row" ng-controller="{% block ng_controller_authenticator %}authenticationController{% endblock %}">
-      <h1 class="white">DONAALDA</h1>
+      <h1 class="white"><a href="{% url 'app:index' %}">DONAALDA</a></h1>
       <span flex></span>
       <md-button style="color:seashell" md-align="center-center">
         {% if not message == ""%}
