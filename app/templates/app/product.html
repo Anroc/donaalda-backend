@@ -26,25 +26,39 @@
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}">
 <!-- TODO FRONTEND: -->
+<div style="height:120px;">
+
+</div>
 <md-content>
   <div>
     <div>
       <h1> Produktname {{ product.name }}</h1>
-      <img src={{product.thumbnail.url}} alt = "None" height ="200" width="300">
+      <img src={{product.thumbnail.url}} alt="None" height="200" width="300">
     </div>
     <div> Produkttyp {{product.product_type}}</div>
     <div>ISBN Nummer {{product.serial_number}}</div>
     <div>Provider {{product.provider.name}}</div>
-    <div><img src={{product.provider.providerprofile.logo_image.url}} alt="None" height="200" weigth="300"</img></div>
+    <div><img src={{product.provider.providerprofile.logo_image.url}} alt="None" height="200" weight="300"></div>
   </div>
-  </div>
-  <div>End of Life {{product.end_of_life}}</div>
+
   <div>
-    <div flex>Image1
-      <img src={{product.image1.url}} alt="None" height="200" width="300">
+    {% if product.end_of_life %}
+    <md-toolbar>
+      <md-fab-actions class="md-toolbar-tools">
+        <p layout="row" layout-align="center center">
+          Dieses Produkt hat End-of-Life erreicht und kann nicht mehr erworben werden.
+        </p>
+      </md-fab-actions>
+    </md-toolbar>
+    {% endif %}
+  </div>
+
+  <div>
+    <div flex style="height: 300px;">
+      <img flex src={{product.image1.url}} alt="None">
+      <img flex src={{product.image2.url}} alt="None">
+      <img flex src={{product.image3.url}} alt="None">
     </div>
-    <div flex><img src={{product.image2.url}} alt="None" height="200" width="300"></div>
-    <div flex><img src={{product.image3.url}} alt="None" height="200" width="300"></div>
   </div>
   <div>
     <div>Description {{product.description}}</div>
