@@ -9,10 +9,10 @@
           <md-icon class="md-48" md-svg-icon="../../../static/app/assets/resources/trump.svg"></md-icon>
 
           <md-icon class="material-icons md-light "> face </md-icon>
-          <a href="/">DONAALDA</a>
+          <a href="{% url 'welcome:index' %}">DONAALDA</a>
         </h1>
       </div>
-      <h1 class="white"><a href="{% url 'welcome:index' %}">DONAALDA</a></h1>
+      <!--h1 class="white"><a href="{% url 'welcome:index' %}">DONAALDA</a></h1-->
       <span flex></span>
       <md-button style="color:seashell" md-align="center-center">
         {% if not message == ""%}
