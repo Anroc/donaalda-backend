@@ -16,12 +16,12 @@
   <script src="{% static 'app/index-app.js' %}"></script>
 
   <!-- Your application bootstrap  -->
-  <script src="{% static 'md-steppers/md-steppers.js' %}"></script>
-  <script src="{% static 'md-steppers/test/app.js' %}"></script>
+  <script src="{% static 'app/md-steppers/md-steppers.js' %}"></script>
+  <script src="{% static 'app/md-steppers/test/app.js' %}"></script>
 
   <!-- style sheet -->
-  <link rel="stylesheet" href="{% static 'md-steppers/test/style.css' %}">
-  <link rel="stylesheet" href="{% static 'md-steppers/md-steppers.css' %}">
+  <link rel="stylesheet" href="{% static 'app/md-steppers/test/style.css' %}">
+  <link rel="stylesheet" href="{% static 'app/md-steppers/md-steppers.css' %}">
   <!-- module -->
 
   <title>DONAALDA - Data Organising Native Ambient Assisted Living Distribution Adviser</title>
@@ -39,6 +39,7 @@
 <div style="height:120px;">
 </div>
 
+{% verbatim %}
 <div flex>
   <md-content layout="row" flex="nogrow"
               style="width: 800px; margin: 40px auto">
@@ -76,7 +77,6 @@
                   <md-step-actions layout="row">
                     <div flex layout="row" layout-align="end top">
                       <md-button class="md-warn">CANCEL</md-button>
-
                     </div>
                   </md-step-actions>
                 </form>
@@ -88,6 +88,7 @@
     </div>
   </md-content>
 </div>
+{% endverbatim %}
 
 <section layout="column" layout-fill layout-margin layout-padding style="padding-top: 130px">
 
