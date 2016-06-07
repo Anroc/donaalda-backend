@@ -144,8 +144,9 @@ class Provider(models.Model):
 
 class ProviderProfile(models.Model):
     public_name = models.CharField(max_length=200, unique=True, )
-    logo_image = models.ImageField(verbose_name="Provider Logo", upload_to="provider")
-    banner_image = models.ImageField(verbose_name="Provider Banner", upload_to="provider")
+    logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider" )
+    profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True)
+    banner_image = models.ImageField(verbose_name="Banner für Profilseite", upload_to="provider")
     introduction = models.TextField()
     contact_email = models.EmailField()
     website = models.URLField()
