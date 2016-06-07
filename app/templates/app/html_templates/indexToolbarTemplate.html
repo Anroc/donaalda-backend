@@ -31,6 +31,8 @@
       </md-button>
       {% endif %}
     </div>
+    {% url 'app:index' as app_index %}
+    {% if request.get_full_path == app_index %}
     <span flex></span>
     <div class="md-padding" layout="column" layout-padding style="height: 0px;">
       <md-tabs md-selected="currentTab" md-stretch-tabs="always" class="md-primary md-hue-1" md-dynamic-height
@@ -43,6 +45,7 @@
         </md-tab>
       </md-tabs>
     </div>
+    {% endif %}
   </div>
 </md-toolbar>
 <!--
