@@ -18,56 +18,71 @@
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  {% include "app/html_templates/indexToolbarTemplate.html" %}
-  {% include "app/html_templates/loginTemplate.html" %}
-  {% include "app/html_templates/registrationTemplate.html" %}
-  {% include "app/html_templates/profileTemplate.html" %}
 </head>
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
-      ng-controller="{% block ng_controller_theme %}themeController{% endblock %}">
+      ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" layout="column" ng-cloak >
 <!-- TODO FRONTEND: -->
-<div style="height:120px;">
 
-</div>
-<md-content>
-  <div>
-    <div>
-      <h1> Produktname {{ product.name }}</h1>
-      <img src={{product.thumbnail.url}} alt="None" height="200" width="300">
-    </div>
-    <div> Produkttyp {{product.product_type}}</div>
-    <div>ISBN Nummer {{product.serial_number}}</div>
-    <div>Provider {{product.provider.name}}</div>
-    <div><img src={{product.provider.providerprofile.logo_image.url}} alt="None" height="200" weight="300"></div>
-  </div>
+{% include "app/html_templates/indexToolbarTemplate.html" %}
+{% include "app/html_templates/loginTemplate.html" %}
+{% include "app/html_templates/registrationTemplate.html" %}
+{% include "app/html_templates/profileTemplate.html" %}
 
-  <div>
-    {% if product.end_of_life %}
-    <md-toolbar>
-      <md-fab-actions class="md-toolbar-tools">
-        <p layout="row" layout-align="center center">
-          Dieses Produkt hat End-of-Life erreicht und kann nicht mehr erworben werden.
-        </p>
-      </md-fab-actions>
-    </md-toolbar>
-    {% endif %}
-  </div>
-
-  <div>
-    <div flex style="height: 300px;">
-      <img flex src={{product.image1.url}} alt="None">
-      {% if product.image2 %}
-      <img flex src={{product.image2.url}} alt="None">
-      {% if product.image3 %}
-      <img flex src={{product.image3.url}} alt="None">
-      {% endif %}
-      {% endif %}  
+  <div layout="row" layout-padding layout-margin style="margin-top:80px">
+    <h2 flex="35">Produktname: {{ product.name }}</h2>
+    <h2 flex="30">Produkttyp: {{product.product_type}}</h2>
+    <div flex-xs flex-gt-xs="20" layout="column" layout-align="end start">
+      <md-card>
+        <md-card-title>
+          <md-card-title-media>
+            <div class="md-media-lg">
+              <img src="{{product.provider.providerprofile.logo_image.url}}" alt="Insert an Image File here">
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+      </md-card>
     </div>
   </div>
-  <div>
-    <div>Description {{product.description}}</div>
+
+  <div layout layout-padding layout-margin style="margin-bottom:300px;">
+    <h3>Artikelnummer:{{product.serial_number}}</h3>
   </div>
-</md-content>
+
+  <div>
+    <md-grid-list md-cols-gt-md="3" md-cols-sm="3" md-cols-md="3" md-row-height="3:1" md-gutter="0px">
+      <md-grid-tile>
+        <md-card>
+          <md-card-conten>
+            <div class="md-media-xl">
+              <img src="{{product.image1.url}}" alt="Insert an Image File here">
+            </div>
+          </md-card-conten>
+        </md-card>
+      </md-grid-tile>
+      <md-grid-tile>
+        <md-card>
+          <md-card-conten>
+            <div class="md-media-xl">
+              <img src="{{product.image2.url}}" alt="Insert an Image File here">
+            </div>
+          </md-card-conten>
+        </md-card>
+      </md-grid-tile>
+      <md-grid-tile>
+        <md-card>
+          <md-card-conten>
+            <div class="md-media-xl">
+              <img src="{{product.image3.url}}" alt="Insert an Image File here">
+            </div>
+          </md-card-conten>
+        </md-card>
+      </md-grid-tile>
+    </md-grid-list>
+  </div>
+
+  <div layout  layout-padding layout-fill layout-margin>
+    <p> {{product.description}} </p>
+  </div>
 
 </body>
 </html>
