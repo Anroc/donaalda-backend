@@ -80,7 +80,6 @@ class CategoryView(generic.ListView):
 
 
 class ScenarioView(generic.DetailView):
-    # TODO: render scenarioTemplate (NOT scenario[S]Template)
 
     template_name = 'scenario.html'
 
@@ -92,7 +91,6 @@ class ScenarioView(generic.DetailView):
 
 
 class ProductView(generic.DetailView):
-    # TODO: render specific ProductTemplate for selected product
 
     template_name = 'app/product.html'
     context_object_name = 'product'
@@ -101,6 +99,17 @@ class ProductView(generic.DetailView):
         product = kwargs.get("product_name")
         return render(request, 'app/product.html',
                       {'product': Product.objects.get(name=product)})
+
+
+# for frontend testing
+class TestView(generic.DetailView):
+
+    template_name = 'app/frontendTesting.html'
+    context_object_name = 'test'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/frontendTesting.html',
+                      {})
 
 
 """
