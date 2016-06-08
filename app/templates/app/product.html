@@ -44,40 +44,14 @@
     </div>
   </div>
 
-  <div layout layout-padding layout-margin style="margin-bottom:300px;">
+  <div layout layout-padding layout-margin style="margin-bottom:150px;">
     <h3>Artikelnummer:{{product.serial_number}}</h3>
   </div>
 
-  <div>
-    <md-grid-list md-cols-gt-md="3" md-cols-sm="3" md-cols-md="3" md-row-height="3:1" md-gutter="0px">
-      <md-grid-tile>
-        <md-card>
-          <md-card-conten>
-            <div class="md-media-xl">
-              <img src="{{product.image1.url}}" alt="Insert an Image File here">
-            </div>
-          </md-card-conten>
-        </md-card>
-      </md-grid-tile>
-      <md-grid-tile>
-        <md-card>
-          <md-card-conten>
-            <div class="md-media-xl">
-              <img src="{{product.image2.url}}" alt="Insert an Image File here">
-            </div>
-          </md-card-conten>
-        </md-card>
-      </md-grid-tile>
-      <md-grid-tile>
-        <md-card>
-          <md-card-conten>
-            <div class="md-media-xl">
-              <img src="{{product.image3.url}}" alt="Insert an Image File here">
-            </div>
-          </md-card-conten>
-        </md-card>
-      </md-grid-tile>
-    </md-grid-list>
+  <div style="margin-bottom:200px;" layout="row" layout-margin layout-wrap >
+    <img src="{{product.image1.url}}" alt="Insert an Image File here" width="30%" height="50%">
+    <img src="{{product.image1.url}}" alt="Insert an Image File here" width="30%" height="50%">
+    <img src="{{product.image1.url}}" alt="Insert an Image File here" width="30%" height="50%">
   </div>
 
   <div layout  layout-padding layout-fill layout-margin>
