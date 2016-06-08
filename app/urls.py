@@ -28,5 +28,5 @@ urlpatterns = [
     url(r'^products/(?P<product_name>[a-zA-Z0-9_-]+)$', views.ProductView.as_view(), name='product'),
     url(r'^profile$', views.profile, name='profile'),
     #for frontend testing
-    url(r'^testing$', views.TestView.as_view(), name='testing'),
+    url(r'^frontendtesting$', views.TestView.as_view(), name='frontendtesting'),
 ]
