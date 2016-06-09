@@ -20,17 +20,17 @@ from django.conf import settings
 
 app_name = 'app'
 urlpatterns = [
-                  url(r'^app/$', views.IndexView.as_view(), name='index'),
-                  url(r'^app/login$', views.login_view, name='login'),
-                  url(r'^app/register$', views.register_user, name='register_user'),
-                  url(r'^app/logout$', views.log_out, name='logout'),
-                  url(r'^app/(?P<category_name>[a-zA-Z0-9_-]+)/$', views.CategoryView.as_view(), name='category'),
-                  url(r'^app/(?P<category_name>[a-zA-Z0-9_-]+)/(?P<current_scenario>[a-zA-Z0-9_-]+)/$',
-                      views.ScenarioView.as_view(),
-                      name='scenario'),
-                  url(r'^app/products/(?P<product_name>[a-zA-Z0-9_-]+)$', views.ProductView.as_view(), name='product'),
-                  url(r'^app/profile$', views.profile, name='profile'),
-                  # for frontend testing
-                  url(r'^app/frontendtesting$', views.TestView.as_view(), name='frontendtesting'),
-                  url(r'^', views.IndexViewNew.as_view(), name='indexnew'),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^app/$', views.IndexView.as_view(), name='index'),
+    url(r'^app/login$', views.login_view, name='login'),
+    url(r'^app/register$', views.register_user, name='register_user'),
+    url(r'^app/logout$', views.log_out, name='logout'),
+    url(r'^app/(?P<category_name>[a-zA-Z0-9_-]+)/$', views.CategoryView.as_view(), name='category'),
+    url(r'^app/(?P<category_name>[a-zA-Z0-9_-]+)/(?P<current_scenario>[a-zA-Z0-9_-]+)/$',
+        views.ScenarioView.as_view(),
+        name='scenario'),
+    url(r'^app/products/(?P<product_name>[a-zA-Z0-9_-]+)$', views.ProductView.as_view(), name='product'),
+    url(r'^app/profile$', views.profile, name='profile'),
+    # for frontend testing
+    url(r'^app/frontendtesting$', views.TestView.as_view(), name='frontendtesting'),
+    url(r'^$', views.IndexViewNew.as_view(), name='indexnew'),
+]
