@@ -19,7 +19,10 @@ class IndexViewNew(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'app/indexNew.html',
-                      {})
+                      {'latest_category_list': Category.objects.all(),
+                       'scenarios': Scenario.objects.all(),
+                       'products': Product.objects.all()})
+
 
 class IndexView(generic.ListView):
     template_name = 'app/index.html'
@@ -87,6 +90,16 @@ class CategoryView(generic.ListView):
                        })
 
 
+class ScenariosView(generic.ListView):
+    template_name = 'app/scenarioGrid.html'
+    context_object_name = 'scenario_list_from_category'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name,
+                      {'scenario_list_from_category': Scenario.objects.all(),
+                       })
+
+
 class ScenarioView(generic.DetailView):
     template_name = 'scenario.html'
 
@@ -146,13 +159,15 @@ def login_user(request):
 def login_view(request):
     form = LoginForm(request.POST or None)
     if request.POST:
+        print(request.POST.get('username'))
+        print(request.POST.get('password'))
         if form.is_valid():
             user = form.login(request)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect("/app/?login=success")
+                return HttpResponseRedirect("/?login=success")
         else:
-            return HttpResponseRedirect("/app/?login=failed")
+            return HttpResponseRedirect("/?login=failed")
     return render(request, 'app/html_templates/loginTemplate.html', {'login_form': form})
 
 
@@ -234,9 +249,7 @@ def profile(request):
 
     user.save()
 
-    print("3333")
     if passwordOld:
-        print("1111")
         if user.check_password(passwordOld):  # change password
             if passwordNew:
                 user.set_password(passwordNew)
