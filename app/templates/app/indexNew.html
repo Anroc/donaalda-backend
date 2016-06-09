@@ -385,67 +385,66 @@
     </div>
 </section>
 
-<section id="fh5co-testimonials" data-section="products">
+<section id="fh5co-work" data-section="products">
     <div class="container">
         <div class="row">
             <div class="col-md-12 section-heading text-center">
                 <h2 class="to-animate">Produkte</h2>
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the
-                            blind texts.</h3>
+                        <h3>Unterschiedliche Hersteller, tausende Produkte für jeden Anwendungszweck.</h3>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="box-testimony">
-                    <blockquote class="to-animate-2">
-                        <p>&ldquo;Rolladen können mit dem XB-Alpha einfach nachgerüstet werden. Einfach Bandaufwicklung
-                            gegen den
-                            XB-Alpha austauschen.&rdquo;</p>
-                    </blockquote>
-                    <div class="author to-animate">
-                        <figure><img src="{% static 'app/assets/images/person1.jpg' %}" alt="Person"></figure>
-                        <p>
-                            <a href="http://www.jung.de/869/produkte/technik/jalousie-und-rollladensteuerung/mechanisch/"
-                               target="_blank">Rolladenmotor XB-Alpha</a> <span class="subtext">Jung</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="box-testimony">
-                    <blockquote class="to-animate-2">
-                        <p>&ldquo;Ich bin fatal.&rdquo;</p>
-                    </blockquote>
-                    <div class="author to-animate">
-                        <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
-                        <p>
-                            Timo <span class="subtext">Creative Director</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="row row-bottom-padded-sm">
+            {% if products %}
+                {% for product in products %}
 
-            <div class="col-md-4">
-                <div class="box-testimony">
-                    <blockquote class="to-animate-2">
-                        <p>&ldquo;Ich schreibe Tests. &rdquo;</p>
-                    </blockquote>
-                    <div class="author to-animate">
-                        <figure><img src="{% static 'app/assets/images/person3.jpg' %}" alt="Person"></figure>
-                        <p>
-                            Amin<span
-                                class="subtext">Superviser</span>
-                        </p>
+                    <div class="col-md-4 col-sm-6 col-xxs-12">
+                        <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+                            <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+                            <div class="fh5co-text">
+                                <h1>
+                                    <div>
+                                        {{ product.name }}
+                                    </div>
+                                </h1>
+                                <h2>
+                                    <div>
+                                        {{ product.provider }}
+                                        <br>{{ product.product_type }}
+                                        <h4>S/N: {{ product.serial_number }}</h4>
+                                    </div>
+                                </h2>
+                                <h3>
+                                    <div>
+                                        {{ product.description }}
+                                    </div>
+                                </h3>
+                                <span>
+                                    EOL: {{ product.end_of_life }}
+                                </span>
+                                <!--h6>
+                                    <div>
+                                        #{% if product.image2 %}
+                                            <img src="#{{ product.image2.url }}"/>
+                                        #{% endif %}
+                                        #{% if product.image3 %}
+                                            <img src="#{{ product.image3.url }}"/>
+                                        #{% endif %}
+                                    </div>
+                                </h6-->
+                            </div>
+                        </a>
                     </div>
+                    <div class="clearfix visible-sm-block"></div>
+                {% endfor %}
+            {% else %}
+                <div>
+                    no products
                 </div>
-            </div>
-
-
+            {% endif %}
         </div>
     </div>
 </section>
@@ -702,26 +701,31 @@
 <div class="modal fade" id="myModalx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Anmelden</h4>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1"><i class="icon-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Benutzername" aria-describedby="basic-addon1">
+            <form action="{%  url 'app:login' %}" method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Anmelden</h4>
                 </div>
-                <br>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon2"><i class="icon-star"></i></span>
-                    <input type="text" class="form-control" placeholder="Passwort" aria-describedby="basic-addon2">
+                <div class="modal-body">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="username" placeholder="Benutzername"
+                               aria-describedby="basic-addon1" value="{{ name }}">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2"><i class="icon-star"></i></span>
+                        <input type="password" class="form-control" name="password" placeholder="Passwort"
+                               aria-describedby="basic-addon2" value="{{ password }}">
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
-                <button type="button" class="btn btn-primary">Los gehts</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+                    <button type="submit" class="btn btn-primary">Los gehts</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
