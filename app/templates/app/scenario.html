@@ -20,8 +20,12 @@
   <title>{{ current_scenario.name }}</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!--boostrap cdn link. wenn dieser link auskommentiert wird, stimmt zwar wieder das layout der seite (abstand zwischen banner und toolbar) aber das carousel funktioniert dann nicht mehr-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!--bootstrap-tags for carousel-->
+  <link href="../../../static/app/assets/css/carousel.css" type="text/css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="../../../static/app/assets/js/bootstrap.min.js"></script>
+
+
 
   {% include "app/html_templates/indexToolbarTemplate.html" %}
   {% include "app/html_templates/loginTemplate.html" %}
@@ -82,20 +86,20 @@
   </div>
 
   <!--product-images-div-->
-  <div style="width:50%; height:500px">
+  <div flex-xs="100" flex-sm="75" flex-gt-md="50" style="">
 
     <!--carousel-->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0"></li>
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
         <li data-target="#myCarousel" data-slide-to="3"></li>
       </ol>
 
       <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
+      <div layout="row" layout-align="center center" class="carousel-inner" role="listbox">
         <div class="item active">
           <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
         </div>
@@ -126,9 +130,6 @@
   </div>
 </div>
 
-<!--bootstrap script tags for carousel-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="../../../static/app/assets/js/bootstrap.min.js"></script>
 
 
 </body>
