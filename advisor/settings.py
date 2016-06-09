@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'djangobower',
     'material',
     'material.admin',
     'django.contrib.admin',
@@ -135,8 +136,33 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'app/static/'),
 ]
 
+# TODO check if correct
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+)
+
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 MEDIA_URL = '/media/'
+
+# TODO check if correct
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'app/static/bower_components')
+
+# TODO check if correct
+
+BOWER_PATH = '/usr/bin/bower'
+
+# TODO check if correct
+
+BOWER_INSTALLED_APPS = (
+    'md-steppers#0.2.4',
+    'jquery'
+)
+
