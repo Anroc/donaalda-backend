@@ -224,6 +224,7 @@
 
 
 </head>
+</head>
 <body>
 
 <header role="banner" id="fh5co-header">
@@ -283,46 +284,32 @@
 <section id="fh5co-intro">
   <div class="container">
     <div class="row row-bottom-padded-lg">
-      <div class="fh5co-block to-animate" style="background-image: url({% static 'app/assets/images/img_7.jpg' %});">
+      {% if latest_category_list %}
+      {% for category in latest_category_list %}
+      <div class="fh5co-block to-animate" style="background-image:url({{ category.picture.url }});">
         <div class="overlay-darker"></div>
         <div class="overlay"></div>
         <div class="fh5co-text">
           <i class="fh5co-intro-icon icon-gift"></i>
-          <h2>Komfort</h2>
-          <p>Komfort ist mehr als ein gemütliches Sofa. Steuer das Licht, die Rolläden und vieles mehr. Egal wo du gerade bist und so weiter...</p>
-          <p><a href="#" data-section="about" class="btn btn-primary">Na dann los</a></p>
+          <h2>
+            {{ category.name }}
+          </h2>
+          <p>
+            {{ category.description }}
+          </p>
+          <p>
+            <a href="#" data-section="about" class="btn btn-primary">
+              Na dann los
+            </a>
+          </p>
         </div>
       </div>
-      <div class="fh5co-block to-animate" style="background-image: url({% static 'app/assets/images/img_8.jpg' %});">
-        <div class="overlay-darker"></div>
-        <div class="overlay"></div>
-        <div class="fh5co-text">
-          <i class="fh5co-intro-icon icon-heart"></i>
-          <h2>Gesundheit</h2>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-          <p><a href="#" class="btn btn-primary">Click Me</a></p>
-        </div>
+      {% endfor %}
+      {% else %}
+      <div>
+        no categories
       </div>
-      <div class="fh5co-block to-animate" style="background-image: url({% static 'app/assets/images/img_10.jpg' %});">
-        <div class="overlay-darker"></div>
-        <div class="overlay"></div>
-        <div class="fh5co-text">
-          <i class="fh5co-intro-icon icon-leaf"></i>
-          <h2>Energie</h2>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-          <p><a href="#" class="btn btn-primary">Why Us?</a></p>
-        </div>
-      </div>
-      <div class="fh5co-block to-animate" style="background-image: url({% static 'app/assets/images/img_10.jpg' %});">
-        <div class="overlay-darker"></div>
-        <div class="overlay"></div>
-        <div class="fh5co-text">
-          <i class="fh5co-intro-icon icon-lock"></i>
-          <h2>Sicherheit</h2>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-          <p><a href="#" class="btn btn-primary">Why Us?</a></p>
-        </div>
-      </div>
+      {% endif %}
     </div>
     <!--<div class="row watch-video text-center to-animate">
               <span>Watch the video</span>
@@ -663,11 +650,13 @@
         <ul class="fh5co-contact-info">
           <li class="fh5co-contact-address ">
             <i class="icon-home"></i>
-            5555 Love Paradise 56 New Clity 5655, <br>Excel Tower United Kingdom
+            13045 Berlin <br>
+            Telekom Tower <br>
+            Berlin, Germany
           </li>
           <li><i class="icon-phone"></i> (123) 465-6789</li>
-          <li><i class="icon-envelope"></i>info@freehtml5.co</li>
-          <li><i class="icon-globe"></i> <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></li>
+          <li><i class="icon-envelope"></i>info@donaalda.com</li>
+          <li><i class="icon-globe"></i> <a href="https://www.donaalda.com/" target="_blank">donaalda.com</a></li>
         </ul>
       </div>
 
@@ -706,8 +695,10 @@
   <div class="container">
     <div class="">
       <div class="col-md-12 text-center">
-        <p>&copy; Elate Free HTML5. All Rights Reserved. <br>Created by <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> Images: <a href="http://pexels.com/" target="_blank">Pexels</a>, <a href="http://plmd.me/" target="_blank">plmd.me</a></p>
-
+        <p>&copy; DONAALDA. All Rights Reserved. <br>
+          Created by <a href="https://www.donaalda.com" target="_blank">donaalda.com</a>
+          Images: <a href="http://pexels.com/" target="_blank">Pexels</a>,
+          <a href="http://plmd.me/" target="_blank">plmd.me</a></p>
       </div>
     </div>
     <div class="row">
@@ -749,42 +740,6 @@
   </div>
 </div>
 
-<!-- For demo purposes Only ( You may delete this anytime :-) -->
-<div id="colour-variations">
-  <a class="option-toggle"><i class="icon-gear"></i></a>
-  <h3>Preset Colors</h3>
-  <ul>
-    <li>
-      <a href="javascript: void(0);" data-theme="style">
-        <span style="background: #3f95ea;"></span>
-        <span style="background: #52d3aa;"></span>
-        <span style="background: #f2f2f2;"></span>
-      </a>
-    </li>
-    <li>
-      <a href="javascript: void(0);" data-theme="style2">
-        <span style="background: #329998;"></span>
-        <span style="background: #6cc99c;"></span>
-        <span style="background: #f2f2f2;"></span>
-      </a>
-    </li>
-    <li>
-      <a href="javascript: void(0);" data-theme="style3">
-        <span style="background: #9f466e;"></span>
-        <span style="background: #c24d67;"></span>
-        <span style="background: #f2f2f2;"></span>
-      </a>
-    </li>
-    <li>
-      <a href="javascript: void(0);" data-theme="style4">
-        <span style="background: #21825C;"></span>
-        <span style="background: #A4D792;"></span>
-        <span style="background: #f2f2f2;"></span>
-      </a>
-    </li>
-
-  </ul>
-</div>
 </body>
 </html>
 

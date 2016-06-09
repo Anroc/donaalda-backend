@@ -19,7 +19,7 @@ class IndexViewNew(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'app/indexNew.html',
-                      {})
+                      {'latest_category_list': Category.objects.all()})
 
 class IndexView(generic.ListView):
     template_name = 'app/index.html'
