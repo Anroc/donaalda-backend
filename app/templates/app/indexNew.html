@@ -229,7 +229,6 @@
 
 
 </head>
-</head>
 <body>
 
 <header role="banner" id="fh5co-header">
@@ -427,15 +426,15 @@
                                     EOL: {{ product.end_of_life }}
                                 </span>
                                 <!--h6>
-                                    <div>
-                                        #{% if product.image2 %}
-                                            <img src="#{{ product.image2.url }}"/>
-                                        #{% endif %}
-                                        #{% if product.image3 %}
-                                            <img src="#{{ product.image3.url }}"/>
-                                        #{% endif %}
-                                    </div>
-                                </h6-->
+                <div>
+                    #{% if product.image2 %}
+                        <img src="#{{ product.image2.url }}"/>
+                    #{% endif %}
+                    #{% if product.image3 %}
+                        <img src="#{{ product.image3.url }}"/>
+                    #{% endif %}
+                </div>
+            </h6-->
                             </div>
                         </a>
                     </div>
@@ -447,6 +446,7 @@
                 </div>
             {% endif %}
         </div>
+    </div>
 </section>
 
 <section id="fh5co-testimonials" data-section="products">
@@ -504,125 +504,6 @@
                                 class="subtext">Superviser</span>
                         </p>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<section id="fh5co-services" data-section="scenarios">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 section-heading text-left">
-                <h2 class=" left-border to-animate">Szenarien</h2>
-                <div class="row">
-                    <div class="col-md-8 subtext to-animate">
-                        <h3>Viele tolle Szenarien, wie Smart Home Ihr Wohnen revolutioniert, ja disruptiv
-                            innoviert!</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                <i class="icon to-animate-2 icon-anchor"></i>
-                <h3>Comfort &amp; Chill</h3>
-                <p>
-                    Zeit zum Chillen.
-                </p>
-            </div>
-            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                <i class="icon to-animate-2 icon-layers2"></i>
-                <h3>Web &amp; Interface</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                    there live the blind
-                    texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large
-                    language ocean</p>
-            </div>
-
-            <div class="clearfix visible-sm-block"></div>
-
-            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                <i class="icon to-animate-2 icon-video2"></i>
-                <h3>Photo &amp; Video</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                    there live the blind
-                    texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large
-                    language ocean</p>
-            </div>
-            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                <i class="icon to-animate-2 icon-monitor"></i>
-                <h3>CMS &amp; eCommerce</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                    there live the blind
-                    texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large
-                    language ocean</p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section id="fh5co-about" data-section="about">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 section-heading text-center">
-                <h2 class="to-animate">About</h2>
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>Far far away, behind the word mountains, far from the countries Vokalia and
-                            Consonantia, there live the
-                            blind texts.</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="fh5co-person text-center to-animate">
-                    <figure><img src="{% static 'app/assets/images/person1.jpg' %}" alt="Image"></figure>
-                    <h3>Amin</h3>
-                    <span class="fh5co-position">Web Designer</span>
-                    <p>
-                        Ich schreibe Tests.
-                    </p>
-                    <ul class="social social-circle">
-                        <li><a href="#"><i class="icon-twitter"></i></a></li>
-                        <li><a href="#"><i class="icon-facebook"></i></a></li>
-                        <li><a href="#"><i class="icon-dribbble"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="fh5co-person text-center to-animate">
-                    <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Image"></figure>
-                    <h3>Timo</h3>
-                    <span class="fh5co-position">Web Developer</span>
-                    <p>
-                        Ich wurde inkubiert, um zu sein. Ich bin einer und nicht viele.
-                    </p>
-
-                    <ul class="social social-circle">
-                        <li><a href="#"><i class="icon-twitter"></i></a></li>
-                        <li><a href="#"><i class="icon-facebook"></i></a></li>
-                        <li><a href="#"><i class="icon-github"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="fh5co-person text-center to-animate">
-                    <figure><img src="{% static 'app/assets/images/person3.jpg' %}" alt="Image"></figure>
-                    <h3>Larry Ben</h3>
-                    <span class="fh5co-position">Web Designer</span>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                        there live the
-                        blind texts</p>
-                    <ul class="social social-circle">
-                        <li><a href="#"><i class="icon-twitter"></i></a></li>
-                        <li><a href="#"><i class="icon-facebook"></i></a></li>
-                        <li><a href="#"><i class="icon-dribbble"></i></a></li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -792,4 +673,3 @@
 
 </body>
 </html>
-
