@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^profile$', views.profile, name='profile'),
     #for frontend testing
     url(r'^frontendtesting$', views.TestView.as_view(), name='frontendtesting'),
+    url(r'^designtesting$', views.TestDesignView.as_view(), name='designtesting'),
 ]

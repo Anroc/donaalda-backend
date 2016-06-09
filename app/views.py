@@ -21,48 +21,48 @@ class IndexView(generic.ListView):
         login_status = request.GET.get('login')
         if login_status == 'failed':
             return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
-                                                               'state': 'failed',
-                                                               'message': 'Wrong login data!',
-                                                               })
+                                                      'state': 'failed',
+                                                      'message': 'Wrong login data!',
+                                                      })
         if login_status == 'success':
             return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
-                                                               'state': 'success',
-                                                               # If the user type 'app/?login=success' in the url the
-                                                               # 'message' attribute will be empty. The toolbar template is
-                                                               # looking for this empty String and will not show 'Welcome [NO USER]'
-                                                               'message': request.user.username,
-                                                               })
+                                                      'state': 'success',
+                                                      # If the user type 'app/?login=success' in the url the
+                                                      # 'message' attribute will be empty. The toolbar template is
+                                                      # looking for this empty String and will not show 'Welcome [NO USER]'
+                                                      'message': request.user.username,
+                                                      })
         registration_status = request.GET.get('registration')
         if registration_status == 'blank_fields':
             return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
-                                                               'message': 'Bitte alle Felder ausfüllen!',
-                                                               })
+                                                      'message': 'Bitte alle Felder ausfüllen!',
+                                                      })
         if registration_status == 'success':
             return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
-                                                               'message': 'Registrierung erfolgreich!',
-                                                               })
+                                                      'message': 'Registrierung erfolgreich!',
+                                                      })
         if registration_status == 'taken':
             return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
-                                                               'message': 'Der Benutzername wird bereits verwendet!',
-                                                               })
+                                                      'message': 'Der Benutzername wird bereits verwendet!',
+                                                      })
 
         profile_status = request.GET.get('profile')
         if profile_status == 'blank_fields':
             return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
-                                                               'message': 'Zum Ändern des Passwortes altes und neues Passwort angegeben! Restliche Änderungen durchgeführt!',
-                                                               })
+                                                      'message': 'Zum Ändern des Passwortes altes und neues Passwort angegeben! Restliche Änderungen durchgeführt!',
+                                                      })
         if profile_status == 'success':
             return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
-                                                               'message': 'Profil erfolgreich verändert!',
-                                                               })
+                                                      'message': 'Profil erfolgreich verändert!',
+                                                      })
         if profile_status == 'wrong_password':
             return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
-                                                               'message': 'Passwort falsch! Das Passwort bleibt unverändert. Restliche Änderungen durchgeführt!',
-                                                               })
+                                                      'message': 'Passwort falsch! Das Passwort bleibt unverändert. Restliche Änderungen durchgeführt!',
+                                                      })
         if profile_status == 'deleted':
             return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
-                                                               'message': 'Ihr Account wurde gelöscht!',
-                                                               })
+                                                      'message': 'Ihr Account wurde gelöscht!',
+                                                      })
 
         return render(request, 'app/index.html', {'latest_category_list': Category.objects.all()})
 
@@ -80,7 +80,6 @@ class CategoryView(generic.ListView):
 
 
 class ScenarioView(generic.DetailView):
-
     template_name = 'scenario.html'
 
     # context_object_name = 'scenario'
@@ -91,7 +90,6 @@ class ScenarioView(generic.DetailView):
 
 
 class ProductView(generic.DetailView):
-
     template_name = 'app/product.html'
     context_object_name = 'product'
 
@@ -103,12 +101,20 @@ class ProductView(generic.DetailView):
 
 # for frontend testing
 class TestView(generic.DetailView):
-
     template_name = 'app/frontendTesting.html'
     context_object_name = 'test'
 
     def get(self, request, *args, **kwargs):
         return render(request, 'app/frontendTesting.html',
+                      {})
+
+
+class TestDesignView(generic.DetailView):
+    template_name = 'app/designTesting.html'
+    context_object_name = 'test'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/designTesting.html',
                       {})
 
 
