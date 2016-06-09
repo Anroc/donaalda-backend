@@ -19,7 +19,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
-      ng-controller="{% block ng_controller_theme %}categoryController{% endblock %}" ng-cloak>
+      ng-controller="{% block ng_controller_theme %}categoryController as vm{% endblock %}" ng-cloak>
 
 <md-content flex="nogrow" style="width: 800px; margin: 40px auto">
   <div>
