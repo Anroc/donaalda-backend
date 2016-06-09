@@ -19,9 +19,9 @@ from django.contrib import admin
 from django.conf import settings
 
 urlpatterns = [
-    url(r'^app/', include('app.urls')),
+    url(r'^', include('app.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('welcome.urls')),
+    # url(r'^', include('welcome.urls')),
 ]
 
 admin.site.site_header = 'DONAALDA'

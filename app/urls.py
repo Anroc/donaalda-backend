@@ -18,16 +18,16 @@ from . import views
 
 app_name = 'app'
 urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^login$', views.login_view, name='login'),
-    url(r'^register$', views.register_user, name='register_user'),
-    url(r'^logout$', views.log_out, name='logout'),
-    url(r'^(?P<category_name>[a-zA-Z0-9_-]+)/$', views.CategoryView.as_view(), name='category'),
-    url(r'^(?P<category_name>[a-zA-Z0-9_-]+)/(?P<current_scenario>[a-zA-Z0-9_-]+)/$', views.ScenarioView.as_view(),
+    url(r'^app/$', views.IndexView.as_view(), name='index'),
+    url(r'^app/login$', views.login_view, name='login'),
+    url(r'^app/register$', views.register_user, name='register_user'),
+    url(r'^app/logout$', views.log_out, name='logout'),
+    url(r'^app/(?P<category_name>[a-zA-Z0-9_-]+)/$', views.CategoryView.as_view(), name='category'),
+    url(r'^app/(?P<category_name>[a-zA-Z0-9_-]+)/(?P<current_scenario>[a-zA-Z0-9_-]+)/$', views.ScenarioView.as_view(),
         name='scenario'),
-    url(r'^products/(?P<product_name>[a-zA-Z0-9_-]+)$', views.ProductView.as_view(), name='product'),
-    url(r'^profile$', views.profile, name='profile'),
+    url(r'^app/products/(?P<product_name>[a-zA-Z0-9_-]+)$', views.ProductView.as_view(), name='product'),
+    url(r'^app/profile$', views.profile, name='profile'),
     # for frontend testing
-    url(r'^frontendtesting$', views.TestView.as_view(), name='frontendtesting'),
-    url(r'^designtesting$', views.TestDesignView.as_view(), name='designtesting'),
+    url(r'^app/frontendtesting$', views.TestView.as_view(), name='frontendtesting'),
+    url(r'^', views.IndexViewNew.as_view(), name='indexnew'),
 ]
