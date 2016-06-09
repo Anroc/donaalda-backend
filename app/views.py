@@ -87,6 +87,15 @@ class CategoryView(generic.ListView):
                        })
 
 
+class ScenariosView(generic.ListView):
+    template_name = 'app/scenarioGrid.html'
+    context_object_name = 'scenario_list_from_category'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name,
+                      {'scenario_list_from_category': Scenario.objects.all(),
+                       })
+
 class ScenarioView(generic.DetailView):
     template_name = 'scenario.html'
 

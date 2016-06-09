@@ -88,9 +88,12 @@
               </md-button>
             </md-card-icon-actions>
             <!-- TODO frontend & backend: show popup / new page with the products used in the scenario -->
-            <md-button href="{% url 'app:scenario' category.name scenario.name %}">In Detail</md-button>
+
+            {% if category  %}
+                <md-button href="{% url 'app:scenario' category.name scenario.name %}">In Detail</md-button>
             <!-- TODO frontend: show question bar -->
             <!-- TODO backend: offer specific questions -->
+            {% endif  %}
             <!--md-button>Show questions</md-button -->
           </md-card-actions>
 
