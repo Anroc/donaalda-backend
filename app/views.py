@@ -19,7 +19,9 @@ class IndexViewNew(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'app/indexNew.html',
-                      {'latest_category_list': Category.objects.all()})
+                      {'latest_category_list': Category.objects.all(),
+                      'scenarios': Scenario.objects.all(),
+                      'categories_for_scenario': Scenario.objects.all()})
 
 class IndexView(generic.ListView):
     template_name = 'app/index.html'
