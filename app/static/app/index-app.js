@@ -82,9 +82,9 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
     vm.maxStep = 3;
     vm.showBusyText = false;
     vm.stepData = [
-        {step: 1, completed: false, optional: false, data: {}},
-        {step: 2, completed: false, optional: false, data: {}},
-        {step: 3, completed: false, optional: false, data: {}},
+        { step: 1, completed: false, optional: false, data: {} },
+        { step: 2, completed: false, optional: false, data: {} },
+        { step: 3, completed: false, optional: false, data: {} },
     ];
 
     vm.enableNextStep = function nextStep() {
@@ -114,7 +114,7 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
             $timeout(function () {
                 vm.showBusyText = false;
                 console.log('On submit success');
-                deferred.resolve({status: 200, statusText: 'success', data: {}});
+                deferred.resolve({ status: 200, statusText: 'success', data: {} });
                 //move to next step when success
                 stepData.completed = true;
                 vm.enableNextStep();

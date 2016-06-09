@@ -157,9 +157,6 @@ MEDIA_URL = '/media/'
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'app/static/bower_components')
 
-# TODO check if correct
-
-BOWER_PATH = '/usr/bin/bower'
 
 # TODO check if correct
 
