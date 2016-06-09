@@ -13,7 +13,9 @@ from imagekit.processors import ResizeToFill
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     picture = models.ImageField(verbose_name="Bild für die Kategorie", upload_to="categories")
+    pictureBackground = models.ImageField(verbose_name="Bild für den Hintergrund", null=True, blank=True)
     description = models.TextField(verbose_name="Beschreibung")
+    iconString = models.CharField(max_length=20, default="gift")
     scenario_set = models.ManyToManyField("Scenario", verbose_name="Zur Kategorie gehörende Szenarien")
 
     def __str__(self):
