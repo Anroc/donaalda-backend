@@ -20,6 +20,9 @@
   <title>{{ current_scenario.name }}</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+  <!--boostrap cdn link. wenn dieser link auskommentiert wird, stimmt zwar wieder das layout der seite (abstand zwischen banner und toolbar) aber das carousel funktioniert dann nicht mehr-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
   {% include "app/html_templates/indexToolbarTemplate.html" %}
   {% include "app/html_templates/loginTemplate.html" %}
   {% include "app/html_templates/registrationTemplate.html" %}
@@ -28,75 +31,104 @@
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}" ng-cloak>
 
-<div class="md-padding" style="padding-top: 140px;">
-  <md-content class="md-padding" layout-xs="column" layout="row">
-    <div layout="column">
-      <md-card>
-        <img ng-src="{{banner}}" class="md-card-image" alt="Washed Out">
-        <md-card-title style="padding-bottom:50px"> <!--padding damit der title nicht mit dem content überlappt-->
-          <md-card-title-text>
-            <span class="md-headline">Scenario-Title</span>
-          </md-card-title-text>
-        </md-card-title>
+<!--wrapper-div-->
+<div layout="column" layout-align="start center" style="padding-top:99px"> <!--toolbar überlappt ohne padding das div-->
 
-        <md-card-content>
-          <div layout="row">
-            <div flex="70">
-              <p style="margin-right:16px"> <!--margin damit der text nicht am bild klebt-->
-                Description:
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-              </p>
-            </div>
-            <div style="background-color:darkgrey" flex="30">
-            </div>
-          </div>
+  <!--szenarioList-div-->
+  <div layout="column">
 
-          <div layout="row">
-            <div style="background-color:darkgrey" flex="30">
-            </div>
-            <div flex="70">
-              <p style="margin-left:16px">
-                Description:
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-              </p>
-            </div>
-          </div>
+    <header style="text-align:center; background:url(../../../static/app/assets/resources/not_so_smart.jpg)">
+      <h1>Szenario-Name</h1>
+    </header>
 
-          <div layout="row">
-            <div flex="70">
-              <p style="margin-right:16px">
-                Description:
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-              </p>
-            </div>
-            <div style="background-color:darkgrey" flex="30">
-            </div>
-          </div>
+    <md-content style="padding-top:16px; padding-left:16px; padding-right:16px">
 
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button>
-        </md-card-actions>
-      </md-card>
+      <div layout="row" layout-align="space-around center" style="padding-bottom:16px">
+        <div flex-xs="50" flex-sm="70" flex-gt-md="80">
+          <p style="margin-right:16px"> <!--margin damit der text nicht am bild klebt-->
+            Description:
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          </p>
+        </div>
+        <div flex-xs="50" flex-sm="30" flex-gt-md="20">
+          <img style="height:auto; width:100%" src="../../../static/app/assets/resources/not_so_smart.jpg">
+        </div>
+      </div>
+
+      <div layout="row" layout-align="space-around center" style="padding-bottom:16px">
+        <div flex-xs="50" flex-sm="30" flex-gt-md="20">
+          <img style="height:auto; width:100%" src="../../../static/app/assets/resources/not_so_smart.jpg">
+        </div>
+        <div flex-xs="50" flex-sm="70" flex-gt-md="80">
+          <p style="margin-left:16px">
+            Description:
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          </p>
+        </div>
+      </div>
+
+      <div layout="row" layout-align="space-around center" style="padding-bottom:16px">
+        <div flex-xs="50" flex-sm="70" flex-gt-md="80">
+          <p style="margin-right:16px">
+            Description:
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          </p>
+        </div>
+        <div flex-xs="50" flex-sm="30" flex-gt-md="20">
+          <img style="height:auto; width:100%" src="../../../static/app/assets/resources/not_so_smart.jpg">
+        </div>
+      </div>
+    </md-content>
+  </div>
+
+  <!--product-images-div-->
+  <div style="width:50%; height:500px">
+
+    <!--carousel-->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
+        </div>
+
+        <div class="item">
+          <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
+        </div>
+
+        <div class="item">
+          <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
+        </div>
+
+        <div class="item">
+          <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
+        </div>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
-  </md-content>
+  </div>
 </div>
+
+<!--bootstrap script tags for carousel-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../../static/app/assets/js/bootstrap.min.js"></script>
 
 
 </body>
