@@ -14,7 +14,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     picture = models.ImageField(verbose_name="Bild für die Kategorie", upload_to="categories")
     description = models.TextField(verbose_name="Beschreibung")
-    scenario_set = models.ManyToManyField("Scenario", verbose_name="Zur Kategorie gehörende Szenarien")
+    scenario_set = models.ManyToManyField("Scenario", verbose_name="Zur Kategorie gehörende Szenarien",  )
 
     def __str__(self):
         return '%s' % self.name
@@ -25,6 +25,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Kategorie"
         verbose_name_plural = "Kategorien"
+        ordering=["name"]
 
 
 class Scenario(models.Model):
@@ -44,6 +45,7 @@ class Scenario(models.Model):
     class Meta:
         verbose_name = "Szenario"
         verbose_name_plural = "Szenarien"
+        ordering = ["name"]
 
 
 class ScenarioDescription(models.Model):
@@ -62,6 +64,7 @@ class ScenarioDescription(models.Model):
     class Meta:
         verbose_name = "Szenariobeschreibung"
         verbose_name_plural = "Szenariobeschreibungen"
+        ordering=["order",]
 
 
 class ProductSet(models.Model):
@@ -79,6 +82,7 @@ class ProductSet(models.Model):
     class Meta:
         verbose_name = "Produktsammlung"
         verbose_name_plural = "Produktsammlungen"
+        ordering = ["name"]
 
 
 class Product(models.Model):
@@ -110,6 +114,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Produkt"
         verbose_name_plural = "Produkte"
+        ordering = ["name", "serial_number"]
         # unique_together = (("provider", "serial_number"),) # It seems like unique_together does not work with ForeignKey
 
 
@@ -125,6 +130,7 @@ class ProductType(models.Model):
     class Meta:
         verbose_name = "Produktart"
         verbose_name_plural = "Produktarten"
+        ordering = ["type_name"]
 
 
 class Provider(models.Model):
@@ -140,6 +146,7 @@ class Provider(models.Model):
     class Meta:
         verbose_name = "Hersteller"
         verbose_name_plural = "Hersteller"
+        ordering=["name"]
 
 
 class ProviderProfile(models.Model):
@@ -169,3 +176,4 @@ class Employee(User):
     class Meta:
         verbose_name = "Angestellter"
         verbose_name_plural = "Angestellte"
+        ordering = ["username"]
