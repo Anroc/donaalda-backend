@@ -3,7 +3,7 @@
  */
 
 
-var donaaldaApp = angular.module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages']);
+var donaaldaApp = angular.module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers']);
 donaaldaApp.controller('themeController', themeControl)
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
