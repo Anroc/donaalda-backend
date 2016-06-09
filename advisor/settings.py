@@ -126,12 +126,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'app/static/'),
-]
-
 # TODO check if correct
 
 STATICFILES_FINDERS = (
@@ -140,16 +134,9 @@ STATICFILES_FINDERS = (
     'djangobower.finders.BowerFinder',
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
-MEDIA_URL = '/media/'
-
 # TODO check if correct
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'app/static/bower_components')
-
 
 # TODO check if correct
 
@@ -157,3 +144,15 @@ BOWER_INSTALLED_APPS = (
     'md-steppers#0.2.4',
     'jquery'
 )
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'app/static/'),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+MEDIA_URL = '/media/'
