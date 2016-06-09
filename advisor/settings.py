@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+#TODO added djangobower
+
 INSTALLED_APPS = [
     'djangobower',
     'material',
