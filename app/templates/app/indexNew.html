@@ -335,97 +335,102 @@
 </section>
 
 <section id="fh5co-work" data-section="information">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Das macht Donaalda</h2>
+    <div class="container">
         <div class="row">
-          <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Unterschiedliche Hersteller, tausende Produkte für jeden Anwendungszweck. Aber wie soll mein
-              <b>Smart
-                Home</b> aussehen?<br>
-              Dabei hilft dir Donaalda, denn sie berät dich mit fertigen Szenarien und fragt dich
-              nach deiner Wohnsituation.</h3>
-          </div>
+            <div class="col-md-12 section-heading text-center">
+                <h2 class="to-animate">Das macht Donaalda</h2>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                        <h3>Unterschiedliche Hersteller, tausende Produkte für jeden Anwendungszweck. Aber wie soll mein
+                            <b>Smart
+                                Home</b> aussehen?<br>
+                            Dabei hilft dir Donaalda, denn sie berät dich mit fertigen Szenarien und fragt dich
+                            nach deiner Wohnsituation.</h3>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="row row-bottom-padded-sm">
+            {% if scenarios %}
+                {% for scenario in scenarios %}
+
+                    <div class="col-md-4 col-sm-6 col-xxs-12">
+                        <a href="{{ scenario.picture.url }}" class="fh5co-project-item image-popup to-animate">
+                            <img src="{{ scenario.picture.url }}" alt="Image" class="img-responsive">
+                            <div class="fh5co-text">
+                                <h1>
+                                    {{ scenario.name }}
+                                </h1>
+                                <h2>
+                                    {{ scenario.provider }}
+                                </h2>
+                                <h3>{{ scenario.scenario_product_set }}</h3>
+                                <h3>
+                                    {% for category in scenario.category_set.all %}
+                                        <p>
+                                            {{ category.name }}
+                                        </p>
+                                    {% endfor %}
+                                </h3>
+                                <h4> {{ scenario.description }}</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="clearfix visible-sm-block"></div>
+                {% endfor %}
+            {% else %}
+                <div>
+                    no scenarios
+                </div>
+            {% endif %}
+
+        </div>
+
     </div>
-
-    <div class="row row-bottom-padded-sm">
-      {% if scenarios %}
-      {% for scenario in scenarios %}
-
-      <div class="col-md-4 col-sm-6 col-xxs-12">
-        <a href="{{ scenario.picture.url }}" class="fh5co-project-item image-popup to-animate">
-          <img src="{{ scenario.picture.url }}" alt="Image" class="img-responsive">
-          <div class="fh5co-text">
-            <h2>{{ scenario.name }}, {{ scenario.provider }}, {{ scenario.scenario_product_set }}</h2>
-            <span></span>
-            <h5>
-              {% for category in scenario.category_set.all %}
-              <p>
-                {{ category.name }}
-              </p>
-              {% endfor %}
-            </h5>
-            <span> {{ scenario.description }}</span>
-          </div>
-        </a>
-      </div>
-      <div class="clearfix visible-sm-block"></div>
-      {% endfor %}
-      {% else %}
-      <div>
-        no scenarios
-      </div>
-      {% endif %}
-
-    </div>
-
-  </div>
 </section>
 
 <section id="fh5co-work" data-section="products">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Produkte</h2>
+    <div class="container">
         <div class="row">
-          <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Unterschiedliche Hersteller, tausende Produkte für jeden Anwendungszweck.</h3>
-          </div>
+            <div class="col-md-12 section-heading text-center">
+                <h2 class="to-animate">Produkte</h2>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                        <h3>Unterschiedliche Hersteller, tausende Produkte für jeden Anwendungszweck.</h3>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="row row-bottom-padded-sm">
-      {% if products %}
-      {% for product in products %}
+        <div class="row row-bottom-padded-sm">
+            {% if products %}
+                {% for product in products %}
 
-      <div class="col-md-4 col-sm-6 col-xxs-12">
-        <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
-          <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
-          <div class="fh5co-text">
-            <h1>
-              <div>
-                {{ product.name }}
-              </div>
-            </h1>
-            <h2>
-              <div>
-                {{ product.provider }}
-                <br>{{ product.product_type }}
-                <h4>S/N: {{ product.serial_number }}</h4>
-              </div>
-            </h2>
-            <h3>
-              <div>
-                {{ product.description }}
-              </div>
-            </h3>
-            <span>
-              EOL: {{ product.end_of_life }}
-            </span>
-            <!--h6>
+                    <div class="col-md-4 col-sm-6 col-xxs-12">
+                        <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+                            <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+                            <div class="fh5co-text">
+                                <h1>
+                                    <div>
+                                        {{ product.name }}
+                                    </div>
+                                </h1>
+                                <h2>
+                                    <div>
+                                        {{ product.provider }}
+                                        <br>{{ product.product_type }}
+                                        <h4>S/N: {{ product.serial_number }}</h4>
+                                    </div>
+                                </h2>
+                                <h4>
+                                    <div>
+                                        {{ product.description }}
+                                    </div>
+                                </h4>
+                                <span>
+                                    EOL: {{ product.end_of_life }}
+                                </span>
+                                <!--h6>
                 <div>
                     #{% if product.image2 %}
                         <img src="#{{ product.image2.url }}"/>
@@ -435,19 +440,20 @@
                     #{% endif %}
                 </div>
             </h6-->
-          </div>
-        </a>
-      </div>
-      <div class="clearfix visible-sm-block"></div>
-      {% endfor %}
-      {% else %}
-      <div>
-        no products
-      </div>
-      {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                    <div class="clearfix visible-sm-block"></div>
+                {% endfor %}
+            {% else %}
+                <div>
+                    no products
+                </div>
+            {% endif %}
+        </div>
     </div>
-  </div>
 </section>
+
 <section id="fh5co-testimonials" data-section="products">
   <div class="container">
     <div class="row">
