@@ -223,7 +223,11 @@
 
     </script>
     <!-- End demo purposes only -->
-
+    <script>
+      function logOut() {
+        location.href = "/app/logout"
+      }
+    </script>
     <!-- Main JS (Do not remove) -->
     <script src="{% static 'app/assets/js/main.js' %}"></script>
 
@@ -260,7 +264,7 @@
                             <li>
                                 <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
                                         data-target="#myModalLogin">
-                                    <i class="fh5co-intro-icon icon-login"></i>
+                                    <i class="glyphicon glyphicon-log-in"></i>
                                 </button>
                             </li>
                             <li>
@@ -277,9 +281,8 @@
                                 {% endif %}
                             {% endif %}
                             <li>
-                                <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
-                                        data-target="#myModalLogout">
-                                    <i class="fh5co-intro-icon icon-login"></i>
+                                <button type="button" class="btn btn-primary btn-xs navbar-btn" onclick="logOut()">
+                                    <i class="glyphicon glyphicon-log-out"></i>
                                 </button>
                                 <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
                             </li>
