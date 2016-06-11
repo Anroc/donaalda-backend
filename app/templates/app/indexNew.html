@@ -227,6 +227,10 @@
       function logOut() {
         location.href = "/app/logout"
       }
+
+      function admin() {
+        location.href = "/admin"
+      }
     </script>
     <!-- Main JS (Do not remove) -->
     <script src="{% static 'app/assets/js/main.js' %}"></script>
@@ -277,7 +281,7 @@
                             <!--TODO: Change these to admin (if allowed), logout and profile-->
                             {% if 1 == 1 %}
                                 {% if user.is_superuser %}
-                                    <li><a href="admin/" data-nav-section=""><span>Admin</span></a></li>
+                                    <li><a href="#" onclick="admin()"><span>Admin</span></a></li>
                                 {% endif %}
                             {% endif %}
                             <li>
