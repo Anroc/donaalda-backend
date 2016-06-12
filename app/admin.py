@@ -19,7 +19,7 @@ from app.models import (Category,
 
 class ScenarioAdmin(admin.ModelAdmin):
 
-    exclude = ["provider"]
+    exclude = ["provider", "url_name"]
 
     def get_queryset(self, request):
         user = request.user
@@ -83,7 +83,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class ProviderProfileAdmin(admin.ModelAdmin):
 
-    exclude = ["owner"]
+    exclude = ["owner", "url_name"]
 
     def get_queryset(self, request):
         user = request.user

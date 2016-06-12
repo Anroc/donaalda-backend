@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -6,12 +7,24 @@ from django.contrib.auth.models import User
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
+from app.validators import validate_legal_chars
+
 
 # Create your models here.
 
+def url_alias(value):
+    temp_alias = value.lower()
+    temp_alias = re.sub('\W', '_', temp_alias)
+    temp_alias = re.sub("ß", 'ss', temp_alias)
+    temp_alias = re.sub('ä', 'a', temp_alias)
+    temp_alias = re.sub('ö', 'o', temp_alias)
+    temp_alias = re.sub('ü', 'u', temp_alias)
+
+    return temp_alias
+
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True, validators=[validate_legal_chars])
     picture = models.ImageField(verbose_name="Bild für die Kategorie", upload_to="categories")
     backgroundPicture = models.ImageField(verbose_name="Bild für den Hintergrund", null=True, blank=True)
     description = models.TextField(verbose_name="Beschreibung")
@@ -32,6 +45,7 @@ class Category(models.Model):
 
 class Scenario(models.Model):
     name = models.CharField(max_length=100, unique=True)
+    url_name = models.CharField(max_length=100, unique=True)
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="255", null=True, blank=True)
     description = models.TextField(verbose_name="Beschreibung", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True)
@@ -43,6 +57,11 @@ class Scenario(models.Model):
 
     def natural_key(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+
+        self.url_name = url_alias(self.name)
+        super(Scenario, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Szenario"
@@ -76,7 +95,7 @@ class ProductSet(models.Model):
     creator = models.ForeignKey("Provider", default="1")
 
     def __str__(self):
-        return '%s' % (self.name)
+        return '%s' % self.name
 
     def natural_key(self):
         return [self.creator.natural_key(), self.name]
@@ -117,7 +136,8 @@ class Product(models.Model):
         verbose_name = "Produkt"
         verbose_name_plural = "Produkte"
         ordering = ["name"]
-        # unique_together = (("provider", "serial_number"),) # It seems like unique_together does not work with ForeignKey
+        # unique_together = (("provider", "serial_number"),)
+        # It seems like unique_together does not work with ForeignKey
 
 
 class ProductType(models.Model):
@@ -153,8 +173,9 @@ class Provider(models.Model):
 
 class ProviderProfile(models.Model):
     public_name = models.CharField(max_length=200, unique=True, verbose_name="öffentlicher Name")
+    url_name = models.CharField(max_length=200, unique=True, )
     logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
-                                   help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt. " )
+                                   help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt.")
     profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True)
     banner_image = models.ImageField(verbose_name="Banner für Profilseite", upload_to="provider")
     introduction = models.TextField()
@@ -167,6 +188,10 @@ class ProviderProfile(models.Model):
 
     def natural_key(self):
         return self.owner.natural_key()
+
+    def save(self, *args, **kwargs):
+        self.url_name = url_alias(self.public_name)
+        super(ProviderProfile, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Herstellerprofil"
@@ -190,10 +215,13 @@ class UserImage(models.Model):
     def __str__(self):
         return "Bild für " + self.belongs_to_user.username
 
+    def natural_key(self):
+        self.belongs_to_user.natural_key()
+
     class Meta:
         verbose_name = "Nutzerbild"
         verbose_name_plural = "Nutzbilder"
-        ordering = ["belongs_to_user",]
+        ordering = ["belongs_to_user", ]
 
 
 class Comment(models.Model):
@@ -209,4 +237,4 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "Kommentar"
         verbose_name_plural = "Kommentare"
-        ordering = ["comment_title", "rating",]
+        ordering = ["comment_title", "rating", ]
