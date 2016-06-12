@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^app/logout$', views.log_out, name='logout'),
     url(r'^app/scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
     url(r'^app/(?P<category_name>[a-zA-Z0-9_-äÄöÖüÜß &]+)/$', views.CategoryView.as_view(), name='category'),
-    url(r'^app/(?P<category_name>[a-zA-Z0-9_-äÄöÖüÜß &]+)/(?P<current_scenario>[a-zA-Z0-9_-äÄöÖüÜß &]+)/$',
+    url(r'^app/scenarios/(?P<current_scenario>[a-zA-Z0-9_-äÄöÖüÜß &]+)/$',
         views.ScenarioView.as_view(), name='scenario'),
     url(r'^app/products/(?P<product_name>[a-zA-Z0-9_-äÄöÖüÜß &]+)$', views.ProductView.as_view(), name='product'),
     url(r'^app/profile$', views.profile, name='profile'),
