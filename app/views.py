@@ -189,7 +189,7 @@ class LoginView(FormView):
 @require_http_methods(["GET", "POST"])
 def log_out(request):
     logout(request)
-    return HttpResponseRedirect("/app/")
+    return HttpResponseRedirect("/")
 
 
 @csrf_protect

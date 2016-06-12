@@ -112,7 +112,15 @@
 
     </script>
     <!-- End demo purposes only -->
+    <script>
+      function logOut() {
+        location.href = "/app/logout"
+      }
 
+      function admin() {
+        location.href = "/admin"
+      }
+    </script>
     <!-- Main JS (Do not remove) -->
     <script src="{% static 'app/assets/js/main.js' %}"></script>
 
@@ -145,12 +153,39 @@
                         <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
                         <li><a href="#" data-nav-section="about"><span>Über</span></a></li>
                         <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
-                        <li>
-                            <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
-                                    data-target="#myModalx">
-                                <i class="fh5co-intro-icon icon-login"></i>
-                            </button>
-                        </li>
+                        {% if not request.user.is_authenticated %}
+                            <li>
+                                <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
+                                        data-target="#myModalLogin">
+                                    <i class="glyphicon glyphicon-log-in"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
+                                        data-target="#myModalRegister">
+                                    <i class="glyphicon glyphicon-new-window"></i>
+                                </button>
+                            </li>
+                        {% else %}
+                            <!--TODO: Change these to admin (if allowed), logout and profile-->
+                            {% if 1 == 1 %}
+                                {% if user.is_superuser %}
+                                    <li><a href="#" onclick="admin()"><span>Admin</span></a></li>
+                                {% endif %}
+                            {% endif %}
+                            <li>
+                                <button type="button" class="btn btn-primary btn-xs navbar-btn" onclick="logOut()">
+                                    <i class="glyphicon glyphicon-log-out"></i>
+                                </button>
+                                <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
+                                        data-target="#myModalProfile">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </button>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </nav>
@@ -248,16 +283,21 @@
                         <a href="{{ scenario.picture.url }}" class="fh5co-project-item image-popup to-animate">
                             <img src="{{ scenario.picture.url }}" alt="Image" class="img-responsive">
                             <div class="fh5co-text">
-                                <h2>{{ scenario.name }}, {{ scenario.provider }}, {{ scenario.scenario_product_set }}</h2>
-                                <span></span>
-                                <h5>
+                                <h1>
+                                    {{ scenario.name }}
+                                </h1>
+                                <h2>
+                                    {{ scenario.provider }}
+                                </h2>
+                                <h3>{{ scenario.scenario_product_set }}</h3>
+                                <h3>
                                     {% for category in scenario.category_set.all %}
                                         <p>
                                             {{ category.name }}
                                         </p>
                                     {% endfor %}
-                                </h5>
-                                <span> {{ scenario.description }}</span>
+                                </h3>
+                                <h4> {{ scenario.description }}</h4>
                             </div>
                         </a>
                     </div>
@@ -306,11 +346,11 @@
                                         <h4>S/N: {{ product.serial_number }}</h4>
                                     </div>
                                 </h2>
-                                <h3>
+                                <h4>
                                     <div>
                                         {{ product.description }}
                                     </div>
-                                </h3>
+                                </h4>
                                 <span>
                                     EOL: {{ product.end_of_life }}
                                 </span>
@@ -354,8 +394,9 @@
             <div class="col-md-4">
                 <div class="box-testimony">
                     <blockquote class="to-animate-2">
-                        <p>&ldquo;Rolladen können mit dem XB-Alpha einfach nachgerüstet werden. Einfach
-                            Bandaufwicklung gegen den
+                        <p>&ldquo;Rolladen können mit dem XB-Alpha einfach nachgerüstet werden. Einfach Bandaufwicklung
+                            gegen
+                            den
                             XB-Alpha austauschen.&rdquo;</p>
                     </blockquote>
                     <div class="author to-animate">
@@ -395,57 +436,130 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </section>
 
 
 <section id="fh5co-services" data-section="scenarios">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 section-heading text-left">
-        <h2 class=" left-border to-animate">Szenarien</h2>
+    <div class="container">
         <div class="row">
-          <div class="col-md-8 subtext to-animate">
-            <h3>Viele tolle Szenarien, wie Smart Home Ihr Wohnen revolutioniert, ja disruptiv innoviert!</h3>
-          </div>
+            <div class="col-md-12 section-heading text-left">
+                <h2 class=" left-border to-animate">Szenarien</h2>
+                <div class="row">
+                    <div class="col-md-8 subtext to-animate">
+                        <h3>Viele tolle Szenarien, wie Smart Home Ihr Wohnen revolutioniert, ja disruptiv
+                            innoviert!</h3>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                <i class="icon to-animate-2 icon-anchor"></i>
+                <h3>Comfort &amp; Chill</h3>
+                <p>
+                    Zeit zum Chillen.
+                </p>
+            </div>
+            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                <i class="icon to-animate-2 icon-layers2"></i>
+                <h3>Web &amp; Interface</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                    there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large
+                    language ocean</p>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                <i class="icon to-animate-2 icon-video2"></i>
+                <h3>Photo &amp; Video</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                    there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large
+                    language ocean</p>
+            </div>
+            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                <i class="icon to-animate-2 icon-monitor"></i>
+                <h3>CMS &amp; eCommerce</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                    there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large
+                    language ocean</p>
+            </div>
+
+        </div>
     </div>
-    <div class="row">
-      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-        <i class="icon to-animate-2 icon-anchor"></i>
-        <h3>Comfort &amp; Chill</h3>
-        <p>
-          Zeit zum Chillen.
-        </p>
-      </div>
-      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-        <i class="icon to-animate-2 icon-layers2"></i>
-        <h3>Web &amp; Interface</h3>
-        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
-          texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean</p>
-      </div>
-
-      <div class="clearfix visible-sm-block"></div>
-
-      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-        <i class="icon to-animate-2 icon-video2"></i>
-        <h3>Photo &amp; Video</h3>
-        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
-          texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean</p>
-      </div>
-      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-        <i class="icon to-animate-2 icon-monitor"></i>
-        <h3>CMS &amp; eCommerce</h3>
-        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
-          texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean</p>
-      </div>
-
-    </div>
-  </div>
 </section>
 
+<section id="fh5co-about" data-section="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 section-heading text-center">
+                <h2 class="to-animate">About</h2>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                        <h3>Far far away, behind the word mountains, far from the countries Vokalia and
+                            Consonantia, there live the
+                            blind texts.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="fh5co-person text-center to-animate">
+                    <figure><img src="{% static 'app/assets/images/person1.jpg' %}" alt="Image"></figure>
+                    <h3>Amin</h3>
+                    <span class="fh5co-position">Web Designer</span>
+                    <p>
+                        Ich schreibe Tests.
+                    </p>
+                    <ul class="social social-circle">
+                        <li><a href="#"><i class="icon-twitter"></i></a></li>
+                        <li><a href="#"><i class="icon-facebook"></i></a></li>
+                        <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="fh5co-person text-center to-animate">
+                    <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Image"></figure>
+                    <h3>Timo</h3>
+                    <span class="fh5co-position">Web Developer</span>
+                    <p>
+                        Ich wurde inkubiert, um zu sein. Ich bin einer und nicht viele.
+                    </p>
+
+                    <ul class="social social-circle">
+                        <li><a href="#"><i class="icon-twitter"></i></a></li>
+                        <li><a href="#"><i class="icon-facebook"></i></a></li>
+                        <li><a href="#"><i class="icon-github"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="fh5co-person text-center to-animate">
+                    <figure><img src="{% static 'app/assets/images/person3.jpg' %}" alt="Image"></figure>
+                    <h3>Larry Ben</h3>
+                    <span class="fh5co-position">Web Designer</span>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                        there live the
+                        blind texts</p>
+                    <ul class="social social-circle">
+                        <li><a href="#"><i class="icon-twitter"></i></a></li>
+                        <li><a href="#"><i class="icon-facebook"></i></a></li>
+                        <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section id="fh5co-counters" style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
          data-stellar-background-ratio="0.5">
@@ -577,7 +691,7 @@
 </footer>
 
 
-<div class="modal fade" id="myModalx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form action="{% url 'app:login' %}" method="post">
@@ -607,6 +721,105 @@
             </form>
 
         </div>
+    </div>
+</div>
 
+<div class="modal fade" id="myModalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action={% url 'app:register_user' %} method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel1">Registrieren</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="username" placeholder="Benutzername"
+                               aria-describedby="basic-addon1" value="{{ name }}">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon4"><i class="icon-star"></i></span>
+                        <input type="password" class="form-control" name="password" placeholder="Passwort"
+                               aria-describedby="basic-addon2" value="{{ password }}">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon5"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="firstname" placeholder="Vorname"
+                               aria-describedby="basic-addon3" value="{{ firstname }}">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon6"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="lastname" placeholder="Nachname"
+                               aria-describedby="basic-addon4" value="{{ lastname }}">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon7"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="email" placeholder="Email-Adresse"
+                               aria-describedby="basic-addon5" value="{{ email }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+                    <button type="submit" class="btn btn-primary">Los gehts</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!--TODO: Frontend add profile to this-->
+<div class="modal fade" id="myModalProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action={% url 'app:register_user' %} method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2">Profil</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon8"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="username" placeholder="Benutzername"
+                               aria-describedby="basic-addon8" value="{{ user.get_username }}">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon9"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="firstname" placeholder="Vorname"
+                               aria-describedby="basic-addon9" value="{{ user.first_name }}">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon10"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="lastname" placeholder="Nachname"
+                               aria-describedby="basic-addon10" value="{{ user.last_name }}">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon11"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="email" placeholder="Email-Adresse"
+                               aria-describedby="basic-addon11" value="{{ user.email }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+                    <button type="submit" class="btn btn-primary">Los gehts</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
