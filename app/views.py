@@ -161,7 +161,7 @@ class ScenarioView(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         scenario = kwargs.get("current_scenario")
-        return render(request, 'app/scenario.html', {'current_scenario': Scenario.objects.get(name=scenario)})
+        return render(request, 'app/scenario.html', {'current_scenario': Scenario.objects.get(url_name=scenario)})
 
 
 class ProductView(generic.DetailView):
