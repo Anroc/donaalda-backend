@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
     url(r'^logout$', views.log_out, name='logout'),
-    url(r'^app/scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
+    url(r'^scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
     url(r'^app/(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
     url(r'^app/scenarios/(?P<current_scenario>[\w]+)/$',
         views.ScenarioView.as_view(), name='scenario'),
