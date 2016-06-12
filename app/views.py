@@ -138,7 +138,7 @@ class ProviderProfileView(generic.ListView):
         return render(request, 'app/providerProfile.html', {'provider': ProviderProfile.objects.get(url_name=provider),
                                                             'provider_products': Product.objects.filter(
                                                                 provider=ProviderProfile.objects.get(
-                                                                    url_name=provider).pk),
+                                                                    url_name=provider).owner.pk),
                                                             })
 
 

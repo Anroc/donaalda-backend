@@ -2,26 +2,26 @@
 
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
-  <script src="{% static 'app/index-app.js' %}"></script>
-  <title>DONAALDA - Data Organising Native Ambient Assisted Living Distribution Adviser</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
+    <script src="{% static 'app/index-app.js' %}"></script>
+    <title>DONAALDA - Data Organising Native Ambient Assisted Living Distribution Adviser</title>
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  {#% include "app/html_templates/indexToolbarTemplate.html" %#}
-  {#% include "app/html_templates/loginTemplate.html" %#}
-  {#% include "app/html_templates/registrationTemplate.html" %#}
-  {#% include "app/html_templates/profileTemplate.html" %#}
+    {#% include "app/html_templates/indexToolbarTemplate.html" %#}
+    {#% include "app/html_templates/loginTemplate.html" %#}
+    {#% include "app/html_templates/registrationTemplate.html" %#}
+    {#% include "app/html_templates/profileTemplate.html" %#}
 </head>
 <body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}">
@@ -37,20 +37,15 @@
 <div>provider.contact_email: {{ provider.contact_email }}</div>
 <div>provider.website: {{ provider.website }}</div>
 <div>provider.owner: {{ provider.owner }}</div>
-{% comment %}
-<!--div>
-Something wrong with this (needs work):
-{% if provider_products %}
-{% for product in provider_products %}
-    <div>{{ product.name }}</div>
-{% endfor %}
-</div>
+
 <div>
-  <md-button>Show Products</md-button>
-</div-->
-{% endif %}
-{% endif %}
-{% endcomment %}
+    {% if provider_products %}
+        {% for product in provider_products %}
+            <div>{{ product.name }}</div>
+        {% endfor %}
+    {% endif %}
+</div>
+
 
 </body>
 </html>
