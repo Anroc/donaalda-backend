@@ -4,7 +4,7 @@ from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .models import Category, Product, Scenario
+from .models import Category, Product, Scenario, ProviderProfile
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -17,23 +17,22 @@ class IndexViewNew(generic.DetailView):
     template_name = 'app/indexNew.html'
     context_object_name = 'test'
 
-
     def get(self, request, *args, **kwargs):
-
 
         profile_status = request.GET.get('profile')
 
         if profile_status == 'blank_fields':
-                    return render(request, 'app/indexNew.html', {'message': 'Zum Ändern des Passwortes altes und neues Passwort eingeben!',
-                                                                 'latest_category_list': Category.objects.all(),
-                                                                 'scenarios': Scenario.objects.all(),
-                                                                 'products': Product.objects.all()})
+            return render(request, 'app/indexNew.html',
+                          {'message': 'Zum Ändern des Passwortes altes und neues Passwort eingeben!',
+                           'latest_category_list': Category.objects.all(),
+                           'scenarios': Scenario.objects.all(),
+                           'products': Product.objects.all()})
 
         if profile_status == 'password_changed':
-                    return render(request, 'app/indexNew.html', {'message': 'Passwort erfolgreich verändert!',
-                                                                 'latest_category_list': Category.objects.all(),
-                                                                 'scenarios': Scenario.objects.all(),
-                                                                 'products': Product.objects.all()})
+            return render(request, 'app/indexNew.html', {'message': 'Passwort erfolgreich verändert!',
+                                                         'latest_category_list': Category.objects.all(),
+                                                         'scenarios': Scenario.objects.all(),
+                                                         'products': Product.objects.all()})
         if profile_status == 'wrong_password':
             return render(request, 'app/indexNew.html', {'message': 'Passwort falsch!',
                                                          'latest_category_list': Category.objects.all(),
@@ -41,41 +40,39 @@ class IndexViewNew(generic.DetailView):
                                                          'products': Product.objects.all()})
         login_status = request.GET.get('login')
         if login_status == 'success':
-                    return render(request, 'app/indexNew.html', {'message': 'Willkommen!',
-                                                                 'latest_category_list': Category.objects.all(),
-                                                                 'scenarios': Scenario.objects.all(),
-                                                                 'products': Product.objects.all()})
+            return render(request, 'app/indexNew.html', {'message': 'Willkommen!',
+                                                         'latest_category_list': Category.objects.all(),
+                                                         'scenarios': Scenario.objects.all(),
+                                                         'products': Product.objects.all()})
 
         if login_status == 'failed':
-                    return render(request, 'app/indexNew.html', {'message': 'Login fehlgeschlagen!',
-                                                                 'latest_category_list': Category.objects.all(),
-                                                                 'scenarios': Scenario.objects.all(),
-                                                                 'products': Product.objects.all()})
+            return render(request, 'app/indexNew.html', {'message': 'Login fehlgeschlagen!',
+                                                         'latest_category_list': Category.objects.all(),
+                                                         'scenarios': Scenario.objects.all(),
+                                                         'products': Product.objects.all()})
 
         register_status = request.GET.get('registration')
         if register_status == 'success':
-                    return render(request, 'app/indexNew.html', {'message': 'Sie wurden erfolgreich registriert!',
-                                                                 'latest_category_list': Category.objects.all(),
-                                                                 'scenarios': Scenario.objects.all(),
-                                                                 'products': Product.objects.all()})
+            return render(request, 'app/indexNew.html', {'message': 'Sie wurden erfolgreich registriert!',
+                                                         'latest_category_list': Category.objects.all(),
+                                                         'scenarios': Scenario.objects.all(),
+                                                         'products': Product.objects.all()})
 
         if register_status == 'taken':
-                    return render(request, 'app/indexNew.html', {'message': 'Benutzername bereits vergeben!',
-                                                                 'latest_category_list': Category.objects.all(),
-                                                                 'scenarios': Scenario.objects.all(),
-                                                                 'products': Product.objects.all()})
+            return render(request, 'app/indexNew.html', {'message': 'Benutzername bereits vergeben!',
+                                                         'latest_category_list': Category.objects.all(),
+                                                         'scenarios': Scenario.objects.all(),
+                                                         'products': Product.objects.all()})
         if register_status == 'blank_fields':
-                    return render(request, 'app/indexNew.html', {'message': 'Bitte alle Felder ausfüllen!',
-                                                                 'latest_category_list': Category.objects.all(),
-                                                                 'scenarios': Scenario.objects.all(),
-                                                                 'products': Product.objects.all()})
-
+            return render(request, 'app/indexNew.html', {'message': 'Bitte alle Felder ausfüllen!',
+                                                         'latest_category_list': Category.objects.all(),
+                                                         'scenarios': Scenario.objects.all(),
+                                                         'products': Product.objects.all()})
 
         return render(request, 'app/indexNew.html',
                       {'latest_category_list': Category.objects.all(),
                        'scenarios': Scenario.objects.all(),
                        'products': Product.objects.all()})
-
 
 
 class IndexView(generic.ListView):
@@ -132,6 +129,15 @@ class IndexView(generic.ListView):
         return render(request, 'app/index.html', {'latest_category_list': Category.objects.all()})
 
 
+class ProviderProfileView(generic.ListView):
+    template_name = 'app/providerProfile.html'
+    context_object_name = 'provider'
+
+    def get(self, request, *args, **kwargs):
+        provider = kwargs.get("provider_url_name")
+        return render(request, 'app/providerProfile.html', {'provider': ProviderProfile.objects.get(url_name=provider)})
+
+
 class CategoryView(generic.ListView):
     template_name = 'app/scenarioGrid.html'
     context_object_name = 'scenario_list_from_category'
@@ -169,9 +175,9 @@ class ProductView(generic.DetailView):
     context_object_name = 'product'
 
     def get(self, request, *args, **kwargs):
-        product = kwargs.get("product_name")
+        product = kwargs.get("pk")
         return render(request, 'app/product.html',
-                      {'product': Product.objects.get(name=product)})
+                      {'product': Product.objects.get(pk=product)})
 
 
 # for frontend testing
