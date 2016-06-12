@@ -152,8 +152,9 @@ class Provider(models.Model):
 
 
 class ProviderProfile(models.Model):
-    public_name = models.CharField(max_length=200, unique=True, )
-    logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider" )
+    public_name = models.CharField(max_length=200, unique=True, verbose_name="öffentlicher Name")
+    logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
+                                   help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt. " )
     profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True)
     banner_image = models.ImageField(verbose_name="Banner für Profilseite", upload_to="provider")
     introduction = models.TextField()
@@ -180,3 +181,32 @@ class Employee(User):
         verbose_name = "Angestellter"
         verbose_name_plural = "Angestellte"
         ordering = ["username"]
+
+
+class UserImage(models.Model):
+    belongs_to_user = models.OneToOneField(to=User, verbose_name="gehört zu Nutzer")
+    image = models.ImageField(upload_to="user", null=True, blank=True, verbose_name="Bild")
+
+    def __str__(self):
+        return "Bild für " + self.belongs_to_user.username
+
+    class Meta:
+        verbose_name = "Nutzerbild"
+        verbose_name_plural = "Nutzbilder"
+        ordering = ["belongs_to_user",]
+
+
+class Comment(models.Model):
+    comment_from = models.ForeignKey(to=User)
+    comment_title = models.CharField(max_length=255, verbose_name="Kommentartitel", )
+    comment_content = models.TextField(verbose_name="Kommentarinhalt")
+    rating = models.PositiveSmallIntegerField(verbose_name="Bewertung", )
+    creation_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.comment_title
+
+    class Meta:
+        verbose_name = "Kommentar"
+        verbose_name_plural = "Kommentare"
+        ordering = ["comment_title", "rating",]
