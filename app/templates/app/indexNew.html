@@ -169,8 +169,8 @@
                         {% else %}
                             <!--TODO: Change these to admin (if allowed), logout and profile-->
                             {% if 1 == 1 %}
-                                {% if user.is_superuser %}
-                                    <li><a href="#" onclick="admin()"><span>Admin</span></a></li>
+                                {% if user.is_staff %}
+                                    <li><a href="#" onclick="admin()"><span>Verwaltung</span></a></li>
                                 {% endif %}
                             {% endif %}
                             <li>

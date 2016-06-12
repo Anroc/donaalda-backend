@@ -227,16 +227,16 @@ def profile(request):
     lastname = request.POST.get('lastname')
 
     if not User.objects.filter(username=username).exists():  # existiert nicht
-        return HttpResponseRedirect("/app/")
+        return HttpResponseRedirect("/")
     else:
         user = User.objects.get(username=username)
 
     if not (passwordOld or passwordNew or passwordDelete or email or firstname or lastname):
-        return HttpResponseRedirect("/app/")
+        return HttpResponseRedirect("/")
 
     if user.check_password(passwordDelete):  # delete account
         user.delete()
-        return HttpResponseRedirect("/app/?profile=deleted")
+        return HttpResponseRedirect("/?profile=deleted")
 
     if firstname:
         user.first_name = firstname
@@ -256,16 +256,16 @@ def profile(request):
                 user.save()
                 user = authenticate(username=username, password=passwordNew)
                 login(request, user)
-                return HttpResponseRedirect("/app/?profile=success")
+                return HttpResponseRedirect("/?profile=success")
             else:
-                return HttpResponseRedirect("/app/?profile=blank_fields")
+                return HttpResponseRedirect("/?profile=blank_fields")
         else:
-            return HttpResponseRedirect("/app/?profile=wrong_password")
+            return HttpResponseRedirect("/?profile=wrong_password")
     else:
         if passwordNew:
-            return HttpResponseRedirect("/app/?profile=blank_fields")
+            return HttpResponseRedirect("/?profile=blank_fields")
 
-    return HttpResponseRedirect("/app/?profile=success")
+    return HttpResponseRedirect("/?profile=success")
 
 
 """
