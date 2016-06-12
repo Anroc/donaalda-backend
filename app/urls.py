@@ -21,9 +21,9 @@ from django.conf import settings
 app_name = 'app'
 urlpatterns = [
     # url(r'^app/$', views.IndexView.as_view(), name='index'),
-    url(r'^app/login$', views.login_view, name='login'),
-    url(r'^app/register$', views.register_user, name='register_user'),
-    url(r'^app/logout$', views.log_out, name='logout'),
+    url(r'^login$', views.login_view, name='login'),
+    url(r'^register$', views.register_user, name='register_user'),
+    url(r'^logout$', views.log_out, name='logout'),
     url(r'^app/scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
     url(r'^app/(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
     url(r'^app/scenarios/(?P<current_scenario>[\w]+)/$',
