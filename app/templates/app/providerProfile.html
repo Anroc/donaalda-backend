@@ -27,12 +27,30 @@
       ng-controller="{% block ng_controller_theme %}themeController{% endblock %}">
 <!-- TODO FRONTEND: -->
 
-{% if provider %}
-<div> Hello {{ provider.public_name }} !</div>
+{#% if provider %#}
+<div>provider.name: {{ provider.public_name }} !</div>
+<div>provider.url_name: {{ provider.url_name }}</div>
+<div>provider.logo_image.url: <img src="{{ provider.logo_image.url }}"></div>
+<div>provider.profile_image.url: <img src="{{ provider.profile_image.url }}"></div>
+<div>provider.banner_image.url: <img src="{{ provider.banner_image.url }}"></div>
+<div>provider.introduction: {{ provider.introduction }}</div>
+<div>provider.contact_email: {{ provider.contact_email }}</div>
+<div>provider.website: {{ provider.website }}</div>
+<div>provider.owner: {{ provider.owner }}</div>
+{% comment %}
+<!--div>
+Something wrong with this (needs work):
+{% if provider_products %}
+{% for product in provider_products %}
+    <div>{{ product.name }}</div>
+{% endfor %}
+</div>
 <div>
   <md-button>Show Products</md-button>
-</div>
+</div-->
 {% endif %}
+{% endif %}
+{% endcomment %}
 
 </body>
 </html>

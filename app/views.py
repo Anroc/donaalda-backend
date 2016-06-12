@@ -135,7 +135,11 @@ class ProviderProfileView(generic.ListView):
 
     def get(self, request, *args, **kwargs):
         provider = kwargs.get("provider_url_name")
-        return render(request, 'app/providerProfile.html', {'provider': ProviderProfile.objects.get(url_name=provider)})
+        return render(request, 'app/providerProfile.html', {'provider': ProviderProfile.objects.get(url_name=provider),
+                                                            'provider_products': Product.objects.filter(
+                                                                provider=ProviderProfile.objects.get(
+                                                                    url_name=provider).pk),
+                                                            })
 
 
 class CategoryView(generic.ListView):
