@@ -41,6 +41,10 @@
 <div>
     {% if provider_products %}
         {% for product in provider_products %}
+            {% comment %}
+            Possiblities: product. name, provider, product_type, serial_number, description,
+            specifications, image1.url, image2.url, image3.url, thumbnail.url, end_of_life
+            {% endcomment %}
             <div>{{ product.name }}</div>
         {% endfor %}
     {% endif %}
