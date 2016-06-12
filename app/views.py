@@ -140,7 +140,7 @@ class CategoryView(generic.ListView):
         category = kwargs.get("category_name")
         return render(request, 'app/scenarioGrid.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
-                       'category': Category.objects.get(name=category)
+                       # 'category': Category.objects.get(name=category)
                        })
 
 
@@ -213,8 +213,6 @@ def login_user(request):
 def login_view(request):
     form = LoginForm(request.POST or None)
     if request.POST:
-        print(request.POST.get('username'))
-        print(request.POST.get('password'))
         if form.is_valid():
             user = form.login(request)
             if user is not None:
@@ -279,7 +277,6 @@ def profile(request):
     email = request.POST.get('email')
     firstname = request.POST.get('firstname')
     lastname = request.POST.get('lastname')
-    print(passwordNew)
 
     if not User.objects.filter(username=username).exists():  # existiert nicht
         return HttpResponseRedirect("/")
