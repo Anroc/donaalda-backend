@@ -115,9 +115,9 @@ class ProductView(generic.DetailView):
     context_object_name = 'product'
 
     def get(self, request, *args, **kwargs):
-        product = kwargs.get("product_name")
+        product = kwargs.get("pk")
         return render(request, 'app/product.html',
-                      {'product': Product.objects.get(name=product)})
+                      {'product': Product.objects.get(pk=product)})
 
 
 # for frontend testing
