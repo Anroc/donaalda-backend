@@ -6,8 +6,9 @@ from django.contrib.auth.models import User
 
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from random import *
 
-from app.validators import validate_legal_chars
+from .validators import validate_legal_chars
 
 
 # Create your models here.
@@ -45,7 +46,7 @@ class Category(models.Model):
 
 class Scenario(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    url_name = models.CharField(max_length=100, unique=True)
+    url_name = models.CharField(max_length=100, unique=False, default=random())
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="255", null=True, blank=True)
     description = models.TextField(verbose_name="Beschreibung", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True)
@@ -112,6 +113,7 @@ class Product(models.Model):
     product_type = models.ForeignKey("ProductType", default="0")
     serial_number = models.CharField(max_length=255, default="------")
     description = models.TextField()
+    specifications = models.TextField(default="---")
     image1 = models.ImageField(verbose_name="Bild 1", upload_to="products")
     image2 = models.ImageField(null=True, blank=True, verbose_name="Bild 2",
                                upload_to="products")
@@ -156,7 +158,7 @@ class ProductType(models.Model):
 
 
 class Provider(models.Model):
-    name = models.CharField(max_length=200, unique=True, )
+    name = models.CharField(max_length=200, unique=False, default=random())
     is_visible = models.BooleanField(default=False)
 
     def __str__(self):
@@ -173,7 +175,7 @@ class Provider(models.Model):
 
 class ProviderProfile(models.Model):
     public_name = models.CharField(max_length=200, unique=True, verbose_name="öffentlicher Name")
-    url_name = models.CharField(max_length=200, unique=True, )
+    url_name = models.CharField(max_length=200, unique=True, default=random())
     logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
                                    help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt.")
     profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True)
