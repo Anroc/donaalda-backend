@@ -114,11 +114,11 @@
     <!-- End demo purposes only -->
     <script>
         function logOut() {
-            location.href = "/app/logout"
+            location.href = "/logout"
         }
 
         function admin() {
-            location.href = "/admin"
+            window.open("/admin", "_blank")
         }
     </script>
     <!-- Main JS (Do not remove) -->
@@ -234,12 +234,11 @@
                             <h2>
                                 {{ category.name }}
                             </h2>
-                            <p>
+                            <div style="height: 170px;">
                                 {{ category.description }}
-                            </p>
+                            </div>
                             <p>
-                                <a href="{% url 'app:category' category.name %}" data-section="about"
-                                   class="btn btn-primary">
+                                <a href="{% url 'app:category' category.name %}" class="btn btn-primary">
                                     Na dann los
                                 </a>
                             </p>
