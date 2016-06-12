@@ -29,7 +29,7 @@ urlpatterns = [
         views.ScenarioView.as_view(), name='scenario'),
     url(r'^products/(?P<pk>[0-9]+)$', views.ProductView.as_view(), name='product'),
     url(r'^profile$', views.profile, name='profile'),
-    url(r'^app/(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
+    url(r'^(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
     # for frontend testing
     url(r'^app/frontendtesting$', views.TestView.as_view(), name='frontendtesting'),
     url(r'^$', views.IndexViewNew.as_view(), name='indexnew'),
