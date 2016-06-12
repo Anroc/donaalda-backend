@@ -113,13 +113,13 @@
     </script>
     <!-- End demo purposes only -->
     <script>
-      function logOut() {
-        location.href = "/app/logout"
-      }
+        function logOut() {
+            location.href = "/app/logout"
+        }
 
-      function admin() {
-        location.href = "/admin"
-      }
+        function admin() {
+            location.href = "/admin"
+        }
     </script>
     <!-- Main JS (Do not remove) -->
     <script src="{% static 'app/assets/js/main.js' %}"></script>
@@ -224,7 +224,8 @@
         <div class="row row-bottom-padded-lg">
             {% if latest_category_list %}
                 {% for category in latest_category_list %}
-                    <div class="fh5co-block to-animate" style="background-image:url({{ category.backgroundPicture.url }});">
+                    <div class="fh5co-block to-animate"
+                         {% if category.backgroundPicture %}style="background-image:url({{ category.backgroundPicture.url }});{% endif %}">
                         <div class="overlay-darker"></div>
                         <div class="overlay"></div>
                         <div class="fh5co-text">
