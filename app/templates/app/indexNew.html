@@ -169,8 +169,8 @@
                         {% else %}
                             <!--TODO: Change these to admin (if allowed), logout and profile-->
                             {% if 1 == 1 %}
-                                {% if user.is_staff %}
-                                    <li><a href="#" onclick="admin()"><span>Verwaltung</span></a></li>
+                                {% if user.is_superuser %}
+                                    <li><a href="#" onclick="admin()"><span>Admin</span></a></li>
                                 {% endif %}
                             {% endif %}
                             <li>
@@ -189,7 +189,7 @@
                     </ul>
                 </div>
             </nav>
-        </div>
+        </div>s
     </div>
 </header>
 
@@ -211,6 +211,7 @@
                             Tipps.<br><br>Finde <b>Szenarios</b> die zu dir passen. Wähle <b>Produkte</b> von
                             verschiedenen <b>Herstellern</b>
                             und stelle dir dein Smart Home zusammen.</h2>
+                      <span>{{ message  }}</span>
                     </div>
                 </div>
             </div>
@@ -780,18 +781,18 @@
 <div class="modal fade" id="myModalProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action={% url 'app:register_user' %} method="post">
+            <form action={% url 'app:profile' %} method="post">
                 {% csrf_token %}
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel2">Profil</h4>
+                    <h4 class="modal-title" id="myModalLabel2" >{{user.username}}</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group">
+                    <div class="input-group" style="display:none">
                         <span class="input-group-addon" id="basic-addon8"><i class="icon-user"></i></span>
-                        <input disabled type="text" class="form-control" name="username" placeholder="Benutzername"
-                               aria-describedby="basic-addon8" value="{{ user.get_username }}">
+                        <input  type="hidden" class="form-control" name="username" placeholder="Benutzername"
+                               aria-describedby="basic-addon8" value="{{user.username }}">
                     </div>
                     <br>
                     <div class="input-group">
@@ -799,28 +800,90 @@
                         <input disabled type="text" class="form-control" name="firstname" placeholder="Vorname"
                                aria-describedby="basic-addon9" value="{{ user.first_name }}">
                     </div>
-                    <br>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon10"><i class="icon-user"></i></span>
                         <input disabled type="text" class="form-control" name="lastname" placeholder="Nachname"
                                aria-describedby="basic-addon10" value="{{ user.last_name }}">
                     </div>
-                    <br>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon11"><i class="icon-user"></i></span>
                         <input disabled type="text" class="form-control" name="email" placeholder="Email-Adresse"
                                aria-describedby="basic-addon11" value="{{ user.email }}">
                     </div>
+                    <br>
+                    <div class="input-group">
+                      <span class="input-group-addon" id="basic-addon12"><i class="icon-user"></i></span>
+                      <input type="password" class="form-control" name="password_old" placeholder="Password Old"
+                             aria-describedby="basic-addon11" value="{{ password }}">
+                    </div>
+                    <div class="input-group">
+                      <span class="input-group-addon" id="basic-addon12"><i class="icon-user"></i></span>
+                      <input type="password" class="form-control" name="password_new" placeholder="Password New"
+                             aria-describedby="basic-addon11" value="{{ password }}">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
-                    <button type="submit" class="btn btn-primary">Los gehts</button>
+                    <button type="submit" class="btn btn-primary">Passwort ändern</button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="myModalProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form action={% url 'app:profile' %} method="post">
+      {% csrf_token %}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel2" >{{user.username}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="" style="display:none">
+          <span class="input-group-addon" id="basic-addon8"><i class="icon-user"></i></span>
+          <input  type="hidden" class="form-control" name="username" placeholder="Benutzername"
+                  aria-describedby="basic-addon8" value="{{user.username }}">
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon9"><i class="icon-user"></i></span>
+          <input disabled type="text" class="form-control" name="firstname" placeholder="Vorname"
+                 aria-describedby="basic-addon9" value="{{ user.first_name }}">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon10"><i class="icon-user"></i></span>
+          <input disabled type="text" class="form-control" name="lastname" placeholder="Nachname"
+                 aria-describedby="basic-addon10" value="{{ user.last_name }}">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon11"><i class="icon-user"></i></span>
+          <input disabled type="text" class="form-control" name="email" placeholder="Email-Adresse"
+                 aria-describedby="basic-addon11" value="{{ user.email }}">
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon12"><i class="icon-user"></i></span>
+          <input type="password" class="form-control" name="password_old" placeholder="Password Old"
+                 aria-describedby="basic-addon11" value="{{ password }}">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon12"><i class="icon-user"></i></span>
+          <input type="password" class="form-control" name="password_new" placeholder="Password New"
+                 aria-describedby="basic-addon11" value="{{ password }}">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+        <button type="submit" class="btn btn-primary">Passwort ändern</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
 

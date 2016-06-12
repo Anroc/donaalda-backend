@@ -17,11 +17,65 @@ class IndexViewNew(generic.DetailView):
     template_name = 'app/indexNew.html'
     context_object_name = 'test'
 
+
     def get(self, request, *args, **kwargs):
+
+
+        profile_status = request.GET.get('profile')
+
+        if profile_status == 'blank_fields':
+                    return render(request, 'app/indexNew.html', {'message': 'Zum Ändern des Passwortes altes und neues Passwort eingeben!',
+                                                                 'latest_category_list': Category.objects.all(),
+                                                                 'scenarios': Scenario.objects.all(),
+                                                                 'products': Product.objects.all()})
+
+        if profile_status == 'password_changed':
+                    return render(request, 'app/indexNew.html', {'message': 'Passwort erfolgreich verändert!',
+                                                                 'latest_category_list': Category.objects.all(),
+                                                                 'scenarios': Scenario.objects.all(),
+                                                                 'products': Product.objects.all()})
+        if profile_status == 'wrong_password':
+            return render(request, 'app/indexNew.html', {'message': 'Passwort falsch!',
+                                                         'latest_category_list': Category.objects.all(),
+                                                         'scenarios': Scenario.objects.all(),
+                                                         'products': Product.objects.all()})
+        login_status = request.GET.get('login')
+        if login_status == 'success':
+                    return render(request, 'app/indexNew.html', {'message': 'Willkommen!',
+                                                                 'latest_category_list': Category.objects.all(),
+                                                                 'scenarios': Scenario.objects.all(),
+                                                                 'products': Product.objects.all()})
+
+        if login_status == 'failed':
+                    return render(request, 'app/indexNew.html', {'message': 'Login fehlgeschlagen!',
+                                                                 'latest_category_list': Category.objects.all(),
+                                                                 'scenarios': Scenario.objects.all(),
+                                                                 'products': Product.objects.all()})
+
+        register_status = request.GET.get('registration')
+        if register_status == 'success':
+                    return render(request, 'app/indexNew.html', {'message': 'Sie wurden erfolgreich registriert!',
+                                                                 'latest_category_list': Category.objects.all(),
+                                                                 'scenarios': Scenario.objects.all(),
+                                                                 'products': Product.objects.all()})
+
+        if register_status == 'taken':
+                    return render(request, 'app/indexNew.html', {'message': 'Benutzername bereits vergeben!',
+                                                                 'latest_category_list': Category.objects.all(),
+                                                                 'scenarios': Scenario.objects.all(),
+                                                                 'products': Product.objects.all()})
+        if register_status == 'blank_fields':
+                    return render(request, 'app/indexNew.html', {'message': 'Bitte alle Felder ausfüllen!',
+                                                                 'latest_category_list': Category.objects.all(),
+                                                                 'scenarios': Scenario.objects.all(),
+                                                                 'products': Product.objects.all()})
+
+
         return render(request, 'app/indexNew.html',
                       {'latest_category_list': Category.objects.all(),
                        'scenarios': Scenario.objects.all(),
                        'products': Product.objects.all()})
+
 
 
 class IndexView(generic.ListView):
@@ -86,7 +140,7 @@ class CategoryView(generic.ListView):
         category = kwargs.get("category_name")
         return render(request, 'app/scenarioGrid.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
-                       # 'category': Category.objects.get(name=category)
+                       'category': Category.objects.get(name=category)
                        })
 
 
@@ -107,7 +161,7 @@ class ScenarioView(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         scenario = kwargs.get("current_scenario")
-        return render(request, 'app/scenario.html', {'current_scenario': Scenario.objects.get(url_name=scenario)})
+        return render(request, 'app/scenario.html', {'current_scenario': Scenario.objects.get(name=scenario)})
 
 
 class ProductView(generic.DetailView):
@@ -115,9 +169,9 @@ class ProductView(generic.DetailView):
     context_object_name = 'product'
 
     def get(self, request, *args, **kwargs):
-        product = kwargs.get("pk")
+        product = kwargs.get("product_name")
         return render(request, 'app/product.html',
-                      {'product': Product.objects.get(pk=product)})
+                      {'product': Product.objects.get(name=product)})
 
 
 # for frontend testing
@@ -204,14 +258,14 @@ def register_user(request):
     if request.POST:
         if username and password and email and firstname and lastname:
             if User.objects.filter(username=username).exists():
-                return HttpResponseRedirect("/app/?registration=taken")
+                return HttpResponseRedirect("/?registration=taken")
             user = User.objects.create_user(username, email, password)
             user.first_name = firstname
             user.last_name = lastname
             user.save()
-            return HttpResponseRedirect("/app/?registration=success")
+            return HttpResponseRedirect("/?registration=success")
         else:
-            return HttpResponseRedirect("/app/?registration=blank_fields")
+            return HttpResponseRedirect("/?registration=blank_fields")
     return render(request, 'app/html_templates/registrationTemplate.html', )
 
 
@@ -225,6 +279,7 @@ def profile(request):
     email = request.POST.get('email')
     firstname = request.POST.get('firstname')
     lastname = request.POST.get('lastname')
+    print(passwordNew)
 
     if not User.objects.filter(username=username).exists():  # existiert nicht
         return HttpResponseRedirect("/")
@@ -256,7 +311,7 @@ def profile(request):
                 user.save()
                 user = authenticate(username=username, password=passwordNew)
                 login(request, user)
-                return HttpResponseRedirect("/?profile=success")
+                return HttpResponseRedirect("/?profile=password_changed")
             else:
                 return HttpResponseRedirect("/?profile=blank_fields")
         else:
