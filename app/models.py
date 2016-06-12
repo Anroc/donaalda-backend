@@ -28,7 +28,8 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, validators=[validate_legal_chars])
     picture = models.ImageField(verbose_name="Bild für die Kategorie", upload_to="categories")
     backgroundPicture = models.ImageField(verbose_name="Bild für den Hintergrund", null=True, blank=True)
-    description = models.TextField(verbose_name="Beschreibung")
+    short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length=170, default="---")
+    description = models.TextField(verbose_name="Beschreibung", default="---")
     iconString = models.CharField(max_length=20, default="gift")
     scenario_set = models.ManyToManyField("Scenario", verbose_name="Zur Kategorie gehörende Szenarien")
 
