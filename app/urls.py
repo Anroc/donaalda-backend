@@ -25,11 +25,11 @@ urlpatterns = [
     url(r'^register$', views.register_user, name='register_user'),
     url(r'^logout$', views.log_out, name='logout'),
     url(r'^scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
-    url(r'^app/(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
-    url(r'^app/scenarios/(?P<current_scenario>[\w]+)/$',
+    url(r'^scenarios/(?P<current_scenario>[\w]+)/$',
         views.ScenarioView.as_view(), name='scenario'),
     url(r'^products/(?P<pk>[0-9]+)$', views.ProductView.as_view(), name='product'),
     url(r'^profile$', views.profile, name='profile'),
+    url(r'^app/(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
     # for frontend testing
     url(r'^app/frontendtesting$', views.TestView.as_view(), name='frontendtesting'),
     url(r'^$', views.IndexViewNew.as_view(), name='indexnew'),
