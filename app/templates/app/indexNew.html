@@ -118,7 +118,7 @@
         }
 
         function admin() {
-            location.href = "/admin"
+            window.open("/admin", "_blank")
         }
     </script>
     <!-- Main JS (Do not remove) -->
@@ -211,7 +211,6 @@
                             Tipps.<br><br>Finde <b>Szenarios</b> die zu dir passen. Wähle <b>Produkte</b> von
                             verschiedenen <b>Herstellern</b>
                             und stelle dir dein Smart Home zusammen.</h2>
-                      <span>{{ message  }}</span>
                     </div>
                 </div>
             </div>
@@ -234,13 +233,12 @@
                             <h2>
                                 {{ category.name }}
                             </h2>
-                            <p>
+                            <div style="height: 170px;">
                                 {{ category.description }}
-                            </p>
+                            </div>
                             <p>
-                                <a href="{% url 'app:category' category.name %}" data-section="about"
-                                   class="btn btn-primary">
-                                    Na dann los
+                                <a href="{% url 'app:category' category.name %}" class="btn btn-primary">
+                                    Ich will {{ category.name }}
                                 </a>
                             </p>
                         </div>
