@@ -3,6 +3,7 @@ import re
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
@@ -231,7 +232,8 @@ class Comment(models.Model):
     comment_from = models.ForeignKey(to=User)
     comment_title = models.CharField(max_length=255, verbose_name="Kommentartitel", )
     comment_content = models.TextField(verbose_name="Kommentarinhalt")
-    rating = models.PositiveSmallIntegerField(verbose_name="Bewertung", )
+    # min value should be 0, max value should be 5, default should be 0
+    rating = models.PositiveSmallIntegerField(verbose_name="Bewertung", validators=[MinValueValidator(0), MaxValueValidator(5)], default='0')
     creation_date = models.DateTimeField()
 
     def __str__(self):
