@@ -49,9 +49,7 @@ class Category(models.Model):
 class Scenario(models.Model):
     name = models.CharField(max_length=100, unique=True)
     url_name = models.CharField(max_length=100, unique=False, default=random())
-    short
-
-    _description = models.TextField(verbose_name="Kurzbeschreibung", max_length="255", null=True, blank=True)
+    short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="255", null=True, blank=True)
     description = models.TextField(verbose_name="Beschreibung", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True)
     provider = models.ForeignKey("Provider", default="1", )
