@@ -21,6 +21,7 @@ from django.conf import settings
 app_name = 'app'
 urlpatterns = [
     # url(r'^app/$', views.IndexView.as_view(), name='index'),
+    url(r'^contact$', views.ContactView.as_view(), name='contact'),
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
     url(r'^logout$', views.log_out, name='logout'),
@@ -28,7 +29,7 @@ urlpatterns = [
     url(r'^scenarios/(?P<current_scenario>[\w]+)/$',
         views.ScenarioView.as_view(), name='scenario'),
     url(r'^products/(?P<pk>[0-9]+)/$', views.ProductView.as_view(), name='product'),
-    url(r'^provider/(?P<provider_url_name>[\w]+)$', views.ProviderProfileView.as_view(),name='provider_profile'),
+    url(r'^provider/(?P<provider_url_name>[\w]+)$', views.ProviderProfileView.as_view(), name='provider_profile'),
     url(r'^profile$', views.profile, name='profile'),
     url(r'^(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
     # for frontend testing

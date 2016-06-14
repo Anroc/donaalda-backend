@@ -142,6 +142,16 @@ class ProviderProfileView(generic.ListView):
                                                             })
 
 
+class ContactView(generic.ListView):
+    template_name = 'app/contact.html'
+
+    # context_object_name = 'provider'
+
+    def get(self, request, *args, **kwargs):
+        # provider = kwargs.get("provider_url_name")
+        return render(request, 'app/contact.html', {})
+
+
 class CategoryView(generic.ListView):
     template_name = 'app/scenarioGrid.html'
     context_object_name = 'scenario_list_from_category'
