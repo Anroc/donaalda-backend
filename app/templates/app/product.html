@@ -83,7 +83,11 @@
     <!-- Main JS (Do not remove) -->
     <script src="{% static 'app/assets/js/main.js' %}"></script>
 
-
+    <script>
+      $(document).ready(function(){
+        $('[data-show="tooltip"]').tooltip();
+      });
+    </script>
 </head>
 <body>
 
@@ -109,15 +113,53 @@
                         <li class="active"><a href="#" data-nav-section="home"><span>Produkt</span></a></li>
                         <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
                         <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>
-                        <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
-                        <li><a href="#" data-nav-section="about"><span>Über</span></a></li>
+                        <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
                         <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
+                        {% if not request.user.is_authenticated %}
                         <li>
-                            <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
-                                    data-target="#myModalx">
-                                <i class="fh5co-intro-icon icon-login"></i>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                    data-show="tooltip" title="Anmelden" data-placement="bottom"
+                                    data-toggle="modal"
+                                    data-target="#myModalLogin">
+                              <i class="glyphicon glyphicon-log-in"></i>
                             </button>
+                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                    data-show="tooltip" title="Registrieren" data-placement="bottom"
+                                    data-toggle="modal"
+                                    data-target="#myModalRegister">
+                              <i class="glyphicon glyphicon-new-window"></i>
+                            </button>
+                          </div>
                         </li>
+                        {% else %}
+                        <!--TODO: Change these to admin (if allowed), logout and profile-->
+                        <li>
+                          <div class="btn-group">
+                            {% if 1 == 1 %}
+                            {% if user.is_staff %}
+                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                    data-show="tooltip" title="Verwaltung" data-placement="bottom"
+                                    onclick="admin()">
+                              <i class="glyphicon glyphicon-cog"></i>
+                            </button>
+                            {% endif %}
+                            {% endif %}
+                            <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
+                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                    data-show="tooltip" title="Abmelden" data-placement="bottom"
+                                    onclick="logOut()">
+                              <i class="glyphicon glyphicon-log-out"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                    data-show="tooltip" title="Profil" data-placement="bottom"
+                                    data-toggle="modal"
+                                    data-target="#myModalProfile">
+                              <i class="glyphicon glyphicon-user"></i>
+                            </button>
+                          </div>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </nav>
@@ -176,26 +218,23 @@
             <div class="row">
                 <div class="col-md-12 section-heading text-center">
                     <h2 class="to-animate">Produktabbildungen</h2>
+                    <div class="row">
+                      <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                        <h3>Aktuelle Produktbilder</h3>
+                      </div>
+                    </div>
                 </div>
             </div>
             <div class="row row-bottom-padded-sm">
                 <div class="col-md-4 col-sm-6 col-xxs-12">
                     <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
                         <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
-                        <!--<div class="fh5co-text">
-                          <h2>Project 1</h2>
-                          <span>Branding</span>
-                        </div>-->
                     </a>
                 </div>
                 {% if product.image2 %}
                     <div class="col-md-4 col-sm-6 col-xxs-12">
                         <a href="{{ product.image2.url }}" class="fh5co-project-item image-popup to-animate">
                             <img src="{{ product.image2.url }}" alt="Image" class="img-responsive">
-                            <!--<div class="fh5co-text">
-                              <h2>Project 2</h2>
-                              <span>Web</span>
-                            </div>-->
                         </a>
                     </div>
                 {% endif %}
@@ -205,30 +244,24 @@
                     <div class="col-md-4 col-sm-6 col-xxs-12">
                         <a href="{{ product.image3.url }}" class="fh5co-project-item image-popup to-animate">
                             <img src="{{ product.image3.url }}" alt="Image" class="img-responsive">
-                            <!--<div class="fh5co-text">
-                              <h2>Project 3</h2>
-                              <span>Web</span>
-                            </div>-->
                         </a>
                     </div>
                 {% endif %}
-
             </div>
-
         </div>
     </section>
 {% endif %}
 
-<section id="fh5co-testimonials" data-section="products">
+<section id="fh5co-testimonials" data-section="tecData">
     <div class="container">
         <div class="row">
             <div class="col-md-12 section-heading text-center">
                 <h2 class="to-animate">Technische Details</h2>
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the
-                            blind texts.</h3>
+                        <h3>
+                          Technische Daten des Produkts nach Angaben des Herstellers
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -240,26 +273,25 @@
 </section>
 
 <footer id="footer" role="contentinfo">
-    <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a>
-    <div class="container">
-        <div class="">
-            <div class="col-md-12 text-center">
-                <p>&copy; DONAALDA. All Rights Reserved. <br>
-                    Created by <a href="https://www.donaalda.com" target="_blank">donaalda.com</a>
-                    Images: <a href="http://pexels.com/" target="_blank">Pexels</a>,
-                    <a href="http://plmd.me/" target="_blank">plmd.me</a></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <ul class="social social-circle">
-                    <li><a href="#"><i class="icon-twitter"></i></a></li>
-                    <li><a href="#"><i class="icon-facebook"></i></a></li>
-                    <li><a href="#"><i class="icon-youtube"></i></a></li>
-                </ul>
-            </div>
-        </div>
+  <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a>
+  <div class="container">
+    <br/>
+    <div>
+      <div class="col-md-12 text-center">
+        <p>&copy; DONAALDA. All Rights Reserved. <br>
+          <a href="https://www.donaalda.com" target="_blank">donaalda.com</a>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <ul class="social social-circle">
+          <li><a href="#"><i class="icon-twitter"></i></a></li>
+          <li><a href="#"><i class="icon-facebook"></i></a></li>
+          <li><a href="#"><i class="icon-youtube"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </footer>
 
 

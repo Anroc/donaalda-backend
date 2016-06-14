@@ -12,7 +12,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   {% if current_scenario %}
-  <title>DONAALDA - Szenario - {{ current_scenario.name }}</title>
+  <title>DONAALDA - Szenarioübersicht - {{ current_scenario.name }}</title>
+  {% else %}
+  <title>DONAALDA - Szenarioübersicht - Kein Szenario gefunden</title>
   {% endif %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content=""/>
@@ -136,10 +138,15 @@
       <div class="text-inner">
         <div class="row">
           <div class="col-md-8">
-            {% if current_scenario %}
-            <h1 class="text-left">{{ current_scenario.name }}</h1>
-            <h3 class="text-left" style="color: #ddd; margin-top: -20px;">{{ current_scenario.provider }}</h3>
-            {% endif %}
+            <h1 class="text-left">Szenario-Name</h1>
+            <h3 class="text-left" style="color: #ddd; margin-top: -20px;">{{ product.product_type.type_name }}</h3>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                {{ product.providerProfile.logo_image }}
+              </div>
+            </div>
           </div>
         </div>
       </div>

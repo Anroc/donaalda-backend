@@ -120,6 +120,10 @@
         function admin() {
             window.open("/admin", "_blank")
         }
+
+        $(document).ready(function(){
+          $('[data-show="tooltip"]').tooltip();
+        });
     </script>
     <!-- Main JS (Do not remove) -->
     <script src="{% static 'app/assets/js/main.js' %}"></script>
@@ -148,43 +152,63 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="#" data-nav-section="home"><span>Start</span></a></li>
-                        <li><a href="#" data-nav-section="information"><span>Was macht Donaalda</span></a></li>
-                        <li><a href="#" data-nav-section="products"><span>Produkte</span></a></li>
+                        <li><a href="#" data-nav-section="whatsIsDonaalda"><span>Was macht Donaalda</span></a></li>
+                        <li><a href="#" data-nav-section="comments"><span>Bewertungen</span></a></li>
                         <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
-                        <li><a href="#" data-nav-section="about"><span>Über</span></a></li>
+                        <li><a href="#" data-nav-section="livingSituation"><span>Wohnsituation</span></a></li>
                         <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
+                        <!--<li>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-xs navbar-btn">Apple</button>
+                            <button type="button" class="btn btn-primary btn-xs navbar-btn">Samsung</button>
+                            <button type="button" class="btn btn-primary btn-xs navbar-btn">Sony</button>
+                          </div>
+                        </li>-->
+
                         {% if not request.user.is_authenticated %}
-                            <li>
-                                <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
-                                        data-target="#myModalLogin">
-                                    <i class="glyphicon glyphicon-log-in"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
-                                        data-target="#myModalRegister">
-                                    <i class="glyphicon glyphicon-new-window"></i>
-                                </button>
-                            </li>
+                          <li>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                      data-show="tooltip" title="Anmelden" data-placement="bottom"
+                                      data-toggle="modal"
+                                      data-target="#myModalLogin">
+                                  <i class="glyphicon glyphicon-log-in"></i>
+                              </button>
+                              <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                      data-show="tooltip" title="Registrieren" data-placement="bottom"
+                                      data-toggle="modal"
+                                      data-target="#myModalRegister">
+                                <i class="glyphicon glyphicon-new-window"></i>
+                              </button>
+                            </div>
+                          </li>
                         {% else %}
                             <!--TODO: Change these to admin (if allowed), logout and profile-->
-                            {% if 1 == 1 %}
-                                {% if user.is_staff %}
-                                    <li><a href="#" onclick="admin()"><span>Verwaltung</span></a></li>
-                                {% endif %}
-                            {% endif %}
-                            <li>
-                                <button type="button" class="btn btn-primary btn-xs navbar-btn" onclick="logOut()">
-                                    <i class="glyphicon glyphicon-log-out"></i>
-                                </button>
-                                <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
-                            </li>
-                            <li>
-                                <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
-                                        data-target="#myModalProfile">
-                                    <i class="glyphicon glyphicon-user"></i>
-                                </button>
-                            </li>
+                          <li>
+                            <div class="btn-group">
+                              {% if 1 == 1 %}
+                                  {% if user.is_staff %}
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Verwaltung" data-placement="bottom"
+                                            onclick="admin()">
+                                      <i class="glyphicon glyphicon-cog"></i>
+                                    </button>
+                                  {% endif %}
+                              {% endif %}
+                              <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
+                              <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                      data-show="tooltip" title="Abmelden" data-placement="bottom"
+                                      onclick="logOut()">
+                                <i class="glyphicon glyphicon-log-out"></i>
+                              </button>
+                              <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                      data-show="tooltip" title="Profil" data-placement="bottom"
+                                      data-toggle="modal"
+                                      data-target="#myModalProfile">
+                                <i class="glyphicon glyphicon-user"></i>
+                              </button>
+                            </div>
+                          </li>
                         {% endif %}
                     </ul>
                 </div>
@@ -193,6 +217,7 @@
     </div>
 </header>
 
+<!-- Top Section -->
 <section id="fh5co-home" data-section="home"
          style="background-image: url({% static 'app/assets/images/full_image_2.jpg' %});"
          data-stellar-background-ratio="0.5">
@@ -208,7 +233,7 @@
                         <h1 class="to-animate">Frag Donaalda</h1>
                         <h2 class="to-animate">Die freundliche Assistentin hilft dir bei deinem <b>Smart Home</b> und
                             gibt dir
-                            Tipps.<br><br>Finde <b>Szenarios</b> die zu dir passen. Wähle <b>Produkte</b> von
+                            Tipps.<br><br>Finde <b>Szenarien</b> die zu dir passen. Wähle <b>Produkte</b> von
                             verschiedenen <b>Herstellern</b>
                             und stelle dir dein Smart Home zusammen.</h2>
                     </div>
@@ -219,6 +244,7 @@
     <div class="slant"></div>
 </section>
 
+<!-- Intro with categories -->
 <section id="fh5co-intro">
     <div class="container">
         <div class="row row-bottom-padded-lg">
@@ -250,26 +276,121 @@
                 </div>
             {% endif %}
         </div>
-        <!--<div class="row watch-video text-center to-animate">
-                  <span>Watch the video</span>
-
-                  <a href="https://vimeo.com/channels/staffpicks/93951774" class="popup-vimeo btn-video"><i class="icon-play2"></i></a>
-              </div>-->
     </div>
 </section>
+<!-- Was macht Donaalda -->
+<section id="fh5co-services" data-section="whatsIsDonaalda">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-left">
+        <h2 class=" left-border to-animate">Was macht Donaalda</h2>
+        <div class="row">
+          <div class="col-md-8 subtext to-animate">
+            <h3>Unterschiedliche Hersteller, tausende Produkte für jeden Anwendungszweck. Aber wie soll mein
+              <b>Smart
+                Home</b> aussehen?<br>
+              Dabei hilft dir Donaalda, denn sie berät dich mit fertigen Szenarien und fragt dich
+              nach deiner Wohnsituation.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+        <i class="icon to-animate-2 icon-search"></i>
+        <h3>Rat &amp; Tat</h3>
+        <p>
+          Donaalda ist Deine Ratgeberin für das <b>Smart Home</b>. Immer mehr Hersteller drängen mit unterschiedlichen Produkten und Technologien auf den Markt.
+          Da verliert man schnell den Überblick. <b>Donaalda findet die Produkte, die zu Deinem Projekt passen.</b>
+          Smart Home war noch nie so einfach.
+        </p>
+      </div>
+      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+        <i class="icon to-animate-2 icon-book"></i>
+        <h3>Szenarien</h3>
+        <p>Die Szenarien geben Dir einen Eindruck, was im Smart Home alles möglich ist. Wusstest Du, dass die CO2-Messung im Schlafzimmer
+          und die Steuerung der Raumluft maßgeblich für einen gesünderen Schlaf sorgen? Das und vieles mehr findest Du in den Szenarien.
+        </p>
+      </div>
+    </div>
 
-<section id="fh5co-work" data-section="information">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+        <i class="icon to-animate-2 icon-gift"></i>
+        <h3>Produkte</h3>
+        <p>
+          Produkte findest Du in jedem Szenario. Und zwar genau die Produkte, die perfekt zum Szenario passen.
+          Hierbei ist es egal von welchem Hersteller die Produkte sind. Donaalda weiß, welche Produkte von
+          welchen Herstellern zusammenpassen, zeigt sie dir und deren Vorteile.
+        </p>
+      </div>
+      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+        <i class="icon to-animate-2 icon-briefcase"></i>
+        <h3>Hersteller</h3>
+        <p>
+          Donaalda ist unabhängig von bestimmten Herstellern, denn als Smart Home Besitzer sollen alle Vorteile
+          von bestimmten Produkten optimal genutzt werden.
+          Deswegen garantiert Dir Donaalda, das Deine herstellerübergreifenden Produkte passen.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Bewertungen -->
+<section id="fh5co-testimonials" data-section="comments">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Bewertungen</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>
+              Du bist nicht der Einzige. Donaalda hat schon Vielen bei der Auswahl des perfekten Smart Home geholfen.
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% if comment %}
+        {% for com in comment %}
+          <div class="col-md-4">
+            <div class="box-testimony">
+              <blockquote class="to-animate-2">
+                <p>&ldquo;Ich bin fatal.&rdquo;</p>
+              </blockquote>
+              <div class="author to-animate">
+                <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
+                <p>
+                  Timo <span class="subtext">Creative Director</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="center-block">
+            <i class="icon icon-thumbs-down"></i> Schade. Es wurden noch keine Kommentare geschrieben.
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+<!-- Szenarien -->
+<section id="fh5co-work" data-section="scenarios">
     <div class="container">
         <div class="row">
             <div class="col-md-12 section-heading text-center">
-                <h2 class="to-animate">Das macht Donaalda</h2>
+                <h2 class="to-animate">Szenarien</h2>
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>Unterschiedliche Hersteller, tausende Produkte für jeden Anwendungszweck. Aber wie soll mein
-                            <b>Smart
-                                Home</b> aussehen?<br>
-                            Dabei hilft dir Donaalda, denn sie berät dich mit fertigen Szenarien und fragt dich
-                            nach deiner Wohnsituation.</h3>
+                        <h3>
+                          Sie helfen Dir für einen bestimmten Anwendungszweck die richtige Lösung zu finden. Dabei gehen
+                          die Szenarien auf unterschiedliche Möglichkeiten ein, um Dein <b>Smart Home</b>
+                          auf Deine Bedürfnisse anzupassen.
+                          Hier siehst Du die neusten Szenarien in Donaalda. Für weitere, wähle <a href="#fh5co-home">oben</a> eine Kategorie.
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -278,7 +399,6 @@
         <div class="row row-bottom-padded-sm">
             {% if scenarios %}
                 {% for scenario in scenarios %}
-
                     <div class="col-md-4 col-sm-6 col-xxs-12">
                         <a href="{{ scenario.picture.url }}" class="fh5co-project-item image-popup to-animate">
                             <img src="{{ scenario.picture.url }}" alt="Image" class="img-responsive">
@@ -301,20 +421,19 @@
                             </div>
                         </a>
                     </div>
-                    <div class="clearfix visible-sm-block"></div>
+                    <!--<div class="clearfix visible-sm-block"></div>-->
                 {% endfor %}
             {% else %}
                 <div>
-                    no scenarios
+                    Es wurden noch keine Szenarien hinzugefügt.
                 </div>
             {% endif %}
-
         </div>
-
     </div>
 </section>
 
-<section id="fh5co-work" data-section="products">
+<!-- not used products list -->
+<!--<section id="fh5co-work" data-section="products">
     <div class="container">
         <div class="row">
             <div class="col-md-12 section-heading text-center">
@@ -354,7 +473,7 @@
                                 <span>
                                     EOL: {{ product.end_of_life }}
                                 </span>
-                                <!--h6>
+                                &lt;!&ndash;h6>
                 <div>
                     #{% if product.image2 %}
                         <img src="#{{ product.image2.url }}"/>
@@ -363,7 +482,7 @@
                         <img src="#{{ product.image3.url }}"/>
                     #{% endif %}
                 </div>
-            </h6-->
+            </h6&ndash;&gt;
                             </div>
                         </a>
                     </div>
@@ -376,148 +495,34 @@
             {% endif %}
         </div>
     </div>
-</section>
+</section>-->
 
-<section id="fh5co-testimonials" data-section="products">
+<!-- Wohnsituation -->
+<section id="fh5co-about" data-section="livingSituation">
     <div class="container">
         <div class="row">
             <div class="col-md-12 section-heading text-center">
-                <h2 class="to-animate">Produkte</h2>
+                <h2 class="to-animate">Wohnsituation</h2>
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>Ya.</h3>
+                        <h3>
+                          Villa oder Besenkammer?! Das ist Donaalda egal. Egal in welcher Wohnsituation Du lebst, sie hat immer die richtige Lösung für Dich.
+                          <br/><br/>
+                          Trotzdem kann sie etwas Hilfe gebrauchen. Dazu stellt sie an manchen Stellen Fragen, damit Du immer genau das Szenario findest,
+                          was Du schon immer gesucht hast.
+                        </h3>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="box-testimony">
-                    <blockquote class="to-animate-2">
-                        <p>&ldquo;Rolladen können mit dem XB-Alpha einfach nachgerüstet werden. Einfach Bandaufwicklung
-                            gegen
-                            den
-                            XB-Alpha austauschen.&rdquo;</p>
-                    </blockquote>
-                    <div class="author to-animate">
-                        <figure><img src="{% static 'app/assets/images/person1.jpg' %}" alt="Person"></figure>
-                        <p>
-                            <a href="http://www.jung.de/869/produkte/technik/jalousie-und-rollladensteuerung/mechanisch/"
-                               target="_blank">Rolladenmotor XB-Alpha</a> <span class="subtext">Jung</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="box-testimony">
-                    <blockquote class="to-animate-2">
-                        <p>&ldquo;Ich bin fatal.&rdquo;</p>
-                    </blockquote>
-                    <div class="author to-animate">
-                        <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
-                        <p>
-                            Timo <span class="subtext">Creative Director</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="box-testimony">
-                    <blockquote class="to-animate-2">
-                        <p>&ldquo;Ich schreibe Tests. &rdquo;</p>
-                    </blockquote>
-                    <div class="author to-animate">
-                        <figure><img src="{% static 'app/assets/images/person3.jpg' %}" alt="Person"></figure>
-                        <p>
-                            Amin<span
-                                class="subtext">Superviser</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</section>
-
-
-<section id="fh5co-services" data-section="scenarios">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 section-heading text-left">
-                <h2 class=" left-border to-animate">Szenarien</h2>
-                <div class="row">
-                    <div class="col-md-8 subtext to-animate">
-                        <h3>Viele tolle Szenarien, wie Smart Home Ihr Wohnen revolutioniert, ja disruptiv
-                            innoviert!</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                <i class="icon to-animate-2 icon-anchor"></i>
-                <h3>Comfort &amp; Chill</h3>
-                <p>
-                    Zeit zum Chillen.
-                </p>
-            </div>
-            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                <i class="icon to-animate-2 icon-layers2"></i>
-                <h3>Web &amp; Interface</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                    there live the blind
-                    texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large
-                    language ocean</p>
-            </div>
-
-            <div class="clearfix visible-sm-block"></div>
-
-            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                <i class="icon to-animate-2 icon-video2"></i>
-                <h3>Photo &amp; Video</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                    there live the blind
-                    texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large
-                    language ocean</p>
-            </div>
-            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                <i class="icon to-animate-2 icon-monitor"></i>
-                <h3>CMS &amp; eCommerce</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                    there live the blind
-                    texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large
-                    language ocean</p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section id="fh5co-about" data-section="about">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 section-heading text-center">
-                <h2 class="to-animate">About</h2>
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>Far far away, behind the word mountains, far from the countries Vokalia and
-                            Consonantia, there live the
-                            blind texts.</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="fh5co-person text-center to-animate">
-                    <figure><img src="{% static 'app/assets/images/person1.jpg' %}" alt="Image"></figure>
-                    <h3>Amin</h3>
-                    <span class="fh5co-position">Web Designer</span>
-                    <p>
-                        Ich schreibe Tests.
+                <div class="fh5co-person text-center to-animate" style="min-height: 400px;">
+                    <figure><img src="{% static 'app/assets/images/haus1.jpg' %}" alt="Image"></figure>
+                    <h3>Miete oder Besitz</h3>
+                    <span class="fh5co-position">Allgemeine Wohnsituation</span>
+                    <p style="min-height: 150px;">
+                        Damit weiß Donaalda welche Produkte besser geeignet sind. Manche erfordern Umbaumaßnahmen, die ungern in Mietwohungen gemacht werden.
                     </p>
                     <ul class="social social-circle">
                         <li><a href="#"><i class="icon-twitter"></i></a></li>
@@ -527,12 +532,12 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="fh5co-person text-center to-animate">
-                    <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Image"></figure>
-                    <h3>Timo</h3>
-                    <span class="fh5co-position">Web Developer</span>
-                    <p>
-                        Ich wurde inkubiert, um zu sein. Ich bin einer und nicht viele.
+                <div class="fh5co-person text-center to-animate" style="min-height: 400px;">
+                    <figure><img src="{% static 'app/assets/images/familie1.jpg' %}" alt="Image"></figure>
+                    <h3>Personen</h3>
+                    <span class="fh5co-position">im Haushalt</span>
+                    <p style="min-height: 150px;">
+                        Sind Kinder im Haushalt, können spezielle Szenarien gezeigt werden, die z.B. die Sicherheit der Kleinen im Haushalt erhöhen.
                     </p>
 
                     <ul class="social social-circle">
@@ -543,13 +548,13 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="fh5co-person text-center to-animate">
-                    <figure><img src="{% static 'app/assets/images/person3.jpg' %}" alt="Image"></figure>
-                    <h3>Larry Ben</h3>
-                    <span class="fh5co-position">Web Designer</span>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                        there live the
-                        blind texts</p>
+                <div class="fh5co-person text-center to-animate" style="min-height: 400px;">
+                    <figure><img src="{% static 'app/assets/images/bauen1.jpg' %}" alt="Image"></figure>
+                    <h3>Ein-/Umbau</h3>
+                    <span class="fh5co-position">Instandsetzung / Renovierung</span>
+                    <p style="min-height: 150px;">
+                      Stehen Instandsetzungs- oder Renovierungsarbeiten an, können entsprechende Lösungen berücksichtig werden.
+                    </p>
                     <ul class="social social-circle">
                         <li><a href="#"><i class="icon-twitter"></i></a></li>
                         <li><a href="#"><i class="icon-facebook"></i></a></li>
@@ -561,75 +566,77 @@
     </div>
 </section>
 
+<!-- Key Facts -->
 <section id="fh5co-counters" style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
          data-stellar-background-ratio="0.5">
     <div class="fh5co-overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-12 section-heading text-center to-animate">
-                <h2>Fun Facts</h2>
+                <h2>Key Facts</h2>
             </div>
         </div>
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="fh5co-counter to-animate">
+                    <i class="fh5co-counter-icon icon-search to-animate-2"></i>
+          <span class="fh5co-counter-number js-counter" data-from="0" data-to="13824" data-speed="2000"
+                data-refresh-interval="50">13824</span>
+                    <span class="fh5co-counter-label">Individuelle Konfigurationen</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="fh5co-counter to-animate">
+                    <i class="fh5co-counter-icon icon-book to-animate-2"></i>
+          <span class="fh5co-counter-number js-counter" data-from="0" data-to="127" data-speed="1000"
+                data-refresh-interval="3">127</span>
+                    <span class="fh5co-counter-label">Szenarien</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="fh5co-counter to-animate">
+                    <i class="fh5co-counter-icon icon-gift to-animate-2"></i>
+          <span class="fh5co-counter-number js-counter" data-from="0" data-to="1302" data-speed="2000"
+                data-refresh-interval="20">1302</span>
+                    <span class="fh5co-counter-label">Produkte</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="fh5co-counter to-animate">
                     <i class="fh5co-counter-icon icon-briefcase to-animate-2"></i>
-          <span class="fh5co-counter-number js-counter" data-from="0" data-to="89" data-speed="5000"
-                data-refresh-interval="50">89</span>
-                    <span class="fh5co-counter-label">Finished projects</span>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="fh5co-counter to-animate">
-                    <i class="fh5co-counter-icon icon-code to-animate-2"></i>
-          <span class="fh5co-counter-number js-counter" data-from="0" data-to="2343409" data-speed="5000"
-                data-refresh-interval="50">2343409</span>
-                    <span class="fh5co-counter-label">Line of codes</span>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="fh5co-counter to-animate">
-                    <i class="fh5co-counter-icon icon-cup to-animate-2"></i>
-          <span class="fh5co-counter-number js-counter" data-from="0" data-to="1302" data-speed="5000"
-                data-refresh-interval="50">92</span>
-                    <span class="fh5co-counter-label">Bottles of Club Mate</span>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="fh5co-counter to-animate">
-                    <i class="fh5co-counter-icon icon-people to-animate-2"></i>
-          <span class="fh5co-counter-number js-counter" data-from="0" data-to="52" data-speed="5000"
-                data-refresh-interval="50">238497</span>
-                    <span class="fh5co-counter-label">Happy little bugs</span>
+          <span class="fh5co-counter-number js-counter" data-from="0" data-to="52" data-speed="1000"
+                data-refresh-interval="5">52</span>
+                    <span class="fh5co-counter-label">Hersteller</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Kontakt -->
 <section id="fh5co-contact" data-section="contact">
     <div class="container">
         <div class="row">
             <div class="col-md-12 section-heading text-center">
-                <h2 class="to-animate">Get In Touch</h2>
+                <h2 class="to-animate">Frag Donaalda</h2>
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>Touch me.</h3>
+                        <h3>oder ihre Erfinder</h3>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row row-bottom-padded-md">
             <div class="col-md-6 to-animate">
-                <h3>Contact Info</h3>
+                <h3>Kontakt Info</h3>
                 <ul class="fh5co-contact-info">
                     <li class="fh5co-contact-address ">
                         <i class="icon-home"></i>
                         13045 Berlin <br>
                         Telekom Tower <br>
-                        Berlin, Germany
+                        Berlin, Deutschland
                     </li>
-                    <li><i class="icon-phone"></i> (123) 465-6789</li>
+                    <li><i class="icon-phone"></i>+49 (0) 30 314-666</li>
                     <li><i class="icon-envelope"></i>info@donaalda.com</li>
                     <li><i class="icon-globe"></i> <a href="https://www.donaalda.com/" target="_blank">donaalda.com</a>
                     </li>
@@ -637,45 +644,42 @@
             </div>
 
             <div class="col-md-6 to-animate">
-                <h3>Contact Form</h3>
+                <h3>Kontaktformular</h3>
                 <div class="form-group ">
                     <label for="name" class="sr-only">Name</label>
                     <input id="name" class="form-control" placeholder="Name" type="text">
                 </div>
                 <div class="form-group ">
-                    <label for="email" class="sr-only">Email</label>
-                    <input id="email" class="form-control" placeholder="Email" type="email">
+                    <label for="email" class="sr-only">E-Mail</label>
+                    <input id="email" class="form-control" placeholder="E-Mail" type="email">
                 </div>
                 <div class="form-group ">
-                    <label for="phone" class="sr-only">Phone</label>
-                    <input id="phone" class="form-control" placeholder="Phone" type="text">
+                    <label for="phone" class="sr-only">Telefon</label>
+                    <input id="phone" class="form-control" placeholder="Telefon" type="text">
                 </div>
                 <div class="form-group ">
-                    <label for="message" class="sr-only">Message</label>
+                    <label for="message" class="sr-only">Nachricht</label>
                             <textarea name="" id="message" cols="30" rows="5" class="form-control"
-                                      placeholder="Message"></textarea>
+                                      placeholder="Nachricht"></textarea>
                 </div>
                 <div class="form-group ">
-                    <input class="btn btn-primary btn-lg" value="Send Message" type="submit">
+                    <input class="btn btn-primary btn-lg" value="Und los!" type="submit">
                 </div>
             </div>
         </div>
-
     </div>
 
     <div id="map" class="to-animate"></div>
 </section>
 
-
 <footer id="footer" role="contentinfo">
     <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a>
     <div class="container">
-        <div class="">
+        <br/>
+        <div>
             <div class="col-md-12 text-center">
                 <p>&copy; DONAALDA. All Rights Reserved. <br>
-                    Created by <a href="https://www.donaalda.com" target="_blank">donaalda.com</a>
-                    Images: <a href="http://pexels.com/" target="_blank">Pexels</a>,
-                    <a href="http://plmd.me/" target="_blank">plmd.me</a></p>
+                    <a href="https://www.donaalda.com" target="_blank">donaalda.com</a>
             </div>
         </div>
         <div class="row">
@@ -690,7 +694,6 @@
     </div>
 </footer>
 
-
 <div class="modal fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -699,17 +702,16 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Anmelden</h4>
+                    <h3 class="modal-title" id="myModalLabel">Anmelden</h3>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group">
+                    <div class="input-group" style="margin-bottom: 5px;">
                         <span class="input-group-addon" id="basic-addon1"><i class="icon-user"></i></span>
                         <input type="text" class="form-control" name="username" placeholder="Benutzername"
                                aria-describedby="basic-addon1" value="{{ name }}">
                     </div>
-                    <br>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon2"><i class="icon-star"></i></span>
+                        <span class="input-group-addon" id="basic-addon2"><i class="icon-key"></i></span>
                         <input type="password" class="form-control" name="password" placeholder="Passwort"
                                aria-describedby="basic-addon2" value="{{ password }}">
                     </div>
@@ -732,35 +734,32 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel1">Registrieren</h4>
+                    <h3 class="modal-title" id="myModalLabel1">Registrieren</h3>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group">
+                    <div class="input-group" style="margin-bottom: 5px;">
                         <span class="input-group-addon" id="basic-addon3"><i class="icon-user"></i></span>
                         <input type="text" class="form-control" name="username" placeholder="Benutzername"
                                aria-describedby="basic-addon1" value="{{ name }}">
                     </div>
-                    <br>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon4"><i class="icon-star"></i></span>
+                        <span class="input-group-addon" id="basic-addon4"><i class="icon-key"></i></span>
                         <input type="password" class="form-control" name="password" placeholder="Passwort"
                                aria-describedby="basic-addon2" value="{{ password }}">
                     </div>
-                    <br>
-                    <div class="input-group">
+                    <br/>
+                    <div class="input-group" style="margin-bottom: 5px;">
                         <span class="input-group-addon" id="basic-addon5"><i class="icon-user"></i></span>
                         <input type="text" class="form-control" name="firstname" placeholder="Vorname"
                                aria-describedby="basic-addon3" value="{{ firstname }}">
                     </div>
-                    <br>
-                    <div class="input-group">
+                    <div class="input-group" style="margin-bottom: 5px;">
                         <span class="input-group-addon" id="basic-addon6"><i class="icon-user"></i></span>
                         <input type="text" class="form-control" name="lastname" placeholder="Nachname"
                                aria-describedby="basic-addon4" value="{{ lastname }}">
                     </div>
-                    <br>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon7"><i class="icon-user"></i></span>
+                        <span class="input-group-addon" id="basic-addon7"><i class="icon-envelope"></i></span>
                         <input type="text" class="form-control" name="email" placeholder="Email-Adresse"
                                aria-describedby="basic-addon5" value="{{ email }}">
                     </div>
@@ -775,7 +774,7 @@
     </div>
 </div>
 
-<!--TODO: Frontend add profile to this-->
+<!--TODO: Frontend add profile to this // Noch aktuell??? Tim:14.06.16-->
 <div class="modal fade" id="myModalProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -784,40 +783,46 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel2" >{{user.username}}</h4>
+                    <h3 class="modal-title" id="myModalLabel2" >Profil von {{ user.first_name }} {{ user.last_name }}</h3>
                 </div>
                 <div class="modal-body">
-                    <div class="input-group" style="display:none">
+                    <h4>Profildaten</h4>
+                    <div class="input-group" style="margin-bottom: 5px;">
                         <span class="input-group-addon" id="basic-addon8"><i class="icon-user"></i></span>
-                        <input  type="hidden" class="form-control" name="username" placeholder="Benutzername"
+                        <input disabled type="text" class="form-control" name="username" placeholder="Benutzername"
                                aria-describedby="basic-addon8" value="{{user.username }}">
                     </div>
-                    <br>
-                    <div class="input-group">
+                    <div class="input-group" style="margin-bottom: 5px;">
                         <span class="input-group-addon" id="basic-addon9"><i class="icon-user"></i></span>
                         <input disabled type="text" class="form-control" name="firstname" placeholder="Vorname"
                                aria-describedby="basic-addon9" value="{{ user.first_name }}">
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" style="margin-bottom: 5px;">
                         <span class="input-group-addon" id="basic-addon10"><i class="icon-user"></i></span>
                         <input disabled type="text" class="form-control" name="lastname" placeholder="Nachname"
                                aria-describedby="basic-addon10" value="{{ user.last_name }}">
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" style="margin-bottom: 5px;">
                         <span class="input-group-addon" id="basic-addon11"><i class="icon-user"></i></span>
                         <input disabled type="text" class="form-control" name="email" placeholder="Email-Adresse"
                                aria-describedby="basic-addon11" value="{{ user.email }}">
                     </div>
                     <br>
-                    <div class="input-group">
-                      <span class="input-group-addon" id="basic-addon12"><i class="icon-user"></i></span>
-                      <input type="password" class="form-control" name="password_old" placeholder="Password Old"
-                             aria-describedby="basic-addon11" value="{{ password }}">
+                    <h4>Passwort (ändern)</h4>
+                    <div class="input-group" style="margin-bottom: 10px;">
+                      <span class="input-group-addon" id="basic-addon12"><i class="icon-key"></i></span>
+                      <input type="password" class="form-control" name="password_old" placeholder="Altes Passwort"
+                             aria-describedby="basic-addon12" value="{{ password }}">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                      <span class="input-group-addon" id="basic-addon13"><i class="icon-key"></i></span>
+                      <input type="password" class="form-control" name="password_new" placeholder="Neues Passwort"
+                             aria-describedby="basic-addon13" value="{{ password }}">
                     </div>
                     <div class="input-group">
-                      <span class="input-group-addon" id="basic-addon12"><i class="icon-user"></i></span>
-                      <input type="password" class="form-control" name="password_new" placeholder="Password New"
-                             aria-describedby="basic-addon11" value="{{ password }}">
+                      <span class="input-group-addon" id="basic-addon14"><i class="icon-key"></i></span>
+                      <input type="password" class="form-control" name="password_new_repeat" placeholder="Neues Passwort wiederholen"
+                             aria-describedby="basic-addon14" value="{{ password }}">
                     </div>
                 </div>
                 <div class="modal-footer">
