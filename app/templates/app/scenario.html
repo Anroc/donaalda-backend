@@ -85,6 +85,14 @@
   <!-- Main JS (Do not remove) -->
   <script src="{% static 'app/assets/js/main.js' %}"></script>
 
+   <script>
+       function back() {
+        location.href = "/back";
+      }
+    </script>
+  <script>
+$.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
+  </script>
 
 </head>
 <body>
@@ -109,6 +117,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
             <li class="active"><a href="#" data-nav-section="home"><span>Produkt</span></a></li>
             <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
             <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>
@@ -209,12 +218,11 @@
 
   <!--product-slider-div-->
   <div class="container-fluid">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position:relative"> <!--style damit die punkt-liste unten im parent-div haftet-->
       <!-- Indicators -->
-      <ol class="carousel-indicators">
+      <ol class="carousel-indicators" style="margin-bottom:0; position:absolute; bottom:0"> <!--style damit die punkt-liste unten im parent-div haftet-->
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol>
 
       <!-- Wrapper for slides -->
