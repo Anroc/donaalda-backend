@@ -24,13 +24,13 @@ body {
 }
 
 a {
-    color: #c24d67;
+    color: darkturquoise;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
 }
 a:hover, a:active, a:focus {
-    color: #c24d67;
+    color: darkturquoise;
     outline: none;
 }
 
@@ -734,7 +734,7 @@ h1, h2, h3, h4, h5, h6 {
     border-left: none;
     padding: 30px;
     background: #fff;
-    background: #c24d67;
+    background: darkturquoise;
     font-size: 20px;
     font-weight: 300;
     position: relative;
@@ -750,7 +750,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 40px;
     border-top: 10px solid black;
     border-top-color: #fff;
-    border-top-color: #c24d67;
+    border-top-color: darkturquoise;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
 }
@@ -766,7 +766,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
 }
 #fh5co-testimonials .box-testimony .author a {
-    color: #c24d67;
+    color: darkturquoise;
 }
 #fh5co-testimonials .box-testimony .author a:hover {
     text-decoration: underline;
@@ -838,13 +838,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: -35px;
 }
 #fh5co-work .section-heading h2 {
-    color: #fff;
+    color: #444;
 }
 #fh5co-work .section-heading h2:after {
     background: rgba(255, 255, 255, 0.3);
 }
 #fh5co-work .section-heading h3 {
-    color: rgba(255, 255, 255, 0.8);
+    color: #444;
 }
 #fh5co-work .fh5co-project-item {
     display: block;
@@ -953,7 +953,7 @@ h1, h2, h3, h4, h5, h6 {
 .form-control:active, .form-control:focus {
     outline: none;
     box-shadow: none;
-    border-color: #c24d67;
+    border-color: darkturquoise;
 }
 
 .btn {
@@ -1020,7 +1020,7 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     width: 80px;
     height: 2px;
-    background: #c24d67;
+    background: darkturquoise;
     left: 50%;
     margin-left: -40px;
     bottom: 0;
@@ -1055,7 +1055,7 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
 }
 .fh5co-nav-toggle.active i::before, .fh5co-nav-toggle.active i::after {
-    background: #c24d67;
+    background: darkturquoise;
 }
 .fh5co-nav-toggle:hover, .fh5co-nav-toggle:focus, .fh5co-nav-toggle:active {
     outline: none;
@@ -1069,18 +1069,18 @@ h1, h2, h3, h4, h5, h6 {
     *display: inline;
     width: 25px;
     height: 3px;
-    color: #c24d67;
+    color: darkturquoise;
     font: bold 14px/.4 Helvetica;
     text-transform: uppercase;
     text-indent: -55px;
-    background: #c24d67;
+    background: darkturquoise;
     transition: all .2s ease-out;
 }
 .fh5co-nav-toggle i::before, .fh5co-nav-toggle i::after {
     content: '';
     width: 25px;
     height: 3px;
-    background: #c24d67;
+    background: darkturquoise;
     position: absolute;
     left: 0;
     -webkit-transition: 0.2s;
@@ -1147,7 +1147,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #footer {
     padding: 50px 0;
-    color: #7f7f7f;
+    color: darkturquoise;
     position: relative;
 }
 #footer .gotop {
@@ -1189,17 +1189,17 @@ h1, h2, h3, h4, h5, h6 {
     transition: 0.3s;
 }
 .btn.btn-primary {
-    background: #c24d67;
+    background: deeppink;
     color: #fff;
     border: none !important;
     border: 2px solid transparent !important;
 }
 .btn.btn-primary:hover, .btn.btn-primary:active, .btn.btn-primary:focus {
     box-shadow: none;
-    background: #c24d67;
+    background: darkturquoise;
 }
 .btn:hover, .btn:active, .btn:focus {
-    background: #393e46 !important;
+    background: darkturquoise !important;
     color: #fff;
     outline: none !important;
 }
@@ -1236,11 +1236,11 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: none;
 }
 .social li a.social-box {
-    background: #c24d67;
+    background: turquoise;
     color: #fff;
 }
 .social li a.social-circle {
-    background: #c24d67;
+    background: turquoise;
     color: #fff;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -1248,14 +1248,14 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 50%;
 }
 .social li a:hover {
-    background: #393e46 !important;
+    background: darkturquoise !important;
 }
 .social.social-box a {
-    background: #c24d67;
+    background: darkturquoise;
     color: #fff;
 }
 .social.social-circle a {
-    background: #c24d67;
+    background: darkturquoise;
     color: #fff;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;

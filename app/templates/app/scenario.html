@@ -218,12 +218,11 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
 
   <!--product-slider-div-->
   <div class="container-fluid">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position:relative"> <!--style damit die punkt-liste unten im parent-div haftet-->
       <!-- Indicators -->
-      <ol class="carousel-indicators">
+      <ol class="carousel-indicators" style="margin-bottom:0; position:absolute; bottom:0"> <!--style damit die punkt-liste unten im parent-div haftet-->
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol>
 
       <!-- Wrapper for slides -->
