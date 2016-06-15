@@ -50,7 +50,7 @@
     <!-- Bootstrap  -->
     <link rel="stylesheet" href="{% static 'app/assets/css/bootstrap.css' %}">
 
-    <link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
+    <link rel="stylesheet" href="{% static 'app/assets/css/styleProvider.css' %}">
 
     <!-- Modernizr JS -->
     <script src="{% static 'app/assets/js/modernizr-2.6.2.min.js' %}"></script>
@@ -112,8 +112,7 @@
                     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
                        data-target="#navbar"
                        aria-expanded="false" aria-controls="navbar"><i></i></a>
-                    <a class="navbar-brand" href="index.html">
-                        <div>
+                            <a class="navbar-brand" href="{% url 'app:indexnew' %}">                        <div>
                             <img alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}"
                                  style="margin-bottom: 5px">
                             <span>Donaalda - Produktdetails</span>
@@ -180,7 +179,6 @@
 </header>
 
 <section id="fh5co-page" data-section="home"
-         style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
          data-stellar-background-ratio="0.5">
     <div class="container">
         <div class="text-wrap">

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from django.contrib import messages
 from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .models import Category, Product, Scenario, ProviderProfile, Comment
+from .models import Category, Product, Scenario, ProviderProfile
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -72,9 +73,7 @@ class IndexViewNew(generic.DetailView):
         return render(request, 'app/indexNew.html',
                       {'latest_category_list': Category.objects.all(),
                        'scenarios': Scenario.objects.all(),
-                       'products': Product.objects.all(),
-                       'comment': Comment.objects.filter(page_url='/')[:5],
-                       })
+                       'products': Product.objects.all()})
 
 
 class IndexView(generic.ListView):
@@ -137,13 +136,11 @@ class ProviderProfileView(generic.ListView):
 
     def get(self, request, *args, **kwargs):
         provider = kwargs.get("provider_url_name")
-        return render(request, 'app/providerProfile.html',
-                      {'provider': ProviderProfile.objects.get(url_name=provider),
-                       'provider_products': Product.objects.filter(
-                           provider=ProviderProfile.objects.get(url_name=provider).owner.pk),
-                       'comment': Comment.objects.filter(
-                           page_url='/provider/' + provider)[:5]
-                       })
+        return render(request, 'app/providerProfile.html', {'provider': ProviderProfile.objects.get(url_name=provider),
+                                                            'provider_products': Product.objects.filter(
+                                                                provider=ProviderProfile.objects.get(
+                                                                    url_name=provider).owner.pk),
+                                                            })
 
 
 class ContactView(generic.ListView):
@@ -164,7 +161,7 @@ class CategoryView(generic.ListView):
         category = kwargs.get("category_name")
         return render(request, 'app/scenarioGrid.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
-                       'category': Category.objects.get(name=category)
+                       # 'category': Category.objects.get(name=category)
                        })
 
 
@@ -179,15 +176,13 @@ class ScenariosView(generic.ListView):
 
 
 class ScenarioView(generic.DetailView):
-    template_name = 'app/scenario.html'
+    template_name = 'scenario.html'
 
     # context_object_name = 'scenario'
 
     def get(self, request, *args, **kwargs):
         scenario = kwargs.get("current_scenario")
-        return render(request, 'app/scenario.html', {'current_scenario': Scenario.objects.get(url_name=scenario),
-                                                     'comment': Comment.objects.filter(
-                                                         page_url='/scenarios/' + scenario)[:5]})
+        return render(request, 'app/scenario.html', {'current_scenario': Scenario.objects.get(url_name=scenario)})
 
 
 class ProductView(generic.DetailView):
@@ -197,8 +192,7 @@ class ProductView(generic.DetailView):
     def get(self, request, *args, **kwargs):
         product = kwargs.get("pk")
         return render(request, 'app/product.html',
-                      {'product': Product.objects.get(pk=product),
-                       'comment': Comment.objects.filter(page_url='/products/' + product)[:5]})
+                      {'product': Product.objects.get(pk=product)})
 
 
 # for frontend testing
@@ -244,8 +238,10 @@ def login_view(request):
             user = form.login(request)
             if user is not None:
                 login(request, user)
+                messages.success(request, 'Sie wurden erfolgreich angemeldet.')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
+            messages.error(request, 'Ihre Anmeldung ist fehlgeschlagen. Versuchen sie es erneut.')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return render(request, 'app/html_templates/loginTemplate.html', {'login_form': form})
 
@@ -268,6 +264,7 @@ class LoginView(FormView):
 @require_http_methods(["GET", "POST"])
 def log_out(request):
     logout(request)
+    messages.success(request, 'Sie wurden erfolgreich abgemeldet!')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -283,13 +280,16 @@ def register_user(request):
     if request.POST:
         if username and password and email and firstname and lastname:
             if User.objects.filter(username=username).exists():
+                messages.error(request, 'Der Benutzername ist bereits vergeben!')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             user = User.objects.create_user(username, email, password)
             user.first_name = firstname
             user.last_name = lastname
             user.save()
+            messages.success(request, 'Sie wurden erfolgreich registriert!')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
+            messages.error(request, 'Bitte alle Felder ausfüllen!')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return render(request, 'app/html_templates/registrationTemplate.html', )
 
@@ -306,16 +306,19 @@ def profile(request):
     lastname = request.POST.get('lastname')
 
     if not User.objects.filter(username=username).exists():  # existiert nicht
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        messages.error(request, 'Benutzer existiert nicht!')
+        HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         user = User.objects.get(username=username)
 
     if not (passwordOld or passwordNew or passwordDelete or email or firstname or lastname):
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        messages.error(request, 'Bitte alle Felder ausfüllen!')
+        HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     if user.check_password(passwordDelete):  # delete account
         user.delete()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        messages.success(request, 'Profil erfolgreich gelöscht!')
+        HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     if firstname:
         user.first_name = firstname
@@ -335,15 +338,19 @@ def profile(request):
                 user.save()
                 user = authenticate(username=username, password=passwordNew)
                 login(request, user)
+                messages.success(request, 'Ihr Passwort wurde erfolgreich verändert!')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             else:
+                messages.error(request, 'Bitte alle Felder ausfüllen!')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
+            messages.error(request, 'Angegebenes Passwort falsch!')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         if passwordNew:
+            messages.error(request, 'Bitte alle Felder ausfüllen!')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
+    messages.success(request, 'Ihr Profil wurde erfolgreich verändert!')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
