@@ -238,6 +238,7 @@ class Comment(models.Model):
     # min value should be 0, max value should be 5, default should be 0
     rating = models.PositiveSmallIntegerField(verbose_name="Bewertung", validators=[MinValueValidator(0), MaxValueValidator(5)], default='0')
     creation_date = models.DateTimeField()
+    page_url = models.URLField(default='')
 
     def __str__(self):
         return self.comment_title

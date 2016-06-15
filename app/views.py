@@ -4,7 +4,7 @@ from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .models import Category, Product, Scenario, ProviderProfile
+from .models import Category, Product, Scenario, ProviderProfile, Comment
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -72,7 +72,9 @@ class IndexViewNew(generic.DetailView):
         return render(request, 'app/indexNew.html',
                       {'latest_category_list': Category.objects.all(),
                        'scenarios': Scenario.objects.all(),
-                       'products': Product.objects.all()})
+                       'products': Product.objects.all(),
+                       'comment': Comment.objects.filter(page_url='/'),
+                       })
 
 
 class IndexView(generic.ListView):
@@ -139,6 +141,8 @@ class ProviderProfileView(generic.ListView):
                       {'provider': ProviderProfile.objects.get(url_name=provider),
                        'provider_products': Product.objects.filter(
                            provider=ProviderProfile.objects.get(url_name=provider).owner.pk),
+                       'comment': Comment.objects.filter(
+                           page_url='provider/' + provider)
                        })
 
 
@@ -159,9 +163,9 @@ class CategoryView(generic.ListView):
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
         return render(request, 'app/scenarioGrid.html',
-                        {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
-                         'category': Category.objects.get(name=category)
-                        })
+                      {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
+                       'category': Category.objects.get(name=category)
+                       })
 
 
 class ScenariosView(generic.ListView):
@@ -181,7 +185,9 @@ class ScenarioView(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         scenario = kwargs.get("current_scenario")
-        return render(request, 'app/scenario.html', {'current_scenario': Scenario.objects.get(url_name=scenario)})
+        return render(request, 'app/scenario.html', {'current_scenario': Scenario.objects.get(url_name=scenario),
+                                                     'comment': Comment.objects.filter(
+                                                         page_url='scenarios/' + scenario)})
 
 
 class ProductView(generic.DetailView):
@@ -191,7 +197,8 @@ class ProductView(generic.DetailView):
     def get(self, request, *args, **kwargs):
         product = kwargs.get("pk")
         return render(request, 'app/product.html',
-                      {'product': Product.objects.get(pk=product)})
+                      {'product': Product.objects.get(pk=product),
+                       'comment': Comment.objects.filter(page_url='products/' + product)})
 
 
 # for frontend testing
