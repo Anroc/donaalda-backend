@@ -84,13 +84,21 @@
     <script src="{% static 'app/assets/js/main.js' %}"></script>
 
     <script>
-      $(document).ready(function(){
-        $('[data-show="tooltip"]').tooltip();
-      });
+        $(document).ready(function () {
+            $('[data-show="tooltip"]').tooltip();
+        });
+
+        function logOut() {
+            location.href = "/logout"
+        }
+
+        function admin() {
+            window.open("/admin", "_blank")
+        }
     </script>
 
     <script>
-        function provider () {
+        function provider() {
             location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
         }
     </script>
@@ -122,49 +130,49 @@
                         <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
                         <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
                         {% if not request.user.is_authenticated %}
-                        <li>
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                    data-show="tooltip" title="Anmelden" data-placement="bottom"
-                                    data-toggle="modal"
-                                    data-target="#myModalLogin">
-                              <i class="glyphicon glyphicon-log-in"></i>
-                            </button>
-                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                    data-show="tooltip" title="Registrieren" data-placement="bottom"
-                                    data-toggle="modal"
-                                    data-target="#myModalRegister">
-                              <i class="glyphicon glyphicon-new-window"></i>
-                            </button>
-                          </div>
-                        </li>
+                            <li>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Anmelden" data-placement="bottom"
+                                            data-toggle="modal"
+                                            data-target="#myModalLogin">
+                                        <i class="glyphicon glyphicon-log-in"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Registrieren" data-placement="bottom"
+                                            data-toggle="modal"
+                                            data-target="#myModalRegister">
+                                        <i class="glyphicon glyphicon-new-window"></i>
+                                    </button>
+                                </div>
+                            </li>
                         {% else %}
-                        <!--TODO: Change these to admin (if allowed), logout and profile-->
-                        <li>
-                          <div class="btn-group">
-                            {% if 1 == 1 %}
-                            {% if user.is_staff %}
-                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                    data-show="tooltip" title="Verwaltung" data-placement="bottom"
-                                    onclick="admin()">
-                              <i class="glyphicon glyphicon-cog"></i>
-                            </button>
-                            {% endif %}
-                            {% endif %}
-                            <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
-                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                    data-show="tooltip" title="Abmelden" data-placement="bottom"
-                                    onclick="logOut()">
-                              <i class="glyphicon glyphicon-log-out"></i>
-                            </button>
-                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                    data-show="tooltip" title="Profil" data-placement="bottom"
-                                    data-toggle="modal"
-                                    data-target="#myModalProfile">
-                              <i class="glyphicon glyphicon-user"></i>
-                            </button>
-                          </div>
-                        </li>
+                            <!--TODO: Change these to admin (if allowed), logout and profile-->
+                            <li>
+                                <div class="btn-group">
+                                    {% if 1 == 1 %}
+                                        {% if user.is_staff %}
+                                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                                    data-show="tooltip" title="Verwaltung" data-placement="bottom"
+                                                    onclick="admin()">
+                                                <i class="glyphicon glyphicon-cog"></i>
+                                            </button>
+                                        {% endif %}
+                                    {% endif %}
+                                    <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Abmelden" data-placement="bottom"
+                                            onclick="logOut()">
+                                        <i class="glyphicon glyphicon-log-out"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Profil" data-placement="bottom"
+                                            data-toggle="modal"
+                                            data-target="#myModalProfile">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </button>
+                                </div>
+                            </li>
                         {% endif %}
                     </ul>
                 </div>
@@ -225,9 +233,9 @@
                 <div class="col-md-12 section-heading text-center">
                     <h2 class="to-animate">Produktabbildungen</h2>
                     <div class="row">
-                      <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>Aktuelle Produktbilder</h3>
-                      </div>
+                        <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                            <h3>Aktuelle Produktbilder</h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -266,7 +274,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 subtext to-animate">
                         <h3>
-                          Technische Daten des Produkts nach Angaben des Herstellers
+                            Technische Daten des Produkts nach Angaben des Herstellers
                         </h3>
                     </div>
                 </div>
@@ -279,51 +287,166 @@
 </section>
 
 <footer id="footer" role="contentinfo">
-  <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a>
-  <div class="container">
-    <br/>
-    <div>
-      <div class="col-md-12 text-center">
-        <p>&copy; DONAALDA. All Rights Reserved. <br>
-          <a href="https://www.donaalda.com" target="_blank">donaalda.com</a>
-      </div>
+    <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a>
+    <div class="container">
+        <br/>
+        <div>
+            <div class="col-md-12 text-center">
+                <p>&copy; DONAALDA. All Rights Reserved. <br>
+                    <a href="https://www.donaalda.com" target="_blank">donaalda.com</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="social social-circle">
+                    <li><a href="#"><i class="icon-twitter"></i></a></li>
+                    <li><a href="#"><i class="icon-facebook"></i></a></li>
+                    <li><a href="#"><i class="icon-youtube"></i></a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <ul class="social social-circle">
-          <li><a href="#"><i class="icon-twitter"></i></a></li>
-          <li><a href="#"><i class="icon-facebook"></i></a></li>
-          <li><a href="#"><i class="icon-youtube"></i></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
 </footer>
 
 
-<div class="modal fade" id="myModalx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Anmelden</h4>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1"><i class="icon-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Benutzername" aria-describedby="basic-addon1">
+            <form action="{% url 'app:login' %}" method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">Anmelden</h3>
                 </div>
-                <br>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon2"><i class="icon-star"></i></span>
-                    <input type="text" class="form-control" placeholder="Passwort" aria-describedby="basic-addon2">
+                <div class="modal-body">
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon1"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="username" placeholder="Benutzername"
+                               aria-describedby="basic-addon1" value="{{ name }}">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password" placeholder="Passwort"
+                               aria-describedby="basic-addon2" value="{{ password }}">
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
-                <button type="button" class="btn btn-primary">Los gehts</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+                    <button type="submit" class="btn btn-primary">Los gehts</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action={% url 'app:register_user' %} method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel1">Registrieren</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon3"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="username" placeholder="Benutzername"
+                               aria-describedby="basic-addon1" value="{{ name }}">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon4"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password" placeholder="Passwort"
+                               aria-describedby="basic-addon2" value="{{ password }}">
+                    </div>
+                    <br/>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon5"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="firstname" placeholder="Vorname"
+                               aria-describedby="basic-addon3" value="{{ firstname }}">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon6"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="lastname" placeholder="Nachname"
+                               aria-describedby="basic-addon4" value="{{ lastname }}">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon7"><i class="icon-envelope"></i></span>
+                        <input type="text" class="form-control" name="email" placeholder="Email-Adresse"
+                               aria-describedby="basic-addon5" value="{{ email }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+                    <button type="submit" class="btn btn-primary">Los gehts</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!--TODO: Frontend add profile to this // Noch aktuell??? Tim:14.06.16-->
+<div class="modal fade" id="myModalProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action={% url 'app:profile' %} method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel2">Profil
+                        von {{ user.first_name }} {{ user.last_name }}</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Profildaten</h4>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon8"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="username" placeholder="Benutzername"
+                               aria-describedby="basic-addon8" value="{{ user.username }}">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon9"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="firstname" placeholder="Vorname"
+                               aria-describedby="basic-addon9" value="{{ user.first_name }}">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon10"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="lastname" placeholder="Nachname"
+                               aria-describedby="basic-addon10" value="{{ user.last_name }}">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon11"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="email" placeholder="Email-Adresse"
+                               aria-describedby="basic-addon11" value="{{ user.email }}">
+                    </div>
+                    <br>
+                    <h4>Passwort (ändern)</h4>
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" id="basic-addon12"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password_old" placeholder="Altes Passwort"
+                               aria-describedby="basic-addon12" value="{{ password }}">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon13"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password_new" placeholder="Neues Passwort"
+                               aria-describedby="basic-addon13" value="{{ password }}">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon14"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password_new_repeat"
+                               placeholder="Neues Passwort wiederholen"
+                               aria-describedby="basic-addon14" value="{{ password }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+                    <button type="submit" class="btn btn-primary">Passwort ändern</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

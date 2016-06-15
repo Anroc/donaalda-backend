@@ -121,8 +121,8 @@
             window.open("/admin", "_blank")
         }
 
-        $(document).ready(function(){
-          $('[data-show="tooltip"]').tooltip();
+        $(document).ready(function () {
+            $('[data-show="tooltip"]').tooltip();
         });
     </script>
     <!-- Main JS (Do not remove) -->
@@ -166,49 +166,49 @@
                         </li>-->
 
                         {% if not request.user.is_authenticated %}
-                          <li>
-                            <div class="btn-group">
-                              <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                      data-show="tooltip" title="Anmelden" data-placement="bottom"
-                                      data-toggle="modal"
-                                      data-target="#myModalLogin">
-                                  <i class="glyphicon glyphicon-log-in"></i>
-                              </button>
-                              <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                      data-show="tooltip" title="Registrieren" data-placement="bottom"
-                                      data-toggle="modal"
-                                      data-target="#myModalRegister">
-                                <i class="glyphicon glyphicon-new-window"></i>
-                              </button>
-                            </div>
-                          </li>
+                            <li>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Anmelden" data-placement="bottom"
+                                            data-toggle="modal"
+                                            data-target="#myModalLogin">
+                                        <i class="glyphicon glyphicon-log-in"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Registrieren" data-placement="bottom"
+                                            data-toggle="modal"
+                                            data-target="#myModalRegister">
+                                        <i class="glyphicon glyphicon-new-window"></i>
+                                    </button>
+                                </div>
+                            </li>
                         {% else %}
                             <!--TODO: Change these to admin (if allowed), logout and profile-->
-                          <li>
-                            <div class="btn-group">
-                              {% if 1 == 1 %}
-                                  {% if user.is_staff %}
+                            <li>
+                                <div class="btn-group">
+                                    {% if 1 == 1 %}
+                                        {% if user.is_staff %}
+                                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                                    data-show="tooltip" title="Verwaltung" data-placement="bottom"
+                                                    onclick="admin()">
+                                                <i class="glyphicon glyphicon-cog"></i>
+                                            </button>
+                                        {% endif %}
+                                    {% endif %}
+                                    <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
                                     <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                            data-show="tooltip" title="Verwaltung" data-placement="bottom"
-                                            onclick="admin()">
-                                      <i class="glyphicon glyphicon-cog"></i>
+                                            data-show="tooltip" title="Abmelden" data-placement="bottom"
+                                            onclick="logOut()">
+                                        <i class="glyphicon glyphicon-log-out"></i>
                                     </button>
-                                  {% endif %}
-                              {% endif %}
-                              <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
-                              <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                      data-show="tooltip" title="Abmelden" data-placement="bottom"
-                                      onclick="logOut()">
-                                <i class="glyphicon glyphicon-log-out"></i>
-                              </button>
-                              <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                      data-show="tooltip" title="Profil" data-placement="bottom"
-                                      data-toggle="modal"
-                                      data-target="#myModalProfile">
-                                <i class="glyphicon glyphicon-user"></i>
-                              </button>
-                            </div>
-                          </li>
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Profil" data-placement="bottom"
+                                            data-toggle="modal"
+                                            data-target="#myModalProfile">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </button>
+                                </div>
+                            </li>
                         {% endif %}
                     </ul>
                 </div>
@@ -280,102 +280,108 @@
 </section>
 <!-- Was macht Donaalda -->
 <section id="fh5co-services" data-section="whatsIsDonaalda">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 section-heading text-left">
-        <h2 class=" left-border to-animate">Was macht Donaalda</h2>
+    <div class="container">
         <div class="row">
-          <div class="col-md-8 subtext to-animate">
-            <h3>Unterschiedliche Hersteller, tausende Produkte für jeden Anwendungszweck. Aber wie soll mein
-              <b>Smart
-                Home</b> aussehen?<br>
-              Dabei hilft dir Donaalda, denn sie berät dich mit fertigen Szenarien und fragt dich
-              nach deiner Wohnsituation.</h3>
-          </div>
+            <div class="col-md-12 section-heading text-left">
+                <h2 class=" left-border to-animate">Was macht Donaalda</h2>
+                <div class="row">
+                    <div class="col-md-8 subtext to-animate">
+                        <h3>Unterschiedliche Hersteller, tausende Produkte für jeden Anwendungszweck. Aber wie soll mein
+                            <b>Smart
+                                Home</b> aussehen?<br>
+                            Dabei hilft dir Donaalda, denn sie berät dich mit fertigen Szenarien und fragt dich
+                            nach deiner Wohnsituation.</h3>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-        <i class="icon to-animate-2 icon-search"></i>
-        <h3>Rat &amp; Tat</h3>
-        <p>
-          Donaalda ist Deine Ratgeberin für das <b>Smart Home</b>. Immer mehr Hersteller drängen mit unterschiedlichen Produkten und Technologien auf den Markt.
-          Da verliert man schnell den Überblick. <b>Donaalda findet die Produkte, die zu Deinem Projekt passen.</b>
-          Smart Home war noch nie so einfach.
-        </p>
-      </div>
-      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-        <i class="icon to-animate-2 icon-book"></i>
-        <h3>Szenarien</h3>
-        <p>Die Szenarien geben Dir einen Eindruck, was im Smart Home alles möglich ist. Wusstest Du, dass die CO2-Messung im Schlafzimmer
-          und die Steuerung der Raumluft maßgeblich für einen gesünderen Schlaf sorgen? Das und vieles mehr findest Du in den Szenarien.
-        </p>
-      </div>
-    </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                <i class="icon to-animate-2 icon-search"></i>
+                <h3>Rat &amp; Tat</h3>
+                <p>
+                    Donaalda ist Deine Ratgeberin für das <b>Smart Home</b>. Immer mehr Hersteller drängen mit
+                    unterschiedlichen Produkten und Technologien auf den Markt.
+                    Da verliert man schnell den Überblick. <b>Donaalda findet die Produkte, die zu Deinem Projekt
+                    passen.</b>
+                    Smart Home war noch nie so einfach.
+                </p>
+            </div>
+            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                <i class="icon to-animate-2 icon-book"></i>
+                <h3>Szenarien</h3>
+                <p>Die Szenarien geben Dir einen Eindruck, was im Smart Home alles möglich ist. Wusstest Du, dass die
+                    CO2-Messung im Schlafzimmer
+                    und die Steuerung der Raumluft maßgeblich für einen gesünderen Schlaf sorgen? Das und vieles mehr
+                    findest Du in den Szenarien.
+                </p>
+            </div>
+        </div>
 
-    <div class="row">
-      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-        <i class="icon to-animate-2 icon-gift"></i>
-        <h3>Produkte</h3>
-        <p>
-          Produkte findest Du in jedem Szenario. Und zwar genau die Produkte, die perfekt zum Szenario passen.
-          Hierbei ist es egal von welchem Hersteller die Produkte sind. Donaalda weiß, welche Produkte von
-          welchen Herstellern zusammenpassen, zeigt sie dir und deren Vorteile.
-        </p>
-      </div>
-      <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-        <i class="icon to-animate-2 icon-briefcase"></i>
-        <h3>Hersteller</h3>
-        <p>
-          Donaalda ist unabhängig von bestimmten Herstellern, denn als Smart Home Besitzer sollen alle Vorteile
-          von bestimmten Produkten optimal genutzt werden.
-          Deswegen garantiert Dir Donaalda, das Deine herstellerübergreifenden Produkte passen.
-        </p>
-      </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                <i class="icon to-animate-2 icon-gift"></i>
+                <h3>Produkte</h3>
+                <p>
+                    Produkte findest Du in jedem Szenario. Und zwar genau die Produkte, die perfekt zum Szenario passen.
+                    Hierbei ist es egal von welchem Hersteller die Produkte sind. Donaalda weiß, welche Produkte von
+                    welchen Herstellern zusammenpassen, zeigt sie dir und deren Vorteile.
+                </p>
+            </div>
+            <div class="col-md-6 col-sm-6 fh5co-service to-animate">
+                <i class="icon to-animate-2 icon-briefcase"></i>
+                <h3>Hersteller</h3>
+                <p>
+                    Donaalda ist unabhängig von bestimmten Herstellern, denn als Smart Home Besitzer sollen alle
+                    Vorteile
+                    von bestimmten Produkten optimal genutzt werden.
+                    Deswegen garantiert Dir Donaalda, das Deine herstellerübergreifenden Produkte passen.
+                </p>
+            </div>
 
+        </div>
     </div>
-  </div>
 </section>
 <!-- Bewertungen -->
 <section id="fh5co-testimonials" data-section="comments">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Bewertungen</h2>
+    <div class="container">
         <div class="row">
-          <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>
-              Du bist nicht der Einzige. Donaalda hat schon Vielen bei der Auswahl des perfekten Smart Home geholfen.
-            </h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      {% if comment %}
-        {% for com in comment %}
-          <div class="col-md-4">
-            <div class="box-testimony">
-              <blockquote class="to-animate-2">
-                <p>&ldquo;{{ com.comment_content }}&rdquo;</p>
-              </blockquote>
-              <div class="author to-animate">
-                <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
-                <p>
-                  {{ com.comment_from }} <span class="subtext">{{ com.comment_title }}</span>
-                </p>
-              </div>
+            <div class="col-md-12 section-heading text-center">
+                <h2 class="to-animate">Bewertungen</h2>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                        <h3>
+                            Du bist nicht der Einzige. Donaalda hat schon Vielen bei der Auswahl des perfekten Smart
+                            Home geholfen.
+                        </h3>
+                    </div>
+                </div>
             </div>
-          </div>
-        {% endfor %}
-      {% else %}
-        <div class="center-block">
-            <i class="icon icon-thumbs-down"></i> Schade. Es wurden noch keine Kommentare geschrieben.
         </div>
-      {% endif %}
+        <div class="row">
+            {% if comment %}
+                {% for com in comment %}
+                    <div class="col-md-4">
+                        <div class="box-testimony">
+                            <blockquote class="to-animate-2">
+                                <p>&ldquo;{{ com.comment_content }}&rdquo;</p>
+                            </blockquote>
+                            <div class="author to-animate">
+                                <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
+                                <p>
+                                    {{ com.comment_from }} <span class="subtext">{{ com.comment_title }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="center-block">
+                    <i class="icon icon-thumbs-down"></i> Schade. Es wurden noch keine Kommentare geschrieben.
+                </div>
+            {% endif %}
+        </div>
     </div>
-  </div>
 </section>
 <!-- Szenarien -->
 <section id="fh5co-work" data-section="scenarios">
@@ -386,10 +392,12 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 subtext to-animate">
                         <h3>
-                          Sie helfen Dir für einen bestimmten Anwendungszweck die richtige Lösung zu finden. Dabei gehen
-                          die Szenarien auf unterschiedliche Möglichkeiten ein, um Dein <b>Smart Home</b>
-                          auf Deine Bedürfnisse anzupassen.
-                          Hier siehst Du die neusten Szenarien in Donaalda. Für weitere, wähle <a href="#fh5co-home">oben</a> eine Kategorie.
+                            Sie helfen Dir für einen bestimmten Anwendungszweck die richtige Lösung zu finden. Dabei
+                            gehen
+                            die Szenarien auf unterschiedliche Möglichkeiten ein, um Dein <b>Smart Home</b>
+                            auf Deine Bedürfnisse anzupassen.
+                            Hier siehst Du die neusten Szenarien in Donaalda. Für weitere, wähle <a href="#fh5co-home">oben</a>
+                            eine Kategorie.
                         </h3>
                     </div>
                 </div>
@@ -506,10 +514,12 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 subtext to-animate">
                         <h3>
-                          Villa oder Besenkammer?! Das ist Donaalda egal. Egal in welcher Wohnsituation Du lebst, sie hat immer die richtige Lösung für Dich.
-                          <br/><br/>
-                          Trotzdem kann sie etwas Hilfe gebrauchen. Dazu stellt sie an manchen Stellen Fragen, damit Du immer genau das Szenario findest,
-                          was Du schon immer gesucht hast.
+                            Villa oder Besenkammer?! Das ist Donaalda egal. Egal in welcher Wohnsituation Du lebst, sie
+                            hat immer die richtige Lösung für Dich.
+                            <br/><br/>
+                            Trotzdem kann sie etwas Hilfe gebrauchen. Dazu stellt sie an manchen Stellen Fragen, damit
+                            Du immer genau das Szenario findest,
+                            was Du schon immer gesucht hast.
                         </h3>
                     </div>
                 </div>
@@ -522,7 +532,8 @@
                     <h3>Miete oder Besitz</h3>
                     <span class="fh5co-position">Allgemeine Wohnsituation</span>
                     <p style="min-height: 150px;">
-                        Damit weiß Donaalda welche Produkte besser geeignet sind. Manche erfordern Umbaumaßnahmen, die ungern in Mietwohungen gemacht werden.
+                        Damit weiß Donaalda welche Produkte besser geeignet sind. Manche erfordern Umbaumaßnahmen, die
+                        ungern in Mietwohungen gemacht werden.
                     </p>
                     <ul class="social social-circle">
                         <li><a href="#"><i class="icon-twitter"></i></a></li>
@@ -537,7 +548,8 @@
                     <h3>Personen</h3>
                     <span class="fh5co-position">im Haushalt</span>
                     <p style="min-height: 150px;">
-                        Sind Kinder im Haushalt, können spezielle Szenarien gezeigt werden, die z.B. die Sicherheit der Kleinen im Haushalt erhöhen.
+                        Sind Kinder im Haushalt, können spezielle Szenarien gezeigt werden, die z.B. die Sicherheit der
+                        Kleinen im Haushalt erhöhen.
                     </p>
 
                     <ul class="social social-circle">
@@ -553,7 +565,8 @@
                     <h3>Ein-/Umbau</h3>
                     <span class="fh5co-position">Instandsetzung / Renovierung</span>
                     <p style="min-height: 150px;">
-                      Stehen Instandsetzungs- oder Renovierungsarbeiten an, können entsprechende Lösungen berücksichtig werden.
+                        Stehen Instandsetzungs- oder Renovierungsarbeiten an, können entsprechende Lösungen
+                        berücksichtig werden.
                     </p>
                     <ul class="social social-circle">
                         <li><a href="#"><i class="icon-twitter"></i></a></li>
@@ -783,14 +796,15 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title" id="myModalLabel2" >Profil von {{ user.first_name }} {{ user.last_name }}</h3>
+                    <h3 class="modal-title" id="myModalLabel2">Profil
+                        von {{ user.first_name }} {{ user.last_name }}</h3>
                 </div>
                 <div class="modal-body">
                     <h4>Profildaten</h4>
                     <div class="input-group" style="margin-bottom: 5px;">
                         <span class="input-group-addon" id="basic-addon8"><i class="icon-user"></i></span>
                         <input disabled type="text" class="form-control" name="username" placeholder="Benutzername"
-                               aria-describedby="basic-addon8" value="{{user.username }}">
+                               aria-describedby="basic-addon8" value="{{ user.username }}">
                     </div>
                     <div class="input-group" style="margin-bottom: 5px;">
                         <span class="input-group-addon" id="basic-addon9"><i class="icon-user"></i></span>
@@ -810,19 +824,20 @@
                     <br>
                     <h4>Passwort (ändern)</h4>
                     <div class="input-group" style="margin-bottom: 10px;">
-                      <span class="input-group-addon" id="basic-addon12"><i class="icon-key"></i></span>
-                      <input type="password" class="form-control" name="password_old" placeholder="Altes Passwort"
-                             aria-describedby="basic-addon12" value="{{ password }}">
+                        <span class="input-group-addon" id="basic-addon12"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password_old" placeholder="Altes Passwort"
+                               aria-describedby="basic-addon12" value="{{ password }}">
                     </div>
                     <div class="input-group" style="margin-bottom: 5px;">
-                      <span class="input-group-addon" id="basic-addon13"><i class="icon-key"></i></span>
-                      <input type="password" class="form-control" name="password_new" placeholder="Neues Passwort"
-                             aria-describedby="basic-addon13" value="{{ password }}">
+                        <span class="input-group-addon" id="basic-addon13"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password_new" placeholder="Neues Passwort"
+                               aria-describedby="basic-addon13" value="{{ password }}">
                     </div>
                     <div class="input-group">
-                      <span class="input-group-addon" id="basic-addon14"><i class="icon-key"></i></span>
-                      <input type="password" class="form-control" name="password_new_repeat" placeholder="Neues Passwort wiederholen"
-                             aria-describedby="basic-addon14" value="{{ password }}">
+                        <span class="input-group-addon" id="basic-addon14"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password_new_repeat"
+                               placeholder="Neues Passwort wiederholen"
+                               aria-describedby="basic-addon14" value="{{ password }}">
                     </div>
                 </div>
                 <div class="modal-footer">
