@@ -306,16 +306,19 @@ def profile(request):
     lastname = request.POST.get('lastname')
 
     if not User.objects.filter(username=username).exists():  # existiert nicht
-        return HttpResponseRedirect("/")
+        messages.error(request, 'Benutzer existiert nicht!')
+        HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         user = User.objects.get(username=username)
 
     if not (passwordOld or passwordNew or passwordDelete or email or firstname or lastname):
-        return HttpResponseRedirect("/")
+        messages.error(request, 'Bitte alle Felder ausfüllen!')
+        HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     if user.check_password(passwordDelete):  # delete account
         user.delete()
-        return HttpResponseRedirect("/?profile=deleted")
+        messages.success(request, 'Profil erfolgreich gelöscht!')
+        HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     if firstname:
         user.first_name = firstname
