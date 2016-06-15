@@ -82,6 +82,9 @@ class ScenarioDescription(models.Model):
     left_right = models.BooleanField()
     order = models.IntegerField()
 
+    def __str__(self):
+        return '%s %s' %(self.belongs_to_scenario, self.order)
+
     def natural_key(self):
         return [self.belongs_to_scenario.natural_key(), self.order]
 
