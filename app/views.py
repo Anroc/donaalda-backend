@@ -244,9 +244,9 @@ def login_view(request):
             user = form.login(request)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect("/?login=success")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            return HttpResponseRedirect("/?login=failed")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return render(request, 'app/html_templates/loginTemplate.html', {'login_form': form})
 
 
@@ -268,7 +268,7 @@ class LoginView(FormView):
 @require_http_methods(["GET", "POST"])
 def log_out(request):
     logout(request)
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @csrf_protect
@@ -283,14 +283,14 @@ def register_user(request):
     if request.POST:
         if username and password and email and firstname and lastname:
             if User.objects.filter(username=username).exists():
-                return HttpResponseRedirect("/?registration=taken")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             user = User.objects.create_user(username, email, password)
             user.first_name = firstname
             user.last_name = lastname
             user.save()
-            return HttpResponseRedirect("/?registration=success")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            return HttpResponseRedirect("/?registration=blank_fields")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return render(request, 'app/html_templates/registrationTemplate.html', )
 
 
@@ -306,16 +306,16 @@ def profile(request):
     lastname = request.POST.get('lastname')
 
     if not User.objects.filter(username=username).exists():  # existiert nicht
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         user = User.objects.get(username=username)
 
     if not (passwordOld or passwordNew or passwordDelete or email or firstname or lastname):
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     if user.check_password(passwordDelete):  # delete account
         user.delete()
-        return HttpResponseRedirect("/?profile=deleted")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     if firstname:
         user.first_name = firstname
@@ -335,16 +335,16 @@ def profile(request):
                 user.save()
                 user = authenticate(username=username, password=passwordNew)
                 login(request, user)
-                return HttpResponseRedirect("/?profile=password_changed")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             else:
-                return HttpResponseRedirect("/?profile=blank_fields")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            return HttpResponseRedirect("/?profile=wrong_password")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         if passwordNew:
-            return HttpResponseRedirect("/?profile=blank_fields")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-    return HttpResponseRedirect("/?profile=success")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 """
