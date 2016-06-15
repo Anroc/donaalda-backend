@@ -358,12 +358,12 @@
           <div class="col-md-4">
             <div class="box-testimony">
               <blockquote class="to-animate-2">
-                <p>&ldquo;Ich bin fatal.&rdquo;</p>
+                <p>&ldquo;{{ com.comment_content }}&rdquo;</p>
               </blockquote>
               <div class="author to-animate">
                 <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
                 <p>
-                  Timo <span class="subtext">Creative Director</span>
+                  {{ com.comment_from }} <span class="subtext">{{ com.comment_title }}</span>
                 </p>
               </div>
             </div>

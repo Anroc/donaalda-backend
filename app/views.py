@@ -73,7 +73,7 @@ class IndexViewNew(generic.DetailView):
                       {'latest_category_list': Category.objects.all(),
                        'scenarios': Scenario.objects.all(),
                        'products': Product.objects.all(),
-                       'comment': Comment.objects.filter(page_url='/'),
+                       'comment': Comment.objects.filter(page_url='/')[:5],
                        })
 
 
@@ -142,7 +142,7 @@ class ProviderProfileView(generic.ListView):
                        'provider_products': Product.objects.filter(
                            provider=ProviderProfile.objects.get(url_name=provider).owner.pk),
                        'comment': Comment.objects.filter(
-                           page_url='provider/' + provider)
+                           page_url='/provider/' + provider)[:5]
                        })
 
 
@@ -187,7 +187,7 @@ class ScenarioView(generic.DetailView):
         scenario = kwargs.get("current_scenario")
         return render(request, 'app/scenario.html', {'current_scenario': Scenario.objects.get(url_name=scenario),
                                                      'comment': Comment.objects.filter(
-                                                         page_url='scenarios/' + scenario)})
+                                                         page_url='/scenarios/' + scenario)[:5]})
 
 
 class ProductView(generic.DetailView):
@@ -198,7 +198,7 @@ class ProductView(generic.DetailView):
         product = kwargs.get("pk")
         return render(request, 'app/product.html',
                       {'product': Product.objects.get(pk=product),
-                       'comment': Comment.objects.filter(page_url='products/' + product)})
+                       'comment': Comment.objects.filter(page_url='/products/' + product)[:5]})
 
 
 # for frontend testing
