@@ -82,6 +82,9 @@ class ScenarioDescription(models.Model):
     left_right = models.BooleanField()
     order = models.IntegerField()
 
+    def __str__(self):
+        return '%s %s' %(self.belongs_to_scenario, self.order)
+
     def natural_key(self):
         return [self.belongs_to_scenario.natural_key(), self.order]
 
@@ -235,6 +238,7 @@ class Comment(models.Model):
     # min value should be 0, max value should be 5, default should be 0
     rating = models.PositiveSmallIntegerField(verbose_name="Bewertung", validators=[MinValueValidator(0), MaxValueValidator(5)], default='0')
     creation_date = models.DateTimeField()
+    page_url = models.CharField(default='', max_length=255)
 
     def __str__(self):
         return self.comment_title
@@ -242,4 +246,4 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "Kommentar"
         verbose_name_plural = "Kommentare"
-        ordering = ["comment_title", "rating", ]
+        ordering = ["-creation_date","comment_title", "-rating",]

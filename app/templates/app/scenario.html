@@ -89,6 +89,7 @@
 </head>
 <body>
 
+{% with scenarios=current_scenario.scenariodescription_set.all %}
 <header role="banner" id="fh5co-header">
   <div class="container">
     <div class="row">
@@ -138,6 +139,9 @@
           <div class="col-md-8">
             {% if current_scenario %}
             <h1 class="text-left">{{ current_scenario.name }}</h1>
+                {% for x in scenarios %}
+            <h2> Scenario-description: {{ x.description }}</h2>
+                {% endfor %}
             <h3 class="text-left" style="color: #ddd; margin-top: -20px;">{{ current_scenario.provider }}</h3>
             {% endif %}
           </div>
@@ -725,5 +729,6 @@
 </div>
 
 </body>
+{% endwith %}
 </html>
 

@@ -1,55 +1,454 @@
 {% load staticfiles %}
-
-<html lang="en">
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DONAALDA - Produktübersicht - {{ product.name }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content=""/>
+
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+    <meta name="twitter:title" content=""/>
+    <meta name="twitter:image" content=""/>
+    <meta name="twitter:url" content=""/>
+    <meta name="twitter:card" content=""/>
+
+    <!--link rel="stylesheet" href="{% static 'app/index-style.css' %}"-->
     <script src="{% static 'app/index-app.js' %}"></script>
-    <title>DONAALDA - Data Organising Native Ambient Assisted Living Distribution Adviser</title>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    {#% include "app/html_templates/indexToolbarTemplate.html" %#}
-    {#% include "app/html_templates/loginTemplate.html" %#}
-    {#% include "app/html_templates/registrationTemplate.html" %#}
-    {#% include "app/html_templates/profileTemplate.html" %#}
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="{% static 'app/favicon.ico' %}">
+
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet'
+          type='text/css'>
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="{% static 'app/assets/css/animate.css' %}">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="{% static 'app/assets/css/icomoon.css' %}">
+    <!-- Simple Line Icons -->
+    <link rel="stylesheet" href="{% static 'app/assets/css/simple-line-icons.css' %}">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{% static 'app/assets/css/magnific-popup.css' %}">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="{% static 'app/assets/css/bootstrap.css' %}">
+
+    <link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
+
+    <!-- Modernizr JS -->
+    <script src="{% static 'app/assets/js/modernizr-2.6.2.min.js' %}"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+  <script src="{% static 'app/assets/js/respond.min.js' %}"></script>
+  <![endif]-->
+
+
+    <!-- jQuery -->
+    <script src="{% static 'app/assets/js/jquery.min.js' %}"></script>
+    <!-- jQuery Easing -->
+    <script src="{% static 'app/assets/js/jquery.easing.1.3.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'app/assets/js/bootstrap.min.js' %}"></script>
+    <!-- Waypoints -->
+    <script src="{% static 'app/assets/js/jquery.waypoints.min.js' %}"></script>
+    <!-- Stellar Parallax -->
+    <script src="{% static 'app/assets/js/jquery.stellar.min.js' %}"></script>
+    <!-- Counter -->
+    <script src="{% static 'app/assets/js/jquery.countTo.js' %}"></script>
+    <!-- Magnific Popup -->
+    <script src="{% static 'app/assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'app/assets/js/magnific-popup-options.js' %}"></script>
+    <!-- Google Map -->
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
+    <script src="{% static 'app/assets/js/google_map.js' %}"></script>
+
+    <!-- Main JS (Do not remove) -->
+    <script src="{% static 'app/assets/js/main.js' %}"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('[data-show="tooltip"]').tooltip();
+    });
+  </script>
+
+  <script>
+    function start() {
+      location.href = "/"
+    }
+    function logOut() {
+      location.href = "/logout"
+    }
+    function admin() {
+      window.open("/admin", "_blank")
+    }
+  </script>
 </head>
-<body ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
-      ng-controller="{% block ng_controller_theme %}themeController{% endblock %}">
-<!-- TODO FRONTEND: -->
+<body>
 
-{#% if provider %#}
-<div>provider.name: {{ provider.public_name }} !</div>
-<div>provider.url_name: {{ provider.url_name }}</div>
-<div>provider.logo_image.url: <img src="{{ provider.logo_image.url }}"></div>
-<div>provider.profile_image.url: <img src="{{ provider.profile_image.url }}"></div>
-<div>provider.banner_image.url: <img src="{{ provider.banner_image.url }}"></div>
-<div>provider.introduction: {{ provider.introduction }}</div>
-<div>provider.contact_email: {{ provider.contact_email }}</div>
-<div>provider.website: {{ provider.website }}</div>
-<div>provider.owner: {{ provider.owner }}</div>
+<header role="banner" id="fh5co-header">
+    <div class="container">
+        <div class="row">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <!-- Mobile Toggle Menu Button -->
+                    <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
+                       data-target="#navbar"
+                       aria-expanded="false" aria-controls="navbar"><i></i></a>
+                    <a class="navbar-brand" href="index.html">
+                        <div>
+                            <img alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}"
+                                 style="margin-bottom: 5px">
+                            <span>Donaalda - Produktdetails</span>
+                        </div>
+                    </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#" data-nav-section="home"><span>Produkt</span></a></li>
+                        <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
+                        <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>
+                        <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
+                        <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
+                        {% if not request.user.is_authenticated %}
+                            <li>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Anmelden" data-placement="bottom"
+                                            data-toggle="modal"
+                                            data-target="#myModalLogin">
+                                        <i class="glyphicon glyphicon-log-in"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Registrieren" data-placement="bottom"
+                                            data-toggle="modal"
+                                            data-target="#myModalRegister">
+                                        <i class="glyphicon glyphicon-new-window"></i>
+                                    </button>
+                                </div>
+                            </li>
+                        {% else %}
+                            <!--TODO: Change these to admin (if allowed), logout and profile-->
+                            <li>
+                                <div class="btn-group">
+                                    {% if 1 == 1 %}
+                                        {% if user.is_staff %}
+                                            <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                                    data-show="tooltip" title="Verwaltung" data-placement="bottom"
+                                                    onclick="admin()">
+                                                <i class="glyphicon glyphicon-cog"></i>
+                                            </button>
+                                        {% endif %}
+                                    {% endif %}
+                                    <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Abmelden" data-placement="bottom"
+                                            onclick="logOut()">
+                                        <i class="glyphicon glyphicon-log-out"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Profil" data-placement="bottom"
+                                            data-toggle="modal"
+                                            data-target="#myModalProfile">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </button>
+                                </div>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
 
-<div>
-    {% if provider_products %}
-        {% for product in provider_products %}
-            {% comment %}
-            Possiblities: product. name, provider, product_type, serial_number, description,
-            specifications, image1.url, image2.url, image3.url, thumbnail.url, end_of_life
-            {% endcomment %}
-            <div>{{ product.name }}</div>
-        {% endfor %}
-    {% endif %}
+<section id="fh5co-page" data-section="home"
+         style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
+         data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="text-wrap">
+            <div class="text-inner">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 class="text-left">{{ provider.public_name }}</h1>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-default pull-right"
+                             style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
+                            <div>
+                                <img style="max-height: 100%; max-width: 100%;"
+                                     src="{{ provider.logo_image.url }}"
+                                     alt="providerImg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slant"></div>
+</section>
+
+<section id="fh5co-intro" data-section="intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 section-heading text-center">
+                <h2 class="to-animate">Beschreibung</h2>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                        <h3>{{ provider.introduction }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="fh5co-work" data-section="Produkte">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 section-heading text-center">
+                <h2 class="to-animate">Produkte</h2>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                        <h3>Aktuelle Produkte</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if provider_products %}
+            {% for product in provider_products %}
+                <div class="col-md-4 col-sm-6 col-xxs-12">
+                    <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+                        <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+                        <div class="fh5co-text">
+                            <h1>
+                                {{ product.name }}
+                            </h1>
+                            <h2>
+                                <br>{{ product.product_type }}
+                                <h4>S/N: {{ product.serial_number }}</h4>
+                            </h2>
+                            <h4>
+                                {{ product.description }}
+                            </h4>
+          <span>
+              EOL: {{ product.end_of_life }}
+          </span>
+                        </div>
+                    </a>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+            {% endfor %}
+        {% else %}
+            <div>
+                no products
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<section id="fh5co-testimonials" data-section="tecData">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 section-heading text-center">
+                <h2 class="to-animate">Kontaktdaten zum Hersteller</h2>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                        <h3>
+                            Email: {{ provider.contact_email }} <br>
+                            Webseite: <a href="{{ provider.website }}"> {{ provider.website }} <a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+    </div>
+</section>
+
+<footer id="footer" role="contentinfo">
+    <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a>
+    <div class="container">
+        <br/>
+        <div>
+            <div class="col-md-12 text-center">
+                <p>&copy; DONAALDA. All Rights Reserved. <br>
+                    <a href="https://www.donaalda.com" target="_blank">donaalda.com</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="social social-circle">
+                    <li><a href="#"><i class="icon-twitter"></i></a></li>
+                    <li><a href="#"><i class="icon-facebook"></i></a></li>
+                    <li><a href="#"><i class="icon-youtube"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<div class="modal fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{% url 'app:login' %}" method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">Anmelden</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon1"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="username" placeholder="Benutzername"
+                               aria-describedby="basic-addon1" value="{{ name }}">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password" placeholder="Passwort"
+                               aria-describedby="basic-addon2" value="{{ password }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+                    <button type="submit" class="btn btn-primary">Los gehts</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
 </div>
 
+<div class="modal fade" id="myModalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action={% url 'app:register_user' %} method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel1">Registrieren</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon3"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="username" placeholder="Benutzername"
+                               aria-describedby="basic-addon1" value="{{ name }}">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon4"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password" placeholder="Passwort"
+                               aria-describedby="basic-addon2" value="{{ password }}">
+                    </div>
+                    <br/>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon5"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="firstname" placeholder="Vorname"
+                               aria-describedby="basic-addon3" value="{{ firstname }}">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon6"><i class="icon-user"></i></span>
+                        <input type="text" class="form-control" name="lastname" placeholder="Nachname"
+                               aria-describedby="basic-addon4" value="{{ lastname }}">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon7"><i class="icon-envelope"></i></span>
+                        <input type="text" class="form-control" name="email" placeholder="Email-Adresse"
+                               aria-describedby="basic-addon5" value="{{ email }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+                    <button type="submit" class="btn btn-primary">Los gehts</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!--TODO: Frontend add profile to this // Noch aktuell??? Tim:14.06.16-->
+<div class="modal fade" id="myModalProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action={% url 'app:profile' %} method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel2">Profil
+                        von {{ user.first_name }} {{ user.last_name }}</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Profildaten</h4>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon8"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="username" placeholder="Benutzername"
+                               aria-describedby="basic-addon8" value="{{ user.username }}">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon9"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="firstname" placeholder="Vorname"
+                               aria-describedby="basic-addon9" value="{{ user.first_name }}">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon10"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="lastname" placeholder="Nachname"
+                               aria-describedby="basic-addon10" value="{{ user.last_name }}">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon11"><i class="icon-user"></i></span>
+                        <input disabled type="text" class="form-control" name="email" placeholder="Email-Adresse"
+                               aria-describedby="basic-addon11" value="{{ user.email }}">
+                    </div>
+                    <br>
+                    <h4>Passwort (ändern)</h4>
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <span class="input-group-addon" id="basic-addon12"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password_old" placeholder="Altes Passwort"
+                               aria-describedby="basic-addon12" value="{{ password }}">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 5px;">
+                        <span class="input-group-addon" id="basic-addon13"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password_new" placeholder="Neues Passwort"
+                               aria-describedby="basic-addon13" value="{{ password }}">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon14"><i class="icon-key"></i></span>
+                        <input type="password" class="form-control" name="password_new_repeat"
+                               placeholder="Neues Passwort wiederholen"
+                               aria-describedby="basic-addon14" value="{{ password }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+                    <button type="submit" class="btn btn-primary">Passwort ändern</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
+

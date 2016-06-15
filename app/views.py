@@ -4,7 +4,7 @@ from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .models import Category, Product, Scenario, ProviderProfile
+from .models import Category, Product, Scenario, ProviderProfile, Comment
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -72,7 +72,9 @@ class IndexViewNew(generic.DetailView):
         return render(request, 'app/indexNew.html',
                       {'latest_category_list': Category.objects.all(),
                        'scenarios': Scenario.objects.all(),
-                       'products': Product.objects.all()})
+                       'products': Product.objects.all(),
+                       'comment': Comment.objects.filter(page_url='/')[:5],
+                       })
 
 
 class IndexView(generic.ListView):
@@ -139,6 +141,8 @@ class ProviderProfileView(generic.ListView):
                       {'provider': ProviderProfile.objects.get(url_name=provider),
                        'provider_products': Product.objects.filter(
                            provider=ProviderProfile.objects.get(url_name=provider).owner.pk),
+                       'comment': Comment.objects.filter(
+                           page_url='/provider/' + provider)[:5]
                        })
 
 
@@ -160,7 +164,7 @@ class CategoryView(generic.ListView):
         category = kwargs.get("category_name")
         return render(request, 'app/scenarioGrid.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
-                       # 'category': Category.objects.get(name=category)
+                       'category': Category.objects.get(name=category)
                        })
 
 
@@ -181,7 +185,9 @@ class ScenarioView(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         scenario = kwargs.get("current_scenario")
-        return render(request, 'app/scenario.html', {'current_scenario': Scenario.objects.get(url_name=scenario)})
+        return render(request, 'app/scenario.html', {'current_scenario': Scenario.objects.get(url_name=scenario),
+                                                     'comment': Comment.objects.filter(
+                                                         page_url='/scenarios/' + scenario)[:5]})
 
 
 class ProductView(generic.DetailView):
@@ -191,7 +197,8 @@ class ProductView(generic.DetailView):
     def get(self, request, *args, **kwargs):
         product = kwargs.get("pk")
         return render(request, 'app/product.html',
-                      {'product': Product.objects.get(pk=product)})
+                      {'product': Product.objects.get(pk=product),
+                       'comment': Comment.objects.filter(page_url='/products/' + product)[:5]})
 
 
 # for frontend testing
@@ -237,9 +244,9 @@ def login_view(request):
             user = form.login(request)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect("/?login=success")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            return HttpResponseRedirect("/?login=failed")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return render(request, 'app/html_templates/loginTemplate.html', {'login_form': form})
 
 
@@ -261,7 +268,7 @@ class LoginView(FormView):
 @require_http_methods(["GET", "POST"])
 def log_out(request):
     logout(request)
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @csrf_protect
@@ -276,14 +283,14 @@ def register_user(request):
     if request.POST:
         if username and password and email and firstname and lastname:
             if User.objects.filter(username=username).exists():
-                return HttpResponseRedirect("/?registration=taken")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             user = User.objects.create_user(username, email, password)
             user.first_name = firstname
             user.last_name = lastname
             user.save()
-            return HttpResponseRedirect("/?registration=success")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            return HttpResponseRedirect("/?registration=blank_fields")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return render(request, 'app/html_templates/registrationTemplate.html', )
 
 
@@ -299,16 +306,16 @@ def profile(request):
     lastname = request.POST.get('lastname')
 
     if not User.objects.filter(username=username).exists():  # existiert nicht
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         user = User.objects.get(username=username)
 
     if not (passwordOld or passwordNew or passwordDelete or email or firstname or lastname):
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     if user.check_password(passwordDelete):  # delete account
         user.delete()
-        return HttpResponseRedirect("/?profile=deleted")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     if firstname:
         user.first_name = firstname
@@ -328,16 +335,16 @@ def profile(request):
                 user.save()
                 user = authenticate(username=username, password=passwordNew)
                 login(request, user)
-                return HttpResponseRedirect("/?profile=password_changed")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             else:
-                return HttpResponseRedirect("/?profile=blank_fields")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            return HttpResponseRedirect("/?profile=wrong_password")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         if passwordNew:
-            return HttpResponseRedirect("/?profile=blank_fields")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-    return HttpResponseRedirect("/?profile=success")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 """
