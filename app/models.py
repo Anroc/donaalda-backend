@@ -241,7 +241,7 @@ class Comment(models.Model):
     page_url = models.CharField(default='', max_length=255)
 
     def __str__(self):
-        return self.comment_title
+        return '%s %s' % self.comment_title, self.comment_from.username
 
     class Meta:
         verbose_name = "Kommentar"
