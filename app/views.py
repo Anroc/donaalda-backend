@@ -20,60 +20,11 @@ class IndexViewNew(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
 
-        profile_status = request.GET.get('profile')
-
-        if profile_status == 'blank_fields':
-            return render(request, 'app/indexNew.html',
-                          {'message': 'Zum Ändern des Passwortes altes und neues Passwort eingeben!',
-                           'latest_category_list': Category.objects.all(),
-                           'scenarios': Scenario.objects.all(),
-                           'products': Product.objects.all()})
-
-        if profile_status == 'password_changed':
-            return render(request, 'app/indexNew.html', {'message': 'Passwort erfolgreich verändert!',
-                                                         'latest_category_list': Category.objects.all(),
-                                                         'scenarios': Scenario.objects.all(),
-                                                         'products': Product.objects.all()})
-        if profile_status == 'wrong_password':
-            return render(request, 'app/indexNew.html', {'message': 'Passwort falsch!',
-                                                         'latest_category_list': Category.objects.all(),
-                                                         'scenarios': Scenario.objects.all(),
-                                                         'products': Product.objects.all()})
-        login_status = request.GET.get('login')
-        if login_status == 'success':
-            return render(request, 'app/indexNew.html', {'message': 'Willkommen!',
-                                                         'latest_category_list': Category.objects.all(),
-                                                         'scenarios': Scenario.objects.all(),
-                                                         'products': Product.objects.all()})
-
-        if login_status == 'failed':
-            return render(request, 'app/indexNew.html', {'message': 'Login fehlgeschlagen!',
-                                                         'latest_category_list': Category.objects.all(),
-                                                         'scenarios': Scenario.objects.all(),
-                                                         'products': Product.objects.all()})
-
-        register_status = request.GET.get('registration')
-        if register_status == 'success':
-            return render(request, 'app/indexNew.html', {'message': 'Sie wurden erfolgreich registriert!',
-                                                         'latest_category_list': Category.objects.all(),
-                                                         'scenarios': Scenario.objects.all(),
-                                                         'products': Product.objects.all()})
-
-        if register_status == 'taken':
-            return render(request, 'app/indexNew.html', {'message': 'Benutzername bereits vergeben!',
-                                                         'latest_category_list': Category.objects.all(),
-                                                         'scenarios': Scenario.objects.all(),
-                                                         'products': Product.objects.all()})
-        if register_status == 'blank_fields':
-            return render(request, 'app/indexNew.html', {'message': 'Bitte alle Felder ausfüllen!',
-                                                         'latest_category_list': Category.objects.all(),
-                                                         'scenarios': Scenario.objects.all(),
-                                                         'products': Product.objects.all()})
-
         return render(request, 'app/indexNew.html',
                       {'latest_category_list': Category.objects.all(),
                        'scenarios': Scenario.objects.all(),
                        'products': Product.objects.all()})
+
 
 
 class IndexView(generic.ListView):
@@ -353,18 +304,53 @@ def profile(request):
     messages.success(request, 'Ihr Profil wurde erfolgreich verändert!')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+@csrf_protect
+@require_http_methods(["GET", "POST"])
+def back(request):
+    print("back")
+    if not 'history' in request.session or not request.session['history']:
+        print("1")
+        return HttpResponseRedirect("/")
+    else:
+        history=request.session['history']
+        redirect= history.pop()
+        if redirect =='redirected':
+            return HttpResponseRedirect("/")
+        print("2")
+        print(redirect)
+        history.append("redirected")
+        request.session['history']= history
+    print("3")
+    print(history)
+    print("back")
+    return HttpResponseRedirect(redirect)
 
-"""
-    if request.POST:
-        if username and password and email and firstname and lastname:
-            if User.objects.filter(username=username).exists():
-                return HttpResponseRedirect("/app/?registration=taken")
-            user = User.objects.create_user(username, email, password)
-            user.first_name = firstname
-            user.last_name = lastname
-            user.save()
-            return HttpResponseRedirect("/app/?registration=success")
+
+@csrf_protect
+@require_http_methods(["GET", "POST"])
+def update_pagehistory(request):
+    lp= request.POST.get('lastpage')
+    if not lp:
+        print("no lastpage")
+        return HttpResponseRedirect("/")
+
+    if 'history' in request.session and request.session['history']: #wenn eine history
+        history = request.session['history']
+        if history[-1] == "redirected" :
+            history.pop()
+            request.session['history'] =history
+            print(1)
+            print(request.session['history'])
+            return HttpResponseRedirect("/")
         else:
-            return HttpResponseRedirect("/app/?registration=blank_fields")
-    return render(request, 'app/html_templates/registrationTemplate.html', )
-"""
+            print(2)
+            history.append(lp)
+            request.session['history'] =history
+    else:
+        print(3)
+        request.session['history'] = [lp]
+    print(request.session['history'])
+    print("update")
+    print(request.POST.get('lastpage'))
+    return HttpResponseRedirect("/")
+

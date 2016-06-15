@@ -102,7 +102,13 @@
         function admin() {
           window.open("/admin", "_blank")
         }
+        function back() {
+        location.href = "/back";
+      }
     </script>
+    <script>
+$.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
+  </script>
 </head>
 <body>
 
@@ -125,6 +131,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
                         <li class="active"><a href="#" data-nav-section="home"><span>Produkt</span></a></li>
                         <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
                         <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>

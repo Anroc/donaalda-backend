@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'^register$', views.register_user, name='register_user'),
     url(r'^logout$', views.log_out, name='logout'),
     url(r'^scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
+    url(r'^back$', views.back, name='back'),
+    url(r'^updatepagehistory$', views.update_pagehistory, name='update_pagehistory'),
     url(r'^scenarios/(?P<current_scenario>[\w]+)/$',
         views.ScenarioView.as_view(), name='scenario'),
     url(r'^products/(?P<pk>[0-9]+)/$', views.ProductView.as_view(), name='product'),
