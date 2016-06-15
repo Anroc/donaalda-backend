@@ -139,9 +139,9 @@
           <div class="col-md-8">
             {% if current_scenario %}
             <h1 class="text-left">{{ current_scenario.name }}</h1>
-                {% for x in scenarios %}
+                <!--{% for x in scenarios %}
             <h2> Scenario-description: {{ x.description }}</h2>
-                {% endfor %}
+                {% endfor %}-->
             <h3 class="text-left" style="color: #ddd; margin-top: -20px;">{{ current_scenario.provider }}</h3>
             {% endif %}
           </div>
@@ -157,56 +157,43 @@
   <!--szenario-div-->
   <div classs="container-fluid" >
 
-    <div class="row">
-      <div class="col-md-8">
-        <p>
-          Description:
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-          sea takimata sanctus est Lorem ipsum dolor sit amet.
-        </p>
-      </div>
-      <div class="col-md-4">
-        <img style="height:auto; width:100%" src="../../../static/app/assets/resources/not_so_smart.jpg">
-      </div>
+    {% if scenarios %}
+    {% for scen in scenarios %}
+    <div class="container-fluid row">
+      {% if scen.left_right %}
+        <div class="col-md-8">
+          <p>
+            {{scen.description}}
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+            sea takimata sanctus est Lorem ipsum dolor sit amet.
+          </p>
+        </div>
+        <div class="col-md-4">
+          <img style="height:auto; width:100%" src="{{scen.image}}" alt="{{scen.image}}">
+        </div>
+      {% else %}
+        <div class="col-md-4">
+          <img style="height:auto; width:100%" src="{{scen.image}}" alt="{{scen.image}}">
+        </div>
+        <div class="col-md-8">
+          <p>
+            {{scen.description}}
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+            sea takimata sanctus est Lorem ipsum dolor sit amet.
+          </p>
+        </div>
+      {% endif %}
     </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <img style="height:auto; width:100%" src="../../../static/app/assets/resources/not_so_smart.jpg">
-      </div>
-      <div class="col-md-8">
-        <p>
-          Description:
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-          sea takimata sanctus est Lorem ipsum dolor sit amet.
-        </p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-8">
-        <p>
-          Description:
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-          sea takimata sanctus est Lorem ipsum dolor sit amet.
-        </p>
-      </div>
-      <div class="col-md-4">
-        <img style="height:auto; width:100%" src="../../../static/app/assets/resources/not_so_smart.jpg">
-      </div>
-    </div>
+    {% endfor %}
+    {% endif %}
   </div>
 </section>
 
