@@ -3,22 +3,20 @@ from django.contrib.auth.admin import UserAdmin
 from app.adminForms import (EmployeeCreationForm,
                             EmployeeChangeForm)
 
-
 # Register your models here.
-from app.models import (Category,
-                        Scenario,
-                        ProductSet,
-                        Product,
-                        ProductType,
-                        Provider,
-                        ProviderProfile,
-                        Employee,
-                        ScenarioDescription,
-                        )
+from .models import (Category,
+                     Scenario,
+                     ProductSet,
+                     Product,
+                     ProductType,
+                     Provider,
+                     ProviderProfile,
+                     Employee,
+                     ScenarioDescription, Comment
+                     )
 
 
 class ScenarioAdmin(admin.ModelAdmin):
-
     exclude = ["provider", "url_name"]
 
     def get_queryset(self, request):
@@ -39,7 +37,6 @@ class ScenarioAdmin(admin.ModelAdmin):
 
 
 class ProductSetAdmin(admin.ModelAdmin):
-
     exclude = ["creator"]
 
     def get_queryset(self, request):
@@ -61,7 +58,6 @@ class ProductSetAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-
     exclude = ["provider"]
 
     def get_queryset(self, request):
@@ -82,7 +78,6 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ProviderProfileAdmin(admin.ModelAdmin):
-
     exclude = ["owner", "url_name"]
 
     def get_queryset(self, request):
@@ -112,7 +107,7 @@ class EmployeeAdmin(UserAdmin):
         ((None, {'fields': ('username', 'password')})),
         (('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
         (('Permissions'), {'fields': ('is_active',
-                                       'groups',)}),
+                                      'groups',)}),
         (('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
 
@@ -152,3 +147,4 @@ admin.site.register(Provider)
 admin.site.register(ProviderProfile, ProviderProfileAdmin)
 admin.site.register(ProductType)
 admin.site.register(ScenarioDescription)
+admin.site.register(Comment)
