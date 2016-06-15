@@ -88,6 +88,12 @@
         $('[data-show="tooltip"]').tooltip();
       });
     </script>
+
+    <script>
+        function provider () {
+            location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
+        }
+    </script>
 </head>
 <body>
 
@@ -182,8 +188,9 @@
                     <div class="col-md-4">
                         <div class="panel panel-default pull-right"
                              style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
-                            <div class="panel-body">
+                            <div class="btn">
                                 <img style="max-height: 100%; max-width: 100%;"
+                                     onclick="provider()"
                                      src="{{ product.provider.providerprofile.logo_image.url }}"
                                      alt="providerImg">
                             </div>

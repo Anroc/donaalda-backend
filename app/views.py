@@ -135,11 +135,11 @@ class ProviderProfileView(generic.ListView):
 
     def get(self, request, *args, **kwargs):
         provider = kwargs.get("provider_url_name")
-        return render(request, 'app/providerProfile.html', {'provider': ProviderProfile.objects.get(url_name=provider),
-                                                            'provider_products': Product.objects.filter(
-                                                                provider=ProviderProfile.objects.get(
-                                                                    url_name=provider).owner.pk),
-                                                            })
+        return render(request, 'app/providerProfile.html',
+                      {'provider': ProviderProfile.objects.get(url_name=provider),
+                       'provider_products': Product.objects.filter(
+                           provider=ProviderProfile.objects.get(url_name=provider).owner.pk),
+                       })
 
 
 class ContactView(generic.ListView):
@@ -159,9 +159,9 @@ class CategoryView(generic.ListView):
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
         return render(request, 'app/scenarioGrid.html',
-                      {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
-                       # 'category': Category.objects.get(name=category)
-                       })
+                        {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
+                         'category': Category.objects.get(name=category)
+                        })
 
 
 class ScenariosView(generic.ListView):
@@ -175,7 +175,7 @@ class ScenariosView(generic.ListView):
 
 
 class ScenarioView(generic.DetailView):
-    template_name = 'scenario.html'
+    template_name = 'app/scenario.html'
 
     # context_object_name = 'scenario'
 
