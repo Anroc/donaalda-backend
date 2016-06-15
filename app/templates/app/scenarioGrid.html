@@ -204,12 +204,9 @@
         <div class="text-inner">
           <div class="row">
             <div class="col-md-12 text-center">
-              <h1 class="to-animate">Das macht Donaalda</h1>
+              <h1 class="to-animate">{{ category.name }}</h1>
                 <div class="col-md-8 col-md-offset-2">
-                  <h2 class="to-animate">Unterschiedliche Hersteller, tausende Produkte für jeden Anwendungszweck. Aber wie soll mein
-                    <b>Smart Home</b> aussehen?<br>
-                    Dabei hilft dir Donaalda, denn sie berät dich mit fertigen Szenarien und fragt dich
-                    nach deiner Wohnsituation.</h2>
+                  <h2 class="to-animate">{{ category.description }}</h2>
                 </div>
               </div>
             </div>
@@ -223,6 +220,7 @@
   <div class="container">
      <div class="row">
       <div class="row row-bottom-padded-sm">
+        <h1 class="to-animate">Szenarien</h1>
         {% if scenario_list_from_category %}
         {% for scenario in scenario_list_from_category %}
 

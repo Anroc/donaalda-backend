@@ -159,9 +159,9 @@ class CategoryView(generic.ListView):
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
         return render(request, 'app/scenarioGrid.html',
-                      {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
-                       # 'category': Category.objects.get(name=category)
-                       })
+                        {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
+                         'category': Category.objects.get(name=category)
+                        })
 
 
 class ScenariosView(generic.ListView):
