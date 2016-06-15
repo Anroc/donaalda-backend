@@ -186,14 +186,12 @@
                             <!--TODO: Change these to admin (if allowed), logout and profile-->
                           <li>
                             <div class="btn-group">
-                              {% if 1 == 1 %}
-                                  {% if user.is_staff %}
-                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                            data-show="tooltip" title="Verwaltung" data-placement="bottom"
-                                            onclick="admin()">
-                                      <i class="glyphicon glyphicon-cog"></i>
-                                    </button>
-                                  {% endif %}
+                              {% if user.is_staff %}
+                                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                        data-show="tooltip" title="Verwaltung" data-placement="bottom"
+                                        onclick="admin()">
+                                  <i class="glyphicon glyphicon-cog"></i>
+                                </button>
                               {% endif %}
                               <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
                               <button type="button" class="btn btn-primary btn-xs navbar-btn"
@@ -248,7 +246,6 @@
 <section id="fh5co-intro">
     <div class="container">
         <div class="row row-bottom-padded-lg">
-            {% if latest_category_list %}
                 {% for category in latest_category_list %}
                     <div class="fh5co-block to-animate"
                          {% if category.backgroundPicture %}style="background-image:url({{ category.backgroundPicture.url }});{% endif %}">
@@ -269,12 +266,11 @@
                             </p>
                         </div>
                     </div>
-                {% endfor %}
-            {% else %}
+                {% empty %}
                 <div>
                     no categories
                 </div>
-            {% endif %}
+                {% endfor %}
         </div>
     </div>
 </section>
@@ -353,27 +349,25 @@
       </div>
     </div>
     <div class="row">
-      {% if comment %}
-        {% for com in comment %}
-          <div class="col-md-4">
-            <div class="box-testimony">
-              <blockquote class="to-animate-2">
-                <p>&ldquo;Ich bin fatal.&rdquo;</p>
-              </blockquote>
-              <div class="author to-animate">
-                <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
-                <p>
-                  Timo <span class="subtext">Creative Director</span>
-                </p>
-              </div>
+      {% for com in comment %}
+        <div class="col-md-4">
+          <div class="box-testimony">
+            <blockquote class="to-animate-2">
+              <p>&ldquo;Ich bin fatal.&rdquo;</p>
+            </blockquote>
+            <div class="author to-animate">
+              <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
+              <p>
+                Timo <span class="subtext">Creative Director</span>
+              </p>
             </div>
           </div>
-        {% endfor %}
-      {% else %}
-        <div class="center-block">
-            <i class="icon icon-thumbs-down"></i> Schade. Es wurden noch keine Kommentare geschrieben.
         </div>
-      {% endif %}
+    {% empty %}
+      <div class="center-block">
+        <i class="icon icon-thumbs-down"></i> Schade. Es wurden noch keine Kommentare geschrieben.
+      </div>
+    {% endfor %}
     </div>
   </div>
 </section>
@@ -397,7 +391,6 @@
         </div>
 
         <div class="row row-bottom-padded-sm">
-            {% if scenarios %}
                 {% for scenario in scenarios %}
                     <div class="col-md-4 col-sm-6 col-xxs-12">
                         <a href="{{ scenario.picture.url }}" class="fh5co-project-item image-popup to-animate">
@@ -422,12 +415,11 @@
                         </a>
                     </div>
                     <!--<div class="clearfix visible-sm-block"></div>-->
-                {% endfor %}
-            {% else %}
+                {% empty %}
                 <div>
                     Es wurden noch keine Szenarien hinzugefügt.
                 </div>
-            {% endif %}
+                {% endfor %}
         </div>
     </div>
 </section>
