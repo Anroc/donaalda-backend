@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<section id="fh5co-testimonials" data-section="comments">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Bewertungen</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>
+              Du bist nicht der Einzige.
+              Donaalda hat schon Vielen bei der Auswahl des perfekten Smart Home geholfen.
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% for com in comment %}
+      <div class="col-md-4">
+        <div class="box-testimony">
+          <blockquote class="to-animate-2">
+            <p>&ldquo;{{ com.comment_content }}&rdquo;</p>
+          </blockquote>
+          <div class="author to-animate">
+            <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
+            <p>
+              {{ com.comment_from }} <span class="subtext">{{ com.comment_title }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="center-block">
+        <i class="icon icon-thumbs-down"></i> Schade. Es wurden noch keine Kommentare geschrieben.
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
