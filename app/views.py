@@ -321,6 +321,35 @@ def change_password(request):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+@csrf_protect
+@require_http_methods("POST")
+def delete_account(request):
+    user = request.user
+    password = request.POST.get("password")
+
+    if user is None or not User.objects.filter(username=user.username).exists():
+
+        messages.error(request, "Der angebene Nutzername existiert nicht.")
+
+    elif user.check_password(password):
+
+        if user.delete():
+
+            messages.success(request,"Ihr Konto wurde erfolgreich gelöscht")
+
+        else:
+
+            messages.error(request, "Beim Löschen ihres Konto trat ein Fehler auf."
+                                    "Bitte wenden Sie sich an den Betreiber.")
+
+        logout(request)
+
+    else:
+
+        messages.error(request, "Falsches Passwort")
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
