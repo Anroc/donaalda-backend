@@ -10,165 +10,184 @@
 <html class="no-js"> <!--<![endif]-->
 <head>
 
-  {% include "app/html_templates/header/headerTemplate.html" %}
+    {% include "app/html_templates/header/headerTemplate.html" %}
 
 
-
-   <script>
-       function back() {
-        location.href = "/back";
-      }
+    <script>
+        function back() {
+            location.href = "/back";
+        }
     </script>
-  <script>
-$.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
-  </script>
+    <script>
+        $.post("/updatepagehistory", {
+            lastpage: "{{request.META.HTTP_REFERER}}",
+            csrfmiddlewaretoken: "{{ csrf_token }}"
+        });
+    </script>
 
 </head>
 <body>
 
 {% with scenarios=current_scenario.scenariodescription_set.all %}
-<header role="banner" id="fh5co-header">
-  <div class="container">
-    <div class="row">
-      <nav class="navbar navbar-default">
-        <div class="navbar-header">
-          <!-- Mobile Toggle Menu Button -->
-          <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
-             data-target="#navbar"
-             aria-expanded="false" aria-controls="navbar"><i></i></a>
-          <a class="navbar-brand" href="index.html">
-            <div>
-              <img alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}"
-                   style="margin-bottom: 5px">
-              <span>Donaalda - Szenario</span>
+    <header role="banner" id="fh5co-header">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header">
+                        <!-- Mobile Toggle Menu Button -->
+                        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
+                           data-target="#navbar"
+                           aria-expanded="false" aria-controls="navbar"><i></i></a>
+                        <a class="navbar-brand" href="index.html">
+                            <div>
+                                <img alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}"
+                                     style="margin-bottom: 5px">
+                                <span>Donaalda - Szenario</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a>
+                            </li>
+                            <li class="active"><a href="#" data-nav-section="home"><span>Produkt</span></a></li>
+                            <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
+                            <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>
+                            <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
+                            <li><a href="#" data-nav-section="about"><span>Über</span></a></li>
+                            <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
+                            <li>
+                                <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
+                                        data-target="#myModalx">
+                                    <i class="fh5co-intro-icon icon-login"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
-          </a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
-            <li class="active"><a href="#" data-nav-section="home"><span>Produkt</span></a></li>
-            <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
-            <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>
-            <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
-            <li><a href="#" data-nav-section="about"><span>Über</span></a></li>
-            <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
-            <li>
-              <button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal"
-                      data-target="#myModalx">
-                <i class="fh5co-intro-icon icon-login"></i>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </div>
-</header>
+    </header>
 
-<section id="fh5co-page" data-section="home"
-         style="background-image: url({% static 'app/assets/images/full_image_2.jpg' %});"
-         data-stellar-background-ratio="0.5">
-  <div class="gradient"></div>
-  <div class="container">
-    <div class="text-wrap">
-      <div class="text-inner">
-        <div class="row">
-          <div class="col-md-8">
-            {% if current_scenario %}
-            <h1 class="text-left">{{ current_scenario.name }}</h1>
-                <!--{% for x in current_scenario.scenario_product_set.products.all %}
+    <section id="fh5co-page" data-section="home"
+             style="background-image: url({% static 'app/assets/images/full_image_2.jpg' %});"
+             data-stellar-background-ratio="0.5">
+        <div class="gradient"></div>
+        <div class="container">
+            <div class="text-wrap">
+                <div class="text-inner">
+                    <div class="row">
+                        <div class="col-md-8">
+                            {% if current_scenario %}
+                                <h1 class="text-left">{{ current_scenario.name }}</h1>
+                                <!--{% for x in current_scenario.scenario_product_set.products.all %}
             <h2> Scenario-description: {{ x.name }}</h2>
                 {% endfor %}-->
-            <h3 class="text-left" style="color: #ddd; margin-top: -20px;">{{ current_scenario.provider }}</h3>
+                                <h3 class="text-left"
+                                    style="color: #ddd; margin-top: -20px;">{{ current_scenario.provider }}</h3>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slant"></div>
+    </section>
+
+    <section id="fh5co-intro" data-section="intro">
+
+        <!--szenario-div-->
+        <div classs="container-fluid">
+
+            {% if scenarios %}
+                {% for scen in scenarios %}
+                    <div class="container-fluid row">
+                        {% if scen.left_right %}
+                            <div class="col-md-8">
+                                <p>
+                                    {{ scen.description }}
+                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                                    tempor invidunt ut labore et
+                                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                                    dolores et ea rebum. Stet
+                                    clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                                    ipsum dolor sit amet,
+                                    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+                                    dolore magna aliquyam erat,
+                                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+                                    clita kasd gubergren, no
+                                    sea takimata sanctus est Lorem ipsum dolor sit amet.
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <img style="height:auto; width:100%" src="{{ scen.image.url }}" alt="{{ scen.image }}">
+                            </div>
+                        {% else %}
+                            <div class="col-md-4">
+                                <img style="height:auto; width:100%" src="{{ scen.image.url }}" alt="{{ scen.image }}">
+                            </div>
+                            <div class="col-md-8">
+                                <p>
+                                    {{ scen.description }}
+                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                                    tempor invidunt ut labore et
+                                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                                    dolores et ea rebum. Stet
+                                    clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                                    ipsum dolor sit amet,
+                                    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+                                    dolore magna aliquyam erat,
+                                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+                                    clita kasd gubergren, no
+                                    sea takimata sanctus est Lorem ipsum dolor sit amet.
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             {% endif %}
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="slant"></div>
-</section>
+    </section>
 
-<section id="fh5co-intro" data-section="intro">
+    <section id="fh5co-work" data-section="images">
 
-  <!--szenario-div-->
-  <div classs="container-fluid" >
-
-    {% if scenarios %}
-    {% for scen in scenarios %}
-    <div class="container-fluid row">
-      {% if scen.left_right %}
-        <div class="col-md-8">
-          <p>
-            {{scen.description}}
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-            sea takimata sanctus est Lorem ipsum dolor sit amet.
-          </p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 section-heading text-center">
+                    <h2 class="to-animate">Produkte</h2>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
-          <img style="height:auto; width:100%" src="{{scen.image.url}}" alt="{{scen.image}}">
-        </div>
-      {% else %}
-        <div class="col-md-4">
-          <img style="height:auto; width:100%" src="{{scen.image.url}}" alt="{{scen.image}}">
-        </div>
-        <div class="col-md-8">
-          <p>
-            {{scen.description}}
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-            sea takimata sanctus est Lorem ipsum dolor sit amet.
-          </p>
-        </div>
-      {% endif %}
-    </div>
-    {% endfor %}
-    {% endif %}
-  </div>
-</section>
 
-<section id="fh5co-work" data-section="images">
+        <!--product-slider-div-------------------------------------------------funzt so noch nicht, ist aber in arbeit-->
+        <div class="container-fluid">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!--position:relative damit die punkt-liste unten im parent-div haftet-->
+                <!-- Indicators-->
+                <ol class="carousel-indicators" style="margin-bottom:0; position:absolute; bottom:0">
+                    <!--style damit die punkt-liste unten im parent-div haftet-->
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                </ol>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Produkte</h2>
-      </div>
-    </div>
-  </div>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
 
-  <!--product-slider-div-------------------------------------------------funzt so noch nicht, ist aber in arbeit-->
-  <div class="container-fluid">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel"> <!--position:relative damit die punkt-liste unten im parent-div haftet-->
-      <!-- Indicators-->
-      <ol class="carousel-indicators" style="margin-bottom:0; position:absolute; bottom:0"> <!--style damit die punkt-liste unten im parent-div haftet-->
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-      </ol>
+                    {% if current_scenario %}
+                        {% for x in current_scenario.scenario_product_set.products.all %}
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-
-        {% if current_scenario %}
-        {% for x in current_scenario.scenario_product_set.products.all %}
-
-          {% if forloop.counter == 1 %} <!--beim ersten slide muss die klasse active hinzugefügt werden, ab dem nächsten nicht mehr-->
-              <div class="item active row">
-          {% else %}
-            {{forloop.counter|add:"-1"}} <!--bei jedem durch 3 teilbarem "index-1" muss ein neuer slide geöffnet werden-->
-            {% if forloop.counter|divisibleby:3 %}
-              <div class="item row">
-            {% endif %}
-            {{forloop.counter|add:"1"}} <!--die -1 war nur um zu checken ob der slide geöffnet werden musste und wird wieder auf seinen wert gesetzt-->
-          {% endif %}
+                            {% if forloop.counter == 1 %}
+                                <!--beim ersten slide muss die klasse active hinzugefügt werden, ab dem nächsten nicht mehr-->
+                                <div class="item active row">
+                            {% else %}
+                                {{ forloop.counter|add:"-1" }}
+                                <!--bei jedem durch 3 teilbarem "index-1" muss ein neuer slide geöffnet werden-->
+                                {% if forloop.counter|divisibleby:3 %}
+                                    <div class="item row">
+                                {% endif %}
+                                {{ forloop.counter|add:"1" }}
+                                <!--die -1 war nur um zu checken ob der slide geöffnet werden musste und wird wieder auf seinen wert gesetzt-->
+                            {% endif %}
 
           <div class="col-md-4">
               <a href="{% url 'app:product' x.pk %}">
@@ -185,335 +204,358 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
               </a>
           </div>
 
-          {% if forloop.counter|divisibleby:3 %}
+                        {% if forloop.counter|divisibleby:3 %}
+                            </div>
+                        {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
             </div>
-          {% endif %}
-        {% endfor %}
-        {% endif %}
-      </div>
+    </section>
 
-      <!-- Left and right controls -->
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  </div>
-</section>
+    <section id="fh5co-testimonials" data-section="products">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 section-heading text-center">
+                    <h2 class="to-animate">Produkte</h2>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                            <h3>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                                there live the
+                                blind texts.</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="box-testimony">
+                        <blockquote class="to-animate-2">
+                            <p>&ldquo;Rolladen können mit dem XB-Alpha einfach nachgerüstet werden. Einfach
+                                Bandaufwicklung
+                                gegen den
+                                XB-Alpha austauschen.&rdquo;</p>
+                        </blockquote>
+                        <div class="author to-animate">
+                            <figure><img src="{% static 'app/assets/images/person1.jpg' %}" alt="Person"></figure>
+                            <p>
+                                <a href="http://www.jung.de/869/produkte/technik/jalousie-und-rollladensteuerung/mechanisch/"
+                                   target="_blank">Rolladenmotor XB-Alpha</a> <span class="subtext">Jung</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box-testimony">
+                        <blockquote class="to-animate-2">
+                            <p>&ldquo;Ich bin fatal.&rdquo;</p>
+                        </blockquote>
+                        <div class="author to-animate">
+                            <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
+                            <p>
+                                Timo <span class="subtext">Creative Director</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-<section id="fh5co-testimonials" data-section="products">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Produkte</h2>
+                <div class="col-md-4">
+                    <div class="box-testimony">
+                        <blockquote class="to-animate-2">
+                            <p>&ldquo;Ich schreibe Tests. &rdquo;</p>
+                        </blockquote>
+                        <div class="author to-animate">
+                            <figure><img src="{% static 'app/assets/images/person3.jpg' %}" alt="Person"></figure>
+                            <p>
+                                Amin<span
+                                    class="subtext">Superviser</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="fh5co-services" data-section="scenarios">
+        <!--wrapper-div
+        <div class="container-fluid" style="padding:0">
+
+          <!--szenario-div-->
+        <div classs="container-fluid">
+
+            <!--banner-->
+            <header style="text-align:center; background:url(../../../static/app/assets/resources/not_so_smart.jpg)">
+                <h1>Szenario-Name</h1>
+            </header>
+
+            <!--content-div-->
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <p>
+                            Description:
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                            invidunt ut labore et
+                            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                            et ea rebum. Stet
+                            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                            dolor sit amet,
+                            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+                            magna aliquyam erat,
+                            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+                            gubergren, no
+                            sea takimata sanctus est Lorem ipsum dolor sit amet.
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <img style="height:auto; width:100%"
+                             src="../../../static/app/assets/resources/not_so_smart.jpg">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <img style="height:auto; width:100%"
+                             src="../../../static/app/assets/resources/not_so_smart.jpg">
+                    </div>
+                    <div class="col-md-8">
+                        <p>
+                            Description:
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                            invidunt ut labore et
+                            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                            et ea rebum. Stet
+                            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                            dolor sit amet,
+                            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+                            magna aliquyam erat,
+                            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+                            gubergren, no
+                            sea takimata sanctus est Lorem ipsum dolor sit amet.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <p>
+                            Description:
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                            invidunt ut labore et
+                            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                            et ea rebum. Stet
+                            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+                            dolor sit amet,
+                            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+                            magna aliquyam erat,
+                            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+                            gubergren, no
+                            sea takimata sanctus est Lorem ipsum dolor sit amet.
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <img style="height:auto; width:100%"
+                             src="../../../static/app/assets/resources/not_so_smart.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--product-slider-div-->
         <div class="row">
-          <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-              there live the
-              blind texts.</h3>
-          </div>
+            <div class="col-md-4 col-md-offset-4">
+                <div id="myCarousel2" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides-->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
+                        </div>
+
+                        <div class="item">
+                            <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
+                        </div>
+
+                        <div class="item">
+                            <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
+                        </div>
+
+                        <div class="item">
+                            <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="box-testimony">
-          <blockquote class="to-animate-2">
-            <p>&ldquo;Rolladen können mit dem XB-Alpha einfach nachgerüstet werden. Einfach Bandaufwicklung
-              gegen den
-              XB-Alpha austauschen.&rdquo;</p>
-          </blockquote>
-          <div class="author to-animate">
-            <figure><img src="{% static 'app/assets/images/person1.jpg' %}" alt="Person"></figure>
-            <p>
-              <a href="http://www.jung.de/869/produkte/technik/jalousie-und-rollladensteuerung/mechanisch/"
-                 target="_blank">Rolladenmotor XB-Alpha</a> <span class="subtext">Jung</span>
-            </p>
-          </div>
+        </div>-->
+    </section>
+
+    <section id="fh5co-about" data-section="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 section-heading text-center">
+                    <h2 class="to-animate">About</h2>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                            <h3>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                                there live the
+                                blind texts.</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="fh5co-person text-center to-animate">
+                        <figure><img src="{% static 'app/assets/images/person1.jpg' %}" alt="Image"></figure>
+                        <h3>Amin</h3>
+                        <span class="fh5co-position">Web Designer</span>
+                        <p>
+                            Ich schreibe Tests.
+                        </p>
+                        <ul class="social social-circle">
+                            <li><a href="#"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="fh5co-person text-center to-animate">
+                        <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Image"></figure>
+                        <h3>Timo</h3>
+                        <span class="fh5co-position">Web Developer</span>
+                        <p>
+                            Ich wurde inkubiert, um zu sein. Ich bin einer und nicht viele.
+                        </p>
+
+                        <ul class="social social-circle">
+                            <li><a href="#"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon-github"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="fh5co-person text-center to-animate">
+                        <figure><img src="{% static 'app/assets/images/person3.jpg' %}" alt="Image"></figure>
+                        <h3>Larry Ben</h3>
+                        <span class="fh5co-position">Web Designer</span>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                            there
+                            live the
+                            blind texts</p>
+                        <ul class="social social-circle">
+                            <li><a href="#"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="box-testimony">
-          <blockquote class="to-animate-2">
-            <p>&ldquo;Ich bin fatal.&rdquo;</p>
-          </blockquote>
-          <div class="author to-animate">
-            <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
-            <p>
-              Timo <span class="subtext">Creative Director</span>
-            </p>
-          </div>
-        </div>
-      </div>
+    </section>
 
-      <div class="col-md-4">
-        <div class="box-testimony">
-          <blockquote class="to-animate-2">
-            <p>&ldquo;Ich schreibe Tests. &rdquo;</p>
-          </blockquote>
-          <div class="author to-animate">
-            <figure><img src="{% static 'app/assets/images/person3.jpg' %}" alt="Person"></figure>
-            <p>
-              Amin<span
-              class="subtext">Superviser</span>
-            </p>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-</section>
-
-
-<section id="fh5co-services" data-section="scenarios">
-  <!--wrapper-div
-  <div class="container-fluid" style="padding:0">
-
-    <!--szenario-div-->
-  <div classs="container-fluid" >
-
-    <!--banner-->
-    <header style="text-align:center; background:url(../../../static/app/assets/resources/not_so_smart.jpg)">
-      <h1>Szenario-Name</h1>
-    </header>
-
-    <!--content-div-->
-    <div class="container-fluid">
-
-      <div class="row">
-        <div class="col-md-8">
-          <p>
-            Description:
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-            sea takimata sanctus est Lorem ipsum dolor sit amet.
-          </p>
-        </div>
-        <div class="col-md-4">
-          <img style="height:auto; width:100%" src="../../../static/app/assets/resources/not_so_smart.jpg">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-4">
-          <img style="height:auto; width:100%" src="../../../static/app/assets/resources/not_so_smart.jpg">
-        </div>
-        <div class="col-md-8">
-          <p>
-            Description:
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-            sea takimata sanctus est Lorem ipsum dolor sit amet.
-          </p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-8">
-          <p>
-            Description:
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-            sea takimata sanctus est Lorem ipsum dolor sit amet.
-          </p>
-        </div>
-        <div class="col-md-4">
-          <img style="height:auto; width:100%" src="../../../static/app/assets/resources/not_so_smart.jpg">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--product-slider-div-->
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <div id="myCarousel2" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-          <li data-target="#myCarousel" data-slide-to="3"></li>
-        </ol>
-
-        <!-- Wrapper for slides-->
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
-          </div>
-
-          <div class="item">
-            <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
-          </div>
-
-          <div class="item">
-            <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
-          </div>
-
-          <div class="item">
-            <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="">
-          </div>
-        </div>
-
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-  </div>
-  </div>-->
-</section>
-
-<section id="fh5co-about" data-section="about">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">About</h2>
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-              there live the
-              blind texts.</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="fh5co-person text-center to-animate">
-          <figure><img src="{% static 'app/assets/images/person1.jpg' %}" alt="Image"></figure>
-          <h3>Amin</h3>
-          <span class="fh5co-position">Web Designer</span>
-          <p>
-            Ich schreibe Tests.
-          </p>
-          <ul class="social social-circle">
-            <li><a href="#"><i class="icon-twitter"></i></a></li>
-            <li><a href="#"><i class="icon-facebook"></i></a></li>
-            <li><a href="#"><i class="icon-dribbble"></i></a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="fh5co-person text-center to-animate">
-          <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Image"></figure>
-          <h3>Timo</h3>
-          <span class="fh5co-position">Web Developer</span>
-          <p>
-            Ich wurde inkubiert, um zu sein. Ich bin einer und nicht viele.
-          </p>
-
-          <ul class="social social-circle">
-            <li><a href="#"><i class="icon-twitter"></i></a></li>
-            <li><a href="#"><i class="icon-facebook"></i></a></li>
-            <li><a href="#"><i class="icon-github"></i></a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="fh5co-person text-center to-animate">
-          <figure><img src="{% static 'app/assets/images/person3.jpg' %}" alt="Image"></figure>
-          <h3>Larry Ben</h3>
-          <span class="fh5co-position">Web Designer</span>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-            live the
-            blind texts</p>
-          <ul class="social social-circle">
-            <li><a href="#"><i class="icon-twitter"></i></a></li>
-            <li><a href="#"><i class="icon-facebook"></i></a></li>
-            <li><a href="#"><i class="icon-dribbble"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="fh5co-counters" style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
-         data-stellar-background-ratio="0.5">
-  <div class="fh5co-overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 section-heading text-center to-animate">
-        <h2>Fun Facts</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="fh5co-counter to-animate">
-          <i class="fh5co-counter-icon icon-briefcase to-animate-2"></i>
+    <section id="fh5co-counters" style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
+             data-stellar-background-ratio="0.5">
+        <div class="fh5co-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 section-heading text-center to-animate">
+                    <h2>Fun Facts</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="fh5co-counter to-animate">
+                        <i class="fh5co-counter-icon icon-briefcase to-animate-2"></i>
           <span class="fh5co-counter-number js-counter" data-from="0" data-to="89" data-speed="5000"
                 data-refresh-interval="50">89</span>
-          <span class="fh5co-counter-label">Finished projects</span>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="fh5co-counter to-animate">
-          <i class="fh5co-counter-icon icon-code to-animate-2"></i>
+                        <span class="fh5co-counter-label">Finished projects</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="fh5co-counter to-animate">
+                        <i class="fh5co-counter-icon icon-code to-animate-2"></i>
           <span class="fh5co-counter-number js-counter" data-from="0" data-to="2343409" data-speed="5000"
                 data-refresh-interval="50">2343409</span>
-          <span class="fh5co-counter-label">Line of codes</span>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="fh5co-counter to-animate">
-          <i class="fh5co-counter-icon icon-cup to-animate-2"></i>
+                        <span class="fh5co-counter-label">Line of codes</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="fh5co-counter to-animate">
+                        <i class="fh5co-counter-icon icon-cup to-animate-2"></i>
           <span class="fh5co-counter-number js-counter" data-from="0" data-to="1302" data-speed="5000"
                 data-refresh-interval="50">92</span>
-          <span class="fh5co-counter-label">Bottles of Club Mate</span>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="fh5co-counter to-animate">
-          <i class="fh5co-counter-icon icon-people to-animate-2"></i>
+                        <span class="fh5co-counter-label">Bottles of Club Mate</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="fh5co-counter to-animate">
+                        <i class="fh5co-counter-icon icon-people to-animate-2"></i>
           <span class="fh5co-counter-number js-counter" data-from="0" data-to="52" data-speed="5000"
                 data-refresh-interval="50">238497</span>
-          <span class="fh5co-counter-label">Happy little bugs</span>
+                        <span class="fh5co-counter-label">Happy little bugs</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+
+    <!--Comments-->
+    {% include "app/html_templates/sections/commentSection.html" %}
 
 
-<!-- Kontakt  -->
-{% include "app/html_templates/sections/contactSection.html" %}
+    <!-- Kontakt  -->
+    {% include "app/html_templates/sections/contactSection.html" %}
 
-<!-- Footer -->
-{% include "app/html_templates/footer/footerTemplate.html" %}
+    <!-- Footer -->
+    {% include "app/html_templates/footer/footerTemplate.html" %}
 
-<!-- Login Modal -->
-{% include "app/html_templates/modals/loginModal.html" %}
+    <!-- Login Modal -->
+    {% include "app/html_templates/modals/loginModal.html" %}
 
-<!-- Register modale -->
-{% include "app/html_templates/modals/registerModal.html" %}
+    <!-- Register modale -->
+    {% include "app/html_templates/modals/registerModal.html" %}
 
-<!-- Profile modale -->
-{% include "app/html_templates/modals/profileModal.html" %}
+    <!-- Profile modale -->
+    {% include "app/html_templates/modals/profileModal.html" %}
 
 
-</body>
+    </body>
 {% endwith %}
 </html>
 
