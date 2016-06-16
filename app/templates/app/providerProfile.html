@@ -241,7 +241,7 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
         {% if provider_products %}
             {% for product in provider_products %}
                 <div class="col-md-4 col-sm-6 col-xxs-12">
-                    <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+                    <a href="{% url 'app:product' product.pk %}" class="fh5co-project-item to-animate">
                         <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
                         <div class="fh5co-text">
                             <h1>
