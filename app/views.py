@@ -99,7 +99,7 @@ class ProviderProfileView(generic.ListView):
                                                             'scenario_list_from_provider': Scenario.objects.filter(
                                                                 provider=(
                                                                     ProviderProfile.objects.get(
-                                                                        url_name='avm').owner.pk))
+                                                                        url_name=provider).owner.pk))
                                                             })
 
 

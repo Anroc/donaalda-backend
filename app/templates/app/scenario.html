@@ -171,16 +171,18 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
           {% endif %}
 
           <div class="col-md-4">
-            <div class="card" style="background-color:white; border-radius:5px">
-              <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ x.name }}</h4>
-                <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ x.provider }}</h6>
-              </div>
-              <img src="{{ x.image1.url }}" alt="" class="img-thumbnail">
-              <div class="card-block">
-                <p class="card-text" style="color:black; padding:5px">kurze beschreibung</p>
-              </div>
-            </div>
+              <a href="{% url 'app:product' x.pk %}">
+                <div class="card" style="background-color:white; border-radius:5px" >
+                  <div class="card-block" style="padding-top:10px; padding-bottom:10px">
+                    <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ x.name }}</h4>
+                    <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ x.provider }}</h6>
+                  </div>
+                  <img src="{{ x.image1.url }}" alt="" class="img-thumbnail">
+                  <div class="card-block">
+                    <p class="card-text" style="color:black; padding:5px">kurze beschreibung</p>
+                  </div>
+                </div>
+              </a>
           </div>
 
           {% if forloop.counter|divisibleby:3 %}
