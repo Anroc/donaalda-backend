@@ -39,8 +39,50 @@
               <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
                 <md-content class="md-padding">
                   <div layout="row" layout-align="center top">
-                    <div flex="nogrow" style="width: 400px">
-                      <h4>Please enter your user name and password</h4>
+                    <div flex>
+                      <h4>Haus oder Wohnung</h4>
+                      <md-input-container class="md-block">
+                        <label>Your user name here</label>
+                        <input ng-disabled="vm.stepData[0].data.completed" name="username" ng-model="vm.stepData[0].data.username" required />
+                        <div ng-messages="step1.username.$error">
+                          <div ng-message="required">
+                            User name is required to proceed on next step.
+                          </div>
+                        </div>
+                      </md-input-container>
+                      <md-input-container class="md-block">
+                        <label>Your password here</label>
+                        <input ng-disabled="vm.stepData[0].data.completed" type="password" name="username" ng-model="vm.stepData[0].data.password" required />
+                        <div ng-messages="step1.password.$error">
+                          <div ng-message="required">
+                            Password required to proceed on next step.
+                          </div>
+                        </div>
+                      </md-input-container>
+                    </div>
+                    <div flex>
+                      <h4>Quadratmeter</h4>
+                      <md-input-container class="md-block">
+                        <label>Your user name here</label>
+                        <input ng-disabled="vm.stepData[0].data.completed" name="username" ng-model="vm.stepData[0].data.username" required />
+                        <div ng-messages="step1.username.$error">
+                          <div ng-message="required">
+                            User name is required to proceed on next step.
+                          </div>
+                        </div>
+                      </md-input-container>
+                      <md-input-container class="md-block">
+                        <label>Kinder? Wenn ja, wie viele?</label>
+                        <input ng-disabled="vm.stepData[0].data.completed" type="password" name="username" ng-model="vm.stepData[0].data.password" required />
+                        <div ng-messages="step1.password.$error">
+                          <div ng-message="required">
+                            Password required to proceed on next step.
+                          </div>
+                        </div>
+                      </md-input-container>
+                    </div>
+                    <div flex>
+                      <h4>Kinder? Wenn ja, wie viele?</h4>
                       <md-input-container class="md-block">
                         <label>Your user name here</label>
                         <input ng-disabled="vm.stepData[0].data.completed" name="username" ng-model="vm.stepData[0].data.username" required />
