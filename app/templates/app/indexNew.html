@@ -134,25 +134,25 @@
 <header role="banner" id="fh5co-header">
     <div class="container">
         <div class="row">
-            <nav class="navbar navbar-default" >
-                  {% block messages %}
+            <nav class="navbar navbar-default">
+                {% block messages %}
                     {% if messages %}
                         {% for message in messages %}
                             {% if message.tags == 'error' %}
-                            <div class="alert alert-danger" fade>  <!-- singular -->
-                                <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                {{ message|safe }}
-                            </div>
+                                <div class="alert alert-danger" fade>  <!-- singular -->
+                                    <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{ message|safe }}
+                                </div>
 
                             {% else %}
                                 <div class="alert alert-{{ message.tags }}" fade>  <!-- singular -->
-                                <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                {{ message|safe }}
-                            </div>
-                            {%  endif %}
+                                    <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{ message|safe }}
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     {% endif %}
-                  {% endblock %}
+                {% endblock %}
                 <div class="navbar-header">
                     <!-- Mobile Toggle Menu Button -->
                     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
@@ -201,29 +201,29 @@
                             </li>
                         {% else %}
                             <!--TODO: Change these to admin (if allowed), logout and profile-->
-                          <li>
-                            <div class="btn-group">
-                              {% if user.is_staff %}
-                                <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                        data-show="tooltip" title="Verwaltung" data-placement="bottom"
-                                        onclick="admin()">
-                                  <i class="glyphicon glyphicon-cog"></i>
-                                </button>
-                              {% endif %}
-                              <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
-                              <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                      data-show="tooltip" title="Abmelden" data-placement="bottom"
-                                      onclick="logOut()">
-                                <i class="glyphicon glyphicon-log-out"></i>
-                              </button>
-                              <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                                      data-show="tooltip" title="Profil" data-placement="bottom"
-                                      data-toggle="modal"
-                                      data-target="#myModalProfile">
-                                <i class="glyphicon glyphicon-user"></i>
-                              </button>
-                            </div>
-                          </li>
+                            <li>
+                                <div class="btn-group">
+                                    {% if user.is_staff %}
+                                        <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                                data-show="tooltip" title="Verwaltung" data-placement="bottom"
+                                                onclick="admin()">
+                                            <i class="glyphicon glyphicon-cog"></i>
+                                        </button>
+                                    {% endif %}
+                                    <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Abmelden" data-placement="bottom"
+                                            onclick="logOut()">
+                                        <i class="glyphicon glyphicon-log-out"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                                            data-show="tooltip" title="Profil" data-placement="bottom"
+                                            data-toggle="modal"
+                                            data-target="#myModalProfile">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </button>
+                                </div>
+                            </li>
                         {% endif %}
                     </ul>
                 </div>
@@ -260,36 +260,35 @@
 </section>
 
 
-
 <!-- Intro with categories -->
 <section id="fh5co-intro">
     <div class="container">
         <div class="row row-bottom-padded-lg">
-                {% for category in latest_category_list %}
-                    <div class="fh5co-block to-animate"
-                         {% if category.backgroundPicture %}style="background-image:url({{ category.backgroundPicture.url }});{% endif %}">
-                        <div class="overlay-darker"></div>
-                        <div class="overlay"></div>
-                        <div class="fh5co-text">
-                            <i class="fh5co-intro-icon icon-{{ category.iconString }}"></i>
-                            <h2>
-                                {{ category.name }}
-                            </h2>
-                            <div style="height: 170px;">
-                                {{ category.description }}
-                            </div>
-                            <p>
-                                <a href="{% url 'app:category' category.name %}" class="btn btn-primary">
-                                    Ich will {{ category.name }}
-                                </a>
-                            </p>
+            {% for category in latest_category_list %}
+                <div class="fh5co-block to-animate"
+                     {% if category.backgroundPicture %}style="background-image:url({{ category.backgroundPicture.url }});{% endif %}">
+                    <div class="overlay-darker"></div>
+                    <div class="overlay"></div>
+                    <div class="fh5co-text">
+                        <i class="fh5co-intro-icon icon-{{ category.iconString }}"></i>
+                        <h2>
+                            {{ category.name }}
+                        </h2>
+                        <div style="height: 170px;">
+                            {{ category.description }}
                         </div>
+                        <p>
+                            <a href="{% url 'app:category' category.name %}" class="btn btn-primary">
+                                Ich will {{ category.name }}
+                            </a>
+                        </p>
                     </div>
-                {% empty %}
+                </div>
+            {% empty %}
                 <div>
                     no categories
                 </div>
-                {% endfor %}
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -389,9 +388,9 @@
                     </div>
                 </div>
             {% empty %}
-            <div class="center-block">
-                <i class="icon icon-thumbs-down"></i> Schade. Es wurden noch keine Kommentare geschrieben.
-            </div>
+                <div class="center-block">
+                    <i class="icon icon-thumbs-down"></i> Schade. Es wurden noch keine Kommentare geschrieben.
+                </div>
             {% endfor %}
         </div>
     </div>
@@ -418,39 +417,40 @@
         </div>
 
         <div class="row row-bottom-padded-sm">
-                {% for scenario in scenarios %}
-                    <div class="col-md-4 col-sm-6 col-xxs-12">
-                        <a href="{{ scenario.picture.url }}" class="fh5co-project-item image-popup to-animate">
-                            <img src="{{ scenario.picture.url }}" alt="Image" class="img-responsive">
-                            <div class="fh5co-text">
-                                <h1>
-                                    {{ scenario.name }}
-                                </h1>
-                                <h2>
-                                    {{ scenario.provider }}
-                                </h2>
-                                <h3>{{ scenario.scenario_product_set }}</h3>
-                                <h3>
-                                    {% for category in scenario.category_set.all %}
-                                        <p>
-                                            {{ category.name }}
-                                        </p>
-                                    {% endfor %}
-                                </h3>
-                                <h4> {{ scenario.description }}</h4>
-                            </div>
-                        </a>
-                    </div>
-                    <!--<div class="clearfix visible-sm-block"></div>-->
-                {% empty %}
+            {% for scenario in scenarios %}
+                <div class="col-md-4 col-sm-6 col-xxs-12">
+                    <a href="{{ scenario.picture.url }}" class="fh5co-project-item image-popup to-animate">
+                        <img src="{{ scenario.picture.url }}" alt="Image" class="img-responsive">
+                        <div class="fh5co-text">
+                            <h1>
+                                {{ scenario.name }}
+                            </h1>
+                            <h2>
+                                {{ scenario.provider }}
+                            </h2>
+                            <h3>{{ scenario.scenario_product_set }}</h3>
+                            <h3>
+                                {% for category in scenario.category_set.all %}
+                                    <p>
+                                        {{ category.name }}
+                                    </p>
+                                {% endfor %}
+                            </h3>
+                            <h4> {{ scenario.description }}</h4>
+                        </div>
+                    </a>
+                </div>
+                <!--<div class="clearfix visible-sm-block"></div>-->
+            {% empty %}
                 <div>
                     Es wurden noch keine Szenarien hinzugefügt.
                 </div>
-                {% endfor %}
+            {% endfor %}
         </div>
     </div>
 </section>
 
+{% comment %}
 <!-- not used products list -->
 <!--<section id="fh5co-work" data-section="products">
     <div class="container">
@@ -515,6 +515,7 @@
         </div>
     </div>
 </section>-->
+{% endcomment %}
 
 <!-- Wohnsituation -->
 <section id="fh5co-about" data-section="livingSituation">
@@ -609,30 +610,62 @@
                     <span class="fh5co-counter-label">Individuelle Konfigurationen</span>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="fh5co-counter to-animate">
-                    <i class="fh5co-counter-icon icon-book to-animate-2"></i>
+            {% if amount_scenarios %}
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="fh5co-counter to-animate">
+                        <i class="fh5co-counter-icon icon-book to-animate-2"></i>
+
+          <span class="fh5co-counter-number">{{ amount_scenarios }}</span>
+                        <span class="fh5co-counter-label">Szenarien</span>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="fh5co-counter to-animate">
+                        <i class="fh5co-counter-icon icon-book to-animate-2"></i>
+
           <span class="fh5co-counter-number js-counter" data-from="0" data-to="127" data-speed="1000"
-                data-refresh-interval="3">127</span>
-                    <span class="fh5co-counter-label">Szenarien</span>
+                data-refresh-interval="3">ERROR</span>
+                        <span class="fh5co-counter-label">Szenarien</span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="fh5co-counter to-animate">
-                    <i class="fh5co-counter-icon icon-gift to-animate-2"></i>
+            {% endif %}
+            {% if amount_products %}
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="fh5co-counter to-animate">
+                        <i class="fh5co-counter-icon icon-gift to-animate-2"></i>
+          <span class="fh5co-counter-number">{{ amount_products }}</span>
+                        <span class="fh5co-counter-label">Produkte</span>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="fh5co-counter to-animate">
+                        <i class="fh5co-counter-icon icon-gift to-animate-2"></i>
           <span class="fh5co-counter-number js-counter" data-from="0" data-to="1302" data-speed="2000"
-                data-refresh-interval="20">1302</span>
-                    <span class="fh5co-counter-label">Produkte</span>
+                data-refresh-interval="20">ERROR</span>
+                        <span class="fh5co-counter-label">Produkte</span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="fh5co-counter to-animate">
-                    <i class="fh5co-counter-icon icon-briefcase to-animate-2"></i>
+            {% endif %}
+            {% if amount_provider %}
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="fh5co-counter to-animate">
+                        <i class="fh5co-counter-icon icon-briefcase to-animate-2"></i>
+          <span class="fh5co-counter-number">{{ amount_provider }}</span>
+                        <span class="fh5co-counter-label">Hersteller</span>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="fh5co-counter to-animate">
+                        <i class="fh5co-counter-icon icon-briefcase to-animate-2"></i>
           <span class="fh5co-counter-number js-counter" data-from="0" data-to="52" data-speed="1000"
-                data-refresh-interval="5">52</span>
-                    <span class="fh5co-counter-label">Hersteller</span>
+                data-refresh-interval="5">ERROR</span>
+                        <span class="fh5co-counter-label">Hersteller</span>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 </section>

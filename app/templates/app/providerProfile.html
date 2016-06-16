@@ -83,29 +83,32 @@
     <!-- Main JS (Do not remove) -->
     <script src="{% static 'app/assets/js/main.js' %}"></script>
 
-  <script>
-    $(document).ready(function(){
-      $('[data-show="tooltip"]').tooltip();
-    });
-  </script>
-
-  <script>
-    function start() {
-      location.href = "/"
-    }
-    function logOut() {
-      location.href = "/logout"
-    }
-    function admin() {
-      window.open("/admin", "_blank")
-    }
-    function back() {
-      location.href = "/back";
-    }
-  </script>
     <script>
-$.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
-  </script>
+        $(document).ready(function () {
+            $('[data-show="tooltip"]').tooltip();
+        });
+    </script>
+
+    <script>
+        function start() {
+            location.href = "/"
+        }
+        function logOut() {
+            location.href = "/logout"
+        }
+        function admin() {
+            window.open("/admin", "_blank")
+        }
+        function back() {
+            location.href = "/back";
+        }
+    </script>
+    <script>
+        $.post("/updatepagehistory", {
+            lastpage: "{{request.META.HTTP_REFERER}}",
+            csrfmiddlewaretoken: "{{ csrf_token }}"
+        });
+    </script>
 </head>
 <body>
 
@@ -118,7 +121,8 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
                     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
                        data-target="#navbar"
                        aria-expanded="false" aria-controls="navbar"><i></i></a>
-                            <a class="navbar-brand" href="{% url 'app:indexnew' %}">                        <div>
+                    <a class="navbar-brand" href="{% url 'app:indexnew' %}">
+                        <div>
                             <img alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}"
                                  style="margin-bottom: 5px">
                             <span>Donaalda - Produktdetails</span>
@@ -127,7 +131,8 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
+                        <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a>
+                        </li>
                         <li class="active"><a href="#" data-nav-section="home"><span>Produkt</span></a></li>
                         <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
                         <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>
@@ -226,6 +231,49 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
     </div>
 </section>
 
+<section id="fh5co-work" data-section="information">
+    <div class="container">
+        <div class="row">
+            <div class="row row-bottom-padded-sm">
+                <h1 class="to-animate">Szenarien</h1>
+                {% if scenario_list_from_provider %}
+                    {% for scenario in scenario_list_from_provider %}
+
+                        <div class="col-md-4 col-sm-6 col-xxs-12">
+                            <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item to-animate">
+                                <img src="{{ scenario.picture.url }}" alt="Image" class="img-responsive">
+                                <div class="fh5co-text">
+                                    <h1>
+                                        {{ scenario.name }}
+                                    </h1>
+                                    <h2>
+                                        {{ scenario.provider }}
+                                    </h2>
+                                    <h3>{{ scenario.scenario_product_set }}</h3>
+                                    <h3>
+                                        {% for category in scenario.category_set.all %}
+                                            <p>
+                                                {{ category.name }}
+                                            </p>
+                                        {% endfor %}
+                                    </h3>
+                                    <h4> {{ scenario.description }}</h4>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="clearfix visible-sm-block"></div>
+                    {% endfor %}
+                {% else %}
+                    <div>
+                        no scenarios
+                    </div>
+                {% endif %}
+
+            </div>
+
+        </div>
+</section>
+
 <section id="fh5co-work" data-section="Produkte">
     <div class="container">
         <div class="row">
@@ -269,6 +317,7 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
         {% endif %}
     </div>
 </section>
+
 
 <section id="fh5co-testimonials" data-section="tecData">
     <div class="container">

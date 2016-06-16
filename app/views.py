@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .models import Category, Product, Scenario, ProviderProfile, Comment
+from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -24,6 +24,9 @@ class IndexViewNew(generic.DetailView):
                        'scenarios': Scenario.objects.all(),
                        'products': Product.objects.all(),
                        'comment': Comment.objects.filter(page_url='/')[:5],
+                       'amount_scenarios': Scenario.objects.all().count(),
+                       'amount_products': Product.objects.all().count(),
+                       'amount_provider': Provider.objects.all().count(),
                        })
 
 
@@ -93,6 +96,10 @@ class ProviderProfileView(generic.ListView):
                                                                     url_name=provider).owner.pk),
                                                             'comment': Comment.objects.filter(
                                                                 page_url='/provider/' + provider)[:5],
+                                                            'scenario_list_from_provider': Scenario.objects.filter(
+                                                                provider=(
+                                                                    ProviderProfile.objects.get(
+                                                                        url_name='avm').owner.pk))
                                                             })
 
 
