@@ -128,14 +128,31 @@
     <!-- Main JS (Do not remove) -->
     <script src="{% static 'app/assets/js/main.js' %}"></script>
 
-
 </head>
 <body>
 
 <header role="banner" id="fh5co-header">
     <div class="container">
         <div class="row">
-            <nav class="navbar navbar-default">
+            <nav class="navbar navbar-default" >
+                  {% block messages %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                            <div class="alert alert-danger" fade>  <!-- singular -->
+                                <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{ message|safe }}
+                            </div>
+
+                            {% else %}
+                                <div class="alert alert-{{ message.tags }}" fade>  <!-- singular -->
+                                <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{ message|safe }}
+                            </div>
+                            {%  endif %}
+                        {% endfor %}
+                    {% endif %}
+                  {% endblock %}
                 <div class="navbar-header">
                     <!-- Mobile Toggle Menu Button -->
                     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
@@ -234,13 +251,6 @@
                             Tipps.<br><br>Finde <b>Szenarien</b> die zu dir passen. Wähle <b>Produkte</b> von
                             verschiedenen <b>Herstellern</b>
                             und stelle dir dein Smart Home zusammen.</h2>
-                        {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
                     </div>
                 </div>
             </div>
@@ -248,6 +258,8 @@
     </div>
     <div class="slant"></div>
 </section>
+
+
 
 <!-- Intro with categories -->
 <section id="fh5co-intro">
