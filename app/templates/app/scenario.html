@@ -139,8 +139,8 @@
           <div class="col-md-8">
             {% if current_scenario %}
             <h1 class="text-left">{{ current_scenario.name }}</h1>
-                <!--{% for x in scenarios %}
-            <h2> Scenario-description: {{ x.description }}</h2>
+                <!--{% for x in current_scenario.scenario_product_set.products.all %}
+            <h2> Scenario-description: {{ x.name }}</h2>
                 {% endfor %}-->
             <h3 class="text-left" style="color: #ddd; margin-top: -20px;">{{ current_scenario.provider }}</h3>
             {% endif %}
@@ -210,64 +210,32 @@
   <!--product-slider-div-->
   <div class="container-fluid">
     <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position:relative"> <!--style damit die punkt-liste unten im parent-div haftet-->
-      <!-- Indicators -->
-      <ol class="carousel-indicators" style="margin-bottom:0; position:absolute; bottom:0"> <!--style damit die punkt-liste unten im parent-div haftet-->
+      <!-- Indicators
+      <ol class="carousel-indicators" style="margin-bottom:0; position:absolute; bottom:0"> <!--style damit die punkt-liste unten im parent-div haftet
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
-      </ol>
+      </ol>-->
 
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
 
+        {% if current_scenario %}
+        {% for x in current_scenario.scenario_product_set.products.all %}
+
+        {% if forloop.counter == 1 %}
         <div class="item active row">
-          <div class="col-md-4">
-            <div class="card" style="background-color:white; border-radius:5px">
-              <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                <h4 class="card-title" style="text-align:center; margin-bottom:0">Produkt 1</h4>
-                <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">Hersteller</h6>
-              </div>
-              <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="" class="img-thumbnail">
-              <div class="card-block">
-                <p class="card-text" style="color:black; padding:5px">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="background-color:white; border-radius:5px">
-              <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                <h4 class="card-title" style="text-align:center; margin-bottom:0">Produkt 2</h4>
-                <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">Hersteller</h6>
-              </div>
-              <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="" class="img-thumbnail">
-              <div class="card-block">
-                <p class="card-text" style="color:black; padding:5px">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="background-color:white; border-radius:5px">
-              <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                <h4 class="card-title" style="text-align:center; margin-bottom:0">Produkt 3</h4>
-                <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">Hersteller</h6>
-              </div>
-              <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="" class="img-thumbnail">
-              <div class="card-block">
-                <p class="card-text" style="color:black; padding:5px">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        {% else %}
         <div class="item row">
+        {% endif %}
           <div class="col-md-4">
             <div class="card" style="background-color:white; border-radius:5px">
               <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                <h4 class="card-title" style="text-align:center; margin-bottom:0">Produkt 1</h4>
-                <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">Hersteller</h6>
+                <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ x.name }}</h4>
+                <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ x.provider }}</h6>
               </div>
-              <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="" class="img-thumbnail">
+              <img src="{{ x.image1 }}" alt="" class="img-thumbnail">
               <div class="card-block">
-                <p class="card-text" style="color:black; padding:5px">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text" style="color:black; padding:5px">{{ x.description }}</p>
               </div>
             </div>
           </div>
@@ -296,7 +264,8 @@
             </div>
           </div>
         </div>
-
+      {% endfor %}
+      {% endif %}
       </div>
 
       <!-- Left and right controls -->
