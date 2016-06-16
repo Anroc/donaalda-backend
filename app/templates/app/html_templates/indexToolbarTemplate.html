@@ -1,80 +1,102 @@
-<md-toolbar class="md-primary" style="position:fixed;" layout="row" layout-align="center end"
-            md-shrink-speed-factor="0.03" md-scroll-shrink="true">
-  <div flex flex-sm="100" flex-gt-sm="95" flex-gt-md="80" layout="column">
-    <div layout="row" ng-controller="{% block ng_controller_authenticator %}authenticationController{% endblock %}">
-      <h1 class="white"><a href="{% url 'app:index' %}">DONAALDA</a></h1>
-      <span flex></span>
-      <!--TODO: link to actual django template in html_html_templates -->
-      <md-button style="color:seashell" md-align="center-center">
-        {% if not message == ""%}
-            {% if state == "success" %}
-                Welcome {{ message  }}
-            {% else %}
-                {{ message }}
-            {% endif %}
-        {% endif %}
-      </md-button>
-      {% if not request.user.is_authenticated %}
-      <md-button style="color:seashell" ng-click="showRegistrationForm($event)">
-        Register
-      </md-button>
-      <md-button style="color:seashell" ng-click="showLoginForm($event)">
-        Log In
-      </md-button>
-      {% else %}
-      <md-button style="color:seashell" ng-click="openProfile()">
-        Profile
-      </md-button>
-      {% csrf_token %}
-      <md-button style="color:seashell; margin:auto" md-align="center-center" href="{% url 'app:logout' %}">
-        Logout
-      </md-button>
-      {% endif %}
-    </div>
-    {% url 'app:index' as app_index %}
-    {% if request.get_full_path == app_index %}
-    <span flex></span>
-    <div class="md-padding" layout="column" layout-padding style="height: 0px;">
-      <md-tabs md-selected="currentTab" md-stretch-tabs="always" class="md-primary md-hue-1" md-dynamic-height
-      md-border-bottom>
-        <md-tab id="1" label="Nutzer">
-          {% include "app/html_templates/categoryGridTemplate.html" %}
-        </md-tab>
-        <md-tab id="2" label="Hersteller">
-          {% include "app/html_templates/providerInfoTemplate.html" %}
-        </md-tab>
-      </md-tabs>
-    </div>
-    {% endif %}
-  </div>
-</md-toolbar>
-<!--
-<md-content>
-    <div flex flex-sm="100" flex-gt-sm="95" flex-gt-md="80" layout="column">
-        <div layout="row" ng-controller="authenticationController">
-            <h1 class="white">DONAALDA</h1>
-            <span flex></span>
-
-            <md-button style="color:seashell" ng-click="showLoginForm($event)">
-                Log In
-            </md-button>
-            <md-button style="color:seashell"
-                       ng-click="showRegistrationForm($event)">
-                Register
-            </md-button>
-            <md-button style="color:seashell" ng-click="openProfile()">
-                Profile
-            </md-button>
+{% load staticfiles %}
+<header role="banner" id="fh5co-header">
+  <div class="container">
+    <div class="row">
+      <nav class="navbar navbar-default" >
+        {% block messages %}
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'error' %}
+        <div class="alert alert-danger" fade>  <!-- singular -->
+          <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{ message|safe }}
         </div>
-        <span flex></span>
-        <md-tabs md-selected="currentTab" md-stretch-tabs="always" class="md-primary md-hue-1">
-            <md-tab id="1">
-                <md-tab-label style="color:seashell">Nutzer</md-tab-label>
-            </md-tab>
-            <md-tab id="2">
-                <md-tab-label style="color:seashell">Hersteller</md-tab-label>
-            </md-tab>
-        </md-tabs>
+
+        {% else %}
+        <div class="alert alert-{{ message.tags }}" fade>  <!-- singular -->
+          <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{ message|safe }}
+        </div>
+        {%  endif %}
+        {% endfor %}
+        {% endif %}
+        {% endblock %}
+        <div class="navbar-header">
+          <!-- Mobile Toggle Menu Button -->
+          <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
+             data-target="#navbar"
+             aria-expanded="false" aria-controls="navbar"><i></i></a>
+          <a class="navbar-brand" href="index.html">
+            <div>
+              <img alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}"
+                   style="margin-bottom: 5px">
+              <span>Donaalda</span>
+            </div>
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#" data-nav-section="home"><span>Start</span></a></li>
+            <li><a href="#" data-nav-section="whatsIsDonaalda"><span>Was macht Donaalda</span></a></li>
+            <li><a href="#" data-nav-section="comments"><span>Bewertungen</span></a></li>
+            <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
+            <li><a href="#" data-nav-section="livingSituation"><span>Wohnsituation</span></a></li>
+            <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
+            <!--<li>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-xs navbar-btn">Apple</button>
+                <button type="button" class="btn btn-primary btn-xs navbar-btn">Samsung</button>
+                <button type="button" class="btn btn-primary btn-xs navbar-btn">Sony</button>
+              </div>
+            </li>-->
+
+            {% if not request.user.is_authenticated %}
+            <li>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Anmelden" data-placement="bottom"
+                        data-toggle="modal"
+                        data-target="#myModalLogin">
+                  <i class="glyphicon glyphicon-log-in"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Registrieren" data-placement="bottom"
+                        data-toggle="modal"
+                        data-target="#myModalRegister">
+                  <i class="glyphicon glyphicon-new-window"></i>
+                </button>
+              </div>
+            </li>
+            {% else %}
+            <!--TODO: Change these to admin (if allowed), logout and profile-->
+            <li>
+              <div class="btn-group">
+                {% if user.is_staff %}
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Verwaltung" data-placement="bottom"
+                        onclick="admin()">
+                  <i class="glyphicon glyphicon-cog"></i>
+                </button>
+                {% endif %}
+                <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Abmelden" data-placement="bottom"
+                        onclick="logOut()">
+                  <i class="glyphicon glyphicon-log-out"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Profil" data-placement="bottom"
+                        data-toggle="modal"
+                        data-target="#myModalProfile">
+                  <i class="glyphicon glyphicon-user"></i>
+                </button>
+              </div>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
     </div>
-</md-content>
--->
+  </div>
+</header>
+
