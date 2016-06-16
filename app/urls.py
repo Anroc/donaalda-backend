@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^products/(?P<pk>[0-9]+)/$', views.ProductView.as_view(), name='product'),
     url(r'^provider/(?P<provider_url_name>[\w]+)$', views.ProviderProfileView.as_view(), name='provider_profile'),
     url(r'^profile$', views.profile, name='profile'),
+    url(r'^password$', views.change_password, name='password_changing'),
     url(r'^(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
     # for frontend testing
     url(r'^app/frontendtesting$', views.TestView.as_view(), name='frontendtesting'),
