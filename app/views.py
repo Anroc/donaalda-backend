@@ -93,6 +93,10 @@ class ProviderProfileView(generic.ListView):
                                                                     url_name=provider).owner.pk),
                                                             'comment': Comment.objects.filter(
                                                                 page_url='/provider/' + provider)[:5],
+                                                            'scenario_list_from_provider': Scenario.objects.filter(
+                                                                provider=(
+                                                                    ProviderProfile.objects.get(
+                                                                        url_name='avm').owner.pk))
                                                             })
 
 
