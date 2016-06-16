@@ -117,3 +117,25 @@
 </script>
 <!-- Main JS (Do not remove) -->
 <script src="{% static 'app/assets/js/main.js' %}"></script>
+
+<script>
+  function logOut() {
+    location.href = "/logout"
+  }
+
+  function admin() {
+    location.href = "/admin"
+  }
+  function start() {
+    location.href = "/"
+  }
+</script>
+
+<script>
+  function back() {
+    location.href = "/back";
+  }
+</script>
+<script>
+  $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
+</script>
