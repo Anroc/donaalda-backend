@@ -1,0 +1,54 @@
+{% load staticfiles %}
+<section id="fh5co-work" data-section="scenarios">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Szenarien</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>
+              Sie helfen Dir für einen bestimmten Anwendungszweck die richtige Lösung zu finden. Dabei
+              gehen
+              die Szenarien auf unterschiedliche Möglichkeiten ein, um Dein <b>Smart Home</b>
+              auf Deine Bedürfnisse anzupassen.
+              Hier siehst Du die neusten Szenarien in Donaalda. Für weitere, wähle <a href="#fh5co-home">oben</a>
+              eine Kategorie.
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-bottom-padded-sm">
+      {% for scenario in scenarios %}
+      <div class="col-md-4 col-sm-6 col-xxs-12">
+        <a href="{{ scenario.picture.url }}" class="fh5co-project-item image-popup to-animate">
+          <img src="{{ scenario.picture.url }}" alt="Image" class="img-responsive">
+          <div class="fh5co-text">
+            <h1>
+              {{ scenario.name }}
+            </h1>
+            <h2>
+              {{ scenario.provider }}
+            </h2>
+            <h3>{{ scenario.scenario_product_set }}</h3>
+            <h3>
+              {% for category in scenario.category_set.all %}
+              <p>
+                {{ category.name }}
+              </p>
+              {% endfor %}
+            </h3>
+            <h4> {{ scenario.description }}</h4>
+          </div>
+        </a>
+      </div>
+      <!--<div class="clearfix visible-sm-block"></div>-->
+      {% empty %}
+      <div>
+        Es wurden noch keine Szenarien hinzugefügt.
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

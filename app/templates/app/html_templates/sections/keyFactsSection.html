@@ -1,0 +1,79 @@
+{% load staticfiles %}
+<section id="fh5co-counters" style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
+         data-stellar-background-ratio="0.5">
+  <div class="fh5co-overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center to-animate">
+        <h2>Key Facts</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="fh5co-counter to-animate">
+          <i class="fh5co-counter-icon icon-search to-animate-2"></i>
+          <span class="fh5co-counter-number js-counter" data-from="0" data-to="13824" data-speed="2000"
+                data-refresh-interval="50">13824</span>
+          <span class="fh5co-counter-label">Individuelle Konfigurationen</span>
+        </div>
+      </div>
+      {% if amount_scenarios %}
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="fh5co-counter to-animate">
+          <i class="fh5co-counter-icon icon-book to-animate-2"></i>
+
+          <span class="fh5co-counter-number">{{ amount_scenarios }}</span>
+          <span class="fh5co-counter-label">Szenarien</span>
+        </div>
+      </div>
+      {% else %}
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="fh5co-counter to-animate">
+          <i class="fh5co-counter-icon icon-book to-animate-2"></i>
+
+          <span class="fh5co-counter-number js-counter" data-from="0" data-to="127" data-speed="1000"
+                data-refresh-interval="3">ERROR</span>
+          <span class="fh5co-counter-label">Szenarien</span>
+        </div>
+      </div>
+      {% endif %}
+      {% if amount_products %}
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="fh5co-counter to-animate">
+          <i class="fh5co-counter-icon icon-gift to-animate-2"></i>
+          <span class="fh5co-counter-number">{{ amount_products }}</span>
+          <span class="fh5co-counter-label">Produkte</span>
+        </div>
+      </div>
+      {% else %}
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="fh5co-counter to-animate">
+          <i class="fh5co-counter-icon icon-gift to-animate-2"></i>
+          <span class="fh5co-counter-number js-counter" data-from="0" data-to="1302" data-speed="2000"
+                data-refresh-interval="20">ERROR</span>
+          <span class="fh5co-counter-label">Produkte</span>
+        </div>
+      </div>
+      {% endif %}
+      {% if amount_provider %}
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="fh5co-counter to-animate">
+          <i class="fh5co-counter-icon icon-briefcase to-animate-2"></i>
+          <span class="fh5co-counter-number">{{ amount_provider }}</span>
+          <span class="fh5co-counter-label">Hersteller</span>
+        </div>
+      </div>
+      {% else %}
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="fh5co-counter to-animate">
+          <i class="fh5co-counter-icon icon-briefcase to-animate-2"></i>
+          <span class="fh5co-counter-number js-counter" data-from="0" data-to="52" data-speed="1000"
+                data-refresh-interval="5">ERROR</span>
+          <span class="fh5co-counter-label">Hersteller</span>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
