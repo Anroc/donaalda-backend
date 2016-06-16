@@ -182,11 +182,11 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
           </p>
         </div>
         <div class="col-md-4">
-          <img style="height:auto; width:100%" src="{{scen.image}}" alt="{{scen.image}}">
+          <img style="height:auto; width:100%" src="{{scen.image.url}}" alt="{{scen.image}}">
         </div>
       {% else %}
         <div class="col-md-4">
-          <img style="height:auto; width:100%" src="{{scen.image}}" alt="{{scen.image}}">
+          <img style="height:auto; width:100%" src="{{scen.image.url}}" alt="{{scen.image}}">
         </div>
         <div class="col-md-8">
           <p>
@@ -216,14 +216,14 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
     </div>
   </div>
 
-  <!--product-slider-div-->
+  <!--product-slider-div-------------------------------------------------funzt so noch nicht, ist aber in arbeit-->
   <div class="container-fluid">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position:relative"> <!--style damit die punkt-liste unten im parent-div haftet-->
-      <!-- Indicators
-      <ol class="carousel-indicators" style="margin-bottom:0; position:absolute; bottom:0"> <!--style damit die punkt-liste unten im parent-div haftet
+    <div id="myCarousel" class="carousel slide" data-ride="carousel"> <!--position:relative damit die punkt-liste unten im parent-div haftet-->
+      <!-- Indicators-->
+      <ol class="carousel-indicators" style="margin-bottom:0; position:absolute; bottom:0"> <!--style damit die punkt-liste unten im parent-div haftet-->
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
-      </ol>-->
+      </ol>
 
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
@@ -231,11 +231,16 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
         {% if current_scenario %}
         {% for x in current_scenario.scenario_product_set.products.all %}
 
-        {% if forloop.counter == 1 %}
-        <div class="item active row">
-        {% else %}
-        <div class="item row">
-        {% endif %}
+          {% if forloop.counter == 1 %} <!--beim ersten slide muss die klasse active hinzugefügt werden, ab dem nächsten nicht mehr-->
+              <div class="item active row">
+          {% else %}
+            {{forloop.counter|add:"-1"}} <!--bei jedem durch 3 teilbarem "index-1" muss ein neuer slide geöffnet werden-->
+            {% if forloop.counter|divisibleby:3 %}
+              <div class="item row">
+            {% endif %}
+            {{forloop.counter|add:"1"}} <!--die -1 war nur um zu checken ob der slide geöffnet werden musste und wird wieder auf seinen wert gesetzt-->
+          {% endif %}
+
           <div class="col-md-4">
             <div class="card" style="background-color:white; border-radius:5px">
               <div class="card-block" style="padding-top:10px; padding-bottom:10px">
@@ -244,37 +249,16 @@ $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfm
               </div>
               <img src="{{ x.image1.url }}" alt="" class="img-thumbnail">
               <div class="card-block">
-                <p class="card-text" style="color:black; padding:5px">{{ x.description }}</p>
+                <p class="card-text" style="color:black; padding:5px">kurze beschreibung</p>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card" style="background-color:white; border-radius:5px">
-              <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                <h4 class="card-title" style="text-align:center; margin-bottom:0">Produkt 2</h4>
-                <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">Hersteller</h6>
-              </div>
-              <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="" class="img-thumbnail">
-              <div class="card-block">
-                <p class="card-text" style="color:black; padding:5px">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
+
+          {% if forloop.counter|divisibleby:3 %}
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="background-color:white; border-radius:5px">
-              <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                <h4 class="card-title" style="text-align:center; margin-bottom:0">Produkt 3</h4>
-                <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">Hersteller</h6>
-              </div>
-              <img src="../../../static/app/assets/resources/not_so_smart.jpg" alt="" class="img-thumbnail">
-              <div class="card-block">
-                <p class="card-text" style="color:black; padding:5px">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-      {% endif %}
+          {% endif %}
+        {% endfor %}
+        {% endif %}
       </div>
 
       <!-- Left and right controls -->
