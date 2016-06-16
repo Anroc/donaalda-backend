@@ -1,49 +1,32 @@
-<div id="gridContainer" ng-controller="{% block ng_controller_grid %}gridController as ctrl{% endblock %}" ng-cloak>
-
-  <md-content class="md-padding">
-    <md-grid-list
-      md-cols-gt-md="2" md-cols-sm="2" md-cols-md="2" md-row-height="2:1" md-gutter="0px">
-      {% if latest_category_list %}
+{% load staticfiles %}
+<section id="fh5co-intro">
+  <div class="container">
+    <div class="row row-bottom-padded-lg">
       {% for category in latest_category_list %}
-      <md-grid-tile>
-        <md-button href="{% url 'app:category' category.name %}">
-          <!--DONE: fix alternative image, add static alternative image-->
-          <!--img src={{category.picture.url}} alt="None" height="200" width="300"-->
-          <!--TODO: Frontend format and center django element below img-->
-          {% if category.name == "Comfort" %}
-          <i class="material-icons" ng-style="{'color':'forestgreen','height' : '250px', 'font-size':'250px'}">
-            tv
-          </i>
-          {% elif category.name == "Security" %}
-          <i class="material-icons" ng-style="{'color':'forestgreen','height' : '250px', 'font-size':'250px'}">
-            lock
-          </i>
-          {% elif category.name == "Health" %}
-          <i class="material-icons" ng-style="{'color':'forestgreen','height' : '250px', 'font-size':'250px'}">
-            favorite
-          </i>
-          {% elif category.name == "Energy" %}
-          <i class="material-icons" ng-style="{'color':'forestgreen','height' : '250px', 'font-size':'250px'}">
-            lightbulb_outline
-          </i>
-          {% else %}
-          <img src={{category.picture.url}} alt="None" height="200" width="300">
-          {% endif %}
-          {% if category.name == "Security" or category.name == "Health" %}
-          <md-tooltip md-direction="top">
-            {{category.name}}
-          </md-tooltip>
-          {% else %}
-          <md-tooltip md-direction="bottom">
-            {{category.name}}
-          </md-tooltip>
-          {% endif %}
-        </md-button>
-      </md-grid-tile>
+      <div class="fh5co-block to-animate"
+           {% if category.backgroundPicture %}style="background-image:url({{ category.backgroundPicture.url }});{% endif %}">
+        <div class="overlay-darker"></div>
+        <div class="overlay"></div>
+        <div class="fh5co-text">
+          <i class="fh5co-intro-icon icon-{{ category.iconString }}"></i>
+          <h2>
+            {{ category.name }}
+          </h2>
+          <div style="height: 170px;">
+            {{ category.description }}
+          </div>
+          <p>
+            <a href="{% url 'app:category' category.name %}" class="btn btn-primary">
+              Ich will {{ category.name }}
+            </a>
+          </p>
+        </div>
+      </div>
+      {% empty %}
+      <div>
+        no categories
+      </div>
       {% endfor %}
-      {% else %}
-      <p>No categories are available</p>
-      {% endif %}
-    </md-grid-list>
-  </md-content>
-</div>
+    </div>
+  </div>
+</section>
