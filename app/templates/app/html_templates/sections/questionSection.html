@@ -10,7 +10,7 @@
 <script src="{% static 'app/index-app.js' %}"></script>
 <section id="fh5co-intro" data-section="questions"
          ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
-         ng-controller="{% block ng_controller_theme %}categoryController as vm{% endblock %}"
+         ng-controller="{% block ng_controller_theme %}questionController as vm{% endblock %}"
          ng-cloak>
   <div class="container">
     <div class="row">
@@ -37,23 +37,27 @@
                   <div flex>
                     <h4>Quadratmeter</h4>
                     <div layout="row">
-                      <div flex="80">
-                        <md-slider class="md-primary" flex min="0" max="255" ng-model="color.blue"
+                      <div flex="60">
+                        <md-slider class="md-primary" flex min="0" max="255" ng-model="data.square_meters"
                                    aria-label="blue" id="blue-slider"></md-slider>
                       </div>
                       <div flex="20" layout layout-align="center center" style="margin-right: 10px;">
-                        <input flex type="number" ng-model="color.blue" aria-label="blue"
+                        <input flex type="number" ng-model="data.square_meters" aria-label="blue"
                                aria-controls="blue-slider">
+                      </div>
+                      <div flex="10" style="text-align: justify">
+                        m²
+                      </div>
+                      <div flex="10">
+
                       </div>
                     </div>
                   </div>
                   <div flex>
                     <h4>Kinder</h4>
                     <div layout>
-                      <md-slider flex md-discrete ng-model="rating" step="1" min="0" max="5"
-                                 aria-label="rating"></md-slider>
                       <div flex="20" layout layout-align="center center">
-                        <input flex type="number" ng-model="rating" aria-label="rating"
+                        <input flex type="number" ng-model="data.children" aria-label="rating"
                                aria-controls="rating-slider">
                       </div>
                     </div>
