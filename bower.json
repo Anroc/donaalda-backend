@@ -1,0 +1,23 @@
+{
+  "name": "advisor",
+  "authors": [
+    "Oskar Schlösinger <o.schloesinger@gmx.de>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "backend/advisor/app/static/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "md-steppers": "^0.2.4"
+  }
+}
