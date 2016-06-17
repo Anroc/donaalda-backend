@@ -137,9 +137,37 @@
   </div>
 </header>
 
+<section id="fh5co-home" data-stellar-background-ratio="0.5" {% if current_scenario.picture %}
+         style="background-image:url({{ current_scenario.picture.url }}); {% endif %}">
+  <div class="gradient">
+    <div class="container">
+      <div class="text-wrap">
+        <div class="text-inner">
+          <div class="row">
+            <div class="col-md-12 text-left">
+              {% if current_scenario %}
+              <h1 class="to-animate">
+                {{ current_scenario.name }}
+              </h1>
+              <h3 class="to-animate" style="color: #ddd; margin-top: -20px;">
+                {{ current_scenario.provider }}
+              </h3>
+              <h2 class="to-animate">
+                {{ current_scenario.description }}
+              </h2>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slant"></div>
+</section>
+
 <section id="fh5co-page" data-section="home"
-         style="background-image: url({% static 'app/assets/images/full_image_2.jpg' %});"
-         data-stellar-background-ratio="0.5">
+         data-stellar-background-ratio="0.5" {% if current_scenario.picture %}
+         style="background-image:url({{ current_scenario.picture.url }}); {% endif %}">
   <div class="gradient"></div>
   <div class="container">
     <div class="text-wrap">
