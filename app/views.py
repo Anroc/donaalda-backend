@@ -258,64 +258,96 @@ def register_user(request):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return render(request, 'app/html_templates/registrationTemplate.html', )
 
-
 @csrf_protect
-@require_http_methods(["GET", "POST"])
+@require_http_methods("POST")
 def profile(request):
-    username = request.POST.get('username')
-    passwordOld = request.POST.get('password_old')
-    passwordNew = request.POST.get('password_new')
-    passwordDelete = request.POST.get('password_delete')
+    user = request.user
     email = request.POST.get('email')
     firstname = request.POST.get('firstname')
     lastname = request.POST.get('lastname')
 
-    if not User.objects.filter(username=username).exists():  # existiert nicht
+    if user is None or not User.objects.filter(username=user.username).exists():  # existiert nicht
         messages.error(request, 'Benutzer existiert nicht!')
-        HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
     else:
-        user = User.objects.get(username=username)
+        if firstname and not user.first_name:
+            user.first_name = firstname
+            messages.success(request, 'Ihr Vorname wurde erfolgreich geändert')
 
-    if not (passwordOld or passwordNew or passwordDelete or email or firstname or lastname):
-        messages.error(request, 'Bitte alle Felder ausfüllen!')
-        HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        elif lastname and not user.last_name == lastname:
+            user.last_name = lastname
+            messages.success(request, 'Ihr Nachname wurde erfolgreich geändert')
 
-    if user.check_password(passwordDelete):  # delete account
-        user.delete()
-        messages.success(request, 'Profil erfolgreich gelöscht!')
-        HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-    if firstname:
-        user.first_name = firstname
-
-    if lastname:
-        user.last_name = lastname
-
-    if email:
-        user.email = email
-
-    user.save()
-
-    if passwordOld:
-        if user.check_password(passwordOld):  # change password
-            if passwordNew:
-                user.set_password(passwordNew)
-                user.save()
-                user = authenticate(username=username, password=passwordNew)
-                login(request, user)
-                messages.success(request, 'Ihr Passwort wurde erfolgreich verändert!')
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-            else:
-                messages.error(request, 'Bitte alle Felder ausfüllen!')
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        elif email and not user.email == email:
+            user.email = email
+            messages.success(request, 'Ihre Email-Adresse wurde erfolgreich geändert')
         else:
-            messages.error(request, 'Angegebenes Passwort falsch!')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            messages.info(request, "Es wurden keine Informationen geändert")
+
+        user.save()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+@csrf_protect
+@require_http_methods("POST")
+def change_password(request):
+    user = request.user
+    password_old = request.POST.get('password_old')
+    password_new = request.POST.get('password_new')
+    password_repeat = request.POST.get('password_new_repeat')
+
+    if user is None and not User.objects.filter(username=user.username).exists():
+
+        messages.error(request, 'Benutzer existiert nicht!')
+
+    elif password_old is None or password_new is None or password_repeat is None:
+
+        messages.error(request, 'Bitte alle Felder ausfüllen!')
+
+    elif user.check_password(password_old):
+
+        if password_new == password_repeat:
+
+            user.set_password(password_new)
+            user.save()
+            messages.success(request, 'Passwort wurde erfolgreich geändert')
+            logout(request)
+            messages.success(request, 'Bitte melden sie sich mit ihrem neuen Passwort an')
+
+        else:
+
+            messages.error(request, 'Die neuen Passwörter haben nicht übereingestimmt')
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+@csrf_protect
+@require_http_methods("POST")
+def delete_account(request):
+    user = request.user
+    password = request.POST.get("password")
+
+    if user is None or not User.objects.filter(username=user.username).exists():
+
+        messages.error(request, "Der angebene Nutzername existiert nicht.")
+
+    elif user.check_password(password):
+
+        if user.delete():
+
+            messages.success(request,"Ihr Konto wurde erfolgreich gelöscht")
+
+        else:
+
+            messages.error(request, "Beim Löschen ihres Konto trat ein Fehler auf."
+                                    "Bitte wenden Sie sich an den Betreiber.")
+
+        logout(request)
+
     else:
-        if passwordNew:
-            messages.error(request, 'Bitte alle Felder ausfüllen!')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    messages.success(request, 'Ihr Profil wurde erfolgreich verändert!')
+
+        messages.error(request, "Falsches Passwort")
+
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 

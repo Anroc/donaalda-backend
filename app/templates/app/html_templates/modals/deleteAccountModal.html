@@ -1,0 +1,31 @@
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form action="{% url 'app:deleteAccount' %}" method="post">
+        {% csrf_token %}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+          <h3 class="modal-title" id="myModalLabel">Konto löschen</h3>
+        </div>
+        <div>
+          <div>
+              Wenn es ist sehr schade, das sie uns verlassen wollen. <br>
+              Wir würden uns freuen, wenn sie uns mitteilen, warum Sie uns verlassen. <br>
+              <a href="mailto:no_reply@connected-living.de">E-Mail</a>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2"><i class="icon-key"></i></span>
+            <input type="password" class="form-control" name="password" placeholder="Passwort"
+                   aria-describedby="basic-addon2" value="{{ password }}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+          <button type="submit" class="btn btn-primary">Los gehts</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
