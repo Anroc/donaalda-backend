@@ -9,8 +9,85 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js"> <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DONAALDA - Produktübersicht - {{ product.name }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content=""/>
+  <meta name="keywords" content=""/>
+  <meta name="author" content=""/>
 
-  {% include "app/html_templates/header/headerTemplate.html" %}
+
+  <!-- Facebook and Twitter integration -->
+  <meta property="og:title" content=""/>
+  <meta property="og:image" content=""/>
+  <meta property="og:url" content=""/>
+  <meta property="og:site_name" content=""/>
+  <meta property="og:description" content=""/>
+  <meta name="twitter:title" content=""/>
+  <meta name="twitter:image" content=""/>
+  <meta name="twitter:url" content=""/>
+  <meta name="twitter:card" content=""/>
+
+  <!--link rel="stylesheet" href="{% static 'app/index-style.css' %}"-->
+  <script src="{% static 'app/index-app.js' %}"></script>
+
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="shortcut icon" href="{% static 'app/favicon.ico' %}">
+
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet'
+        type='text/css'>
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="{% static 'app/assets/css/animate.css' %}">
+  <!-- Icomoon Icon Fonts-->
+  <link rel="stylesheet" href="{% static 'app/assets/css/icomoon.css' %}">
+  <!-- Simple Line Icons -->
+  <link rel="stylesheet" href="{% static 'app/assets/css/simple-line-icons.css' %}">
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" href="{% static 'app/assets/css/magnific-popup.css' %}">
+  <!-- Bootstrap  -->
+  <link rel="stylesheet" href="{% static 'app/assets/css/bootstrap.css' %}">
+
+  <link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
+
+  <!-- Modernizr JS -->
+  <script src="{% static 'app/assets/js/modernizr-2.6.2.min.js' %}"></script>
+  <!-- FOR IE9 below -->
+  <!--[if lt IE 9]>
+  <script src="{% static 'app/assets/js/respond.min.js' %}"></script>
+  <![endif]-->
+
+
+  <!-- jQuery -->
+  <script src="{% static 'app/assets/js/jquery.min.js' %}"></script>
+  <!-- jQuery Easing -->
+  <script src="{% static 'app/assets/js/jquery.easing.1.3.js' %}"></script>
+  <!-- Bootstrap -->
+  <script src="{% static 'app/assets/js/bootstrap.min.js' %}"></script>
+  <!-- Waypoints -->
+  <script src="{% static 'app/assets/js/jquery.waypoints.min.js' %}"></script>
+  <!-- Stellar Parallax -->
+  <script src="{% static 'app/assets/js/jquery.stellar.min.js' %}"></script>
+  <!-- Counter -->
+  <script src="{% static 'app/assets/js/jquery.countTo.js' %}"></script>
+  <!-- Magnific Popup -->
+  <script src="{% static 'app/assets/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'app/assets/js/magnific-popup-options.js' %}"></script>
+  <!-- Google Map -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
+  <script src="{% static 'app/assets/js/google_map.js' %}"></script>
+
+  <!-- Main JS (Do not remove) -->
+  <script src="{% static 'app/assets/js/main.js' %}"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('[data-show="tooltip"]').tooltip();
+    });
+  </script>
 
   <script>
     function provider() {
@@ -101,7 +178,6 @@
                         data-toggle="modal"
                         data-target="#myModalProfile">
                   <i class="glyphicon glyphicon-user"></i>
-
                 </button>
               </div>
             </li>
@@ -116,122 +192,272 @@
 <section id="fh5co-page" data-section="home"
          style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
          data-stellar-background-ratio="0.5">
-    <div class="container">
-        <div class="text-wrap">
-            <div class="text-inner">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h1 class="text-left">{{ product.name }}</h1>
-                        <h3 class="text-left"
-                            style="color: #ddd; margin-top: -20px;">{{ product.product_type.type_name }}</h3>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="panel panel-default pull-right"
-                             style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
-                            <div class="btn">
-                                <img style="max-height: 100%; max-width: 100%;"
-                                     onclick="provider()"
-                                     src="{{ product.provider.providerprofile.logo_image.url }}"
-                                     alt="providerImg">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="container">
+    <div class="text-wrap">
+      <div class="text-inner">
+        <div class="row">
+          <div class="col-md-8">
+            <h1 class="text-left">{{ product.name }}</h1>
+            <h3 class="text-left"
+                style="color: #ddd; margin-top: -20px;">{{ product.product_type.type_name }}</h3>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-default pull-right"
+                 style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
+              <div class="btn">
+                <img style="max-height: 100%; max-width: 100%;"
+                     onclick="provider()"
+                     src="{{ product.provider.providerprofile.logo_image.url }}"
+                     alt="providerImg">
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="slant"></div>
+  </div>
+  <div class="slant"></div>
 </section>
 
 <section id="fh5co-intro" data-section="intro">
-    <div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Beschreibung</h2>
         <div class="row">
-            <div class="col-md-12 section-heading text-center">
-                <h2 class="to-animate">Beschreibung</h2>
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>{{ product.description }}</h3>
-                    </div>
-                </div>
-            </div>
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>{{ product.description }}</h3>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 
 {% if product.image1 %}
-    <section id="fh5co-work" data-section="images">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 section-heading text-center">
-                    <h2 class="to-animate">Produktabbildungen</h2>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                            <h3>Aktuelle Produktbilder</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row row-bottom-padded-sm">
-                <div class="col-md-4 col-sm-6 col-xxs-12">
-                    <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
-                        <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
-                    </a>
-                </div>
-                {% if product.image2 %}
-                    <div class="col-md-4 col-sm-6 col-xxs-12">
-                        <a href="{{ product.image2.url }}" class="fh5co-project-item image-popup to-animate">
-                            <img src="{{ product.image2.url }}" alt="Image" class="img-responsive">
-                        </a>
-                    </div>
-                {% endif %}
-
-                <div class="clearfix visible-sm-block"></div>
-                {% if product.image3 %}
-                    <div class="col-md-4 col-sm-6 col-xxs-12">
-                        <a href="{{ product.image3.url }}" class="fh5co-project-item image-popup to-animate">
-                            <img src="{{ product.image3.url }}" alt="Image" class="img-responsive">
-                        </a>
-                    </div>
-                {% endif %}
-            </div>
+<section id="fh5co-work" data-section="images">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Produktabbildungen</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>Aktuelle Produktbilder</h3>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+    <div class="row row-bottom-padded-sm">
+      <div class="col-md-4 col-sm-6 col-xxs-12">
+        <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+          <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+        </a>
+      </div>
+      {% if product.image2 %}
+      <div class="col-md-4 col-sm-6 col-xxs-12">
+        <a href="{{ product.image2.url }}" class="fh5co-project-item image-popup to-animate">
+          <img src="{{ product.image2.url }}" alt="Image" class="img-responsive">
+        </a>
+      </div>
+      {% endif %}
+
+      <div class="clearfix visible-sm-block"></div>
+      {% if product.image3 %}
+      <div class="col-md-4 col-sm-6 col-xxs-12">
+        <a href="{{ product.image3.url }}" class="fh5co-project-item image-popup to-animate">
+          <img src="{{ product.image3.url }}" alt="Image" class="img-responsive">
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
 {% endif %}
 
 <section id="fh5co-testimonials" data-section="tecData">
-    <div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Technische Details</h2>
         <div class="row">
-            <div class="col-md-12 section-heading text-center">
-                <h2 class="to-animate">Technische Details</h2>
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>
-                            Technische Daten des Produkts nach Angaben des Herstellers
-                        </h3>
-                    </div>
-                </div>
-            </div>
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>
+              Technische Daten des Produkts nach Angaben des Herstellers
+            </h3>
+          </div>
         </div>
-        <div class="row">
-
-        </div>
+      </div>
     </div>
+    <div class="row">
+
+    </div>
+  </div>
 </section>
 
-<!--Comments-->
-{% include "app/html_templates/sections/commentSection.html" %}
+<footer id="footer" role="contentinfo">
+  <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a>
+  <div class="container">
+    <br/>
+    <div>
+      <div class="col-md-12 text-center">
+        <p>&copy; DONAALDA. All Rights Reserved. <br>
+          <a href="https://www.donaalda.com" target="_blank">donaalda.com</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <ul class="social social-circle">
+          <li><a href="#"><i class="icon-twitter"></i></a></li>
+          <li><a href="#"><i class="icon-facebook"></i></a></li>
+          <li><a href="#"><i class="icon-youtube"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
 
-<!-- Footer -->
-{% include "app/html_templates/footer/footerTemplate.html" %}
 
-<!-- Login Modal -->
-{% include "app/html_templates/modals/loginModal.html" %}
+<div class="modal fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form action="{% url 'app:login' %}" method="post">
+        {% csrf_token %}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+          <h3 class="modal-title" id="myModalLabel">Anmelden</h3>
+        </div>
+        <div class="modal-body">
+          <div class="input-group" style="margin-bottom: 5px;">
+            <span class="input-group-addon" id="basic-addon1"><i class="icon-user"></i></span>
+            <input type="text" class="form-control" name="username" placeholder="Benutzername"
+                   aria-describedby="basic-addon1" value="{{ name }}">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2"><i class="icon-key"></i></span>
+            <input type="password" class="form-control" name="password" placeholder="Passwort"
+                   aria-describedby="basic-addon2" value="{{ password }}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+          <button type="submit" class="btn btn-primary">Los gehts</button>
+        </div>
+      </form>
 
-<!-- Register modale -->
-{% include "app/html_templates/modals/registerModal.html" %}
+    </div>
+  </div>
+</div>
 
-<!-- Profile modale -->
-{% include "app/html_templates/modals/profileModal.html" %}
+<div class="modal fade" id="myModalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form action={% url 'app:register_user' %} method="post">
+      {% csrf_token %}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel1">Registrieren</h3>
+      </div>
+      <div class="modal-body">
+        <div class="input-group" style="margin-bottom: 5px;">
+          <span class="input-group-addon" id="basic-addon3"><i class="icon-user"></i></span>
+          <input type="text" class="form-control" name="username" placeholder="Benutzername"
+                 aria-describedby="basic-addon1" value="{{ name }}">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon4"><i class="icon-key"></i></span>
+          <input type="password" class="form-control" name="password" placeholder="Passwort"
+                 aria-describedby="basic-addon2" value="{{ password }}">
+        </div>
+        <br/>
+        <div class="input-group" style="margin-bottom: 5px;">
+          <span class="input-group-addon" id="basic-addon5"><i class="icon-user"></i></span>
+          <input type="text" class="form-control" name="firstname" placeholder="Vorname"
+                 aria-describedby="basic-addon3" value="{{ firstname }}">
+        </div>
+        <div class="input-group" style="margin-bottom: 5px;">
+          <span class="input-group-addon" id="basic-addon6"><i class="icon-user"></i></span>
+          <input type="text" class="form-control" name="lastname" placeholder="Nachname"
+                 aria-describedby="basic-addon4" value="{{ lastname }}">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon7"><i class="icon-envelope"></i></span>
+          <input type="text" class="form-control" name="email" placeholder="Email-Adresse"
+                 aria-describedby="basic-addon5" value="{{ email }}">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+        <button type="submit" class="btn btn-primary">Los gehts</button>
+      </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!--TODO: Frontend add profile to this // Noch aktuell??? Tim:14.06.16-->
+<div class="modal fade" id="myModalProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form action={% url 'app:profile' %} method="post">
+      {% csrf_token %}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel2">Profil
+          von {{ user.first_name }} {{ user.last_name }}</h3>
+      </div>
+      <div class="modal-body">
+        <h4>Profildaten</h4>
+        <div class="input-group" style="margin-bottom: 5px;">
+          <span class="input-group-addon" id="basic-addon8"><i class="icon-user"></i></span>
+          <input disabled type="text" class="form-control" name="username" placeholder="Benutzername"
+                 aria-describedby="basic-addon8" value="{{ user.username }}">
+        </div>
+        <div class="input-group" style="margin-bottom: 5px;">
+          <span class="input-group-addon" id="basic-addon9"><i class="icon-user"></i></span>
+          <input disabled type="text" class="form-control" name="firstname" placeholder="Vorname"
+                 aria-describedby="basic-addon9" value="{{ user.first_name }}">
+        </div>
+        <div class="input-group" style="margin-bottom: 5px;">
+          <span class="input-group-addon" id="basic-addon10"><i class="icon-user"></i></span>
+          <input disabled type="text" class="form-control" name="lastname" placeholder="Nachname"
+                 aria-describedby="basic-addon10" value="{{ user.last_name }}">
+        </div>
+        <div class="input-group" style="margin-bottom: 5px;">
+          <span class="input-group-addon" id="basic-addon11"><i class="icon-user"></i></span>
+          <input disabled type="text" class="form-control" name="email" placeholder="Email-Adresse"
+                 aria-describedby="basic-addon11" value="{{ user.email }}">
+        </div>
+        <br>
+        <h4>Passwort (ändern)</h4>
+        <div class="input-group" style="margin-bottom: 10px;">
+          <span class="input-group-addon" id="basic-addon12"><i class="icon-key"></i></span>
+          <input type="password" class="form-control" name="password_old" placeholder="Altes Passwort"
+                 aria-describedby="basic-addon12" value="{{ password }}">
+        </div>
+        <div class="input-group" style="margin-bottom: 5px;">
+          <span class="input-group-addon" id="basic-addon13"><i class="icon-key"></i></span>
+          <input type="password" class="form-control" name="password_new" placeholder="Neues Passwort"
+                 aria-describedby="basic-addon13" value="{{ password }}">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon14"><i class="icon-key"></i></span>
+          <input type="password" class="form-control" name="password_new_repeat"
+                 placeholder="Neues Passwort wiederholen"
+                 aria-describedby="basic-addon14" value="{{ password }}">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Doch nicht</button>
+        <button type="submit" class="btn btn-primary">Passwort ändern</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
