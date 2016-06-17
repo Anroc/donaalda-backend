@@ -356,43 +356,12 @@
   </div>
 </section>
 
-<footer id="footer" role="contacts">
-  <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a>
-  <div class="container">
-    <br/>
-    <div>
-      <div class="col-md-12 text-center">
-        <p>&copy; DONAALDA. All Rights Reserved. <br>
-          <a href="https://www.donaalda.com" target="_blank">donaalda.com</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <ul class="social social-circle">
-          <li><a href="#"><i class="icon-twitter"></i></a></li>
-          <li><a href="#"><i class="icon-facebook"></i></a></li>
-          <li><a href="#"><i class="icon-youtube"></i></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</footer>
+
+<!-- Footer -->
+{% include "app/html_templates/footer/footerTemplate.html" %}
 
 
-<!-- Login Modal -->
-{% include "app/html_templates/modals/loginModal.html" %}
-
-<!-- Register Modale -->
-{% include "app/html_templates/modals/registerModal.html" %}
-
-<!-- Profile Modale -->
-{% include "app/html_templates/modals/profileModal.html" %}
-
-<!-- Password Modale -->
-{% include "app/html_templates/modals/passwordModal.html" %}
-
-<!-- Delete Account Modale -->
-{% include "app/html_templates/modals/deleteAccountModal.html" %}
+{% include "app/html_templates/modals/modals.html" %}
 
 
 </body>
