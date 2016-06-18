@@ -3,7 +3,7 @@
 <div class="modal fade" id="myModalProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <form action={% url 'app:profile' %} method="post">
+      <form enctype="multipart/form-data" action={% url 'app:profile' %} method="post">
       {% csrf_token %}
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span

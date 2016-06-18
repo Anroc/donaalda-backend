@@ -283,7 +283,7 @@ def profile(request):
     email = request.POST.get('email')
     firstname = request.POST.get('firstname')
     lastname = request.POST.get('lastname')
-    avatar_image = request.FILES.get('avatar')
+    avatar_image = request.FILES['avatar']
 
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
@@ -313,8 +313,9 @@ def profile(request):
             if UserImage.objects.filter(belongs_to_user=user).exists():
                 userimage = user.userimage
             else:
-                userimage = UserImage(user)
+                userimage = UserImage(belongs_to_user=user)
 
+            print("image upload")
             userimage.image = avatar_image
             userimage.save()
             messages.success(request, 'Ihr Profilbild wurde erfolgreich geändert')
