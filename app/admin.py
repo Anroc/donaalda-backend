@@ -152,7 +152,7 @@ class UserImageInline(admin.StackedInline):
     model = UserImage
 
 
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(UserAdmin):
     inlines = (UserImageInline,)
 
 
