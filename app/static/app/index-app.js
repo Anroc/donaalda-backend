@@ -73,7 +73,39 @@ function authenticationControl($scope, $mdDialog, $mdSidenav) {
 ;
 
 
-donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
+
+donaaldaApp.controller('questionController', function ($scope, $q, $timeout) {
+
+    $scope.accommodation = {
+
+    };
+
+    $scope.data = {
+        accommodation : "apartment",
+        square_meters : 0,
+        children : 0,
+        other_persons : 0,
+        age : 25,
+        lives_in_apartment : false,
+        lives_in_house : false,
+        lives_in_trump_tower : false,
+        has_garage : false,
+        has_car : false,
+        has_balcony : false,
+        has_terrace : false,
+        has_garden : false,
+        owns_estate : false,
+        estate_age : false
+}
+
+    $scope.preferences = {
+        heater_control : false,
+        light_control : false,
+        remote_control : false,
+        security_control : false,
+        health_control : false,
+        comfort_control : false
+}
 
     var vm = this;
 
@@ -82,9 +114,9 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
     vm.maxStep = 3;
     vm.showBusyText = false;
     vm.stepData = [
-        { step: 1, completed: false, optional: false, data: {} },
-        { step: 2, completed: false, optional: false, data: {} },
-        { step: 3, completed: false, optional: false, data: {} },
+        {step: 1, completed: false, optional: false, data: {}},
+        {step: 2, completed: false, optional: false, data: {}},
+        {step: 3, completed: false, optional: false, data: {}},
     ];
 
     vm.enableNextStep = function nextStep() {
@@ -114,7 +146,7 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
             $timeout(function () {
                 vm.showBusyText = false;
                 console.log('On submit success');
-                deferred.resolve({ status: 200, statusText: 'success', data: {} });
+                deferred.resolve({status: 200, statusText: 'success', data: {}});
                 //move to next step when success
                 stepData.completed = true;
                 vm.enableNextStep();
@@ -127,7 +159,7 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
 
 });
 
-;(function(angular, window) {
+;(function (angular, window) {
     /*
      * Credit: Credit to angular md-tabs
      *         All codes are based on md-tabs by angular material
@@ -208,9 +240,15 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
             scope.select = scope.select || angular.noop;
             scope.deselect = scope.deselect || angular.noop;
 
-            scope.$watch('active', function (active) { if (active) ctrl.select(data.getIndex()); });
-            scope.$watch('complete', function () { ctrl.refreshIndex(); });
-            scope.$watch('disabled', function () { ctrl.refreshIndex(); });
+            scope.$watch('active', function (active) {
+                if (active) ctrl.select(data.getIndex());
+            });
+            scope.$watch('complete', function () {
+                ctrl.refreshIndex();
+            });
+            scope.$watch('disabled', function () {
+                ctrl.refreshIndex();
+            });
             scope.$watch(
                 function () {
                     return ctrl.getStepElementIndex(element);
@@ -220,7 +258,9 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
                     ctrl.updateStepOrder();
                 }
             );
-            scope.$on('$destroy', function () { ctrl.removeStep(data); });
+            scope.$on('$destroy', function () {
+                ctrl.removeStep(data);
+            });
         }
 
         function firstChild(element, tagName) {
@@ -252,7 +292,7 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
         .directive('mdStepLabel', MdStepLabel);
 
     function MdStepLabel() {
-        return { terminal: true };
+        return {terminal: true};
     }
 
 
@@ -377,7 +417,9 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
         function defineOneWayBinding(key, handler) {
             var attr = $attrs.$normalize('md-' + key);
             if (handler) defineProperty(key, handler);
-            $attrs.$observe(attr, function (newValue) { ctrl[key] = newValue; });
+            $attrs.$observe(attr, function (newValue) {
+                ctrl[key] = newValue;
+            });
         }
 
         /**
@@ -642,11 +684,21 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
         function insertStep(stepData, index) {
             var hasLoaded = loaded;
             var proto = {
-                    getIndex: function () { return ctrl.steppers.indexOf(step); },
-                    isActive: function () { return this.getIndex() === ctrl.selectedIndex; },
-                    isLeft: function () { return this.getIndex() < ctrl.selectedIndex; },
-                    isRight: function () { return this.getIndex() > ctrl.selectedIndex; },
-                    shouldRender: function () { return !ctrl.noDisconnect || this.isActive(); },
+                    getIndex: function () {
+                        return ctrl.steppers.indexOf(step);
+                    },
+                    isActive: function () {
+                        return this.getIndex() === ctrl.selectedIndex;
+                    },
+                    isLeft: function () {
+                        return this.getIndex() < ctrl.selectedIndex;
+                    },
+                    isRight: function () {
+                        return this.getIndex() > ctrl.selectedIndex;
+                    },
+                    shouldRender: function () {
+                        return !ctrl.noDisconnect || this.isActive();
+                    },
                     hasFocus: function () {
                         return !ctrl.lastClick
                             && ctrl.hasFocus && this.getIndex() === ctrl.focusIndex;
@@ -665,7 +717,9 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
                 updatePagination();
                 // if autoselect is enabled, select the newly added step
                 if (hasLoaded && ctrl.autoselect) $mdUtil.nextTick(function () {
-                    $mdUtil.nextTick(function () { select(ctrl.steppers.indexOf(step)); });
+                    $mdUtil.nextTick(function () {
+                        select(ctrl.steppers.indexOf(step));
+                    });
                 });
             });
             return step;
@@ -745,7 +799,9 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
         function shouldPaginate() {
             if (ctrl.noPagination || !loaded) return false;
             var canvasWidth = $element.prop('clientWidth');
-            angular.forEach(getElements().dummies, function (step) { canvasWidth -= step.offsetWidth; });
+            angular.forEach(getElements().dummies, function (step) {
+                canvasWidth -= step.offsetWidth;
+            });
             return canvasWidth < 0;
         }
 
@@ -779,7 +835,9 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
          */
         function defineProperty(key, handler, value) {
             Object.defineProperty(ctrl, key, {
-                get: function () { return value; },
+                get: function () {
+                    return value;
+                },
                 set: function (newValue) {
                     var oldValue = value;
                     value = newValue;
@@ -833,7 +891,8 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
                 index = ctrl[key];
             for (newIndex = index + inc;
                  ctrl.steppers[newIndex] && ctrl.steppers[newIndex].scope.disabled;
-                 newIndex += inc) { }
+                 newIndex += inc) {
+            }
             if (ctrl.steppers[newIndex]) {
                 ctrl[key] = newIndex;
             }
@@ -866,7 +925,9 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
          * are called before the UI is ready, such as size calculations.
          */
         function processQueue() {
-            queue.forEach(function (func) { $mdUtil.nextTick(func); });
+            queue.forEach(function (func) {
+                $mdUtil.nextTick(func);
+            });
             queue = [];
         }
 
@@ -915,8 +976,8 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
             // Lock during animation so the user can't change steppers
             locked = true;
 
-            var fromHeight = { height: currentHeight + 'px' },
-                toHeight = { height: newHeight + 'px' };
+            var fromHeight = {height: currentHeight + 'px'},
+                toHeight = {height: newHeight + 'px'};
 
             // Set the height to the current, specific pixel height to fix a bug on iOS where the height
             // first animates to 0, then back to the proper height causing a visual glitch
@@ -954,7 +1015,7 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
          */
         function updateInkBarStyles() {
             if (!elements.steppers[ctrl.selectedIndex]) {
-                angular.element(elements.inkBar).css({ left: 'auto', right: 'auto' });
+                angular.element(elements.inkBar).css({left: 'auto', right: 'auto'});
                 return;
             }
             if (!ctrl.steppers.length) return queue.push(ctrl.updateInkBarStyles);
@@ -975,7 +1036,7 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
             }
             updateInkBarClassName();
             //angular.element(elements.inkBar).css({ left: left + 'px', right: right + 'px' });
-            angular.element(elements.inkBar).css({ left: 32 + 'px', right: totalWidth - left + 'px' });
+            angular.element(elements.inkBar).css({left: 32 + 'px', right: totalWidth - left + 'px'});
         }
 
         /**
@@ -1011,7 +1072,7 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
          * @param element
          */
         function attachRipple(scope, element) {
-            var options = { colorElement: angular.element(elements.inkBar) };
+            var options = {colorElement: angular.element(elements.inkBar)};
             $mdStepInkRipple.attach(scope, element, options);
         }
     }
@@ -1040,9 +1101,9 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
             },
             template: function (element, attr) {
                 attr["$mdSteppersTemplate"] = element.html();
-                return ['' ,
-                    '<md-steppers-wrapper> ' ,
-                    '<md-step-data></md-step-data> ' ,
+                return ['',
+                    '<md-steppers-wrapper> ',
+                    '<md-step-data></md-step-data> ',
                     // '<md-prev-button ' ,
                     //     'tabindex="-1" ' ,
                     //     'role="button" ' ,
@@ -1063,39 +1124,39 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
                     //     'ng-click="$mdSteppersCtrl.nextPage()"> ' ,
                     //   '<md-icon md-svg-icon="md-tabs-arrow"></md-icon> ' ,
                     // '</md-next-button> ' ,
-                    '<md-steppers-canvas ' ,
-                    'tabindex="{{ $mdSteppersCtrl.hasFocus ? -1 : 0 }}" ' ,
-                    'aria-activedescendant="step-item-{{$mdSteppersCtrl.steppers[$mdSteppersCtrl.focusIndex].id}}" ' ,
-                    'ng-focus="$mdSteppersCtrl.redirectFocus()" ' ,
-                    'ng-class="{ ' ,
-                    '\'md-paginated\': $mdSteppersCtrl.shouldPaginate, ' ,
-                    '\'md-center-steppers\': $mdSteppersCtrl.shouldCenterSteppers ' ,
-                    '}" ' ,
-                    'ng-keydown="$mdSteppersCtrl.keydown($event)" ' ,
+                    '<md-steppers-canvas ',
+                    'tabindex="{{ $mdSteppersCtrl.hasFocus ? -1 : 0 }}" ',
+                    'aria-activedescendant="step-item-{{$mdSteppersCtrl.steppers[$mdSteppersCtrl.focusIndex].id}}" ',
+                    'ng-focus="$mdSteppersCtrl.redirectFocus()" ',
+                    'ng-class="{ ',
+                    '\'md-paginated\': $mdSteppersCtrl.shouldPaginate, ',
+                    '\'md-center-steppers\': $mdSteppersCtrl.shouldCenterSteppers ',
+                    '}" ',
+                    'ng-keydown="$mdSteppersCtrl.keydown($event)" ',
                     'role="steplist"> ',
                     '<md-busy ng-show="$mdSteppersCtrl.busy">{{$mdSteppersCtrl.busyText}}</md-busy>',
-                    '<md-pagination-wrapper ' ,
-                    'ng-class="{ \'md-center-steppers\': $mdSteppersCtrl.shouldCenterSteppers }" ' ,
-                    'md-step-scroll="$mdSteppersCtrl.scroll($event)"> ' ,
-                    '<md-step-item ' ,
-                    'tabindex="-1" ' ,
-                    'class="md-step" ' ,
-                    'style="max-width: {{ $mdSteppersCtrl.maxStepWidth + \'px\' }}" ' ,
-                    'ng-repeat="step in $mdSteppersCtrl.steppers" ' ,
-                    'role="step" ' ,
-                    'aria-controls="step-content-{{::step.id}}" ' ,
-                    'aria-selected="{{step.isActive()}}" ' ,
-                    'aria-disabled="{{step.scope.disabled || \'false\'}}" ' ,
-                    'ng-click="$mdSteppersCtrl.select(step.getIndex())" ' ,
-                    'ng-class="{ ' ,
-                    '\'md-active\':    step.isActive(), ' ,
-                    '\'md-focused\':   step.hasFocus(), ' ,
-                    '\'md-disabled\':  step.scope.disabled, ' ,
+                    '<md-pagination-wrapper ',
+                    'ng-class="{ \'md-center-steppers\': $mdSteppersCtrl.shouldCenterSteppers }" ',
+                    'md-step-scroll="$mdSteppersCtrl.scroll($event)"> ',
+                    '<md-step-item ',
+                    'tabindex="-1" ',
+                    'class="md-step" ',
+                    'style="max-width: {{ $mdSteppersCtrl.maxStepWidth + \'px\' }}" ',
+                    'ng-repeat="step in $mdSteppersCtrl.steppers" ',
+                    'role="step" ',
+                    'aria-controls="step-content-{{::step.id}}" ',
+                    'aria-selected="{{step.isActive()}}" ',
+                    'aria-disabled="{{step.scope.disabled || \'false\'}}" ',
+                    'ng-click="$mdSteppersCtrl.select(step.getIndex())" ',
+                    'ng-class="{ ',
+                    '\'md-active\':    step.isActive(), ',
+                    '\'md-focused\':   step.hasFocus(), ',
+                    '\'md-disabled\':  step.scope.disabled, ',
                     '\'md-complete\':  step.scope.complete ',
-                    '}" ' ,
-                    'ng-disabled="step.scope.disabled" ' ,
-                    'md-swipe-left="$mdSteppersCtrl.nextPage()" ' ,
-                    'md-swipe-right="$mdSteppersCtrl.previousPage()" ' ,
+                    '}" ',
+                    'ng-disabled="step.scope.disabled" ',
+                    'md-swipe-left="$mdSteppersCtrl.nextPage()" ',
+                    'md-swipe-right="$mdSteppersCtrl.previousPage()" ',
                     'md-scope="::step.parent"><md-step-label-wrapper ',
                     'stepindex="{{::$index+1}}" ',
                     'md-steppers-template="::step.label" ',
@@ -1103,50 +1164,50 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
                     '></md-step-label-wrapper>',
                     '</md-step-item> ',
                     //'<md-ink-bar></md-ink-bar> ' ,
-                    '</md-pagination-wrapper> ' ,
-                    '<div class="md-visually-hidden md-dummy-wrapper"> ' ,
-                    '<md-dummy-step ' ,
-                    'class="md-step" ' ,
+                    '</md-pagination-wrapper> ',
+                    '<div class="md-visually-hidden md-dummy-wrapper"> ',
+                    '<md-dummy-step ',
+                    'class="md-step" ',
                     'tabindex="-1" ',
                     'stepindex="{{::$index+1}}" ',
-                    'id="step-item-{{::step.id}}" ' ,
-                    'role="step" ' ,
-                    'aria-controls="step-content-{{::step.id}}" ' ,
-                    'aria-selected="{{step.isActive()}}" ' ,
-                    'aria-disabled="{{step.scope.disabled || \'false\'}}" ' ,
-                    'ng-focus="$mdSteppersCtrl.hasFocus = true" ' ,
-                    'ng-blur="$mdSteppersCtrl.hasFocus = false" ' ,
-                    'ng-repeat="step in $mdSteppersCtrl.steppers" ' ,
+                    'id="step-item-{{::step.id}}" ',
+                    'role="step" ',
+                    'aria-controls="step-content-{{::step.id}}" ',
+                    'aria-selected="{{step.isActive()}}" ',
+                    'aria-disabled="{{step.scope.disabled || \'false\'}}" ',
+                    'ng-focus="$mdSteppersCtrl.hasFocus = true" ',
+                    'ng-blur="$mdSteppersCtrl.hasFocus = false" ',
+                    'ng-repeat="step in $mdSteppersCtrl.steppers" ',
                     'md-scope="::step.parent"><md-step-label-wrapper ',
                     'stepindex="{{::$index+1}}" ',
                     'md-steppers-template="::step.label" ',
                     'md-scope="::step.parent" ',
-                    '></md-step-label-wrapper></md-dummy-step> ' ,
+                    '></md-step-label-wrapper></md-dummy-step> ',
                     '</div> ',
-                    '</md-steppers-canvas> ' ,
-                    '</md-steppers-wrapper> ' ,
-                    '<md-steppers-content-wrapper ng-show="$mdSteppersCtrl.hasContent && $mdSteppersCtrl.selectedIndex >= 0"> ' ,
-                    '<md-step-content ' ,
-                    'id="step-content-{{::step.id}}" ' ,
-                    'role="steppanel" ' ,
-                    'aria-labelledby="step-item-{{::step.id}}" ' ,
-                    'md-swipe-left="$mdSteppersCtrl.swipeContent && $mdSteppersCtrl.incrementIndex(1)" ' ,
-                    'md-swipe-right="$mdSteppersCtrl.swipeContent && $mdSteppersCtrl.incrementIndex(-1)" ' ,
-                    'ng-if="$mdSteppersCtrl.hasContent" ' ,
-                    'ng-repeat="(index, step) in $mdSteppersCtrl.steppers" ' ,
-                    'ng-class="{ ' ,
-                    '\'md-no-transition\': $mdSteppersCtrl.lastSelectedIndex == null, ' ,
-                    '\'md-active\':        step.isActive(), ' ,
-                    '\'md-left\':          step.isLeft(), ' ,
-                    '\'md-right\':         step.isRight(), ' ,
-                    '\'md-no-scroll\':     $mdSteppersCtrl.dynamicHeight ' ,
-                    '}"> ' ,
-                    '<div ' ,
-                    'md-steppers-template="::step.template" ' ,
-                    'md-connected-if="step.isActive()" ' ,
-                    'md-scope="::step.parent" ' ,
-                    'ng-if="$mdSteppersCtrl.enableDisconnect || step.shouldRender()"></div> ' ,
-                    '</md-step-content> ' ,
+                    '</md-steppers-canvas> ',
+                    '</md-steppers-wrapper> ',
+                    '<md-steppers-content-wrapper ng-show="$mdSteppersCtrl.hasContent && $mdSteppersCtrl.selectedIndex >= 0"> ',
+                    '<md-step-content ',
+                    'id="step-content-{{::step.id}}" ',
+                    'role="steppanel" ',
+                    'aria-labelledby="step-item-{{::step.id}}" ',
+                    'md-swipe-left="$mdSteppersCtrl.swipeContent && $mdSteppersCtrl.incrementIndex(1)" ',
+                    'md-swipe-right="$mdSteppersCtrl.swipeContent && $mdSteppersCtrl.incrementIndex(-1)" ',
+                    'ng-if="$mdSteppersCtrl.hasContent" ',
+                    'ng-repeat="(index, step) in $mdSteppersCtrl.steppers" ',
+                    'ng-class="{ ',
+                    '\'md-no-transition\': $mdSteppersCtrl.lastSelectedIndex == null, ',
+                    '\'md-active\':        step.isActive(), ',
+                    '\'md-left\':          step.isLeft(), ',
+                    '\'md-right\':         step.isRight(), ',
+                    '\'md-no-scroll\':     $mdSteppersCtrl.dynamicHeight ',
+                    '}"> ',
+                    '<div ',
+                    'md-steppers-template="::step.template" ',
+                    'md-connected-if="step.isActive()" ',
+                    'md-scope="::step.parent" ',
+                    'ng-if="$mdSteppersCtrl.enableDisconnect || step.shouldRender()"></div> ',
+                    '</md-step-content> ',
                     '</md-steppers-content-wrapper>'].join('');
             },
             controller: 'MdSteppersController',
@@ -1154,6 +1215,7 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
             bindToController: true
         };
     }
+
     angular
         .module('md-steppers')
         .directive('mdSteppersTemplate', MdSteppersTemplate);
@@ -1181,7 +1243,9 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
             return $mdUtil.nextTick(handleScope);
 
             function handleScope() {
-                scope.$watch('connected', function (value) { value === false ? disconnect() : reconnect(); });
+                scope.$watch('connected', function (value) {
+                    value === false ? disconnect() : reconnect();
+                });
                 scope.$on('$destroy', reconnect);
             }
 
@@ -1241,7 +1305,9 @@ donaaldaApp.controller('categoryController', function ($scope, $q, $timeout) {
                 var fn = $parse(attr.mdStepScroll, null, true);
                 return function ngEventHandler(scope, element) {
                     element.on('mousewheel', function (event) {
-                        scope.$apply(function () { fn(scope, { $event: event }); });
+                        scope.$apply(function () {
+                            fn(scope, {$event: event});
+                        });
                     });
                 };
             }

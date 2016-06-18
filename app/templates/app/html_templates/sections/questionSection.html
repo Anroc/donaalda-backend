@@ -8,167 +8,204 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
 <script src="{% static 'app/index-app.js' %}"></script>
-<section id="fh5co-intro" data-section="categories"
+<section id="fh5co-questions" data-section="questions"
          ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
-         ng-controller="{% block ng_controller_theme %}categoryController as vm{% endblock %}"
+         ng-controller="{% block ng_controller_theme %}questionController as vm{% endblock %}"
          ng-cloak>
+  <div class="container">
+
+  </div>
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-left">
         <h2 class=" left-border to-animate">Fragen</h2>
-
-        <md-content flex="nogrow" style="width: 800px; margin: 40px auto">
-          <div>
-            <md-card>
-              <md-toolbar>
-                <div class="md-toolbar-tools">
-                  <h2>
-                    <md-icon md-svg-icon="md-menu"></md-icon>
-                    <span>Create account</span>
-                  </h2>
-                </div>
-              </md-toolbar>
-              <md-stepper-card-content class="md-no-padding">
-                <md-steppers md-dynamic-height md-stretch-steppers="always" md-selected="vm.selectedStep" md-busy-text="'Processing...'" md-busy="vm.showBusyText">
-                  <md-step label="Login detail" md-complete="vm.stepData[0].data.completed" ng-disabled="vm.stepProgress < 1">
-                    <md-step-body>
-                      <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
-                        <md-content class="md-padding">
-                          <div layout="row" layout-align="center top">
-                            <div flex>
-                              <h4>Haus oder Wohnung</h4>
-                              <md-input-container class="md-block">
-                                <label>Your user name here</label>
-                                <input ng-disabled="vm.stepData[0].data.completed" name="username" ng-model="vm.stepData[0].data.username" required />
-                                <div ng-messages="step1.username.$error">
-                                  <div ng-message="required">
-                                    User name is required to proceed on next step.
-                                  </div>
-                                </div>
-                              </md-input-container>
-                              <md-input-container class="md-block">
-                                <label>Your password here</label>
-                                <input ng-disabled="vm.stepData[0].data.completed" type="password" name="username" ng-model="vm.stepData[0].data.password" required />
-                                <div ng-messages="step1.password.$error">
-                                  <div ng-message="required">
-                                    Password required to proceed on next step.
-                                  </div>
-                                </div>
-                              </md-input-container>
-                            </div>
-                            <div flex>
-                              <h4>Quadratmeter</h4>
-                              <md-input-container class="md-block">
-                                <label>Your user name here</label>
-                                <input ng-disabled="vm.stepData[0].data.completed" name="username" ng-model="vm.stepData[0].data.username" required />
-                                <div ng-messages="step1.username.$error">
-                                  <div ng-message="required">
-                                    User name is required to proceed on next step.
-                                  </div>
-                                </div>
-                              </md-input-container>
-                              <md-input-container class="md-block">
-                                <label>Kinder? Wenn ja, wie viele?</label>
-                                <input ng-disabled="vm.stepData[0].data.completed" type="password" name="username" ng-model="vm.stepData[0].data.password" required />
-                                <div ng-messages="step1.password.$error">
-                                  <div ng-message="required">
-                                    Password required to proceed on next step.
-                                  </div>
-                                </div>
-                              </md-input-container>
-                            </div>
-                            <div flex>
-                              <h4>Kinder? Wenn ja, wie viele?</h4>
-                              <md-input-container class="md-block">
-                                <label>Your user name here</label>
-                                <input ng-disabled="vm.stepData[0].data.completed" name="username" ng-model="vm.stepData[0].data.username" required />
-                                <div ng-messages="step1.username.$error">
-                                  <div ng-message="required">
-                                    User name is required to proceed on next step.
-                                  </div>
-                                </div>
-                              </md-input-container>
-                              <md-input-container class="md-block">
-                                <label>Your password here</label>
-                                <input ng-disabled="vm.stepData[0].data.completed" type="password" name="username" ng-model="vm.stepData[0].data.password" required />
-                                <div ng-messages="step1.password.$error">
-                                  <div ng-message="required">
-                                    Password required to proceed on next step.
-                                  </div>
-                                </div>
-                              </md-input-container>
-                            </div>
-                          </div>
-                        </md-content>
-                        <md-step-actions layout="row">
-                          <div flex layout="row" layout-align="end top">
-                            <md-button class="md-warn">CANCEL</md-button>
-                            <md-button type="submit" ng-disabled="!vm.stepData[0].data.username || !vm.stepData[0].data.password || vm.showBusyText" class="md-primary md-raised">NEXT</md-button>
-                          </div>
-                        </md-step-actions>
-                      </form>
-                    </md-step-body>
-                  </md-step>
-                  <md-step label="Personal Info" md-complete="vm.stepData[1].data.completed" ng-disabled="vm.stepProgress < 2">
-                    <md-step-body>
-                      <form name="step2">
-                        <md-content class="md-padding">
-                          <div layout="row" layout-align="center top">
-                            <div flex="nogrow" style="width: 400px">
-                              <h4>Please enter yout full name</h4>
-                              <md-input-container class="md-block">
-                                <label>Your first name here</label>
-                                <input name="firsname" ng-model="vm.stepData[1].data.firsname"/>
-                              </md-input-container>
-                              <md-input-container class="md-block">
-                                <label>Your last name</label>
-                                <input name="lastname" ng-model="vm.stepData[1].data.lastname"/>
-                              </md-input-container>
-                            </div>
-                          </div>
-                        </md-content>
-                        <md-step-actions layout="row">
-                          <div flex>
-                            <md-button ng-click="vm.moveToPreviousStep()">PREVIOUS</md-button>
-                          </div>
-                          <div flex layout="row" layout-align="end top">
-                            <md-button class="md-warn">CANCEL</md-button>
-                            <md-button ng-disabled="vm.showBusyText" ng-click="vm.submitCurrentStep(vm.stepData[1].data, !(vm.stepData[1].data.firsname && vm.stepData[1].data.lastname))" class="md-primary md-raised">
-                              {% verbatim %}
-                              {{ vm.stepData[1].data.firsname && vm.stepData[1].data.lastname ? 'NEXT' : 'SKIP' }}
-                              {% endverbatim %}
-                            </md-button>
-                          </div>
-                        </md-step-actions>
-                      </form>
-                    </md-step-body>
-                  </md-step>
-                  <md-step label="Finish" md-complete="vm.stepData[2].data.completed" ng-disabled="vm.stepProgress < 3">
-                    <md-step-body>
-                      <form name="step2">
-                        <md-content class="md-padding">
-                          <div layout="column" layout-align="center center" style="min-height: 200px">
-                            <h4>Account created!</h4>
-                            <md-button class="md-primary md-raised">GO TO DASHBOARD</md-button>
-                          </div>
-                        </md-content>
-                      </form>
-                    </md-step-body>
-                  </md-step>
-                </md-steppers>
-              </md-stepper-card-content>
-            </md-card>
-          </div>
-        </md-content>
-
       </div>
     </div>
-  </div>
-  <div class="container">
-    <div class="row row-bottom-padded-lg">
+    <md-stepper-card-content class="md-no-padding" style="width:100%;">
+      <md-steppers md-dynamic-height md-stretch-steppers="always" md-selected="vm.selectedStep"
+                   md-busy-text="'Processing...'" md-busy="vm.showBusyText">
+        <md-step label="Daten" md-complete="vm.stepData[0].data.completed"
+                 ng-disabled="vm.stepProgress < 1">
+          <md-step-body>
+            <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
+              <md-content class="md-padding">
+                <div layout="row" layout-align="center top">
+                  <div flex>
+                    <h4>Haus oder Wohnung</h4>
+                    <md-checkbox>Haus</md-checkbox>
+                    <md-checkbox>Wohnung</md-checkbox>
 
-      Frieg Frag Frug
-    </div>
+                    <form ng-submit="submit()">
+
+                      <p>Selected Value: <span class="radioValue">{{ data.accommodation }}</span></p>
+
+                      <h4>Ich wohne in ...</h4>
+                      <md-radio-group ng-model="data.accommodation">
+
+                        <md-radio-button value="house" class="md-primary">einem Haus</md-radio-button>
+                        <md-radio-button value="apartment">einer Wohnung</md-radio-button>
+                        <md-radio-button value="trump_tower">im Trump Tower</md-radio-button>
+
+                      </md-radio-group>
+                    </form>
+                  </div>
+                  <div flex>
+                    <h4>Quadratmeter</h4>
+                    <div layout="row">
+                      <div flex="60">
+                        <md-slider class="md-primary" flex min="0" max="255" ng-model="data.square_meters"
+                                   aria-label="blue" id="blue-slider"></md-slider>
+                      </div>
+                      <div flex="20" layout layout-align="center center" style="margin-right: 10px;">
+                        <input flex type="number" ng-model="data.square_meters" aria-label="blue"
+                               aria-controls="blue-slider">
+                      </div>
+                      <div flex="10" style="text-align: justify">
+                        m²
+                      </div>
+                      <div flex="10">
+
+                      </div>
+                    </div>
+                  </div>
+                  <div flex>
+                    <h4>Kinder</h4>
+                    <div layout>
+                      <div flex="20" layout layout-align="center center">
+                        <input flex type="number" ng-model="data.children" aria-label="rating"
+                               aria-controls="rating-slider">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </md-content>
+              <md-step-actions layout="row">
+                <div flex layout="row" layout-align="end top">
+                  <md-button class="md-warn">CANCEL</md-button>
+                  <md-button type="submit"
+                             ng-disabled=""
+                             class="md-primary md-raised">NEXT
+                  </md-button>
+                </div>
+              </md-step-actions>
+            </form>
+          </md-step-body>
+        </md-step>
+        <md-step label="Präferenz" md-complete="vm.stepData[1].data.completed"
+                 ng-disabled="vm.stepProgress < 2">
+          <md-step-body>
+            <form name="step2">
+              <md-content class="md-padding">
+                <div layout="row" layout-align="center top">
+                  <div flex="nogrow" style="width: 400px">
+                    <h4>Was ist Ihrem Smart Home besonders wichtig?</h4>
+                    <md-checkbox>Komfort</md-checkbox>
+                    <md-checkbox>Sicherheit</md-checkbox>
+                    <md-checkbox>Gesundheit</md-checkbox>
+                    <md-checkbox>Energie</md-checkbox>
+                    <md-checkbox>Remote</md-checkbox>
+                  </div>
+                </div>
+              </md-content>
+              <md-step-actions layout="row">
+                <div flex>
+                  <md-button ng-click="vm.moveToPreviousStep()">PREVIOUS</md-button>
+                </div>
+                <div flex layout="row" layout-align="end top">
+                  <md-button class="md-warn">CANCEL</md-button>
+                  <md-button ng-disabled="vm.showBusyText"
+                             ng-click="vm.submitCurrentStep(vm.stepData[1].data, !(vm.stepData[1].data.firsname && vm.stepData[1].data.lastname))"
+                             class="md-primary md-raised">
+                    {% verbatim %}
+                    {{ vm.stepData[1].data.firsname && vm.stepData[1].data.lastname ? 'NEXT' : 'SKIP' }}
+                    {% endverbatim %}
+                  </md-button>
+                </div>
+              </md-step-actions>
+            </form>
+          </md-step-body>
+        </md-step>
+        <md-step label="Random" md-complete="vm.stepData[1].data.completed"
+                 ng-disabled="vm.stepProgress < 2">
+          <md-step-body>
+            <form name="step2">
+              <md-content class="md-padding">
+                <div layout="row" layout-align="center top">
+                  <div flex="nogrow" style="width: 400px">
+                    <h4>
+                      Ich wohne...
+                      (zur miete/im eigentum/in wohnung/in haus/mit garten/mit balkon/mit terrasse/mit garage)
+                    </h4>
+                    <h4>
+                      mein zuhause ist:
+                      (1-5/6-15/älter als 15/ich plane neubau/wohnfläche
+                      in qm/personen im haushalt insgesamt/davon kinder)
+                    </h4>
+                    <h4>
+                      haben sie aktuell renovierungen geplant? (ja/nein)
+                    </h4>
+                    <h4>
+                      geschlecht? (männlich/weiblich)
+                    </h4>
+                    <h4>
+                      alter? (<30/30-39/40-49/50-60/>60)
+                    </h4>
+                    <h4>
+                      möchten sie ihre heizung steuern?
+                    </h4>
+                    <h4>
+                      möchten sie ihr licht steuern?
+                    </h4>
+                    <h4>
+                      Möchten sie ihre heimgeräte steuern?
+                    </h4>
+                    <h4>
+                      Möchten sie sicherheitsmaßnahmen ergreifen?
+                    </h4>
+                    <h4>
+                      Möchten sie ihr smarthome von unterwegs aus steuern?
+                    </h4>
+                    <h4>Was ist Ihrem Smart Home besonders wichtig?</h4>
+                    <md-checkbox>Komfort</md-checkbox>
+                    <md-checkbox>Sicherheit</md-checkbox>
+                    <md-checkbox>Gesundheit</md-checkbox>
+                    <md-checkbox>Energie</md-checkbox>
+                    <md-checkbox>Remote</md-checkbox>
+                  </div>
+                </div>
+              </md-content>
+              <md-step-actions layout="row">
+                <div flex>
+                  <md-button ng-click="vm.moveToPreviousStep()">PREVIOUS</md-button>
+                </div>
+                <div flex layout="row" layout-align="end top">
+                  <md-button class="md-warn">CANCEL</md-button>
+                  <md-button ng-disabled="vm.showBusyText"
+                             ng-click="vm.submitCurrentStep(vm.stepData[1].data, !(vm.stepData[1].data.firsname && vm.stepData[1].data.lastname))"
+                             class="md-primary md-raised">
+                    {% verbatim %}
+                    {{ vm.stepData[1].data.firsname && vm.stepData[1].data.lastname ? 'NEXT' : 'SKIP' }}
+                    {% endverbatim %}
+                  </md-button>
+                </div>
+              </md-step-actions>
+            </form>
+          </md-step-body>
+        </md-step>
+        <md-step label="Finish" md-complete="vm.stepData[2].data.completed" ng-disabled="vm.stepProgress < 3">
+          <md-step-body>
+            <form name="step2">
+              <md-content class="md-padding">
+                <div layout="column" layout-align="center center" style="min-height: 200px">
+                  <h4>Account created!</h4>
+                  <md-button class="md-primary md-raised">GO TO DASHBOARD</md-button>
+                </div>
+              </md-content>
+            </form>
+          </md-step-body>
+        </md-step>
+      </md-steppers>
+    </md-stepper-card-content>
   </div>
 </section>
 
