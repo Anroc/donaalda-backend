@@ -403,6 +403,8 @@ def delete_account(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def back(request):
+    redirect="/";
+
     if not 'history' in request.session or not request.session['history']:
         return HttpResponseRedirect("/")
     else:
