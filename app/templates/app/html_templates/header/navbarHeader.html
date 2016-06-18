@@ -26,7 +26,7 @@
           <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
              data-target="#navbar"
              aria-expanded="false" aria-controls="navbar"><i></i></a>
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="/">
             <div>
               <img alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}"
                    style="margin-bottom: 5px">
@@ -37,18 +37,9 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="#" data-nav-section="home"><span>Start</span></a></li>
+            <li><a href="#" data-nav-section="categories"><span>Kategorien</span></a></li>
             <li><a href="#" data-nav-section="whatsIsDonaalda"><span>Was macht Donaalda</span></a></li>
-            <li><a href="#" data-nav-section="comments"><span>Bewertungen</span></a></li>
-            <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
-            <li><a href="#" data-nav-section="livingSituation"><span>Wohnsituation</span></a></li>
-            <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
-            <!--<li>
-              <div class="btn-group">
-                <button type="button" class="btn btn-primary btn-xs navbar-btn">Apple</button>
-                <button type="button" class="btn btn-primary btn-xs navbar-btn">Samsung</button>
-                <button type="button" class="btn btn-primary btn-xs navbar-btn">Sony</button>
-              </div>
-            </li>-->
+
 
             {% if not request.user.is_authenticated %}
             <li>

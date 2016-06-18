@@ -103,14 +103,6 @@
 </script>
 <!-- End demo purposes only -->
 <script>
-  function logOut() {
-    location.href = "/logout"
-  }
-
-  function admin() {
-    window.open("/admin", "_blank")
-  }
-
   $(document).ready(function () {
     $('[data-show="tooltip"]').tooltip();
   });
@@ -124,8 +116,9 @@
   }
 
   function admin() {
-    location.href = "/admin"
+    window.open("/admin", "_blank")
   }
+
   function start() {
     location.href = "/"
   }

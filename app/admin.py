@@ -15,9 +15,11 @@ from .models import (Category,
                      ScenarioDescription, Comment
                      )
 
+# TODO: Superuser should have no exclusions on changing data (Priority: 7/10)
+
 
 class ScenarioAdmin(admin.ModelAdmin):
-    exclude = ["provider", "url_name"]
+    exclude = []
 
     def get_queryset(self, request):
         user = request.user
@@ -26,6 +28,7 @@ class ScenarioAdmin(admin.ModelAdmin):
         if user.is_superuser:
             return qs
 
+        self.exclude.extend(['provider', 'url_name'])
         return qs.filter(provider=user.employee.employer_id)
 
     def save_model(self, request, obj, form, change):
