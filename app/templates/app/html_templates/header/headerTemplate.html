@@ -110,6 +110,7 @@
   }
 
   function start() {
+    $.post( "/updatepagehistory", { reset: 'y', csrfmiddlewaretoken: "{{ csrf_token }}"} );
     location.href = "/"
   }
   function back() {
