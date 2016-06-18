@@ -1,0 +1,32 @@
+[
+{
+    "model": "app.scenariodescription",
+    "fields": {
+        "belongs_to_scenario": "Intelligente W\u00e4rmesteuerung",
+        "description": "This is description 1 left",
+        "image": "scenarioDesc/scenario-W\u00e4rmesteuerung.jpg",
+        "left_right": true,
+        "order": 1
+    }
+},
+{
+    "model": "app.scenariodescription",
+    "fields": {
+        "belongs_to_scenario": "Intelligente W\u00e4rmesteuerung",
+        "description": "This is description 2",
+        "image": "scenarioDesc/scenario-W\u00e4rmesteuerung_HybYTII.jpg",
+        "left_right": false,
+        "order": 2
+    }
+},
+{
+    "model": "app.scenariodescription",
+    "fields": {
+        "belongs_to_scenario": "Intelligente W\u00e4rmesteuerung",
+        "description": "This is description 3",
+        "image": "scenarioDesc/scenario-W\u00e4rmesteuerung_aZRYe6e.jpg",
+        "left_right": true,
+        "order": 3
+    }
+}
+]

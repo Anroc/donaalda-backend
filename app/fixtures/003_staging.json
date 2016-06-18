@@ -1,0 +1,241 @@
+[
+{
+    "model": "app.providerprofile",
+    "fields": {
+        "public_name": "AVM",
+        "url_name": "avm",
+        "logo_image": "provider/avm_logo.png",
+        "profile_image": "provider/avm_produkte.png",
+        "banner_image": "provider/avm_banner.jpg",
+        "introduction": "Die AVM Computersysteme Vertriebs GmbH ist ein deutscher Hersteller von Produkten aus dem Bereich der Telekommunikation und Netzwerktechnik (unter anderem DSL, LTE, ISDN, WLAN und Internettelefonie)",
+        "contact_email": "tralala@avvvvvvm.nix",
+        "website": "http://www.avm.de",
+        "owner": "AVM"
+    }
+},
+{
+    "model": "app.providerprofile",
+    "fields": {
+        "public_name": "Connected Living",
+        "url_name": "connected_living",
+        "logo_image": "provider/cl_logo.png",
+        "profile_image": "provider/cl_image.jpg",
+        "banner_image": "provider/cl_banner.png",
+        "introduction": "Im Leben der Zukunft wird alles einfach vernetzt sein. Wir betreten nicht mehr allein das Smarte Haus als Zentrum der Vernetzung von Menschen und Dingen. Das Vernetzte Leben geht dar\u00fcber hinaus. Die Anwendungsfelder Wohnen, Mobilit\u00e4t, Gesundheit, Geb\u00e4ude sowie St\u00e4dte konvergieren im zuk\u00fcnftigen Internet of Everything verst\u00e4rkt hin zu ganzheitlichen und branchen\u00fcbergreifenden L\u00f6sungen.",
+        "contact_email": "jakob@connected-living.org",
+        "website": "http://www.connected-living.org",
+        "owner": "Connected Living"
+    }
+},
+{
+    "model": "app.providerprofile",
+    "fields": {
+        "public_name": "Eurotronic",
+        "url_name": "eurotronic",
+        "logo_image": "provider/eurotronic_logo.jpg",
+        "profile_image": "provider/eurotronic_image.png",
+        "banner_image": "provider/eurotronic_banner.jpg",
+        "introduction": "Wir haben uns auf die Entwicklung innovativer L\u00f6sungen \r\nzur Reduzierung der Energiekosten spezialisiert.\r\n\r\nUnser mittelst\u00e4ndisches Familienunternehmen hat sich seit der Firmengr\u00fcndung im Mai 1998 kontinuierlich zu einem der marktf\u00fchrenden Unternehmen im Bereich der elektronischen Heizk\u00f6rperregler entwickelt. Unsere Produkte werden in den eigenen Werken in Hessen hergestellt. Ziel ist es, Produkte auf h\u00f6chstem technischen Niveau zu entwickeln, zu produzieren und anwenderfreundlich zu gestalten.",
+        "contact_email": "noreply@eurotronic.org",
+        "website": "http://www.eurotronic.org",
+        "owner": "Eurotronic"
+    }
+},
+{
+    "model": "app.providerprofile",
+    "fields": {
+        "public_name": "Fibaro",
+        "url_name": "fibaro",
+        "logo_image": "provider/fibaro_logo.jpg",
+        "profile_image": "provider/fibaro_image.jpg",
+        "banner_image": "provider/fibaro_banner.jpg",
+        "introduction": "Zur Zeit ist das FIBARO-System die beste auf dem Markt verf\u00fcgbare Aufbau- Automationsl\u00f6sung.\r\n\r\nEs bietet einen nichtinvasiven Installationsprozess, durch den die Notwendigkeit von meterlangen Kabeln hinf\u00e4llig wird. Unsere Miniatur-Module k\u00f6nnen in jedem Wandschaltkasten installiert werden, hinter einem Lichtschalter, einem Rollladen-Schalter etc., und sind mit jedem elektrischen System kompatibel. \r\nEs ist das einzige auf dem Markt verf\u00fcgbare System, das in der Lage ist, LED-Licht oder fluoreszierendes Licht ohne Nulleiter in elektrischen Systemen zu kontrollieren (ehemals typische elektrische Systeme). \r\nFibaro-Ger\u00e4te werden nicht permanent an die Geb\u00e4udeinfrastruktur gekoppelt. Wenn Sie Ihre Wohnung also umdekorieren, einige W\u00e4nde einrei\u00dfen oder das Inneneinrichtungskonzept \u00e4ndern m\u00f6chten\u2026 Ist das kein Problem. Tun Sie es einfach. Nehmen Sie einfach jedes beliebige Modul aus der Wand und installieren es an einem neuen Platz. Durch das Maschennetzwerk aktualisiert das Modul seinen Standort und nimmt die Kooperation mit den \u00fcbrigen Systemkomponenten problemlos wieder auf.",
+        "contact_email": "noreply@fibaro.com",
+        "website": "http://www.fibaro.com",
+        "owner": "Fibaro"
+    }
+},
+{
+    "model": "app.providerprofile",
+    "fields": {
+        "public_name": "Jung",
+        "url_name": "jung",
+        "logo_image": "provider/jung_logo.png",
+        "profile_image": "provider/jung_image.jpg",
+        "banner_image": "provider/jung_banner.jpg",
+        "introduction": "Intelligente Haussteuerung mit dem zukunftssicheren KNX-System\r\nDie Aufgabe moderner Haustechnik ist es, Wohn- und Arbeitswelten intelligent zu steuern und dabei auf individuelle Gestaltungsw\u00fcnsche und Wohnqualit\u00e4t R\u00fccksicht zu nehmen. Von Bedeutung sind dabei die Aspekte Komfort, Wirtschaftlichkeit, Energieeffizienz und Repr\u00e4sentation. In diesem Sinne vernetzt KNX hier Funktionen wie Beleuchtung, Klima, Sicherheit und Multimedia f\u00fcr eine zentrale und smarte Steuerung.",
+        "contact_email": "alt@jung.de",
+        "website": "http://www.jung.de/",
+        "owner": "Jung"
+    }
+},
+{
+    "model": "app.providerprofile",
+    "fields": {
+        "public_name": "Withthings",
+        "url_name": "withthings",
+        "logo_image": "provider/withings_logo.jpg",
+        "profile_image": "provider/withthing_image.jpg",
+        "banner_image": "provider/withthings_banner.jpg",
+        "introduction": "Withings ist ein Hersteller, der...",
+        "contact_email": "noreply@withtings.com",
+        "website": "http://www.withings.com/eu/de/",
+        "owner": "Withthings"
+    }
+},
+{
+    "model": "app.employee",
+    "fields": {
+        "employer": "Connected Living",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "app.employee",
+    "fields": {
+        "employer": "AVM",
+        "groups": [
+            [
+                "Marketing"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "app.product",
+    "fields": {
+        "name": "test",
+        "provider": "Connected Living",
+        "product_type": "Basisger\u00e4t",
+        "serial_number": "NULL",
+        "description": "NULL",
+        "specifications": "---",
+        "image1": "products/81eatl5.jpeg",
+        "image2": "products/81eatl5_gHw2fCv.jpeg",
+        "image3": "products/81eatl5_WqTQUxU.jpeg",
+        "end_of_life": true
+    }
+},
+{
+    "model": "app.product",
+    "fields": {
+        "name": "request",
+        "provider": "Connected Living",
+        "product_type": "Basisger\u00e4t",
+        "serial_number": "0-0-00-0",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+        "specifications": "---",
+        "image1": "products/81eatl5.jpeg",
+        "image2": "",
+        "image3": "",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "fields": {
+        "name": "Jung CO2-Sensor",
+        "provider": "Jung",
+        "product_type": "CO2-Sensor",
+        "serial_number": "CO2 LS 2178",
+        "description": "Bestimmungsgem\u00e4\u00dfer Gebrauch\r\n\r\n    Messen von CO2-Konzentration, relativer Luftfeuchte und Lufttemperatur\r\n\r\n    Ausgabe der gemessenen Werte als Telegramm auf den Bus, z.B. zum Steuern von L\u00fcftern oder Fensterantrieben \u00fcber KNX-Telegramme\r\n\r\n    Einzelraum-Temperaturregelung in KNX-Installationen\r\n\r\n    Montage in Ger\u00e4tedose nach DIN 49073\r\n\r\n\r\nProdukteigenschaften\r\n\r\n    Grenzwert\u00fcberwachung f\u00fcr CO2-Konzentration (max. 4 Grenzwerte) und Luftfeuchte (max. 2 Grenzwerte)\r\n    Taupunktalarmierung z.B. f\u00fcr K\u00fchldecken und Winterg\u00e4rten, zur Vermeidung von Schimmelbildung\r\n    Zwei Bin\u00e4reing\u00e4nge zum Anschluss potentialfreier Kontakte, z.B. Taster, Schalter, Fensterkontakte\r\n    Logikgatter f\u00fcr einfache Verkn\u00fcpfungsfunktionen",
+        "specifications": "---",
+        "image1": "products/jung_co2_1.png",
+        "image2": "products/Jung_CO2-Sensor_2.jpg",
+        "image3": "products/Jung_CO2-Sensor_3.png",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "fields": {
+        "name": "EUROtronic Comet",
+        "provider": "Eurotronic",
+        "product_type": "Thermostat",
+        "serial_number": "700 100 418, EAN: 42 600 1271 101 0",
+        "description": "\u00c4u\u00dferst ger\u00e4uscharm, eine deutlich l\u00e4ngere Batterielebensdauer und die sehr kompakte Bauform zeichnen SPARmatic comet aus. Durch die optimierte Men\u00fcstruktur ist SPARmatic comet intuitiv bedienbar und l\u00e4sst sich mit dem neu entwickelten Klickverschluss noch schneller und einfacher montieren.",
+        "specifications": "- bis zu 30% Heizkosten sparen!\r\n- Ventil schonend mit ET-Ventilschutz\r\n- sehr stabile Geh\u00e4usebauform \r\n- \u00e4u\u00dferst kompakter Energiespar-Regler\r\n- kleiner als ein handels\u00ad\u00fcblicher Thermostatkopf\r\n- Batterielebensdauer bis zu 5 Jahren*\r\n- \u00e4u\u00dferst ger\u00e4uscharmer Lauf\r\n- einfache Bedienung\r\n- einfache Montage durch Klickverschluss\r\n- Frostschutzfunktion\r\n- \"Fenster-offen\"-Erkennung\r\n- 8 Schaltpunkte pro Tag programmierbar\r\n- komfortable Programmierung mit PROGmatic Programmierstick m\u00f6glich\r\n- passt auf viele bekannte Heizk\u00f6rperventile (z.B. Heimeier, Honeywell MNG, Honeywell Braukmann, Danfoss, Oventrop ab ca. 1996 u.a.)",
+        "image1": "products/eurotronic_sparmatic_comet_1.jpg",
+        "image2": "products/Eurotronic_Comet_2.jpg",
+        "image3": "products/Eurotronic_Comet_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "fields": {
+        "name": "Fibaro Wall Plug",
+        "provider": "Fibaro",
+        "product_type": "Smart Plug/Smart Socket",
+        "serial_number": "EFGWPF-102; FGWPF-101",
+        "description": "Der FIBARO Wall Plug ist ein intelligenter ultimativer Plug & Play - ein extrem kompakter, h\u00f6chstentwickelter und ferngesteuerter Steckdosenstecker mit Energieverbrauchsmessfunktion.\r\nMit diesem \u00e4u\u00dferst funktionellen Wall Plug l\u00e4sst sich jedes beliebige elektrische Ger\u00e4t steuern und dessen Energieverbrauch bequem und wartungsfrei messen.",
+        "specifications": "---",
+        "image1": "products/fibaro_plug_1.jpg",
+        "image2": "products/Fiabro_Wall_Plug_2.JPG",
+        "image3": "products/Fiabro_Wall_Plug_4.JPG",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "fields": {
+        "name": "Withings Wireless Blood Pressure Monitor",
+        "provider": "Withthings",
+        "product_type": "Blutdruck-Messger\u00e4t",
+        "serial_number": "------",
+        "description": "Legen Sie einfach die Manschette an und schalten Sie das Blood Pressure Monitor ein. Die Health Mate-App wird dann automatisch gestartet. Nach ein paar kurzen Anweisungen sind Sie bereit, Ihren Blutdruck zu messen.",
+        "specifications": "---",
+        "image1": "products/withings_bloodpressure_1.png",
+        "image2": "products/Withings_Wireless_Blood_Pressure_Monitor.jpg",
+        "image3": "products/Withings_Wireless_Blood_Pressure_Monitor_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "fields": {
+        "name": "Jung Bewegungsmelder",
+        "provider": "Jung",
+        "product_type": "Bewegungsmelder",
+        "serial_number": "3361 WW",
+        "description": "Bestimmungsgem\u00e4\u00dfer Gebrauch\r\n\r\n    Bedarfsgerechtes Steuern von Beleuchtung, Raumthermostaten und anderen elektrischen Verbrauchern in Innenr\u00e4umen\r\n    Deckenmontage an festen Decken in Ger\u00e4tedose nach DIN 49073 oder Aufputzgeh\u00e4use Art.-Nr.: PM-KAPPE-1 bzw. PM-KAPPE AL-1\r\n\r\n\r\nProdukteigenschaften\r\n\r\n    Integrierte Busankopplung\r\n\r\n    3 PIR-Sensoren\r\n\r\n    Erfassungsfeld 360\u00b0 (3 x 120\u00b0)\r\n\r\n    Integrierter Helligkeitssensor\r\n\r\n    Einsatz als Pr\u00e4senzmelder, Bewegungsmelder, oder f\u00fcr Meldebetrieb\r\n\r\n    Ausgangsfunktionen: Schalten, Treppenhausfunktion, Schalten mit Zwangsstellung, Wertgeber, Lichtszenennebenstelle, Betriebsmodusvorgabe f\u00fcr Raumtemperaturregler\r\n\r\n    Erfassungsbereich erweiterbar durch Parallelschalten mehrerer Ger\u00e4te als Haupt- und Nebenstelle\r\n\r\n    Einsteller zur manuellen Korrektur der Empfindlichkeit\r\n\r\n    Status-LED: Blinkt bei Bewegungserfassung; je nach Programmierung im normalen Betrieb oder nur w\u00e4hrend des Gehtest-Betriebs",
+        "specifications": "---",
+        "image1": "products/jung_bewegungsmelder_1.png",
+        "image2": "products/Jung_Presence_Detector_1.jpg",
+        "image3": "products/Jung_Presence_Detector_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "fields": {
+        "name": "Fibaro Smoke Sensor",
+        "provider": "Fibaro",
+        "product_type": "Rauchmelder",
+        "serial_number": "FGSS-101",
+        "description": "Der Fiabro Rauchsensor ist mit qualitativ guten Komponenten bestens ausgestattet. Seine Perforation l\u00e4sst den Rauch in die Sensorkammer eindringen. Je besser dies erfolgen kann, desto kleinere Rauchmengen sind n\u00f6tig, um eine Gefahr zu entdecken und den Alarm auszul\u00f6sen.\r\nDas Sensorgitter besteht aus einem hochwertigen Material mit einer Vielzahl von L\u00f6chern. Jedes einzelne von ihnen wurde elektrochemisch so geformt, dass der eindringende Rauch direkt in die Sensorkammer geleitet wird. Aufgrund der schnellen Branderkennung bietet der FIBARO Rauchsensor ultimativen Schutz und maximale Schadensbegrenzung.",
+        "specifications": "---",
+        "image1": "products/fibaro_smoke_1.png",
+        "image2": "products/Fiabro_Smoke_Sensor_3.jpg",
+        "image3": "products/Fiabro_Smoke_Sensor_1.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "fields": {
+        "name": "FRITZbox",
+        "provider": "AVM",
+        "product_type": "Router",
+        "serial_number": "7490",
+        "description": "Alles f\u00fcr das schnellste Heimnetz\r\nSpektakul\u00e4re kabellose Geschwindigkeit sowie bedeutend mehr Reichweite mit dem neuen und ultraschnellen WLAN AC. Erleben Sie das Topmodell f\u00fcr Internet, Telefonie und Multimedia.<hr/>",
+        "specifications": "---",
+        "image1": "products/fritzbox_1.png",
+        "image2": "products/fritzbox_2.png",
+        "image3": "products/fritzbox_3.png",
+        "end_of_life": false
+    }
+}
+]

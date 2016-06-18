@@ -1,0 +1,138 @@
+[
+{
+    "model": "app.scenario",
+    "fields": {
+        "name": "Schlafanreiz",
+        "url_name": "schlafanreiz",
+        "short_description": "Heizungsregelung und Raumluftsteuerung mit CO2 gesteuerter L\u00fcftung",
+        "picture": "scenarios/scenario-Schlafanreize.jpg",
+        "provider": "Connected Living",
+        "scenario_product_set": [
+            "Connected Living",
+            "Schlafanreiz-Produktset"
+        ],
+        "categories": [
+            "Gesundheit"
+        ]
+    }
+},
+{
+    "model": "app.scenario",
+    "fields": {
+        "name": "Intelligente W\u00e4rmesteuerung",
+        "url_name": "intelligente_warmesteuerung",
+        "short_description": "Die Raumtemperatur wird an die Gegebenheiten des Smart Home angepasst",
+        "picture": "scenarios/scenario-W\u00e4rmesteuerung.jpg",
+        "provider": "Connected Living",
+        "scenario_product_set": [
+            "Connected Living",
+            "W\u00e4rmesteuerung-Produktset"
+        ],
+        "categories": [
+            "Energie"
+        ]
+    }
+},
+{
+    "model": "app.scenario",
+    "fields": {
+        "name": "Energieverbrauch aufzeigen",
+        "url_name": "energieverbrauch_aufzeigen",
+        "short_description": "Anzeige des gesamten Energieverbrauchs aller Ger\u00e4te im Haushalt",
+        "picture": "scenarios/scenario-Energieverbrauch.jpg",
+        "provider": "Connected Living",
+        "scenario_product_set": [
+            "Connected Living",
+            "Energieverbrauch-Produktset"
+        ],
+        "categories": [
+            "Energie"
+        ]
+    }
+},
+{
+    "model": "app.scenario",
+    "fields": {
+        "name": "Aufzeichnung von Vitaldaten",
+        "url_name": "aufzeichnung_von_vitaldaten",
+        "short_description": "Sensoren/Wearables messen Vitalparameter (Blutdruck/Gewicht...)",
+        "picture": "scenarios/scenario-Vitaldaten.jpg",
+        "provider": "Connected Living",
+        "scenario_product_set": [
+            "Connected Living",
+            "Vitaldaten-Produktset"
+        ],
+        "categories": [
+            "Gesundheit"
+        ]
+    }
+},
+{
+    "model": "app.scenario",
+    "fields": {
+        "name": "Aufzeichnung des Aktivit\u00e4tsgrads",
+        "url_name": "aufzeichnung_des_aktivitatsgrads",
+        "short_description": "Sensoren in der Wohnung messen den Aktivit\u00e4tsgrad der Personen im Haushalt",
+        "picture": "scenarios/scenario-Aktivit\u00e4t.jpg",
+        "provider": "Connected Living",
+        "scenario_product_set": [
+            "Connected Living",
+            "Aktivit\u00e4tsgrad-Produktset"
+        ],
+        "categories": [
+            "Gesundheit"
+        ]
+    }
+},
+{
+    "model": "app.scenario",
+    "fields": {
+        "name": "Aufwachanreiz",
+        "url_name": "aufwachanreiz",
+        "short_description": "Aufwachzeitpunkt abgeglichen mit dem pers\u00f6nlichem Kalender",
+        "picture": "scenarios/scenario-Aufwachanreiz.jpg",
+        "provider": "AVM",
+        "scenario_product_set": [
+            "Connected Living",
+            "Aufwachanreiz-Produktset"
+        ],
+        "categories": [
+            "Gesundheit"
+        ]
+    }
+},
+{
+    "model": "app.scenario",
+    "fields": {
+        "name": "Automatische Lichtsteuerung",
+        "url_name": "automatische_lichtsteuerung",
+        "short_description": "Entsprechend Anwesenheit des Nutzers, Tageszeit und Lichtverh\u00e4ltnissen",
+        "picture": "scenarios/scenario-lichtsteuerung.jpg",
+        "provider": "Connected Living",
+        "scenario_product_set": [
+            "Connected Living",
+            "Lichtsteuerung-Produktset"
+        ],
+        "categories": [
+            "Komfort"
+        ]
+    }
+},
+{
+    "model": "app.scenario",
+    "fields": {
+        "name": "Warnung vor Wasser und Feuer",
+        "url_name": "warnung_vor_wasser_und_feuer",
+        "short_description": "Warnung vor Wasser & Feuer",
+        "picture": "scenarios/scenario-Wasser.jpg",
+        "provider": "Connected Living",
+        "scenario_product_set": [
+            "Connected Living",
+            "Wasser-Produktset"
+        ],
+        "categories": [
+            "Sicherheit"
+        ]
+    }
+}
+]

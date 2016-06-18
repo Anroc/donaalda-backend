@@ -1,0 +1,132 @@
+[
+{
+    "model": "app.productset",
+    "fields": {
+        "name": "TestProductSet",
+        "description": "TestProductSet",
+        "creator": "Connected Living",
+        "products": [
+            [
+                "Connected Living",
+                "0-0-00-0"
+            ],
+            [
+                "Connected Living",
+                "NULL"
+            ]
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "fields": {
+        "name": "Schlafanreiz-Produktset",
+        "description": "Dieses Produktset geh\u00f6rt zum Szenario \"Schlafanreize\"",
+        "creator": "Connected Living",
+        "products": [
+            [
+                "Jung",
+                "CO2 LS 2178"
+            ]
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "fields": {
+        "name": "W\u00e4rmesteuerung-Produktset",
+        "description": "",
+        "creator": "Connected Living",
+        "products": [
+            [
+                "Eurotronic",
+                "700 100 418, EAN: 42 600 1271 101 0"
+            ]
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "fields": {
+        "name": "Energieverbrauch-Produktset",
+        "description": "Diese Produktsammlung geh\u00f6rt zum Szenario \"Energieverbrauch aufzeigen\"",
+        "creator": "Connected Living",
+        "products": [
+            [
+                "Fibaro",
+                "EFGWPF-102; FGWPF-101"
+            ]
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "fields": {
+        "name": "Vitaldaten-Produktset",
+        "description": "Diese Produktsammlung geh\u00f6rt zum Szenario \"Aufzeichnung von Vitaldaten\"",
+        "creator": "Connected Living",
+        "products": [
+            [
+                "Withthings",
+                "------"
+            ]
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "fields": {
+        "name": "Aktivit\u00e4tsgrad-Produktset",
+        "description": "Diese Produktset geh\u00f6rt zum Szenario \"Aufzeichnung des Aktivit\u00e4tsgrads\"",
+        "creator": "Connected Living",
+        "products": [
+            [
+                "Jung",
+                "3361 WW"
+            ]
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "fields": {
+        "name": "Aufwachanreiz-Produktset",
+        "description": "Diese Produktsammlung geh\u00f6rt zum Szenario \"Aufwachanreiz\"",
+        "creator": "Connected Living",
+        "products": [
+            [
+                "Fibaro",
+                "EFGWPF-102; FGWPF-101"
+            ]
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "fields": {
+        "name": "Lichtsteuerung-Produktset",
+        "description": "Dieses Produktset geh\u00f6rt zum Szenario \"Automatische Lichtsteuerung\"",
+        "creator": "Connected Living",
+        "products": [
+            [
+                "Fibaro",
+                "EFGWPF-102; FGWPF-101"
+            ]
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "fields": {
+        "name": "Wasser-Produktset",
+        "description": "geh\u00f6rt zu \"Warnung vor Wasser & Feuer\"",
+        "creator": "Connected Living",
+        "products": [
+            [
+                "Fibaro",
+                "FGSS-101"
+            ]
+        ]
+    }
+}
+]

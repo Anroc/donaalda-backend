@@ -1,0 +1,866 @@
+[
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add category",
+        "content_type": [
+            "app",
+            "category"
+        ],
+        "codename": "add_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change category",
+        "content_type": [
+            "app",
+            "category"
+        ],
+        "codename": "change_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete category",
+        "content_type": [
+            "app",
+            "category"
+        ],
+        "codename": "delete_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add scenario",
+        "content_type": [
+            "app",
+            "scenario"
+        ],
+        "codename": "add_scenario"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change scenario",
+        "content_type": [
+            "app",
+            "scenario"
+        ],
+        "codename": "change_scenario"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete scenario",
+        "content_type": [
+            "app",
+            "scenario"
+        ],
+        "codename": "delete_scenario"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add product set",
+        "content_type": [
+            "app",
+            "productset"
+        ],
+        "codename": "add_productset"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change product set",
+        "content_type": [
+            "app",
+            "productset"
+        ],
+        "codename": "change_productset"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete product set",
+        "content_type": [
+            "app",
+            "productset"
+        ],
+        "codename": "delete_productset"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add product",
+        "content_type": [
+            "app",
+            "product"
+        ],
+        "codename": "add_product"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change product",
+        "content_type": [
+            "app",
+            "product"
+        ],
+        "codename": "change_product"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete product",
+        "content_type": [
+            "app",
+            "product"
+        ],
+        "codename": "delete_product"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Produktart",
+        "content_type": [
+            "app",
+            "producttype"
+        ],
+        "codename": "add_producttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Produktart",
+        "content_type": [
+            "app",
+            "producttype"
+        ],
+        "codename": "change_producttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Produktart",
+        "content_type": [
+            "app",
+            "producttype"
+        ],
+        "codename": "delete_producttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Hersteller",
+        "content_type": [
+            "app",
+            "provider"
+        ],
+        "codename": "add_provider"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Hersteller",
+        "content_type": [
+            "app",
+            "provider"
+        ],
+        "codename": "change_provider"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Hersteller",
+        "content_type": [
+            "app",
+            "provider"
+        ],
+        "codename": "delete_provider"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Herstellerprofil",
+        "content_type": [
+            "app",
+            "providerprofile"
+        ],
+        "codename": "add_providerprofile"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Herstellerprofil",
+        "content_type": [
+            "app",
+            "providerprofile"
+        ],
+        "codename": "change_providerprofile"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Herstellerprofil",
+        "content_type": [
+            "app",
+            "providerprofile"
+        ],
+        "codename": "delete_providerprofile"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Angestellter",
+        "content_type": [
+            "app",
+            "employee"
+        ],
+        "codename": "add_employee"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Angestellter",
+        "content_type": [
+            "app",
+            "employee"
+        ],
+        "codename": "change_employee"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Angestellter",
+        "content_type": [
+            "app",
+            "employee"
+        ],
+        "codename": "delete_employee"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add scenario description",
+        "content_type": [
+            "app",
+            "scenariodescription"
+        ],
+        "codename": "add_scenariodescription"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change scenario description",
+        "content_type": [
+            "app",
+            "scenariodescription"
+        ],
+        "codename": "change_scenariodescription"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete scenario description",
+        "content_type": [
+            "app",
+            "scenariodescription"
+        ],
+        "codename": "delete_scenariodescription"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add module",
+        "content_type": [
+            "frontend",
+            "module"
+        ],
+        "codename": "add_module"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change module",
+        "content_type": [
+            "frontend",
+            "module"
+        ],
+        "codename": "change_module"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete module",
+        "content_type": [
+            "frontend",
+            "module"
+        ],
+        "codename": "delete_module"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Nutzerbild",
+        "content_type": [
+            "app",
+            "userimage"
+        ],
+        "codename": "add_userimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Nutzerbild",
+        "content_type": [
+            "app",
+            "userimage"
+        ],
+        "codename": "change_userimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Nutzerbild",
+        "content_type": [
+            "app",
+            "userimage"
+        ],
+        "codename": "delete_userimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Kommentar",
+        "content_type": [
+            "app",
+            "comment"
+        ],
+        "codename": "add_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Kommentar",
+        "content_type": [
+            "app",
+            "comment"
+        ],
+        "codename": "change_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Kommentar",
+        "content_type": [
+            "app",
+            "comment"
+        ],
+        "codename": "delete_comment"
+    }
+},
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "Marketing",
+        "permissions": [
+            [
+                "add_product",
+                "app",
+                "product"
+            ],
+            [
+                "change_product",
+                "app",
+                "product"
+            ],
+            [
+                "delete_product",
+                "app",
+                "product"
+            ],
+            [
+                "add_productset",
+                "app",
+                "productset"
+            ],
+            [
+                "change_productset",
+                "app",
+                "productset"
+            ],
+            [
+                "delete_productset",
+                "app",
+                "productset"
+            ],
+            [
+                "add_producttype",
+                "app",
+                "producttype"
+            ],
+            [
+                "change_producttype",
+                "app",
+                "producttype"
+            ],
+            [
+                "delete_producttype",
+                "app",
+                "producttype"
+            ],
+            [
+                "add_providerprofile",
+                "app",
+                "providerprofile"
+            ],
+            [
+                "change_providerprofile",
+                "app",
+                "providerprofile"
+            ],
+            [
+                "delete_providerprofile",
+                "app",
+                "providerprofile"
+            ],
+            [
+                "add_scenario",
+                "app",
+                "scenario"
+            ],
+            [
+                "change_scenario",
+                "app",
+                "scenario"
+            ],
+            [
+                "delete_scenario",
+                "app",
+                "scenario"
+            ],
+            [
+                "add_scenariodescription",
+                "app",
+                "scenariodescription"
+            ],
+            [
+                "change_scenariodescription",
+                "app",
+                "scenariodescription"
+            ],
+            [
+                "delete_scenariodescription",
+                "app",
+                "scenariodescription"
+            ],
+            [
+                "add_userimage",
+                "app",
+                "userimage"
+            ],
+            [
+                "change_userimage",
+                "app",
+                "userimage"
+            ],
+            [
+                "delete_userimage",
+                "app",
+                "userimage"
+            ]
+        ]
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$9bjdMjPwNf9L$FNvdmKXdtPPS91KWGr0WYGq4o+agcmn+UrU+u5QWEaA=",
+        "last_login": "2016-06-18T15:59:13.295Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "Herr",
+        "last_name": "Admin",
+        "email": "admin@localhost.local",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-05-18T13:33:55Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$yhZEiwoyc44d$9AyI2khHesuJGRF21L7AynUUKizBJWqYQZnS4GT69MY=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "yourmom",
+        "first_name": "",
+        "last_name": "",
+        "email": "are@twins.incest",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-05-26T19:08:01.913Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$IHnjJ0gxTLuw$zDh51XwhG3BjttN1nmExvjp+w8wlAO64ULDVA92P+hM=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "henning",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-06-05T12:40:11Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$k83a6GNUiT0Y$/XgnodT4ZygP21aQVgu+3tN6OF6UYT/ySP9C6hWK298=",
+        "last_login": "2016-06-05T14:10:50.203Z",
+        "is_superuser": false,
+        "username": "micha",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-06-05T14:09:55Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$PzmJKURTfBJT$8Rqh9s7r+aYIiNLW1D3j/Nt2wvPyjJ7CvSXiL2Pm0GM=",
+        "last_login": "2016-06-11T12:47:38.602Z",
+        "is_superuser": false,
+        "username": "Ferhat",
+        "first_name": "Ferhat",
+        "last_name": "Ferhat",
+        "email": "ferhat@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-06-11T12:31:11.925Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$ERjsdBRBtcCF$vkQI5Phwmk8nU9tU2brX0lYCcWqJqMMGLlukQjkzbR4=",
+        "last_login": "2016-06-18T09:50:02.280Z",
+        "is_superuser": false,
+        "username": "AVMAngestellter",
+        "first_name": "AVM",
+        "last_name": "Verwaltung",
+        "email": "dingbums@sldflskd.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-06-12T11:35:56Z",
+        "groups": [
+            [
+                "Marketing"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$8VvkUM4mqwZr$oKOtHsGvS3B1qanlMyDbPQeU2eR8ZM3HJ0l5Ao74oKc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Ferhat1",
+        "first_name": "Ferhat",
+        "last_name": "Ferhat",
+        "email": "ferhat",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-06-12T17:07:31.239Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$J4OrTPBo6IsY$o+0H6i/nIvk+xuXrmkNsneZfqv1LpusduCMN2oNz60M=",
+        "last_login": "2016-06-12T17:10:17.632Z",
+        "is_superuser": false,
+        "username": "Ferhat2",
+        "first_name": "ferhat",
+        "last_name": "ferhat",
+        "email": "ferhat",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-06-12T17:09:22.171Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$24000$pNgSGpouFiqB$qjoZdiJDM5vQnl+i8ZEO/v1ttYcM6+jfHoB0NVOVsL8=",
+        "last_login": "2016-06-18T10:27:37.453Z",
+        "is_superuser": false,
+        "username": "Christian",
+        "first_name": "Christian ",
+        "last_name": "Schwerdt",
+        "email": "c.schwerdt@icoud.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-06-18T10:27:16.797Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
