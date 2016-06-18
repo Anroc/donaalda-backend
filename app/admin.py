@@ -19,7 +19,7 @@ from .models import (Category,
 
 
 class ScenarioAdmin(admin.ModelAdmin):
-    exclude = []
+    exclude = ['url_name']
 
     def get_queryset(self, request):
         user = request.user
@@ -28,7 +28,7 @@ class ScenarioAdmin(admin.ModelAdmin):
         if user.is_superuser:
             return qs
 
-        self.exclude.extend(['provider', 'url_name'])
+        self.exclude.extend(['provider'])
         return qs.filter(provider=user.employee.employer_id)
 
     def save_model(self, request, obj, form, change):
