@@ -47,14 +47,13 @@
             {% if not request.user.is_authenticated %}
             <li>
               <div class="btn-group">
-                <a data-toggle="modal" href="#" data-nav-section="contact">
+
                 <button type="button" class="btn btn-primary btn-xs navbar-btn"
                         data-show="tooltip" title="Kontakt" data-placement="bottom"
-                        data-toggle="modal"
-                        data-target="#" data-nav-section="contact">
-                  <i class="glyphicon glyphicon-envelope"></i>
-                  </button>
-                  </a>
+                        onclick="contact()">
+                    <i class="glyphicon glyphicon-envelope"></i>
+                </button>
+
                 <button type="button" class="btn btn-primary btn-xs navbar-btn"
                         data-show="tooltip" title="Anmelden" data-placement="bottom"
                         data-toggle="modal"
@@ -75,14 +74,13 @@
               <div class="btn-group">
                 {% if user.is_staff %}
 
-                <a data-toggle="modal" href="#" data-nav-section="contact">
-                  <button type="button" class="btn btn-primary btn-xs navbar-btn"
-                          data-show="tooltip" title="Kontakt" data-placement="bottom"
-                          data-toggle="modal"
-                          data-target="#" data-nav-section="contact">
-                    <i class="glyphicon glyphicon-envelope"></i>
-                  </button>
-                </a>
+
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Kontakt" data-placement="bottom"
+                        onclick="contact()">
+                  <i class="glyphicon glyphicon-envelope"></i>
+                </button>
+
 
                 <button type="button" class="btn btn-primary btn-xs navbar-btn"
                         data-show="tooltip" title="Verwaltung" data-placement="bottom"
