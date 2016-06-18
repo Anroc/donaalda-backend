@@ -7,20 +7,8 @@
           <div flex>
 
             <h4>
-              Ich wohne in {% verbatim %} {{ data.accommodation }} {% endverbatim %}
-              (zur miete/im eigentum/in wohnung/in haus/mit garten/mit balkon/mit terrasse/mit garage)
-            </h4>
-
-            <h4>
               In was wohnst du?
             </h4>
-            <p>
-              Selected Value:
-              <span class="radioValue">
-                {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
-              </span>
-            </p>
-
 
             <md-radio-group ng-model="data.accommodation_name">
 
@@ -31,10 +19,32 @@
             </md-radio-group>
 
             <h4>
-              mein zuhause ist:
-              (1-5/6-15/älter als 15/ich plane neubau/wohnfläche
-              in qm/personen im haushalt insgesamt/davon kinder)
+              Eigentum oder Miete?
             </h4>
+
+            <md-radio-group ng-model="data.ownership">
+
+              <md-radio-button value="Eigentum" class="md-primary">Eigentum</md-radio-button>
+              <md-radio-button value="Miete">Miete</md-radio-button>
+
+            </md-radio-group>
+
+            <h4>
+              Zusatz?
+            </h4>
+
+            <md-checkbox-group ng-model="data.addition">
+              <md-checkbox value="Garten">Garten</md-checkbox>
+              <md-checkbox value="Balkon">Balkon</md-checkbox>
+              <md-checkbox value="Terrasse">Terrasse</md-checkbox>
+              <md-checkbox value="Garage">Garage</md-checkbox>
+            </md-checkbox-group>
+
+
+
+
+          </div>
+          <div flex>
 
             <h4>
               Wie alt ist dein Heim?
@@ -42,14 +52,13 @@
 
             <md-radio-group ng-model="data.accommodation">
 
-              <md-radio-button value="Wohnung" class="md-primary">Wohnung</md-radio-button>
-              <md-radio-button value="Haus">Haus</md-radio-button>
-              <md-radio-button value="Trump Tower" class="md-accent">Trump Tower</md-radio-button>
+              <md-radio-button value="1-5 Jahre" class="md-primary">1-5 Jahre</md-radio-button>
+              <md-radio-button value="6-15">6-15</md-radio-button>
+              <md-radio-button value="Ich plane Neubau" class="md-accent">Ich plane Neubau</md-radio-button>
+              <md-radio-button value="Wohnfläche" class="md-accent">Wohnfläche</md-radio-button>
 
             </md-radio-group>
 
-          </div>
-          <div flex>
             <h4>Quadratmeter</h4>
             <div layout="row">
               <div flex="60">
@@ -69,6 +78,15 @@
             </div>
           </div>
           <div flex>
+
+            <h4>Personen im Haushalt</h4>
+            <div layout>
+              <div flex="20" layout layout-align="center center">
+                <input flex type="number" ng-model="data.children" aria-label="rating"
+                       aria-controls="rating-slider">
+              </div>
+            </div>
+
             <h4>Kinder</h4>
             <div layout>
               <div flex="20" layout layout-align="center center">
