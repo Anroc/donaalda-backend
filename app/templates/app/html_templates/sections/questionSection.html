@@ -8,18 +8,19 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
 <script src="{% static 'app/index-app.js' %}"></script>
-<section id="fh5co-intro" data-section="questions"
+<section id="fh5co-questions" data-section="questions"
          ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
          ng-controller="{% block ng_controller_theme %}questionController as vm{% endblock %}"
          ng-cloak>
+  <div class="container">
+
+  </div>
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-left">
         <h2 class=" left-border to-animate">Fragen</h2>
       </div>
     </div>
-  </div>
-  <div class="container">
     <md-stepper-card-content class="md-no-padding" style="width:100%;">
       <md-steppers md-dynamic-height md-stretch-steppers="always" md-selected="vm.selectedStep"
                    md-busy-text="'Processing...'" md-busy="vm.showBusyText">
@@ -33,6 +34,20 @@
                     <h4>Haus oder Wohnung</h4>
                     <md-checkbox>Haus</md-checkbox>
                     <md-checkbox>Wohnung</md-checkbox>
+
+                    <form ng-submit="submit()">
+
+                      <p>Selected Value: <span class="radioValue">{{ data.accommodation }}</span></p>
+
+                      <h4>Ich wohne in ...</h4>
+                      <md-radio-group ng-model="data.accommodation">
+
+                        <md-radio-button value="house" class="md-primary">einem Haus</md-radio-button>
+                        <md-radio-button value="apartment">einer Wohnung</md-radio-button>
+                        <md-radio-button value="trump_tower">im Trump Tower</md-radio-button>
+
+                      </md-radio-group>
+                    </form>
                   </div>
                   <div flex>
                     <h4>Quadratmeter</h4>
