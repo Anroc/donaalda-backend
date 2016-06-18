@@ -145,6 +145,10 @@ BOWER_INSTALLED_APPS = (
     'jquery'
 )
 
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, 'app/fixtures/'),
+)
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
