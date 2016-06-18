@@ -466,8 +466,9 @@ h1, h2, h3, h4, h5, h6 {
   background-image: -ms-repeating-linear-gradient(top left, #3f95ea 0%, #52d3aa 100%);
 }
 #fh5co-page, #fh5co-page .text-wrap {
-  margin-top: 30px;
-  height: 300px;
+  margin-top: 0px;
+  padding-top: 50px ;
+  height: 400px;
 }
 #fh5co-page .text-wrap {
   display: table;

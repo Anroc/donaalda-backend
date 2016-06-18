@@ -12,7 +12,10 @@ from .models import (Category,
                      Provider,
                      ProviderProfile,
                      Employee,
-                     ScenarioDescription, Comment
+                     ScenarioDescription,
+                     Comment,
+                     UserImage,
+                     User,
                      )
 
 
@@ -145,6 +148,15 @@ class EmployeeAdmin(UserAdmin):
         obj.save()
 
 
+class UserImageInline(admin.StackedInline):
+    model = UserImage
+
+
+class UserAdmin(UserAdmin):
+    inlines = (UserImageInline,)
+
+
+admin.site.unregister(User)
 admin.site.register(Category)
 admin.site.register(Scenario, ScenarioAdmin)
 admin.site.register(ProductSet, ProductSetAdmin)
@@ -155,3 +167,4 @@ admin.site.register(ProviderProfile, ProviderProfileAdmin)
 admin.site.register(ProductType)
 admin.site.register(ScenarioDescription)
 admin.site.register(Comment)
+admin.site.register(User, UserAdmin)
