@@ -9,19 +9,197 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js"> <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DONAALDA - Produktübersicht - {{ product.name }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content=""/>
+  <meta name="keywords" content=""/>
+  <meta name="author" content=""/>
 
-  {% include "app/html_templates/header/headerTemplate.html" %}
 
+  <!-- Facebook and Twitter integration -->
+  <meta property="og:title" content=""/>
+  <meta property="og:image" content=""/>
+  <meta property="og:url" content=""/>
+  <meta property="og:site_name" content=""/>
+  <meta property="og:description" content=""/>
+  <meta name="twitter:title" content=""/>
+  <meta name="twitter:image" content=""/>
+  <meta name="twitter:url" content=""/>
+  <meta name="twitter:card" content=""/>
+
+  <!--link rel="stylesheet" href="{% static 'app/index-style.css' %}"-->
+  <script src="{% static 'app/index-app.js' %}"></script>
+
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="shortcut icon" href="{% static 'app/favicon.ico' %}">
+
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet'
+        type='text/css'>
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="{% static 'app/assets/css/animate.css' %}">
+  <!-- Icomoon Icon Fonts-->
+  <link rel="stylesheet" href="{% static 'app/assets/css/icomoon.css' %}">
+  <!-- Simple Line Icons -->
+  <link rel="stylesheet" href="{% static 'app/assets/css/simple-line-icons.css' %}">
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" href="{% static 'app/assets/css/magnific-popup.css' %}">
+  <!-- Bootstrap  -->
+  <link rel="stylesheet" href="{% static 'app/assets/css/bootstrap.css' %}">
+
+  <link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
+
+  <!-- Modernizr JS -->
+  <script src="{% static 'app/assets/js/modernizr-2.6.2.min.js' %}"></script>
+  <!-- FOR IE9 below -->
+  <!--[if lt IE 9]>
+  <script src="{% static 'app/assets/js/respond.min.js' %}"></script>
+  <![endif]-->
+
+
+  <!-- jQuery -->
+  <script src="{% static 'app/assets/js/jquery.min.js' %}"></script>
+  <!-- jQuery Easing -->
+  <script src="{% static 'app/assets/js/jquery.easing.1.3.js' %}"></script>
+  <!-- Bootstrap -->
+  <script src="{% static 'app/assets/js/bootstrap.min.js' %}"></script>
+  <!-- Waypoints -->
+  <script src="{% static 'app/assets/js/jquery.waypoints.min.js' %}"></script>
+  <!-- Stellar Parallax -->
+  <script src="{% static 'app/assets/js/jquery.stellar.min.js' %}"></script>
+  <!-- Counter -->
+  <script src="{% static 'app/assets/js/jquery.countTo.js' %}"></script>
+  <!-- Magnific Popup -->
+  <script src="{% static 'app/assets/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'app/assets/js/magnific-popup-options.js' %}"></script>
+  <!-- Google Map -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
+  <script src="{% static 'app/assets/js/google_map.js' %}"></script>
+
+  <!-- Main JS (Do not remove) -->
+  <script src="{% static 'app/assets/js/main.js' %}"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('[data-show="tooltip"]').tooltip();
+    });
+  </script>
+
+  <script>
+    function logOut() {
+      location.href = "/logout"
+    }
+    function start() {
+      location.href = "/"
+    }
+    function admin() {
+      window.open("/admin", "_blank")
+    }
+    function back() {
+      location.href = "/back";
+    }
+  </script>
+  <script>
+    $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
+  </script>
 </head>
 <body>
 
+<header role="banner" id="fh5co-header">
+  <div class="container">
+    <div class="row">
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <!-- Mobile Toggle Menu Button -->
+          <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
+             data-target="#navbar"
+             aria-expanded="false" aria-controls="navbar"><i></i></a>
+          <a class="navbar-brand" href="/">
+            <div>
 
-<!-- nav bar or tool bar -->
-<!-- TODO: rename to navigationBarTemplate ? -->
-{% include "app/html_templates/header/navbarHeader.html" %}
+            </div>
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
+            <li class="active"><a href="#" data-nav-section="home"><span>Produkt</span></a></li>
+            <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
+            <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>
+            <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
+            <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
+            {% if not request.user.is_authenticated %}
+            <li>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Anmelden" data-placement="bottom"
+                        data-toggle="modal"
+                        data-target="#myModalLogin">
+                  <i class="glyphicon glyphicon-log-in"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Registrieren" data-placement="bottom"
+                        data-toggle="modal"
+                        data-target="#myModalRegister">
+                  <i class="glyphicon glyphicon-new-window"></i>
+                </button>
+              </div>
+            </li>
+            {% else %}
+            <!--TODO: Change these to admin (if allowed), logout and profile-->
+            <li>
+              <div class="btn-group">
+                {% if 1 == 1 %}
+                {% if user.is_staff %}
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Verwaltung" data-placement="bottom"
+                        onclick="admin()">
+                  <i class="glyphicon glyphicon-cog"></i>
+                </button>
+                {% endif %}
+                {% endif %}
+                <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Abmelden" data-placement="bottom"
+                        onclick="logOut()">
+                  <i class="glyphicon glyphicon-log-out"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Profil" data-placement="bottom"
+                        data-toggle="modal"
+                        data-target="#myModalProfile">
+                  <i class="glyphicon glyphicon-user"></i>
+                </button>
+              </div>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
 
-<!-- Kontakt  -->
-{% include "app/html_templates/sections/contactSection.html" %}
+<section id="fh5co-page" data-section="home"
+         style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
+         data-stellar-background-ratio="0.5">
+  <div class="container">
+    <div class="text-wrap">
+      <div class="text-inner">
+        <div class="row">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slant"></div>
+</section>
+
+{% include "app/html_templates/sections/contactSection.html"  %}
 
 <!-- Footer -->
 {% include "app/html_templates/footer/footerTemplate.html" %}
