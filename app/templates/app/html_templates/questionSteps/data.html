@@ -8,20 +8,6 @@
             <h4>Haus oder Wohnung</h4>
             <md-checkbox>Haus</md-checkbox>
             <md-checkbox>Wohnung</md-checkbox>
-
-            <form ng-submit="submit()">
-
-              <p>Selected Value: <span class="radioValue">{{ data.accommodation }}</span></p>
-
-              <h4>Ich wohne in ...</h4>
-              <md-radio-group ng-model="data.accommodation">
-
-                <md-radio-button value="house" class="md-primary">einem Haus</md-radio-button>
-                <md-radio-button value="apartment">einer Wohnung</md-radio-button>
-                <md-radio-button value="trump_tower">im Trump Tower</md-radio-button>
-
-              </md-radio-group>
-            </form>
           </div>
           <div flex>
             <h4>Quadratmeter</h4>
