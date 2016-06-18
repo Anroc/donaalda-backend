@@ -390,9 +390,13 @@ def update_pagehistory(request):
             print(request.session['history'])
             return HttpResponseRedirect("/")
         else:
-            print(2)
-            history.append(lp)
-            request.session['history'] = history
+            if request.META.get('HTTP_REFERER') == lp:
+                print(5)
+                return HttpResponseRedirect("/")
+            else:
+                print(2)
+                history.append(lp)
+                request.session['history'] = history
     else:
         print(3)
         request.session['history'] = [lp]
