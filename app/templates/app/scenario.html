@@ -97,7 +97,6 @@
 </head>
 <body>
 
-{% with scenarios=current_scenario.scenariodescription_set.all %}
 <header role="banner" id="fh5co-header">
   <div class="container">
     <div class="row">
@@ -137,34 +136,6 @@
   </div>
 </header>
 
-<section id="fh5co-home" data-stellar-background-ratio="0.5" {% if current_scenario.picture %}
-         style="background-image:url({{ current_scenario.picture.url }}); {% endif %}">
-  <div class="gradient">
-    <div class="container">
-      <div class="text-wrap">
-        <div class="text-inner">
-          <div class="row">
-            <div class="col-md-12 text-left">
-              {% if current_scenario %}
-              <h1 class="to-animate">
-                {{ current_scenario.name }}
-              </h1>
-              <h3 class="to-animate" style="color: #ddd; margin-top: -20px;">
-                {{ current_scenario.provider }}
-              </h3>
-              <h2 class="to-animate">
-                {{ current_scenario.description }}
-              </h2>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="slant"></div>
-</section>
-
 <section id="fh5co-page" data-section="home"
          data-stellar-background-ratio="0.5" {% if current_scenario.picture %}
          style="background-image:url({{ current_scenario.picture.url }}); {% endif %}">
@@ -189,8 +160,9 @@
   <div class="slant"></div>
 </section>
 
+<!-- Scenario description boxes -->
+{% with scenarios=current_scenario.scenariodescription_set.all %}
 <section id="fh5co-intro" data-section="intro">
-
   <!--szenario-div-->
   <div classs="container-fluid">
 
@@ -233,84 +205,81 @@
     {% endif %}
   </div>
 </section>
+{% endwith %}
 
-<section id="fh5co-work" data-section="images">
-
+{% if current_scenario %}
+<section id="fh5co-work" data-section="products">
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-center">
         <h2 class="to-animate">Produkte</h2>
       </div>
     </div>
-  </div>
 
-  <!--product-slider-div-------------------------------------------------funzt so noch nicht, ist aber in arbeit-->
-  <div class="container-fluid">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!--position:relative damit die punkt-liste unten im parent-div haftet-->
-      <!-- Indicators-->
-      <ol class="carousel-indicators" style="margin-bottom:0; position:absolute; bottom:0">
-        <!--style damit die punkt-liste unten im parent-div haftet-->
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <!-- foreach for products -->
+        {% with slide=1%}
+          {% for indicator in current_scenario.scenario_product_set.products.all %}
+            {% if forloop.counter == 1 %}
+              <li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li>
+            {% endif %}
+            {% if forloop.counter|divisibleby:3 %}
+
+                <li data-target="#carousel-example-generic" data-slide-to="{{ slide|add:'1' }}"></li>
+
+            {% endif %}
+          {% endfor %}
+        {% endwith %}
       </ol>
 
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
-
-        {% if current_scenario %}
-        {% for x in current_scenario.scenario_product_set.products.all %}
-
-        {% if forloop.counter == 1 %}
-        <!--beim ersten slide muss die klasse active hinzugefügt werden, ab dem nächsten nicht mehr-->
-        <div class="item active row">
-          {% else %}
-          {{forloop.counter|add:"-1"}} <!--bei jedem durch 3 teilbarem "index-1" muss ein neuer slide geöffnet werden-->
-          {% if forloop.counter|divisibleby:3 %}
-          <div class="item row">
-            {% endif %}
-            {{forloop.counter|add:"1"}}
-            <!--die -1 war nur um zu checken ob der slide geöffnet werden musste und wird wieder auf seinen wert gesetzt-->
-            {% endif %}
-
+        {% for item in current_scenario.scenario_product_set.products.all %}
+          {% if forloop.counter == 1 %}
+            <div class="item active" >
+          {% endif%}
             <div class="col-md-4">
               <div class="card" style="background-color:white; border-radius:5px">
                 <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                  <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ x.name }}</h4>
-                  <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ x.provider }}</h6>
+                  <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ item.name }}</h4>
+                  <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ item.provider }}</h6>
                 </div>
-                <img src="{{ x.image1.url }}" alt="" class="img-thumbnail">
-                <div class="card-block">
-                  <p class="card-text" style="color:black; padding:5px">kurze beschreibung</p>
+                <div style="height: 200px;">
+                  <img src="{{ item.image1.url }}" alt="" class="img-thumbnail">
                 </div>
               </div>
             </div>
-
+          {% if forloop.counter == current_scenario.scenario_product_set.products.all|length %}
+            </div>
+          {% else %}
             {% if forloop.counter|divisibleby:3 %}
-          </div>
+              </div>
+              <div class="item">
+            {% endif%}
           {% endif %}
-          {% endfor %}
-          {% endif %}
-        </div>
-
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+        {% endfor %}
       </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
+  </div>
 </section>
+{% endif %}
 
 {% include "app/html_templates/footer/footerTemplate.html" %}
 
 {% include "app/html_templates/modals/modals.html" %}
 
 </body>
-{% endwith %}
 </html>
 
