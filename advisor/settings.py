@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # TODO added djangobower
 
 INSTALLED_APPS = [
-    'django_bootstrap_carousel',
+    # 'django_bootstrap_carousel',
     'djangobower',
     'material',
     'material.admin',
