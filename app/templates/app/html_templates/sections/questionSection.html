@@ -8,10 +8,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
 <script src="{% static 'app/index-app.js' %}"></script>
-<section id="fh5co-questions" data-section="questions"
-         ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
-         ng-controller="{% block ng_controller_theme %}questionController as vm{% endblock %}"
-         ng-cloak>
+<section id="fh5co-questions" data-section="questions">
 
   <div class="container">
     <div class="row">
@@ -21,7 +18,10 @@
     </div>
 
   </div>
-  <div class="container">
+  <div class="container"
+       ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
+       ng-controller="{% block ng_controller_theme %}questionController as vm{% endblock %}"
+       ng-cloak>
 
     <md-stepper-card-content class="md-no-padding" style="width:100%;">
       <md-steppers md-dynamic-height md-stretch-steppers="always" md-selected="vm.selectedStep"
@@ -85,7 +85,7 @@
                 <div flex layout="row" layout-align="end top">
                   <md-button class="md-warn">CANCEL</md-button>
                   <md-button type="submit"
-                             ng-disabled=""
+                             ng-disabled="false"
                              class="md-primary md-raised">NEXT
                   </md-button>
                 </div>
@@ -93,6 +93,7 @@
             </form>
           </md-step-body>
         </md-step>
+
         <md-step label="Präferenz" md-complete="vm.stepData[1].data.completed"
                  ng-disabled="vm.stepProgress < 2">
           <md-step-body>
@@ -127,6 +128,7 @@
             </form>
           </md-step-body>
         </md-step>
+
         <md-step label="Random" md-complete="vm.stepData[1].data.completed"
                  ng-disabled="vm.stepProgress < 2">
           <md-step-body>
