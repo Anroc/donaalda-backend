@@ -41,6 +41,10 @@
             <li><a href="#" data-nav-section="comments"><span>Bewertungen</span></a></li>
             <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
             <li><a href="#" data-nav-section="livingSituation"><span>Wohnsituation</span></a></li>
+
+            <!-- TODO CHRIS -->
+
+
             <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
             <!--<li>
               <div class="btn-group">
@@ -53,6 +57,12 @@
             {% if not request.user.is_authenticated %}
             <li>
               <div class="btn-group">
+                <a href="#" data-nav-section="contact">
+                  <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                          data-show="tooltip" title="Kontakt" data-placement="bottom">
+                    <i class="glyphicon glyphicon-log-out"></i>
+                  </button>
+                </a>
                 <button type="button" class="btn btn-primary btn-xs navbar-btn"
                         data-show="tooltip" title="Anmelden" data-placement="bottom"
                         data-toggle="modal"
