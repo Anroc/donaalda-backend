@@ -442,10 +442,7 @@ a {
 .btn1 {
     color: lightgreen;
 }
-.active {
-    background: lightgreen;
-    color: ivory;
-}
+
 .btn1:not([disabled]):hover {
     background-color: lightgreen;
     color: ivory;

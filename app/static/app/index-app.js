@@ -76,10 +76,6 @@ function authenticationControl($scope, $mdDialog, $mdSidenav) {
 
 donaaldaApp.controller('questionController', function ($scope, $q, $timeout) {
 
-    $scope.accommodation = {
-
-    };
-
     $scope.data = {
         accommodation : "apartment",
         square_meters : 0,

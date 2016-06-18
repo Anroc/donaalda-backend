@@ -1,0 +1,53 @@
+<md-step label="Daten" md-complete="vm.stepData[0].data.completed"
+         ng-disabled="vm.stepProgress < 1">
+  <md-step-body>
+    <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
+      <md-content class="md-padding">
+        <div layout="row" layout-align="center top">
+          <div flex>
+            <h4>Haus oder Wohnung</h4>
+            <md-checkbox>Haus</md-checkbox>
+            <md-checkbox>Wohnung</md-checkbox>
+          </div>
+          <div flex>
+            <h4>Quadratmeter</h4>
+            <div layout="row">
+              <div flex="60">
+                <md-slider class="md-primary" flex min="0" max="255" ng-model="data.square_meters"
+                           aria-label="blue" id="blue-slider"></md-slider>
+              </div>
+              <div flex="20" layout layout-align="center center" style="margin-right: 10px;">
+                <input flex type="number" ng-model="data.square_meters" aria-label="blue"
+                       aria-controls="blue-slider">
+              </div>
+              <div flex="10" style="text-align: justify">
+                m²
+              </div>
+              <div flex="10">
+
+              </div>
+            </div>
+          </div>
+          <div flex>
+            <h4>Kinder</h4>
+            <div layout>
+              <div flex="20" layout layout-align="center center">
+                <input flex type="number" ng-model="data.children" aria-label="rating"
+                       aria-controls="rating-slider">
+              </div>
+            </div>
+          </div>
+        </div>
+      </md-content>
+      <md-step-actions layout="row">
+        <div flex layout="row" layout-align="end top">
+          <md-button class="md-warn">CANCEL</md-button>
+          <md-button type="submit"
+                     ng-disabled=""
+                     class="md-primary md-raised">NEXT
+          </md-button>
+        </div>
+      </md-step-actions>
+    </form>
+  </md-step-body>
+</md-step>
