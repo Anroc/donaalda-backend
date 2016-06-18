@@ -33,6 +33,13 @@
           <input type="text" class="form-control" name="email" placeholder="Email-Adresse"
                  aria-describedby="basic-addon11" value="{{ user.email }}">
         </div>
+        <div class="input-group row-bottom-padded-sm" style="margin-bottom: 5px;">
+          <label class="btn btn-default btn-file"> Profilbild
+          <input type="file" name="avatar"  style="display: none;" value="">
+          </label>
+          <img src="" style="width:75px; height:75px; display:block; border-radius: 1px; background-color:#cccccc;">
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger"data-toggle="modal"
