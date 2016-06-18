@@ -404,18 +404,19 @@ def delete_account(request):
 @require_http_methods(["GET", "POST"])
 def back(request):
     print("back")
+    history = request.session['history']
+    redirect = "/";
     if not 'history' in request.session or not request.session['history']:
         print("1")
         return HttpResponseRedirect("/")
     else:
-        history = request.session['history']
-        redirect = history.pop()
-        if redirect == 'redirected':
-            return HttpResponseRedirect("/")
-        print("2")
-        print(redirect)
-        history.append("redirected")
-        request.session['history'] = history
+        if len(request.session['history'])>=2:
+            history.pop()
+            redirect = history.pop()
+            print("2")
+            print(redirect)
+            request.session['history'] = history
+
     print("3")
     print(history)
     print("back")
@@ -425,38 +426,32 @@ def back(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def update_pagehistory(request):
-    print(request.POST.get('reset'))
     if request.POST.get('reset') == "y":
         if 'history' in request.session and request.session['history']:
-            request.session['history'] = ["redirected"]
+            request.session['history'] = []
         print("reset")
         return HttpResponse("/")
 
-    lp = request.POST.get('lastpage')
-    if not lp:
-        print("no lastpage")
-        return HttpResponseRedirect("/")
+    cp = request.META.get('HTTP_REFERER')
+    if not cp:
+        print("no current page")
+        return HttpResponse("/")
 
     if 'history' in request.session and request.session['history']:  # wenn eine history
         history = request.session['history']
-        if history[-1] == "redirected":
-            history.pop()
-            request.session['history'] = history
-            print(1)
-            print(request.session['history'])
-            return HttpResponseRedirect("/")
+        print("////")
+        print(history[-1])
+        print("////")
+
+        if history[-1] == cp: # same page
+            return HttpResponse("/")
         else:
-            if request.META.get('HTTP_REFERER') == lp or lp == "None":
-                print(5)
-                return HttpResponseRedirect("/")
-            else:
-                print(2)
-                history.append(lp)
-                request.session['history'] = history
+            print(2)
+            history.append(cp)
+            request.session['history'] = history
     else:
         print(3)
-        request.session['history'] = [lp]
+        request.session['history'] = [cp]
     print(request.session['history'])
     print("update")
-    print(request.POST.get('lastpage'))
-    return HttpResponseRedirect("/")
+    return HttpResponse("/")
