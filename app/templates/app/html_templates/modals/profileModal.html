@@ -3,6 +3,7 @@
 <div class="modal fade" id="myModalProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+
       <form enctype="multipart/form-data" action={% url 'app:profile' %} method="post">
       {% csrf_token %}
       <div class="modal-header">
@@ -48,8 +49,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-danger"data-toggle="modal"
                 data-target="#deleteAccountModal">Konto löschen</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal"
-                data-target="#myModalChangePassword">Passwort ändern</button>
+        <button type="button" id="changePassword" class="btn btn-primary">Passwort ändern</button>
         <button type="submit" class="btn btn-primary">Profil ändern</button>
       </div>
       </form>

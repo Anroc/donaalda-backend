@@ -84,27 +84,17 @@
 <script src="{% static 'app/assets/js/google_map.js' %}"></script>
 
 <!-- For demo purposes only styleswitcher ( You may delete this anytime ) -->
-<script src="{% static 'app/assets/js/jquery.style.switcher.js' %}"></script>
-<script>
-  $(function () {
-    $('#colour-variations ul').styleSwitcher({
-      defaultThemeId: 'theme-switch',
-      hasPreview: false,
-      cookie: {
-        expires: 30,
-        isManagingLoad: true
-      }
-    });
-    $('.option-toggle').click(function () {
-      $('#colour-variations').toggleClass('sleep');
-    });
-  });
 
-</script>
 <!-- End demo purposes only -->
 <script>
   $(document).ready(function () {
     $('[data-show="tooltip"]').tooltip();
+
+    $('#changePassword').on('click', function(){
+      $('#myModalProfile').modal('hide');
+      $('#myModalChangePassword').modal('show');
+
+    });
   });
 </script>
 <!-- Main JS (Do not remove) -->
@@ -122,9 +112,6 @@
   function start() {
     location.href = "/"
   }
-</script>
-
-<script>
   function back() {
     location.href = "/back";
   }
