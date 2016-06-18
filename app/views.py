@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider
+from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -283,6 +283,7 @@ def profile(request):
     email = request.POST.get('email')
     firstname = request.POST.get('firstname')
     lastname = request.POST.get('lastname')
+    avatar_image = request.FILES['avatar']
 
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
@@ -294,19 +295,30 @@ def profile(request):
         messages.error(request, 'Benutzer existiert nicht!')
 
     else:
-        if firstname and not user.first_name:
+        if firstname and not user.first_name == firstname:
             user.first_name = firstname
             messages.success(request, 'Ihr Vorname wurde erfolgreich geändert')
 
-        elif lastname and not user.last_name == lastname:
+        if lastname and not user.last_name == lastname:
             user.last_name = lastname
             messages.success(request, 'Ihr Nachname wurde erfolgreich geändert')
 
-        elif email and not user.email == email:
+        if email and not user.email == email:
             user.email = email
             messages.success(request, 'Ihre Email-Adresse wurde erfolgreich geändert')
-        else:
-            messages.info(request, "Es wurden keine Informationen geändert")
+
+        if avatar_image:
+            userimage = None
+
+            if UserImage.objects.filter(belongs_to_user=user).exists():
+                userimage = user.userimage
+            else:
+                userimage = UserImage(belongs_to_user=user)
+
+            print("image upload")
+            userimage.image = avatar_image
+            userimage.save()
+            messages.success(request, 'Ihr Profilbild wurde erfolgreich geändert')
 
         user.save()
 

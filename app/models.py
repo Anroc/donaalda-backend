@@ -28,7 +28,7 @@ def url_alias(value):
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, validators=[validate_legal_chars])
     picture = models.ImageField(verbose_name="Bild für die Kategorie", upload_to="categories")
-    backgroundPicture = models.ImageField(verbose_name="Bild für den Hintergrund", null=True, blank=True)
+    backgroundPicture = models.ImageField(verbose_name="Bild für den Hintergrund", null=True, blank=True, upload_to="categories")
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length=170, default="---")
     description = models.TextField(verbose_name="Beschreibung", default="---")
     iconString = models.CharField(max_length=20, default="gift")
@@ -48,9 +48,8 @@ class Category(models.Model):
 class Scenario(models.Model):
     name = models.CharField(max_length=100, unique=True)
     url_name = models.CharField(max_length=100, unique=False, default=random())
-    short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="255", null=True, blank=True)
-    description = models.TextField(verbose_name="Beschreibung", null=True, blank=True)
-    picture = models.ImageField(verbose_name="Bild", null=True, blank=True)
+    short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
+    picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
     provider = models.ForeignKey("Provider", default="1", )
     scenario_product_set = models.ForeignKey("ProductSet", null=True)
     categories = models.ManyToManyField("Category", verbose_name="passende Kategorien")
@@ -75,10 +74,10 @@ class Scenario(models.Model):
 class ScenarioDescription(models.Model):
     belongs_to_scenario = models.ForeignKey("Scenario")
     description = models.TextField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to="scenarioDesc")
     thumbnail = ImageSpecField(source='image',
                                processors=[ResizeToFill(200, 100)],
-                               format='JPEG', )
+                               format='JPEG')
     left_right = models.BooleanField()
     order = models.IntegerField()
 
@@ -119,14 +118,14 @@ class Product(models.Model):
     serial_number = models.CharField(max_length=255, default="------")
     description = models.TextField()
     specifications = models.TextField(default="---")
-    image1 = models.ImageField(verbose_name="Bild 1", upload_to="products")
+    image1 = models.ImageField(verbose_name="Bild 1",upload_to="products")
     image2 = models.ImageField(null=True, blank=True, verbose_name="Bild 2",
                                upload_to="products")
     image3 = models.ImageField(null=True, blank=True, verbose_name="Bild 3",
                                upload_to="products")
     thumbnail = ImageSpecField(source='image1',
                                processors=[ResizeToFill(200, 100)],
-                               format='JPEG', )
+                               format='JPEG')
     end_of_life = models.BooleanField(default=False)
 
     def __str__(self):
