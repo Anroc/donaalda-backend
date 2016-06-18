@@ -467,7 +467,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-page, #fh5co-page .text-wrap {
   margin-top: 0px;
-  height: 300px;
+  padding-top: 50px ;
+  height: 400px;
 }
 #fh5co-page .text-wrap {
   display: table;
