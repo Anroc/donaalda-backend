@@ -127,11 +127,9 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
-            <li class="active"><a href="#" data-nav-section="home"><span>Produkt</span></a></li>
-            <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
-            <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>
-            <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
-            <li><a href="#" data-nav-section="contact"><span>Kontakt</span></a></li>
+            <li class="active"><a href="#" data-nav-section="contact"><span>Frag Donaalda</span></a></li>
+            <li><a href="#" data-nav-section="intro"><span>Kontakt</span></a></li>
+
             {% if not request.user.is_authenticated %}
             <li>
               <div class="btn-group">
@@ -199,62 +197,7 @@
   <div class="slant"></div>
 </section>
 
-<section id="fh5co-intro" data-section="intro">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Frag Donaalda</h2>
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>oder ihre Erfinder</h3>
-          </div>
-        </div>
-        <div class="row row-bottom-padded-md">
-          <div class="col-md-6 to-animate">
-            <h3>Kontakt Info</h3>
-            <ul class="fh5co-contact-info">
-              <li class="fh5co-contact-address ">
-                <i class="icon-home"></i>
-                13045 Berlin <br>
-                Telekom Tower <br>
-                Berlin, Deutschland
-              </li>
-              <li><i class="icon-phone"></i>+49 (0) 30 314-666</li>
-              <li><i class="icon-envelope"></i>info@donaalda.com</li>
-              <li><i class="icon-globe"></i> <a href="https://www.donaalda.com/" target="_blank">donaalda.com</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-md-6 to-animate">
-            <h3>Kontaktformular</h3>
-            <div class="form-group ">
-              <label for="name" class="sr-only">Name</label>
-              <input id="name" class="form-control" placeholder="Name" type="text">
-            </div>
-            <div class="form-group ">
-              <label for="email" class="sr-only">E-Mail</label>
-              <input id="email" class="form-control" placeholder="E-Mail" type="email">
-            </div>
-            <div class="form-group ">
-              <label for="phone" class="sr-only">Telefon</label>
-              <input id="phone" class="form-control" placeholder="Telefon" type="text">
-            </div>
-            <div class="form-group ">
-              <label for="message" class="sr-only">Nachricht</label>
-                            <textarea name="" id="message" cols="30" rows="5" class="form-control"
-                                      placeholder="Nachricht"></textarea>
-            </div>
-            <div class="form-group ">
-              <input class="btn btn-primary btn-lg" value="Und los!" type="submit">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</section>
+{% include "app/html_templates/sections/contactSection.html"  %}
 
 <!-- Footer -->
 {% include "app/html_templates/footer/footerTemplate.html" %}
