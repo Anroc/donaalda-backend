@@ -403,23 +403,15 @@ def delete_account(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def back(request):
-    print("back")
-    history = request.session['history']
-    redirect = "/";
     if not 'history' in request.session or not request.session['history']:
-        print("1")
         return HttpResponseRedirect("/")
     else:
         if len(request.session['history'])>=2:
+            history= request.session['history']
             history.pop()
             redirect = history.pop()
-            print("2")
-            print(redirect)
             request.session['history'] = history
 
-    print("3")
-    print(history)
-    print("back")
     return HttpResponseRedirect(redirect)
 
 
@@ -429,29 +421,19 @@ def update_pagehistory(request):
     if request.POST.get('reset') == "y":
         if 'history' in request.session and request.session['history']:
             request.session['history'] = []
-        print("reset")
         return HttpResponse("/")
 
     cp = request.META.get('HTTP_REFERER')
-    if not cp:
-        print("no current page")
-        return HttpResponse("/")
 
     if 'history' in request.session and request.session['history']:  # wenn eine history
         history = request.session['history']
-        print("////")
-        print(history[-1])
-        print("////")
 
         if history[-1] == cp: # same page
             return HttpResponse("/")
         else:
-            print(2)
             history.append(cp)
             request.session['history'] = history
     else:
-        print(3)
         request.session['history'] = [cp]
-    print(request.session['history'])
-    print("update")
+
     return HttpResponse("/")
