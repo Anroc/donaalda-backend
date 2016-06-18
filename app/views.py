@@ -425,6 +425,13 @@ def back(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def update_pagehistory(request):
+    print(request.POST.get('reset'))
+    if request.POST.get('reset') == "y":
+        if 'history' in request.session and request.session['history']:
+            request.session['history'] = ["redirected"]
+        print("reset")
+        return HttpResponse("/")
+
     lp = request.POST.get('lastpage')
     if not lp:
         print("no lastpage")

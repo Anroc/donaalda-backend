@@ -93,7 +93,16 @@
     $('#changePassword').on('click', function(){
       $('#myModalProfile').modal('hide');
       $('#myModalChangePassword').modal('show');
+    });
 
+    $('#deleteAccount').on('click', function(){
+      $('#myModalProfile').modal('hide');
+      $('#deleteAccountModal').modal('show');
+    });
+
+    $('#start').on('click', function() {
+      $.post( "/updatepagehistory", { reset: 'y', csrfmiddlewaretoken: "{{ csrf_token }}"} );
+      location.href = "/"
     });
   });
 </script>
@@ -109,9 +118,11 @@
     window.open("/admin", "_blank")
   }
 
-  function start() {
-    location.href = "/"
+  function contact() {
+    location.href = "/contact";
   }
+
+
   function back() {
     location.href = "/back";
   }
