@@ -5,23 +5,49 @@
       <md-content class="md-padding">
         <div layout="row" layout-align="center top">
           <div flex>
-            <h4>Haus oder Wohnung</h4>
-            <md-checkbox>Haus</md-checkbox>
-            <md-checkbox>Wohnung</md-checkbox>
 
-            <form ng-submit="submit()">
+            <h4>
+              Ich wohne in {% verbatim %} {{ data.accommodation }} {% endverbatim %}
+              (zur miete/im eigentum/in wohnung/in haus/mit garten/mit balkon/mit terrasse/mit garage)
+            </h4>
 
-              <p>Selected Value: <span class="radioValue">{{ data.accommodation }}</span></p>
+            <h4>
+              In was wohnst du?
+            </h4>
+            <p>
+              Selected Value:
+              <span class="radioValue">
+                {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
+              </span>
+            </p>
 
-              <h4>Ich wohne in ...</h4>
-              <md-radio-group ng-model="data.accommodation">
 
-                <md-radio-button value="house" class="md-primary">einem Haus</md-radio-button>
-                <md-radio-button value="apartment">einer Wohnung</md-radio-button>
-                <md-radio-button value="trump_tower">im Trump Tower</md-radio-button>
+            <md-radio-group ng-model="data.accommodation_name">
 
-              </md-radio-group>
-            </form>
+              <md-radio-button value="Wohnung" class="md-primary">Wohnung</md-radio-button>
+              <md-radio-button value="Haus">Haus</md-radio-button>
+              <md-radio-button value="Trump Tower" class="md-accent">Trump Tower</md-radio-button>
+
+            </md-radio-group>
+
+            <h4>
+              mein zuhause ist:
+              (1-5/6-15/älter als 15/ich plane neubau/wohnfläche
+              in qm/personen im haushalt insgesamt/davon kinder)
+            </h4>
+
+            <h4>
+              Wie alt ist dein Heim?
+            </h4>
+
+            <md-radio-group ng-model="data.accommodation">
+
+              <md-radio-button value="Wohnung" class="md-primary">Wohnung</md-radio-button>
+              <md-radio-button value="Haus">Haus</md-radio-button>
+              <md-radio-button value="Trump Tower" class="md-accent">Trump Tower</md-radio-button>
+
+            </md-radio-group>
+
           </div>
           <div flex>
             <h4>Quadratmeter</h4>

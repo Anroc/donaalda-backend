@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider
+from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -197,6 +197,12 @@ def login_user(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def login_view(request):
+    if (request.META.get('HTTP_REFERER') is None):
+        redirectpage = "/"
+        print("none")
+    else:
+        redirectpage = request.META.get('HTTP_REFERER')
+
     form = LoginForm(request.POST or None)
     if request.POST:
         if form.is_valid():
@@ -204,10 +210,10 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, 'Sie wurden erfolgreich angemeldet.')
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                return HttpResponseRedirect(redirectpage)
         else:
             messages.error(request, 'Ihre Anmeldung ist fehlgeschlagen. Versuchen sie es erneut.')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return HttpResponseRedirect(redirectpage)
     return render(request, 'app/html_templates/loginTemplate.html', {'login_form': form})
 
 
@@ -228,9 +234,14 @@ class LoginView(FormView):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def log_out(request):
+    if (request.META.get('HTTP_REFERER') is None):
+        redirectpage = "/"
+        print("none")
+    else:
+        redirectpage = request.META.get('HTTP_REFERER')
     logout(request)
     messages.success(request, 'Sie wurden erfolgreich abgemeldet!')
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(redirectpage)
 
 
 @csrf_protect
@@ -242,21 +253,28 @@ def register_user(request):
     firstname = request.POST.get('firstname')
     lastname = request.POST.get('lastname')
 
+    if (request.META.get('HTTP_REFERER') is None):
+        redirectpage = "/"
+        print("none")
+    else:
+        redirectpage = request.META.get('HTTP_REFERER')
+
     if request.POST:
         if username and password and email and firstname and lastname:
             if User.objects.filter(username=username).exists():
                 messages.error(request, 'Der Benutzername ist bereits vergeben!')
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                return HttpResponseRedirect(redirectpage)
             user = User.objects.create_user(username, email, password)
             user.first_name = firstname
             user.last_name = lastname
             user.save()
             messages.success(request, 'Sie wurden erfolgreich registriert!')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return HttpResponseRedirect(redirectpage)
         else:
             messages.error(request, 'Bitte alle Felder ausfüllen!')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return HttpResponseRedirect(redirectpage)
     return render(request, 'app/html_templates/registrationTemplate.html', )
+
 
 @csrf_protect
 @require_http_methods("POST")
@@ -265,28 +283,46 @@ def profile(request):
     email = request.POST.get('email')
     firstname = request.POST.get('firstname')
     lastname = request.POST.get('lastname')
+    avatar_image = request.FILES['avatar']
+
+    if (request.META.get('HTTP_REFERER') is None):
+        redirectpage = "/"
+        print("none")
+    else:
+        redirectpage = request.META.get('HTTP_REFERER')
 
     if user is None or not User.objects.filter(username=user.username).exists():  # existiert nicht
         messages.error(request, 'Benutzer existiert nicht!')
 
     else:
-        if firstname and not user.first_name:
+        if firstname and not user.first_name == firstname:
             user.first_name = firstname
             messages.success(request, 'Ihr Vorname wurde erfolgreich geändert')
 
-        elif lastname and not user.last_name == lastname:
+        if lastname and not user.last_name == lastname:
             user.last_name = lastname
             messages.success(request, 'Ihr Nachname wurde erfolgreich geändert')
 
-        elif email and not user.email == email:
+        if email and not user.email == email:
             user.email = email
             messages.success(request, 'Ihre Email-Adresse wurde erfolgreich geändert')
-        else:
-            messages.info(request, "Es wurden keine Informationen geändert")
+
+        if avatar_image:
+            userimage = None
+
+            if UserImage.objects.filter(belongs_to_user=user).exists():
+                userimage = user.userimage
+            else:
+                userimage = UserImage(belongs_to_user=user)
+
+            print("image upload")
+            userimage.image = avatar_image
+            userimage.save()
+            messages.success(request, 'Ihr Profilbild wurde erfolgreich geändert')
 
         user.save()
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(redirectpage)
 
 
 @csrf_protect
@@ -296,6 +332,12 @@ def change_password(request):
     password_old = request.POST.get('password_old')
     password_new = request.POST.get('password_new')
     password_repeat = request.POST.get('password_new_repeat')
+
+    if (request.META.get('HTTP_REFERER') is None):
+        redirectpage = "/"
+        print("none")
+    else:
+        redirectpage = request.META.get('HTTP_REFERER')
 
     if user is None and not User.objects.filter(username=user.username).exists():
 
@@ -319,13 +361,20 @@ def change_password(request):
 
             messages.error(request, 'Die neuen Passwörter haben nicht übereingestimmt')
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(redirectpage)
+
 
 @csrf_protect
 @require_http_methods("POST")
 def delete_account(request):
     user = request.user
     password = request.POST.get("password")
+
+    if (request.META.get('HTTP_REFERER') is None):
+        redirectpage = "/"
+        print("none")
+    else:
+        redirectpage = request.META.get('HTTP_REFERER')
 
     if user is None or not User.objects.filter(username=user.username).exists():
 
@@ -335,7 +384,7 @@ def delete_account(request):
 
         if user.delete():
 
-            messages.success(request,"Ihr Konto wurde erfolgreich gelöscht")
+            messages.success(request, "Ihr Konto wurde erfolgreich gelöscht")
 
         else:
 
@@ -348,7 +397,7 @@ def delete_account(request):
 
         messages.error(request, "Falsches Passwort")
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(redirectpage)
 
 
 @csrf_protect
@@ -390,7 +439,7 @@ def update_pagehistory(request):
             print(request.session['history'])
             return HttpResponseRedirect("/")
         else:
-            if request.META.get('HTTP_REFERER') == lp:
+            if request.META.get('HTTP_REFERER') == lp or lp == "None":
                 print(5)
                 return HttpResponseRedirect("/")
             else:
