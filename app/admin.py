@@ -15,6 +15,7 @@ from .models import (Category,
                      ScenarioDescription, Comment
                      )
 
+# TODO: Superuser should have no exclusions on changing data (Priority: 7/10)
 
 class ScenarioAdmin(admin.ModelAdmin):
     exclude = ["provider", "url_name"]
