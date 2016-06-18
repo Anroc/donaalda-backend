@@ -12,15 +12,17 @@
          ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
          ng-controller="{% block ng_controller_theme %}questionController as vm{% endblock %}"
          ng-cloak>
-  <div class="container">
 
-  </div>
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-left">
-        <h2 class=" left-border to-animate">Fragen</h2>
+        <h2 class="left-border to-animate">Fragen</h2>
       </div>
     </div>
+
+  </div>
+  <div class="container">
+
     <md-stepper-card-content class="md-no-padding" style="width:100%;">
       <md-steppers md-dynamic-height md-stretch-steppers="always" md-selected="vm.selectedStep"
                    md-busy-text="'Processing...'" md-busy="vm.showBusyText">

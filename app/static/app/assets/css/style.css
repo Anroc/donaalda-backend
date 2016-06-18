@@ -713,6 +713,7 @@ h1, h2, h3, h4, h5, h6 {
 /* questions */
 
 #fh5co-questions {
+
     position: relative;
     bottom: 0;
     margin-top: 0px;
@@ -815,19 +816,33 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #fh5co-questions .fh5co-block:hover > .fh5co-text, #fh5co-questions .fh5co-block:focus > .fh5co-text {
-    color: #fff;
+    color: #52d3aa;
 }
 
 #fh5co-questions .fh5co-block:hover > .fh5co-text .fh5co-questions-icon, #fh5co-questions .fh5co-block:focus > .fh5co-text .fh5co-questions-icon {
-    color: #fff;
+    color: #52d3aa;
 }
 
 #fh5co-questions .fh5co-block:hover h2, #fh5co-questions .fh5co-block:focus h2 {
-    color: #fff;
+    color: #52d3aa;
+}
+
+#fh5co-page .text-inner h1 {
+    font-size: 50px;
+    color: white;
+    margin: 0 0 20px 0;
+}
+
+#fh5co-page .text-inner h2 {
+    font-size: 28px;
+    line-height: 38px;
+    font-weight: 300;
+    color: #52d3aa;
+    margin: 0;
 }
 
 #fh5co-questions .fh5co-block:hover .btn, #fh5co-questions .fh5co-block:focus .btn {
-    border: 2px solid #fff !important;
+    border: 2px solid #52d3aa !important;
     background: transparent;
 }
 
