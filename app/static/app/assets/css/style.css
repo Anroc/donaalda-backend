@@ -589,7 +589,8 @@ h1, h2, h3, h4, h5, h6 {
 #fh5co-intro {
     position: relative;
     bottom: 0;
-    margin-top: 0px;
+    margin-top: -150px;
+    margin-bottom: -250px;
     z-index: 10;
     padding-bottom: 0em;
 }
@@ -612,9 +613,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #fh5co-intro .fh5co-block {
-    width: 24%;
-    margin-left: 0.5%;
-    margin-right: 0.5%;
+    width: 25%;
+    margin-left: 0%;
+    margin-right: 0%;
     float: left;
     text-align: center;
     font-size: 16px;
