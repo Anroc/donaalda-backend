@@ -37,7 +37,11 @@
           <label class="btn btn-default btn-file"> Profilbild
           <input type="file" name="avatar"  style="display: none;" value="">
           </label>
-          <img src="" style="width:75px; height:75px; display:block; border-radius: 1px; background-color:#cccccc;">
+            {% if  user.userimage %}
+          <img src={{ user.userimage.image.url  }} style="width:75px; height:75px; display:block; border-radius: 1px; background-color:#cccccc;">
+            {% else %}
+          <img src="{% static 'app/assets/images/myAvatar.png' %}"  style="width:75px; height:75px; display:block; border-radius: 1px; background-color:#cccccc;">
+            {% endif %}
         </div>
 
       </div>
