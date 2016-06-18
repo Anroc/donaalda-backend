@@ -15,6 +15,7 @@ from .models import (Category,
                      ScenarioDescription, Comment
                      )
 
+
 # TODO: Superuser should have no exclusions on changing data (Priority: 7/10)
 
 
@@ -40,7 +41,7 @@ class ScenarioAdmin(admin.ModelAdmin):
 
 
 class ProductSetAdmin(admin.ModelAdmin):
-    exclude = ["creator"]
+    exclude = []
 
     def get_queryset(self, request):
         user = request.user
@@ -49,6 +50,7 @@ class ProductSetAdmin(admin.ModelAdmin):
         if user.is_superuser:
             return qs
 
+        self.exclude.extend(['creator'])
         return qs.filter(creator=user.employee.employer_id)
 
     def save_model(self, request, obj, form, change):
@@ -61,7 +63,7 @@ class ProductSetAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    exclude = ["provider"]
+    exclude = []
 
     def get_queryset(self, request):
         user = request.user
@@ -69,6 +71,7 @@ class ProductAdmin(admin.ModelAdmin):
         if user.is_superuser:
             return qs
 
+        self.exclude.extend(['provider'])
         return qs.filter(provider=user.employee.employer_id)
 
     def save_model(self, request, obj, form, change):
@@ -81,7 +84,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ProviderProfileAdmin(admin.ModelAdmin):
-    exclude = ["owner", "url_name"]
+    exclude = ['url_name']
 
     def get_queryset(self, request):
         user = request.user
@@ -90,6 +93,7 @@ class ProviderProfileAdmin(admin.ModelAdmin):
         if user.is_superuser:
             return qs
 
+        self.exclude.extend(['owner'])
         return qs.filter(owner=user.employee.employer_id)
 
     def save_model(self, request, obj, form, change):
