@@ -32,7 +32,6 @@ class Category(models.Model):
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length=170, default="---")
     description = models.TextField(verbose_name="Beschreibung", default="---")
     iconString = models.CharField(max_length=20, default="gift")
-    scenario_set = models.ManyToManyField("Scenario", verbose_name="Zur Kategorie gehörende Szenarien")
 
     def __str__(self):
         return '%s' % self.name
@@ -54,6 +53,7 @@ class Scenario(models.Model):
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True)
     provider = models.ForeignKey("Provider", default="1", )
     scenario_product_set = models.ForeignKey("ProductSet", null=True)
+    categories = models.ManyToManyField("Category", verbose_name="passende Kategorien")
 
     def __str__(self):
         return '%s' % self.name

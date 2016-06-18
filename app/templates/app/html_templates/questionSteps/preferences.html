@@ -1,0 +1,34 @@
+<md-step label="Präferenz" md-complete="vm.stepData[1].data.completed"
+         ng-disabled="vm.stepProgress < 2">
+  <md-step-body>
+    <form name="step2">
+      <md-content class="md-padding">
+        <div layout="row" layout-align="center top">
+          <div flex="nogrow" style="width: 400px">
+            <h4>Was ist Ihrem Smart Home besonders wichtig?</h4>
+            <md-checkbox>Komfort</md-checkbox>
+            <md-checkbox>Sicherheit</md-checkbox>
+            <md-checkbox>Gesundheit</md-checkbox>
+            <md-checkbox>Energie</md-checkbox>
+            <md-checkbox>Remote</md-checkbox>
+          </div>
+        </div>
+      </md-content>
+      <md-step-actions layout="row">
+        <div flex>
+          <md-button ng-click="vm.moveToPreviousStep()">PREVIOUS</md-button>
+        </div>
+        <div flex layout="row" layout-align="end top">
+          <md-button class="md-warn">CANCEL</md-button>
+          <md-button ng-disabled="vm.showBusyText"
+                     ng-click="vm.submitCurrentStep(vm.stepData[1].data, !(vm.stepData[1].data.firsname && vm.stepData[1].data.lastname))"
+                     class="md-primary md-raised">
+            {% verbatim %}
+            {{ vm.stepData[1].data.firsname && vm.stepData[1].data.lastname ? 'NEXT' : 'SKIP' }}
+            {% endverbatim %}
+          </md-button>
+        </div>
+      </md-step-actions>
+    </form>
+  </md-step-body>
+</md-step>
