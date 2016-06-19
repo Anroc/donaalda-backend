@@ -93,6 +93,18 @@
   <script>
     $.post("/updatepagehistory", {lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"});
   </script>
+  <style>
+    .carousel-control {
+      width: 50px;
+      opacity: 0.2;
+      filter: alpha(opacity=20);
+      font-size: 30px;
+    }
+
+    .carousel-indicators{
+      bottom:-50px;
+    }
+  </style>
 
 </head>
 <body>
@@ -163,46 +175,54 @@
 <!-- Scenario description boxes -->
 {% with scenarios=current_scenario.scenariodescription_set.all %}
 <section id="fh5co-intro" data-section="intro">
-  <!--szenario-div-->
-  <div classs="container-fluid">
-
-    {% if scenarios %}
-    {% for scen in scenarios %}
-    <div class="container-fluid row">
-      {% if scen.left_right %}
-      <div class="col-md-8">
-        <p>
-          {{scen.description}}
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-          sea takimata sanctus est Lorem ipsum dolor sit amet.
-        </p>
+  <div class="container">
+    <div class="col-md-12">
+      <div class="text-inner">
+        <div class="row">
+          <div class="col-md-12 section-heading text-center">
+            <h2 class="to-animate">Beschreibung</h2>
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 subtext to-animate">
+                <h3>
+                  Sieh Dir an wie {{ current_scenario.name }} funktioniert. Vielleicht ist es auch etwas für Dich
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div>
+            {% if scenarios %}
+              {% for scenario in scenarios %}
+                <div class="container-fluid row">
+                  <div class="panel">
+                    <div class="panel-body">
+                      {% if scenario.left_right %}
+                        <div class="col-md-8">
+                          <p class="text-justify">
+                            {{scenario.description}}
+                          </p>
+                        </div>
+                        <div class="col-md-4">
+                          <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
+                        </div>
+                      {% else %}
+                        <div class="col-md-4">
+                          <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
+                        </div>
+                        <div class="col-md-8">
+                          <p class="text-justify">
+                            {{scenario.description}}
+                          </p>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
       </div>
-      <div class="col-md-4">
-        <img style="height:auto; width:100%" src="{{scen.image.url}}" alt="{{scen.image}}">
-      </div>
-      {% else %}
-      <div class="col-md-4">
-        <img style="height:auto; width:100%" src="{{scen.image.url}}" alt="{{scen.image}}">
-      </div>
-      <div class="col-md-8">
-        <p>
-          {{scen.description}}
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-          clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-          sea takimata sanctus est Lorem ipsum dolor sit amet.
-        </p>
-      </div>
-      {% endif %}
     </div>
-    {% endfor %}
-    {% endif %}
   </div>
 </section>
 {% endwith %}
@@ -213,6 +233,13 @@
     <div class="row">
       <div class="col-md-12 section-heading text-center">
         <h2 class="to-animate">Produkte</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>
+              Damit Du dieses Scenario in deinem Smart Home realisieren kannst, schlägt Dir Donaalda folgende Produkte vor
+            </h3>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -237,28 +264,30 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
         {% for item in current_scenario.scenario_product_set.products.all %}
-          {% if forloop.counter == 1 %}
-            <div class="item active" >
-          {% endif%}
-            <div class="col-md-4">
-              <div class="card" style="background-color:white; border-radius:5px">
-                <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                  <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ item.name }}</h4>
-                  <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ item.provider }}</h6>
-                </div>
-                <div style="height: 200px;">
-                  <img src="{{ item.image1.url }}" alt="" class="img-thumbnail">
-                </div>
-              </div>
-            </div>
-          {% if forloop.counter == current_scenario.scenario_product_set.products.all|length %}
-            </div>
-          {% else %}
-            {% if forloop.counter|divisibleby:3 %}
-              </div>
-              <div class="item">
+          <a href="{% url 'app:product' item.pk %}">
+            {% if forloop.counter == 1 %}
+              <div class="item active" style="margin-left: 50px; margin-right: 50px;">
             {% endif%}
-          {% endif %}
+              <div class="col-md-4">
+                <div class="card" style="background-color:white; border-radius:5px">
+                  <div class="card-block" style="padding-top:10px; padding-bottom:10px">
+                    <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ item.name }}</h4>
+                    <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ item.provider }}</h6>
+                  </div>
+                  <div style="height: 250px;">
+                    <img src="{{ item.image1.url }}" alt="" class="center-block" style="max-height: 95%; max-width: 95%;">
+                  </div>
+                </div>
+              </div>
+            {% if forloop.counter == current_scenario.scenario_product_set.products.all|length %}
+              </div>
+            {% else %}
+              {% if forloop.counter|divisibleby:3 %}
+                </div>
+                <div class="item" style="margin-left: 50px; margin-right: 50px;">
+              {% endif%}
+            {% endif %}
+          </a>
         {% endfor %}
       </div>
 
@@ -275,6 +304,8 @@
   </div>
 </section>
 {% endif %}
+
+{% include "app/html_templates/sections/commentSection.html" %}
 
 {% include "app/html_templates/footer/footerTemplate.html" %}
 
