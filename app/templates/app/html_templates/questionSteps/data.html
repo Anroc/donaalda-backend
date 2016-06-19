@@ -6,78 +6,42 @@
         <div layout="row" layout-align="center top">
           <div flex>
 
-            <h4>
-              In was wohnst du?
-            </h4>
+            <h4>In was wohnst du?</h4>
 
             <md-radio-group ng-model="data.accommodation_name">
-
-              <md-radio-button value="Wohnung" class="md-primary">Wohnung</md-radio-button>
+              <md-radio-button value="Wohnung">Wohnung</md-radio-button>
               <md-radio-button value="Haus">Haus</md-radio-button>
-              <md-radio-button value="Trump Tower" class="md-accent">Trump Tower</md-radio-button>
-
             </md-radio-group>
 
-            <h4>
-              Eigentum oder Miete?
-            </h4>
+            <h4>Eigentum oder Miete?</h4>
 
             <md-radio-group ng-model="data.ownership">
-
-              <md-radio-button value="Eigentum" class="md-primary">Eigentum</md-radio-button>
+              <md-radio-button value="Eigentum">Eigentum</md-radio-button>
               <md-radio-button value="Miete">Miete</md-radio-button>
-
             </md-radio-group>
-
-            <h4>
-              Zusatz?
-            </h4>
-
-            <md-checkbox-group ng-model="data.addition">
-              <md-checkbox value="Garten">Garten</md-checkbox>
-              <md-checkbox value="Balkon">Balkon</md-checkbox>
-              <md-checkbox value="Terrasse">Terrasse</md-checkbox>
-              <md-checkbox value="Garage">Garage</md-checkbox>
-            </md-checkbox-group>
 
 
 
 
           </div>
           <div flex>
-
-            <h4>
-              Wie alt ist dein Heim?
-            </h4>
-
-            <md-radio-group ng-model="data.accommodation">
-
-              <md-radio-button value="1-5 Jahre" class="md-primary">1-5 Jahre</md-radio-button>
-              <md-radio-button value="6-15">6-15</md-radio-button>
-              <md-radio-button value="Ich plane Neubau" class="md-accent">Ich plane Neubau</md-radio-button>
-              <md-radio-button value="Wohnfläche" class="md-accent">Wohnfläche</md-radio-button>
-
-            </md-radio-group>
-
             <h4>Quadratmeter</h4>
             <div layout="row">
-              <div flex="60">
+              <div flex="50">
                 <md-slider class="md-primary" flex min="0" max="255" ng-model="data.square_meters"
                            aria-label="blue" id="blue-slider"></md-slider>
               </div>
+              <div flex="10">
+
+              </div>
               <div flex="20" layout layout-align="center center" style="margin-right: 10px;">
                 <input flex type="number" ng-model="data.square_meters" aria-label="blue"
-                       aria-controls="blue-slider">
-              </div>
-              <div flex="10" style="text-align: justify">
-                m²
+                       aria-controls="blue-slider">  m²
               </div>
               <div flex="10">
 
               </div>
             </div>
-          </div>
-          <div flex>
 
             <h4>Personen im Haushalt</h4>
             <div layout>
@@ -94,6 +58,29 @@
                        aria-controls="rating-slider">
               </div>
             </div>
+          </div>
+          <div flex>
+            <h4>
+              Ausstattung von deiner {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
+            </h4>
+            <div class="row">
+              <md-checkbox-group ng-model="data.addition">
+                <p>
+                  <md-checkbox value="Garten">Garten</md-checkbox>
+                </p>
+                <p>
+                  <md-checkbox value="Balkon">Balkon</md-checkbox>
+                </p>
+                <p>
+                  <md-checkbox value="Terrasse">Terrasse</md-checkbox>
+                </p>
+                <p>
+                  <md-checkbox value="Garage">Garage</md-checkbox>
+                </p>
+              </md-checkbox-group>
+            </div>
+
+
           </div>
         </div>
       </md-content>
