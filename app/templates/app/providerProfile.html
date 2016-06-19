@@ -115,7 +115,10 @@
 {% include "app/html_templates/header/navbarHeader.html" with navInfo='product'%}
 
 <section id="fh5co-page" data-section="home"
-         data-stellar-background-ratio="0.5">
+         data-stellar-background-ratio="0.5"
+         {% if provider.banner_image %}
+         style="background-image:url({{ provider.banner_image.url }}); {% endif %}">
+  <div class="gradient">
   <div class="container">
     <div class="text-wrap">
       <div class="text-inner">
@@ -137,7 +140,9 @@
       </div>
     </div>
   </div>
-  <div class="slant"></div>
+    </div>
+  <div class="slant">
+  </div>
 </section>
 
 <section id="fh5co-intro" data-section="description">
@@ -197,7 +202,9 @@
       {% endfor %}
       </div>
     </div>
+  {% include "app/html_templates/sections/commentSection.html" %}
 </section>
+
 <section id="fh5co-work-grid" data-section="products">
   <div class="container">
     <div class="row">
@@ -244,8 +251,12 @@
     {% endfor %}
     </div>
   </div>
+  {% include "app/html_templates/sections/commentSection.html" %}
 </section>
 
+<section id="fh5co-intro">
+  {% include "app/html_templates/sections/commentSection.html" %}
+</section>
 
 <section id="fh5co-testimonials" data-section="tecData">
   <div class="container">
