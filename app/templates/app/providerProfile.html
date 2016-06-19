@@ -158,21 +158,24 @@
 <section id="fh5co-work" data-section="scenarios">
   <div class="container">
     <div class="row">
+      <div class="row row-bottom-padded-sm">
       <div class="col-md-12 section-heading text-center">
         <h2 class="to-animate">Szenarien</h2>
-        {% if scenario_list_from_provider %}
         {% for scenario in scenario_list_from_provider %}
         <div class="col-md-4 col-sm-6 col-xxs-12">
-          <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item to-animate">
-            <img src="{{ scenario.picture.url }}" alt="Image" class="img-responsive">
+          <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item">
+            <div class="img-responsive" style="background-image: url('{{ scenario.picture.url }}'); background-repeat: no-repeat; height: 250px;"></div>
             <div class="fh5co-text">
-              <h1>
-                {{ scenario.name }}
-              </h1>
-              <h2>
+              <h3 class="text-muted">
                 {{ scenario.provider }}
-              </h2>
-              <h3>{{ scenario.scenario_product_set }}</h3>
+              </h3>
+              <div style="height: 80px;">
+                <h1>
+                  {{ scenario.name }}
+                </h1>
+              </div>
+              <!-- too much content for cards -->
+              <!--<h3>{{ scenario.scenario_product_set }}</h3>
               <h3>
                 {% for category in scenario.category_set.all %}
                 <p>
@@ -180,23 +183,18 @@
                 </p>
                 {% endfor %}
               </h3>
-              <h4> {{ scenario.description }}</h4>
+              <h4> {{ scenario.description }}</h4>-->
             </div>
           </a>
         </div>
-        <div class="clearfix visible-sm-block"></div>
-        {% endfor %}
-        {% else %}
+        {% empty %}
         <div>
-          no scenarios
+          Es wurden noch keine Szenarien hinzugefügt.
         </div>
-        {% endif %}
-
+        {% endfor %}
       </div>
     </div>
-    </div>
 </section>
-
 <section id="fh5co-services" data-section="products">
   <div class="container">
     <div class="row">
@@ -209,35 +207,39 @@
         </div>
       </div>
     </div>
-    {% if provider_products %}
     {% for product in provider_products %}
     <div class="col-md-4 col-sm-6 col-xxs-12">
       <a href="{% url 'app:product' product.pk %}" class="fh5co-project-item to-animate">
-        <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+        <img src="{{ product.image1.url }}" alt="Image" class="img-responsive" style="background-repeat: no-repeat;
+         height: 250px;">
         <div class="fh5co-text">
-          <h1>
-            {{ product.name }}
-          </h1>
-          <h2>
-            <br>{{ product.product_type }}
-            <h4>S/N: {{ product.serial_number }}</h4>
-          </h2>
-          <h4>
-            {{ product.description }}
-          </h4>
-          <span>
-              EOL: {{ product.end_of_life }}
-          </span>
+          <h3 class="text-muted">
+            {{ product.product_type }}
+          </h3>
+          <div style="height: 80px;">
+            <h1>
+              {{ product.name }}
+            </h1>
+          </div>
+          <!-- too much content for cards -->
+          <!--<h3>{{ scenario.scenario_product_set }}</h3>
+          <h3>
+            {% for category in scenario.category_set.all %}
+            <p>
+              {{ category.name }}
+            </p>
+            {% endfor %}
+          </h3>
+          <h4> {{ scenario.description }}</h4>-->
         </div>
       </a>
     </div>
-    <div class="clearfix visible-sm-block"></div>
-    {% endfor %}
-    {% else %}
+    {% empty %}
     <div>
-      no products
+      Es wurden noch keine Szenarien hinzugefügt.
     </div>
-    {% endif %}
+    {% endfor %}
+    </div>
   </div>
 </section>
 
