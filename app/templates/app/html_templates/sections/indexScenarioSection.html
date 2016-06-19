@@ -26,13 +26,16 @@
         <a href="{{ scenario.picture.url }}" class="fh5co-project-item image-popup to-animate">
           <div class="img-responsive" style="background-image: url('{{ scenario.picture.url }}'); background-repeat: no-repeat; height: 250px;"></div>
           <div class="fh5co-text">
-            <h1>
-              {{ scenario.name }}
-            </h1>
-            <h2>
+            <h3 class="text-muted">
               {{ scenario.provider }}
-            </h2>
-            <h3>{{ scenario.scenario_product_set }}</h3>
+            </h3>
+            <div style="height: 80px;">
+              <h1>
+                {{ scenario.name }}
+              </h1>
+            </div>
+            <!-- too much content for cards -->
+            <!--<h3>{{ scenario.scenario_product_set }}</h3>
             <h3>
               {% for category in scenario.category_set.all %}
               <p>
@@ -40,7 +43,7 @@
               </p>
               {% endfor %}
             </h3>
-            <h4> {{ scenario.description }}</h4>
+            <h4> {{ scenario.description }}</h4>-->
           </div>
         </a>
       </div>
