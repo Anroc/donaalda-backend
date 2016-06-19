@@ -2,7 +2,7 @@
 <header role="banner" id="fh5co-header">
   <div class="container">
     <div class="row">
-      <nav class="navbar navbar-default" >
+      <nav class="navbar navbar-default">
         {% block messages %}
         {% if messages %}
         {% for message in messages %}
@@ -17,7 +17,7 @@
           <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
           {{ message|safe }}
         </div>
-        {%  endif %}
+        {% endif %}
         {% endfor %}
         {% endif %}
         {% endblock %}
@@ -34,37 +34,37 @@
             </div>
           </a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
 
+        <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-          {% if navInfo == 'index' %}
+            {% if navInfo == 'index' %}
             <li class="active"><a href="#" data-nav-section="home"><span>Start</span></a></li>
             <li><a href="#" data-nav-section="categories"><span>Kategorien</span></a></li>
             <li><a href="#" data-nav-section="whatsIsDonaalda"><span>Donaalda</span></a></li>
             <li><a href="#" data-nav-section="livingSituation"><span>Wohnsituation</span></a></li>
             <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
             <li><a href="#" data-nav-section="comments"><span>Bewertungen</span></a></li>
-        {% endif %}
-        {% if navInfo == 'category' %}
+            {% endif %}
+            {% if navInfo == 'category' %}
             <li><a href="#" onclick="back()">Zurück</a></li>
             <li class="active"><a href="#" id="start" data-nav-section="home"><span>Start</span></a></li>
             <li><a href="#" data-nav-section="questions"><span>Fragen</span></a></li>
             <li><a href="#" data-nav-section="information"><span>Szenarien</span></a></li>
-        {% endif %}
-        {% if navInfo == 'product' %}
+            {% endif %}
+            {% if navInfo == 'product' %}
             <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
             <li class="active"><a href="#" data-nav-section="home"><span>Produkt</span></a></li>
             <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
             <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>
             <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
-        {% endif %}
-        {% if navInfo == 'provider' %}
-          <li><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a>
+            {% endif %}
+            {% if navInfo == 'provider' %}
+            <li><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a>
             </li>
             <li><a href="#" data-nav-section="home"><span>Beschreibung</span></a></li>
             <li><a href="#" data-nav-section="intro"><span>Szenarien</span></a></li>
             <li><a href="#" data-nav-section="images"><span>Produkte</span></a></li>
-        {% endif %}
+            {% endif %}
 
             {% if not request.user.is_authenticated %}
             <li>
@@ -73,7 +73,7 @@
                 <button type="button" class="btn btn-primary btn-xs navbar-btn"
                         data-show="tooltip" title="Kontakt" data-placement="bottom"
                         onclick="contact()">
-                    <i class="glyphicon glyphicon-envelope"></i>
+                  <i class="glyphicon glyphicon-envelope"></i>
                 </button>
 
                 <button type="button" class="btn btn-primary btn-xs navbar-btn"
