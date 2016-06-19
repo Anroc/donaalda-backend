@@ -72,6 +72,11 @@
             <li><a href="#" data-nav-section="products"><span>Produkte</span></a></li>
             <li><a href="#" data-nav-section="comments"><span>Bewertungen</span></a></li>
             {% endif %}
+            {% if navInfo == 'contact' %}
+            <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
+            <li class="active"><a href="#" data-nav-section="contact"><span>Frag Donaalda</span></a></li>
+
+            {% endif %}
 
             {% if not request.user.is_authenticated %}
             <li>
