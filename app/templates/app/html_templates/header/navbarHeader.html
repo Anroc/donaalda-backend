@@ -59,11 +59,18 @@
             <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
             {% endif %}
             {% if navInfo == 'provider' %}
-            <li><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a>
-            </li>
-            <li><a href="#" data-nav-section="home"><span>Beschreibung</span></a></li>
-            <li><a href="#" data-nav-section="intro"><span>Szenarien</span></a></li>
-            <li><a href="#" data-nav-section="images"><span>Produkte</span></a></li>
+            <li><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
+            <li><a href="#" data-nav-section="description"><span>Beschreibung</span></a></li>
+            <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
+            <li><a href="#" data-nav-section="products"><span>Produkte</span></a></li>
+            <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
+            {% endif %}
+            {% if navInfo == 'scenario' %}
+            <li><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
+            <li class="active"><a href="#" data-nav-section="home"><span>Start</span></a></li>
+            <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
+            <li><a href="#" data-nav-section="products"><span>Produkte</span></a></li>
+            <li><a href="#" data-nav-section="comments"><span>Bewertungen</span></a></li>
             {% endif %}
 
             {% if not request.user.is_authenticated %}
