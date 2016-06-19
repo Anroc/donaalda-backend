@@ -21,7 +21,7 @@
     </div>
 
     <div class="row row-bottom-padded-sm">
-      {% for scenario in scenarios %}
+      {% for scenario in scenarios|slice:":6" %}
       <div class="col-md-4 col-sm-6 col-xxs-12">
         <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item">
           <div class="img-responsive" style="background-image: url('{{ scenario.picture.url }}'); background-repeat: no-repeat; height: 250px;"></div>
