@@ -114,19 +114,19 @@ class ContactView(generic.ListView):
 
 
 class CategoryView(generic.ListView):
-    template_name = 'app/scenarioGrid.html'
+    template_name = 'app/category.html'
     context_object_name = 'scenario_list_from_category'
 
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
-        return render(request, 'app/scenarioGrid.html',
+        return render(request, 'app/category.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
                        'category': Category.objects.get(name=category)
                        })
 
 
 class ScenariosView(generic.ListView):
-    template_name = 'app/scenarioGrid.html'
+    template_name = 'app/category.html'
     context_object_name = 'scenario_list_from_category'
 
     def get(self, request, *args, **kwargs):
