@@ -112,7 +112,117 @@
 </head>
 <body>
 
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='product'%}
+<header role="banner" id="fh5co-header">
+  <div class="container">
+    <div class="row">
+      <nav class="navbar navbar-default">
+        {% block messages %}
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'error' %}
+        <div class="alert alert-danger" fade>  <!-- singular -->
+          <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{ message|safe }}
+        </div>
+
+        {% else %}
+        <div class="alert alert-{{ message.tags }}" fade>  <!-- singular -->
+          <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{ message|safe }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endblock %}
+        <div class="navbar-header">
+          <!-- Mobile Toggle Menu Button -->
+          <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
+             data-target="#navbar"
+             aria-expanded="false" aria-controls="navbar"><i></i></a>
+          <a class="navbar-brand" href="/">
+            <div>
+              <img alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}"
+                   style="margin-bottom: 5px">
+              <span>Donaalda</span>
+            </div>
+          </a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a>
+            </li>
+            <li><a href="#" data-nav-section="description"><span>Beschreibung</span></a></li>
+            <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
+            <li><a href="#" data-nav-section="products"><span>Produkte</span></a></li>
+            <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
+
+            {% if not request.user.is_authenticated %}
+            <li>
+              <div class="btn-group">
+
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Kontakt" data-placement="bottom"
+                        onclick="contact()">
+                  <i class="glyphicon glyphicon-envelope"></i>
+                </button>
+
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Anmelden" data-placement="bottom"
+                        data-toggle="modal"
+                        data-target="#myModalLogin">
+                  <i class="glyphicon glyphicon-log-in"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Registrieren" data-placement="bottom"
+                        data-toggle="modal"
+                        data-target="#myModalRegister">
+                  <i class="glyphicon glyphicon-new-window"></i>
+                </button>
+              </div>
+            </li>
+            {% else %}
+            <!--TODO: Change these to admin (if allowed), logout and profile-->
+            <li>
+              <div class="btn-group">
+                {% if user.is_staff %}
+
+
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Kontakt" data-placement="bottom"
+                        onclick="contact()">
+                  <i class="glyphicon glyphicon-envelope"></i>
+                </button>
+
+
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Verwaltung" data-placement="bottom"
+                        onclick="admin()">
+                  <i class="glyphicon glyphicon-cog"></i>
+                </button>
+                {% endif %}
+                <!--TODO: Frontend logout here, acquire csrf token like this https://docs.djangoproject.com/en/1.9/ref/csrf/#ajax-->
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Abmelden" data-placement="bottom"
+                        onclick="logOut()">
+                  <i class="glyphicon glyphicon-log-out"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-xs navbar-btn"
+                        data-show="tooltip" title="Profil" data-placement="bottom"
+                        data-toggle="modal"
+                        data-target="#myModalProfile">
+                  <i class="glyphicon glyphicon-user"></i>
+                </button>
+              </div>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
 
 <section id="fh5co-page" data-section="home"
          data-stellar-background-ratio="0.5"
@@ -202,7 +312,6 @@
       {% endfor %}
       </div>
     </div>
-  {% include "app/html_templates/sections/commentSection.html" %}
 </section>
 
 <section id="fh5co-work-grid" data-section="products">
@@ -251,12 +360,8 @@
     {% endfor %}
     </div>
   </div>
-  {% include "app/html_templates/sections/commentSection.html" %}
 </section>
 
-<section id="fh5co-intro">
-  {% include "app/html_templates/sections/commentSection.html" %}
-</section>
 
 <section id="fh5co-testimonials" data-section="tecData">
   <div class="container">
