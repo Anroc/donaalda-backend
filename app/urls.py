@@ -35,8 +35,8 @@ urlpatterns = [
     url(r'^profile$', views.profile, name='profile'),
     url(r'^password$', views.change_password, name='password_changing'),
     url(r'^deleteaccount$', views.delete_account, name='deleteAccount'),
+    url(r'^all_products/$', views.AllProductsView.as_view(), name='product_all'),
     url(r'^(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
     # for frontend testing
-    url(r'^app/frontendtesting$', views.TestView.as_view(), name='frontendtesting'),
     url(r'^$', views.IndexViewNew.as_view(), name='indexnew'),
 ]

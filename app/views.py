@@ -162,13 +162,13 @@ class ProductView(generic.DetailView):
 
 
 # for frontend testing
-class TestView(generic.DetailView):
-    template_name = 'app/frontendTesting.html'
-    context_object_name = 'test'
+class AllProductsView(generic.DetailView):
+    template_name = 'app/allProducts.html'
+    context_object_name = 'all_products'
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'app/frontendTesting.html',
-                      {})
+        return render(request, 'app/allProducts.html',
+                      {'all_products': Product.objects.all()})
 
 
 """
