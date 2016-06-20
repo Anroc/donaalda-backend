@@ -90,9 +90,11 @@
   </script>
 
   <script>
+      {% if porduct.provider.is_visible %}
     function provider() {
       location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
     }
+      {% endif %}
     function logOut() {
       location.href = "/logout"
     }
@@ -129,9 +131,15 @@
           <div class="col-md-4">
             <div class="panel panel-default pull-right"
                  style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
+            {% if product.provider.is_visible %}
               <div class="btn">
+            {% else %}
+              <div class="panel-body">
+            {% endif %}
                 <img style="max-height: 100%; max-width: 100%;"
+                     {% if product.provider.is_visible %}
                      onclick="provider()"
+                     {% endif %}
                      src="{{ product.provider.providerprofile.logo_image.url }}"
                      alt="providerImg">
               </div>
