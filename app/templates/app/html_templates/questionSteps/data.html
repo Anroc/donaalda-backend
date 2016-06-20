@@ -6,10 +6,10 @@
         <div layout="row" layout-align="center top">
           <div flex>
 
-            <h4>In was wohnst du?</h4>
+            <h4>Wie wohnst du?</h4>
             <md-radio-group ng-model="data.accommodation_name">
-              <md-radio-button value="Wohnung">Wohnung</md-radio-button>
-              <md-radio-button value="Haus">Haus</md-radio-button>
+              <md-radio-button value="deiner Wohnung">Wohnung</md-radio-button>
+              <md-radio-button value="deinem Haus">Haus</md-radio-button>
             </md-radio-group>
 
             <h4>Eigentum oder Miete?</h4>
@@ -20,54 +20,57 @@
 
           </div>
           <div flex>
-            <h4>Quadratmeter</h4>
-            <div layout="row">
-              <div flex="50">
-                <md-slider class="md-primary" flex min="0" max="255" ng-model="data.square_meters"
-                           aria-label="blue" id="blue-slider"></md-slider>
-              </div>
-              <div flex="10">
+            <div flex>
+              <h4>Quadratmeter</h4>
+              <div layout="row">
+                <div flex="50">
+                  <md-slider class="md-primary"
+                             flex step="5" min="5" max="255"
+                             ng-model="data.square_meters"
+                             aria-label="blue" id="blue-slider">
+                  </md-slider>
+                </div>
+                <div flex="10">
 
-              </div>
-              <div flex="20" layout layout-align="center center" style="margin-right: 10px;">
-                <input flex type="number" ng-model="data.square_meters" aria-label="blue"
-                       aria-controls="blue-slider" style="border: none; text-align: right"> m²
-              </div>
-              <div flex="10">
+                </div>
+                <div flex="20" layout layout-align="center center" style="margin-right: 10px;">
+                  <input flex
+                         type="number" min="0" max="5000" step="5"
+                         ng-model="data.square_meters"
+                         aria-label="blue" aria-controls="blue-slider"
+                         style="border: none; text-align: right"> m²
+                </div>
+                <div flex="10">
 
+                </div>
               </div>
             </div>
-
-
-            <div flex>
-              <div layout="row">
-                <input flex="20" type="number"
-                       ng-model="data.persons"
-                       aria-label="rating"
-                       aria-controls="rating-slider"
-                       style="text-align: right;
-                         border: none;"> Personen
+            <div flex style="padding-top: 20px;">
+              <div flex layout="row">
+                <div layout="row">
+                  <input flex="10"
+                         type="number"
+                         ng-model="data.persons"
+                         aria-label="rating"
+                         aria-controls="rating-slider"
+                         style="text-align: right; border: none; height: 20px;">
+                  <i flex="10" class="material-icons">people</i>
+                  <h4 flex="80">Personen im Haushalt</h4>
+                </div>
               </div>
             </div>
           </div>
           <div flex>
             <h4>
-              Ausstattung von deiner {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
+              Ausstattung von {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
             </h4>
             <div class="row">
-              <md-checkbox-group ng-model="data.addition">
-                <p>
-                  <md-checkbox value="Garten">Garten</md-checkbox>
-                </p>
-                <p>
-                  <md-checkbox value="Balkon">Balkon</md-checkbox>
-                </p>
-                <p>
-                  <md-checkbox value="Terrasse">Terrasse</md-checkbox>
-                </p>
-                <p>
-                  <md-checkbox value="Garage">Garage</md-checkbox>
-                </p>
+
+              <md-checkbox-group ng-model="data.addition" layout="column">
+                <md-checkbox value="Garten">Garten</md-checkbox>
+                <md-checkbox value="Balkon">Balkon</md-checkbox>
+                <md-checkbox value="Terrasse">Terrasse</md-checkbox>
+                <md-checkbox value="Garage">Garage</md-checkbox>
               </md-checkbox-group>
             </div>
           </div>
