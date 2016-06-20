@@ -3,7 +3,9 @@
  */
 
 
-var donaaldaApp = angular.module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers']);
+var donaaldaApp = angular
+    .module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers'])
+    ;
 donaaldaApp.controller('themeController', themeControl)
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
@@ -73,38 +75,37 @@ function authenticationControl($scope, $mdDialog, $mdSidenav) {
 ;
 
 
-
 donaaldaApp.controller('questionController', function ($scope, $q, $timeout) {
 
     $scope.data = {
-        accommodation_name : "Wohnung",
-        accommodation_age : 5,
-        addition : "Garage",
-        ownership : "Miete",
-        square_meters : 50,
-        children : 0,
-        persons : 2,
-        age : 25,
-        lives_in_apartment : false,
-        lives_in_house : false,
-        lives_in_trump_tower : false,
-        has_garage : false,
-        has_car : false,
-        has_balcony : false,
-        has_terrace : false,
-        has_garden : false,
-        owns_estate : false,
-        estate_age : false
-}
+        accommodation_name: "Wohnung",
+        accommodation_age: 5,
+        addition: "Garage",
+        ownership: "Miete",
+        square_meters: 50,
+        children: 0,
+        persons: 2,
+        age: 25,
+        lives_in_apartment: false,
+        lives_in_house: false,
+        lives_in_trump_tower: false,
+        has_garage: false,
+        has_car: false,
+        has_balcony: false,
+        has_terrace: false,
+        has_garden: false,
+        owns_estate: false,
+        estate_age: false
+    }
 
     $scope.preferences = {
-        heater_control : false,
-        light_control : false,
-        remote_control : false,
-        security_control : false,
-        health_control : false,
-        comfort_control : false
-}
+        heater_control: false,
+        light_control: false,
+        remote_control: false,
+        security_control: false,
+        health_control: false,
+        comfort_control: false
+    }
 
     var vm = this;
 
@@ -156,6 +157,10 @@ donaaldaApp.controller('questionController', function ($scope, $q, $timeout) {
         }
     }
 
+}).config(function ($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+        .primaryPalette('orange')
+        .accentPalette('orange');
 });
 
 ;(function (angular, window) {
