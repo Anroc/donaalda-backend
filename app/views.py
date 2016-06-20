@@ -20,7 +20,7 @@ class IndexViewNew(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'app/indexNew.html',
-                      {'latest_category_list': Category.objects.all(),
+                      {'category_list': Category.objects.all(),
                        'scenarios': Scenario.objects.all(),
                        'products': Product.objects.all(),
                        'comment': Comment.objects.filter(page_url='/')[:5],
@@ -32,17 +32,17 @@ class IndexViewNew(generic.DetailView):
 
 class IndexView(generic.ListView):
     template_name = 'app/index.html'
-    context_object_name = 'latest_category_list'
+    context_object_name = 'category_list'
 
     def get(self, request):
         login_status = request.GET.get('login')
         if login_status == 'failed':
-            return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
+            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
                                                       'state': 'failed',
                                                       'message': 'Wrong login data!',
                                                       })
         if login_status == 'success':
-            return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
+            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
                                                       'state': 'success',
                                                       # If the user type 'app/?login=success' in the url the
                                                       # 'message' attribute will be empty. The toolbar template is
@@ -51,37 +51,37 @@ class IndexView(generic.ListView):
                                                       })
         registration_status = request.GET.get('registration')
         if registration_status == 'blank_fields':
-            return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
+            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
                                                       'message': 'Bitte alle Felder ausfüllen!',
                                                       })
         if registration_status == 'success':
-            return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
+            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
                                                       'message': 'Registrierung erfolgreich!',
                                                       })
         if registration_status == 'taken':
-            return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
+            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
                                                       'message': 'Der Benutzername wird bereits verwendet!',
                                                       })
 
         profile_status = request.GET.get('profile')
         if profile_status == 'blank_fields':
-            return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
+            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
                                                       'message': 'Zum Ändern des Passwortes altes und neues Passwort angegeben! Restliche Änderungen durchgeführt!',
                                                       })
         if profile_status == 'success':
-            return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
+            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
                                                       'message': 'Profil erfolgreich verändert!',
                                                       })
         if profile_status == 'wrong_password':
-            return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
+            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
                                                       'message': 'Passwort falsch! Das Passwort bleibt unverändert. Restliche Änderungen durchgeführt!',
                                                       })
         if profile_status == 'deleted':
-            return render(request, 'app/index.html', {'latest_category_list': Category.objects.all(),
+            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
                                                       'message': 'Ihr Account wurde gelöscht!',
                                                       })
 
-        return render(request, 'app/index.html', {'latest_category_list': Category.objects.all()})
+        return render(request, 'app/index.html', {'category_list': Category.objects.all()})
 
 
 class ProviderProfileView(generic.ListView):
@@ -121,6 +121,7 @@ class CategoryView(generic.ListView):
         category = kwargs.get("category_name")
         return render(request, 'app/category.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
+                      'category_list': Category.objects.all(),
                        'category': Category.objects.get(name=category)
                        })
 

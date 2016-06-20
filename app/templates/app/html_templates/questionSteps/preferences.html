@@ -7,10 +7,11 @@
           <div flex="nogrow" style="width: 100%;" layout="column" layout-align="center center">
             <div layout="column" layout-align="center top">
               <h4>Was ist dir besonders wichtig?</h4>
-              <md-checkbox>Komfort</md-checkbox>
-              <md-checkbox>Sicherheit</md-checkbox>
-              <md-checkbox>Gesundheit</md-checkbox>
-              <md-checkbox>Energie</md-checkbox>
+              {% if category_list %}
+              {% for category in category_list %}
+              <md-checkbox>{{category}}</md-checkbox>
+              {% endfor %}
+              {% endif %}
               <md-checkbox>Remote</md-checkbox>
             </div>
           </div>
