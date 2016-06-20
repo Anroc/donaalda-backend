@@ -136,12 +136,14 @@
             {% else %}
               <div class="panel-body">
             {% endif %}
+                <a href="{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}">
                 <img style="max-height: 100%; max-width: 100%;"
                      {% if product.provider.is_visible %}
                      onclick="provider()"
                      {% endif %}
                      src="{{ product.provider.providerprofile.logo_image.url }}"
                      alt="providerImg">
+                </a>
               </div>
 
             </div>
