@@ -1,7 +1,7 @@
 <md-step label="Präferenz" md-complete="vm.stepData[1].data.completed"
          ng-disabled="vm.stepProgress < 2">
   <md-step-body>
-    <form name="step2">
+    <form name="step2" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
       <md-content class="md-padding">
         <div layout="row" layout-align="center top">
           <div flex="nogrow" style="width: 100%;">
