@@ -12,79 +12,6 @@
 
   {% include "app/html_templates/header/headerTemplate.html" %}
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>DONAALDA - Produktübersicht - {{ product.name }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content=""/>
-  <meta name="keywords" content=""/>
-  <meta name="author" content=""/>
-
-
-  <!-- Facebook and Twitter integration -->
-  <meta property="og:title" content=""/>
-  <meta property="og:image" content=""/>
-  <meta property="og:url" content=""/>
-  <meta property="og:site_name" content=""/>
-  <meta property="og:description" content=""/>
-  <meta name="twitter:title" content=""/>
-  <meta name="twitter:image" content=""/>
-  <meta name="twitter:url" content=""/>
-  <meta name="twitter:card" content=""/>
-
-  <!--link rel="stylesheet" href="{% static 'app/index-style.css' %}"-->
-  <script src="{% static 'app/index-app.js' %}"></script>
-
-
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <link rel="shortcut icon" href="{% static 'app/favicon.ico' %}">
-
-  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet'
-        type='text/css'>
-
-  <!-- Animate.css -->
-  <link rel="stylesheet" href="{% static 'app/assets/css/animate.css' %}">
-  <!-- Icomoon Icon Fonts-->
-  <link rel="stylesheet" href="{% static 'app/assets/css/icomoon.css' %}">
-  <!-- Simple Line Icons -->
-  <link rel="stylesheet" href="{% static 'app/assets/css/simple-line-icons.css' %}">
-  <!-- Magnific Popup -->
-  <link rel="stylesheet" href="{% static 'app/assets/css/magnific-popup.css' %}">
-  <!-- Bootstrap  -->
-  <link rel="stylesheet" href="{% static 'app/assets/css/bootstrap.css' %}">
-
-  <link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
-
-  <!-- Modernizr JS -->
-  <script src="{% static 'app/assets/js/modernizr-2.6.2.min.js' %}"></script>
-  <!-- FOR IE9 below -->
-  <!--[if lt IE 9]>
-  <script src="{% static 'app/assets/js/respond.min.js' %}"></script>
-  <![endif]-->
-
-
-  <!-- jQuery -->
-  <script src="{% static 'app/assets/js/jquery.min.js' %}"></script>
-  <!-- jQuery Easing -->
-  <script src="{% static 'app/assets/js/jquery.easing.1.3.js' %}"></script>
-  <!-- Bootstrap -->
-  <script src="{% static 'app/assets/js/bootstrap.min.js' %}"></script>
-  <!-- Waypoints -->
-  <script src="{% static 'app/assets/js/jquery.waypoints.min.js' %}"></script>
-  <!-- Stellar Parallax -->
-  <script src="{% static 'app/assets/js/jquery.stellar.min.js' %}"></script>
-  <!-- Counter -->
-  <script src="{% static 'app/assets/js/jquery.countTo.js' %}"></script>
-  <!-- Magnific Popup -->
-  <script src="{% static 'app/assets/js/jquery.magnific-popup.min.js' %}"></script>
-  <script src="{% static 'app/assets/js/magnific-popup-options.js' %}"></script>
-  <!-- Google Map -->
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-  <script src="{% static 'app/assets/js/google_map.js' %}"></script>
-
-  <!-- Main JS (Do not remove) -->
-  <script src="{% static 'app/assets/js/main.js' %}"></script>
 
   <script>
     $(document).ready(function(){
@@ -98,18 +25,10 @@
       location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
     }
       {% endif %}
-    function logOut() {
-      location.href = "/logout"
-    }
+
     function start() {
       location.href = "/"
-    }
-    function admin() {
-      window.open("/admin", "_blank")
-    }
-    function back() {
-      location.href = "/back";
-    }
+    }}
   </script>
   <script>
     $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
