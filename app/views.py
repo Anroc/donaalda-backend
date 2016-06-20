@@ -171,30 +171,6 @@ class AllProductsView(generic.DetailView):
                       {'all_products': Product.objects.all()})
 
 
-"""
-@csrf_protect
-@require_http_methods(["GET","POST"])
-def login_user(request):
-    state = "Please log in below..."
-    username = password = ''
-    if request.POST:
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                state = "You're successfully logged in!"
-                return HttpResponseRedirect('/app')
-            else:
-                state = "Your account is not active, please contact the site admin."
-        else:
-            state = "Your username and/or password were incorrect."
-
-    return render(request, 'app/loginTemplate.html', {'state': state, 'username': username})"""
-
-
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def login_view(request):
@@ -216,20 +192,6 @@ def login_view(request):
             messages.error(request, 'Ihre Anmeldung ist fehlgeschlagen. Versuchen sie es erneut.')
             return HttpResponseRedirect(redirectpage)
     return render(request, 'app/html_templates/loginTemplate.html', {'login_form': form})
-
-
-"""
-class LoginView(FormView):
-    form_class = LoginForm
-    template_name = 'app/loginTemplate.html'
-    success_url = 'app/index.html'
-
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.login()
-        return super(LoginView, self).form_valid(form)
-"""
 
 
 @csrf_protect
