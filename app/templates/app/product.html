@@ -14,24 +14,25 @@
 
 
   <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
       $('[data-show="tooltip"]').tooltip();
     });
   </script>
 
   <script>
-      {% if product.provider.is_visible %}
+    {% if product.provider.is_visible %}
     function provider() {
       location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
     }
-      {% endif %}
+    {% endif %}
 
     function start() {
       location.href = "/"
-    }}
+    }
+
   </script>
   <script>
-    $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
+    $.post("/updatepagehistory", {lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"});
   </script>
 </head>
 <body>
@@ -53,33 +54,34 @@
           <div class="col-md-4">
             <div class="panel panel-default pull-right"
                  style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
-            {% if product.provider.is_visible %}
+              {% if product.provider.is_visible %}
               <div class="btn">
-            {% else %}
-              <div class="panel-body">
-            {% endif %}
-                {% if product.provider_profile %}
-                <a href="{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}">
+                {% else %}
+                <div class="panel-body">
                   {% endif %}
-                <img style="max-height: 100%; max-width: 100%;"
-                     {% if product.provider.is_visible %}
-                     onclick="provider()"
-                     {% endif %}
-                     src="{{ product.provider.providerprofile.logo_image.url }}"
-                     alt="providerImg">
-                </a>
-              </div>
+                  {% if product.provider_profile %}
+                  <a href="{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}">
+                    {% endif %}
+                    <img style="max-height: 100%; max-width: 100%;"
+                         {% if product.provider.is_visible %}
+                         onclick="provider()"
+                         {% endif %}
+                         src="{{ product.provider.providerprofile.logo_image.url }}"
+                         alt="providerImg">
+                  </a>
+                </div>
 
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="slant"></div>
   </div>
-  <div class="slant"></div>
 </section>
 
-<section id="fh5co-intro" data-section="intro">
+<section id="fh5co-questions" data-section="intro">
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-center">
@@ -133,8 +135,6 @@
   </div>
 </section>
 {% endif %}
-
-
 
 
 <section id="fh5co-testimonials" data-section="tecData">
