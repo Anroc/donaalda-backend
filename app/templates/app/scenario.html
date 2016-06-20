@@ -177,13 +177,27 @@
                             {{scenario.description}}
                           </p>
                         </div>
+                          {% comment %}
                         <div class="col-md-4">
                           <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
                         </div>
+                        {% endcomment %}
+                          <div class="col-md-4">
+                            <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
+                                <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
+                                </a>
+                          </div>
                       {% else %}
+                          {% comment %}
                         <div class="col-md-4">
                           <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
                         </div>
+                        {% endcomment %}
+                          <div class="col-md-4">
+                            <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
+                                <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
+                                </a>
+                          </div>
                         <div class="col-md-8">
                           <p class="text-justify">
                             {{scenario.description}}
