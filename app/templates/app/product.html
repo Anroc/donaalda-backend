@@ -9,6 +9,9 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js"> <!--<![endif]-->
 <head>
+
+  {% include "app/html_templates/header/headerTemplate.html" %}
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>DONAALDA - Produktübersicht - {{ product.name }}</title>
@@ -136,7 +139,9 @@
             {% else %}
               <div class="panel-body">
             {% endif %}
+                {% if product.provider_profile %}
                 <a href="{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}">
+                  {% endif %}
                 <img style="max-height: 100%; max-width: 100%;"
                      {% if product.provider.is_visible %}
                      onclick="provider()"
