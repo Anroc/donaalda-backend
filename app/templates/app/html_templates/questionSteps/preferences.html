@@ -4,13 +4,15 @@
     <form name="step2" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
       <md-content class="md-padding">
         <div layout="row" layout-align="center top">
-          <div flex="nogrow" style="width: 100%;">
-            <h4>Was ist Ihrem Smart Home besonders wichtig?</h4>
-            <md-checkbox>Komfort</md-checkbox>
-            <md-checkbox>Sicherheit</md-checkbox>
-            <md-checkbox>Gesundheit</md-checkbox>
-            <md-checkbox>Energie</md-checkbox>
-            <md-checkbox>Remote</md-checkbox>
+          <div flex="nogrow" style="width: 100%;" layout="column" layout-align="center center">
+            <div layout="column" layout-align="center top">
+              <h4>Was ist dir besonders wichtig?</h4>
+              <md-checkbox>Komfort</md-checkbox>
+              <md-checkbox>Sicherheit</md-checkbox>
+              <md-checkbox>Gesundheit</md-checkbox>
+              <md-checkbox>Energie</md-checkbox>
+              <md-checkbox>Remote</md-checkbox>
+            </div>
           </div>
         </div>
       </md-content>
