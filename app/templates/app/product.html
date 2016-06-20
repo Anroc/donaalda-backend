@@ -90,7 +90,7 @@
   </script>
 
   <script>
-      {% if porduct.provider.is_visible %}
+      {% if product.provider.is_visible %}
     function provider() {
       location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
     }
