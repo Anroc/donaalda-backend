@@ -20,7 +20,6 @@ from django.conf import settings
 
 app_name = 'app'
 urlpatterns = [
-    # url(r'^app/$', views.IndexView.as_view(), name='index'),
     url(r'^contact$', views.ContactView.as_view(), name='contact'),
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
