@@ -8,6 +8,9 @@
 
   {% include "app/html_templates/header/headerTemplate.html" %}
 
+  {% load compile_static %}
+
+  <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
 
   <script>
     $(document).ready(function(){
@@ -24,7 +27,7 @@
 
     function start() {
       location.href = "/"
-    }}
+    }
   </script>
   <script>
     $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
@@ -69,6 +72,7 @@
       </div>
     </div>
     <div class="slant"></div>
+  </div>
 </section>
 
 <section id="fh5co-intro" data-section="intro">
