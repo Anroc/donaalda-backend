@@ -28,10 +28,11 @@ def url_alias(value):
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, validators=[validate_legal_chars])
     picture = models.ImageField(verbose_name="Bild für die Kategorie", upload_to="categories")
-    backgroundPicture = models.ImageField(verbose_name="Bild für den Hintergrund", null=True, blank=True, upload_to="categories")
+    backgroundPicture = models.ImageField(verbose_name="Bild für den Hintergrund", null=True, blank=True,
+                                          upload_to="categories")
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length=170, default="---")
     description = models.TextField(verbose_name="Beschreibung", default="---")
-    iconString = models.CharField(max_length=20, default="gift")
+    iconString = models.CharField(max_length=20, default="gift", verbose_name="Zu verwendenes Icon")
 
     def __str__(self):
         return '%s' % self.name
@@ -47,11 +48,12 @@ class Category(models.Model):
 
 class Scenario(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    url_name = models.CharField(max_length=100, unique=False, default=random())
+    url_name = models.CharField(max_length=100, unique=False, default=random(), verbose_name="URL-Name")
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
-    provider = models.ForeignKey("Provider", default="1", )
-    scenario_product_set = models.ForeignKey("ProductSet", null=True)
+    provider = models.ForeignKey("Provider", default="1", verbose_name="Versorger")
+    scenario_product_set = models.ForeignKey("ProductSet", null=True, verbose_name="dazugehörige Produktsammlung",
+                                             on_delete=models.SET_NULL)
     categories = models.ManyToManyField("Category", verbose_name="passende Kategorien")
 
     def __str__(self):
@@ -72,14 +74,15 @@ class Scenario(models.Model):
 
 
 class ScenarioDescription(models.Model):
-    belongs_to_scenario = models.ForeignKey("Scenario")
-    description = models.TextField()
-    image = models.ImageField(upload_to="scenarioDesc")
+    belongs_to_scenario = models.ForeignKey("Scenario", verbose_name="Beschreibung für Szenario",
+                                            on_delete=models.CASCADE)
+    description = models.TextField(verbose_name="Beschreibung")
+    image = models.ImageField(upload_to="scenarioDesc", verbose_name="Bild")
     thumbnail = ImageSpecField(source='image',
                                processors=[ResizeToFill(200, 100)],
                                format='JPEG')
-    left_right = models.BooleanField()
-    order = models.IntegerField()
+    left_right = models.BooleanField(verbose_name="Bild auf der rechten Seite zeigen")
+    order = models.IntegerField(verbose_name="Reihenfolge")
 
     def __str__(self):
         return '%s %s' %(self.belongs_to_scenario, self.order)
@@ -97,7 +100,7 @@ class ProductSet(models.Model):
     name = models.CharField(max_length=100, default="------")
     description = models.TextField(blank=True, verbose_name="Beschreibung")
     products = models.ManyToManyField("Product", verbose_name="Dazugehörige Produkte")
-    creator = models.ForeignKey("Provider", default="1")
+    creator = models.ForeignKey("Provider", default="1", verbose_name="Ersteller", on_delete=models.CASCADE)
 
     def __str__(self):
         return '%s' % self.name
@@ -113,11 +116,12 @@ class ProductSet(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    provider = models.ForeignKey("Provider", default="1")
-    product_type = models.ForeignKey("ProductType", default="0")
-    serial_number = models.CharField(max_length=255, default="------")
-    description = models.TextField()
-    specifications = models.TextField(default="---")
+    provider = models.ForeignKey("Provider", default="1", on_delete=models.CASCADE, verbose_name="Produzent")
+    product_type = models.ForeignKey("ProductType", default="1", verbose_name="Produktart",
+                                     on_delete=models.SET_DEFAULT)
+    serial_number = models.CharField(max_length=255, default="------", verbose_name="Artikelnummer")
+    description = models.TextField(verbose_name="Berschreibung")
+    specifications = models.TextField(default="---", verbose_name="Technische Details")
     image1 = models.ImageField(verbose_name="Bild 1",upload_to="products")
     image2 = models.ImageField(null=True, blank=True, verbose_name="Bild 2",
                                upload_to="products")
@@ -126,7 +130,7 @@ class Product(models.Model):
     thumbnail = ImageSpecField(source='image1',
                                processors=[ResizeToFill(200, 100)],
                                format='JPEG')
-    end_of_life = models.BooleanField(default=False)
+    end_of_life = models.BooleanField(default=False, verbose_name="EOL")
 
     def __str__(self):
         return '%s' % self.name
@@ -147,7 +151,7 @@ class Product(models.Model):
 
 
 class ProductType(models.Model):
-    type_name = models.CharField(max_length=255, unique=True)
+    type_name = models.CharField(max_length=255, unique=True, verbose_name="Artname")
 
     def __str__(self):
         return '%s' % self.type_name
@@ -163,7 +167,7 @@ class ProductType(models.Model):
 
 class Provider(models.Model):
     name = models.CharField(max_length=200, unique=False, default=random())
-    is_visible = models.BooleanField(default=False)
+    is_visible = models.BooleanField(default=False, verbose_name="sichtbar")
 
     def __str__(self):
         return '%s' % self.name
@@ -184,10 +188,10 @@ class ProviderProfile(models.Model):
                                    help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt.")
     profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True)
     banner_image = models.ImageField(verbose_name="Banner für Profilseite", upload_to="provider")
-    introduction = models.TextField()
-    contact_email = models.EmailField()
+    introduction = models.TextField(verbose_name="Einleitung")
+    contact_email = models.EmailField(verbose_name="Kontakt-Email")
     website = models.URLField()
-    owner = models.OneToOneField(Provider, default="1")
+    owner = models.OneToOneField(Provider, default="1", verbose_name="Eigentümer", on_delete=models.CASCADE)
 
     def __str__(self):
         return '%s' % self.public_name
@@ -206,7 +210,7 @@ class ProviderProfile(models.Model):
 
 
 class Employee(User):
-    employer = models.ForeignKey("Provider")
+    employer = models.ForeignKey("Provider", on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Angestellter"
@@ -215,7 +219,7 @@ class Employee(User):
 
 
 class UserImage(models.Model):
-    belongs_to_user = models.OneToOneField(to=User, verbose_name="gehört zu Nutzer")
+    belongs_to_user = models.OneToOneField(to=User, verbose_name="gehört zu Nutzer", on_delete=models.CASCADE)
     image = models.ImageField(upload_to="user", null=True, blank=True, verbose_name="Bild")
 
     def __str__(self):
@@ -231,11 +235,12 @@ class UserImage(models.Model):
 
 
 class Comment(models.Model):
-    comment_from = models.ForeignKey(to=User)
+    comment_from = models.ForeignKey(to=User, on_delete=models.CASCADE)
     comment_title = models.CharField(max_length=255, verbose_name="Kommentartitel", )
     comment_content = models.TextField(verbose_name="Kommentarinhalt")
     # min value should be 0, max value should be 5, default should be 0
-    rating = models.PositiveSmallIntegerField(verbose_name="Bewertung", validators=[MinValueValidator(0), MaxValueValidator(5)], default='0')
+    rating = models.PositiveSmallIntegerField(verbose_name="Bewertung",
+                                              validators=[MinValueValidator(0), MaxValueValidator(5)], default='0')
     creation_date = models.DateTimeField()
     page_url = models.CharField(default='', max_length=255)
 
