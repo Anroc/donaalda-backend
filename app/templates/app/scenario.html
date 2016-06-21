@@ -141,6 +141,28 @@
             <h3 class="text-left" style="color: #ddd; margin-top: -20px;">{{ current_scenario.provider }}</h3>
             {% endif %}
           </div>
+
+                         <div class="col-md-4">
+            <div class="panel panel-default pull-right"
+                 style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
+              {% if current_scenario.provider.is_visible %}
+              <div class="btn">
+                {% else %}
+                <div class="panel-body">
+                  {% endif %}
+                  {% if current_scenario.provider.providerprofile %}
+                  <a href="{%  url 'app:provider_profile' current_scenario.provider.providerprofile.url_name %}">
+                    {% endif %}
+                    <img style="max-height: 100%; max-width: 100%;"
+                         {% if current_scenario.provider.is_visible %}
+                         onclick="provider()"
+                         {% endif %}
+                         src="{{ current_scenario.provider.providerprofile.logo_image.url }}"
+                         alt="providerImg">
+                  </a>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
     </div>
