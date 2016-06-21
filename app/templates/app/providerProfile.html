@@ -231,6 +231,7 @@
             </h1>
           </div>
           <!-- too much content for cards -->
+            {% comment %}
           <!--<h3>{{ scenario.scenario_product_set }}</h3>
           <h3>
             {% for category in scenario.category_set.all %}
@@ -240,12 +241,13 @@
             {% endfor %}
           </h3>
           <h4> {{ scenario.description }}</h4>-->
+          {% endcomment%}
         </div>
       </a>
     </div>
     {% empty %}
     <div>
-      Es wurden noch keine Szenarien hinzugefügt.
+      Es wurden noch keine Produkte hinzugefügt.
     </div>
     {% endfor %}
     </div>
