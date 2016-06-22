@@ -22,7 +22,11 @@
             <p>&ldquo;{{ com.comment_content }}&rdquo;</p>
           </blockquote>
           <div class="author to-animate">
+              {% if not com.comment_from.userimage%}
             <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
+              {% else%}
+              <figure><img src="{{ com.comment_from.userimage.image.url }}" alt="Person"></figure>
+              {% endif%}
             <p>
               {{ com.comment_from }} <span class="subtext">{{ com.comment_title }}</span>
             </p>
