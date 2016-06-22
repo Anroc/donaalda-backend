@@ -51,7 +51,7 @@ class Scenario(models.Model):
     url_name = models.CharField(max_length=100, unique=False, default=random(), verbose_name="URL-Name")
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
-    provider = models.ForeignKey("Provider", default="1", verbose_name="Versorger")
+    provider = models.ForeignKey("Provider", default="1", verbose_name="Versorger", on_delete=models.CASCADE)
     scenario_product_set = models.ForeignKey("ProductSet", null=True, verbose_name="dazugehörige Produktsammlung",
                                              on_delete=models.SET_NULL)
     categories = models.ManyToManyField("Category", verbose_name="passende Kategorien")
