@@ -1,131 +1,198 @@
 [
 {
     "model": "app.productset",
+    "pk": 2,
     "fields": {
         "name": "TestProductSet",
         "description": "TestProductSet",
-        "creator": "Connected Living",
+        "creator": 1,
         "products": [
-            [
-                "Connected Living",
-                "0-0-00-0"
-            ],
-            [
-                "Connected Living",
-                "NULL"
-            ]
+            2,
+            1
         ]
     }
 },
 {
     "model": "app.productset",
+    "pk": 3,
     "fields": {
         "name": "Schlafanreiz-Produktset",
         "description": "Dieses Produktset geh\u00f6rt zum Szenario \"Schlafanreize\"",
-        "creator": "Connected Living",
+        "creator": 5,
         "products": [
-            [
-                "Jung",
-                "CO2 LS 2178"
-            ]
+            3,
+            19
         ]
     }
 },
 {
     "model": "app.productset",
+    "pk": 4,
     "fields": {
         "name": "W\u00e4rmesteuerung-Produktset",
         "description": "",
-        "creator": "Connected Living",
+        "creator": 7,
         "products": [
-            [
-                "Eurotronic",
-                "700 100 418, EAN: 42 600 1271 101 0"
-            ]
+            15,
+            14,
+            12,
+            10
         ]
     }
 },
 {
     "model": "app.productset",
+    "pk": 5,
     "fields": {
         "name": "Energieverbrauch-Produktset",
         "description": "Diese Produktsammlung geh\u00f6rt zum Szenario \"Energieverbrauch aufzeigen\"",
-        "creator": "Connected Living",
+        "creator": 4,
         "products": [
-            [
-                "Fibaro",
-                "EFGWPF-102; FGWPF-101"
-            ]
+            5
         ]
     }
 },
 {
     "model": "app.productset",
+    "pk": 6,
     "fields": {
         "name": "Vitaldaten-Produktset",
         "description": "Diese Produktsammlung geh\u00f6rt zum Szenario \"Aufzeichnung von Vitaldaten\"",
-        "creator": "Connected Living",
+        "creator": 1,
         "products": [
-            [
-                "Withthings",
-                "------"
-            ]
+            33,
+            30,
+            31
         ]
     }
 },
 {
     "model": "app.productset",
+    "pk": 7,
     "fields": {
         "name": "Aktivit\u00e4tsgrad-Produktset",
         "description": "Diese Produktset geh\u00f6rt zum Szenario \"Aufzeichnung des Aktivit\u00e4tsgrads\"",
-        "creator": "Connected Living",
+        "creator": 7,
         "products": [
-            [
-                "Jung",
-                "3361 WW"
-            ]
+            13,
+            14,
+            10
         ]
     }
 },
 {
     "model": "app.productset",
+    "pk": 8,
     "fields": {
         "name": "Aufwachanreiz-Produktset",
         "description": "Diese Produktsammlung geh\u00f6rt zum Szenario \"Aufwachanreiz\"",
-        "creator": "Connected Living",
+        "creator": 5,
         "products": [
-            [
-                "Fibaro",
-                "EFGWPF-102; FGWPF-101"
-            ]
+            18,
+            16,
+            17
         ]
     }
 },
 {
     "model": "app.productset",
+    "pk": 9,
     "fields": {
         "name": "Lichtsteuerung-Produktset",
         "description": "Dieses Produktset geh\u00f6rt zum Szenario \"Automatische Lichtsteuerung\"",
-        "creator": "Connected Living",
+        "creator": 17,
         "products": [
-            [
-                "Fibaro",
-                "EFGWPF-102; FGWPF-101"
-            ]
+            37,
+            36
         ]
     }
 },
 {
     "model": "app.productset",
+    "pk": 10,
     "fields": {
         "name": "Wasser-Produktset",
         "description": "geh\u00f6rt zu \"Warnung vor Wasser & Feuer\"",
-        "creator": "Connected Living",
+        "creator": 23,
         "products": [
-            [
-                "Fibaro",
-                "FGSS-101"
-            ]
+            43,
+            44,
+            8
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "pk": 11,
+    "fields": {
+        "name": "Rolladensteuerung-Produktset",
+        "description": "",
+        "creator": 5,
+        "products": [
+            18,
+            16,
+            17
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "pk": 12,
+    "fields": {
+        "name": "Besucher-Produktset",
+        "description": "",
+        "creator": 4,
+        "products": [
+            45,
+            43,
+            42,
+            5
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "pk": 13,
+    "fields": {
+        "name": "Einbruch-Produktset",
+        "description": "",
+        "creator": 4,
+        "products": [
+            45,
+            43,
+            42,
+            5
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "pk": 14,
+    "fields": {
+        "name": "Elektroger\u00e4te-Produktset",
+        "description": "",
+        "creator": 11,
+        "products": [
+            24,
+            8,
+            25,
+            21,
+            23
+        ]
+    }
+},
+{
+    "model": "app.productset",
+    "pk": 15,
+    "fields": {
+        "name": "Kinderschutz-Produktset",
+        "description": "",
+        "creator": 23,
+        "products": [
+            43,
+            38,
+            7,
+            10
         ]
     }
 }

@@ -1,6 +1,7 @@
 [
 {
     "model": "app.providerprofile",
+    "pk": 1,
     "fields": {
         "public_name": "AVM",
         "url_name": "avm",
@@ -10,11 +11,12 @@
         "introduction": "Die AVM Computersysteme Vertriebs GmbH ist ein deutscher Hersteller von Produkten aus dem Bereich der Telekommunikation und Netzwerktechnik (unter anderem DSL, LTE, ISDN, WLAN und Internettelefonie)",
         "contact_email": "tralala@avvvvvvm.nix",
         "website": "http://www.avm.de",
-        "owner": "AVM"
+        "owner": 2
     }
 },
 {
     "model": "app.providerprofile",
+    "pk": 2,
     "fields": {
         "public_name": "Connected Living",
         "url_name": "connected_living",
@@ -24,11 +26,12 @@
         "introduction": "Im Leben der Zukunft wird alles einfach vernetzt sein. Wir betreten nicht mehr allein das Smarte Haus als Zentrum der Vernetzung von Menschen und Dingen. Das Vernetzte Leben geht dar\u00fcber hinaus. Die Anwendungsfelder Wohnen, Mobilit\u00e4t, Gesundheit, Geb\u00e4ude sowie St\u00e4dte konvergieren im zuk\u00fcnftigen Internet of Everything verst\u00e4rkt hin zu ganzheitlichen und branchen\u00fcbergreifenden L\u00f6sungen.",
         "contact_email": "jakob@connected-living.org",
         "website": "http://www.connected-living.org",
-        "owner": "Connected Living"
+        "owner": 1
     }
 },
 {
     "model": "app.providerprofile",
+    "pk": 3,
     "fields": {
         "public_name": "Eurotronic",
         "url_name": "eurotronic",
@@ -38,11 +41,12 @@
         "introduction": "Wir haben uns auf die Entwicklung innovativer L\u00f6sungen \r\nzur Reduzierung der Energiekosten spezialisiert.\r\n\r\nUnser mittelst\u00e4ndisches Familienunternehmen hat sich seit der Firmengr\u00fcndung im Mai 1998 kontinuierlich zu einem der marktf\u00fchrenden Unternehmen im Bereich der elektronischen Heizk\u00f6rperregler entwickelt. Unsere Produkte werden in den eigenen Werken in Hessen hergestellt. Ziel ist es, Produkte auf h\u00f6chstem technischen Niveau zu entwickeln, zu produzieren und anwenderfreundlich zu gestalten.",
         "contact_email": "noreply@eurotronic.org",
         "website": "http://www.eurotronic.org",
-        "owner": "Eurotronic"
+        "owner": 3
     }
 },
 {
     "model": "app.providerprofile",
+    "pk": 4,
     "fields": {
         "public_name": "Fibaro",
         "url_name": "fibaro",
@@ -52,11 +56,12 @@
         "introduction": "Zur Zeit ist das FIBARO-System die beste auf dem Markt verf\u00fcgbare Aufbau- Automationsl\u00f6sung.\r\n\r\nEs bietet einen nichtinvasiven Installationsprozess, durch den die Notwendigkeit von meterlangen Kabeln hinf\u00e4llig wird. Unsere Miniatur-Module k\u00f6nnen in jedem Wandschaltkasten installiert werden, hinter einem Lichtschalter, einem Rollladen-Schalter etc., und sind mit jedem elektrischen System kompatibel. \r\nEs ist das einzige auf dem Markt verf\u00fcgbare System, das in der Lage ist, LED-Licht oder fluoreszierendes Licht ohne Nulleiter in elektrischen Systemen zu kontrollieren (ehemals typische elektrische Systeme). \r\nFibaro-Ger\u00e4te werden nicht permanent an die Geb\u00e4udeinfrastruktur gekoppelt. Wenn Sie Ihre Wohnung also umdekorieren, einige W\u00e4nde einrei\u00dfen oder das Inneneinrichtungskonzept \u00e4ndern m\u00f6chten\u2026 Ist das kein Problem. Tun Sie es einfach. Nehmen Sie einfach jedes beliebige Modul aus der Wand und installieren es an einem neuen Platz. Durch das Maschennetzwerk aktualisiert das Modul seinen Standort und nimmt die Kooperation mit den \u00fcbrigen Systemkomponenten problemlos wieder auf.",
         "contact_email": "noreply@fibaro.com",
         "website": "http://www.fibaro.com",
-        "owner": "Fibaro"
+        "owner": 4
     }
 },
 {
     "model": "app.providerprofile",
+    "pk": 5,
     "fields": {
         "public_name": "Jung",
         "url_name": "jung",
@@ -66,11 +71,12 @@
         "introduction": "Intelligente Haussteuerung mit dem zukunftssicheren KNX-System\r\nDie Aufgabe moderner Haustechnik ist es, Wohn- und Arbeitswelten intelligent zu steuern und dabei auf individuelle Gestaltungsw\u00fcnsche und Wohnqualit\u00e4t R\u00fccksicht zu nehmen. Von Bedeutung sind dabei die Aspekte Komfort, Wirtschaftlichkeit, Energieeffizienz und Repr\u00e4sentation. In diesem Sinne vernetzt KNX hier Funktionen wie Beleuchtung, Klima, Sicherheit und Multimedia f\u00fcr eine zentrale und smarte Steuerung.",
         "contact_email": "alt@jung.de",
         "website": "http://www.jung.de/",
-        "owner": "Jung"
+        "owner": 5
     }
 },
 {
     "model": "app.providerprofile",
+    "pk": 6,
     "fields": {
         "public_name": "Withthings",
         "url_name": "withthings",
@@ -80,35 +86,211 @@
         "introduction": "Withings ist ein Hersteller, der...",
         "contact_email": "noreply@withtings.com",
         "website": "http://www.withings.com/eu/de/",
-        "owner": "Withthings"
+        "owner": 6
     }
 },
 {
-    "model": "app.employee",
+    "model": "app.providerprofile",
+    "pk": 7,
     "fields": {
-        "employer": "Connected Living",
-        "groups": [],
-        "user_permissions": []
+        "public_name": "Thermokon Sensortechnik GmbH",
+        "url_name": "thermokon_sensortechnik_gmbh",
+        "logo_image": "provider/thermokon_logo.png",
+        "profile_image": "provider/thermokon_profile.jpg",
+        "banner_image": "provider/thermokon_banner.png",
+        "introduction": "Thermokon \u2013 Home of Sensor Technology\r\n\r\nVom einzelnen Produkt zur Systeml\u00f6sung f\u00fcr Sensorik\r\nWas 1987 mit der Gr\u00fcndung der Thermokon Sensortechnik GmbH durch Harald Zygan begann, entwickelte sich schnell zur Erfolgsgeschichte: Der anf\u00e4nglichen Spezialisierung auf Temperaturf\u00fchler f\u00fcr die Heizkesselindustrie folgte schon bald die schrittweise Erweiterung unseres Produktportfolios auf Sensorikl\u00f6sungen zur Erfassung von relativer Feuchte, Luftqualit\u00e4t und Helligkeit. Sie legte den Grundstein f\u00fcr die energieeffiziente Auslegung unserer Systeme und L\u00f6sungen.\r\n\r\nMit Kompetenz f\u00fcr den Erfolg unserer Kunden\r\nSeit fast 30 Jahren steht der Name Thermokon f\u00fcr die Aufwertung intelligenter Geb\u00e4ude mit Engineering, Innovation und Qualit\u00e4t \u201eMade in Germany\u201c. Mit der Entwicklung und Fertigung richtungsweisender Sensoren und Sensorsysteme schaffen wir Mehrwert f\u00fcr Kunden in aller Welt. Effizienz, Nachhaltigkeit und Offenheit f\u00fcr Neues stehen dabei ebenso im Fokus wie die enge Partnerschaft und der intensive Dialog mit unseren Kunden. \r\n\r\nAls Innovationstreiber mit breitgef\u00e4chertem Anwendungsspektrum entwickeln wir unser Produktportfolio stetig weiter und bieten entscheidende Vorteile durch produktbezogene Leistungen, Sonderl\u00f6sungen und Engineering. Unser gesamtes Portfolio ist auf energieeffiziente Geb\u00e4ude ausgelegt, die eine A-Klassifizierung nach DIN EN 15232 anstreben.",
+        "contact_email": "email@thermokon.de",
+        "website": "http://www.thermokon.de/",
+        "owner": 7
     }
 },
 {
-    "model": "app.employee",
+    "model": "app.providerprofile",
+    "pk": 8,
     "fields": {
-        "employer": "AVM",
-        "groups": [
-            [
-                "Marketing"
-            ]
-        ],
-        "user_permissions": []
+        "public_name": "nodOn",
+        "url_name": "nodon",
+        "logo_image": "provider/thermokon_logo_EcI0Ifz.png",
+        "profile_image": "provider/thermokon_profile_LUIqxNl.jpg",
+        "banner_image": "provider/thermokon_banner_kk0Lzh1.png",
+        "introduction": "Home Automation by nodOn\r\n\r\nThe Home automation uses are countless. At NodOn\u00ae, we always design products with multiple and upgradable uses.\r\nhome automation comfort\r\nCOMFORT\r\n\r\nWe believe in strong synergies between energy savings and wellbeing. Our outlook of Smart Home is to be able to control more to save more, without degrading your comfort and wellbeing. And who knows, why not improving it?\r\n\r\nhome automation energy savings\r\nENERGY SAVINGS\r\n\r\nBy connecting NodOn\u00ae products / modules on your existing appliances (lights, HVAC, home appliances, etc\u2026) you can monitor your energy consumption and then act on it. As a game with your family (\u201cwho will save the most energy this month?\u201d), or through intelligent scenarios\r\n\r\nhome automation security\r\nSECURITY\r\n\r\nYour home should always be the most confident and safe place on earth, as a little nest for you and your family. Using NodOn\u00ae products, you combine home control with non-intrusive security system. Safe and relax.",
+        "contact_email": "contact@nodon.fr",
+        "website": "http://nodon.fr/en/",
+        "owner": 8
+    }
+},
+{
+    "model": "app.providerprofile",
+    "pk": 9,
+    "fields": {
+        "public_name": "Permundo GmbH",
+        "url_name": "permundo_gmbh",
+        "logo_image": "provider/logo_permundo.jpg",
+        "profile_image": "provider/profile_permundo.jpg",
+        "banner_image": "provider/banner_permundo.jpg",
+        "introduction": "permundo - the smart control company\r\n\r\npermundo is a supplier of \r\nadvanced smart-control components.\r\n\r\nThe company was founded in 2009 and is based in D\u00fcsseldorf, Germany.\r\n\r\nThe company focus is on Engineering & Design and on Marketing, by an international team of committed experts. Production is outsourced under licence to European-based electronics manufacturers.\r\n\r\nWe at permundo are convinced that cool and easy-to-use products will bring revolutionary new possibilities into our daily lifes. These will increase comfort and will help us to save energy.",
+        "contact_email": "sales@permundo.com",
+        "website": "http://www.permundo.com/",
+        "owner": 9
+    }
+},
+{
+    "model": "app.providerprofile",
+    "pk": 10,
+    "fields": {
+        "public_name": "Gira Giersiepen GmbH & Co. KG",
+        "url_name": "gira_giersiepen_gmbh___co__kg",
+        "logo_image": "provider/gira-logo.jpg",
+        "profile_image": "provider/gira-profile.jpg",
+        "banner_image": "provider/gira-banner.jpg",
+        "introduction": "Das Unternehmen Gira\r\nDer Name Gira steht f\u00fcr moderne Geb\u00e4udetechnik mit System, die das Wohnen komfortabler, sicherer und energieeffizienter macht. Daf\u00fcr bietet Gira intelligente Funktionen und benutzerfreundliche Ger\u00e4te f\u00fcr die einfache und bequeme Steuerung von Beleuchtung, Heizung und Jalousien sowie von T\u00fcrkommunikations-, Multimedia- und Sicherheitssystemen. Den richtigen Rahmen f\u00fcr die Integration der verschiedenen L\u00f6sungen bieten ausgezeichnete Schalterprogramme mit hohem Designanspruch. Mit dem Gesch\u00e4ftsfeld Kunststofftechnik entwickelt und produziert Gira zudem auch spezielle L\u00f6sungen f\u00fcr die Medizin- und Pharmaindustrie.",
+        "contact_email": "marketing-service-hotline@gira.de",
+        "website": "https://www.gira.de/",
+        "owner": 22
+    }
+},
+{
+    "model": "app.providerprofile",
+    "pk": 11,
+    "fields": {
+        "public_name": "Miele & Cie. KG",
+        "url_name": "miele___cie__kg",
+        "logo_image": "provider/High_Res_Miele_logo_2.jpg",
+        "profile_image": "provider/High_Res_Miele_profile_2.jpg",
+        "banner_image": "provider/miele_banner.jpg",
+        "introduction": "Die Miele & Cie. KG ist ein deutscher Haushaltsger\u00e4te-Hersteller mit Sitz in G\u00fctersloh (Nordrhein-Westfalen). Das Unternehmen besch\u00e4ftigt nach eigenen Angaben weltweit 17.741 Mitarbeiter (Stand Gesch\u00e4ftsjahr 2014/2015). Der Umsatz betrug im Gesch\u00e4ftsjahr 2014/2015 3,49 Milliarden Euro. Gesch\u00e4ftsf\u00fchrer sind Markus Miele, Reinhard Zinkann junior, Eduard Sailer, Axel Kniehl und Olaf Bartsch. Seit der Gr\u00fcndung ist die Firma, mittlerweile in der vierten Generation, im Besitz der Familien Miele (51,1 %) und Zinkann (48,9 %). Das Unternehmen ist eine Kommanditgesellschaft. Die unbeschr\u00e4nkt haftenden Gesellschafter (Komplement\u00e4re) sind die Miele Verwaltungs-GmbH und die Zinkann Verwaltungs-GmbH.",
+        "contact_email": "info@miele.de",
+        "website": "http://www.miele.de/",
+        "owner": 11
+    }
+},
+{
+    "model": "app.providerprofile",
+    "pk": 12,
+    "fields": {
+        "public_name": "Polar Electro GmbH Deutschland",
+        "url_name": "polar_electro_gmbh_deutschland",
+        "logo_image": "provider/og-polar-logo.jpg",
+        "profile_image": "provider/og-polar-profile.jpg",
+        "banner_image": "provider/og-polar-banner.jpg",
+        "introduction": "Auf die Signale unseres K\u00f6rpers zu achten, ist das eine, diese auch richtig zu interpretieren etwas anderes. Polar hilft dir, dein Training zu verstehen und die richtigen Schl\u00fcsse f\u00fcr das Training zu ziehen. Garanten hierf\u00fcr sind unser Know-how in Sachen Sport, Physiologie und Elektronik sowie das Verst\u00e4ndnis f\u00fcr die Bed\u00fcrfnisse unserer Nutzer. Nicht zuletzt deshalb sind wir seit 1977 f\u00fchrend im Bereich der Entwicklung von Herzfrequenz-Messger\u00e4ten und technischen Innovationen.\r\n\r\nUnser umfangreiches Produktangebot erf\u00fcllt die hohen Anspr\u00fcche und unterschiedlichen sportlichen Ziele unserer Kunden in Sport und Fitness \u2013 ob Leistungsoptimierung f\u00fcr Wettkampfsportler, Unterst\u00fctzung eines ges\u00fcnderen Lebensstils, Hilfe bei der Rehabilitation oder dem Gewichtsmanagement.\r\n\r\nUnsere ambitionierten und kompetenten Mitarbeiter erm\u00f6glichen es durch ihren Ehrgeiz, Tag f\u00fcr Tag nach dem Besten und weiteren Innovationen zu streben. Seit mehr als 30 Jahren verfolgen wir unsere Ziele mit derselben Leidenschaft. Und unser Erfolg best\u00e4tigt dies. Gegenw\u00e4rtig besch\u00e4ftigt Polar 1.200 Menschen in 26 Tochtergesellschaften auf der ganzen Welt. Wir stellen unsere Produkte ausschlie\u00dflich in unseren eigenen Produktionsst\u00e4tten her und verf\u00fcgt \u00fcber ein Vertriebsnetz, das \u00fcber 35.000 Einzelhandelsgesch\u00e4fte in mehr als 80 L\u00e4ndern beliefert.",
+        "contact_email": "info@polar-deutschland.de",
+        "website": "http://www.polar.com/de",
+        "owner": 12
+    }
+},
+{
+    "model": "app.providerprofile",
+    "pk": 13,
+    "fields": {
+        "public_name": "SEIKO Epson CORPORATION",
+        "url_name": "seiko_epson_corporation",
+        "logo_image": "provider/epson_tagline_logo_blue_and_black.jpg",
+        "profile_image": "provider/epson_tagline_profile.jpg",
+        "banner_image": "provider/epson_banner.jpg",
+        "introduction": "Die Schnelllebigkeit und der gro\u00dfe Druck im Gesundheitswesen erfordern bedienerfreundliche Technologien, die vertrauliche Informationen zuverl\u00e4ssig sch\u00fctzen und jederzeit eine optimale Leistung liefern. Ein gutes Preis-Leistungs-Verh\u00e4ltnis steht hierbei im Vordergrund.\r\n\r\nGenau hier setzt Epson an. Von der Patientenverwaltung \u00fcber die Etikettierung von Medikamenten bis zum Drucken, Archivieren und Abrufen von Daten helfen Ihnen unsere Produkte, Kosten zu sparen, und schaffen mehr Zeit f\u00fcr das Wesentliche \u2013 die Versorgung Ihrer Patienten.",
+        "contact_email": "info@epson.de",
+        "website": "http://www.epson.de/",
+        "owner": 13
+    }
+},
+{
+    "model": "app.providerprofile",
+    "pk": 14,
+    "fields": {
+        "public_name": "eQ-3 AG",
+        "url_name": "eq_3_ag",
+        "logo_image": "provider/logo.gif",
+        "profile_image": "provider/profile.gif",
+        "banner_image": "provider/banner.jpg",
+        "introduction": "Smart Home vom Pionier\r\neQ-3 liefert seit mehr als 30 Jahren innovative Produkte und Technologien f\u00fcr den Home-Control-Bereich und z\u00e4hlt laut \u201eTechnologie Review\u201c zu den 50 innovativsten Unternehmen der Welt. Dar\u00fcber hinaus h\u00e4lt eQ-3 - laut \u201eBerg Insight\u201c - die Marktf\u00fchrerschaft im Bereich der Whole-Home-Systeme im europ\u00e4ischen Raum.\r\n \r\nAls deutsches Familienunternehmen mit Hauptsitz in Leer besch\u00e4ftigen wir weltweit mehr als 1000 Mitarbeiter, welche tagt\u00e4glich dazu beitragen, hochqualitative, innovative aber auch erschwingliche Produkte zu entwickeln und zu produzieren. Unsere vielf\u00e4ltige Vertriebskanalstruktur sorgt f\u00fcr eine breite Verf\u00fcgbarkeit unserer Produkte. Unsere Systeme k\u00f6nnen \u00fcber den Onlinehandel, den Installateur und \u00fcber unterschiedlichste H\u00e4ndler bezogen werden.\r\n\r\nNeben unseren Eigenmarken Homematic, Homematic IP und MAX! nutzen auch Unternehmen wie RWE, EWE, Mobilcom und die Telekom unsere Technologien f\u00fcr ihre Produkte. In der Qivicon Smart-Home-Plattform ist der Homematic Standard bereits ab Werk fest integriert.\r\n\r\n \r\n\r\n \r\nHomematic - Ein ganzes Haus voller guter Ideen\r\n\r\nMit Homematic stellen wir unseren Kunden eine umfangreiche Smart Home L\u00f6sung f\u00fcr nahezu alle Bereiche der Hausautomation zur Verf\u00fcgung. Mehr als 80 Komponenten erm\u00f6glichen das Steuern und Regeln der Beleuchtungs-, Beschattungs-, Sicherheits-, sowie der Heizungsanlage. Die CCU-2 Zentrale sorgt f\u00fcr eine intelligente Zusammenarbeit der verschiedenen Bereiche und stellt zus\u00e4tzlich offene Schnittstellen zu anderen Systemen, der eigenen Benutzeroberfl\u00e4che und zum Internet bereit. Dank dieser Schnittstellen k\u00f6nnen beispielsweise sogar K\u00e4rcher-Gartenbew\u00e4sserungssysteme automatisch den Garten bew\u00e4ssern, sobald der Boden Feuchtigkeit ben\u00f6tigt. Neben einem deutlich gesteigerten Wohnkomfort hilft das Homematic System somit auch beim Wassersparen und senkt dar\u00fcber hinaus die Heizkosten um bis zu 30 %.\r\n\r\n \r\n\r\n \r\nHomematic IP - Die neue Smart Home Generation\r\n\r\nHomematic IP stellt die n\u00e4chste Generation des Homematic Systems dar. Das System kombiniert die hohe Verarbeitungsqualit\u00e4t des Homematic Systems mit modernster IP-Kommunikationstechnologie und einer intuitiv nutzbaren, weltweit abrufbaren Smartphone-App-Benutzeroberfl\u00e4che. Das stetig wachsende Automationssystem umfasst derzeit Produkte zur Raumklima- und Heizungsregelung, mit deren Hilfe bis zu 30 % Heizkosten eingespart werden k\u00f6nnen, sowie Sicherheitskomponenten zur \u00dcberwachung. Wie auch beim Homematic System steht auch bei der neuen Ger\u00e4tegeneration eine offene Schnittstelle f\u00fcr Partner-Software- und Hardwarel\u00f6sungen zur Verf\u00fcgung.\r\n\r\n \r\nMAX! - Heizungssteuerung per Smartphone und Internet\r\n\r\nW\u00e4hrend Homematic nahezu alle Bereiche der Heimautomation abdeckt, ist das MAX! System auf die intelligente Heizungssteuerung spezialisiert. Das Funksystem zeichnet sich durch besonders leichte Handhabung aus, was es auch f\u00fcr Techniklaien interessant macht. Nahezu jedermann kann das System in wenigen Minuten installieren und per Smartphone App einrichten. Dabei beschr\u00e4nkt sich die App-Funktionalit\u00e4t nicht nur auf die eigenen vier W\u00e4nde. Per Onlinezugang \u00fcber den MAX! Cube kann die jeweilige Raumtemperatur auch unterwegs gepr\u00fcft und bei Bedarf angepasst werden. Dank der intelligenten Raumregelung, bei der neben der Raumluft auch T\u00fcren und Fenster \u00fcberwacht werden k\u00f6nnen, kann auch mit dem MAX! System bis zu 30 % Heizenergie eingespart werden. Auf Grund der geringen Anschaffungskosten, wird eine schnelle\r\nAmortisation erreicht.\r\n\r\n \r\n\r\n \r\neqiva\r\n\r\nBei den eqiva Produkten von eQ-3 handelt es sich um hochwertige Stand-Alone-L\u00f6sungen, die auf die Heimabsicherung und Heizungsregelung spezialisiert sind. Das Portfolio erstreckt sich von manuell programmierbaren Heizk\u00f6rperthermostaten, \u00fcber Rauchmelder bis hin zu per App steuer- und programmierbaren Bluetooth-Heizk\u00f6rperthermostaten. Diese Produkte werden \u201estand-alone\u201c, das hei\u00dft unabh\u00e4ngig von den Systemen MAX!, Homematic oder Homematic IP betrieben.",
+        "contact_email": "info@eq-3.de",
+        "website": "https://www.eq-3.de",
+        "owner": 20
+    }
+},
+{
+    "model": "app.providerprofile",
+    "pk": 15,
+    "fields": {
+        "public_name": "Witti Inc",
+        "url_name": "witti_inc",
+        "logo_image": "provider/logo.jpeg",
+        "profile_image": "provider/witti_profile.jpeg",
+        "banner_image": "provider/banner.jpeg",
+        "introduction": "We are Witti Inc",
+        "contact_email": "sales@wittidesign.com",
+        "website": "http://wittidesign.com/en/",
+        "owner": 19
+    }
+},
+{
+    "model": "app.providerprofile",
+    "pk": 16,
+    "fields": {
+        "public_name": "Philips",
+        "url_name": "philips",
+        "logo_image": "provider/logo.jpg",
+        "profile_image": "provider/profile.jpg",
+        "banner_image": "provider/philips_banner.png",
+        "introduction": "Philips Hue bietet eine Vielzahl an Funktionen, \u00fcber die einfache, komfortable Steuerung von unterwegs \u00fcber verschiedene Wei\u00dfnuancen f\u00fcr den Alltag bis hin zu einem bunten Farbenspiel f\u00fcr ein intensives Entertainment-Erlebnis. Entdecken Sie hier die Funktionen, die auf drei S\u00e4ulen aufbauen: Komfort & Sicherheit, Wohlf\u00fchlen im Alltag und Entertainment.",
+        "contact_email": "Unternehmenskommunikation@philips.com",
+        "website": "http://www.philips.de/",
+        "owner": 17
+    }
+},
+{
+    "model": "app.providerprofile",
+    "pk": 17,
+    "fields": {
+        "public_name": "D-Link (Deutschland) GmbH",
+        "url_name": "d_link__deutschland__gmbh",
+        "logo_image": "provider/logo_f3M1Sze.jpg",
+        "profile_image": "provider/profile_NkFC74m.jpg",
+        "banner_image": "provider/banner.png",
+        "introduction": "Die D-Link Corporation (chinesisch \u53cb\u8a0a\u79d1\u6280, Pinyin Y\u01d2ux\u00f9n K\u0113j\u00ec \u201afreundliche Signaltechnik\u2018) ist ein Hersteller von Ger\u00e4ten der Netzwerktechnik.",
+        "contact_email": "info@dlink.de",
+        "website": "https://www.dlink.com/de/de/",
+        "owner": 16
+    }
+},
+{
+    "model": "app.providerprofile",
+    "pk": 18,
+    "fields": {
+        "public_name": "Danfoss GmbH",
+        "url_name": "danfoss_gmbh",
+        "logo_image": "provider/logo_cCm6Ij0.jpg",
+        "profile_image": "provider/profile_w7jBLyX.jpg",
+        "banner_image": "provider/banner_G2AqTP9.jpg",
+        "introduction": "Die Danfoss A/S ist ein Unternehmen im Bereich W\u00e4rme- und K\u00e4ltetechnik mit Sitz in Nordborg, auf der s\u00fcdd\u00e4nischen Insel Alsen in der Kommune S\u00f8nderborg. Nach eigenen Angaben betr\u00e4gt der Umsatz 2013 3,248 Mrd. Euro. Das Unternehmen unterh\u00e4lt 53 Produktionsst\u00e4tten in 21 L\u00e4ndern und besch\u00e4ftigt weltweit etwa 22.500 Mitarbeiter.\r\nDie Tierart Microcebus danfossi ist nach der Firma benannt, da der Konzern die Patenschaft f\u00fcr diese Tiere \u00fcbernommen hat. Neben dem Stammsitz wurde 2006 der Vergn\u00fcgungspark Danfoss Universe er\u00f6ffnet.",
+        "contact_email": "info@danfoss.de",
+        "website": "http://www.danfoss.de",
+        "owner": 25
+    }
+},
+{
+    "model": "app.providerprofile",
+    "pk": 19,
+    "fields": {
+        "public_name": "Aeotec by Aeon Labs",
+        "url_name": "aeotec_by_aeon_labs",
+        "logo_image": "provider/logo_Tprhle9.jpg",
+        "profile_image": "provider/profile_waEjEwM.jpg",
+        "banner_image": "provider/AEON0415.jpg",
+        "introduction": "A house becomes a home when you personalise it and make it your own. When you don't simply fill it with furniture but selectively place the things that mean something to you in each room. The furniture that appeals. The pictures that bring back memories. The things that make you happy. The things that make you comfortable.\r\n\r\nSeldom has technology done this, however. Sure, you can spend many an enjoyable hour in front of your home theatre, but most other technology doesn't make a house a home. It's just there and it's basic and it's the same as everyone else's. Home automation and control technology does away with that flaw, allowing you to create a home where the technology works for you. Whether it's for security or pleasure, whether it's installed for you or a retrofit installation you do yourself, it's automation for your safety, it's automation for your comfort.\r\n\r\nThis is the technology that inspires us at Aeotec. These are the home automation products that we make.",
+        "contact_email": "info@aeotec.com",
+        "website": "https://aeotec.com/",
+        "owner": 23
     }
 },
 {
     "model": "app.product",
+    "pk": 1,
     "fields": {
         "name": "test",
-        "provider": "Connected Living",
-        "product_type": "Basisger\u00e4t",
+        "provider": 1,
+        "product_type": 1,
         "serial_number": "NULL",
         "description": "NULL",
         "specifications": "---",
@@ -120,10 +302,11 @@
 },
 {
     "model": "app.product",
+    "pk": 2,
     "fields": {
         "name": "request",
-        "provider": "Connected Living",
-        "product_type": "Basisger\u00e4t",
+        "provider": 1,
+        "product_type": 1,
         "serial_number": "0-0-00-0",
         "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
         "specifications": "---",
@@ -135,10 +318,11 @@
 },
 {
     "model": "app.product",
+    "pk": 3,
     "fields": {
         "name": "Jung CO2-Sensor",
-        "provider": "Jung",
-        "product_type": "CO2-Sensor",
+        "provider": 5,
+        "product_type": 4,
         "serial_number": "CO2 LS 2178",
         "description": "Bestimmungsgem\u00e4\u00dfer Gebrauch\r\n\r\n    Messen von CO2-Konzentration, relativer Luftfeuchte und Lufttemperatur\r\n\r\n    Ausgabe der gemessenen Werte als Telegramm auf den Bus, z.B. zum Steuern von L\u00fcftern oder Fensterantrieben \u00fcber KNX-Telegramme\r\n\r\n    Einzelraum-Temperaturregelung in KNX-Installationen\r\n\r\n    Montage in Ger\u00e4tedose nach DIN 49073\r\n\r\n\r\nProdukteigenschaften\r\n\r\n    Grenzwert\u00fcberwachung f\u00fcr CO2-Konzentration (max. 4 Grenzwerte) und Luftfeuchte (max. 2 Grenzwerte)\r\n    Taupunktalarmierung z.B. f\u00fcr K\u00fchldecken und Winterg\u00e4rten, zur Vermeidung von Schimmelbildung\r\n    Zwei Bin\u00e4reing\u00e4nge zum Anschluss potentialfreier Kontakte, z.B. Taster, Schalter, Fensterkontakte\r\n    Logikgatter f\u00fcr einfache Verkn\u00fcpfungsfunktionen",
         "specifications": "---",
@@ -150,10 +334,11 @@
 },
 {
     "model": "app.product",
+    "pk": 4,
     "fields": {
         "name": "EUROtronic Comet",
-        "provider": "Eurotronic",
-        "product_type": "Thermostat",
+        "provider": 3,
+        "product_type": 5,
         "serial_number": "700 100 418, EAN: 42 600 1271 101 0",
         "description": "\u00c4u\u00dferst ger\u00e4uscharm, eine deutlich l\u00e4ngere Batterielebensdauer und die sehr kompakte Bauform zeichnen SPARmatic comet aus. Durch die optimierte Men\u00fcstruktur ist SPARmatic comet intuitiv bedienbar und l\u00e4sst sich mit dem neu entwickelten Klickverschluss noch schneller und einfacher montieren.",
         "specifications": "- bis zu 30% Heizkosten sparen!\r\n- Ventil schonend mit ET-Ventilschutz\r\n- sehr stabile Geh\u00e4usebauform \r\n- \u00e4u\u00dferst kompakter Energiespar-Regler\r\n- kleiner als ein handels\u00ad\u00fcblicher Thermostatkopf\r\n- Batterielebensdauer bis zu 5 Jahren*\r\n- \u00e4u\u00dferst ger\u00e4uscharmer Lauf\r\n- einfache Bedienung\r\n- einfache Montage durch Klickverschluss\r\n- Frostschutzfunktion\r\n- \"Fenster-offen\"-Erkennung\r\n- 8 Schaltpunkte pro Tag programmierbar\r\n- komfortable Programmierung mit PROGmatic Programmierstick m\u00f6glich\r\n- passt auf viele bekannte Heizk\u00f6rperventile (z.B. Heimeier, Honeywell MNG, Honeywell Braukmann, Danfoss, Oventrop ab ca. 1996 u.a.)",
@@ -165,10 +350,11 @@
 },
 {
     "model": "app.product",
+    "pk": 5,
     "fields": {
         "name": "Fibaro Wall Plug",
-        "provider": "Fibaro",
-        "product_type": "Smart Plug/Smart Socket",
+        "provider": 4,
+        "product_type": 6,
         "serial_number": "EFGWPF-102; FGWPF-101",
         "description": "Der FIBARO Wall Plug ist ein intelligenter ultimativer Plug & Play - ein extrem kompakter, h\u00f6chstentwickelter und ferngesteuerter Steckdosenstecker mit Energieverbrauchsmessfunktion.\r\nMit diesem \u00e4u\u00dferst funktionellen Wall Plug l\u00e4sst sich jedes beliebige elektrische Ger\u00e4t steuern und dessen Energieverbrauch bequem und wartungsfrei messen.",
         "specifications": "---",
@@ -180,25 +366,11 @@
 },
 {
     "model": "app.product",
-    "fields": {
-        "name": "Withings Wireless Blood Pressure Monitor",
-        "provider": "Withthings",
-        "product_type": "Blutdruck-Messger\u00e4t",
-        "serial_number": "------",
-        "description": "Legen Sie einfach die Manschette an und schalten Sie das Blood Pressure Monitor ein. Die Health Mate-App wird dann automatisch gestartet. Nach ein paar kurzen Anweisungen sind Sie bereit, Ihren Blutdruck zu messen.",
-        "specifications": "---",
-        "image1": "products/withings_bloodpressure_1.png",
-        "image2": "products/Withings_Wireless_Blood_Pressure_Monitor.jpg",
-        "image3": "products/Withings_Wireless_Blood_Pressure_Monitor_3.jpg",
-        "end_of_life": false
-    }
-},
-{
-    "model": "app.product",
+    "pk": 7,
     "fields": {
         "name": "Jung Bewegungsmelder",
-        "provider": "Jung",
-        "product_type": "Bewegungsmelder",
+        "provider": 5,
+        "product_type": 10,
         "serial_number": "3361 WW",
         "description": "Bestimmungsgem\u00e4\u00dfer Gebrauch\r\n\r\n    Bedarfsgerechtes Steuern von Beleuchtung, Raumthermostaten und anderen elektrischen Verbrauchern in Innenr\u00e4umen\r\n    Deckenmontage an festen Decken in Ger\u00e4tedose nach DIN 49073 oder Aufputzgeh\u00e4use Art.-Nr.: PM-KAPPE-1 bzw. PM-KAPPE AL-1\r\n\r\n\r\nProdukteigenschaften\r\n\r\n    Integrierte Busankopplung\r\n\r\n    3 PIR-Sensoren\r\n\r\n    Erfassungsfeld 360\u00b0 (3 x 120\u00b0)\r\n\r\n    Integrierter Helligkeitssensor\r\n\r\n    Einsatz als Pr\u00e4senzmelder, Bewegungsmelder, oder f\u00fcr Meldebetrieb\r\n\r\n    Ausgangsfunktionen: Schalten, Treppenhausfunktion, Schalten mit Zwangsstellung, Wertgeber, Lichtszenennebenstelle, Betriebsmodusvorgabe f\u00fcr Raumtemperaturregler\r\n\r\n    Erfassungsbereich erweiterbar durch Parallelschalten mehrerer Ger\u00e4te als Haupt- und Nebenstelle\r\n\r\n    Einsteller zur manuellen Korrektur der Empfindlichkeit\r\n\r\n    Status-LED: Blinkt bei Bewegungserfassung; je nach Programmierung im normalen Betrieb oder nur w\u00e4hrend des Gehtest-Betriebs",
         "specifications": "---",
@@ -210,10 +382,11 @@
 },
 {
     "model": "app.product",
+    "pk": 8,
     "fields": {
         "name": "Fibaro Smoke Sensor",
-        "provider": "Fibaro",
-        "product_type": "Rauchmelder",
+        "provider": 4,
+        "product_type": 11,
         "serial_number": "FGSS-101",
         "description": "Der Fiabro Rauchsensor ist mit qualitativ guten Komponenten bestens ausgestattet. Seine Perforation l\u00e4sst den Rauch in die Sensorkammer eindringen. Je besser dies erfolgen kann, desto kleinere Rauchmengen sind n\u00f6tig, um eine Gefahr zu entdecken und den Alarm auszul\u00f6sen.\r\nDas Sensorgitter besteht aus einem hochwertigen Material mit einer Vielzahl von L\u00f6chern. Jedes einzelne von ihnen wurde elektrochemisch so geformt, dass der eindringende Rauch direkt in die Sensorkammer geleitet wird. Aufgrund der schnellen Branderkennung bietet der FIBARO Rauchsensor ultimativen Schutz und maximale Schadensbegrenzung.",
         "specifications": "---",
@@ -225,16 +398,609 @@
 },
 {
     "model": "app.product",
+    "pk": 9,
     "fields": {
-        "name": "FRITZbox",
-        "provider": "AVM",
-        "product_type": "Router",
+        "name": "FRITZ!box",
+        "provider": 2,
+        "product_type": 12,
         "serial_number": "7490",
         "description": "Alles f\u00fcr das schnellste Heimnetz\r\nSpektakul\u00e4re kabellose Geschwindigkeit sowie bedeutend mehr Reichweite mit dem neuen und ultraschnellen WLAN AC. Erleben Sie das Topmodell f\u00fcr Internet, Telefonie und Multimedia.<hr/>",
         "specifications": "---",
         "image1": "products/fritzbox_1.png",
         "image2": "products/fritzbox_2.png",
         "image3": "products/fritzbox_3.png",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 10,
+    "fields": {
+        "name": "Thermokon SRW01 - Window & Door contact",
+        "provider": 7,
+        "product_type": 13,
+        "serial_number": "SRW01",
+        "description": "Batterieloser Funk-Fensterkontakt zur Zustands\u00fcberwachung von Fenstern und T\u00fcren. Sorgt f\u00fcr eine Verringerung des Energieverbrauchs durch bedarfsgerechte Heizung oder K\u00fchlung.",
+        "specifications": "Funktechnologie: EnOcean (IEC 14543-3-10)\r\nFrequenz: 868 MHz, optional:, 902 MHz, 315 MHz\r\nSpannungsversorgung: Solarzelle, interner Super Cap, wartungsfrei, BAT: Knopfzelle CR1220 (optional)\r\nGeh\u00e4use: ABS, reinwei\u00df\r\nSchutzart: IP40 gem\u00e4\u00df DIN EN 60529\r\nUmgebungsbedingung: -25..+65 \u00b0C, max. 85% rH nicht kondensierend\r\nMontage: flach auf Untergrund, kleben (mit beiliegender Folie) oder schrauben\r\nHinweise: Sonderlackierung auf Anfrage",
+        "image1": "products/Thermokon_SWR01_5.jpg",
+        "image2": "products/Thermokon_SWR01_5_2.png",
+        "image3": "products/Thermokon_SWR01_5_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 11,
+    "fields": {
+        "name": "Nodon STP-2-1-05 sensor",
+        "provider": 8,
+        "product_type": 5,
+        "serial_number": "3700313920183",
+        "description": "\"The NodOn\u00ae indoor temperature sensor is a wireless and battery-less sensor, EnOcean compliant.\r\nCombined with a Home Automation Gateway, the sensor sends the temperature of a room with a precision below 0.2\u00b0C, and a measure range from 0\u00b0C to 40\u00b0C.\r\nThe sensor checks the temperature every 100sec. If the temperature changed for more than 0.5\u00b0C compare to previous value, the new temperature is sent to the Gateway.\r\nWithout any variation, the temperature is sent every 15 minutes.\"",
+        "specifications": "Power source - Solar panel\r\nMeasurement range 0\u00b0C to 40\u00b0C (0.16\u00b0C resolution) - Indoor use\r\nWall mounting using adhesive bounding (included) or screws (not included)\r\nOptional CR1216 battery (not included) for dark are use (5years in total darkness)\r\nOperational temperature - 0\u00b0C to 40\u00b0C - Altitude - 2.000m\r\nRadio protocol - EnOcean 868.3MHz - EEP - A5-02-05\r\nRange: 30m indoor\r\nDimension : 80*26*18mm",
+        "image1": "products/nodon-stp-2-1-05-temperatursensor.jpg",
+        "image2": "products/nodon-stp-2-1-05-temperatursensor_2.jpg",
+        "image3": "products/nodon-stp-2-1-05-temperatursensor_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 12,
+    "fields": {
+        "name": "Thermokon SR04 Temperature Sensor",
+        "provider": 7,
+        "product_type": 5,
+        "serial_number": "SR04",
+        "description": "Aufputz-Raumf\u00fchler mit Funk zur Temperaturmessung in Wohn- und B\u00fcror\u00e4umen.",
+        "specifications": "Messgr\u00f6\u00dfen\tTemperatur\r\nFunktechnologie\tEnOcean (IEC 14543-3-10)\r\nFrequenz\t868 MHz, optional:, 902 MHz, 928 MHz, 315 MHz\r\nSpannungsversorgung\tSolarzelle, interner Super Cap, wartungsfrei, optional: St\u00fctzbatterie LS14250 (3,6 V)\r\nMessbereich Temperatur\t0..+40 \u00b0C\r\nGenauigkeit Temperatur\t\u00b10,4 K (typ. bei 21 \u00b0C)\r\nMessintervall\tWakeUp Zeit = 100 Sek. (standard)\r\nGeh\u00e4use\tASA, reinwei\u00df\r\nSchutzart\tIP30 gem\u00e4\u00df DIN EN 60529\r\nUmgebungsbedingung\t0..+40 \u00b0C, max. 85% rH nicht kondensierend\r\nGewicht\t50 g\r\nMontage\tflach auf Untergrund, kleben (mit beiliegender Folie) oder schrauben\r\nLieferumfang\tKlebefolie\r\nHinweise\tIntegrierte Batteriehalterung f\u00fcr dunkle R\u00e4ume, f\u00fcr Ger\u00e4te mit Bedienelementen siehe bitte Produkt SR04 x",
+        "image1": "products/tmk_web_slider1_easySens_SR07.png",
+        "image2": "products/tmk_web_02_slider_easySens_SR04.png",
+        "image3": "products/tmk_web_03_slider_easySens_SR04.png",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 13,
+    "fields": {
+        "name": "Permundo PSC 234 Smart Plug",
+        "provider": 9,
+        "product_type": 6,
+        "serial_number": "PSC234",
+        "description": "Der permundo Smart Plug PSC234 ist ein SCHUKO-Zwischenstecker mit 16A-Schaltfunktion und Energiemessung nach dem bidirektionalen Enocean-Standard (868.3Mhz, Dolphin). Es sind bis zu 32 Sensoren/Schalter einlernbar: Zwei- oder Eintastbedienung EIN/AUS Schalter (Umschalten), Tastbedienung Schalter (Impuls), T\u00fcrsensor, Bewegungsmelder. Repeater: 1-Level/2-Level kann aktiviert werden. Remote Management: Ja EEPs: A5-38-08, A5-12-01, D2-01-09 Messfunktion: momentane Wirkleistung [W] und kumulierten Energieverbrauch [Wh]. Der Energieverbrauchswert wird bei Stromausfall gespeichert.",
+        "specifications": "Plug and socket type IEC type F \u201cSchuko\u201d (PSC234)\r\n IEC type E \u201cNF\u201d (PSC236)\r\nMaximum load power 3680 W / 16 A (2500 W continuous)\r\nElectrical 230V, 50 Hz\r\nPower dissipation standby < 0.5 W\r\nSafety protections over-temperature, average-overload, child-safety\r\nSafety rating IP20\r\nMeasurement power [W], energy (cumulative and power-fail safe) [Wh]\r\nWireless communication EnOcean-Dolphin standard (ISO/IEC 14543-3-10), RF 868 MHz, 2-way, EEPs: D2 01 09, A5 38 08, A5 12 01\r\nRange extension Repeating level 1 and level 2 EnOcean telegrams\r\nFirmware update supported",
+        "image1": "products/PSC234_1.jpg",
+        "image2": "products/PSC234_2.jpg",
+        "image3": "products/PSC234_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 14,
+    "fields": {
+        "name": "Thermokon SR-MDS Solar",
+        "provider": 7,
+        "product_type": 10,
+        "serial_number": "SR-MDS",
+        "description": "Decken-Multisensor mit Funk zur Helligkeitsmessung und Bewegungserfassung. Die Kommunikation funktioniert kabellos \u00fcber EnOcean-Funktechnologie.",
+        "specifications": "Messgr\u00f6\u00dfen\tLicht, Bewegung\r\nFunktechnologie\tEnOcean (IEC 14543-3-10), STM\r\nFrequenz\t868 MHz\r\nSpannungsversorgung\tflex. 15..240 V =/~, BAT: 3x Batterie LS14250, 3,6 V\r\nLeistungsaufnahme\ttyp. 0,8 W (24 V =) | 1,2 VA (24 V ~)\r\nMessbereich Licht\t0..510 Lux\r\nMessintervall\tWakeUp Zeit = 100 Sek. (standard)\r\nErfassungsbereich\t\u00d8=5 m bei einer Einbauh\u00f6he von ca. 2,5 m\r\nGeh\u00e4use\tABS, reinwei\u00df\r\nSchutzart\tIP20 gem\u00e4\u00df DIN EN 60529\r\nUmgebungsbedingung\t-10..+50 \u00b0C, max. 85% rH nicht kondensierend\r\nHinweise\tZur Konstantlichtregelung geeignet",
+        "image1": "products/tmk_web_01_slider_easySens_SR_MDS_Solar.png",
+        "image2": "products/tmk_web_02_slider_easySens_SR_MOC.png",
+        "image3": "products/sr-mds-solar-2.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 15,
+    "fields": {
+        "name": "Thermokon SAB02 thermostat",
+        "provider": 7,
+        "product_type": 5,
+        "serial_number": "SAB02",
+        "description": "Der Funk-Stellantrieb SAB02 wird eingesetzt um eine komfortable\r\nEinzelraumregelung mittels Radiator- oder Fu\u00dfbodenheizung zu\r\nrealisieren.",
+        "specifications": "Batterielaufzeit: ca. 2 Jahre*\r\nTechnologie: EnOcean\r\nSende-/Empfangsfrequenz: 868,3 MHz\r\nReichweite: ca. 30m in Geb\u00e4ude, ca. 300m Freifeld\r\nGeh\u00e4use:\r\nSchutzart IP20\r\nVersorgungsspannung: 2xBatterie AA (im Lieferumfang enthalten)\r\nKunststoff, wei\u00df\r\nAbmessungen (BxHxT): 48x64x75 mm\r\nVentil-Anschluss: Standard: M30x1,5\r\nMitgelieferte Adapter f\u00fcr:\r\nDanfoss RA, RAV und RAVL\r\nMax. Hub: 4 mm\r\nStellkraft: abh\u00e4ngig vom Ventil, max. 100 N\r\nStellzeit: 3s/mm\r\ngem\u00e4\u00df EN60529\r\nUmgebungstemperatur: 0...50\u00b0C\r\nMedientemperatur: 0...100\u00b0C\r\nTransport: -10...75\u00b0C / max. 70%rF, nicht kond.\r\nGewicht: Ca. 250g",
+        "image1": "products/tmk_SAB02_1.jpg",
+        "image2": "products/tmk_SAB02_2.jpg",
+        "image3": "products/tmk_SAB02_3.png",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 16,
+    "fields": {
+        "name": "Jung Switch / blinds actuator, 16/8-gang",
+        "provider": 5,
+        "product_type": 16,
+        "serial_number": "2316.16 REGHE",
+        "description": "Eine ausf\u00fchrliche Beschreibung finden sie unter Technische Details",
+        "specifications": "Bestimmungsgem\u00e4\u00dfer Gebrauch\r\nSchalten elektrischer Verbraucher AC 110 ... 230 V mit potentialfreien Kontakten\r\nSchalten elektrisch betriebener Jalousien, Rolll\u00e4den, Markisen und \u00e4hnlicher Beh\u00e4nge\r\nMontage auf Hutschiene in Kleinverteiler\r\n\r\nProdukteigenschaften\r\nAusg\u00e4nge manuell bedienbar, Baustellenbetrieb\r\nR\u00fcckmeldung im Handbetrieb und im Busbetrieb\r\nSzenenfunktion\r\nSperren einzelner Ausg\u00e4nge per Hand oder Bus\r\n\r\nEigenschaften Schalterbetrieb\r\nSchlie\u00dfer- oder \u00d6ffnerbetrieb\r\nVerkn\u00fcpfungs- und Zwangsf\u00fchrungsfunktion\r\nR\u00fcckmeldefunktion\r\nZentrale Schaltfunktion mit Sammelr\u00fcckmeldung\r\nZeitfunktionen: Ein-, Ausschaltverz\u00f6gerung, Treppenlichtschalter mit Vorwarnfunktion\r\n\r\nEigenschaften Jalousiebetrieb\r\nEignung f\u00fcr AC-Motoren 110 ... 230 V\r\nBehangposition direkt ansteuerbar\r\nLamellenstellung direkt ansteuerbar\r\nR\u00fcckmeldung von Fahrzustand, Behangposition und Lamellenstellung\r\nZwangsstellung durch \u00fcbergeordnete Steuerung\r\nSicherheitsfunktion: 3 unabh\u00e4ngige Windalarme, Regenalarm, Frostalarm\r\nSonnenschutzfunktion",
+        "image1": "products/jung-2316_16_reghe_01.jpg",
+        "image2": "products/jung-2316_16_reghe_02.jpg",
+        "image3": "products/jung-2316_16_reghe_03.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 17,
+    "fields": {
+        "name": "Jung Switch actuator with C-load, 8-gang with current detection",
+        "provider": 5,
+        "product_type": 17,
+        "serial_number": "2308.16 REGCHM",
+        "description": "Die Beschreibung finden Sie unter den technischen Details",
+        "specifications": "Bestimmungsgem\u00e4\u00dfer Gebrauch\r\nSchalten elektrischer Verbraucher AC 110 ... 230 V oder AC/DC 24 V mit potentialfreien Kontakten\r\nMontage auf Hutschiene nach DIN EN 60715 in Unterverteiler\r\n\r\nProdukteigenschaften\r\nManuelle Bet\u00e4tigung der Relais unabh\u00e4ngig vom Bus\r\nSchlie\u00dfer- oder \u00d6ffnerbetrieb\r\nVerkn\u00fcpfungs- und Zwangsf\u00fchrungsfunktion\r\nR\u00fcckmeldung Schalten (nur Busbetrieb)\r\nSchaltstellungsanzeige\r\nZentrale Schaltfunktion mit Sammelr\u00fcckmeldung\r\nSperrfunktion f\u00fcr jeden Kanal\r\nZeitfunktionen: Ein- und Ausschaltverz\u00f6gerung, Treppenhauslichtschalter mit Vorwarnfunktion\r\nEinbindung in Lichtszenen\r\nBetriebsstundenz\u00e4hler, \u00fcber Bus konfigurierbar\r\nEingangs\u00fcberwachung auf zyklische Aktualisierung mit Sicherheitsschaltung\r\nKeine zus\u00e4tzliche Stromversorgung erforderlich\r\nStromerkennung: Messung des Laststroms f\u00fcr jeden Ausgang\r\n\u00dcberwachen von Schwellwerten zur Last\u00fcberwachung, z.B. f\u00fcr Meldung Lastausfall\r\nSchalten kapazitiver Lasten und dadurch bedingte hohe Einschaltstr\u00f6me",
+        "image1": "products/jung-2308_16_regchm-knx-ns0828035_01.jpg",
+        "image2": "products/jung-2308_16_regchm-knx-ns0828035_02.jpg",
+        "image3": "products/jung-2308_16_regchm-knx-ns0828035_06.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 18,
+    "fields": {
+        "name": "Gira Universal dimming actuator 4-gang",
+        "provider": 22,
+        "product_type": 18,
+        "serial_number": "2174 00",
+        "description": "Central switching function for control of all dimming channels.\r\nDelay for actively transmitted feedback messages following bus voltage recovery.\r\nLoad type and dimming method can be configured: universal (with automatic calibration), electronic transformer (capacitive / trailing edge principle), conventional transformer (inductive / leading edge principle), LED (trailing edge or leading edge principle).\r\nFeedback for \"\"switching\"\" and \"\"brightness value\"\".\r\nDimmable brightness range can be set.\r\nDimming behaviour and dimming characteristics can be parameterised.\r\nSwitch-on behaviour for a relative dimming command can be parameterised.\r\nBulb-saving switch-on and switch-off\r\nAlarm telegrams for short circuit, overload, and load failure.\r\nFeedback of connected load type.\r\nBlock function or forced setting function can be parameterised for each output.\r\nTime functions (switch-on/off delay, staircase light function).\r\nStaircase light function with advance warning function via time-controlled reduction of lighting or activation of permanent lighting.\r\nLinking function and up to eight scenes per dimming channel possible.\r\nElapsed-hours meter for recording switch-on time.\r\nReactions after bus voltage failure and recovery can be set.",
+        "specifications": "Dimming actuators with integrated bus coupler for switching and dimming of various light bulbs, HV halogen lamps, and LV halogen lamps with inductive transformers or Tronic transformers, dimmable HV LED or compact fluorescent lamps.\r\nAutomatic or manual selection of dimming principle according to load.\r\nIdle-state, short-circuit, and excess temperature-proof\r\nManual operation of the outputs independent of the bus (building site operation also possible).\r\nSeveral outputs can be wired in parallel to increase output power.\r\nParallel switching of several outputs to a load of 950 W possible. Do not connect HV LED or compact fluorescent lamps to dimming outputs connected in parallel.",
+        "image1": "products/Gira_217400_1.jpg",
+        "image2": "products/Gira_217400_2.jpg",
+        "image3": "",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 19,
+    "fields": {
+        "name": "Jung Heating actuator, 6-gang",
+        "provider": 5,
+        "product_type": 5,
+        "serial_number": "2336 REG HZ HE",
+        "description": "siehe technische Details",
+        "specifications": "Bestimmungsgem\u00e4\u00dfer Gebrauch\r\nSchalten elektrothermischer Stellantriebe f\u00fcr Heizungen oder K\u00fchldecken\r\nEinbau in Unterverteiler auf Hutschiene nach DIN EN 60715\r\n\r\nProdukteigenschaften\r\nSchaltbetrieb oder PWM-Betrieb\r\nStellantriebe mit Charakteristik stromlos ge\u00f6ffnet oder stromlos geschlossen ansteuerbar\r\nStellantriebe 230 V oder 24 V ansteuerbar\r\nAusg\u00e4nge manuell bedienbar, Baustellenbetrieb\r\nR\u00fcckmeldung im Handbetrieb und im Busbetrieb\r\nSperren einzelner Ausg\u00e4nge per Hand oder Bus\r\n\u00dcberlastsicher, kurzschlusssicher; Fehleranzeige mit LED\r\nSchutz gegen festsitzende Ventile\r\nZwangsstellung\r\nUnterschiedliche Sollwerte f\u00fcr Zwangsstellung oder Notbetrieb bei Busausfall f\u00fcr Sommer und Winter\r\nZyklische \u00dcberwachung der Eingangssignale parametrierbar\r\nR\u00fcckmeldung \u00fcber Bus z. B. bei Netzausfall, \u00dcberlast oder Sensorausfall",
+        "image1": "products/Jung-KNX-Heizungsaktor-2336-REG-HZ-HE.jpg",
+        "image2": "products/jung-2336_reg_hz_he-knx-ns6516434_02.jpg",
+        "image3": "products/jung-2336_reg_hz_he-knx-ns6516434_04.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 20,
+    "fields": {
+        "name": "BMS Weather controller Quadra",
+        "provider": 21,
+        "product_type": 19,
+        "serial_number": "------",
+        "description": "Die Wetterzentrale Quadra\u00ae ist gleichzeitig eine\r\nWetterstation und eine Sonnenschutzzentrale f\u00fcr\r\nacht Sektoren/Fassadenabschnitte.\r\nDie Wetterzentrale erfasst mit ihren Sensoren\r\n\u2022 Wind und Windrichtung\r\n\u2022 5 x Helligkeit (Nord, Ost, S\u00fcd, West, Sky)\r\n\u2022 5 x Globalstrahlung (Nord, Ost, S\u00fcd, West, Sky)\r\n\u2022 Temperatur\r\n\u2022 Niederschlag\r\ndas Wettergeschehen aufs Genauste.\r\nNeben ihren zahlreichen Sicherheits- und Komfortprogrammen\r\nbietet die Wetterzentrale zus\u00e4tzliche\r\nBesonderheiten wie Globalstrahlungserfassung,\r\nSonnenstandsnachf\u00fchrung, verschlei\u00dffreie Windrichtungsdiagnose,\r\nBeleuchtungsautomatik und die\r\nneuartige BMS-Fuzzylogik.\r\nUnd bei allem ist die Quadra\u00ae kinderleicht in Betrieb\r\nzu nehmen.",
+        "specifications": "Komfortprogramme\r\n4 x Beschattung\r\n1 x Temperatur\r\n1 x Hitze\r\n1 x Beleuchtung\r\n1 x D\u00e4mmerung\r\n2 x Zeit\r\n16 x Eingang\r\n\r\nWeitere Funktionen\r\n\u2022 Grenzwerte \u00fcber EIB/KNX \u00e4nderbar\r\n\u2022 Sonnenstandsnachf\u00fchrung\r\n\u2022 Serviceintervall-Meldung\r\n\u2022 St\u00f6rungsmeldungen der Sensoren\r\n\u2022 Positionierung je Programm m\u00f6glich\r\n\u2022 8 Sektoren/Fassadenabschnitte\r\n\r\nSicherheitspogramme\r\n2 x Wind\r\n2 x Niederschlag\r\n2 x Frost\r\n1 x Globalstrahlung",
+        "image1": "products/bms_quadra_1.jpg",
+        "image2": "products/bms_quadra_2.jpg",
+        "image3": "products/bms_quadra_3.png",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 21,
+    "fields": {
+        "name": "Vollintegrierter Geschirrsp\u00fcler",
+        "provider": 11,
+        "product_type": 20,
+        "serial_number": "G 6992 SCVi K2O",
+        "description": "Vollintegrierter Geschirrsp\u00fcler\r\n\u2212 der Miele Allesk\u00f6nner f\u00fcr griffloses K\u00fcchendesign.\r\nAutomatische T\u00fcr\u00f6ffnung bei 2maligem Klopfen \u2212 Knock2open\r\nEinfachste Kommunikation mit dem Ger\u00e4te - WiFi Conn@ct \r\nMotorische T\u00fcrschlie\u00dfung - AutoClose\r\nPerfekte Ausleuchtung f\u00fcr leichtes Beladen \u2212 BrilliantLight\r\nBeste Ergebnisse in weniger als einer Stunde - QuickPowerWash",
+        "specifications": "Bauform \r\nVollintegrierter Geschirrsp\u00fcler        \r\n\u2022\r\n60er Geschirrsp\u00fcler        \r\n\u2022\r\nDesign \r\nFarbe        \r\nEdelstahl\r\nBlendenausf\u00fchrung        \r\nVollintegrierte Blende\r\nBedienungsart        \r\nTouch on metal\r\nDisplay        \r\n2-zeiliges Vi-Display mit Klartext\r\nDisplayfarbe        \r\nWei\u00df\r\nKomfort \r\nKnock2open        \r\n\u2022\r\nT\u00fcrschlie\u00dfhilfe        \r\nAutoClose\r\nRestzeitanzeige        \r\n\u2022\r\nBrilliantLight        \r\n\u2022\r\nBetriebsger\u00e4usch dB(A) re 1 pW        \r\n41\r\nSalzgef\u00e4\u00df in der T\u00fcr        \r\n\u2022\r\nStartvorwahl bis zu 24 h        \r\n\u2022\r\nTimeControl        \r\n\u2022\r\nFunktionskontrolle        \r\noptisch und akustisch\r\nGeschirr erg\u00e4nzen m\u00f6glich        \r\n\u2022\r\nWahl der Displaysprache        \r\n\u2022\r\nEffizienz und Nachhaltigkeit \r\nEnergieeffizienzklasse        \r\nA+++\r\nsparsamer als der Grenzwert der Energieeffizienzklasse A+++        \r\n20%\r\nTrocknungsklasse        \r\nA\r\nWasserverbrauch im Programm ECO in l        \r\n9,9\r\nStromverbrauch im Programm ECO in kWh        \r\n0,67\r\nJahreswasserverbrauch im Programm ECO in l        \r\n2.772\r\nJahresstromverbrauch im Programm ECO in kWh        \r\n189\r\nWasserverbrauch im Programm Automatic in l ab        \r\n6,5\r\nVerbrauchswert Warmwasseranschluss im Programm ECO in kWh        \r\n0,49\r\nStromverbrauch im Stand-by Modus in W        \r\n0,30\r\nFlexiTimer mit EcoStart        \r\n\u2022\r\nEcoFeedback        \r\n\u2022\r\nWarmwasseranschluss        \r\n\u2022\r\nWechselsp\u00fcl-Technologie        \r\n\u2022\r\nHalbe Beladung        \r\n\u2022\r\nGeschirr- und Gl\u00e4serschonung \r\nFrischwassersp\u00fcler        \r\n\u2022\r\nAutoOpen-Trocknung        \r\n\u2022\r\nSensorDry        \r\n\u2022\r\nUmluft-Turbothermic-Trocknung        \r\n\u2022\r\nPerfect GlassCare        \r\n\u2022\r\nReinigerAgent        \r\n\u2022\r\nSp\u00fclprogramme \r\nECO        \r\n\u2022\r\nAutomatic        \r\n\u2022\r\nIntensiv 75\u00b0C        \r\n\u2022\r\nNormal 55\u00b0C        \r\n\u2022\r\nFein        \r\n\u2022\r\nQuickPowerWash        \r\n\u2022\r\nSolarSpar        \r\n\u2022\r\nHygiene        \r\n\u2022\r\nExtraLeise 38 dB(A)        \r\n\u2022\r\nPasta/Paella        \r\n\u2022\r\nOhne Oberkorb 65\u00b0C        \r\n\u2022\r\nBiergl\u00e4ser warm        \r\n\u2022\r\nMaschinenreinigung        \r\n\u2022\r\nSp\u00fcloptionen \r\nKurz        \r\n\u2022\r\nUnten intensiv        \r\n\u2022\r\nExtra sparsam        \r\n\u2022\r\nExtra trocken        \r\n\u2022\r\nEinweichen        \r\n\u2022\r\nVorsp\u00fclen        \r\n\u2022\r\nKorbgestaltung \r\nBesteckunterbringung        \r\n3D-Besteckschublade +\r\nFlexCare-Gl\u00e4serhalter        \r\n4\r\nKorbgestaltung        \r\nMaxiComfort\r\nAnzahl Ma\u00dfgedecke        \r\n14\r\nHausger\u00e4te-Vernetzung \r\nMiele@home        \r\nausger\u00fcstet\r\nWifiConn@ct        \r\n\u2022\r\nMiele@mobile App        \r\n\u2022\r\nSuperVision-Anzeige        \r\n\u2022\r\nMobileControl        \r\n\u2022\r\nSmartStart        \r\n\u2022\r\nTechnik und Qualit\u00e4t \r\nSensorik        \r\nAutoSensor\r\nEcoTech W\u00e4rmespeicher        \r\n\u2022\r\nElektronische Profi-Pumpe f\u00fcr variablen Spr\u00fchdruck        \r\n\u2022\r\nSicherheit \r\nWaterproof-System        \r\n\u2022\r\nSieb-Kontrollanzeige        \r\n\u2022\r\nTechnische Daten \r\nNischenbreite in mm        \r\n600\r\n-\r\n600\r\nNischenh\u00f6he in mm        \r\n805\r\n-\r\n870\r\nNischentiefe in mm        \r\n570\r\nGer\u00e4tebreite in mm        \r\n598\r\nGer\u00e4teh\u00f6he in mm        \r\n805\r\nGer\u00e4tetiefe in mm        \r\n570\r\nGer\u00e4tetiefe bei ge\u00f6ffneter T\u00fcr in cm        \r\n116,5\r\nNettogewicht in kg        \r\n47,0\r\nGesamtanschlusswert in kW        \r\n2,1\r\nSpannung in V        \r\n230\r\nAbsicherung in A        \r\n10\r\nElektrische Frequenz Standard        \r\n50\r\nPhasenanzahl        \r\n1\r\nL\u00e4nge Wasserzulaufschlauch in m        \r\n1,50\r\nL\u00e4nge Wasserablaufschlauch in m        \r\n1,50\r\nL\u00e4nge der elektrischen Zuleitung in m        \r\n1,70",
+        "image1": "products/Miele_G6992SCViK2O_1.jpg",
+        "image2": "products/miele_g_6992_scvi_k2o_2.jpg",
+        "image3": "products/miele_g_6992_scvi_k2o_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 22,
+    "fields": {
+        "name": "Finish&Eco T1 W\u00e4rmepumpentrockner",
+        "provider": 11,
+        "product_type": 21,
+        "serial_number": "TMM840 WP S",
+        "description": "T1 W\u00e4rmepumpentrockner\r\nmit SG-ready automatisch zum g\u00fcnstigsten Stromtarif trocknen.\r\nIntelligentes Energiemanagement mit SG-ready\r\nDuftende W\u00e4sche, so wie Sie es m\u00f6gen - FragranceDos\r\nDer schnelle B\u00fcgelersatz durch Dampfgl\u00e4tten - SteamFinish\r\nPunktgenaue Trocknung f\u00fcr alle Textilien - Perfect Dry\r\nSchonende W\u00e4schepflege dank Miele Schontrommel",
+        "specifications": "Produktdetails - TMM840 WP SFinish&Eco\r\n\r\nBauform \r\nS\u00e4ulenf\u00e4hig\t\r\n\u2022Side-by-Side\t\r\n\u2022Unterschiebbar\t\r\n\u2022T\u00fcranschlag\t\r\nlinks\r\n\r\nBauart \r\n\u2022W\u00e4rmepumpentrockner\r\n\r\nProduktmarke\t\r\n\u2022T1 White Edition\r\n\r\nDesign \r\nGer\u00e4tefarbe\t\r\nLotoswei\u00df\r\nT\u00fcrdesign\t\r\nWei\u00df mit Chromring\r\nParameter-Tasten\t\r\nChrom\r\nBlendenfarbe\t\r\nLotoswei\u00df\r\nOptions-Tasten\t\r\nLotoswei\u00df\r\nFarbe Drehwahlschalter\t\r\nLotoswei\u00df / Ring Chrom\r\nBlendenausf\u00fchrung\t\r\n5\u00b0 geneigt\r\nBedienungsart\t\r\nDrehwahlschalter\r\nDisplay\t\r\n1-zeilig\r\nTrockenergebnis \r\nFragranceDos\t\r\n\u2022Perfect Dry\t\r\n\u2022SteamFinish\t\r\n\u2022Intelligente Trommelreversierung\t\r\n\u2022W\u00e4scheschonung \r\nPatentierte Schontrommel\t\r\n\r\nBeladung in kg\t\r\n\u20228,0\r\nBedienkomfort \r\n\u2022Startvorwahl bis zu 24h\t\r\n\u2022Restzeitanzeige\t\r\n\u2022Programmablauf-Anzeige\t\r\n\u2022Trommelbeleuchtung\r\n\u2022LED\r\n\u2022Wahl der Displaysprache\t\r\n\u2022Kondensatbeh\u00e4lter\r\n\u2022Integrierte Kondenswasserableitung\t\r\n\r\nEffizienz und Nachhaltigkeit \r\n\r\nEnergieeffizienzklasse\t\r\n\u2022A+++\r\nJahresstromverbrauch in kWh\t\r\n\u2022169\r\nLaufzeit im Standardprogramm in min\t\r\n\u2022169\r\nGer\u00e4usch im Programm Baumwolle volle Beladung in db(A)re1pW\t\r\n\u202264\r\nKondensationseffizienzklasse\t\r\n\u2022A\r\nStromverbrauch im Standardprogramm Baumwolle Schranktrocken bei voller Beladung in kWh\t\r\n\u20221,39\r\n\u2022Wartungsfreier W\u00e4rmetauscher\t\r\n\u2022EcoFeedback-Funktion\r\n\u2022EcoDry-Technologie\t\r\n\u2022Enth\u00e4lt fluorierte Treibhausgase\t\r\n\u2022Hermetisch geschlossen\t\r\nK\u00e4ltemittelart\t\r\n\u2022R134a\r\nProfiEco Motor\t\r\n\r\nTrockenprogramme \r\n\u2022Automatic plus\t\r\n\u2022Baumwolle\t\r\n\u2022Pflegeleicht\t\r\n\u2022Feinw\u00e4sche\t\r\n\u2022Oberhemden\t\r\n\u2022Finish Seide\t\r\n\u2022Finish Wolle\t\r\n\u2022Dampfgl\u00e4tten\t\r\n\u2022Express\t\r\n\u2022Jeans\t\r\n\u2022Outdoor\t\r\n\u2022Impr\u00e4gnieren\t\r\n\u2022Sportw\u00e4sche\t\r\n\u2022L\u00fcften kalt\t\r\n\u2022L\u00fcften warm\t\r\n\u2022Korbprogramm\t\r\n\u2022Schongl\u00e4tten\t\r\n\u2022Trockenoptionen \r\nKnitterschutz\t\r\n\u2022Schonen plus\t\r\n\u2022Auffrischen\t\r\n\u2022Summer\t\r\n\u2022Mengenautomatik\t\r\n\u2022Hausger\u00e4te-Vernetzung \r\n\r\nVorger\u00fcstet f\u00fcr Miele@home\t\r\n\u2022SmartStart\t\r\n\u2022Qualit\u00e4t \r\nEmaillierte Front\t\r\n\u2022Softrippen\t\r\n\r\nSicherheit \r\n\u2022PIN-Code Verriegelung\t\r\n\u2022Anzeige \"\"Beh\u00e4lter entleeren\"\"\t\r\n\u2022Anzeige \"\"Filter reinigen\"\"\t\r\n\u2022Optische Schnittstelle\t\r\n\r\nTechnische Daten \r\nAbmessungen in mm (Breite)\t\r\n596\r\nAbmessungen in mm (H\u00f6he)\t\r\n850\r\nAbmessungen in mm (Tiefe)\t\r\n643\r\nGer\u00e4tetiefe bei ge\u00f6ffneter T\u00fcr in mm\t\r\n1.077\r\nGewicht in kg\t\r\n64\r\nGesamtanschlusswert in kW\t\r\n1,10\r\nSpannung in V\t\r\n220-240\r\nFrequenz in HZ\t\r\n50\r\nAbsicherung in A\t\r\n10\r\nL\u00e4nge der elektrischen Zuleitung in mm\t\r\n2.000\r\nMitgeliefertes Zubeh\u00f6r \r\nDuftflakon",
+        "image1": "products/miele_TMM840WPS_1.jpg",
+        "image2": "products/miele_TMM840WPS_2.png",
+        "image3": "products/miele_TMM840WPS_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 23,
+    "fields": {
+        "name": "Wash 2.0 & TDos XLW1 Waschmaschine Frontlader",
+        "provider": 11,
+        "product_type": 22,
+        "serial_number": "WMR861 WPS P",
+        "description": "W1 Waschmaschine Frontlader\r\nmit Miele@home und SteamCare f\u00fcr maximalen Komfort.\r\nF\u00fcr die gro\u00dfe W\u00e4sche - 9,0 kg Beladung\r\nSchneller sauber geht es nicht - QuickPowerWash\r\nBestes Fl\u00fcssigwaschmittel auf Knopfdruck - TwinDos\r\nDie perfekte Erg\u00e4nzung f\u00fcr spezielle Anwendungen - CapDosing\r\n50% weniger B\u00fcgeln plus maximale Anwendungsvielfalt - SteamCare\r\nBeste W\u00e4scheschonung - Thermo-Schontrommel",
+        "specifications": "Produktdetails - WMR861 WPS PWash 2.0 & TDos XL\r\n\r\nBauform \r\nS\u00e4ulenf\u00e4hig\t\r\n\u2022\r\nSide-by-Side\t\r\n\u2022\r\nUnterschiebbar\t\r\n\u2022\r\nT\u00fcranschlag\t\r\nrechts\r\nBauart \r\nProduktmarke\t\r\nW1 White Edition\r\nFrontlader\t\r\n\u2022\r\nSchleudern \r\nMax. Schleuderdrehzahl\t\r\n1.600\r\nSp\u00fclstop\t\r\n\u2022\r\nFunktion \"\"ohne Schleudern\"\"\t\r\n\u2022\r\nDesign \r\nGer\u00e4tefarbe\t\r\nLotoswei\u00df\r\nT\u00fcrdesign\t\r\nWei\u00df mit Chromring\r\nParameter-Tasten\t\r\nChrom\r\nBlendenfarbe\t\r\nLotoswei\u00df\r\nOptions-Tasten\t\r\nChrom\r\nFarbe Drehwahlschalter\t\r\nLotoswei\u00df / Ring Chrom\r\nBlendenausf\u00fchrung\t\r\n5\u00b0 geneigt\r\nBedienungsart\t\r\nDrehwahlschalter\r\nDisplay\t\r\n4-zeilig TFT\r\nReinigungsleistung \r\nPowerWash 2.0\t\r\n\u2022\r\nTwinDos\t\r\n\u2022\r\nCapDosing\t\r\n\u2022\r\nFleckenoption\t\r\n\u2022\r\nW\u00e4scheschonung \r\nThermo-Schontrommel\t\r\n\u2022\r\nBeladung in kg\t\r\n9,0\r\nBedienkomfort \r\nSteamCare\t\r\n\u2022\r\nStartvorwahl bis zu 24h\t\r\n\u2022\r\nRestzeitanzeige\t\r\n\u2022\r\nTageszeitanzeige\t\r\n\u2022\r\nProgrammablauf-Anzeige\t\r\n\u2022\r\nFavoriten-Programme\t\r\n\u2022\r\nTrommelbeleuchtung\t\r\nLED\r\nWahl der Displaysprache\t\r\n\u2022\r\nAutoClean Einsp\u00fclkasten\t\r\n\u2022\r\nEffizienz und Nachhaltigkeit \r\nEnergieeffizienzklasse\t\r\nA+++\r\nsparsamer als der Grenzwert der Energieeffizienzklasse A+++\t\r\n40%\r\nJahreswasserverbrauch in l\t\r\n11.000\r\nJahresstromverbrauch in kWh\t\r\n130,00\r\nSchleuderwirkungsklasse\t\r\nA\r\nGer\u00e4usch beim Waschen in db(A) re1pW\t\r\n46\r\nGer\u00e4usch beim Schleudern in db(A) re1pW\t\r\n72\r\nWasserverbrauch im Standardprogramm Baumwolle 60\u00b0 bei voller Beladung in l\t\r\n54\r\nStromverbrauch im Standardprogramm Baumwolle 60\u00b0 bei voller Beladung in kWh\t\r\n0,80\r\nEcoFeedback-Funktion\t\r\n\u2022\r\nMengenautomatik\t\r\n\u2022\r\nNiedrigtemperaturwaschen \"\"kalt\"\" und \"\"20\u00b0C\"\"\t\r\n\u2022\r\nWassermengenz\u00e4hler\t\r\n\u2022\r\nSchaumregulierung\t\r\n\u2022\r\nProfiEco Motor\t\r\n\u2022\r\nWaschprogramme \r\nQuickPowerWash\t\r\n\u2022\r\nAutomatic plus\t\r\n\u2022\r\nBaumwolle\t\r\n\u2022\r\nFeinw\u00e4sche\t\r\n\u2022\r\nPflegeleicht\t\r\n\u2022\r\nOberhemden\t\r\n\u2022\r\nSeide (Handw\u00e4sche)\t\r\n\u2022\r\nWolle (Handw\u00e4sche)\t\r\n\u2022\r\nEinzelteilemix\t\r\n\u2022\r\nFavoriten\t\r\n\u2022\r\nExpress 20\t\r\n\u2022\r\nDunkle W\u00e4sche\t\r\n\u2022\r\nJeans\t\r\n\u2022\r\nOutdoor\t\r\n\u2022\r\nImpr\u00e4gnieren\t\r\n\u2022\r\nSportw\u00e4sche\t\r\n\u2022\r\nFederbetten\t\r\n\u2022\r\nDaunen\t\r\n\u2022\r\nGardinen\t\r\n\u2022\r\nAuffrischen (Dampf)\t\r\n\u2022\r\nFinish Dampf\t\r\n\u2022\r\nMaschine reinigen\t\r\n\u2022\r\nNeue Textilien\t\r\n\u2022\r\nNur Sp\u00fclen\t\r\n\u2022\r\nSt\u00e4rken\t\r\n\u2022\r\nPumpen/Schleudern\t\r\n\u2022\r\nWaschoptionen \r\nProgrammManager\t\r\n\u2022\r\nKurz\t\r\n\u2022\r\nEinweichen\t\r\n\u2022\r\nVorw\u00e4sche\t\r\n\u2022\r\nWasser plus\t\r\n\u2022\r\nZus\u00e4tzlicher Sp\u00fclgang\t\r\n\u2022\r\nDampfgl\u00e4tten\t\r\n\u2022\r\nSummer\t\r\n\u2022\r\nHausger\u00e4te-Vernetzung \r\nVorger\u00fcstet f\u00fcr Miele@home\t\r\n\u2022\r\nSmartStart\t\r\n\u2022\r\nQualit\u00e4t \r\nLaugenbeh\u00e4lter\t\r\nEdelstahl\r\nEmaillierte Front\t\r\n\u2022\r\nKontergewichte aus Grauguss\t\r\n\u2022\r\nSicherheit \r\nWaterproof-System\t\r\n\u2022\r\nKindersicherung\t\r\n\u2022\r\nPIN-Code Verriegelung\t\r\n\u2022\r\nOptische Schnittstelle\t\r\n\u2022\r\nTechnische Daten \r\nAbmessungen in mm (Breite)\t\r\n596\r\nAbmessungen in mm (H\u00f6he)\t\r\n850\r\nAbmessungen in mm (Tiefe)\t\r\n643\r\nGer\u00e4tetiefe bei ge\u00f6ffneter T\u00fcr in mm\t\r\n1.077\r\nGewicht in kg\t\r\n96\r\nGesamtanschlusswert in kW\t\r\n2,10-2,40\r\nSpannung in V\t\r\n220-240\r\nFrequenz in HZ\t\r\n50\r\nAbsicherung in A\t\r\n10\r\nL\u00e4nge der elektrischen Zuleitung in mm\t\r\n2.000\r\nMitgeliefertes Zubeh\u00f6r \r\n3 Caps\t\r\n\u2022\r\nUltraPhase 1\t\r\n\u2022\r\nUltraPhase 2\t\r\n\u2022",
+        "image1": "products/miele_WMR861WPSP_1.jpg",
+        "image2": "products/miele_WMR861WPSP_2.png",
+        "image3": "products/miele_WMR861WPSP_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 24,
+    "fields": {
+        "name": "Backofen",
+        "provider": 11,
+        "product_type": 23,
+        "serial_number": "H 6660 BP",
+        "description": "Backofen\r\nmit AirClean-Katalysator und Speisenthermometer zum gradgenauen Garen.\r\nTFT-Klartext-Display mit Touch-Bedienung - SensorTronic\r\nPerfektionierung der Back- und Bratergebnisse - Klimagaren\r\nGradgenaues Braten - Speisenthermometer\r\nGanz einfach zum perfekten Ergebnis - Automatikprogramme\r\nGeringster Reinigungsaufwand - Pyrolyse-Ausstattung",
+        "specifications": "Produktdetails - H 6660 BP\r\n\r\nBauform \r\nEinbau-Backofen\t\r\n\u2022\r\nDesign \r\nPureLine\t\r\n\u2022\r\nFarbe\t\r\nBrillantwei\u00df\r\nDisplay\t\r\nSensorTronic\r\nGenussvorteile \r\nGenaue Temperaturregelung\t\r\n30 - 300\u00b0C\r\nSpeisenthermometer\t\r\n\u2022\r\nCrisp function\t\r\n\u2022\r\nBetriebsarten \r\nBratautomatic\t\r\n\u2022\r\nAuftauen\t\r\n\u2022\r\nAutomatikprogramme\t\r\n\u00fcber 100\r\nBr\u00e4unungsgaren\t\r\n\u2022\r\nGrill\t\r\n\u2022\r\nGrill klein\t\r\n\u2022\r\nHei\u00dfluft plus\t\r\n\u2022\r\nIntensivbacken\t\r\n\u2022\r\nNiedertemperaturgaren\t\r\n\u2022\r\nKlimagaren\t\r\n\u2022\r\nOber-/Unterhitze\t\r\n\u2022\r\nOberhitze\t\r\n\u2022\r\nUnterhitze\t\r\n\u2022\r\nUmluftgrill\t\r\n\u2022\r\nSpezialanwendungen\t\r\n\u2022\r\nBedienkomfort \r\nIndividuelle Sprachauswahl\t\r\n\u2022\r\nZeitlich programmierbarer Dampfsto\u00df\t\r\n\u2022\r\nTageszeitanzeige\t\r\n\u2022\r\nAnzeige Datum\t\r\n\u2022\r\nKurzzeitwecker\t\r\n\u2022\r\nUhrzeitspeicher in h\t\r\n200\r\nStart-Stopp-Programmierung\t\r\n\u2022\r\nAbschaltautomatik\t\r\n\u2022\r\nProgrammierung Garzeitdauer\t\r\n\u2022\r\nWerteeingabe \u00fcber Zehner-Block\t\r\n\u2022\r\nIst-Temperaturanzeige\t\r\n\u2022\r\nVorschlagstemperatur\t\r\n\u2022\r\nSignalton bei Erreichen der Solltemperatur\t\r\n\u2022\r\nEigene Programme\t\r\n20\r\nSabbat Programm\t\r\n\u2022\r\nIndividuelle Einstellungen\t\r\n\u2022\r\nGer\u00e4tet\u00fcr \r\nCleanGlass T\u00fcr\t\r\n\u2022\r\nGarraum \r\nGarraumvolumen in l\t\r\n76\r\nAnzahl der Einschubebenen\t\r\n5\r\nKennzeichnung der Einschubebenen\t\r\n\u2022\r\nAnzahl Halogen-Beleuchtung\t\r\nzweifach\r\nPflegekomfort \r\nPyrolytische Selbstreinigung\t\r\n\u2022\r\nKatalysator beheizt\t\r\n\u2022\r\nGrillheizk\u00f6rper abklappbar\t\r\n\u2022\r\nEffizienz und Nachhaltigkeit \r\nEnergieeffizienzklasse\t\r\nA+\r\nEnergiesparschaltung Beleuchtung\t\r\n\u2022\r\nSchnellaufheizen\t\r\n\u2022\r\nRestw\u00e4rmenutzung\t\r\n\u2022\r\nHausger\u00e4te-Vernetzung \r\nMiele@home\t\r\nVorbereitet\r\nSuperVision-Anzeige\t\r\n\u2022\r\nSicherheit \r\nGer\u00e4tek\u00fchlsystem mit k\u00fchler Front\t\r\n\u2022\r\nSicherheitsausschaltung\t\r\n\u2022\r\nInbetriebnahmesperre\t\r\n\u2022\r\nT\u00fcrkontaktschalter\t\r\n\u2022\r\nT\u00fcrverriegelung im Pyrolysebetrieb\t\r\n\u2022\r\nTechnische Daten \r\nNischenbreite in mm\t\r\n560\r\n-\r\n568\r\nNischenh\u00f6he in mm\t\r\n593\r\n-\r\n595\r\nNischentiefe in mm\t\r\n550\r\nGewicht in kg\t\r\n47,0\r\nGesamtanschlusswert in kW\t\r\n3,7\r\nFrequenz in Hz\t\r\n50\r\nSpannung in V\t\r\n230\r\nAbsicherung in A\t\r\n16\r\nPhasenanzahl\t\r\n1\r\nMitgeliefertes Zubeh\u00f6r \r\nBackblech mit PerfectClean\t\r\n1\r\nUniversalblech mit PerfectClean\t\r\n1\r\nBack- und Bratrost PyroFit\t\r\n1\r\nFlexiClip-Vollausz\u00fcge PyroFit\t\r\n1 Paar\r\nAufnahmegitter PyroFit\t\r\n1 Paar\r\nAnforderungskarte f\u00fcr Kochbuch\t\r\n\u2022\r\nNetzstecker\t\r\n\u2022\r\nEntkalkungstabletten\t\r\n\u2022",
+        "image1": "products/Miele_ofen_1.jpg",
+        "image2": "products/miele_ofen_2.jpg",
+        "image3": "products/Miele_ofen_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 25,
+    "fields": {
+        "name": "Herdunabh\u00e4ngiges Induktionskochfeld",
+        "provider": 11,
+        "product_type": 24,
+        "serial_number": "KM 6879",
+        "description": "Herdunabh\u00e4ngiges Induktionskochfeld\r\nmit TempControl f\u00fcr intelligentes & einfaches Braten\r\n Intuitive Schnellanwahl durch Zahlenreihen - Smart Select White\r\nModernes Design - 928 mm breit f\u00fcr den fl\u00e4chenb\u00fcndigen Einbau\r\nIntelligent und flexibel - 5 Kochzonen inkl. TempControl-Kochzone\r\nKommunikation mit der Haube - Automatikfunktion Con@ctivity 2.0\r\nGro\u00dfes Leistungsspektrum - Warmhalten Plus und TwinBooster",
+        "specifications": "Produktdetails - KM 6879\r\n\r\nBeheizungsart \r\nBeheizungsart\t\r\nElektro mit Induktion\r\nBauform \r\nUnabh\u00e4ngig vom Herd\t\r\n\u2022\r\nDesign \r\nElegante Glaskeramikoberfl\u00e4che\t\r\n\u2022\r\nFarbe der Glaskeramik\t\r\nGraphitschwarz\r\nBedruckungsdesign\t\r\nLightPrint\r\nFl\u00e4chenb\u00fcndiger Einbau\t\r\n\u2022\r\nKochzonenausstattung \r\nAnzahl der Kochzonen\t\r\n5\r\nPowerFlex-Kochzonen \r\nAnzahl\t\r\n2\r\nDurchmesser in mm\t\r\n150x230\r\nLeistung in W\t\r\n2100\r\nBooster in W\t\r\n3000\r\nTwinBooster in W\t\r\n3650\r\nKochzone \r\nPosition\t\r\nvorne links\r\nArt\t\r\nVario-Kochzone\r\nDurchmesser in mm\t\r\n\u00d8 100-160\r\nLeistung in W\t\r\n1400\r\nBooster in W\t\r\n1750\r\nTwinBooster in W\t\r\n2200\r\nKochzone \r\nPosition\t\r\nhinten links\r\nArt\t\r\nVario-Kochzone\r\nDurchmesser in mm\t\r\n\u00d8 160-230\r\nLeistung in W\t\r\n2300\r\nBooster in W\t\r\n3000\r\nTwinBooster in W\t\r\n3700\r\nKochzone \r\nPosition\t\r\nhinten mittig\r\nArt\t\r\nVario-Kochzone\r\nDurchmesser in mm\t\r\n\u00d8 180-280\r\nLeistung in W\t\r\n2600\r\nBooster in W\t\r\n3000\r\nTwinBooster in W\t\r\n3700\r\nKochzone \r\nPosition\t\r\nrechts\r\nArt\t\r\nPowerFlex-Br\u00fccke\r\nDurchmesser in mm\t\r\n230x390\r\nLeistung in W\t\r\n3400\r\nBooster in W\t\r\n4800\r\nTwinBooster in W\t\r\n7300\r\nBedienkomfort \r\nBedienung \u00fcber Sensortasten\t\r\nSmart Select White\r\nTempControl\t\r\n\u2022\r\nPermanente Topferkennung\t\r\n\u2022\r\nTopf- und Topfgr\u00f6\u00dfenerkennung\t\r\n\u2022\r\nStop&Go-Funktion\t\r\n\u2022\r\nKurzzeitwecker\t\r\n\u2022\r\nAbschaltautomatik\t\r\n\u2022\r\nAnkochautomatik\t\r\n\u2022\r\nWarmhalten Plus\t\r\n\u2022\r\nWarmhalten\t\r\n\u2022\r\nIndividuelle Einstellm\u00f6glichkeiten (z.B. Signalt\u00f6ne)\t\r\n\u2022\r\nAnzeigen \r\nDigitale Anzeige der Leistungsstufen\t\r\n\u2022\r\nEffizienz und Nachhaltigkeit \r\nRestw\u00e4rmenutzung\t\r\n\u2022\r\nHausger\u00e4te-Vernetzung \r\nMiele@home\t\r\nausger\u00fcstet\r\nAutomatikfunktion Con@ctivity 2.0\t\r\nausger\u00fcstet\r\nPflegekomfort \r\nLeicht zu reinigende Glaskeramik\t\r\n\u2022\r\nWischschutz\t\r\n\u2022\r\nSicherheit \r\nSicherheitsausschaltung\t\r\n\u2022\r\nVerriegelungsfunktion\t\r\n\u2022\r\nInbetriebnahmesperre\t\r\n\u2022\r\nFehler\u00fcberwachung\t\r\n\u2022\r\n\u00dcberhitzungsschutz\t\r\n\u2022\r\nRestw\u00e4rmeanzeige\t\r\n\u2022\r\nTechnische Daten \r\nAbmessungen in mm (Breite)\t\r\n928\r\nAbmessungen in mm (Tiefe)\t\r\n512\r\nEinbauh\u00f6he mit Anschlusskasten in mm\t\r\n52\r\nAusschnittma\u00dfe in mm (Breite)\t\r\n932\r\nAusschnittma\u00dfe in mm (Tiefe)\t\r\n516\r\nGesamtanschlusswert in kW\t\r\n11,0\r\nGewicht in kg\t\r\n16\r\nSpannung in V\t\r\n230\r\nAbsicherung in A\t\r\n16\r\nFrequenz in Hz\t\r\n50-60\r\nPhasenanzahl\t\r\n3\r\nL\u00e4nge der elektrischen Zuleitung in m\t\r\n1,4\r\nMitgeliefertes Zubeh\u00f6r \r\nAnschlusskabel\t\r\n\u2022",
+        "image1": "products/miele_kochfeld_1.jpg",
+        "image2": "products/miele_kochfeld_2.jpg",
+        "image3": "products/Miele_kochfeld_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 26,
+    "fields": {
+        "name": "Puristic Edition 6000 Wand-Dunstabzugshaube",
+        "provider": 11,
+        "product_type": 25,
+        "serial_number": "DA 6690 W",
+        "description": "Wand-Dunstabzugshaube\r\nmit energiesparender LED-Beleuchtung und Touchbedienung f\u00fcr einfache Bedienung.\r\nFamiliendesign - abgestimmt auf Einbauger\u00e4tegeneration 6000\r\nEinzigartiger Bedienkomfort - Con@ctivity 2.0\r\nLeistungsstark - 640 m3/h in der Boosterstufe\r\nEnergiesparend und leise - leistungsstarker ECO-Motor\r\nAngenehm leise - Miele Akustikpaket",
+        "specifications": "Produktdetails - DA 6690 W Puristic Edition 6000\r\n\r\nBauform \r\nWand-Dunstabzugshaube\t\r\n\u2022\r\nDesign \r\nFarbe\t\r\nEdelstahl\r\nRAL-Farbe als Sonderanfertigung m\u00f6glich\t\r\n\u2022\r\nIndividuelle Anpassungen auf Kundenwunsch m\u00f6glich\t\r\n\u2022\r\nVariable H\u00f6he als Sonderanfertigung m\u00f6glich\t\r\n\u2022\r\nVariable Breite als Sonderanfertigung m\u00f6glich\t\r\n\u2022\r\nBetriebsarten \r\nArt der Luftf\u00fchrung\t\r\nUmr\u00fcstbar\r\nBedienkomfort \r\nElektronische Steuerung\t\r\n\u2022\r\nTouchbedienung auf Glas\t\r\n\u2022\r\nLeistungsstufen (Anzahl ohne Boosterstufe)\t\r\n3\r\nBoosterstufe\t\r\n\u2022\r\nBoosterstufenabschaltung programmierbar\t\r\n\u2022\r\nNachlaufzeit 5 o. 15 Min.\t\r\n\u2022\r\nFettfilter-S\u00e4ttigung programmierbar\t\r\n\u2022\r\nSilence-Paket\t\r\n\u2022\r\nAktivkohlefilter-S\u00e4ttigung programmierbar\t\r\n\u2022\r\nPflegekomfort \r\nReinigungsfreundlicher Haubeninnenraum CleanCover\t\r\n\u2022\r\nEffizienz und Nachhaltigkeit \r\nJ\u00e4hrlicher Energieverbrauch in kWh/Jahr\t\r\n30,8\r\nEnergieeffizienzklasse\t\r\nA+\r\nKlasse f\u00fcr fluiddynamische Effizienz\t\r\nA\r\nBeleuchtungseffizienzklasse\t\r\nA\r\nKlasse f\u00fcr den Fettabscheidegrad\t\r\nA\r\nPowerManagement System\t\r\n\u2022\r\nECO-Paket\t\r\n\u2022\r\nHausger\u00e4te-Vernetzung \r\nAutomatikfunktion Con@ctivity 2.0\t\r\n\u2022\r\nMiele@home\t\r\nausger\u00fcstet\r\nFiltersystem \r\nAnzahl sp\u00fclmaschinengeeign. EDST-Metallfettfilter (10-lagig)\t\r\n3\r\nBeleuchtung \r\nLED\t\r\n\u2022\r\nAnzahl x Watt\t\r\n3 x 3 W\r\nBeleuchtungsst\u00e4rke in Lx\t\r\n520\r\nFarbtemperatur in K\t\r\n3.500\r\nGebl\u00e4se \r\nDoppelseitig saugendes Gebl\u00e4se\t\r\n\u2022\r\nECO-Motor (Gleichstrommotor)\t\r\n\u2022\r\nLuftleistung bei max. Abluftquerschnitt f\u00fcr Abluftbetrieb (nicht bei externer Variante) \r\nLuftleistung Stufe 1 (m\u00b3/h) nach EN 61591\t\r\n200\r\nLuftleistung Stufe 2 (m\u00b3/h) nach EN 61591\t\r\n300\r\nLuftleistung Stufe 3 (m\u00b3/h) nach EN 61591\t\r\n400\r\nLuftleistung Boosterstufe (m\u00b3/h) nach EN 61591\t\r\n640\r\nSchallleistung Stufe 1 (dB(A) re1pW) nach EN 60704-3\t\r\n38\r\nSchallleistung Stufe 2 (dB(A) re1pW) nach EN 60704-3\t\r\n44\r\nSchallleistung Stufe 3 (dB(A) re1pW) nach EN 60704-3\t\r\n51\r\nSchallleistung Boosterstufe (dB(A) re1pW) n. EN 60704-3\t\r\n63\r\nSchalldruck Stufe 1 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n23\r\nSchalldruck Stufe 2 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n29\r\nSchalldruck Stufe 3 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n36\r\nSchalldruck Boosterstufe (dB(A) re20\u00b5Pa) n. EN 60704-2-13\t\r\n48\r\nLuftleistung f\u00fcr Umluftbetrieb \r\nLuftleistung Stufe 1 (m\u00b3/h) nach EN 61591\t\r\n120\r\nLuftleistung Stufe 2 (m\u00b3/h) nach EN 61591\t\r\n210\r\nLuftleistung Stufe 3 (m\u00b3/h) nach EN 61591\t\r\n330\r\nLuftleistung Boosterstufe (m\u00b3/h) nach EN 61591\t\r\n490\r\nSchallleistung Stufe 1 (dB(A) re1pW) nach EN 60704-3\t\r\n49\r\nSchallleistung Stufe 2 (dB(A) re1pW) nach EN 60704-3\t\r\n54\r\nSchallleistung Stufe 3 (dB(A) re1pW) nach EN 60704-3\t\r\n61\r\nSchallleistung Boosterstufe (dB(A) re1pW) n. EN 60704-3\t\r\n71\r\nSchalldruck Stufe 1 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n34\r\nSchalldruck Stufe 2 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n40\r\nSchalldruck Stufe 3 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n46\r\nSchalldruck Boosterstufe (dB(A) re20\u00b5Pa) n. EN 60704-2-13\t\r\n56\r\nSicherheit \r\nSicherheitsausschaltung\t\r\n\u2022\r\nEinscheibensicherheitsglas (ESG)\t\r\n\u2022\r\nTechnische Daten \r\nGesamthaubenh\u00f6he Abluft und Extern in mm\t\r\n710\r\n-\r\n1.030\r\nGesamthaubenh\u00f6he Umluft in mm\t\r\n840\r\n-\r\n1.160\r\nBreite des Haubenk\u00f6rpers in mm\t\r\n898\r\nH\u00f6he des Haubenk\u00f6rpers in mm\t\r\n85\r\nTiefe des Haubenk\u00f6rpers in mm\t\r\n500\r\nMindestabstand \u00fcber Elektrokochfeldern in mm\t\r\n450\r\nMindestabstand \u00fcber Gaskochstellen (max. 12,6 kW Gesamtleistung, Brenner \u2264 4,5 kW) in mm\t\r\n650\r\nNettogewicht in kg\t\r\n26,0\r\nL\u00e4nge der elektrischen Zuleitung in m\t\r\n1,5\r\nSchutzkontaktstecker\t\r\n\u2022\r\nGesamtanschlusswert in kW\t\r\n0,10\r\nSpannung in V\t\r\n230\r\nAbsicherung in A\t\r\n10\r\nFrequenz in Hz\t\r\n50\r\nPhasenanzahl\t\r\n1\r\nMontagehinweise \r\nAbluftanschluss oben\t\r\n\u2022\r\nAbluftanschluss oben und hinten\t\r\n\u2022\r\nDurchmesser des Abluftstutzens in mm\t\r\n150\r\nTeleskopierbarer Kamin\t\r\n\u2022\r\nTeleskopierbares Wandhalteblech\t\r\n\u2022\r\nMitgeliefertes Zubeh\u00f6r \r\nR\u00fcckstauklappe\t\r\n\u2022\r\nKommunikationsstick Con@ctivity 2.0 f\u00fcr KM\t\r\nXKS 3000 Z",
+        "image1": "products/miele_dunst_1.jpg",
+        "image2": "products/miele_dunst_2.jpg",
+        "image3": "products/miele_dunst_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 27,
+    "fields": {
+        "name": "Einbau-Kaffeevollautomat",
+        "provider": 11,
+        "product_type": 26,
+        "serial_number": "CVA 6805",
+        "description": "\"Einbau-Kaffeevollautomat\r\nmit Bohnensystem - der Miele Allesk\u00f6nner f\u00fcr h\u00f6chste Anspr\u00fcche.\r\nPerfekte Ergebnisse und intensives Kaffeearoma - AromaticSystem\r\nVollautomatische Perfektion - OneTouch for Two\r\nEinzigartige automatische Tassenh\u00f6henerkennung - CupSensor\r\nInnovatives und komfortables Milchsystem - EasyClick-Milksystem\r\nKomfortable Reinigung f\u00fcr Pflege und Erhalt - Reinigungsprogramme\"",
+        "specifications": "Produktdetails - CVA 6805\r\n\r\nBauform \r\nEinbau-Kaffeevollautomat mit Bohnensystem\t\r\n\u2022\r\nDesign \r\nPureLine\t\r\n\u2022\r\nFarbe\t\r\nHavannabraun\r\nDisplay\t\r\nM Touch\r\nGetr\u00e4nkespezialit\u00e4ten \r\nEspresso\t\r\n\u2022\r\nKaffee\t\r\n\u2022\r\nKaffee lang\t\r\n\u2022\r\nCappuccino\t\r\n\u2022\r\nLatte Macchiato\t\r\n\u2022\r\nCaff\u00e8 Latte\t\r\n\u2022\r\nHei\u00dfwasser\t\r\n\u2022\r\nHei\u00dfe Milch\t\r\n\u2022\r\nMilchschaum\t\r\n\u2022\r\nGenussvorteile \r\nOne-Touch-Zubereitung\t\r\n\u2022\r\nOneTouch for Two-Zubereitung\t\r\n\u2022\r\nAromaschonendes Kegelmahlwerk\t\r\n\u2022\r\nZweite Kaffeesorte in Form von Pulver m\u00f6glich\t\r\n\u2022\r\nGenie\u00dferprofile programmierbar\t\r\n11\r\nMahlgrad einstellbar\t\r\n\u2022\r\nMahlmenge programmierbar\t\r\n\u2022\r\nWassermenge programmierbar\t\r\n\u2022\r\nWassertemperatur programmierbar\t\r\n\u2022\r\nMilchmenge programmierbar\t\r\n\u2022\r\nMilchschaummenge programmierbar\t\r\n\u2022\r\nVorbr\u00fchen programmierbar\t\r\n\u2022\r\nKaffeekannenfunktion\t\r\n\u2022\r\nBedienkomfort \r\nIndividuelle Sprachauswahl\t\r\n\u2022\r\nAnzeige Datum\t\r\n\u2022\r\nTageszeitanzeige\t\r\n\u2022\r\nCupSensor\t\r\n\u2022\r\nStufenlos h\u00f6henverstellbarer Getr\u00e4nkeauslauf in cm\t\r\n8,3\r\n-\r\n16,5\r\nComfortDoor\t\r\n\u2022\r\nBrilliantLight\t\r\n\u2022\r\nVersteckter T\u00fcrgriff\t\r\n\u2022\r\nLeicht zug\u00e4ngliche Versorgungsbeh\u00e4lter\t\r\n\u2022\r\nEntnehmbarer Bohnenbeh\u00e4lter\t\r\n\u2022\r\nFassungsverm\u00f6gen Kaffeebohnen-Beh\u00e4lter in g\t\r\n500\r\nFassungsverm\u00f6gen Wassertank in l\t\r\n2,3\r\nFassungsverm\u00f6gen Restebeh\u00e4lter in St\u00fcck\t\r\n15\r\nEinschaltzeit programmierbar\t\r\n\u2022\r\nAusschaltzeit programmierbar\t\r\n\u2022\r\nStand-by-Zeit programmierbar\t\r\n\u2022\r\nOptionaler Anschluss f\u00fcr Einbaugeschirrw\u00e4rmer\t\r\n\u2022\r\nUhrzeitspeicher in h\t\r\n200\r\nFestwasseranschluss\t\r\n\u2022\r\nPflegekomfort \r\nKomfortable Reinigungsprogramme\t\r\n\u2022\r\nAutomatische Sp\u00fclfunktion\t\r\n\u2022\r\nAutomatische Sp\u00fclung der Milchleitung aus dem Wassertank\t\r\n\u2022\r\nComfortClean\t\r\n\u2022\r\nEntnehmbare Milchleitung\t\r\n\u2022\r\nEntnehmbare Br\u00fcheinheit\t\r\n\u2022\r\nWasserh\u00e4rte einstellbar\t\r\n\u2022\r\nEffizienz und Nachhaltigkeit \r\nEnergiesparender Eco-Mode einschaltbar\t\r\n\u2022\r\nNachtabschaltung\t\r\n\u2022\r\nHausger\u00e4te-Vernetzung \r\nMiele@Home\t\r\nvorger\u00fcstet\r\nSuperVision-Anzeige\t\r\n\u2022\r\nSicherheit \r\nInbetriebnahmesperre\t\r\n\u2022\r\nWasserschutzsystem\t\r\n\u2022\r\nTechnische Daten \r\nNischenbreite in mm\t\r\n560\r\n-\r\n568\r\nNischenh\u00f6he in mm\t\r\n450\r\n-\r\n452\r\nNischentiefe in mm\t\r\n550\r\nGer\u00e4tebreite in mm\t\r\n595\r\nGer\u00e4teh\u00f6he in mm\t\r\n452\r\nGer\u00e4tetiefe in mm\t\r\n496\r\nTiefe bei ge\u00f6ffneter T\u00fcr in cm\t\r\n106,0\r\nGesamtanschlusswert in kW\t\r\n3,5\r\nSpannung in V\t\r\n220-240\r\nAbsicherung in A\t\r\n16\r\nPhasenanzahl\t\r\n1\r\nL\u00e4nge Wasserzulaufschlauch in m\t\r\n1,5\r\nL\u00e4nge der elektrischen Zuleitung in m\t\r\n2,0\r\nMitgeliefertes Zubeh\u00f6r \r\nMilchbeh\u00e4lter - Glas\t\r\n\u2022\r\nMilchbeh\u00e4lter - Kompaktverschluss\t\r\n\u2022\r\nEntkalkungsmittel\t\r\n\u2022\r\nReinigungstabletten\t\r\n\u2022\r\nReiniger f\u00fcr Milchleitungen\t\r\n\u2022\r\nKaffeel\u00f6ffel f\u00fcr Pulverkaffee\t\r\n\u2022\r\nTeststreifen zur Bestimmung der Wasserh\u00e4rte\t\r\n\u2022",
+        "image1": "products/miele_kaffee_1.jpg",
+        "image2": "products/miele_kaffee_2.jpg",
+        "image3": "products/miele_kaffee_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 28,
+    "fields": {
+        "name": "Einbau-K\u00fchlschrank",
+        "provider": 11,
+        "product_type": 2,
+        "serial_number": "K 37683 iDF",
+        "description": "Einbau-K\u00fchlschrank\r\nmit professionellem Plus, dank PerfectFresh Pro und innovativem FlexiLight. \r\nProfessionelle Lagerung - l\u00e4ngere Frische mit PerfectFresh Pro\r\nIndividuell verstellbare Glasbodenbeleuchtung dank FlexiLight\r\nEinlagerung von Lebensmitteln an jedem Platz - DynaCool\r\nReinigung der T\u00fcrabsteller im Geschirrsp\u00fcler - ComfortClean\r\nGed\u00e4mpftes Schlie\u00dfen der T\u00fcr durch SoftClose",
+        "specifications": "Produktdetails - K 37683 iDF\r\n\r\nEAN: 4002515161128 / Artikelnummer: 36376830EU1 / Materialnummer: 09358880\r\nGer\u00e4tekategorie \r\nK\u00fchlschrank\t\r\n\u2022\r\nBauform \r\nEinbauger\u00e4t\t\r\n\u2022\r\nEinbauger\u00e4t integriert\t\r\n\u2022\r\nT\u00fcranschlag\t\r\nrechts\r\nT\u00fcranschlag wechselbar\t\r\n\u2022\r\nDesign \r\nBeleuchtung K\u00fchlzone\t\r\nFlexiLight\r\nPerfectFresh Pro LED Beleuchtung\t\r\n\u2022\r\nBedienkomfort \r\nFrischesystem\t\r\nPerfectFresh Pro\r\nComfortClean\t\r\n\u2022\r\nDynaCool\t\r\n\u2022\r\nSoftClose\t\r\n\u2022\r\nSelfClose\t\r\n\u2022\r\nSteuerung \r\nBedienkonzept\t\r\nTouchControl\r\nSuperK\u00fchlen\t\r\n\u2022\r\nAnzahl Temperaturzonen\t\r\n3\r\nSabbatmodus\t\r\n\u2022\r\nK\u00fchlger\u00e4t/-zone \r\nH\u00f6henverstellbare Abstellfl\u00e4chen aus Sicherheitsglas\t\r\n\u2022\r\nAnzahl der Abstellfl\u00e4chen\t\r\n3\r\ndavon beleuchtet\t\r\n2\r\nFlaschenablage aus verchromtem Metall\t\r\n\u2022\r\nAnzahl Frischeschubladen\t\r\n3\r\nAbstellborde durchg\u00e4ngig\t\r\n3\r\nInnent\u00fcrabsteller f\u00fcr Flaschen\t\r\n2\r\nEffizienz und Nachhaltigkeit \r\nEnergieeffizienzklasse\t\r\nA+++\r\nEnergieverbrauch pro Jahr in kWh\t\r\n160\r\nEnergieverbrauch in 24 h in kWh\t\r\n0,438\r\nHausger\u00e4te-Vernetzung \r\nMiele@home\t\r\nvorbereitet\r\nSicherheit \r\nVerriegelungsfunktion\t\r\n\u2022\r\nAkustischer T\u00fcralarm\t\r\n\u2022\r\nOptischer T\u00fcralarm\t\r\n\u2022\r\nTechnische Daten \r\nNischenbreite in mm\t\r\n560\r\n-\r\n570\r\nNischenh\u00f6he in mm\t\r\n1.772\r\n-\r\n1.788\r\nNischentiefe in mm\t\r\n550\r\nGer\u00e4tebreite in mm\t\r\n559\r\nGer\u00e4teh\u00f6he in mm\t\r\n1.770\r\nGewicht in kg\t\r\n73,1000\r\nGer\u00e4tetiefe in mm\t\r\n544\r\nBefestigungstechnik\t\r\nFestt\u00fcr\r\nMax. T\u00fcrfrontgewicht K\u00fchlteil in kg\t\r\n26\r\nKlimaklasse\t\r\nSN-T\r\nK\u00fchlzone in l\t\r\n257\r\n4*-Gefrierzone in l\t\r\n27\r\nPerfectFresh-Zone in l\t\r\n90\r\nGesamtnutzinhalt in l\t\r\n284\r\nLagerzeit bei St\u00f6rung\t\r\n19\r\nGefrierverm\u00f6gen in kg/24h\t\r\n2,0\r\nGer\u00e4usch-Schallleistung in dB(A) re1pW\t\r\n35\r\nStromaufnahme in Milliampere (mA)\t\r\n1.200\r\nSpannung in V\t\r\n220-240\r\nAbsicherung in A\t\r\n10\r\nPhasenanzahl\t\r\n1\r\nFrequenz in Hz\t\r\n50\r\nL\u00e4nge der elektrischen Zuleitung in m\t\r\n2,1\r\nMitgeliefertes Zubeh\u00f6r \r\nButterdose\t\r\n\u2022\r\nEierablage\t\r\n\u2022\r\nEisw\u00fcrfelschale\t\r\n\u2022",
+        "image1": "products/miele_kuhl_1.jpg",
+        "image2": "products/miele_kuhl_2.jpg",
+        "image3": "products/miele_kuhl_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 29,
+    "fields": {
+        "name": "Miele@Home Gateway",
+        "provider": 11,
+        "product_type": 27,
+        "serial_number": "XGW 3000",
+        "description": "Gateway\r\nzur Integration der vernetzbaren Hausger\u00e4te in Hausbussysteme f\u00fcr mehr Komfort.\r\nM\u00f6glichkeit der Kontrolle und Steuerung per Smartphone, Tablet PC\r\nNutzung von Smart Energy Systemen - z.B. Photovoltaikanlagen\r\nOptionale Nutzung von InfoService",
+        "specifications": "---",
+        "image1": "products/miele_gate_1.jpg",
+        "image2": "products/miele_gate_2.jpg",
+        "image3": "",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 30,
+    "fields": {
+        "name": "Polar H7 Heart Rate Sensor",
+        "provider": 12,
+        "product_type": 28,
+        "serial_number": "92044305-P",
+        "description": "Hook up your fitness app or training device with Polar H7 and get live, accurate heart rate while you train. You can use Polar H7 with a number of Polar products and compatible gym equipment.",
+        "specifications": "Battery type CR 2025\r\nBattery sealing ring O-ring 20.0 x 1.0 Material FPM\r\nBattery lifetime 200 h\r\nOperating\r\ntemperature\r\n14 \u00b0F to 122 \u00b0F/ -10 \u00b0C to\r\n+50 \u00b0C\r\nConnector material Polyamide\r\nStrap material 38% Polyamide, 29%\r\nPolyurethane, 20% Elastane,\r\n13% Polyester",
+        "image1": "products/polar_92044305-P_1.jpg",
+        "image2": "products/polar_92044305-P_2.jpg",
+        "image3": "products/polar_92044305-P_3.png",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 31,
+    "fields": {
+        "name": "\u2022 EPSON PULSENSE PS-100 BAND \u2022 BEURER BM85 UPPER ARM BLOOD PRESSURE MONITOR",
+        "provider": 13,
+        "product_type": 29,
+        "serial_number": "E11E207B12 4211125/658.09/0",
+        "description": "Easily track your heart rate with the Pulsense PS-100, a slim, comfortable wristband that measures heart rate at the wrist \u2013 no chest strap required. Be inspired to move toward higher performance with heart rate zone monitoring made easy. Check your zone via the LED lights on the face of the wristband and real-time data displayed on your smartphone. Featuring Epson's leading-edge sensing technology, the sporty PS-100 accurately tracks your heart rate, records steps, counts calories, and monitors sleep. Review stored data with the easy-to-use Pulsense mobile app or website. You get personalized information that\u2019s sure to empower you to reach your next goal.",
+        "specifications": "Heart rate monitor and fitness tracker \u2014 continuous heart rate monitoring, comfortably measured at the wrist\r\nZone training made easy \u2014 ensure proper intensity with heart rate zone LED indicators\r\nTrack steps \u2014 monitor the amount of activity throughout the day\r\nCount calories \u2014 track calories burned based on heart rate activity\r\nMonitor your sleep patterns \u2014 review your sleep quality; calculated using both motion sensing and heart rate data\r\nBand data storage \u2014 stores up to 20 days of heart rate and activity data in the band\r\nSync data wirelessly \u2014 easily transfer heart rate and activity data from the wristband to your mobile device via Bluetooth\u00ae Smart\r\nCompact size \u2014 stylish wristband contains leading-edge technology to monitor your activity\r\nView stats on your mobile device or online via a computer \u2014 easily access stored data and stats from the mobile app or online website\r\nInnovative sensing technology \u2014 accurate and compact sensing module detects heart rate from the wrist; rechargeable via USB or optional AC adapter",
+        "image1": "products/epson_blut_1.jpg",
+        "image2": "products/epson_blut_2.jpg",
+        "image3": "products/epson_blut_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 32,
+    "fields": {
+        "name": "EQ-3 Bluetooth Thermostat",
+        "provider": 20,
+        "product_type": 5,
+        "serial_number": "CC-RT-BLE",
+        "description": "Intuitive Bedienung per kostenloser iOS und Android App\r\nZus\u00e4tzlich jederzeit auch ohne Smartphone bedienbar\r\nKonfiguration des Wochenprogramms erlaubt Eingabe beliebiger Temperaturverl\u00e4ufe mit bis zu 7 Schaltzeiten pro Tag\r\nBoost-Funktion f\u00fcr schnelles, kurzzeitiges Aufheizen\r\nKompaktes Ger\u00e4t mit besonders leisem Betrieb\r\n\u00dcber die App k\u00f6nnen bis zu 5 Heizk\u00f6rperthermostate in einem Raum zusammengefasst und bedient werden\r\nIn typischen Anwendungen bis zu 30 % Energie-Ersparnis\r\nAutomatische Absenkung beim L\u00fcften spart zus\u00e4tzlich Energie\r\nUrlaubsfunktion: Die Temperatur kann bis zur Heimkehr abgesenkt werden\r\nPassend f\u00fcr Ventile aller g\u00e4ngigen Hersteller\r\nEinfache Montage ohne Wasser abzulassen, ohne Eingriff in das Heizungssystem, kein Spezialwerkzeug erforderlich, unabh\u00e4ngig von der Art der Heizung",
+        "specifications": "Versorgungsspannung2x 1,5 V LR6/Mignon/AA\r\nStromaufnahme100 mA max.\r\nBatterielebensdauer2 Jahre (typ.)\r\nFunkfrequenz2,402 GHz \u2013 2,480 GHz\r\nFunk-Freifeldreichweite10 m (typ.)\r\nSmartphonesUnterst\u00fctzung von Apple (ab iOS 8.3) und Android (ab Version 4.4) - Voraussetzung BLUETOOTH 4.0\r\nDisplayLCD\r\nGewindeanschlussM30 x 1,5 mm\r\nKompatibel mitHeimeier, MNG, Honeywell-Braukmann, Oventrop, Schl\u00f6sser, Comap, Valf Sanayii, Idmar, Jaga, Junkers, Pegler, R.B.M., Watts, Danfoss RA mit Adapter u.v.m.\r\nSchutzartIP20\r\nAbmessungen55 x 60 x 102 mm (B x H x T)\r\nGewicht162 g (inkl. Batterien)",
+        "image1": "products/eQ_thermo_1.png",
+        "image2": "products/eQ_thermo_2.jpg",
+        "image3": "products/eQ_thermo_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 33,
+    "fields": {
+        "name": "Beddi Smart Alarm Clock",
+        "provider": 19,
+        "product_type": 30,
+        "serial_number": "------",
+        "description": "Beddi is an alarm clock/Bluetooth speaker for your smartphone that does so much more than just wake you up.",
+        "specifications": "---",
+        "image1": "products/beddi_1.jpg",
+        "image2": "products/beddi_2.jpg",
+        "image3": "products/beddi_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 34,
+    "fields": {
+        "name": "Fritz!DECT 200 Power Plug",
+        "provider": 2,
+        "product_type": 6,
+        "serial_number": "4023125025723",
+        "description": "With the FRITZ!DECT 200, you can intelligently manage the power supply to connected appliances and measure, record, and evaluate energy consumption. This smart plug is connected to your home network via securely encrypted DECT technology. It can be easily operated via PC, notebook, smartphone, or tablet \u2013 and even via the Internet when you\u2019re not at home.",
+        "specifications": "Socket with intelligent switching\r\nControls power supply to devices automatically or manually\r\nMeasures, records and analyzes energy consumption\r\nControl via PC, notebook, smartphone or tablet \u2013 even remotely over the Internet and by app\r\nIntegrated in the home network via DECT \u2013 securely encrypted upon delivery",
+        "image1": "products/avm_plug_1.jpg",
+        "image2": "products/avm_plug_2.jpg",
+        "image3": "",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 35,
+    "fields": {
+        "name": "Comet DECT Thermostat",
+        "provider": 3,
+        "product_type": 5,
+        "serial_number": "700100406",
+        "description": "Comet DECT Der intelligente Energiespar-Regler Ideal f\u00fcr FRITZ!box",
+        "specifications": "---",
+        "image1": "products/comet_temp_1.jpg",
+        "image2": "products/comet_temp_2.jpg",
+        "image3": "",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 36,
+    "fields": {
+        "name": "Philips Hue Starter Kit, 1st Generation",
+        "provider": 17,
+        "product_type": 31,
+        "serial_number": "426353",
+        "description": "Philips hue signals a new era in home lighting both in the way we think about and experience light in our homes. It allows you to create and control the light using your smartphone or tablet. Bringing endless possibilities to help you get creative and help you personalize your lighting to suit yours and your family's lifestyle. A starter pack includes three bulbs that simply screw into your existing lamps and a bridge that you plug into your home Wi-Fi router. Simply download the hue app to start experiencing light in a completely new way.",
+        "specifications": "---",
+        "image1": "products/hue_start_1.jpg",
+        "image2": "products/hue_start_2.jpg",
+        "image3": "products/hue_start_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 37,
+    "fields": {
+        "name": "Philips Hue Personal Wireless Lighting, Single Bulb",
+        "provider": 17,
+        "product_type": 37,
+        "serial_number": "426361 PHHUESB",
+        "description": "Philips hue signals a new era in home lighting both in the way we think about and experience light in our homes. It allows you to create and control the light using your smartphone or tablet. Bringing endless possibilities to help you get creative and help you personalize your lighting to suit yours and your family's lifestyle. A starter pack includes three bulbs that simply screw into your existing lamps and a bridge that you plug into your home Wi-Fi router. Simply download the hue app to start experiencing light in a completely new way.",
+        "specifications": "---",
+        "image1": "products/hue_single_1.jpg",
+        "image2": "products/hue_single_2.jpg",
+        "image3": "products/hue_single_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 38,
+    "fields": {
+        "name": "D-Link DCS-2132L",
+        "provider": 16,
+        "product_type": 3,
+        "serial_number": "DCS-2132L, GTIN: 790069382123",
+        "description": "Die DCS-2132L Wireless N HD Cube Cloud Camera ist eine IP-\u00dcberwachungskamera mit mydlink-Unterst\u00fctzung, mit der Sie einen Bereich rund um die Uhr \u00fcberwachen k\u00f6nnen. So behalten Sie Ihr Haus oder Ihr B\u00fcro auch unterwegs immer im Auge.",
+        "specifications": "Kamera\r\n1/4\u201c-Megapixel-CMOS-Sensor, progressive Abtastung\r\nFestobjektiv: 3,45 mm, f2,0\r\nPassiver Infrarotsensor (PIR) f\u00fcr erweiterte Bewegungserkennung\r\nEingebauter verstellbarer Infrarot-Sperrfilter (ICR) f\u00fcr \u00dcberwachung Tag und Nacht\r\nEingebaute IR-LED-Beleuchtung f\u00fcr den Einsatz in absoluter Dunkelheit\r\nEingebautes Mikrofon und Lautsprecher f\u00fcr 2-Wege-Kommunikation\r\nONVIF-konform\r\n \r\nVerbindungen\r\nDrahtlose Verbindungen mit 802.11n\r\n10/100 Fast Ethernet-Anschluss\r\nmicroSD/SDHC-Kartensteckplatz zur lokalen Speicherung\r\nDI/DO-Anschluss f\u00fcr Verbindungen zu externen Ger\u00e4ten\r\n \r\nBild und Video\r\nHD-Aufl\u00f6sung (1280 \u00d7 720) und bis zu 1 Megapixel (1280 \u00d7 800)\r\nH.264-, MPEG-4- und Motion JPEG-Echtzeitkompression\r\nePTZ-Betrachtung\r\nUnterst\u00fctzt mehrere Streams parallel\r\nFunktion f\u00fcr Datenschutz-Maske\r\nUnterst\u00fctzt mehrere Zugriffslisten\r\nIntegrierter Samba-Client f\u00fcr NAS",
+        "image1": "products/dlink_kamera_1.png",
+        "image2": "products/dlink_kamera_2.png",
+        "image3": "products/dlink_kamera_3.gif",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 39,
+    "fields": {
+        "name": "KINGMAK WiFi T\u00fcrklingel",
+        "provider": 15,
+        "product_type": 33,
+        "serial_number": "WR230",
+        "description": "---",
+        "specifications": "---",
+        "image1": "products/kingmak_klingel_1.jpg",
+        "image2": "products/kingmak_klingel_2.jpg",
+        "image3": "products/kingmak_klingel_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 40,
+    "fields": {
+        "name": "Danfoss LC-13",
+        "provider": 1,
+        "product_type": 5,
+        "serial_number": "014G0013, GTIN: 5013567421497",
+        "description": "Living Connect ist ein Stellventil zur Steuerung von Wandheizk\u00f6rpern. Es regelt die Heizung auf eine vorgegebene Temperatur, die lokal am Ger\u00e4t mittels Tasten oder \u00fcber Z-Wave Funk eingestellt wird. Neben der direkten Temperatureingabe sind spezielle Heizungsmodi wie Frostschutz oder Energiesparen w\u00e4hlbar. Die geregelte Temperatur wird direkt am Ger\u00e4t auf einer LCD-Anzeige dargestellt.\r\nLiving Connect besitzt eine interne Schaltuhr, mit der f\u00fcr 7 verschiedene Wochentage bis zu 9 verschiedene Zieltemperaturen \u2013 genannt Setpoints - vorw\u00e4hlbar sind, die dann selbst\u00e4ndig zeitabh\u00e4ngig geregelt werden. Weitere intelligente Funktionen sind die Erkennung offener Fenster mit entsprechendem Umschalten in den Energiesparmodus oder eine Ventiltrainingsfunktion, die sicherstellt, dass Ventile auch nach l\u00e4ngerer Nichtbenutzung immer noch steuerbar sind.\r\n\r\nDas Ger\u00e4t erwartet eine regelm\u00e4\u00dfige Funkverbindung zu einem IP-Gateway zur Aktualisierung der internen Uhr und zum Austausch von Status-Meldungen. Der Thermostat kann an Ventile mit den Anschl\u00fcssen RA (30x1.5) oder RAK (Danfoss Schnappverschluss) angeschlossen werden.",
+        "specifications": "---",
+        "image1": "products/danfoss_1.jpg",
+        "image2": "products/danfoss_2.jpg",
+        "image3": "products/danfoss_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 41,
+    "fields": {
+        "name": "Fibaro Motion Sensor FIB FGMS-001",
+        "provider": 4,
+        "product_type": 10,
+        "serial_number": "FGMS-001, GTIN: 5902020528258",
+        "description": "<h4>Inspiriert von der Natur</h4>\r\nSch\u00f6nheit kommt aus der Natur, fortschrittliche Technologie von den Menschen. FIBARO brachte beides zusammen und erschuf daraus eine Perfektion. Aus der Vereinigung der unwandelbaren Gesetze der Architektur mit der neuesten Technologie entstand der FIBARO Multi Sensor \u2013 Ihr Acht gebendes Auge auf das Heim. Inspiriert von dem Glauben der alten \u00c4gypter haben wir den weltweit kleinsten Funk-Bewegungsmelder entworfen \u2013 so wachsam wie das Auge einer Katze.\r\n\r\nSeit Jahrhunderten symbolisiert die Katze den beh\u00fctenden Schutzgott f\u00fcr Familie und Heim. Ihr scharfes Seh- und H\u00f6rverm\u00f6gen sowie die au\u00dfergew\u00f6hnliche Wachsamkeit brachten Ihr tiefen Respekt und ehrliche Bewunderung ein. Der FIBARO Motion Sensor ist so scharf wie ein Katzenauge. Ihm f\u00e4llt auf, was Sie nicht sehen k\u00f6nnen. Er verf\u00fcgt \u00fcber ein ausgedehntes Sichtfeld, hohe Reichweite und ist unglaublich wachsam. Er wird Ihnen das Leben nicht nur komfortabler gestalten, Sie werden sich auch sicherer f\u00fchlen.",
+        "specifications": "---",
+        "image1": "products/fibaro_motion_1.jpg",
+        "image2": "products/fibaro_motion_2.jpg",
+        "image3": "products/fibaro_motion_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 42,
+    "fields": {
+        "name": "Fibaro FGK-101",
+        "provider": 4,
+        "product_type": 13,
+        "serial_number": "FGK-101",
+        "description": "Dieser batteriebetriebene Reed-Sensor arbeitet mit dem Z-Wave Standard und ist so kompatibel mit dem Fibaro System. Er erweitert dieses um die \u00dcberwachung ge\u00f6ffneter T\u00fcren, Fenster und Garagentore. Er findet Verwendung in Lichtschranken, Zugangskontrollen und Objektschutzsystemen. Eine Heiminstallation des Sensors erh\u00f6ht die Sicherheit und den Komfort der Bewohner. \u00dcberh\u00f6hte Geb\u00fchren f\u00fcr Heizung und Klimaanlage werden damit ausgeschlossen. Zus\u00e4tzlich kann dieses Modul mit einem Temperatursensor ausgestattet werden und nutzt den integrierten Bin\u00e4reingang.",
+        "specifications": "---",
+        "image1": "products/fibaro_tur_1.png",
+        "image2": "products/fibaro_tur_2.jpg",
+        "image3": "products/fibaro_tur_3.png",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 43,
+    "fields": {
+        "name": "Aeon Siren GEN5",
+        "provider": 23,
+        "product_type": 34,
+        "serial_number": "AEO_DSD31",
+        "description": "<h4>Siren for alarms.<br> Siren for safety. </h4>\r\n\r\nMost sirens are made to be a part of a security system. They\u2019re designed to be placed outdoors in the hopes of deterring break-ins or to alert your neighbours that something\u2019s up. Siren from Aeotec works differently. It\u2019s been crafted to keep you safe and secure when you\u2019re home. The wellbeing of you and your family is its focus.\r\n\r\nThat\u2019s why Siren offers 5 different alert tones. They\u2019ve been designed for issues ranging from home intrusions to fire emergencies to falls. And they\u2019re all available to you through your Z-Wave gateway so that you can perfectly optimise Siren for your security and safety needs.",
+        "specifications": "---",
+        "image1": "products/aeon_alarm_1.jpg",
+        "image2": "products/aeon_alarm_2.jpg",
+        "image3": "products/aeon_alarm_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 44,
+    "fields": {
+        "name": "Fibaro Flood Sensor",
+        "provider": 4,
+        "product_type": 35,
+        "serial_number": "FGFS-101, GTIN: 5902020528142",
+        "description": "Der Fibaro \u00dcberflutungssensor warnt Sie vor einer drohenden \u00dcberschwemmung oder einem schnellen Temperaturanstieg oder -abfall und hat eine Vielzahl zus\u00e4tzlicher Funktionen. Dank seiner flexiblen, goldenen Teleskopsonden funktioniert das Ger\u00e4t auch auf unebenen Oberfl\u00e4chen. Der \u00dcberflutungssensor hat eine eingebaute Alarmsirene, die Ihnen hilft, im Falle einer \u00dcberschwemmung, einem rapiden Temperaturwechsel oder einem Manipulationsversuch, schnell zu reagieren. Abgesehen von der Alarmsirene kann das Ger\u00e4t Sie \u00fcber die Farbanzeige der eingebauten RGB-Diode vor einer Bedrohung warnen. Zudem besitzt das Ger\u00e4t einen Neigungssensor, welcher eine Neigung und Bewegung \u00fcber 15 Grad erkennt und daraufhin eine Meldung an den Controller sendet. Der eingebaute Temperatursensor kann nicht nur als Feueralarmsensor verwendet werden, er l\u00e4sst sich ebenso f\u00fcr die Regelung einer Fu\u00dfbodenheizung nutzen. \u00dcber den Input-Anschluss ist es m\u00f6glich, eine externe Sonde anzuschlie\u00dfen und den Sensor an jedem beliebigen Ort zu installieren. Der Ausgangsanschluss erm\u00f6glicht beispielsweise den Anschluss an eine Alarmanlage. Der Fibaro \u00dcberflutungssensor kann mit 12/ 24 VDC oder Batterie betrieben werden.",
+        "specifications": "---",
+        "image1": "products/FIBARO-FLOOD-SENSOR-FGFS101_1.jpg",
+        "image2": "products/FIBARO-FLOOD-SENSOR-FGFS101_2.jpg",
+        "image3": "products/FIBARO-FLOOD-SENSOR-FGFS101_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 45,
+    "fields": {
+        "name": "Aeon Labs MultiSensor 6-in-1",
+        "provider": 23,
+        "product_type": 10,
+        "serial_number": "Aeotec ZW100-C, GTIN: 1220000013100",
+        "description": "Machen Sie Ihr Zuhause wirklich intelligent - Mit einem kleinen Ger\u00e4t, vollgepackt mit intelligenten Funktionen. Ein Zuhause ist erst dann intelligent, wenn es anstelle von starren Zeitpl\u00e4nen auf die Ereignisse im Haus in Echtzeit reagieren kann. Der Multisensor mit 6 Sensoren ist ab sofort die Grundlage Ihres modernen Smart Home. Der Multisensor von Aeotec vereint gleich 6 Sensoren in einem Ger\u00e4t: Bewegungssensor; Temperatursensor; Lichtsensor; Luftfeuchtigkeitssensor; Vibrationssensor; UV Sensor; Der Multisensor 6 wird mit 2 x CR123A Batterien betrieben. Dies erm\u00f6glicht Ihnen eine flexible Positionierung im Raum. Im Batteriemodus wacht das Ger\u00e4t in einem definierten Zeitintervall auf und \u00fcbermittelt die Messdaten an die Smart Home Zentrale. Im Lieferumfang finden Sie ein USB auf Micro USB Kabel um den Multisensor 6 auch per USB Spannung betrieben zu k\u00f6nnen. Dann ist der Multisensor in der Lage die Messdaten in Echtzeit an Ihre Smart Home Zentrale zu \u00fcbermitteln.",
+        "specifications": "---",
+        "image1": "products/aeon_multi_1.jpg",
+        "image2": "products/aeon_multi_2.jpg",
+        "image3": "products/aeon_multi_3.jpg",
+        "end_of_life": false
+    }
+},
+{
+    "model": "app.product",
+    "pk": 46,
+    "fields": {
+        "name": "Aeon Labs LED Bulb",
+        "provider": 23,
+        "product_type": 37,
+        "serial_number": "ZW098",
+        "description": "---",
+        "specifications": "---",
+        "image1": "products/aeon_led_1.jpg",
+        "image2": "products/aeon_led_2.png",
+        "image3": "products/aeon_led_3.jpg",
         "end_of_life": false
     }
 }

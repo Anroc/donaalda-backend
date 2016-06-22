@@ -1,116 +1,279 @@
 [
 {
     "model": "app.category",
+    "pk": 7,
     "fields": {
         "name": "Komfort",
         "picture": "categories/comfort_full.jpg",
         "backgroundPicture": "categories/comfort_bg.jpg",
-        "short_description": "---",
+        "short_description": "Komfort ist mehr als ein gem\u00fctliches Sofa. Steuer das Licht, die Roll\u00e4den und vieles mehr. Egal wo du gerade bist.",
         "description": "Komfort ist mehr als ein gem\u00fctliches Sofa. Steuer das Licht, die Roll\u00e4den und vieles mehr. Egal wo du gerade bist.",
         "iconString": "gift"
     }
 },
 {
     "model": "app.category",
+    "pk": 8,
     "fields": {
         "name": "Energie",
         "picture": "categories/enegry_full.jpg",
         "backgroundPicture": "categories/energy_bg.jpg",
-        "short_description": "---",
+        "short_description": "Es werden Dir die M\u00f6glichkeiten angeboten, den eigenen Energiehaushalt jederzeit zu \u00fcberpr\u00fcfen und zu regulieren, so dass Du energieeffizienter leben kannst.",
         "description": "Es werden Dir die M\u00f6glichkeiten angeboten, den eigenen Energiehaushalt jederzeit zu \u00fcberpr\u00fcfen und zu regulieren, so dass Du energieeffizienter leben kannst.",
         "iconString": "leaf"
     }
 },
 {
     "model": "app.category",
+    "pk": 9,
     "fields": {
         "name": "Sicherheit",
         "picture": "categories/security_full.jpg",
         "backgroundPicture": "categories/security_bg.jpg",
-        "short_description": "---",
+        "short_description": "Nutze die Produkte und schenke Deiner Familie und Dir selbst ein sicheres Zuhause. Geh\u00f6re zu den perfekten Helikoptereltern, mit Kamera-Kinder\u00fcberwachung.",
         "description": "Nutze die Produkte und schenke Deiner Familie und Dir selbst ein sicheres Zuhause. Geh\u00f6re zu den perfekten Helikoptereltern, mit Kamera-Kinder\u00fcberwachung.",
         "iconString": "lock"
     }
 },
 {
     "model": "app.category",
+    "pk": 10,
     "fields": {
         "name": "Gesundheit",
         "picture": "categories/smart_health_full.jpg",
         "backgroundPicture": "categories/smart_health_bg.jpg",
-        "short_description": "---",
+        "short_description": "Nutze die M\u00f6glichkeiten von IoT-Ger\u00e4ten, um ihre Gesundheit besser im Blick zu behalten, sportliche Erfolge nachzuverfolgen und gesund zu leben.",
         "description": "Nutze die M\u00f6glichkeiten von IoT-Ger\u00e4ten, um ihre Gesundheit besser im Blick zu behalten, sportliche Erfolge nachzuverfolgen und gesund zu leben.",
         "iconString": "heart"
     }
 },
 {
     "model": "app.producttype",
+    "pk": 1,
     "fields": {
         "type_name": "Basisger\u00e4t"
     }
 },
 {
     "model": "app.producttype",
+    "pk": 2,
     "fields": {
         "type_name": "K\u00fchlschrank"
     }
 },
 {
     "model": "app.producttype",
+    "pk": 3,
     "fields": {
         "type_name": "Kamera"
     }
 },
 {
     "model": "app.producttype",
+    "pk": 4,
     "fields": {
         "type_name": "CO2-Sensor"
     }
 },
 {
     "model": "app.producttype",
+    "pk": 5,
     "fields": {
-        "type_name": "Thermostat"
+        "type_name": "Thermostat/Temperatursensor"
     }
 },
 {
     "model": "app.producttype",
+    "pk": 6,
     "fields": {
         "type_name": "Smart Plug/Smart Socket"
     }
 },
 {
     "model": "app.producttype",
+    "pk": 8,
     "fields": {
         "type_name": "Waage"
     }
 },
 {
     "model": "app.producttype",
+    "pk": 10,
     "fields": {
-        "type_name": "Blutdruck-Messger\u00e4t"
+        "type_name": "Bewegungsmelder/Lichtsensor"
     }
 },
 {
     "model": "app.producttype",
-    "fields": {
-        "type_name": "Bewegungsmelder"
-    }
-},
-{
-    "model": "app.producttype",
+    "pk": 11,
     "fields": {
         "type_name": "Rauchmelder"
     }
 },
 {
     "model": "app.producttype",
+    "pk": 12,
     "fields": {
         "type_name": "Router"
     }
 },
 {
+    "model": "app.producttype",
+    "pk": 13,
+    "fields": {
+        "type_name": "T\u00fcr-/Fensterkontaktsensor"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 15,
+    "fields": {
+        "type_name": "Luftfeuchtigkeitssensor (inkl. CO2-Messung)"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 16,
+    "fields": {
+        "type_name": "Rollladen-Aktor"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 17,
+    "fields": {
+        "type_name": "Schaltaktor"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 18,
+    "fields": {
+        "type_name": "Lichtsteuerung/Dimmer"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 19,
+    "fields": {
+        "type_name": "Wetterstation"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 20,
+    "fields": {
+        "type_name": "Geschirrsp\u00fcler"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 21,
+    "fields": {
+        "type_name": "Trockner"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 22,
+    "fields": {
+        "type_name": "Waschmaschine"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 23,
+    "fields": {
+        "type_name": "Ofen"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 24,
+    "fields": {
+        "type_name": "Kochfeld"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 25,
+    "fields": {
+        "type_name": "Dunstabzugshaube"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 26,
+    "fields": {
+        "type_name": "Kaffeemaschine"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 27,
+    "fields": {
+        "type_name": "Gateway"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 28,
+    "fields": {
+        "type_name": "Herzfrequenzsensor"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 29,
+    "fields": {
+        "type_name": "Blutdruckmessger\u00e4t"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 30,
+    "fields": {
+        "type_name": "Smarter Wecker"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 31,
+    "fields": {
+        "type_name": "Lampe & Bridge"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 33,
+    "fields": {
+        "type_name": "T\u00fcrklingel"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 34,
+    "fields": {
+        "type_name": "Alarmsirene"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 35,
+    "fields": {
+        "type_name": "Wassersensor"
+    }
+},
+{
+    "model": "app.producttype",
+    "pk": 37,
+    "fields": {
+        "type_name": "Leuchtmittel"
+    }
+},
+{
     "model": "app.provider",
+    "pk": 1,
     "fields": {
         "name": "Connected Living",
         "is_visible": true
@@ -118,6 +281,7 @@
 },
 {
     "model": "app.provider",
+    "pk": 2,
     "fields": {
         "name": "AVM",
         "is_visible": true
@@ -125,6 +289,7 @@
 },
 {
     "model": "app.provider",
+    "pk": 3,
     "fields": {
         "name": "Eurotronic",
         "is_visible": true
@@ -132,6 +297,7 @@
 },
 {
     "model": "app.provider",
+    "pk": 4,
     "fields": {
         "name": "Fibaro",
         "is_visible": true
@@ -139,6 +305,7 @@
 },
 {
     "model": "app.provider",
+    "pk": 5,
     "fields": {
         "name": "Jung",
         "is_visible": true
@@ -146,8 +313,129 @@
 },
 {
     "model": "app.provider",
+    "pk": 6,
     "fields": {
         "name": "Withthings",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 7,
+    "fields": {
+        "name": "Thermokon",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 8,
+    "fields": {
+        "name": "NodOn",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 9,
+    "fields": {
+        "name": "Permundo",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 11,
+    "fields": {
+        "name": "Miele",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 12,
+    "fields": {
+        "name": "Polar",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 13,
+    "fields": {
+        "name": "Epson",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 15,
+    "fields": {
+        "name": "Kingmak",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 16,
+    "fields": {
+        "name": "D-Link",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 17,
+    "fields": {
+        "name": "Philips",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 19,
+    "fields": {
+        "name": "Beddi",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 20,
+    "fields": {
+        "name": "eQ-3",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 21,
+    "fields": {
+        "name": "BMS \u2013 Building Management Systems",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 22,
+    "fields": {
+        "name": "Gira",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 23,
+    "fields": {
+        "name": "Aeotec by Aeon Labs",
+        "is_visible": true
+    }
+},
+{
+    "model": "app.provider",
+    "pk": 25,
+    "fields": {
+        "name": "Danfoss",
         "is_visible": true
     }
 }
