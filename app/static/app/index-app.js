@@ -5,7 +5,11 @@
 
 var donaaldaApp = angular
     .module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers'])
-    ;
+    .config(['controllerProvider', function($controllerProvider) {
+        $controllerProvider.allowGlobals();
+    }]);
+
+
 donaaldaApp.controller('themeController', themeControl)
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
@@ -75,7 +79,8 @@ function authenticationControl($scope, $mdDialog, $mdSidenav) {
 ;
 
 
-donaaldaApp.controller('questionController', function ($scope, $q, $timeout) {
+donaaldaApp.controller('questionController', questionController($scope, $q, $timeout));
+function questionController($scope, $q, $timeout) {
 
     $scope.data = {
         accommodation_name: "deiner Wohnung",
@@ -157,11 +162,7 @@ donaaldaApp.controller('questionController', function ($scope, $q, $timeout) {
         }
     }
 
-}).config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default')
-        .primaryPalette('orange')
-        .accentPalette('orange');
-})();
+};
 
 ;(function (angular, window) {
     /*
