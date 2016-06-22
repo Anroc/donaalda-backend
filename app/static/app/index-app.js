@@ -2,84 +2,19 @@
  * Created by lenovo on 18.05.2016.
  */
 
+console.log("angular file found");
 
 var donaaldaApp = angular
     .module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers'])
-    .config(['controllerProvider', function($controllerProvider) {
-        $controllerProvider.allowGlobals();
-    }]);
 
+    ;
 
-donaaldaApp.controller('themeController', themeControl)
+donaaldaApp.controller('questionController', questionController)
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
-            .primaryPalette('green')
-            .accentPalette('light-blue')
+            .primaryPalette('orange')
+            .accentPalette('orange')
     });
-
-donaaldaApp.controller('gridController', gridController);
-function gridController($scope) {
-    this.aalObjects = (function () {
-        var list = ["Energie", "Gesundheit", "Sicherheit", "Komfort"];
-        return list;
-    })();
-}
-
-function themeControl($scope) {
-}
-
-donaaldaApp.controller('authenticationController', authenticationControl);
-function authenticationControl($scope, $mdDialog, $mdSidenav) {
-    $scope.openProfile = function () {
-        console.log("show profile")
-        $mdSidenav('profile').toggle();
-    };
-
-    $scope.showLoginForm = function (evt) {
-        console.log("show login form");
-        return $mdDialog.show({
-            controller: function ($scope) {
-                return angular.extend($scope, {
-                    user: {
-                        name: '',
-                        password: ''
-                    },
-                    closeDialog: function () {
-                        return $mdDialog.hide();
-                    }
-                });
-            },
-            templateUrl: 'loginTemplate.html',
-            targetEvent: evt
-        });
-    };
-
-    $scope.showRegistrationForm = function (evt) {
-        console.log("show register form");
-        return $mdDialog.show({
-            controller: function ($scope) {
-                return angular.extend($scope, {
-                    user: {
-                        username: '',
-                        email: '',
-                        firstname: '',
-                        lastname: '',
-                        password: ''
-                    },
-                    closeDialog: function () {
-                        return $mdDialog.hide();
-                    }
-                });
-            },
-            templateUrl: 'registrationTemplate.html',
-            targetEvent: evt
-        });
-    }
-}
-;
-
-
-donaaldaApp.controller('questionController', questionController($scope, $q, $timeout));
 function questionController($scope, $q, $timeout) {
 
     $scope.data = {
