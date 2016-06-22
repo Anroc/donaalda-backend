@@ -161,7 +161,7 @@ donaaldaApp.controller('questionController', function ($scope, $q, $timeout) {
     $mdThemingProvider.theme('default')
         .primaryPalette('orange')
         .accentPalette('orange');
-});
+})();
 
 ;(function (angular, window) {
     /*
