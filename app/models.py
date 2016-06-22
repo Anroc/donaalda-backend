@@ -155,7 +155,7 @@ class Product(models.Model):
 
 
 class ProductType(models.Model):
-    type_name = models.CharField(max_length=255, unique=True, verbose_name="Artname")
+    type_name = models.CharField(max_length=255, unique=True, verbose_name="Name")
 
     def __str__(self):
         return '%s' % self.type_name
@@ -214,7 +214,7 @@ class ProviderProfile(models.Model):
 
 
 class Employee(User):
-    employer = models.ForeignKey("Provider", on_delete=models.CASCADE)
+    employer = models.ForeignKey("Provider", on_delete=models.CASCADE, verbose_name="Arbeitgeber")
 
     class Meta:
         verbose_name = "Angestellter"
@@ -224,7 +224,7 @@ class Employee(User):
 
 class UserImage(models.Model):
     belongs_to_user = models.OneToOneField(to=User, verbose_name="gehört zu Nutzer", on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="user", null=True, blank=True, verbose_name="Bild")
+    image = models.ImageField(upload_to="user", null=True, blank=True, verbose_name="Nutzerbild")
 
     def __str__(self):
         return "Bild für " + self.belongs_to_user.username
@@ -239,14 +239,14 @@ class UserImage(models.Model):
 
 
 class Comment(models.Model):
-    comment_from = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    comment_title = models.CharField(max_length=255, verbose_name="Kommentartitel", )
-    comment_content = models.TextField(verbose_name="Kommentarinhalt")
+    comment_from = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name="geschrieben von")
+    comment_title = models.CharField(max_length=255, verbose_name="Titel", )
+    comment_content = models.TextField(verbose_name="Inhalt")
     # min value should be 0, max value should be 5, default should be 0
     rating = models.PositiveSmallIntegerField(verbose_name="Bewertung",
                                               validators=[MinValueValidator(0), MaxValueValidator(5)], default='0')
-    creation_date = models.DateTimeField()
-    page_url = models.CharField(default='', max_length=255)
+    creation_date = models.DateTimeField(auto_now_add=True, verbose_name="Erstellungsdatum")
+    page_url = models.CharField(default='', max_length=255, verbose_name="Seiten-URL")
 
     def __str__(self):
         return 'Where: %s | Title: %s | By: %s' % (self.page_url, self.comment_title, self.comment_from.username)
@@ -270,20 +270,44 @@ class Question(models.Model):
         (SLIDER_CHOICE, 'Slider'),
     )
 
-    question_text = models.CharField(max_length=255, null=False, blank=False, )
+    question_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Fragentext")
     answer_presentation = models.CharField(
         max_length=2,
         choices=ANSWER_PRESENTATION_CHOICES,
         default=MULTI_CHOICE,
+        verbose_name="Anzeigenart der Anworten"
     )
+
+    def __str__(self):
+        return '%s -- %s' % (self.question_text, self.get_answer_presentation_display())
+
+    class Meta:
+        verbose_name = "Frage"
+        verbose_name_plural = "Fragen"
 
 
 class Answer(models.Model):
-    belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE,)
-    answer_text = models.CharField(max_length=255, null=False, blank=False)
-    tag = models.ForeignKey(to="Tag", on_delete=models.CASCADE)
+    belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE, verbose_name="gehört zu Frage")
+    answer_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Anworttext")
+    tag = models.ForeignKey(to="Tag", on_delete=models.CASCADE, verbose_name="Schlagwort")
+
+    def __str__(self):
+        return '%s zu "%s"' % (self.answer_text, self.belongs_to_question.question_text)
+
+    class Meta:
+        verbose_name = "Antwort"
+        verbose_name_plural = "Antworten"
+        ordering = ['belongs_to_question_id', 'pk', ]
 
 
 class Tag(models.Model):
     code = models.CharField(max_length=45)
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return '%s (%s)' % (self.name, self.code)
+
+    class Meta:
+        verbose_name = "Schlagwort"
+        verbose_name_plural = "Schlagwörter"
+        ordering = ['code', ]
