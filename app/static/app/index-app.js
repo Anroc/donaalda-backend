@@ -2,7 +2,8 @@
  * Created by lenovo on 18.05.2016.
  */
 
-console.log("angular file found");
+console.log("angular code loaded.");
+
 
 var donaaldaApp = angular
     .module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers'])
