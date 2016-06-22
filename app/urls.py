@@ -20,7 +20,6 @@ from django.conf import settings
 
 app_name = 'app'
 urlpatterns = [
-    # url(r'^app/$', views.IndexView.as_view(), name='index'),
     url(r'^contact$', views.ContactView.as_view(), name='contact'),
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
@@ -38,5 +37,5 @@ urlpatterns = [
     url(r'^all_products/$', views.AllProductsView.as_view(), name='product_all'),
     url(r'^(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
     # for frontend testing
-    url(r'^$', views.IndexViewNew.as_view(), name='indexnew'),
+    url(r'^$', views.IndexView.as_view(), name='index'),
 ]

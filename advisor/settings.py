@@ -28,9 +28,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-# TODO added djangobower
-
 INSTALLED_APPS = [
+    'static_precompiler',
     'djangobower',
     'material',
     'material.admin',
@@ -41,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'welcome',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -131,6 +129,7 @@ USE_TZ = True
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'static_precompiler.finders.StaticPrecompilerFinder',
     'djangobower.finders.BowerFinder',
 )
 
@@ -160,3 +159,20 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 MEDIA_URL = '/media/'
+
+STATIC_PRECOMPILER_COMPILERS = (
+    ('static_precompiler.compilers.CoffeeScript', {"executable": "/usr/bin/coffeescript"}),
+    ('static_precompiler.compilers.SCSS', {
+            "sourcemap_enabled": True,
+            "compass_enabled": True,
+            "precision": 8,
+            "output_style": "compressed"}),
+    'static_precompiler.compilers.Babel',
+    'static_precompiler.compilers.Handlebars',
+    'static_precompiler.compilers.SASS',
+    'static_precompiler.compilers.LESS',
+    'static_precompiler.compilers.Stylus',
+)
+
+STATIC_PRECOMPILER_ROOT = os.path.join(BASE_DIR, 'app/static/app/assets')
+

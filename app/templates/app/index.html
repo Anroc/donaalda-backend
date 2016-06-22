@@ -1,0 +1,54 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <!-- header with all the needed js and css imports -->
+  {% include "app/html_templates/header/headerTemplate.html" %}
+</head>
+<body>
+
+<!-- nav bar or tool bar -->
+<!-- TODO: rename to navigationBarTemplate ? -->
+{% include "app/html_templates/header/navbarHeader.html" with navInfo='index'%}
+
+<!-- Top Section: "Ask Donaalda" -->
+{% include "app/html_templates/sections/welcomeSection.html" %}
+
+
+<!-- Intro with categories -->
+<!-- TODO: proposal: rename categoryGridTemplate to categorySectionTemplate? -->
+{% include "app/html_templates/sections/categorySection.html" %}
+
+
+<!-- Was macht Donaalda -->
+<!-- TODO: contemplate renaming this file -->
+{% include "app/html_templates/sections/generalInformationSection.html" %}
+
+{% include "app/html_templates/sections/livingSituationSection.html" %}
+{% include "app/html_templates/sections/indexScenarioSection.html" %}
+
+{% include "app/html_templates/sections/commentSection.html" %}
+{% include "app/html_templates/sections/keyFactsSection.html" %}
+{% include "app/html_templates/sections/contactSection.html" %}
+
+<!--
+{% comment %}
+{% include "app/html_templates/sections/productListSection.html" %}
+{% endcomment %}
+-->
+
+<!-- Footer -->
+{% include "app/html_templates/footer/footerTemplate.html" %}
+
+{% include "app/html_templates/modals/modals.html" %}
+
+</body>
+</html>
+

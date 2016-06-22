@@ -14,12 +14,12 @@ from django.views.decorators.http import require_http_methods
 from django.http import *
 
 
-class IndexViewNew(generic.DetailView):
-    template_name = 'app/indexNew.html'
+class IndexView(generic.DetailView):
+    template_name = 'app/index.html'
     context_object_name = 'test'
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'app/indexNew.html',
+        return render(request, 'app/index.html',
                       {'category_list': Category.objects.all(),
                        'scenarios': Scenario.objects.all(),
                        'products': Product.objects.all(),
@@ -30,7 +30,7 @@ class IndexViewNew(generic.DetailView):
                        })
 
 
-class IndexView(generic.ListView):
+class IndexViewL(generic.ListView):
     template_name = 'app/index.html'
     context_object_name = 'category_list'
 
