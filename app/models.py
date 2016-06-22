@@ -98,9 +98,12 @@ class ScenarioDescription(models.Model):
 
 class ProductSet(models.Model):
     name = models.CharField(max_length=100, default="------")
-    description = models.TextField(blank=True, verbose_name="Beschreibung")
+    description = models.TextField(blank=True, verbose_name="Beschreibung",
+                                   help_text="Wenn dieses Produktset zu einem Szenario gehört,"
+                                             "dann geben Sie das bitte hier mit an")
     products = models.ManyToManyField("Product", verbose_name="Dazugehörige Produkte")
     creator = models.ForeignKey("Provider", default="1", verbose_name="Ersteller", on_delete=models.CASCADE)
+    tags = models.ManyToManyField(to="Tag", verbose_name="Schlagwörter")
 
     def __str__(self):
         return '%s' % self.name
@@ -131,6 +134,7 @@ class Product(models.Model):
                                processors=[ResizeToFill(200, 100)],
                                format='JPEG')
     end_of_life = models.BooleanField(default=False, verbose_name="EOL")
+    tags = models.ManyToManyField(to="Tag", verbose_name="Schlagwörter")
 
     def __str__(self):
         return '%s' % self.name
@@ -251,3 +255,35 @@ class Comment(models.Model):
         verbose_name = "Kommentar"
         verbose_name_plural = "Kommentare"
         ordering = ["-creation_date","comment_title", "-rating",]
+
+
+class Question(models.Model):
+    MULTI_CHOICE = 'mc'
+    RADIO_CHOICE = 'rc'
+    DROP_CHOICE = 'dc'
+    SLIDER_CHOICE = 'sc'
+
+    ANSWER_PRESENTATION_CHOICES = (
+        (MULTI_CHOICE, 'Multiple Choice'),
+        (RADIO_CHOICE, 'Radiobutton'),
+        (DROP_CHOICE, 'Dropdown'),
+        (SLIDER_CHOICE, 'Slider'),
+    )
+
+    question_text = models.CharField(max_length=255, null=False, blank=False, )
+    answer_presentation = models.CharField(
+        max_length=2,
+        choices=ANSWER_PRESENTATION_CHOICES,
+        default=MULTI_CHOICE,
+    )
+
+
+class Answer(models.Model):
+    belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE,)
+    answer_text = models.CharField(max_length=255, null=False, blank=False)
+    tag = models.ForeignKey(to="Tag", on_delete=models.CASCADE)
+
+
+class Tag(models.Model):
+    code = models.CharField(max_length=45)
+    name = models.CharField(max_length=255)

@@ -16,6 +16,9 @@ from .models import (Category,
                      Comment,
                      UserImage,
                      User,
+                     Question,
+                     Answer,
+                     Tag,
                      )
 
 
@@ -168,3 +171,7 @@ admin.site.register(ProductType)
 admin.site.register(ScenarioDescription)
 admin.site.register(Comment)
 admin.site.register(User, UserAdmin)
+admin.site.register(Question)
+admin.site.register(Answer)
+admin.site.register(Tag)
+
