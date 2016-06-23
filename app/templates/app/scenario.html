@@ -269,7 +269,7 @@
       <div class="carousel-inner" role="listbox">
         {% for item in current_scenario.scenario_product_set.products.all %}
             {% if forloop.counter == 1 %}
-              <div class="item active" style="margin-left: 50px; margin-right: 50px;">
+            <div class="item active" style="margin-left: 50px; margin-right: 50px;">
             {% endif%}
               <a href="{% url 'app:product' item.pk %}">
                   <div class="col-md-4">
@@ -285,10 +285,10 @@
                   </div>
               </a>
             {% if forloop.counter == current_scenario.scenario_product_set.products.all|length %}
-              </div>
+            </div>
             {% elif forloop.counter|divisibleby:3 %}
-                </div>
-                <div class="item" style="margin-left: 50px; margin-right: 50px;">
+            </div>
+            <div class="item" style="margin-left: 50px; margin-right: 50px;">
             {% endif %}
         {% endfor %}
       </div>
