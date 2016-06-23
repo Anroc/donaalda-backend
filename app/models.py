@@ -257,6 +257,8 @@ class Comment(models.Model):
         ordering = ["-creation_date","comment_title", "-rating",]
 
 
+# TODO:Add reference field to tell frontend which step each question belongs to
+# TODO:Maybe which category each question belongs to? manytomany to category?
 class Question(models.Model):
     MULTI_CHOICE = 'mc'
     RADIO_CHOICE = 'rc'
