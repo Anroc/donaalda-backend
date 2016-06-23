@@ -33,6 +33,14 @@
 
         {% include "app/html_templates/questionSteps/preferences.html" %}
 
+        {% if category_list %}
+        {% for category in category_list %}
+        {% include "app/html_templates/questionSteps/categoryStep.html" %}
+
+        {% endfor %}
+        {% endif %}
+
+
         {% comment %}
         {% include "app/html_templates/questionSteps/random.html" %}
         {% endcomment %}

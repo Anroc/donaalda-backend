@@ -3,40 +3,18 @@
   <md-step-body>
     <form name="step2">
       <md-content class="md-padding">
-        <div layout="row" layout-align="center top">
-          <div flex="nogrow" style="width: 100%;">
-            <h4>
-              An welchen Smart Home-Bereich sind Sie interessiert?
-            </h4>
-
-
-            <md-checkbox-group ng-model="data.addition">
-
-              <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
-                Komfort
-              </md-checkbox>
-              <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
-                Sicherheit
-              </md-checkbox>
-              <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
-                Geundheit
-              </md-checkbox>
-              <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
-                Remote
-              </md-checkbox>
-
-            <!--
-            <md-checkbox>Komfort</md-checkbox>
-            <md-checkbox>Sicherheit</md-checkbox>
-            <md-checkbox>Gesundheit</md-checkbox>
-            <md-checkbox>Energie</md-checkbox>
-            <md-checkbox>Remote</md-checkbox>
-
-            -->
-
-
-          </div>
+        <div layout="column" layout-align="center top">
+          <h4>
+            An welchen Smart Home-Bereich sind Sie interessiert?
+          </h4>
+          {% if category_list %}
+          {% for category in category_list %}
+          <md-checkbox>{{category}}</md-checkbox>
+          {% endfor %}
+          {% endif %}
+          <md-checkbox>Remote</md-checkbox>
         </div>
+
       </md-content>
       <md-step-actions layout="row">
         <div flex>

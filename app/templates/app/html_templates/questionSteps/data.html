@@ -13,11 +13,11 @@
 
           <div flex>
 
-            <h4>ich wohne...</h4>
+            <h4>Ich wohne...</h4>
 
             <md-radio-group ng-model="data.accommodation_name">
-              <md-radio-button value="Wohnung">in einer Wohnung</md-radio-button>
-              <md-radio-button value="Haus">in einem Haus</md-radio-button>
+              <md-radio-button value="deiner Wohnung">in einer Wohnung</md-radio-button>
+              <md-radio-button value="deinem Haus">in einem Haus</md-radio-button>
             </md-radio-group>
 
             <!--<h4>Eigentum oder Miete?</h4> -->
@@ -44,7 +44,24 @@
           </div>
 
           <div flex>
-            <h4>Unsere Wohfläche umfasst Quadratmeter:</h4>
+
+            <h4>
+              Ausstattung von {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
+            </h4>
+            <div class="row">
+
+
+              <md-checkbox-group ng-model="data.addition" layout="column">
+                <md-checkbox value="Garten">Garten</md-checkbox>
+                <md-checkbox value="Balkon">Balkon</md-checkbox>
+                <md-checkbox value="Terrasse">Terrasse</md-checkbox>
+                <md-checkbox value="Garage">Garage</md-checkbox>
+              </md-checkbox-group>
+            </div>
+          </div>
+
+          <div flex>
+            <h4>Unsere Wohnfläche umfasst Quadratmeter:</h4>
             <div layout="row">
               <div flex="50">
                 <md-slider class="md-primary" flex min="0" max="255" ng-model="data.square_meters"
@@ -72,44 +89,13 @@
                        aria-label="rating"
                        aria-controls="rating-slider"
                        style="text-align: right;
-                         border: none;">  Personen
+                         ;">
+                <i flex="10" class="material-icons">people</i>
+                Personen
               </div>
             </div>
           </div>
 
-          <div flex style="text-align:right">
-            <h4>
-              Ausstattung von deiner {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
-            </h4>
-            <div class="row">
-              <md-checkbox-group ng-model="data.addition">
-
-                <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
-                  mit Garten
-                </md-checkbox>
-                <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
-                 mit Balkon
-                </md-checkbox>
-                <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
-                mit Tarasse
-                 </md-checkbox>
-                <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
-                Garage
-                </md-checkbox>
-
-      <!--
-                  <md-checkbox value="Garten">Garten</md-checkbox>
-                  <md-checkbox value="Balkon">Balkon</md-checkbox>
-                  <md-checkbox value="Terrasse">Terrasse</md-checkbox>
-                  <md-checkbox value="Garage">Garage</md-checkbox>
-
-                  -->
-
-              </md-checkbox-group>
-            </div>
-
-
-          </div>
         </div>
       </md-content>
       <md-step-actions layout="row">
