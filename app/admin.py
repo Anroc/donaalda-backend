@@ -26,6 +26,9 @@ from .models import (Category,
 
 
 class ScenarioAdmin(admin.ModelAdmin):
+
+    actions = []
+
     exclude = ['url_name']
 
     def get_queryset(self, request):
@@ -46,7 +49,15 @@ class ScenarioAdmin(admin.ModelAdmin):
         obj.save()
 
 
+class CommentAdmin(admin.ModelAdmin):
+
+    actions = []
+
+
 class ProductSetAdmin(admin.ModelAdmin):
+
+    actions = []
+
     exclude = []
 
     def get_queryset(self, request):
@@ -69,7 +80,14 @@ class ProductSetAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
+
+    actions = []
+
     exclude = []
+
+    list_display = ('name', 'serial_number', 'provider', 'product_type', 'end_of_life')
+
+    list_filter = ('provider', 'product_type', 'end_of_life')
 
     def get_queryset(self, request):
         user = request.user
@@ -90,6 +108,9 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ProviderProfileAdmin(admin.ModelAdmin):
+
+    actions = []
+
     exclude = ['url_name']
 
     def get_queryset(self, request):
@@ -102,6 +123,10 @@ class ProviderProfileAdmin(admin.ModelAdmin):
         self.exclude.extend(['owner'])
         return qs.filter(owner=user.employee.employer_id)
 
+    @staticmethod
+    def get_visibility(self, obj):
+        return obj.owner.is_visible
+
     def save_model(self, request, obj, form, change):
         user = request.user
 
@@ -111,10 +136,19 @@ class ProviderProfileAdmin(admin.ModelAdmin):
         obj.save()
 
 
+class UserImageInline(admin.StackedInline):
+    model = UserImage
+
+
 class EmployeeAdmin(UserAdmin):
+
+    actions = []
+
     add_form = EmployeeCreationForm
 
     form = EmployeeChangeForm
+
+    inlines = (UserImageInline,)
 
     fieldsets = (
         ((None, {'fields': ('username', 'password')})),
@@ -151,10 +185,6 @@ class EmployeeAdmin(UserAdmin):
         obj.save()
 
 
-class UserImageInline(admin.StackedInline):
-    model = UserImage
-
-
 class UserAdmin(UserAdmin):
     inlines = (UserImageInline,)
 
@@ -169,9 +199,8 @@ admin.site.register(Provider)
 admin.site.register(ProviderProfile, ProviderProfileAdmin)
 admin.site.register(ProductType)
 admin.site.register(ScenarioDescription)
-admin.site.register(Comment)
+admin.site.register(Comment, CommentAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Question)
 admin.site.register(Answer)
 admin.site.register(Tag)
-
