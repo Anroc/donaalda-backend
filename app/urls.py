@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """advisor URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -18,6 +20,7 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+# Beware: insert new urls minding the regex pattern matching goes top to bottom
 app_name = 'app'
 urlpatterns = [
     url(r'^contact$', views.ContactView.as_view(), name='contact'),
