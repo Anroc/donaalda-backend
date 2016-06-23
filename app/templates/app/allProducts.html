@@ -8,9 +8,10 @@
 
   {% include "app/html_templates/header/headerTemplate.html" %}
 
-  {% load compile_static %}
-
-  <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
+  {% comment %}
+    {% load compile_static %}
+    <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
+  {% endcomment %}
 
   <script>
     $(document).ready(function(){
