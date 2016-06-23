@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import (UserCreationForm,
                                        UserChangeForm)
 from django.contrib.auth import password_validation
-from app.models import Employee
+from .models import Employee
 
 
 class EmployeeCreationForm(forms.ModelForm):
