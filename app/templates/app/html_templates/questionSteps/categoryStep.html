@@ -1,0 +1,11 @@
+{% load staticfiles %}
+<md-step label="{{ category.name }}" md-complete="step2.completed" ng-disabled="step2.disabled">
+  <md-content>
+    <h1>
+      Kategorie Beschreibung
+    </h1>
+    <md-button class="md-raised md-primary" ng-click="selected = 0">PREV</md-button>
+    <md-button class="md-raised md-primary" ng-click="step1.completed = true">Complete Step 1</md-button>
+    <md-button class="md-raised md-primary" ng-click="selected = 2">NEXT</md-button>
+  </md-content>
+</md-step>
