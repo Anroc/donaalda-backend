@@ -21,13 +21,25 @@
     <div class="row">
       <div class="col-md-12 section-heading text-left">
         <h2 class=" left-border to-animate">Fragen</h2>
+        <p>
+          Bitte gib mir ein paar Infos über deine jetzige Wohnsituation, damit ich Dir ein passendes Angebot
+          zusammenstellen kann.
+        </p>
       </div>
+
+
+      <!--p>
+        Um Ihre individuelle Wohnsituation besser einordnen zu können, bitten wir zunächst, uns ein paar grundlegende
+        Fragen zu beantworten. Sie geben uns damit die Möglichkeit, das für Sie passende Angebot zusammenzustellen.
+      </p-->
+
     </div>
   </div>
   <div class="container">
     <md-stepper-card-content class="md-no-padding" style="width:100%;">
       <md-steppers md-dynamic-height md-stretch-steppers="always" md-selected="vm.selectedStep"
                    md-busy-text="'Einen Moment bitte...'" md-busy="vm.showBusyText">
+
 
         {% include "app/html_templates/questionSteps/data.html" %}
 
