@@ -76,7 +76,6 @@ WSGI_APPLICATION = 'advisor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-# TODO: change to postgre once we have our server
 DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
@@ -124,7 +123,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-# TODO check if correct
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -133,11 +131,9 @@ STATICFILES_FINDERS = (
     'djangobower.finders.BowerFinder',
 )
 
-# TODO check if correct
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'app/static/bower_components')
 
-# TODO check if correct
 
 BOWER_INSTALLED_APPS = (
     'md-steppers#0.2.4',
