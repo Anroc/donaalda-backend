@@ -1,25 +1,47 @@
-<md-step label="Präferenz" md-complete="vm.stepData[1].data.completed"
+<md-step label="Kategorienauswahl" md-complete="vm.stepData[1].data.completed"
          ng-disabled="vm.stepProgress < 2">
   <md-step-body>
-    <form name="step2" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
+    <form name="step2">
       <md-content class="md-padding">
         <div layout="row" layout-align="center top">
-          <div flex="nogrow" style="width: 100%;" layout="column" layout-align="center center">
-            <div layout="column" layout-align="center top">
-              <h4>Was ist dir besonders wichtig?</h4>
-              {% if category_list %}
-              {% for category in category_list %}
-              <md-checkbox>{{category}}</md-checkbox>
-              {% endfor %}
-              {% endif %}
-              <md-checkbox>Remote</md-checkbox>
-            </div>
+          <div flex="nogrow" style="width: 100%;">
+            <h4>
+              An welchen Smart Home-Bereich sind Sie interessiert?
+            </h4>
+
+
+            <md-checkbox-group ng-model="data.addition">
+
+              <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
+                Komfort
+              </md-checkbox>
+              <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
+                Sicherheit
+              </md-checkbox>
+              <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
+                Geundheit
+              </md-checkbox>
+              <md-checkbox md-no-ink="" aria-label="Checkbox No Ink"  class="md-primary">
+                Remote
+              </md-checkbox>
+
+            <!--
+            <md-checkbox>Komfort</md-checkbox>
+            <md-checkbox>Sicherheit</md-checkbox>
+            <md-checkbox>Gesundheit</md-checkbox>
+            <md-checkbox>Energie</md-checkbox>
+            <md-checkbox>Remote</md-checkbox>
+
+            -->
+
+
           </div>
         </div>
       </md-content>
       <md-step-actions layout="row">
         <div flex>
-          <md-button ng-click="vm.moveToPreviousStep()">ZURÜCK</md-button>
+
+          <md-button class="md-raised md-primary" ng-click="vm.moveToPreviousStep()">Zurück</md-button>
         </div>
         <div flex layout="row" layout-align="end top">
           <md-button class="md-warn">ABBRECHEN</md-button>

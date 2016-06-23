@@ -3,22 +3,17 @@
     location.href="/contact";
   }
 </script>
-<md-step label="Ende" md-complete="vm.stepData[2].data.completed" ng-disabled="vm.stepProgress < 3">
+<md-step label="Ergebnis" md-complete="vm.stepData[2].data.completed" ng-disabled="vm.stepProgress < 3">
   <md-step-body>
     <form name="step2">
       <md-content class="md-padding">
         <div layout="column" layout-align="center center" style="min-height: 200px">
-          <h4>Deine Fragen sind soweit beantwortet!</h4>
+          <h4>Donnalda brechnet die Vorschläges!</h4>
           <md-button
             class="md-primary md-raised"
             onclick="showFilteredResults()">Vorschläge anzeigen</md-button>
         </div>
       </md-content>
-      <md-step-actions>
-        <div flex>
-          <md-button ng-click="vm.moveToPreviousStep()">ZURÜCK</md-button>
-        </div>
-      </md-step-actions>
     </form>
   </md-step-body>
 </md-step>
