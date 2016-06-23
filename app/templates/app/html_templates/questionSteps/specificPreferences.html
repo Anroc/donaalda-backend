@@ -1,4 +1,4 @@
-<md-step label="Allgemein" md-complete="vm.stepData[0].data.completed"
+<md-step label="Spezifisch" md-complete="vm.stepData[0].data.completed"
          ng-disabled="vm.stepProgress < 1">
 
   <md-step-body>
@@ -8,11 +8,11 @@
 
           <div flex>
 
-            <h4>Ich wohne...</h4>
+            <h4>Radiobutton frage</h4>
 
             <md-radio-group ng-model="data.accommodation_name">
-              <md-radio-button value="deiner Wohnung">in einer Wohnung</md-radio-button>
-              <md-radio-button value="deinem Haus">in einem Haus</md-radio-button>
+              <md-radio-button value="Option 1">Option 1</md-radio-button>
+              <md-radio-button value="Option 2">Option 2</md-radio-button>
             </md-radio-group>
 
             <!--<h4>Eigentum oder Miete?</h4> -->
@@ -30,8 +30,8 @@
                 </h4>
                 <!-- WICHTIG NOCH ANZUPASSEN -->
                 <md-radio-group ng-model="data.ownershipOpen">
-                  <md-radio-button value="Miete">Ja </md-radio-button>
-                  <md-radio-button value="Eigentum">Nein</md-radio-button>
+                  <md-radio-button value="Ja">Ja </md-radio-button>
+                  <md-radio-button value="Nein">Nein</md-radio-button>
 
                 </md-radio-group>
               </div>
@@ -39,13 +39,11 @@
           </div>
 
           <div flex>
-
             <h4>
               Ausstattung von {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
             </h4>
+
             <div class="row">
-
-
               <md-checkbox-group ng-model="data.addition" layout="column">
                 <md-checkbox value="Garten">Garten</md-checkbox>
                 <md-checkbox value="Balkon">Balkon</md-checkbox>
