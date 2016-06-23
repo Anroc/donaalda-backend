@@ -1,104 +1,32 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<html class="no-js lt-ie9 lt-ie8">
+<html class="no-js lt-ie9">
+<html class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>DONAALDA - Filter</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content=""/>
-  <meta name="keywords" content=""/>
-  <meta name="author" content=""/>
 
+  {% include "app/html_templates/header/headerTemplate.html" %}
 
-  <!-- Facebook and Twitter integration -->
-  <meta property="og:title" content=""/>
-  <meta property="og:image" content=""/>
-  <meta property="og:url" content=""/>
-  <meta property="og:site_name" content=""/>
-  <meta property="og:description" content=""/>
-  <meta name="twitter:title" content=""/>
-  <meta name="twitter:image" content=""/>
-  <meta name="twitter:url" content=""/>
-  <meta name="twitter:card" content=""/>
+  {% load compile_static %}
 
-  <!--link rel="stylesheet" href="{% static 'app/index-style.css' %}"-->
-  <script src="{% static 'app/index-app.js' %}"></script>
-
-
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <link rel="shortcut icon" href="{% static 'app/favicon.ico' %}">
-
-  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet'
-        type='text/css'>
-
-  <!-- Animate.css -->
-  <link rel="stylesheet" href="{% static 'app/assets/css/animate.css' %}">
-  <!-- Icomoon Icon Fonts-->
-  <link rel="stylesheet" href="{% static 'app/assets/css/icomoon.css' %}">
-  <!-- Simple Line Icons -->
-  <link rel="stylesheet" href="{% static 'app/assets/css/simple-line-icons.css' %}">
-  <!-- Magnific Popup -->
-  <link rel="stylesheet" href="{% static 'app/assets/css/magnific-popup.css' %}">
-  <!-- Bootstrap  -->
-  <link rel="stylesheet" href="{% static 'app/assets/css/bootstrap.css' %}">
-
-  <link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
-
-  <!-- Modernizr JS -->
-  <script src="{% static 'app/assets/js/modernizr-2.6.2.min.js' %}"></script>
-  <!-- FOR IE9 below -->
-  <!--[if lt IE 9]>
-  <script src="{% static 'app/assets/js/respond.min.js' %}"></script>
-  <![endif]-->
-
-
-  <!-- jQuery -->
-  <script src="{% static 'app/assets/js/jquery.min.js' %}"></script>
-  <!-- jQuery Easing -->
-  <script src="{% static 'app/assets/js/jquery.easing.1.3.js' %}"></script>
-  <!-- Bootstrap -->
-  <script src="{% static 'app/assets/js/bootstrap.min.js' %}"></script>
-  <!-- Waypoints -->
-  <script src="{% static 'app/assets/js/jquery.waypoints.min.js' %}"></script>
-  <!-- Stellar Parallax -->
-  <script src="{% static 'app/assets/js/jquery.stellar.min.js' %}"></script>
-  <!-- Counter -->
-  <script src="{% static 'app/assets/js/jquery.countTo.js' %}"></script>
-  <!-- Magnific Popup -->
-  <script src="{% static 'app/assets/js/jquery.magnific-popup.min.js' %}"></script>
-  <script src="{% static 'app/assets/js/magnific-popup-options.js' %}"></script>
-  <!-- Google Map -->
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-  <script src="{% static 'app/assets/js/google_map.js' %}"></script>
-
-  <!-- Main JS (Do not remove) -->
-  <script src="{% static 'app/assets/js/main.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
 
   <script>
-    function logOut() {
-      location.href = "/logout"
+    $(document).ready(function(){
+      $('[data-show="tooltip"]').tooltip();
+    });
+  </script>
+
+  <script>
+    {% if product.provider.is_visible %}
+    function provider() {
+      location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
     }
+    {% endif %}
 
-    function admin() {
-      window.open("/admin", "_blank")
-    }
-
-    function contact() {
-      location.href = "/contact";
-    }
-
-
-    function back() {
-      location.href = "/back";
+    function start() {
+      location.href = "/"
     }
   </script>
   <script>
@@ -107,44 +35,36 @@
 </head>
 <body>
 
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='scenario'%}
+{% include "app/html_templates/header/navbarHeader.html" with navInfo='product'%}
 
 <section id="fh5co-page" data-section="home"
-         data-stellar-background-ratio="0.5" style="background-image:url({{ current_scenario.picture.url }}); {% endif %}">
-  <div class="gradient"></div>
+         style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
+         data-stellar-background-ratio="0.5">
   <div class="container">
     <div class="text-wrap">
       <div class="text-inner">
         <div class="row">
           <div class="col-md-8">
-            {% if current_scenario %}
-            <h1 class="text-left">{{ current_scenario.name }}</h1>
-            <!--{% for x in current_scenario.scenario_product_set.products.all %}
-        <h2> Scenario-description: {{ x.name }}</h2>
-            {% endfor %}-->
-            <h3 class="text-left" style="color: #ddd; margin-top: -20px;">{{ current_scenario.provider }}</h3>
-            {% endif %}
+            <h1 class="text-left">{{ product.name }}</h1>
+            <h3 class="text-left"
+                style="color: #ddd; margin-top: -20px;">{{ product.product_type.type_name }}</h3>
           </div>
-
           <div class="col-md-4">
             <div class="panel panel-default pull-right"
                  style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
-              {% if current_scenario.provider.is_visible %}
+              {% if product.provider.is_visible %}
               <div class="btn">
                 {% else %}
                 <div class="panel-body">
                   {% endif %}
-                  {% if current_scenario.provider.providerprofile %}
-                  <a href="{%  url 'app:provider_profile' current_scenario.provider.providerprofile.url_name %}">
-                    {% endif %}
-                    <img style="max-height: 100%; max-width: 100%;"
-                         {% if current_scenario.provider.is_visible %}
-                         onclick="provider()"
-                         {% endif %}
-                         src="{{ current_scenario.provider.providerprofile.logo_image.url }}"
-                         alt="providerImg">
-                  </a>
+                  <img style="max-height: 100%; max-width: 100%;"
+                       {% if product.provider.is_visible %}
+                       onclick="provider()"
+                       {% endif %}
+                       src="{{ product.provider.providerprofile.logo_image.url }}"
+                       alt="providerImg">
                 </div>
+
               </div>
             </div>
           </div>
@@ -152,68 +72,18 @@
       </div>
     </div>
     <div class="slant"></div>
+  </div>
 </section>
 
-<!-- Scenario description boxes -->
-{% with scenarios=current_scenario.scenariodescription_set.all %}
 <section id="fh5co-intro" data-section="intro">
   <div class="container">
-    <div class="col-md-12">
-      <div class="text-inner">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Beschreibung</h2>
         <div class="row">
-          <div class="col-md-12 section-heading text-center">
-            <h2 class="to-animate">Beschreibung</h2>
-            <div class="row">
-              <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                <h3>
-                  Sieh Dir an wie '{{ current_scenario.name }}' funktioniert. Vielleicht ist es auch etwas für Dich
-                </h3>
-              </div>
-            </div>
-          </div>
-          <div>
-            {% if scenarios %}
-            {% for scenario in scenarios %}
-            <div class="container-fluid row">
-              <div class="panel">
-                <div class="panel-body">
-                  {% if scenario.left_right %}
-                  <div class="col-md-8">
-                    <p class="text-justify">
-                      {{scenario.description}}
-                    </p>
-                  </div>
-                  {% comment %}
-                  <div class="col-md-4">
-                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
-                  </div>
-                  {% endcomment %}
-                  <div class="col-md-4">
-                    <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
-                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
-                    </a>
-                  </div>
-                  {% else %}
-                  {% comment %}
-                  <div class="col-md-4">
-                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
-                  </div>
-                  {% endcomment %}
-                  <div class="col-md-4">
-                    <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
-                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
-                    </a>
-                  </div>
-                  <div class="col-md-8">
-                    <p class="text-justify">
-                      {{scenario.description}}
-                    </p>
-                  </div>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-            {% endfor %}
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            {% if product.description %}
+            <h3>{{ product.description }}</h3>
             {% endif %}
           </div>
         </div>
@@ -221,92 +91,86 @@
     </div>
   </div>
 </section>
-{% endwith %}
 
-{% if current_scenario %}
-<section id="fh5co-work" data-section="products">
+{% if product.image1 %}
+<section id="fh5co-work" data-section="images">
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Produkte</h2>
+        <h2 class="to-animate">Bilder</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>
-              Damit Du dieses Scenario in deinem Smart Home realisieren kannst, schlägt Dir Donaalda folgende Produkte vor
-            </h3>
+            <h3>So sieht's aus:</h3>
           </div>
         </div>
       </div>
     </div>
-
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <!-- foreach for products -->
-        {% with slide=1%}
-        {% for indicator in current_scenario.scenario_product_set.products.all %}
-        {% if forloop.counter == 1 %}
-        <li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li>
-        {% endif %}
-        {% if forloop.counter|divisibleby:3 %}
-
-        <li data-target="#carousel-example-generic" data-slide-to="{{ slide|add:'1' }}"></li>
-
-        {% endif %}
-        {% endfor %}
-        {% endwith %}
-      </ol>
-
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-        {% for item in current_scenario.scenario_product_set.products.all %}
-        <a href="{% url 'app:product' item.pk %}">
-          {% if forloop.counter == 1 %}
-          <div class="item active" style="margin-left: 50px; margin-right: 50px;">
-            {% endif%}
-            <div class="col-md-4">
-              <div class="card" style="background-color:white; border-radius:5px">
-                <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                  <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ item.name }}</h4>
-                  <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ item.provider }}</h6>
-                </div>
-                <div style="height: 250px;">
-                  <img src="{{ item.image1.url }}" alt="" class="center-block" style="max-height: 95%; max-width: 95%;">
-                </div>
-              </div>
-            </div>
-            {% if forloop.counter == current_scenario.scenario_product_set.products.all|length %}
-          </div>
-          {% else %}
-          {% if forloop.counter|divisibleby:3 %}
-      </div>
-      <div class="item" style="margin-left: 50px; margin-right: 50px;">
-        {% endif%}
-        {% endif %}
+    <div class="row row-bottom-padded-sm">
+      <div class="col-md-4 col-sm-6 col-xxs-12">
+        <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+          <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
         </a>
-        {% endfor %}
       </div>
+      {% if product.image2 %}
+      <div class="col-md-4 col-sm-6 col-xxs-12">
+        <a href="{{ product.image2.url }}" class="fh5co-project-item image-popup to-animate">
+          <img src="{{ product.image2.url }}" alt="Image" class="img-responsive">
+        </a>
+      </div>
+      {% endif %}
 
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+      <div class="clearfix visible-sm-block"></div>
+      {% if product.image3 %}
+      <div class="col-md-4 col-sm-6 col-xxs-12">
+        <a href="{{ product.image3.url }}" class="fh5co-project-item image-popup to-animate">
+          <img src="{{ product.image3.url }}" alt="Image" class="img-responsive">
+        </a>
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>
 {% endif %}
 
+
+
+
+<section id="fh5co-testimonials" data-section="tecData">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Technische Details</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>
+              Technische Daten des Produkts nach Angaben des Herstellers
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+
+    </div>
+  </div>
+</section>
+
+
 {% include "app/html_templates/sections/commentSection.html" %}
 
+<!-- Footer -->
 {% include "app/html_templates/footer/footerTemplate.html" %}
 
 {% include "app/html_templates/modals/modals.html" %}
 
+{% if all_products %}
+{% for product in all_products %}
+<div class="col-md-4 col-sm-6 col-xxs-12">
+  <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+    <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+  </a>
+</div>
+{% endfor %}
+{% endif %}
 </body>
 </html>
-
