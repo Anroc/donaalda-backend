@@ -46,9 +46,9 @@
       <div class="text-inner">
         <div class="row">
           <div class="col-md-8">
-            <h1 class="text-left">{{ product.name }}</h1>
+            <h1 class="text-left">product-name (old)</h1>
             <h3 class="text-left"
-                style="color: #ddd; margin-top: -20px;">{{ product.product_type.type_name }}</h3>
+                style="color: #ddd; margin-top: -20px;">product-type-name (old)</h3>
           </div>
           <div class="col-md-4">
             <div class="panel panel-default pull-right"
@@ -65,7 +65,6 @@
                        src="{{ product.provider.providerprofile.logo_image.url }}"
                        alt="providerImg">
                 </div>
-
               </div>
             </div>
           </div>
@@ -76,16 +75,45 @@
   </div>
 </section>
 
-<section id="fh5co-intro" data-section="intro">
+<section id="fh5co-intro" data-section="intro" style="">
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Beschreibung</h2>
+        <h2 class="to-animate">Filter</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
             {% if product.description %}
             <h3>{{ product.description }}</h3>
             {% endif %}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="label label-default">Preis</label>
+            <select class="form-control">
+              <option value="one">-</option>
+              <option value="one">0-100 €</option>
+              <option value="two">100-250 €</option>
+              <option value="three">250-500 €</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="label label-default">Hersteller</label>
+            <select class="form-control">
+              <option value="one">-</option>
+              <option value="one">Toyota</option>
+              <option value="two">Samsung</option>
+              <option value="three">Nutella</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="label label-default">Kategorie</label>
+            <select class="form-control">
+              <option value="one">-</option>
+              <option value="one">Energie</option>
+              <option value="two">Komfort</option>
+              <option value="three">Sicherheit</option>
+            </select>
           </div>
         </div>
       </div>
