@@ -254,23 +254,15 @@
         </div>
       </div>
     </div>
-
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
-        <!-- foreach for products -->
-        {% with slide=1%}
+        <!-- foreach product in products -->
           {% for indicator in current_scenario.scenario_product_set.products.all %}
-            {% if forloop.counter == 1 %}
-              <li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li>
-            {% endif %}
-            {% if forloop.counter|divisibleby:3 %}
-
-                <li data-target="#carousel-example-generic" data-slide-to="{{ slide|add:'1' }}"></li>
-
+            {% if forloop.counter0|divisibleby:3 %}
+                <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
             {% endif %}
           {% endfor %}
-        {% endwith %}
       </ol>
 
       <!-- Wrapper for slides -->
