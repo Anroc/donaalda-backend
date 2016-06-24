@@ -254,52 +254,42 @@
         </div>
       </div>
     </div>
-
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
-        <!-- foreach for products -->
-        {% with slide=1%}
+        <!-- foreach product in products -->
           {% for indicator in current_scenario.scenario_product_set.products.all %}
-            {% if forloop.counter == 1 %}
-              <li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li>
-            {% endif %}
-            {% if forloop.counter|divisibleby:3 %}
-
-                <li data-target="#carousel-example-generic" data-slide-to="{{ slide|add:'1' }}"></li>
-
+            {% if forloop.counter0|divisibleby:3 %}
+                <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
             {% endif %}
           {% endfor %}
-        {% endwith %}
       </ol>
 
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
         {% for item in current_scenario.scenario_product_set.products.all %}
-          <a href="{% url 'app:product' item.pk %}">
             {% if forloop.counter == 1 %}
-              <div class="item active" style="margin-left: 50px; margin-right: 50px;">
+            <div class="item active" style="margin-left: 50px; margin-right: 50px;">
             {% endif%}
-              <div class="col-md-4">
-                <div class="card" style="background-color:white; border-radius:5px">
-                  <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                    <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ item.name }}</h4>
-                    <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ item.provider }}</h6>
+              <a href="{% url 'app:product' item.pk %}">
+                  <div class="col-md-4">
+                    <div class="card" style="background-color:white; border-radius:5px">
+                      <div class="card-block" style="padding-top:10px; padding-bottom:10px">
+                        <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ item.name }}</h4>
+                        <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ item.provider }}</h6>
+                      </div>
+                      <div style="height: 250px;">
+                        <img src="{{ item.image1.url }}" alt="" class="center-block" style="max-height: 95%; max-width: 95%;">
+                      </div>
+                    </div>
                   </div>
-                  <div style="height: 250px;">
-                    <img src="{{ item.image1.url }}" alt="" class="center-block" style="max-height: 95%; max-width: 95%;">
-                  </div>
-                </div>
-              </div>
+              </a>
             {% if forloop.counter == current_scenario.scenario_product_set.products.all|length %}
-              </div>
-            {% else %}
-              {% if forloop.counter|divisibleby:3 %}
-                </div>
-                <div class="item" style="margin-left: 50px; margin-right: 50px;">
-              {% endif%}
+            </div>
+            {% elif forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="item" style="margin-left: 50px; margin-right: 50px;">
             {% endif %}
-          </a>
         {% endfor %}
       </div>
 
