@@ -232,6 +232,9 @@ def register_user(request):
             user.last_name = lastname
             user.save()
             messages.success(request, 'Sie wurden erfolgreich registriert!')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, 'Sie wurden erfolgreich angemeldet!')
             return HttpResponseRedirect(redirectpage)
         else:
             messages.error(request, 'Bitte alle Felder ausfüllen!')
