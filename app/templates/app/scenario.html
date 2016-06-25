@@ -196,7 +196,7 @@
                       {% if scenario.left_right %}
                         <div class="col-md-8">
                           <p class="text-justify to-animate">
-                            {{scenario.description}}
+                            {{scenario.description|safe|linebreaksbr}}
                           </p>
                         </div>
                           {% comment %}
@@ -222,7 +222,7 @@
                           </div>
                         <div class="col-md-8">
                           <p class="text-justify">
-                            {{scenario.description}}
+                           {{scenario.description|safe|linebreaksbr}}
                           </p>
                         </div>
                       {% endif %}
