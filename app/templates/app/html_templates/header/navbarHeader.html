@@ -116,19 +116,14 @@ window.setTimeout(function() {
               </div>
             </li>
             {% else %}
-            <!--TODO: Change these to admin (if allowed), logout and profile-->
             <li>
               <div class="btn-group">
-                {% if user.is_staff %}
-
-
                 <button type="button" class="btn btn-primary btn-xs navbar-btn"
                         data-show="tooltip" title="Kontakt" data-placement="bottom"
                         onclick="contact()">
                   <i class="glyphicon glyphicon-envelope"></i>
                 </button>
-
-
+                {% if user.is_staff %}
                 <button type="button" class="btn btn-primary btn-xs navbar-btn"
                         data-show="tooltip" title="Verwaltung" data-placement="bottom"
                         onclick="admin()">
