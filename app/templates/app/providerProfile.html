@@ -152,7 +152,7 @@
         <h2 class="to-animate">Beschreibung</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>{{ provider.introduction }}</h3>
+            <h3>{{ provider.introduction|safe|linebreaksbr }}</h3>
           </div>
         </div>
       </div>
@@ -191,7 +191,7 @@
               </p>
               {% endfor %}
             </h3>
-            <h4> {{ scenario.description }}</h4>-->
+            <h4> {{ scenario.description|safe|linebreaksbr }}</h4>-->
           </div>
         </a>
       </div>

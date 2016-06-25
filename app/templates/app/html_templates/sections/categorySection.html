@@ -21,7 +21,7 @@
             {{ category.name }}
           </h2>
           <div style="height: 170px;">
-            {{ category.description }}
+            {{ category.description|safe|linebreaksbr }}
           </div>
           <p>
             <a href="{% url 'app:category' category.name %}" class="btn btn-primary">
