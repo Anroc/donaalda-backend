@@ -9,8 +9,8 @@
   {% include "app/html_templates/header/headerTemplate.html" %}
 
   {% comment %}
-    {% load compile_static %}
-    <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
+  {% load compile_static %}
+  <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
   {% endcomment %}
 
   <script>
@@ -86,40 +86,60 @@
   </div>
 </section>
 
-<section id="fh5co-questions" data-section="intro" style="">
-  {% verbatim %}
-  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-    <div class="container">
-        <legend>Hersteller-Filter</legend>
-        <div layout="row" layout-align="space-around center">
-          <div>
-            <md-checkbox class="md-primary">Hersteller 1</md-checkbox>
-          </div>
-          <div>
-            <md-checkbox class="md-primary">Hersteller 2</md-checkbox>
-          </div>
-          <div>
-            <md-checkbox class="md-primary">Hersteller 3</md-checkbox>
-          </div>
-          <div>
-            <md-checkbox class="md-primary">Hersteller 4</md-checkbox>
+<section id="fh5co-questions" data-section="intro">
+
+  <!--section-header-->
+  <div class="container">
+    <div class="row" style="width:100%">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Filter</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>Wählen Sie nach welchen Attributen die Produkte gefiltert werden.</h3>
           </div>
         </div>
-        <div layout="row" layout-align="space-around center">
-          <div>
-            <md-checkbox class="md-primary">Hersteller 5</md-checkbox>
-          </div>
-          <div>
-            <md-checkbox class="md-primary">Hersteller 6</md-checkbox>
-          </div>
-          <div>
-            <md-checkbox class="md-primary">Hersteller 7</md-checkbox>
-          </div>
-          <div>
-            <md-checkbox class="md-primary">Hersteller 8</md-checkbox>
-          </div>
-        </div>
+      </div>
     </div>
+  </div>
+
+  {% verbatim %}
+  <!--filter-container for material-checkboxes-->
+  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+
+    <!--hersteller-filter-->
+    <div class="container">
+      <legend>Hersteller-Filter</legend>
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Hersteller 1</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 2</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 3</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 4</md-checkbox>
+        </div>
+      </div>
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Hersteller 5</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 6</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 7</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 8</md-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <!--preis-filter-->
     <div class="container">
       <legend>Preis-Filter</legend>
       <div layout="row" layout-align="space-around center">
@@ -134,103 +154,209 @@
         </div>
       </div>
     </div>
-  </div>
 
-
-
-
-
-
-
-    <div ng-controller="SelectOptGroupController" class="md-padding" ng-cloak>
-      <div>
-        <h1 class="md-title">Pick your pizza below</h1>
-        <div layout="row">
-          <md-input-container style="margin-right: 10px;">
-            <label>Size</label>
-            <md-select ng-model="size">
-              <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
-            </md-select>
-          </md-input-container>
-          <md-input-container>
-            <label>Topping</label>
-            <md-select ng-model="selectedToppings" multiple>
-              <md-optgroup label="Meats">
-                <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'meat' }">{{topping.name}}</md-option>
-              </md-optgroup>
-              <md-optgroup label="Veggies">
-                <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'veg' }">{{topping.name}}</md-option>
-              </md-optgroup>
-            </md-select>
-          </md-input-container>
+    <!--kategorie-filter-->
+    <div class="container">
+      <legend>Kategorie-Filter</legend>
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Komfort</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Gesundheit</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Sicherheit</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Energie</md-checkbox>
         </div>
       </div>
     </div>
+
+    <!--button um section mit weiteren filtern anzuzeigen-->
+    <div class="container" style="text-align:center">
+      <button type="button" class="btn btn-link">Weitere Filter anzeigen</button>
+    </div>
+  </div>
   {% endverbatim %}
 </section>
 
-{% if product.image1 %}
+
 <section id="fh5co-work" data-section="images">
+
+  <!--section-header-->
   <div class="container">
-    <div class="row">
+    <div class="row" style="width:100%">
       <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Bilder</h2>
+        <h2 class="to-animate">Weitere Filter (hidden-section)</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>So sieht's aus:</h3>
+            <h3>Wählen Sie noch präzisere Filter-Attribute.</h3>
           </div>
         </div>
       </div>
     </div>
-    <div class="row row-bottom-padded-sm">
-      <div class="col-md-4 col-sm-6 col-xxs-12">
-        <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
-          <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
-        </a>
-      </div>
-      {% if product.image2 %}
-      <div class="col-md-4 col-sm-6 col-xxs-12">
-        <a href="{{ product.image2.url }}" class="fh5co-project-item image-popup to-animate">
-          <img src="{{ product.image2.url }}" alt="Image" class="img-responsive">
-        </a>
-      </div>
-      {% endif %}
+  </div>
 
-      <div class="clearfix visible-sm-block"></div>
-      {% if product.image3 %}
-      <div class="col-md-4 col-sm-6 col-xxs-12">
-        <a href="{{ product.image3.url }}" class="fh5co-project-item image-popup to-animate">
-          <img src="{{ product.image3.url }}" alt="Image" class="img-responsive">
-        </a>
+  {% verbatim %}
+  <!--filter-container for material-checkboxes-->
+  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+
+    <!--szenario-filter-->
+    <div class="container">
+      <legend>Szenario-Filter</legend>
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Szenario 1</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Szenario 2</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Szenario 3</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Szenario 4</md-checkbox>
+        </div>
       </div>
-      {% endif %}
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Szenario 5</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Szenario 6</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Szenario 7</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Szenario 8</md-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <!--produktkategorie-filter-->
+    <div class="container">
+      <legend>Produktkategorie-Filter</legend>
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Küchengeräte</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Sensoren</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Aktoren</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Beleuchtung</md-checkbox>
+        </div>
+      </div>
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Heimkino</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Brandschutz</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Sirenen</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Sonstiges</md-checkbox>
+        </div>
+      </div>
     </div>
   </div>
+  {% endverbatim %}
+
+
+  {% verbatim %}
+  <!--filter-container for material-selects-->
+  <div ng-controller="SelectOptGroupController" class="md-padding" ng-cloak>
+
+    <div class="container">
+      <div layout="row" layout-align="space-around center">
+
+        <md-input-container>
+          <label>Preissegment</label>
+          <md-select ng-model="size">
+            <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
+          </md-select>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Produktkategorie</label>
+          <md-select ng-model="selectedToppings" multiple>
+            <md-optgroup label="Küchengeräte">
+              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Küchengeräte' }">{{topping.name}}</md-option>
+            </md-optgroup>
+            <md-optgroup label="Sensoren">
+              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Sensoren' }">{{topping.name}}</md-option>
+            </md-optgroup>
+          </md-select>
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+  {% endverbatim %}
 </section>
-{% endif %}
 
 
 
 
 <section id="fh5co-testimonials" data-section="tecData">
+
+  <!--section-header-->
   <div class="container">
-    <div class="row">
+    <div class="row" style="width:100%">
       <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Technische Details</h2>
+        <h2 class="to-animate">Produkt-Liste</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>
-              Technische Daten des Produkts nach Angaben des Herstellers
-            </h3>
+            <h3>Die Produkt-Liste wurde nach ihren Interessen gefiltert. Sie haben nun die Möglichkeit diese zu sortieren.</h3>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
+  </div>
 
+
+  {% verbatim %}
+  <!--sorting-selectbox-->
+  <div ng-controller="SelectOptGroupController2" class="md-padding" ng-cloak>
+
+    <div class="container">
+      <div layout="row" layout-align="space-around center">
+
+        <md-input-container>
+          <label>Sortieren nach...</label>
+          <md-select ng-model="size">
+            <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
+          </md-select>
+        </md-input-container>
+      </div>
     </div>
   </div>
+  {% endverbatim %}
+
+  <!--product-list-->
+  {% if all_products %}
+  {% for product in all_products %}
+  <div class="col-md-4 col-sm-6 col-xxs-12">
+    <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+      <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+    </a>
+  </div>
+  {% endfor %}
+  {% endif %}
+
 </section>
+
+
+
+
 
 
 {% include "app/html_templates/sections/commentSection.html" %}
@@ -240,36 +366,25 @@
 
 {% include "app/html_templates/modals/modals.html" %}
 
-{% if all_products %}
-{% for product in all_products %}
-<div class="col-md-4 col-sm-6 col-xxs-12">
-  <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
-    <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
-  </a>
-</div>
-{% endfor %}
-{% endif %}
-
 <!--script for angular selects-->
 <script type="text/javascript">
   angular
     .module('selectDemoOptGroups', ['ngMaterial'])
     .controller('SelectOptGroupController', function($scope) {
       $scope.sizes = [
-        "small (12-inch)",
-        "medium (14-inch)",
-        "large (16-inch)",
-        "insane (42-inch)"
+        "Preissegment 1",
+        "Preissegment 2",
+        "Preissegment 3",
+        "Preissegment 4"
       ];
       $scope.toppings = [
-        { category: 'meat', name: 'Pepperoni' },
-        { category: 'meat', name: 'Sausage' },
-        { category: 'meat', name: 'Ground Beef' },
-        { category: 'meat', name: 'Bacon' },
-        { category: 'veg', name: 'Mushrooms' },
-        { category: 'veg', name: 'Onion' },
-        { category: 'veg', name: 'Green Pepper' },
-        { category: 'veg', name: 'Green Olives' }
+        { category: 'Küchengeräte', name: 'Kühlschrank' },
+        { category: 'Küchengeräte', name: 'Herd' },
+        { category: 'Küchengeräte', name: 'Kaffemaschine' },
+        { category: 'Küchengeräte', name: 'Mikrowelle' },
+        { category: 'Sensoren', name: 'Bewegungsmelder' },
+        { category: 'Sensoren', name: 'Türkontakt' },
+        { category: 'Sensoren', name: 'Luftfeuchtigkeitsmesser' }
       ];
       $scope.selectedToppings = [];
       $scope.printSelectedToppings = function printSelectedToppings() {
@@ -287,6 +402,14 @@
         return this.selectedToppings.join('');
       };
     })
+    .controller('SelectOptGroupController2', function($scope) {
+      $scope.sizes = [
+        "Preis aufsteigend",
+        "Preis absteigend",
+        "Nach Hersteller",
+        "Alphabetisch A-Z"
+      ];
+    })
     .controller('AppCtrl', function($scope) {
       $scope.data = {};
       $scope.data.cb1 = true;
@@ -295,6 +418,7 @@
       $scope.data.cb4 = false;
       $scope.data.cb5 = false;
     });
+
 </script>
 </body>
 </html>
