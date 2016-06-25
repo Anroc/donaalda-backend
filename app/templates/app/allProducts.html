@@ -57,9 +57,9 @@
       <div class="text-inner">
         <div class="row">
           <div class="col-md-8">
-            <h1 class="text-left">product-name (old)</h1>
+            <h1 class="text-left">Filter-Seite</h1>
             <h3 class="text-left"
-                style="color: #ddd; margin-top: -20px;">product-type-name (old)</h3>
+                style="color: #ddd; margin-top: -20px;">Alle Produkte nach Attributen gefiltert</h3>
           </div>
           <div class="col-md-4">
             <div class="panel panel-default pull-right"
@@ -86,8 +86,62 @@
   </div>
 </section>
 
-<section id="fh5co-intro" data-section="intro" style="">
-  <div>
+<section id="fh5co-questions" data-section="intro" style="">
+  {% verbatim %}
+  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+    <div class="container">
+        <legend>Hersteller-Filter</legend>
+        <div layout="row" layout-align="space-around center">
+          <div>
+            <md-checkbox class="md-primary">Hersteller 1</md-checkbox>
+          </div>
+          <div>
+            <md-checkbox class="md-primary">Hersteller 2</md-checkbox>
+          </div>
+          <div>
+            <md-checkbox class="md-primary">Hersteller 3</md-checkbox>
+          </div>
+          <div>
+            <md-checkbox class="md-primary">Hersteller 4</md-checkbox>
+          </div>
+        </div>
+        <div layout="row" layout-align="space-around center">
+          <div>
+            <md-checkbox class="md-primary">Hersteller 5</md-checkbox>
+          </div>
+          <div>
+            <md-checkbox class="md-primary">Hersteller 6</md-checkbox>
+          </div>
+          <div>
+            <md-checkbox class="md-primary">Hersteller 7</md-checkbox>
+          </div>
+          <div>
+            <md-checkbox class="md-primary">Hersteller 8</md-checkbox>
+          </div>
+        </div>
+    </div>
+    <div class="container">
+      <legend>Preis-Filter</legend>
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Preissegment 1</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Preissegment 2</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Preissegment 3</md-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
     <div ng-controller="SelectOptGroupController" class="md-padding" ng-cloak>
       <div>
         <h1 class="md-title">Pick your pizza below</h1>
@@ -112,8 +166,7 @@
         </div>
       </div>
     </div>
-  </div>
-
+  {% endverbatim %}
 </section>
 
 {% if product.image1 %}
@@ -233,6 +286,14 @@
         }
         return this.selectedToppings.join('');
       };
+    })
+    .controller('AppCtrl', function($scope) {
+      $scope.data = {};
+      $scope.data.cb1 = true;
+      $scope.data.cb2 = false;
+      $scope.data.cb3 = false;
+      $scope.data.cb4 = false;
+      $scope.data.cb5 = false;
     });
 </script>
 </body>
