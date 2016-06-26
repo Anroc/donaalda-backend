@@ -1,88 +1,52 @@
 {% load staticfiles %}
 <section id="fh5co-testimonials" data-section="comments">
-    <div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Bewertungen</h2>
         <div class="row">
-            <div class="col-md-12 section-heading text-center">
-                <h2 class="to-animate">Bewertungen</h2>
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>
-                            Du bist nicht der Einzige.
-                            Donaalda hat schon Vielen bei der Auswahl des perfekten Smart Home geholfen.
-                        </h3>
-                    </div>
-                </div>
-            </div>
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>
+              Du bist nicht der Einzige.
+              Donaalda hat schon Vielen bei der Auswahl des perfekten Smart Home geholfen.
+            </h3>
+          </div>
         </div>
-        <div class="row">
-            {% for com in comment %}
-                <div class="col-md-4">
-                    <div class="box-testimony">
-                        <blockquote class="to-animate-2">
-                            <p>&ldquo;{{ com.comment_content }}&rdquo;</p>
-                        </blockquote>
-                        <div class="author to-animate">
-                            {% if not com.comment_from.userimage %}
-                                <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
-                            {% else %}
-                                <figure><img src="{{ com.comment_from.userimage.image.url }}" alt="Person"></figure>
-                            {% endif %}
-                            <p>
-                                {{ com.comment_from }} <span class="subtext">{{ com.comment_title }}</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            {% empty %}
-                <div class="center-block">
-                    <i class="icon icon-thumbs-down"></i> Schade. Es wurden noch keine Kommentare geschrieben.
-                </div>
-            {% endfor %}
-
-        </div>
-        <button type="button" class="btn btn-primary btn-l navbar-btn"
-                data-show="tooltip" title="Comment" data-placement="bottom"
-                data-toggle="modal"
-                data-target="#myModalComment">
-            <i class="glyphicon glyphicon-user"></i>
-        </button>
-        {% comment %}
-                        {% if user.is_authenticated %}
-          <div class="col-md-6 to-animate">
-           <form action={%  url 'app:commentreceiver' %} method="post">{% csrf_token %}
-                       <div class="form-group ">
-                          <label for="title" class="sr-only">Titel</label>
-                          <input name="title" id="name" class="form-control" placeholder="Titel" type="text">
-                        </div>
-
-
-
-                       <div class="form-group ">
-                            <label for="message" class="sr-only">Text</label>
-                            <textarea name="text" id="message" cols="30" rows="5" class="form-control" placeholder="Text"></textarea>
-                       </div>
-
-                        <div class="form-group ">
-                            <label for="message" class="sr-only">Bewertung</label>
-                            Bewertung:<select name="rating">
-                                <option value=0>0</option>
-                                <option value=1>1</option>
-                                <option value=2>2</option>
-                                <option value=3>3</option>
-                                <option value=2>4</option>
-                                <option value=3>5</option>
-                            </select>
-                       </div>
-
-                        <input type="hidden" name="path" value="{{ request.path }}" >
-                        <input class="btn btn-primary btn-lg" value="Abschicken" type="submit">
-            </form>
-            </div>
-                  {% else %}
-                      Bitte melden Sie sich an, um Kommentare abgeben zu können.
-                {% endif %}
-  </div>
-  {% endcomment %}
+      </div>
     </div>
-{% include "app/html_templates/modals/commentModal.html" %}
+    <div class="row">
+      {% for com in comment %}
+      <div class="col-md-4">
+        <div class="box-testimony">
+          <blockquote class="to-animate-2">
+            <p>&ldquo;{{ com.comment_content }}&rdquo;</p>
+          </blockquote>
+          <div class="author to-animate">
+            {% if not com.comment_from.userimage %}
+            <figure><img src="{% static 'app/assets/images/person2.jpg' %}" alt="Person"></figure>
+            {% else %}
+            <figure><img src="{{ com.comment_from.userimage.image.url }}" alt="Person"></figure>
+            {% endif %}
+            <p>
+              {{ com.comment_from }} <span class="subtext">{{ com.comment_title }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="center-block">
+        <i class="icon icon-thumbs-down"></i> Schade. Es wurden noch keine Kommentare geschrieben.
+      </div>
+      {% endfor %}
+
+    </div>
+    <button type="button" class="btn btn-primary btn-l navbar-btn"
+            data-show="tooltip" title="Comment" data-placement="bottom"
+            data-toggle="modal"
+            data-target="#myModalComment">
+      <i class="glyphicon glyphicon-user"></i>
+    </button>
+
+  </div>
+  {% include "app/html_templates/modals/commentModal.html" %}
 </section>
