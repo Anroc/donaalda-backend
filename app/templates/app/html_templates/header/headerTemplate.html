@@ -2,34 +2,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-{% if navInfo == 'scenario' %}
-{% if current_scenario %}
-<title>DONAALDA - Szenario - {{ current_scenario.name }}</title>
-{% endif %}
-<link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
-<style>
-  .carousel-control {
-    width: 50px;
-    opacity: 0.2;
-    filter: alpha(opacity=20);
-    font-size: 30px;
-  }
-
-  .carousel-indicators{
-    bottom:-50px;
-  }
-</style>
-{% elif navInfo == 'provider' %}
-{% if product.name %}
-<title>DONAALDA - Produktübersicht - {{ product.name }}</title>
-{% endif %}
-<link rel="stylesheet" href="{% static 'app/assets/css/styleProvider.css' %}">
-
-{% else %}
-<title>DONAALDA</title>
-
-<link rel="stylesheet" href="{% static 'app/assets/css/style.css' %}">
-{% endif %}
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,6 +41,39 @@
 <link rel="stylesheet" href="{% static 'app/assets/css/magnific-popup.css' %}">
 <!-- Bootstrap  -->
 <link rel="stylesheet" href="{% static 'app/assets/css/bootstrap.css' %}">
+
+
+
+{% if navInfo == 'scenario' %}
+{% if current_scenario %}
+<title>DONAALDA - Szenario - {{ current_scenario.name }}</title>
+
+<link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
+<style>
+  .carousel-control {
+    width: 50px;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    font-size: 30px;
+  }
+
+  .carousel-indicators{
+    bottom:-50px;
+  }
+</style>
+{% endif %}
+{% elif navInfo == 'provider' %}
+{% if product.name %}
+<title>DONAALDA - Produktübersicht - {{ product.name }}</title>
+
+<link rel="stylesheet" href="{% static 'app/assets/css/styleProvider.css' %}">
+{% endif %}
+
+{% else %}
+<title>DONAALDA</title>
+
+<link rel="stylesheet" href="{% static 'app/assets/css/style.css' %}">
+{% endif %}
 
 <!-- Modernizr JS -->
 <script src="{% static 'app/assets/js/modernizr-2.6.2.min.js' %}"></script>
@@ -122,12 +127,6 @@
 </script>
 <!-- Main JS (Do not remove) -->
 <script src="{% static 'app/assets/js/main.js' %}"></script>
-
-<script>
-  $(document).ready(function () {
-    $('[data-show="tooltip"]').tooltip();
-  });
-</script>
 
 <script>
   function start() {
