@@ -37,7 +37,7 @@
 </head>
 <body>
 
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='product'%}
+{% include "app/html_templates/header/navbarHeader.html" with navInfo='product' productName=product.name%}
 
 <section id="fh5co-page" data-section="home"
          style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"

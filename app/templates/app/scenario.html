@@ -27,7 +27,7 @@
 </head>
 <body>
 
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='scenario'%}
+{% include "app/html_templates/header/navbarHeader.html" with navInfo='scenario' scenarioName=current_scenario.name %}
 
 <section id="fh5co-page" data-section="home"
          data-stellar-background-ratio="0.5" {% if current_scenario.picture %}
