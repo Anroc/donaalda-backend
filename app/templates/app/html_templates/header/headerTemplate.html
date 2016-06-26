@@ -6,12 +6,29 @@
 {% if current_scenario %}
 <title>DONAALDA - Szenario - {{ current_scenario.name }}</title>
 {% endif %}
+<link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
+<style>
+  .carousel-control {
+    width: 50px;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    font-size: 30px;
+  }
+
+  .carousel-indicators{
+    bottom:-50px;
+  }
+</style>
 {% elif navInfo == 'provider' %}
 {% if product.name %}
 <title>DONAALDA - Produktübersicht - {{ product.name }}</title>
 {% endif %}
+<link rel="stylesheet" href="{% static 'app/assets/css/styleProvider.css' %}">
+
 {% else %}
 <title>DONAALDA</title>
+
+<link rel="stylesheet" href="{% static 'app/assets/css/style.css' %}">
 {% endif %}
 
 
@@ -52,18 +69,6 @@
 <link rel="stylesheet" href="{% static 'app/assets/css/magnific-popup.css' %}">
 <!-- Bootstrap  -->
 <link rel="stylesheet" href="{% static 'app/assets/css/bootstrap.css' %}">
-
-{% if navInfo == 'provider' %}
-
-<link rel="stylesheet" href="{% static 'app/assets/css/styleProvider.css' %}">
-{% elif navInfo == 'scenario' %}
-
-<link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
-
-{% else %}
-<link rel="stylesheet" href="{% static 'app/assets/css/style.css' %}">
-
-{% endif %}
 
 <!-- Modernizr JS -->
 <script src="{% static 'app/assets/js/modernizr-2.6.2.min.js' %}"></script>
