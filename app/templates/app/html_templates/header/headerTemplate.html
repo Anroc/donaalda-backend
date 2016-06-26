@@ -1,7 +1,16 @@
 {% load staticfiles %}
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+{% if navInfo == 'scenario' %}
+{% if current_scenario %}
+<title>DONAALDA - Szenario - {{ current_scenario.name }}</title>
+{% endif %}
+{% else %}
 <title>DONAALDA</title>
+{% endif %}
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
