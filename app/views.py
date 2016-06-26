@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 from django.contrib import messages
 from django.views import generic
 from django.contrib.auth import authenticate
@@ -405,3 +406,31 @@ def update_pagehistory(request):
         request.session['history'] = [cp]
 
     return HttpResponse("/")
+
+@csrf_protect
+@require_http_methods(["GET", "POST"])
+def commentreceiver(request):
+    #Formvariables: text, title, rating, path
+    title= request.POST.get('title')
+    text= request.POST.get('text')
+    path= request.POST.get('path')
+    rating= request.POST.get('rating')
+    user = request.user
+    if title is None or not title or text is None or not text or rating is None or not rating:
+        messages.error(request, 'Bitte alle Felder ausfüllen!')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    if path is None or not path:
+        messages.error(request, 'Ein Fehler ist aufgetreten!')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    if user is None or not User.objects.filter(username=user.username).exists():  # existiert nicht
+        messages.error(request, 'Benutzer existiert nicht!')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    path= path.rstrip("/")
+
+    comment = Comment(comment_title=title, comment_content=text, page_url=path,comment_from=user , rating=rating, creation_date = datetime.datetime.now())
+    comment.save()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

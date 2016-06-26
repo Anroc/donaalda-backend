@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
     url(r'^logout$', views.log_out, name='logout'),
+    url(r'^commentreceiver$', views.commentreceiver, name='commentreceiver'),
     url(r'^scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
     url(r'^back$', views.back, name='back'),
     url(r'^updatepagehistory$', views.update_pagehistory, name='update_pagehistory'),
