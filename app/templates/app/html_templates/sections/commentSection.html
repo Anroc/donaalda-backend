@@ -38,14 +38,17 @@
                     <i class="icon icon-thumbs-down"></i> Schade. Es wurden noch keine Kommentare geschrieben.
                 </div>
             {% endfor %}
-
         </div>
-        <button type="button" class="btn btn-primary btn-l navbar-btn"
-                data-show="tooltip" title="Comment" data-placement="bottom"
-                data-toggle="modal"
-                data-target="#myModalComment">
-            <i class="glyphicon glyphicon-user"></i>
-        </button>
+    {% if comment|length >= 1 %}
+        {% if user.is_authenticated %}
+                <button type="button" class="btn btn-primary btn-l navbar-btn"
+                    data-show="tooltip" title="Comment" data-placement="bottom"
+                    data-toggle="modal"
+                    data-target="#myModalComment">
+                <i class="glyphicon glyphicon-user"></i>
+            </button>
+            {% endif %}
+    {% endif %}
         {% comment %}
                         {% if user.is_authenticated %}
           <div class="col-md-6 to-animate">
@@ -84,5 +87,5 @@
   </div>
   {% endcomment %}
     </div>
-{% include "app/html_templates/modals/commentModal.html" %}
+    {% include "app/html_templates/modals/commentModal.html" %}
 </section>
