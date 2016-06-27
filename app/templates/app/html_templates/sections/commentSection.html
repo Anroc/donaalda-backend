@@ -41,10 +41,11 @@
 
         </div>
         {% if user.is_authenticated %}
+            <br>
             <button type="button" class="btn btn-primary btn-l navbar-btn"
                     data-show="tooltip" title="Comment" data-placement="bottom"
                     data-toggle="modal"
-                    data-target="#myModalComment">Hinterlass doch einen Kommentar
+                    data-target="#myModalComment" style="float: right;">Hinterlass doch einen Kommentar
                 <i class="glyphicon glyphicon-pencil"></i>
             </button>
         {% else %}
