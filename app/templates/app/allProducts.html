@@ -45,21 +45,19 @@
 </head>
 
 
-<body ng-app="selectDemoOptGroups">
+<body ng-app="allProductsApp">
 
 {% include "app/html_templates/header/navbarHeader.html" with navInfo='product'%}
 
 <section id="fh5co-page" data-section="home"
          style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
          data-stellar-background-ratio="0.5">
-  <div>
+  <div class="container">
     <div class="text-wrap">
       <div class="text-inner">
         <div class="row">
           <div class="col-md-8">
             <h1 class="text-left">Filter-Seite</h1>
-            <h3 class="text-left"
-                style="color: #ddd; margin-top: -20px;">Alle Produkte nach Attributen gefiltert</h3>
           </div>
           <div class="col-md-4">
             <div class="panel panel-default pull-right"
@@ -95,7 +93,7 @@
         <h2 class="to-animate">Filter</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Wählen Sie nach welchen Attributen die Produkte gefiltert werden.</h3>
+            <h3>Wählen Sie nach welchen Attributen die Produkte gefiltert werden sollen.</h3>
           </div>
         </div>
       </div>
@@ -141,18 +139,42 @@
 
     <!--preis-filter-->
     <div class="container">
+
       <legend>Preis-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Preissegment 1</md-checkbox>
+      <md-content style="margin: 16px; padding:16px">
+        <div ng-controller="AppCtrl2" ng-cloak>
+          <md-slider-container>
+            <div class="row">
+              <div class="col-md-10">
+                <md-slider flex ng-model="color.blue" min="0" max="999" aria-label="min" id="blue-slider-min" class="md-primary">
+                </md-slider>
+              </div>
+              <div class="col-md-2">
+                <md-input-container>
+                  <label>Preis min</label>
+                  <input flex type="number" ng-model="color.blue" aria-label="min" aria-controls="blue-slider-min">
+                </md-input-container>
+              </div>
+            </div>
+          </md-slider-container>
         </div>
-        <div>
-          <md-checkbox class="md-primary">Preissegment 2</md-checkbox>
+        <div ng-controller="AppCtrl2" ng-cloak>
+          <md-slider-container>
+            <div class="row">
+              <div class="col-md-10">
+                <md-slider flex ng-model="color.blue" min="0" max="999" aria-label="max" id="blue-slider-max" class="md-primary">
+                </md-slider>
+              </div>
+              <div class="col-md-2">
+                <md-input-container>
+                  <label>Preis max</label>
+                  <input flex type="number" ng-model="color.blue" aria-label="max" aria-controls="blue-slider-max">
+                </md-input-container>
+              </div>
+            </div>
+          </md-slider-container>
         </div>
-        <div>
-          <md-checkbox class="md-primary">Preissegment 3</md-checkbox>
-        </div>
-      </div>
+      </md-content>
     </div>
 
     <!--kategorie-filter-->
@@ -270,37 +292,6 @@
     </div>
   </div>
   {% endverbatim %}
-
-
-  {% verbatim %}
-  <!--filter-container for material-selects-->
-  <div ng-controller="SelectOptGroupController" class="md-padding" ng-cloak>
-
-    <div class="container">
-      <div layout="row" layout-align="space-around center">
-
-        <md-input-container>
-          <label>Preissegment</label>
-          <md-select ng-model="size">
-            <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
-          </md-select>
-        </md-input-container>
-
-        <md-input-container>
-          <label>Produktkategorie</label>
-          <md-select ng-model="selectedToppings" multiple>
-            <md-optgroup label="Küchengeräte">
-              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Küchengeräte' }">{{topping.name}}</md-option>
-            </md-optgroup>
-            <md-optgroup label="Sensoren">
-              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Sensoren' }">{{topping.name}}</md-option>
-            </md-optgroup>
-          </md-select>
-        </md-input-container>
-      </div>
-    </div>
-  </div>
-  {% endverbatim %}
 </section>
 
 
@@ -325,7 +316,7 @@
 
   {% verbatim %}
   <!--sorting-selectbox-->
-  <div ng-controller="SelectOptGroupController2" class="md-padding" ng-cloak>
+  <div ng-controller="sorting" class="md-padding" ng-cloak>
 
     <div class="container">
       <div layout="row" layout-align="space-around center">
@@ -369,40 +360,8 @@
 <!--script for angular selects-->
 <script type="text/javascript">
   angular
-    .module('selectDemoOptGroups', ['ngMaterial'])
-    .controller('SelectOptGroupController', function($scope) {
-      $scope.sizes = [
-        "Preissegment 1",
-        "Preissegment 2",
-        "Preissegment 3",
-        "Preissegment 4"
-      ];
-      $scope.toppings = [
-        { category: 'Küchengeräte', name: 'Kühlschrank' },
-        { category: 'Küchengeräte', name: 'Herd' },
-        { category: 'Küchengeräte', name: 'Kaffemaschine' },
-        { category: 'Küchengeräte', name: 'Mikrowelle' },
-        { category: 'Sensoren', name: 'Bewegungsmelder' },
-        { category: 'Sensoren', name: 'Türkontakt' },
-        { category: 'Sensoren', name: 'Luftfeuchtigkeitsmesser' }
-      ];
-      $scope.selectedToppings = [];
-      $scope.printSelectedToppings = function printSelectedToppings() {
-        var numberOfToppings = this.selectedToppings.length;
-        // If there is more than one topping, we add an 'and'
-        // to be gramatically correct. If there are 3+ toppings
-        // we also add an oxford comma.
-        if (numberOfToppings > 1) {
-          var needsOxfordComma = numberOfToppings > 2;
-          var lastToppingConjunction = (needsOxfordComma ? ',' : '') + ' and ';
-          var lastTopping = lastToppingConjunction +
-            this.selectedToppings[this.selectedToppings.length - 1];
-          return this.selectedToppings.slice(0, -1).join(', ') + lastTopping;
-        }
-        return this.selectedToppings.join('');
-      };
-    })
-    .controller('SelectOptGroupController2', function($scope) {
+    .module('allProductsApp', ['ngMaterial'])
+    .controller('sorting', function($scope) {
       $scope.sizes = [
         "Preis aufsteigend",
         "Preis absteigend",
@@ -417,6 +376,21 @@
       $scope.data.cb3 = false;
       $scope.data.cb4 = false;
       $scope.data.cb5 = false;
+    })
+    .controller('AppCtrl2', function($scope) {
+      $scope.color = {
+        red: Math.floor(Math.random() * 255),
+        green: Math.floor(Math.random() * 255),
+        blue: Math.floor(Math.random() * 255)
+      };
+      $scope.rating1 = 3;
+      $scope.rating2 = 2;
+      $scope.rating3 = 4;
+      $scope.disabled1 = Math.floor(Math.random() * 100);
+      $scope.disabled2 = 0;
+      $scope.disabled3 = 70;
+      $scope.invert = Math.floor(Math.random() * 100);
+      $scope.isDisabled = true;
     });
 
 </script>
