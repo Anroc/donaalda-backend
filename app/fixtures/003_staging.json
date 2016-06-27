@@ -285,6 +285,42 @@
     }
 },
 {
+    "model": "app.answer",
+    "pk": 1,
+    "fields": {
+        "belongs_to_question": 1,
+        "answer_text": "Energie",
+        "tag": 7
+    }
+},
+{
+    "model": "app.answer",
+    "pk": 2,
+    "fields": {
+        "belongs_to_question": 1,
+        "answer_text": "Sicherheit",
+        "tag": 4
+    }
+},
+{
+    "model": "app.answer",
+    "pk": 3,
+    "fields": {
+        "belongs_to_question": 1,
+        "answer_text": "Gesundheit",
+        "tag": 5
+    }
+},
+{
+    "model": "app.answer",
+    "pk": 4,
+    "fields": {
+        "belongs_to_question": 1,
+        "answer_text": "Komfort",
+        "tag": 6
+    }
+},
+{
     "model": "app.product",
     "pk": 1,
     "fields": {
@@ -297,7 +333,8 @@
         "image1": "products/81eatl5.jpeg",
         "image2": "products/81eatl5_gHw2fCv.jpeg",
         "image3": "products/81eatl5_WqTQUxU.jpeg",
-        "end_of_life": true
+        "end_of_life": true,
+        "tags": []
     }
 },
 {
@@ -313,7 +350,8 @@
         "image1": "products/81eatl5.jpeg",
         "image2": "",
         "image3": "",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -329,7 +367,8 @@
         "image1": "products/jung_co2_1.png",
         "image2": "products/Jung_CO2-Sensor_2.jpg",
         "image3": "products/Jung_CO2-Sensor_3.png",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -345,7 +384,8 @@
         "image1": "products/eurotronic_sparmatic_comet_1.jpg",
         "image2": "products/Eurotronic_Comet_2.jpg",
         "image3": "products/Eurotronic_Comet_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -361,7 +401,8 @@
         "image1": "products/fibaro_plug_1.jpg",
         "image2": "products/Fiabro_Wall_Plug_2.JPG",
         "image3": "products/Fiabro_Wall_Plug_4.JPG",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -377,7 +418,8 @@
         "image1": "products/jung_bewegungsmelder_1.png",
         "image2": "products/Jung_Presence_Detector_1.jpg",
         "image3": "products/Jung_Presence_Detector_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -393,7 +435,8 @@
         "image1": "products/fibaro_smoke_1.png",
         "image2": "products/Fiabro_Smoke_Sensor_3.jpg",
         "image3": "products/Fiabro_Smoke_Sensor_1.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -409,7 +452,8 @@
         "image1": "products/fritzbox_1.png",
         "image2": "products/fritzbox_2.png",
         "image3": "products/fritzbox_3.png",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -425,7 +469,8 @@
         "image1": "products/Thermokon_SWR01_5.jpg",
         "image2": "products/Thermokon_SWR01_5_2.png",
         "image3": "products/Thermokon_SWR01_5_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -441,7 +486,8 @@
         "image1": "products/nodon-stp-2-1-05-temperatursensor.jpg",
         "image2": "products/nodon-stp-2-1-05-temperatursensor_2.jpg",
         "image3": "products/nodon-stp-2-1-05-temperatursensor_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -457,7 +503,8 @@
         "image1": "products/tmk_web_slider1_easySens_SR07.png",
         "image2": "products/tmk_web_02_slider_easySens_SR04.png",
         "image3": "products/tmk_web_03_slider_easySens_SR04.png",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -473,7 +520,8 @@
         "image1": "products/PSC234_1.jpg",
         "image2": "products/PSC234_2.jpg",
         "image3": "products/PSC234_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -489,7 +537,8 @@
         "image1": "products/tmk_web_01_slider_easySens_SR_MDS_Solar.png",
         "image2": "products/tmk_web_02_slider_easySens_SR_MOC.png",
         "image3": "products/sr-mds-solar-2.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -505,7 +554,8 @@
         "image1": "products/tmk_SAB02_1.jpg",
         "image2": "products/tmk_SAB02_2.jpg",
         "image3": "products/tmk_SAB02_3.png",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -521,7 +571,8 @@
         "image1": "products/jung-2316_16_reghe_01.jpg",
         "image2": "products/jung-2316_16_reghe_02.jpg",
         "image3": "products/jung-2316_16_reghe_03.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -537,7 +588,8 @@
         "image1": "products/jung-2308_16_regchm-knx-ns0828035_01.jpg",
         "image2": "products/jung-2308_16_regchm-knx-ns0828035_02.jpg",
         "image3": "products/jung-2308_16_regchm-knx-ns0828035_06.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -553,7 +605,8 @@
         "image1": "products/Gira_217400_1.jpg",
         "image2": "products/Gira_217400_2.jpg",
         "image3": "",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -569,7 +622,8 @@
         "image1": "products/Jung-KNX-Heizungsaktor-2336-REG-HZ-HE.jpg",
         "image2": "products/jung-2336_reg_hz_he-knx-ns6516434_02.jpg",
         "image3": "products/jung-2336_reg_hz_he-knx-ns6516434_04.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -585,7 +639,8 @@
         "image1": "products/bms_quadra_1.jpg",
         "image2": "products/bms_quadra_2.jpg",
         "image3": "products/bms_quadra_3.png",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -601,7 +656,8 @@
         "image1": "products/Miele_G6992SCViK2O_1.jpg",
         "image2": "products/miele_g_6992_scvi_k2o_2.jpg",
         "image3": "products/miele_g_6992_scvi_k2o_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -617,7 +673,8 @@
         "image1": "products/miele_TMM840WPS_1.jpg",
         "image2": "products/miele_TMM840WPS_2.png",
         "image3": "products/miele_TMM840WPS_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -633,7 +690,8 @@
         "image1": "products/miele_WMR861WPSP_1.jpg",
         "image2": "products/miele_WMR861WPSP_2.png",
         "image3": "products/miele_WMR861WPSP_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -649,7 +707,8 @@
         "image1": "products/Miele_ofen_1.jpg",
         "image2": "products/miele_ofen_2.jpg",
         "image3": "products/Miele_ofen_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -665,7 +724,8 @@
         "image1": "products/miele_kochfeld_1.jpg",
         "image2": "products/miele_kochfeld_2.jpg",
         "image3": "products/Miele_kochfeld_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -681,7 +741,8 @@
         "image1": "products/miele_dunst_1.jpg",
         "image2": "products/miele_dunst_2.jpg",
         "image3": "products/miele_dunst_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -697,7 +758,8 @@
         "image1": "products/miele_kaffee_1.jpg",
         "image2": "products/miele_kaffee_2.jpg",
         "image3": "products/miele_kaffee_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -713,7 +775,8 @@
         "image1": "products/miele_kuhl_1.jpg",
         "image2": "products/miele_kuhl_2.jpg",
         "image3": "products/miele_kuhl_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -729,7 +792,8 @@
         "image1": "products/miele_gate_1.jpg",
         "image2": "products/miele_gate_2.jpg",
         "image3": "",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -745,7 +809,8 @@
         "image1": "products/polar_92044305-P_1.jpg",
         "image2": "products/polar_92044305-P_2.jpg",
         "image3": "products/polar_92044305-P_3.png",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -761,7 +826,8 @@
         "image1": "products/epson_blut_1.jpg",
         "image2": "products/epson_blut_2.jpg",
         "image3": "products/epson_blut_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -777,7 +843,8 @@
         "image1": "products/eQ_thermo_1.png",
         "image2": "products/eQ_thermo_2.jpg",
         "image3": "products/eQ_thermo_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -793,7 +860,8 @@
         "image1": "products/beddi_1.jpg",
         "image2": "products/beddi_2.jpg",
         "image3": "products/beddi_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -809,7 +877,8 @@
         "image1": "products/avm_plug_1.jpg",
         "image2": "products/avm_plug_2.jpg",
         "image3": "",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -825,7 +894,8 @@
         "image1": "products/comet_temp_1.jpg",
         "image2": "products/comet_temp_2.jpg",
         "image3": "",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -841,7 +911,8 @@
         "image1": "products/hue_start_1.jpg",
         "image2": "products/hue_start_2.jpg",
         "image3": "products/hue_start_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -857,7 +928,8 @@
         "image1": "products/hue_single_1.jpg",
         "image2": "products/hue_single_2.jpg",
         "image3": "products/hue_single_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -873,7 +945,8 @@
         "image1": "products/dlink_kamera_1.png",
         "image2": "products/dlink_kamera_2.png",
         "image3": "products/dlink_kamera_3.gif",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -889,7 +962,8 @@
         "image1": "products/kingmak_klingel_1.jpg",
         "image2": "products/kingmak_klingel_2.jpg",
         "image3": "products/kingmak_klingel_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -905,7 +979,8 @@
         "image1": "products/danfoss_1.jpg",
         "image2": "products/danfoss_2.jpg",
         "image3": "products/danfoss_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -921,7 +996,8 @@
         "image1": "products/fibaro_motion_1.jpg",
         "image2": "products/fibaro_motion_2.jpg",
         "image3": "products/fibaro_motion_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -937,7 +1013,8 @@
         "image1": "products/fibaro_tur_1.png",
         "image2": "products/fibaro_tur_2.jpg",
         "image3": "products/fibaro_tur_3.png",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -953,7 +1030,8 @@
         "image1": "products/aeon_alarm_1.jpg",
         "image2": "products/aeon_alarm_2.jpg",
         "image3": "products/aeon_alarm_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -969,7 +1047,8 @@
         "image1": "products/FIBARO-FLOOD-SENSOR-FGFS101_1.jpg",
         "image2": "products/FIBARO-FLOOD-SENSOR-FGFS101_2.jpg",
         "image3": "products/FIBARO-FLOOD-SENSOR-FGFS101_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -985,7 +1064,8 @@
         "image1": "products/aeon_multi_1.jpg",
         "image2": "products/aeon_multi_2.jpg",
         "image3": "products/aeon_multi_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 },
 {
@@ -1001,7 +1081,8 @@
         "image1": "products/aeon_led_1.jpg",
         "image2": "products/aeon_led_2.png",
         "image3": "products/aeon_led_3.jpg",
-        "end_of_life": false
+        "end_of_life": false,
+        "tags": []
     }
 }
 ]
