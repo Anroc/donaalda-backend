@@ -40,7 +40,7 @@
             {% endfor %}
 
         </div>
-        {% if comment|length >= 1 and user.is_authenticated %}
+        {% if user.is_authenticated %}
             <button type="button" class="btn btn-primary btn-l navbar-btn"
                     data-show="tooltip" title="Comment" data-placement="bottom"
                     data-toggle="modal"
