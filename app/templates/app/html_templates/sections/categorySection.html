@@ -1,5 +1,5 @@
 {% load staticfiles %}
-<section id="fh5co-intro" data-section="categories">
+<section id="fh5co-intro">
   <!--div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-left">
@@ -8,7 +8,7 @@
       </div>
     </div>
   </div-->
-  <div class="container">
+  <div class="container" id="test">
     <div class="row row-bottom-padded-lg">
       {% for category in category_list %}
       <div class="fh5co-block to-animate"
@@ -16,6 +16,7 @@
         <div class="overlay-darker"></div>
         <div class="overlay"></div>
         <div class="fh5co-text">
+          <a name="categories"></a>
           <i class="fh5co-intro-icon icon-{{ category.iconString }}"></i>
           <h2>
             {{ category.name }}

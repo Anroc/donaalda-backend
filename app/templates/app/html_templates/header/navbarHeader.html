@@ -9,7 +9,13 @@ window.setTimeout(function() {
     });
 }, 3000);
 
-});
+  $("#btn").click(function(){
+    $("html, body").animate({
+      scrollTop: $("#test").offset().top - 120
+    }, 2000);
+    });
+  });
+
 </script>
 
 <header role="banner" id="fh5co-header">
@@ -52,7 +58,7 @@ window.setTimeout(function() {
           <ul class="nav navbar-nav navbar-right">
             {% if navInfo == 'index' %}
             <li class="active"><a href="#" data-nav-section="home"><span>Start</span></a></li>
-            <li><a href="#" data-nav-section="categories"><span>Kategorien</span></a></li>
+            <li><a href="#" id="btn"><span>Kategorien</span></a></li>
             <li><a href="#" data-nav-section="whatsIsDonaalda"><span>Donaalda</span></a></li>
             <li><a href="#" data-nav-section="livingSituation"><span>Wohnsituation</span></a></li>
             <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
