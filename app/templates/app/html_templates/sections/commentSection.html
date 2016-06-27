@@ -45,8 +45,10 @@
                     data-show="tooltip" title="Comment" data-placement="bottom"
                     data-toggle="modal"
                     data-target="#myModalComment">Hinterlass doch einen Kommentar
-                <i class="glyphicon glyphicon-comment"></i>
+                <i class="glyphicon glyphicon-pencil"></i>
             </button>
+        {% else %}
+            Bitte melde dich an, um Kommentare abgeben zu können
         {% endif %}
     </div>
     {% include "app/html_templates/modals/commentModal.html" %}
