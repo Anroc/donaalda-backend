@@ -1,3 +1,6 @@
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'app/assets/css/steper.css' %}">
+
 <md-step label="Allgemein" md-complete="vm.stepData[0].data.completed"
          ng-disabled="vm.stepProgress < 1">
 
@@ -43,17 +46,43 @@
             <h4>
               Ausstattung von {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
             </h4>
+
+
             <div class="row">
 
+              <div>
+                <label class="label--checkbox">
+                  <input type="checkbox" class="checkbox" unchecked>
+                  Garten
+                </label>
+                <label class="label--checkbox">
+                  <input type="checkbox" class="checkbox" unchecked>
+                  Balkon
+                </label>
+                <label class="label--checkbox">
+                  <input type="checkbox" class="checkbox" unchecked>
+                  Terasse
+                </label>
+                <label class="label--checkbox">
+                  <input type="checkbox" class="checkbox" unchecked>
+                  Garten
+                </label>
+              </div>
 
+              <!--
               <md-checkbox-group ng-model="data.addition" layout="column">
                 <md-checkbox value="Garten">Garten</md-checkbox>
                 <md-checkbox value="Balkon">Balkon</md-checkbox>
                 <md-checkbox value="Terrasse">Terrasse</md-checkbox>
                 <md-checkbox value="Garage">Garage</md-checkbox>
               </md-checkbox-group>
+                 -->
             </div>
+
+
+
           </div>
+
 
           <div flex>
             <h4>Unsere Wohnfläche umfasst Quadratmeter:</h4>
@@ -97,6 +126,9 @@
           </div>
 
         </div>
+
+
+
       </md-content>
       <md-step-actions layout="row">
         <div flex layout="row" layout-align="end top">
