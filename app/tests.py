@@ -6,8 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from .models import Category, Product
 
-# this is a test comment
-# second comment
+
 class SimpleTest(unittest.TestCase):
     def setUp(self):
         # Every test needs a client.
