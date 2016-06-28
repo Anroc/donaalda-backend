@@ -265,12 +265,14 @@ class Question(models.Model):
     RADIO_CHOICE = 'rc'
     DROP_CHOICE = 'dc'
     SLIDER_CHOICE = 'sc'
+    RANGE_CHOICE = 'rs'
 
     ANSWER_PRESENTATION_CHOICES = (
         (MULTI_CHOICE, 'Multiple Choice'),
         (RADIO_CHOICE, 'Radiobutton'),
         (DROP_CHOICE, 'Dropdown'),
         (SLIDER_CHOICE, 'Slider'),
+        (RANGE_CHOICE, 'Range Slider'),
     )
 
     question_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Fragentext")

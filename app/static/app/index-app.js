@@ -5,6 +5,8 @@
 console.log("angular code loaded.");
 
 
+
+
 var donaaldaApp = angular
     .module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers'])
 
