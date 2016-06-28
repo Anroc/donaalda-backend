@@ -33,32 +33,28 @@
     <div class="modal fade" id="myModalComment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action={% url 'app:commentreceiver' %} method="post">{% csrf_token %}
-                    <div class="form-group ">
-                        <label for="title" class="sr-only">Titel</label>
+                <form action={% url 'app:commentreceiver' %} method="post">
+                    {% csrf_token %}
+                    <div class="modal-body ">
+                      <div class="input-group"></div>
                         <input name="title" id="name" class="form-control" placeholder="Titel" type="text">
-                    </div>
-
-
-                    <div class="form-group ">
-                        <label for="message" class="sr-only">Text</label>
-                <textarea name="text" id="message" cols="30" rows="5" class="form-control"
-                          placeholder="Text"></textarea>
-                    </div>
-
-                    <div class="form-group ">
-                        <label for="message" class="sr-only">Bewertung</label>
-                        Bewertung:<select name="rating">
+                        <textarea name="text" id="message" cols="30" rows="5" class="form-control"
+                                  placeholder="Text"></textarea>
+                        <br>
+                        <label for="message">Bewertung</label>
+                        <select name="rating">
                         <option value=0>0</option>
                         <option value=1>1</option>
                         <option value=2>2</option>
                         <option value=3>3</option>
                         <option value=2>4</option>
                         <option value=3>5</option>
-                    </select>
+                        </select>
                     </div>
-                    <input type="hidden" name="path" value="{{ request.path }}">
-                    <input class="btn btn-primary btn-lg" value="Abschicken" type="submit">
+                    <div class="modal-footer">
+                      <input type="hidden" name="path" value="{{ request.path }}">
+                      <input class="btn btn-primary btn-lg" value="Abschicken" type="submit">
+                    </div>
                 </form>
             </div>
         </div>
