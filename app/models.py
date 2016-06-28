@@ -64,7 +64,6 @@ class Scenario(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-
         self.url_name = url_alias(self.name)
         super(Scenario, self).save(*args, **kwargs)
 
@@ -86,7 +85,7 @@ class ScenarioDescription(models.Model):
     order = models.IntegerField(verbose_name="Reihenfolge")
 
     def __str__(self):
-        return '%s %s' %(self.belongs_to_scenario, self.order)
+        return '%s %s' % (self.belongs_to_scenario, self.order)
 
     def natural_key(self):
         return [self.belongs_to_scenario.natural_key(), self.order]
@@ -126,7 +125,7 @@ class Product(models.Model):
     serial_number = models.CharField(max_length=255, default="------", verbose_name="Artikelnummer")
     description = models.TextField(verbose_name="Berschreibung")
     specifications = models.TextField(default="---", verbose_name="Technische Details")
-    image1 = models.ImageField(verbose_name="Bild 1",upload_to="products")
+    image1 = models.ImageField(verbose_name="Bild 1", upload_to="products")
     image2 = models.ImageField(null=True, blank=True, verbose_name="Bild 2",
                                upload_to="products")
     image3 = models.ImageField(null=True, blank=True, verbose_name="Bild 3",
@@ -255,7 +254,7 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "Kommentar"
         verbose_name_plural = "Kommentare"
-        ordering = ["-creation_date","comment_title", "-rating",]
+        ordering = ["-creation_date", "comment_title", "-rating", ]
 
 
 # TODO:Add reference field to tell frontend which step each question belongs to
