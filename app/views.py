@@ -122,7 +122,7 @@ class CategoryView(generic.ListView):
         category = kwargs.get("category_name")
         return render(request, 'app/category.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
-                      'category_list': Category.objects.all(),
+                       'category_list': Category.objects.all(),
                        'category': Category.objects.get(name=category)
                        })
 
@@ -370,13 +370,13 @@ def delete_account(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def back(request):
-    redirect="/";
+    redirect = "/";
 
     if not 'history' in request.session or not request.session['history']:
         return HttpResponseRedirect("/")
     else:
-        if len(request.session['history'])>=2:
-            history= request.session['history']
+        if len(request.session['history']) >= 2:
+            history = request.session['history']
             history.pop()
             redirect = history.pop()
             request.session['history'] = history
@@ -397,7 +397,7 @@ def update_pagehistory(request):
     if 'history' in request.session and request.session['history']:  # wenn eine history
         history = request.session['history']
 
-        if history[-1] == cp: # same page
+        if history[-1] == cp:  # same page
             return HttpResponse("/")
         else:
             history.append(cp)
@@ -407,15 +407,16 @@ def update_pagehistory(request):
 
     return HttpResponse("/")
 
+
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def commentreceiver(request):
-    #Formvariables: text, title, rating, path
-    title= request.POST.get('title')
-    text= request.POST.get('text')
-    path= request.POST.get('path')
+    # Formvariables: text, title, rating, path
+    title = request.POST.get('title')
+    text = request.POST.get('text')
+    path = request.POST.get('path')
     print(path)
-    rating= request.POST.get('rating')
+    rating = request.POST.get('rating')
     user = request.user
     if title is None or not title or text is None or not text or rating is None or not rating:
         messages.error(request, 'Bitte alle Felder ausfüllen!')
@@ -428,10 +429,11 @@ def commentreceiver(request):
     if user is None or not User.objects.filter(username=user.username).exists():  # existiert nicht
         messages.error(request, 'Benutzer existiert nicht!')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    if( not path == "/"):
-        path= path.rstrip("/")
+    if (not path == "/"):
+        path = path.rstrip("/")
     print(path)
-    comment = Comment(comment_title=title, comment_content=text, page_url=path,comment_from=user , rating=rating, creation_date = datetime.datetime.now())
+    comment = Comment(comment_title=title, comment_content=text, page_url=path, comment_from=user, rating=rating,
+                      creation_date=datetime.datetime.now())
     comment.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
