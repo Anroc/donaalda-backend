@@ -32,7 +32,7 @@ class ScenarioAdmin(admin.ModelAdmin):
         user = request.user
         qs = super(ScenarioAdmin, self).get_queryset(request)
 
-        if user.is_superuser:
+        if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
 
         self.exclude.extend(['provider'])
@@ -61,7 +61,7 @@ class ProductSetAdmin(admin.ModelAdmin):
         user = request.user
         qs = super(ProductSetAdmin, self).get_queryset(request)
 
-        if user.is_superuser:
+        if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
 
         self.exclude.extend(['creator'])
@@ -89,7 +89,7 @@ class ProductAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         user = request.user
         qs = super(ProductAdmin, self).get_queryset(request)
-        if user.is_superuser:
+        if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
 
         self.exclude.extend(['provider'])
@@ -114,7 +114,7 @@ class ProviderProfileAdmin(admin.ModelAdmin):
         user = request.user
         qs = super(ProviderProfileAdmin, self).get_queryset(request)
 
-        if user.is_superuser:
+        if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
 
         self.exclude.extend(['owner'])
@@ -166,7 +166,7 @@ class EmployeeAdmin(UserAdmin):
         user = request.user
         qs = super(EmployeeAdmin, self).get_queryset(request)
 
-        if user.is_superuser:
+        if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
 
         return qs.filter(employer=user.employee.employer_id)
