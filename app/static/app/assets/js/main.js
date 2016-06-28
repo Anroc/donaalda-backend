@@ -104,7 +104,7 @@
                 navActive($(this.element).data('section'));
             }
         }, {
-            offset: '250px'
+            offset: '350px'
         });
 
         $section.waypoint(function (direction) {
@@ -113,7 +113,7 @@
             }
         }, {
             offset: function () {
-                return -$(this.element).height() + 250;
+                return -$(this.element).height() + 355;
             }
         });
 
