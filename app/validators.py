@@ -9,4 +9,3 @@ def validate_legal_chars(value):
     if pattern.search(value) is not None:
         raise ValidationError('der Name %(value)s enhält ein unerlaubtes Zeichen. Gültige Zeichen sind a-zA-Z0-9.',
                               params={'value': value}, code='illegal_character')
-
