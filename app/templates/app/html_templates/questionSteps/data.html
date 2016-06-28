@@ -42,14 +42,10 @@
           </div>
 
           <div flex>
-
-            <h4>
-              Ausstattung von {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
-            </h4>
-
-
+              <h4>
+                Ausstattung von {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
+              </h4>
             <div class="row">
-
               <div>
                 <label class="label--checkbox">
                   <input type="checkbox" class="checkbox" unchecked>
@@ -69,23 +65,10 @@
                 </label>
               </div>
 
-              <!--
-              <md-checkbox-group ng-model="data.addition" layout="column">
-                <md-checkbox value="Garten">Garten</md-checkbox>
-                <md-checkbox value="Balkon">Balkon</md-checkbox>
-                <md-checkbox value="Terrasse">Terrasse</md-checkbox>
-                <md-checkbox value="Garage">Garage</md-checkbox>
-              </md-checkbox-group>
-                 -->
-            </div>
-
-
-
-          </div>
-
-
           <div flex>
-            <h4>Unsere Wohnfläche umfasst Quadratmeter:</h4>
+            <div style="padding-top: 20px">
+              <h4>Unsere Wohnfläche umfasst Quadratmeter:</h4>
+            </div>
             <div layout="row">
               <div flex="50">
                 <md-slider class="md-primary" flex min="0" step="5" max="255" ng-model="data.square_meters"
