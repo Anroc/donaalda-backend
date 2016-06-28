@@ -414,6 +414,7 @@ def commentreceiver(request):
     title= request.POST.get('title')
     text= request.POST.get('text')
     path= request.POST.get('path')
+    print(path)
     rating= request.POST.get('rating')
     user = request.user
     if title is None or not title or text is None or not text or rating is None or not rating:
@@ -427,9 +428,9 @@ def commentreceiver(request):
     if user is None or not User.objects.filter(username=user.username).exists():  # existiert nicht
         messages.error(request, 'Benutzer existiert nicht!')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-    path= path.rstrip("/")
-
+    if( not path == "/"):
+        path= path.rstrip("/")
+    print(path)
     comment = Comment(comment_title=title, comment_content=text, page_url=path,comment_from=user , rating=rating, creation_date = datetime.datetime.now())
     comment.save()
 
