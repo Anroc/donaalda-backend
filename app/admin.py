@@ -186,6 +186,14 @@ class UserAdmin(UserAdmin):
     inlines = (UserImageInline,)
 
 
+class QuestionAnswerInline(admin.StackedInline):
+    model = Answer
+
+
+class QuestionAdmin(admin.ModelAdmin):
+    inlines = (QuestionAnswerInline,)
+
+
 admin.site.unregister(User)
 admin.site.register(Category)
 admin.site.register(Scenario, ScenarioAdmin)
@@ -198,6 +206,6 @@ admin.site.register(ProductType)
 admin.site.register(ScenarioDescription)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(User, UserAdmin)
-admin.site.register(Question)
+admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
 admin.site.register(Tag)
