@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import re
 from django.contrib import messages
 from django.views import generic
 from django.contrib.auth import authenticate
@@ -29,60 +30,6 @@ class IndexView(generic.DetailView):
                        'amount_products': Product.objects.all().count(),
                        'amount_provider': Provider.objects.all().count(),
                        })
-
-
-class IndexViewL(generic.ListView):
-    template_name = 'app/index.html'
-    context_object_name = 'category_list'
-
-    def get(self, request):
-        login_status = request.GET.get('login')
-        if login_status == 'failed':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'state': 'failed',
-                                                      'message': 'Wrong login data!',
-                                                      })
-        if login_status == 'success':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'state': 'success',
-                                                      # If the user type 'app/?login=success' in the url the
-                                                      # 'message' attribute will be empty. The toolbar template is
-                                                      # looking for this empty String and will not show 'Welcome [NO USER]'
-                                                      'message': request.user.username,
-                                                      })
-        registration_status = request.GET.get('registration')
-        if registration_status == 'blank_fields':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Bitte alle Felder ausfüllen!',
-                                                      })
-        if registration_status == 'success':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Registrierung erfolgreich!',
-                                                      })
-        if registration_status == 'taken':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Der Benutzername wird bereits verwendet!',
-                                                      })
-
-        profile_status = request.GET.get('profile')
-        if profile_status == 'blank_fields':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Zum Ändern des Passwortes altes und neues Passwort angegeben! Restliche Änderungen durchgeführt!',
-                                                      })
-        if profile_status == 'success':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Profil erfolgreich verändert!',
-                                                      })
-        if profile_status == 'wrong_password':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Passwort falsch! Das Passwort bleibt unverändert. Restliche Änderungen durchgeführt!',
-                                                      })
-        if profile_status == 'deleted':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Ihr Account wurde gelöscht!',
-                                                      })
-
-        return render(request, 'app/index.html', {'category_list': Category.objects.all()})
 
 
 class ProviderProfileView(generic.ListView):
@@ -178,6 +125,7 @@ class AllProductsView(generic.DetailView):
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
+#this view logs user in if existent and redirects to previous page
 def login_view(request):
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
@@ -201,6 +149,7 @@ def login_view(request):
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
+#this view logs user out if existent and redirects to previous page
 def log_out(request):
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
@@ -215,6 +164,9 @@ def log_out(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def register_user(request):
+    #this view registers a userprofile if username is not already taken
+    #redirects and returns statusmessage
+    #received formvariables: username,email,password,firstname,lastname
     username = request.POST.get('username')
     password = request.POST.get('password')
     email = request.POST.get('email')
@@ -231,6 +183,9 @@ def register_user(request):
         if username and password and email and firstname and lastname:
             if User.objects.filter(username=username).exists():
                 messages.error(request, 'Der Benutzername ist bereits vergeben!')
+                return HttpResponseRedirect(redirectpage)
+            if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+                messages.error(request, 'Das ist keine valide Emailadresse!')
                 return HttpResponseRedirect(redirectpage)
             user = User.objects.create_user(username, email, password)
             user.first_name = firstname
@@ -250,6 +205,9 @@ def register_user(request):
 @csrf_protect
 @require_http_methods("POST")
 def profile(request):
+    #this view modifies attributes in a useraccount if existent
+    #redirects and returns statusmessage
+    #received formvariables: email, firstname,lastname,avatar(imagefile)
     user = request.user
     email = request.POST.get('email')
     firstname = request.POST.get('firstname')
@@ -262,7 +220,7 @@ def profile(request):
     else:
         redirectpage = request.META.get('HTTP_REFERER')
 
-    if user is None or not User.objects.filter(username=user.username).exists():  # existiert nicht
+    if user is None or not User.objects.filter(username=user.username).exists():
         messages.error(request, 'Benutzer existiert nicht!')
 
     else:
@@ -275,10 +233,15 @@ def profile(request):
             messages.success(request, 'Ihr Nachname wurde erfolgreich geändert')
 
         if email and not user.email == email:
-            user.email = email
-            messages.success(request, 'Ihre Email-Adresse wurde erfolgreich geändert')
+            if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+                messages.error(request, 'Das ist keine valide Emailadresse!')
+                HttpResponseRedirect(redirectpage)
+            else:
+                user.email = email
+                messages.success(request, 'Ihre Email-Adresse wurde erfolgreich geändert')
 
         if avatar_image:
+            print(avatar_image)
             userimage = None
 
             if UserImage.objects.filter(belongs_to_user=user).exists():
@@ -299,6 +262,9 @@ def profile(request):
 @csrf_protect
 @require_http_methods("POST")
 def change_password(request):
+    #this view changes userpassword if useraccount is existent
+    #redirects and returns statusmessage
+    #received formvariables: password_old, password_new
     user = request.user
     password_old = request.POST.get('password_old')
     password_new = request.POST.get('password_new')
@@ -338,6 +304,9 @@ def change_password(request):
 @csrf_protect
 @require_http_methods("POST")
 def delete_account(request):
+    #this view deletes a user account if existent
+    #redirects and returns statusmessage
+    #received formvariables: password(for verification)
     user = request.user
     password = request.POST.get("password")
 
@@ -375,7 +344,7 @@ def delete_account(request):
 @require_http_methods(["GET", "POST"])
 def back(request):
     #this view redirects you to last page saved in session and removes it from it(last page is second first page!)
-    #if there are less than 2 pages in history redirect to mainpage "/"
+    #if there are less than 2 pages in history it redirects to mainpage "/"
     redirect = "/";
 
     if not 'history' in request.session or not request.session['history']: #if there is no page in history redirect to mainpage(this is also the case when HTTP_REFERER is turned off)
@@ -395,9 +364,8 @@ def back(request):
 def update_pagehistory(request):
     #this view gets called to update the users page history
     # current(cp) page gets accessed via HTTP_REFERER. HTTP_REFERER has to be turned on for this to work
-    #formvariables: reset(is "y" if userhistory is should be reset)
-    #pagehistory is added to a list in session
-    #if
+    #formvariables: reset(is "y" if userhistory should be reset. This is the case when the user enters the mainpage "/")
+    #pagehistory is saved to a list in session
     if request.POST.get('reset') == "y": #if history should be reset replace with empty list
         if 'history' in request.session and request.session['history']:
             request.session['history'] = []
@@ -422,7 +390,7 @@ def update_pagehistory(request):
 @require_http_methods(["GET", "POST"])
 def commentreceiver(request):
     # this view adds a comment in the database to a certain page-url
-    # formvariables: text, title, rating(from 0 to 5 as string), path of the page the comment is on (hidden), username(hidden)
+    # received  formvariables: text, title, rating(from 0 to 5 as string), path of the page the comment is on (hidden)
     title = request.POST.get('title')
     text = request.POST.get('text')
     path = request.POST.get('path')
@@ -437,7 +405,7 @@ def commentreceiver(request):
         messages.error(request, 'Ein Fehler ist aufgetreten!')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-    if user is None or not User.objects.filter(username=user.username).exists():  # existiert nicht
+    if user is None or not User.objects.filter(username=user.username).exists():
         messages.error(request, 'Benutzer existiert nicht!')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     if (not path == "/"):
