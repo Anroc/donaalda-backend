@@ -19,6 +19,10 @@ from .models import (Category,
                      Question,
                      Answer,
                      Tag,
+                     SessionTags,
+                     QuestionSet,
+                     GivenAnswers,
+
                      )
 
 
@@ -209,3 +213,6 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
 admin.site.register(Tag)
+admin.site.register(QuestionSet)
+admin.site.register(SessionTags)
+admin.site.register(GivenAnswers)
