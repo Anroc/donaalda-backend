@@ -31,9 +31,6 @@
     }
 
   </script>
-  <script>
-    $.post("/updatepagehistory", {lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"});
-  </script>
 </head>
 <body>
 
