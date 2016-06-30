@@ -254,7 +254,10 @@ def profile(request):
     email = request.POST.get('email')
     firstname = request.POST.get('firstname')
     lastname = request.POST.get('lastname')
-    avatar_image = request.FILES['avatar']
+    try:
+        avatar_image = request.FILES['avatar']
+    except:
+        avatar_image = None
 
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
