@@ -370,9 +370,11 @@ def delete_account(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def back(request):
+    #this view redirects you to last page saved in session and removes it from it(last page is second first page!)
+    #if there are less than 2 pages in history redirect to mainpage "/"
     redirect = "/";
 
-    if not 'history' in request.session or not request.session['history']:
+    if not 'history' in request.session or not request.session['history']: #if there is no page in history redirect to mainpage(this is also the case when HTTP_REFERER is turned off)
         return HttpResponseRedirect("/")
     else:
         if len(request.session['history']) >= 2:
@@ -387,31 +389,36 @@ def back(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def update_pagehistory(request):
-    if request.POST.get('reset') == "y":
+    #this view gets called to update the users page history
+    # current(cp) page gets accessed via HTTP_REFERER. HTTP_REFERER has to be turned on for this to work
+    #formvariables: reset(is "y" if userhistory is should be reset)
+    #pagehistory is added to a list in session
+    #if
+    if request.POST.get('reset') == "y": #if history should be reset replace with empty list
         if 'history' in request.session and request.session['history']:
             request.session['history'] = []
         return HttpResponse("/")
 
     cp = request.META.get('HTTP_REFERER')
 
-    if 'history' in request.session and request.session['history']:  # wenn eine history
+    if 'history' in request.session and request.session['history']:  # check if there already is a history in session
         history = request.session['history']
 
-        if history[-1] == cp:  # same page
+        if history[-1] == cp:  #if last page is the same as current page(probably redirected) do nothing to the history
             return HttpResponse("/")
-        else:
+        else:#otherwise add current page to history
             history.append(cp)
             request.session['history'] = history
     else:
-        request.session['history'] = [cp]
+        request.session['history'] = [cp] #if no historylist yet create one with current page in session
 
     return HttpResponse("/")
-
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def commentreceiver(request):
-    # Formvariables: text, title, rating, path
+    # this view adds a comment in the database to a certain page-url
+    # formvariables: text, title, rating(from 0 to 5 as string), path of the page the comment is on (hidden), username(hidden)
     title = request.POST.get('title')
     text = request.POST.get('text')
     path = request.POST.get('path')
@@ -422,7 +429,7 @@ def commentreceiver(request):
         messages.error(request, 'Bitte alle Felder ausfüllen!')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-    if path is None or not path:
+    if path is None or not path or not rating in ["0","1","2","3","4","5"]:
         messages.error(request, 'Ein Fehler ist aufgetreten!')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
