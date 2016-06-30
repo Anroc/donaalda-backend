@@ -6,7 +6,7 @@ from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType
+from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, QuestionSet, Question, Answer
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -120,10 +120,14 @@ class CategoryView(generic.ListView):
 
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
+        print(QuestionSet.objects.exclude(category = None))
         return render(request, 'app/category.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
                        'category_list': Category.objects.all(),
-                       'category': Category.objects.get(name=category)
+                       'category': Category.objects.get(name=category),
+                       'g_questionset': QuestionSet.objects.get(name='Allgemeine Fragen'),
+                       'categories_question_sets': QuestionSet.objects.exclude(category = None),
+                       'choose_category_question_set': QuestionSet.objects.get(name='Kategorieauswahl-Fragen'),
                        })
 
 
@@ -452,9 +456,9 @@ def commentreceiver(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def calculate_result(request):
-    answers =[]
-    for param in answers:
-        return
+    #answers =[]
+   # for param in answers:
+     #   return
      #   if request.args.getList()
     #answers = request.GET.get()
     return
