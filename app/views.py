@@ -6,7 +6,7 @@ from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage
+from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -169,7 +169,11 @@ class AllProductsView(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'app/allProducts.html',
-                      {'all_products': Product.objects.all()})
+                      {'all_products': Product.objects.all(),
+                       'category_list': Category.objects.all(),
+                       'provider_list': Provider.objects.all(),
+                       'producttype_list':ProductType.objects.all(),
+                       })
 
 
 @csrf_protect

@@ -331,7 +331,7 @@ class GivenAnswers(models.Model):
 
 class QuestionSet(models.Model):
     name = models.CharField(max_length=255, default="---")
-    question = models.ManyToManyField("Product", verbose_name="Dazugehörige Fragen")
+    question = models.ManyToManyField("Question", verbose_name="Dazugehörige Fragen")
     category = models.OneToOneField("Category", on_delete=models.CASCADE, null=True, blank=True,
                                     verbose_name="Dazugehörige Kategorie")
 
