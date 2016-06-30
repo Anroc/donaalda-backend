@@ -58,11 +58,11 @@
       position: absolute;
       height: 2px;
       top: 23px;
-      background-color: rgb(255, 64, 129);
+      background-color: blue;
     }
 
     .range-slider-container md-slider.md-default-theme.md-min .md-thumb:after {
-      background-color: rgb(255, 64, 129) !important;
+      background-color: blue !important;
     }
 
     .range-slider-left, .range-slider-right {
@@ -80,11 +80,11 @@
     }
 
     .range-slider-left md-slider.md-default-theme .md-track.md-track-fill {
-      background-color: rgba(188, 188, 188, 1) !important;
+      background-color: blue) !important;
     }
 
     .range-slider-left md-slider.md-default-theme .md-track:not(.md-track-fill) {
-      background-color: rgb(255, 64, 129) !important;
+      background-color: blue !important;
     }
 
     .range-slider-container md-slider .md-thumb-container {
@@ -119,14 +119,9 @@
               {% if product.provider.is_visible %}
               <div class="btn">
                 {% else %}
-                <div class="panel-body">
+                <div>
                   {% endif %}
-                  <img style="max-height: 100%; max-width: 100%;"
-                       {% if product.provider.is_visible %}
-                       onclick="provider()"
-                       {% endif %}
-                       src="{{ product.provider.providerprofile.logo_image.url }}"
-                       alt="providerImg">
+
                 </div>
               </div>
             </div>
@@ -193,49 +188,9 @@
     </div>
 
     <!--preis-slider-->
-    <div class="container">
-
-      <legend>Preis-Filter</legend>
-      <md-content style="margin: 16px; padding:16px">
-        <div ng-controller="AppCtrl2" ng-cloak>
-          <md-slider-container>
-            <div class="row">
-              <div class="col-md-10">
-                <md-slider flex ng-model="color.blue" min="0" max="999" aria-label="min" id="blue-slider-min" class="md-primary">
-                </md-slider>
-              </div>
-              <div class="col-md-2">
-                <md-input-container>
-                  <label>Preis min</label>
-                  <input flex type="number" ng-model="color.blue" aria-label="min" aria-controls="blue-slider-min">
-                </md-input-container>
-              </div>
-            </div>
-          </md-slider-container>
-        </div>
-        <div ng-controller="AppCtrl2" ng-cloak>
-          <md-slider-container>
-            <div class="row">
-              <div class="col-md-10">
-                <md-slider flex ng-model="color.blue" min="0" max="999" aria-label="max" id="blue-slider-max" class="md-primary">
-                </md-slider>
-              </div>
-              <div class="col-md-2">
-                <md-input-container>
-                  <label>Preis max</label>
-                  <input flex type="number" ng-model="color.blue" aria-label="max" aria-controls="blue-slider-max">
-                </md-input-container>
-              </div>
-            </div>
-          </md-slider-container>
-        </div>
-      </md-content>
-    </div>
-
-
-    <!--preis-range-slider-->
     <div ng-controller="AppCtrl2" ng-cloak>
-      <div class="container" style="margin: 16px; padding:16px">
+      <legend>Preis-Filter</legend>
+      <div class="container">
         <div ng-init="lower=1;upper=40;gap=1;">
           <md-content class="md-padding">
             <range-slider min="1" max="40" step="1" lower-value="lower" upper-value="upper" gap="gap"></range-slider>
