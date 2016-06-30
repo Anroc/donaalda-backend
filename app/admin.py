@@ -19,11 +19,13 @@ from .models import (Category,
                      Question,
                      Answer,
                      Tag,
+                     SessionTags,
+                     QuestionSet,
+                     GivenAnswers,
                      )
 
 
 class ScenarioAdmin(admin.ModelAdmin):
-
     actions = []
 
     exclude = ['url_name']
@@ -32,7 +34,7 @@ class ScenarioAdmin(admin.ModelAdmin):
         user = request.user
         qs = super(ScenarioAdmin, self).get_queryset(request)
 
-        if user.is_superuser:
+        if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
 
         self.exclude.extend(['provider'])
@@ -47,12 +49,10 @@ class ScenarioAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-
     actions = []
 
 
 class ProductSetAdmin(admin.ModelAdmin):
-
     actions = []
 
     exclude = []
@@ -61,7 +61,7 @@ class ProductSetAdmin(admin.ModelAdmin):
         user = request.user
         qs = super(ProductSetAdmin, self).get_queryset(request)
 
-        if user.is_superuser:
+        if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
 
         self.exclude.extend(['creator'])
@@ -77,7 +77,6 @@ class ProductSetAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-
     actions = []
 
     exclude = []
@@ -89,7 +88,7 @@ class ProductAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         user = request.user
         qs = super(ProductAdmin, self).get_queryset(request)
-        if user.is_superuser:
+        if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
 
         self.exclude.extend(['provider'])
@@ -105,7 +104,6 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ProviderProfileAdmin(admin.ModelAdmin):
-
     actions = []
 
     exclude = ['url_name']
@@ -114,7 +112,7 @@ class ProviderProfileAdmin(admin.ModelAdmin):
         user = request.user
         qs = super(ProviderProfileAdmin, self).get_queryset(request)
 
-        if user.is_superuser:
+        if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
 
         self.exclude.extend(['owner'])
@@ -138,7 +136,6 @@ class UserImageInline(admin.StackedInline):
 
 
 class EmployeeAdmin(UserAdmin):
-
     actions = []
 
     add_form = EmployeeCreationForm
@@ -166,7 +163,7 @@ class EmployeeAdmin(UserAdmin):
         user = request.user
         qs = super(EmployeeAdmin, self).get_queryset(request)
 
-        if user.is_superuser:
+        if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
 
         return qs.filter(employer=user.employee.employer_id)
@@ -186,6 +183,14 @@ class UserAdmin(UserAdmin):
     inlines = (UserImageInline,)
 
 
+class QuestionAnswerInline(admin.StackedInline):
+    model = Answer
+
+
+class QuestionAdmin(admin.ModelAdmin):
+    inlines = (QuestionAnswerInline,)
+
+
 admin.site.unregister(User)
 admin.site.register(Category)
 admin.site.register(Scenario, ScenarioAdmin)
@@ -198,6 +203,9 @@ admin.site.register(ProductType)
 admin.site.register(ScenarioDescription)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(User, UserAdmin)
-admin.site.register(Question)
+admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
 admin.site.register(Tag)
+admin.site.register(QuestionSet)
+admin.site.register(SessionTags)
+admin.site.register(GivenAnswers)

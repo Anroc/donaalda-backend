@@ -1,7 +1,9 @@
 {% load staticfiles %}
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>DONAALDA</title>
+
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -40,20 +42,38 @@
 <!-- Bootstrap  -->
 <link rel="stylesheet" href="{% static 'app/assets/css/bootstrap.css' %}">
 
-<!--
-  Default Theme Style
-  You can change the style.css (default color purple) to one of these styles
 
-  1. pink.css
-  2. blue.css
-  3. turquoise.css
-  4. orange.css
-  5. lightblue.css
-  6. brown.css
-  7. green.css
 
-  -->
+{% if navInfo == 'scenario' %}
+{% if current_scenario %}
+<title>DONAALDA - Szenario - {{ current_scenario.name }}</title>
+
+<link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
+<style>
+  .carousel-control {
+    width: 50px;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    font-size: 30px;
+  }
+
+  .carousel-indicators{
+    bottom:-50px;
+  }
+</style>
+{% endif %}
+{% elif navInfo == 'provider' %}
+{% if provider.public_name %}
+<title>DONAALDA - {{ provider.public_name }}</title>
+
+<link rel="stylesheet" href="{% static 'app/assets/css/styleProvider.css' %}">
+{% endif %}
+
+{% else %}
+<title>DONAALDA</title>
+
 <link rel="stylesheet" href="{% static 'app/assets/css/style.css' %}">
+{% endif %}
 
 <!-- Modernizr JS -->
 <script src="{% static 'app/assets/js/modernizr-2.6.2.min.js' %}"></script>
@@ -83,9 +103,6 @@
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
 <script src="{% static 'app/assets/js/google_map.js' %}"></script>
 
-<!-- For demo purposes only styleswitcher ( You may delete this anytime ) -->
-
-<!-- End demo purposes only -->
 <script>
   $(document).ready(function () {
     $('[data-show="tooltip"]').tooltip();
@@ -101,7 +118,9 @@
     });
 
     $('#start').on('click', function() {
-      $.post( "/updatepagehistory", { reset: 'y', csrfmiddlewaretoken: "{{ csrf_token }}"} );
+      $.post( "/updatepagehistory", {
+        reset: 'y', csrfmiddlewaretoken: "{{ csrf_token }}"
+      });
       location.href = "/"
     });
   });
@@ -110,6 +129,10 @@
 <script src="{% static 'app/assets/js/main.js' %}"></script>
 
 <script>
+  function start() {
+    location.href = "/"
+  }
+
   function logOut() {
     location.href = "/logout"
   }
@@ -128,5 +151,7 @@
   }
 </script>
 <script>
-  $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
+  $.post( "/updatepagehistory", {
+    lastpage: "{{request.META.HTTP_REFERER}}",
+    csrfmiddlewaretoken: "{{ csrf_token }}"} );
 </script>

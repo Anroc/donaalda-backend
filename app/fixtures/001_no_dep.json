@@ -283,7 +283,7 @@
     "model": "app.provider",
     "pk": 2,
     "fields": {
-        "name": "AVM",
+        "name": "avm",
         "is_visible": true
     }
 },
@@ -437,6 +437,54 @@
     "fields": {
         "name": "Danfoss",
         "is_visible": true
+    }
+},
+{
+    "model": "app.question",
+    "pk": 1,
+    "fields": {
+        "question_text": "F\u00fcr welche Bereiche interessieren Sie sich?",
+        "answer_presentation": "mc"
+    }
+},
+{
+    "model": "app.tag",
+    "pk": 4,
+    "fields": {
+        "code": "category_security",
+        "name": "Sicherheit"
+    }
+},
+{
+    "model": "app.tag",
+    "pk": 5,
+    "fields": {
+        "code": "category_health",
+        "name": "Gesundheit"
+    }
+},
+{
+    "model": "app.tag",
+    "pk": 6,
+    "fields": {
+        "code": "category_comfort",
+        "name": "Komfort"
+    }
+},
+{
+    "model": "app.tag",
+    "pk": 7,
+    "fields": {
+        "code": "category_energy",
+        "name": "Energie"
+    }
+},
+{
+    "model": "app.tag",
+    "pk": 8,
+    "fields": {
+        "code": "livingsituation_flat",
+        "name": "Wohnung"
     }
 }
 ]

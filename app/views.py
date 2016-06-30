@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 from django.contrib import messages
 from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage
+from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -121,7 +122,7 @@ class CategoryView(generic.ListView):
         category = kwargs.get("category_name")
         return render(request, 'app/category.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
-                      'category_list': Category.objects.all(),
+                       'category_list': Category.objects.all(),
                        'category': Category.objects.get(name=category)
                        })
 
@@ -168,7 +169,11 @@ class AllProductsView(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'app/allProducts.html',
-                      {'all_products': Product.objects.all()})
+                      {'all_products': Product.objects.all(),
+                       'category_list': Category.objects.all(),
+                       'provider_list': Provider.objects.all(),
+                       'producttype_list':ProductType.objects.all(),
+                       })
 
 
 @csrf_protect
@@ -232,6 +237,9 @@ def register_user(request):
             user.last_name = lastname
             user.save()
             messages.success(request, 'Sie wurden erfolgreich registriert!')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, 'Sie wurden erfolgreich angemeldet!')
             return HttpResponseRedirect(redirectpage)
         else:
             messages.error(request, 'Bitte alle Felder ausfüllen!')
@@ -366,13 +374,15 @@ def delete_account(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def back(request):
-    redirect="/";
+    #this view redirects you to last page saved in session and removes it from it(last page is second first page!)
+    #if there are less than 2 pages in history redirect to mainpage "/"
+    redirect = "/";
 
-    if not 'history' in request.session or not request.session['history']:
+    if not 'history' in request.session or not request.session['history']: #if there is no page in history redirect to mainpage(this is also the case when HTTP_REFERER is turned off)
         return HttpResponseRedirect("/")
     else:
-        if len(request.session['history'])>=2:
-            history= request.session['history']
+        if len(request.session['history']) >= 2:
+            history = request.session['history']
             history.pop()
             redirect = history.pop()
             request.session['history'] = history
@@ -383,22 +393,68 @@ def back(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def update_pagehistory(request):
-    if request.POST.get('reset') == "y":
+    #this view gets called to update the users page history
+    # current(cp) page gets accessed via HTTP_REFERER. HTTP_REFERER has to be turned on for this to work
+    #formvariables: reset(is "y" if userhistory is should be reset)
+    #pagehistory is added to a list in session
+    #if
+    if request.POST.get('reset') == "y": #if history should be reset replace with empty list
         if 'history' in request.session and request.session['history']:
             request.session['history'] = []
         return HttpResponse("/")
 
     cp = request.META.get('HTTP_REFERER')
 
-    if 'history' in request.session and request.session['history']:  # wenn eine history
+    if 'history' in request.session and request.session['history']:  # check if there already is a history in session
         history = request.session['history']
 
-        if history[-1] == cp: # same page
+        if history[-1] == cp:  #if last page is the same as current page(probably redirected) do nothing to the history
             return HttpResponse("/")
-        else:
+        else:#otherwise add current page to history
             history.append(cp)
             request.session['history'] = history
     else:
-        request.session['history'] = [cp]
+        request.session['history'] = [cp] #if no historylist yet create one with current page in session
 
     return HttpResponse("/")
+
+@csrf_protect
+@require_http_methods(["GET", "POST"])
+def commentreceiver(request):
+    # this view adds a comment in the database to a certain page-url
+    # formvariables: text, title, rating(from 0 to 5 as string), path of the page the comment is on (hidden), username(hidden)
+    title = request.POST.get('title')
+    text = request.POST.get('text')
+    path = request.POST.get('path')
+    print(path)
+    rating = request.POST.get('rating')
+    user = request.user
+    if title is None or not title or text is None or not text or rating is None or not rating:
+        messages.error(request, 'Bitte alle Felder ausfüllen!')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    if path is None or not path or not rating in ["0","1","2","3","4","5"]:
+        messages.error(request, 'Ein Fehler ist aufgetreten!')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    if user is None or not User.objects.filter(username=user.username).exists():  # existiert nicht
+        messages.error(request, 'Benutzer existiert nicht!')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    if (not path == "/"):
+        path = path.rstrip("/")
+    print(path)
+    comment = Comment(comment_title=title, comment_content=text, page_url=path, comment_from=user, rating=rating,
+                      creation_date=datetime.datetime.now())
+    comment.save()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+@csrf_protect
+@require_http_methods(["GET", "POST"])
+def calculate_result(request):
+    answers =[]
+    for param in answers:
+        return
+     #   if request.args.getList()
+    #answers = request.GET.get()
+    return
