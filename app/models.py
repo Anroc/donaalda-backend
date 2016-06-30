@@ -4,6 +4,7 @@ import re
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 from imagekit.models import ImageSpecField
@@ -12,8 +13,6 @@ from random import *
 
 from .validators import validate_legal_chars
 
-
-# Create your models here.
 
 def url_alias(value):
     temp_alias = value.lower()
@@ -315,3 +314,46 @@ class Tag(models.Model):
         verbose_name = "Schlagwort"
         verbose_name_plural = "Schlagwörter"
         ordering = ['code', ]
+
+
+class GivenAnswers(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE, verbose_name="User")
+    user_answer = models.ManyToManyField(to="Answer", verbose_name="hat geantwortet")
+
+    def __str__(self):
+        return '%s hat geantwortet: \"%s\"' % (self.user, self.user_answer.answer_text)
+
+    class Meta:
+        verbose_name = "beantwortete Antwort"
+        verbose_name_plural = "beantwortete Antworten"
+        # ordering = ['user', ]
+
+
+class QuestionSet(models.Model):
+    name = models.CharField(max_length=255, default="---")
+    question = models.ManyToManyField("Product", verbose_name="Dazugehörige Fragen")
+    category = models.OneToOneField("Category", on_delete=models.CASCADE, null=True, blank=True,
+                                    verbose_name="Dazugehörige Kategorie")
+
+    def __str__(self):
+        return '%s' % self.name
+
+    def natural_key(self):
+        return [self.name]
+
+    class Meta:
+        verbose_name = "Fragensammlung"
+        verbose_name_plural = "Fragensammlungen"
+        ordering = ["name"]
+
+
+class SessionTags(models.Model):
+    session = models.OneToOneField(Session, null=True, on_delete=models.SET_NULL, verbose_name="Zugehörige Session")
+    tag = models.ManyToManyField("Tag", verbose_name="Referenziert auf Tag")
+
+    def __str__(self):
+        return '%s' % self.name
+
+    class Meta:
+        verbose_name = 'Session Tag'
+        verbose_name_plural = 'Session Tags'
