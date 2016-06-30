@@ -30,11 +30,12 @@
       location.href = "/"
     }
   </script>
+
   <script>
     $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
   </script>
 
-  <!--tags needed for angular material selects-->
+  <!--tags needed for angular material-->
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
@@ -42,8 +43,61 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 
-</head>
+  <!--range slider css-->
+  <style>
+    .range-slider-container {
+      position: relative;
+      height: 100px;
+    }
 
+    .range-slider-container md-slider {
+      margin: 0;
+    }
+
+    .range-track-line {
+      position: absolute;
+      height: 2px;
+      top: 23px;
+      background-color: rgb(255, 64, 129);
+    }
+
+    .range-slider-container md-slider.md-default-theme.md-min .md-thumb:after {
+      background-color: rgb(255, 64, 129) !important;
+    }
+
+    .range-slider-left, .range-slider-right {
+      position: absolute;
+      top: 0px;
+    }
+
+    .range-slider-right {
+      right: 0px;
+    }
+
+    .range-slider-left md-slider .md-thumb-container {
+      transition: -webkit-transform 0s linear;
+      transition: transform 0s linear;
+    }
+
+    .range-slider-left md-slider.md-default-theme .md-track.md-track-fill {
+      background-color: rgba(188, 188, 188, 1) !important;
+    }
+
+    .range-slider-left md-slider.md-default-theme .md-track:not(.md-track-fill) {
+      background-color: rgb(255, 64, 129) !important;
+    }
+
+    .range-slider-container md-slider .md-thumb-container {
+      transition: -webkit-transform 0s linear;
+      transition: transform 0s linear;
+    }
+
+    .range-slider-container md-slider .md-track-container {
+      transition: -webkit-transform 0s linear;
+      transition: transform 0s linear;
+    }
+  </style>
+</head>
 
 <body ng-app="allProductsApp">
 
@@ -83,6 +137,7 @@
     <div class="slant"></div>
   </div>
 </section>
+
 
 <section id="fh5co-questions" data-section="intro">
 
@@ -137,7 +192,7 @@
       </div>
     </div>
 
-    <!--preis-filter-->
+    <!--preis-slider-->
     <div class="container">
 
       <legend>Preis-Filter</legend>
@@ -175,6 +230,22 @@
           </md-slider-container>
         </div>
       </md-content>
+    </div>
+
+
+    <!--preis-range-slider-->
+    <div ng-controller="AppCtrl2" ng-cloak>
+      <div class="container" style="margin: 16px; padding:16px">
+        <div ng-init="lower=1;upper=40;gap=1;">
+          <md-content class="md-padding">
+            <range-slider min="1" max="40" step="1" lower-value="lower" upper-value="upper" gap="gap"></range-slider>
+            <div>
+              <p>min: {{lower}}€</p>
+              <p>max: {{upper}}€</p>
+            </div>
+          </md-content>
+        </div>
+      </div>
     </div>
 
     <!--kategorie-filter-->
@@ -295,8 +366,6 @@
 </section>
 
 
-
-
 <section id="fh5co-testimonials" data-section="tecData">
 
   <!--section-header-->
@@ -313,7 +382,6 @@
     </div>
   </div>
 
-
   {% verbatim %}
   <!--sorting-selectbox-->
   <div ng-controller="sorting" class="md-padding" ng-cloak>
@@ -323,8 +391,8 @@
 
         <md-input-container>
           <label>Sortieren nach...</label>
-          <md-select ng-model="size">
-            <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
+          <md-select ng-model="sort">
+            <md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
           </md-select>
         </md-input-container>
       </div>
@@ -342,27 +410,39 @@
   </div>
   {% endfor %}
   {% endif %}
-
 </section>
-
-
-
-
-
 
 {% include "app/html_templates/sections/commentSection.html" %}
 
-<!-- Footer -->
 {% include "app/html_templates/footer/footerTemplate.html" %}
 
 {% include "app/html_templates/modals/modals.html" %}
 
-<!--script for angular selects-->
+
+<!--script for range slider-->
+{% verbatim %}
+<script type="text/ng-template" id="range-slider.tpl.html">
+  <div class='range-slider-container'>
+    <div class='range-slider-left' ng-style="{width:lowerWidth+'%'}">
+      <md-slider ng-model="lowerValue" min='{{min}}' max='{{lowerMaxLimit}}' step="{{step}}"
+                 aria-label="lowerSlider"></md-slider>
+    </div>
+    <div class="range-track-line"
+         ng-style="{width:tracker.width+'%',left:tracker.left+'%',right:tracker.right+'%'}"></div>
+    <div class='range-slider-right' ng-style="{width:upperWidth+'%'}">
+      <md-slider ng-model="upperValue" min="{{upperMinLimit}}" max="{{max}}" step="{{step}}"
+                 aria-label="upperSlider"></md-slider>
+    </div>
+  </div>
+</script>
+{% endverbatim %}
+
+<!--script for angular components-->
 <script type="text/javascript">
   angular
-    .module('allProductsApp', ['ngMaterial'])
+    .module('allProductsApp', ['ngMaterial', "directives.rangeSlider"])
     .controller('sorting', function($scope) {
-      $scope.sizes = [
+      $scope.sorts = [
         "Preis aufsteigend",
         "Preis absteigend",
         "Nach Hersteller",
@@ -370,29 +450,83 @@
       ];
     })
     .controller('AppCtrl', function($scope) {
-      $scope.data = {};
-      $scope.data.cb1 = true;
-      $scope.data.cb2 = false;
-      $scope.data.cb3 = false;
-      $scope.data.cb4 = false;
-      $scope.data.cb5 = false;
     })
     .controller('AppCtrl2', function($scope) {
       $scope.color = {
-        red: Math.floor(Math.random() * 255),
-        green: Math.floor(Math.random() * 255),
         blue: Math.floor(Math.random() * 255)
       };
-      $scope.rating1 = 3;
-      $scope.rating2 = 2;
-      $scope.rating3 = 4;
-      $scope.disabled1 = Math.floor(Math.random() * 100);
-      $scope.disabled2 = 0;
-      $scope.disabled3 = 70;
-      $scope.invert = Math.floor(Math.random() * 100);
-      $scope.isDisabled = true;
     });
 
+  //directive for range-slider
+  angular.module('directives.rangeSlider', ['ngMaterial'])
+    .directive('rangeSlider', function () {
+      return {
+        restrict   : "E",
+        scope      : {
+          max       : '=',
+          min       : '=',
+          gap       : '=?',
+          step      : '=?',
+          lowerValue: "=",
+          upperValue: "="
+        },
+        templateUrl: 'range-slider.tpl.html',
+        controller : ["$scope", function ($scope) {
+
+          var COMFORTABLE_STEP = $scope.step, // whether the step is comfortable that depends on u
+            tracker = $scope.tracker = {    // track style
+              width: 0,
+              left : 0,
+              right: 0
+            };
+
+          function updateSliders() {
+
+            if ($scope.upperValue - $scope.lowerValue > $scope.gap) {
+
+              $scope.lowerMaxLimit = $scope.lowerValue + COMFORTABLE_STEP;
+              $scope.upperMinLimit = $scope.upperValue - COMFORTABLE_STEP;
+
+            } else {
+              $scope.lowerMaxLimit = $scope.lowerValue;
+              $scope.upperMinLimit = $scope.upperValue;
+            }
+
+            updateSlidersStyle();
+
+          }
+
+          function updateSlidersStyle() {
+            // update sliders style
+            $scope.lowerWidth = $scope.lowerMaxLimit / $scope.max * 100;
+            $scope.upperWidth = ($scope.max - $scope.upperMinLimit) / $scope.max * 100;
+
+            // update tracker line style
+            tracker.width = 100 - $scope.lowerWidth - $scope.upperWidth;
+            tracker.left = $scope.lowerWidth || 0;
+            tracker.right = $scope.upperWidth || 0;
+          }
+
+          // watch lowerValue & upperValue to update sliders
+          $scope.$watchGroup(["lowerValue", "upperValue"], function (newVal) {
+
+            // filter the default initialization
+            if (newVal !== undefined) {
+              updateSliders();
+            }
+
+          });
+
+          // init
+          $scope.step = $scope.step || 1;
+          $scope.gap = $scope.gap || 0;
+          $scope.lowerMaxLimit = $scope.lowerValue + COMFORTABLE_STEP;
+          $scope.upperMinLimit = $scope.upperValue - COMFORTABLE_STEP;
+          updateSlidersStyle();
+        }]
+      };
+
+    })
 </script>
 </body>
-</html>                                   
+</html>
