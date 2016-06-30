@@ -444,3 +444,13 @@ def commentreceiver(request):
     comment.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+@csrf_protect
+@require_http_methods(["GET", "POST"])
+def calculate_result(request):
+    answers =[]
+    for param in answers:
+        return
+     #   if request.args.getList()
+    #answers = request.GET.get()
+    return

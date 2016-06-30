@@ -19,11 +19,13 @@ from .models import (Category,
                      Question,
                      Answer,
                      Tag,
+                     SessionTags,
+                     QuestionSet,
+                     GivenAnswers,
                      )
 
 
 class ScenarioAdmin(admin.ModelAdmin):
-
     actions = []
 
     exclude = ['url_name']
@@ -47,12 +49,10 @@ class ScenarioAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-
     actions = []
 
 
 class ProductSetAdmin(admin.ModelAdmin):
-
     actions = []
 
     exclude = []
@@ -77,7 +77,6 @@ class ProductSetAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-
     actions = []
 
     exclude = []
@@ -105,7 +104,6 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ProviderProfileAdmin(admin.ModelAdmin):
-
     actions = []
 
     exclude = ['url_name']
@@ -138,7 +136,6 @@ class UserImageInline(admin.StackedInline):
 
 
 class EmployeeAdmin(UserAdmin):
-
     actions = []
 
     add_form = EmployeeCreationForm
@@ -209,3 +206,6 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
 admin.site.register(Tag)
+admin.site.register(QuestionSet)
+admin.site.register(SessionTags)
+admin.site.register(GivenAnswers)
