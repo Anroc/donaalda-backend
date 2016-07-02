@@ -7,7 +7,8 @@ from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, QuestionSet, Question, Answer
+from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
+    QuestionSet, Question, Answer
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -67,13 +68,13 @@ class CategoryView(generic.ListView):
 
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
-        print(QuestionSet.objects.exclude(category = None))
+        print(QuestionSet.objects.exclude(category=None))
         return render(request, 'app/category.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
                        'category_list': Category.objects.all(),
                        'category': Category.objects.get(name=category),
                        'g_questionset': QuestionSet.objects.get(name='Allgemeine Fragen'),
-                       'categories_question_sets': QuestionSet.objects.exclude(category = None),
+                       'categories_question_sets': QuestionSet.objects.exclude(category=None),
                        'choose_category_question_set': QuestionSet.objects.get(name='Kategorieauswahl-Fragen'),
                        })
 
@@ -123,13 +124,13 @@ class AllProductsView(generic.DetailView):
                       {'all_products': Product.objects.all(),
                        'category_list': Category.objects.all(),
                        'provider_list': Provider.objects.all(),
-                       'producttype_list':ProductType.objects.all(),
+                       'producttype_list': ProductType.objects.all(),
                        })
 
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
-#this view logs user in if existent and redirects to previous page
+# this view logs user in if existent and redirects to previous page
 def login_view(request):
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
@@ -159,8 +160,19 @@ class StepperResultView(generic.ListView):
 
 
 @csrf_protect
+@require_http_methods(["POST"])
+def stepper_check(request):
+    if request.POST:
+        print(request.POST)
+        for x in request.POST.get:
+            print(x)
+
+    return render(request, 'app/result.html',)
+
+
+@csrf_protect
 @require_http_methods(["GET", "POST"])
-#this view logs user out if existent and redirects to previous page
+# this view logs user out if existent and redirects to previous page
 def log_out(request):
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
@@ -175,9 +187,9 @@ def log_out(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def register_user(request):
-    #this view registers a userprofile if username is not already taken
-    #redirects and returns statusmessage
-    #received formvariables: username,email,password,firstname,lastname
+    # this view registers a userprofile if username is not already taken
+    # redirects and returns statusmessage
+    # received formvariables: username,email,password,firstname,lastname
     username = request.POST.get('username')
     password = request.POST.get('password')
     email = request.POST.get('email')
@@ -216,9 +228,9 @@ def register_user(request):
 @csrf_protect
 @require_http_methods("POST")
 def profile(request):
-    #this view modifies attributes in a useraccount if existent
-    #redirects and returns statusmessage
-    #received formvariables: email, firstname,lastname,avatar(imagefile)
+    # this view modifies attributes in a useraccount if existent
+    # redirects and returns statusmessage
+    # received formvariables: email, firstname,lastname,avatar(imagefile)
     user = request.user
     email = request.POST.get('email')
     firstname = request.POST.get('firstname')
@@ -276,9 +288,9 @@ def profile(request):
 @csrf_protect
 @require_http_methods("POST")
 def change_password(request):
-    #this view changes userpassword if useraccount is existent
-    #redirects and returns statusmessage
-    #received formvariables: password_old, password_new
+    # this view changes userpassword if useraccount is existent
+    # redirects and returns statusmessage
+    # received formvariables: password_old, password_new
     user = request.user
     password_old = request.POST.get('password_old')
     password_new = request.POST.get('password_new')
@@ -318,9 +330,9 @@ def change_password(request):
 @csrf_protect
 @require_http_methods("POST")
 def delete_account(request):
-    #this view deletes a user account if existent
-    #redirects and returns statusmessage
-    #received formvariables: password(for verification)
+    # this view deletes a user account if existent
+    # redirects and returns statusmessage
+    # received formvariables: password(for verification)
     user = request.user
     password = request.POST.get("password")
 
@@ -357,11 +369,12 @@ def delete_account(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def back(request):
-    #this view redirects you to last page saved in session and removes it from it(last page is second first page!)
-    #if there are less than 2 pages in history it redirects to mainpage "/"
+    # this view redirects you to last page saved in session and removes it from it(last page is second first page!)
+    # if there are less than 2 pages in history it redirects to mainpage "/"
     redirect = "/";
 
-    if not 'history' in request.session or not request.session['history']: #if there is no page in history redirect to mainpage(this is also the case when HTTP_REFERER is turned off)
+    if not 'history' in request.session or not request.session[
+        'history']:  # if there is no page in history redirect to mainpage(this is also the case when HTTP_REFERER is turned off)
         return HttpResponseRedirect("/")
     else:
         if len(request.session['history']) >= 2:
@@ -376,11 +389,11 @@ def back(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def update_pagehistory(request):
-    #this view gets called to update the users page history
+    # this view gets called to update the users page history
     # current(cp) page gets accessed via HTTP_REFERER. HTTP_REFERER has to be turned on for this to work
-    #formvariables: reset(is "y" if userhistory should be reset. This is the case when the user enters the mainpage "/")
-    #pagehistory is saved to a list in session
-    if request.POST.get('reset') == "y": #if history should be reset replace with empty list
+    # formvariables: reset(is "y" if userhistory should be reset. This is the case when the user enters the mainpage "/")
+    # pagehistory is saved to a list in session
+    if request.POST.get('reset') == "y":  # if history should be reset replace with empty list
         if 'history' in request.session and request.session['history']:
             request.session['history'] = []
         return HttpResponse("/")
@@ -390,15 +403,16 @@ def update_pagehistory(request):
     if 'history' in request.session and request.session['history']:  # check if there already is a history in session
         history = request.session['history']
 
-        if history[-1] == cp:  #if last page is the same as current page(probably redirected) do nothing to the history
+        if history[-1] == cp:  # if last page is the same as current page(probably redirected) do nothing to the history
             return HttpResponse("/")
-        else:#otherwise add current page to history
+        else:  # otherwise add current page to history
             history.append(cp)
             request.session['history'] = history
     else:
-        request.session['history'] = [cp] #if no historylist yet create one with current page in session
+        request.session['history'] = [cp]  # if no historylist yet create one with current page in session
 
     return HttpResponse("/")
+
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
@@ -415,7 +429,7 @@ def commentreceiver(request):
         messages.error(request, 'Bitte alle Felder ausfüllen!')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-    if path is None or not path or not rating in ["0","1","2","3","4","5"]:
+    if path is None or not path or not rating in ["0", "1", "2", "3", "4", "5"]:
         messages.error(request, 'Ein Fehler ist aufgetreten!')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
