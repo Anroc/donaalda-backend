@@ -95,7 +95,6 @@ function questionController($scope, $q, $timeout) {
                     keys.push(k);
                 console.log("total " + keys.length + " keys: " + keys);
                 console.log("mittels Object.keys: " + Object.keys(stepData));
-                console.log(stepData.accommodation_name)
                 vm.enableNextStep();
             }, 1000)
         } else {
