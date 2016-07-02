@@ -49,7 +49,7 @@ function questionController($scope, $q, $timeout) {
     }
 
     var vm = this;
-
+    var answer= [];
     vm.selectedStep = 0;
     vm.stepProgress = 1;
     vm.maxStep = 3;
@@ -59,6 +59,30 @@ function questionController($scope, $q, $timeout) {
         {step: 2, completed: false, optional: false, data: {}},
         {step: 3, completed: false, optional: false, data: {}},
     ];
+
+    function post(path) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", "resultset");
+            hiddenField.setAttribute("value", JSON.stringify(vm.stepData));
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
 
     vm.enableNextStep = function nextStep() {
         //do not exceed into max step
@@ -95,6 +119,12 @@ function questionController($scope, $q, $timeout) {
                     keys.push(k);
                 console.log("total " + keys.length + " keys: " + keys);
                 console.log("mittels Object.keys: " + Object.keys(stepData));
+                if (stepData.question4 ){
+                    console.log("quesiton4:"+Object.keys(stepData.question4));
+
+                    for (var a in stepData.question4)
+                        console.log("answerId: " +a)
+                }
                 vm.enableNextStep();
             }, 1000)
         } else {
