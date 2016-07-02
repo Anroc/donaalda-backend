@@ -12,16 +12,16 @@
                             {% for question in g_questionset.question.all %}
                                 <h4>{{ question.question_text }}</h4>
                                 {% if question.answer_presentation == 'rc' %}
-                                    <md-radio-group ng-model="vm.stepData[0].data.accommodation_name">
+                                    <md-radio-group ng-model="vm.stepData[0].data.question{{ question.pk }}">
                                         {% for answer in question.answer_set.all %}
                                             <md-radio-button
                                                     value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
                                         {% endfor %}
                                     </md-radio-group>
                                 {% elif question.answer_presentation == 'mc' %}
-                                    <md-checkbox-group ng-model="vm.stepData[0].data.addition" layout="column">
+                                    <md-checkbox-group layout="column">
                                         {% for answer in question.answer_set.all %}
-                                            <md-checkbox value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
+                                            <md-checkbox ng-model="vm.stepData[0].data.question{{ question.pk }}.answer{{  forloop.counter }}" value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
                                         {% endfor %}
                                     </md-checkbox-group>
                                 {% elif question.answer_presentation == 'dc' %}
@@ -133,9 +133,7 @@
                     <md-button class="md-warn">ABBRECHEN</md-button>
                     <md-button type="submit"
                                ng-disabled="" class="md-primary md-raised">
-                        {{ vm.stepData[0].data.accommodation_name && vm.stepData[0].data.addition &&
-                        vm.stepData[0].data.ownershipOpen && vm.stepData[0].data.square_meters &&
-                        vm.stepData[0].data.persons ? 'NEXT' : 'WEITER' }}
+                        {{ 'WEITER' }}
                     </md-button>
                 </div>
                 {% endverbatim %}
