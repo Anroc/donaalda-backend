@@ -5,10 +5,8 @@
 console.log("angular code loaded.");
 
 
-
-
 var donaaldaApp = angular
-    .module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers'])
+        .module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers'])
 
     ;
 
@@ -92,6 +90,12 @@ function questionController($scope, $q, $timeout) {
                 deferred.resolve({status: 200, statusText: 'success', data: {}});
                 //move to next step when success
                 stepData.completed = true;
+                var keys = [];
+                for (var k in stepData)
+                    keys.push(k);
+                console.log("total " + keys.length + " keys: " + keys);
+                console.log("mittels Object.keys: " + Object.keys(stepData));
+                console.log(stepData.accommodation_name)
                 vm.enableNextStep();
             }, 1000)
         } else {
