@@ -12,13 +12,13 @@
             {% for question in g_questionset.question.all %}
                 <h4>{{ question.question_text }}</h4>
                 {% if question.answer_presentation == 'rc' %}
-                    <md-radio-group ng-model="data.accommodation_name">
+                    <md-radio-group ng-model="vm.stepData[0].data.accommodation_name">
                     {% for answer in question.answer_set.all %}
                           <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
                     {% endfor %}
                     </md-radio-group>
                 {% elif question.answer_presentation == 'mc' %}
-                     <md-checkbox-group ng-model="data.addition" layout="column">
+                     <md-checkbox-group ng-model="vm.stepData[0].data.addition" layout="column">
                      {% for answer in question.answer_set.all %}
                         <md-checkbox value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
                      {% endfor %}
@@ -49,7 +49,7 @@
                   Haben Sie aktuell Renovierungen geplant?
                 </h4>
                 <!-- WICHTIG NOCH ANZUPASSEN -->
-                <md-radio-group ng-model="data.ownershipOpen">
+                <md-radio-group ng-model="vm.stepData[0].data.ownershipOpen">
                   <md-radio-button value="Miete">Ja </md-radio-button>
                   <md-radio-button value="Eigentum">Nein</md-radio-button>
 
@@ -61,12 +61,12 @@
           <div flex>
 
             <h4>
-              Ausstattung von {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
+              Ausstattung von {% verbatim %} {{ vm.stepData[0].data.accommodation_name }} {% endverbatim %}
             </h4>
             <div class="row">
 
 
-              <md-checkbox-group ng-model="data.addition" layout="column">
+              <md-checkbox-group ng-model="vm.stepData[0].data.addition" layout="column">
                 <md-checkbox value="Garten">Garten</md-checkbox>
                 <md-checkbox value="Balkon">Balkon</md-checkbox>
                 <md-checkbox value="Terrasse">Terrasse</md-checkbox>
@@ -79,7 +79,7 @@
             <h4>Unsere Wohnfläche umfasst Quadratmeter:</h4>
             <div layout="row">
               <div flex="50">
-                <md-slider class="md-primary" flex min="0" step="5" max="255" ng-model="data.square_meters"
+                <md-slider class="md-primary" flex min="0" step="5" max="255" ng-model="vm.stepData[0].data.square_meters"
                            aria-label="blue" id="blue-slider"></md-slider>
               </div>
               <div flex="10">
@@ -89,7 +89,7 @@
               <div flex="20" layout layout-align="center center" style="margin-right: 10px;">
                 <input flex
                        type="number" min="0" max="5000" step="5"
-                       ng-model="data.square_meters"
+                       ng-model="vm.stepData[0].data.square_meters"
                        aria-label="blue" aria-controls="blue-slider"
                        style="border: none; text-align: right"> m²
               </div>
@@ -105,7 +105,7 @@
               <div layout="row">
 
                 <input flex="20" type="number" min="1" max="20"
-                       ng-model="data.persons"
+                       ng-model="vm.stepData[0].data.persons"
                        aria-label="rating"
                        aria-controls="rating-slider"
                        style="text-align: right;
@@ -119,13 +119,14 @@
         </div>
       </md-content>
       <md-step-actions layout="row">
+          {% verbatim %}
         <div flex layout="row" layout-align="end top">
           <md-button class="md-warn">ABBRECHEN</md-button>
-          <md-button type="submit"
-                     ng-disabled=""
-                     class="md-primary md-raised">WEITER
+          <md-button ng-disabled="vm.showBusyText" ng-click="vm.submitCurrentStep(vm.stepData[0].data, 0)" class="md-primary md-raised">
+           {{ vm.stepData[0].data.accommodation_name && vm.stepData[0].data.addition && vm.stepData[0].data.ownershipOpen && vm.stepData[0].data.square_meters && vm.stepData[0].data.persons ? 'NEXT' : 'WEITER' }}
           </md-button>
         </div>
+        {% endverbatim %}
       </md-step-actions>
     </form>
   </md-step-body>
