@@ -122,7 +122,8 @@
           {% verbatim %}
         <div flex layout="row" layout-align="end top">
           <md-button class="md-warn">ABBRECHEN</md-button>
-          <md-button ng-disabled="vm.showBusyText" ng-click="vm.submitCurrentStep(vm.stepData[0].data, 0)" class="md-primary md-raised">
+          <md-button type="submit"
+                     ng-disabled="" class="md-primary md-raised">
            {{ vm.stepData[0].data.accommodation_name && vm.stepData[0].data.addition && vm.stepData[0].data.ownershipOpen && vm.stepData[0].data.square_meters && vm.stepData[0].data.persons ? 'NEXT' : 'WEITER' }}
           </md-button>
         </div>
