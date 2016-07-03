@@ -172,9 +172,11 @@ def stepper_check(request):
         steps[key] = json.loads(value)
 
     # create dict only containing 'data' part of stepData of stepper
+    resultdict = {}
     for key in steps:
-        resultdict = steps[key]['data']
-
+        resultdict[steps[key]['step']] = steps[key]['data']
+        print(steps[key]['data'])
+    print(resultdict)
     return render(request, 'app/result.html', )
 
 
