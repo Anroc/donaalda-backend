@@ -1,23 +1,4 @@
 {% load staticfiles %}
-<script type="text/javascript">
-
-$(document).ready(function () {
-
-window.setTimeout(function() {
-    $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
-        $(this).remove();
-    });
-}, 3000);
-
-  $("#btn").click(function(){
-    $("html, body").animate({
-      scrollTop: $("#test").offset().top - 120
-    }, 2000);
-    });
-  });
-
-</script>
-
 <header role="banner" id="fh5co-header">
   <div class="container">
     <div class="row">
@@ -40,6 +21,7 @@ window.setTimeout(function() {
         {% endfor %}
         {% endif %}
         {% endblock %}
+        <!-- TODO create own css classes -->
         <div style="margin-bottom:10px;">
           <!-- Mobile Toggle Menu Button -->
           <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
@@ -94,7 +76,7 @@ window.setTimeout(function() {
             <li><a href="#" data-nav-section="comments"><span>Bewertungen</span></a></li>
             {% endif %}
             {% if navInfo == 'contact' %}
-            <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
+            <li class="active"><a href="#" onclick="back()" data-nav-section="banner"><span>Zurück</span></a></li>
             <li class="active"><a href="#" data-nav-section="contact"><span>Frag Donaalda</span></a></li>
 
             {% endif %}
@@ -159,4 +141,24 @@ window.setTimeout(function() {
     </div>
   </div>
 </header>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function () {
+
+    window.setTimeout(function () {
+      $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+        $(this).remove();
+      });
+    }, 3000);
+
+    $("#btn").click(function () {
+      $("html, body").animate({
+        scrollTop: $("#test").offset().top - 120
+      }, 2000);
+    });
+  });
+
+</script>
 
