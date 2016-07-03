@@ -21,7 +21,7 @@
                                 {% elif question.answer_presentation == 'mc' %}
                                     <md-checkbox-group layout="column">
                                         {% for answer in question.answer_set.all %}
-                                            <md-checkbox ng-model="vm.stepData[0].data.question{{ question.pk }}.answer{{  forloop.counter }}" value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
+                                            <md-checkbox ng-model="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}" value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
                                         {% endfor %}
                                     </md-checkbox-group>
                                 {% elif question.answer_presentation == 'dc' %}
