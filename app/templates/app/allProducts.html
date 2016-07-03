@@ -46,29 +46,18 @@
           <div class="col-md-4">
             <div class="panel panel-default pull-right"
                  style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
-              {% if product.provider.is_visible %}
-              <div class="btn">
-                {% else %}
-                <div class="panel-body">
-                  {% endif %}
-                  <img style="max-height: 100%; max-width: 100%;"
-                       {% if product.provider.is_visible %}
-                       onclick="provider()"
-                       {% endif %}
-                       src="{{ product.provider.providerprofile.logo_image.url }}"
-                       alt="providerImg">
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="slant"></div>
+  </div>
+  </div>
+  <div class="slant"></div>
   </div>
 </section>
 
-<section id="fh5co-questions" data-section="intro">
+<section id="fh5co-questions" data-section="filter">
 
   <!--section-header-->
   <div class="container">
@@ -165,7 +154,7 @@
 </section>
 
 
-<section id="fh5co-work" data-section="images">
+<section id="fh5co-work" data-section="preciseFilter">
 
   <!--section-header-->
   <div class="container">
@@ -272,10 +261,14 @@
           <label>Produktkategorie</label>
           <md-select ng-model="selectedToppings" multiple>
             <md-optgroup label="Küchengeräte">
-              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Küchengeräte' }">{{topping.name}}</md-option>
+              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Küchengeräte' }">
+                {{topping.name}}
+              </md-option>
             </md-optgroup>
             <md-optgroup label="Sensoren">
-              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Sensoren' }">{{topping.name}}</md-option>
+              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Sensoren' }">
+                {{topping.name}}
+              </md-option>
             </md-optgroup>
           </md-select>
         </md-input-container>
@@ -286,9 +279,7 @@
 </section>
 
 
-
-
-<section id="fh5co-testimonials" data-section="tecData">
+<section id="fh5co-testimonials" data-section="results">
 
   <!--section-header-->
   <div class="container">
@@ -297,48 +288,47 @@
         <h2 class="to-animate">Produkt-Liste</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Die Produkt-Liste wurde nach ihren Interessen gefiltert. Sie haben nun die Möglichkeit diese zu sortieren.</h3>
+            <h3>Die Produkt-Liste wurde nach ihren Interessen gefiltert. Sie haben nun die Möglichkeit diese zu
+              sortieren.</h3>
           </div>
         </div>
       </div>
     </div>
   </div>
+</section>
+</body>
+</html>
 
+{% verbatim %}
+<!--sorting-selectbox-->
+<div ng-controller="SelectOptGroupController2" class="md-padding" ng-cloak>
 
-  {% verbatim %}
-  <!--sorting-selectbox-->
-  <div ng-controller="SelectOptGroupController2" class="md-padding" ng-cloak>
+  <div class="container">
+    <div layout="row" layout-align="space-around center">
 
-    <div class="container">
-      <div layout="row" layout-align="space-around center">
-
-        <md-input-container>
-          <label>Sortieren nach...</label>
-          <md-select ng-model="size">
-            <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
-          </md-select>
-        </md-input-container>
-      </div>
+      <md-input-container>
+        <label>Sortieren nach...</label>
+        <md-select ng-model="size">
+          <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
+        </md-select>
+      </md-input-container>
     </div>
   </div>
-  {% endverbatim %}
+</div>
+{% endverbatim %}
 
-  <!--product-list-->
-  {% if all_products %}
-  {% for product in all_products %}
-  <div class="col-md-4 col-sm-6 col-xxs-12">
-    <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
-      <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
-    </a>
-  </div>
-  {% endfor %}
-  {% endif %}
+<!--product-list-->
+{% if all_products %}
+{% for product in all_products %}
+<div class="col-md-4 col-sm-6 col-xxs-12">
+  <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+    <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+  </a>
+</div>
+{% endfor %}
+{% endif %}
 
 </section>
-
-
-
-
 
 
 {% include "app/html_templates/sections/commentSection.html" %}
@@ -352,7 +342,7 @@
 <script type="text/javascript">
   angular
     .module('selectDemoOptGroups', ['ngMaterial'])
-    .controller('SelectOptGroupController', function($scope) {
+    .controller('SelectOptGroupController', function ($scope) {
       $scope.sizes = [
         "Preissegment 1",
         "Preissegment 2",
@@ -360,13 +350,13 @@
         "Preissegment 4"
       ];
       $scope.toppings = [
-        { category: 'Küchengeräte', name: 'Kühlschrank' },
-        { category: 'Küchengeräte', name: 'Herd' },
-        { category: 'Küchengeräte', name: 'Kaffemaschine' },
-        { category: 'Küchengeräte', name: 'Mikrowelle' },
-        { category: 'Sensoren', name: 'Bewegungsmelder' },
-        { category: 'Sensoren', name: 'Türkontakt' },
-        { category: 'Sensoren', name: 'Luftfeuchtigkeitsmesser' }
+        {category: 'Küchengeräte', name: 'Kühlschrank'},
+        {category: 'Küchengeräte', name: 'Herd'},
+        {category: 'Küchengeräte', name: 'Kaffemaschine'},
+        {category: 'Küchengeräte', name: 'Mikrowelle'},
+        {category: 'Sensoren', name: 'Bewegungsmelder'},
+        {category: 'Sensoren', name: 'Türkontakt'},
+        {category: 'Sensoren', name: 'Luftfeuchtigkeitsmesser'}
       ];
       $scope.selectedToppings = [];
       $scope.printSelectedToppings = function printSelectedToppings() {
@@ -384,7 +374,7 @@
         return this.selectedToppings.join('');
       };
     })
-    .controller('SelectOptGroupController2', function($scope) {
+    .controller('SelectOptGroupController2', function ($scope) {
       $scope.sizes = [
         "Preis aufsteigend",
         "Preis absteigend",
@@ -392,7 +382,7 @@
         "Alphabetisch A-Z"
       ];
     })
-    .controller('AppCtrl', function($scope) {
+    .controller('AppCtrl', function ($scope) {
       $scope.data = {};
       $scope.data.cb1 = true;
       $scope.data.cb2 = false;

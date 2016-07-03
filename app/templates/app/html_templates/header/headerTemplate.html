@@ -19,6 +19,8 @@
 
 <link rel="stylesheet" href="{% static 'app/assess/css/custom/base.css' %}">
 
+<title>DONAALDA</title>
+
 <!-- for rendering the correct title and linking the correct specific stylesheet -->
 {% if navInfo == 'scenario' %}
 {% if current_scenario %}
@@ -34,12 +36,15 @@
 <link rel="stylesheet" href="{% static 'app/assets/css/styleProvider.css' %}">
 {% endif %}
 
+{% elif navInfo == 'filter' %}
+
+<link rel="stylesheet" href="{% static 'app/assets/css/custom/filter.css' %}">
+
 {% elif navInfo == 'contact' %}
 
 <link rel="stylesheet" href="{% static 'app/assets/css/custom/contact.css' %}">
 
 {% else %}
-<title>DONAALDA</title>
 
 <link rel="stylesheet" href="{% static 'app/assets/css/style.css' %}">
 {% endif %}
