@@ -221,10 +221,8 @@
   {% verbatim %}
   <!--filter-container for material-selects-->
   <div ng-controller="SelectOptGroupController" class="md-padding" ng-cloak>
-
     <div class="container">
       <div layout="row" layout-align="space-around center">
-
         <md-input-container>
           <label>Produktkategorie</label>
           <md-select ng-model="selectedToppings" multiple>
@@ -263,41 +261,62 @@
       </div>
     </div>
   </div>
-</section>
-</body>
-</html>
 
-{% verbatim %}
-<!--sorting-selectbox-->
-<div ng-controller="SelectOptGroupController2" class="md-padding" ng-cloak>
+  {% verbatim %}
+  <!--sorting-selectbox-->
+  <div ng-controller="SelectOptGroupController2" class="md-padding" ng-cloak>
 
-  <div class="container">
-    <div layout="row" layout-align="space-around center">
+    <div class="container">
+      <div layout="row" layout-align="space-around center">
 
-      <md-input-container>
-        <label>Sortieren nach...</label>
-        <md-select ng-model="size">
-          <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
-        </md-select>
-      </md-input-container>
+        <md-input-container>
+          <label>Sortieren nach...</label>
+          <md-select ng-model="size">
+            <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
+          </md-select>
+        </md-input-container>
+      </div>
     </div>
   </div>
-</div>
-{% endverbatim %}
+  {% endverbatim %}
 
-<!--product-list-->
-{% if all_products %}
-{% for product in all_products %}
-<div class="col-md-4 col-sm-6 col-xxs-12">
-  <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
-    <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
-  </a>
-</div>
-{% endfor %}
-{% endif %}
 
+
+  <div class="container">
+    <div class="row">
+      <div class="row row-bottom-padded-sm">
+        <div class="col-md-12 section-heading text-center">
+          <h2 class="to-animate">Szenarien</h2>
+        </div>
+      </div>
+    </div>
+    {% if all_products %}
+    {% for product in all_products %}
+    <div class="col-md-4 col-sm-6 col-xxs-12">
+      <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item">
+        <div class="img-responsive"
+             style="background-image: url('{{ product.image1.url }}'); background-repeat: no-repeat; height: 250px;">
+        </div>
+        <div class="fh5co-text">
+          <h3 class="text-muted">
+            {{ product.provider }}
+          </h3>
+          <div style="height: 80px;">
+            <h1>
+              {{ product.name }}
+            </h1>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% empty %}
+    <div>
+      Es wurden noch keine Szenarien hinzugefügt.
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
 </section>
-
 
 {% include "app/html_templates/sections/commentSection.html" %}
 
