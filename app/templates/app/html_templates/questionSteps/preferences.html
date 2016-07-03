@@ -1,7 +1,7 @@
 <md-step label="Kategorienauswahl" md-complete="vm.stepData[1].data.completed"
          ng-disabled="vm.stepProgress < 2">
   <md-step-body>
-    <form name="step2">
+    <form name="step2" ng-submit="vm.submitCurrentStep(vm.stepData[1].data)">
       <md-content class="md-padding">
         <div layout="column" layout-align="center top">
           {% if choose_category_question_set %}
@@ -14,7 +14,7 @@
                     {% endfor %}
                     </md-radio-group>
                 {% elif question.answer_presentation == 'mc' %}
-                     <md-checkbox-group ng-model="data.addition" layout="column">
+                     <md-checkbox-group ng-model="data.question{{ question.pk }}.answer{{ answer.pk }}" layout="column">
                      {% for answer in question.answer_set.all %}
                         <md-checkbox value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
                      {% endfor %}
@@ -44,16 +44,16 @@
 
           <md-button class="md-raised md-primary" ng-click="vm.moveToPreviousStep()">Zurück</md-button>
         </div>
+                      {% verbatim %}
         <div flex layout="row" layout-align="end top">
           <md-button class="md-warn">ABBRECHEN</md-button>
-          <md-button ng-disabled="vm.showBusyText"
-                     ng-click="vm.submitCurrentStep(vm.stepData[1].data, !(vm.stepData[1].data.firsname && vm.stepData[1].data.lastname))"
+          <md-button type="submit" ng-disabled=""
                      class="md-primary md-raised">
-            {% verbatim %}
-            {{ vm.stepData[1].data.firsname && vm.stepData[1].data.lastname ? 'NEXT' : 'WEITER' }}
-            {% endverbatim %}
+
+            {{ 'WEITER' }}
           </md-button>
         </div>
+                    {% endverbatim %}
       </md-step-actions>
     </form>
   </md-step-body>
