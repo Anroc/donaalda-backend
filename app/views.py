@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from django.middleware.csrf import get_token
+from collections import ChainMap
 
 from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
     QuestionSet, Question, Answer
@@ -171,12 +171,46 @@ def stepper_check(request):
     for key, value in request.POST.items():
         steps[key] = json.loads(value)
 
+    def flatten_dict(d):
+        def expand(key, value):
+            if isinstance(value, dict):
+                return [(str(key) + '.' + str(k), str(v)) for k, v in flatten_dict(value).items()]
+            else:
+                return [(key, value)]
+
+        items = [item for k, v in d.items() for item in expand(k, v)]
+
+        return dict(items)
+
+    resultdict = {}
+    for key in steps:
+        resultdict[steps[key]['step']] = steps[key]['data']
+
+    print(list(flatten_dict(resultdict).items()))
+
+    """
     # create dict only containing 'data' part of stepData of stepper
     resultdict = {}
     for key in steps:
         resultdict[steps[key]['step']] = steps[key]['data']
-        print(steps[key]['data'])
-    print(resultdict)
+
+    result_list = []
+    for item in resultdict.values():
+        result_list.append(item)
+
+    def flatten_dict(d):
+        def expand(key, value):
+            if isinstance(value, dict):
+                return [(str(key) + '.' + str(k), str(v)) for k, v in flatten_dict(value).items()]
+            else:
+                return [(key, value)]
+
+        items = [item for k, v in d.items() for item in expand(k, v)]
+
+        return dict(items)
+
+    print(flatten_dict(resultdict))
+    """
     return render(request, 'app/result.html', )
 
 
