@@ -10,30 +10,16 @@
 <html class="no-js"> <!--<![endif]-->
 <head>
 
-  {% include "app/html_templates/header/headerTemplate.html" %}
-
-
-  <script>
-    $(document).ready(function () {
-      $('[data-show="tooltip"]').tooltip();
-    });
-  </script>
+  {% include "app/html_templates/header/headerTemplate.html" with navInfo = 'product' %}
 
   <script>
     {% if product.provider.is_visible %}
     function provider() {
       location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
     }
-    {% endif %}
-
-    function start() {
-      location.href = "/"
-    }
-
+    {% endif % }
   </script>
-  <script>
-    $.post("/updatepagehistory", {lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"});
-  </script>
+
 </head>
 <body>
 
@@ -160,11 +146,7 @@
 
 {% include "app/html_templates/sections/commentSection.html" %}
 
-<!-- Footer -->
-{% include "app/html_templates/footer/footerTemplate.html" %}
-
-{% include "app/html_templates/modals/modals.html" %}
-
+{% include "app/html_templates/footer/bodyBackBone.html" %}
 </body>
 </html>
 

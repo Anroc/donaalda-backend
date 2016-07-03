@@ -8,30 +8,6 @@
 
   {% include "app/html_templates/header/headerTemplate.html" %}
 
-  {% load compile_static %}
-
-  <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
-
-  <script>
-    $(document).ready(function(){
-      $('[data-show="tooltip"]').tooltip();
-    });
-  </script>
-
-  <script>
-    {% if product.provider.is_visible %}
-    function provider() {
-      location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
-    }
-    {% endif %}
-
-    function start() {
-      location.href = "/"
-    }
-  </script>
-  <script>
-    $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
-  </script>
 </head>
 <body>
 
@@ -158,10 +134,7 @@
 
 {% include "app/html_templates/sections/commentSection.html" %}
 
-<!-- Footer -->
-{% include "app/html_templates/footer/footerTemplate.html" %}
-
-{% include "app/html_templates/modals/modals.html" %}
+{% include "app/html_templates/footer/bodyBackBone.html" %}
 
 {% if all_products %}
 {% for product in all_products %}
