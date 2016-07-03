@@ -184,7 +184,7 @@ def stepper_check(request):
 
     regex = re.compile("[0-9].(optional|completed|step|data.completed)")
     result_dic = flatten_dict(steps)
-    clean_result_dic = result_dic
+    clean_result_dic = dict(result_dic)
     delete_list = [i for i in result_dic.keys() if regex.search(i)]
     for item in delete_list:
         del clean_result_dic[item]
