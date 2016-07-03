@@ -1,28 +1,4 @@
 {% load staticfiles %}
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
-<meta name="author" content=""/>
-
-<!-- Facebook and Twitter integration -->
-<meta property="og:title" content=""/>
-<meta property="og:image" content=""/>
-<meta property="og:url" content=""/>
-<meta property="og:site_name" content=""/>
-<meta property="og:description" content=""/>
-<meta name="twitter:title" content=""/>
-<meta name="twitter:image" content=""/>
-<meta name="twitter:url" content=""/>
-<meta name="twitter:card" content=""/>
-
-<!--link rel="stylesheet" href="{% static 'app/index-style.css' %}"-->
-<script src="{% static 'app/index-app.js' %}"></script>
-
-<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-<link rel="shortcut icon" href="{% static 'app/favicon.ico' %}">
 
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet'
       type='text/css'>
@@ -39,24 +15,17 @@
 <link rel="stylesheet" href="{% static 'app/assets/css/bootstrap.css' %}">
 
 
+<!-- TODO create base css for every site zu be used -->
 
+<link rel="stylesheet" href="{% static 'app/assess/css/custom/base.css' %}">
+
+<!-- for rendering the correct title and linking the correct specific stylesheet -->
 {% if navInfo == 'scenario' %}
 {% if current_scenario %}
 <title>DONAALDA - Szenario - {{ current_scenario.name }}</title>
 
-<link rel="stylesheet" href="{% static 'app/assets/css/styleProduct.css' %}">
-<style>
-  .carousel-control {
-    width: 50px;
-    opacity: 0.2;
-    filter: alpha(opacity=20);
-    font-size: 30px;
-  }
+<link rel="stylesheet" href="{% static 'app/assets/css/custom/scenario.css' %}">
 
-  .carousel-indicators{
-    bottom:-50px;
-  }
-</style>
 {% endif %}
 {% elif navInfo == 'provider' %}
 {% if provider.public_name %}
@@ -74,6 +43,20 @@
 
 <link rel="stylesheet" href="{% static 'app/assets/css/style.css' %}">
 {% endif %}
+
+
+
+
+
+
+
+<!-- TODO: fix this Place favicon.ico and apple-touch-icon.png in the root directory -->
+<link rel="shortcut icon" href="{% static 'app/favicon.ico' %}">
+
+<!-- js files -->
+
+<!-- used for the angular controller only -->
+<script src="{% static 'app/index-app.js' %}"></script>
 
 <!-- Modernizr JS -->
 <script src="{% static 'app/assets/js/modernizr-2.6.2.min.js' %}"></script>
@@ -155,3 +138,24 @@
     lastpage: "{{request.META.HTTP_REFERER}}",
     csrfmiddlewaretoken: "{{ csrf_token }}"} );
 </script>
+
+
+<!-- meta -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<meta name="author" content="Oskar Schlösinger"/>
+
+<!-- Facebook and Twitter integration -->
+<meta property="og:title" content=""/>
+<meta property="og:image" content=""/>
+<meta property="og:url" content=""/>
+<meta property="og:site_name" content=""/>
+<meta property="og:description" content=""/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:image" content=""/>
+<meta name="twitter:url" content=""/>
+<meta name="twitter:card" content=""/>

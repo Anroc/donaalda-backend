@@ -1,4 +1,5 @@
 {% load staticfiles %}
+<link rel="stylesheet" href="{% static 'app/assets/css/custom/navBarHeader.css' %}">
 <header role="banner" id="fh5co-header">
   <div class="container">
     <div class="row">
@@ -22,15 +23,14 @@
         {% endif %}
         {% endblock %}
         <!-- TODO create own css classes -->
-        <div style="margin-bottom:10px;">
+        <div class="leftNavbar">
           <!-- Mobile Toggle Menu Button -->
           <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
              data-target="#navbar"
              aria-expanded="false" aria-controls="navbar"><i></i></a>
           <a class="navbar-brand" href="/">
             <div>
-              <img alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}"
-                   style="margin-bottom: 5px">
+              <img class="navbarIcon" alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}">
               <span>Donaalda</span>
             </div>
           </a>
