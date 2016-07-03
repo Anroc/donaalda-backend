@@ -60,6 +60,12 @@
             <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>
             <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
             {% endif %}
+            {% if navInfo == 'filter' %}
+            <li class="active"><a href="#" onclick="back()"><span>Zurück</span></a></li>
+            <li class="active"><a href="#" data-nav-section="home"><span>Oben</span></a></li>
+            <li><a href="#" data-nav-section="filter"><span>Filter</span></a></li>
+            <li><a href="#" data-nav-section="results"><span>Ergebnisse</span></a></li>
+            {% endif %}
             {% if navInfo == 'provider' %}
             <li><a href="#" onclick="back()"><span>Zurück</span></a></li>
             <li class="active"><a href="#" data-nav-section="home"><span>{{ providerName }}</span></a></li>

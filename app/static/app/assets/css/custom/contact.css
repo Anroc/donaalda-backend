@@ -15,6 +15,7 @@
 }
 
 
+{% load staticfiles %}
 #fh5co-contactBanner {
     background-color: transparent;
     background-size: cover;
@@ -24,7 +25,7 @@
     background-color: #52d3aa;
     color: #fff;
     overflow: hidden;
-    background-image: url({% static 'app/assets/resources/contact_smaller.jpg' %});
+    background-image: url({% static 'app/assets/resources/contact_smaller.jpg' %}); /* might not work because of django tags */
     height: 900px; /* might be better to be variable */
 }
 
