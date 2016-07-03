@@ -73,7 +73,6 @@
     </div>
   </div>
 
-  {% verbatim %}
   <!--filter-container for material-checkboxes-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
 
@@ -130,18 +129,13 @@
     <div class="container">
       <legend>Kategorie-Filter</legend>
       <div layout="row" layout-align="space-around center">
+        {% for category in categories %}
         <div>
-          <md-checkbox class="md-primary">Komfort</md-checkbox>
+          <md-checkbox class="md-primary">
+            {{ category }}
+          </md-checkbox>
         </div>
-        <div>
-          <md-checkbox class="md-primary">Gesundheit</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sicherheit</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Energie</md-checkbox>
-        </div>
+        {% endfor %}
       </div>
     </div>
 
@@ -150,7 +144,6 @@
       <button type="button" class="btn btn-link">Weitere Filter anzeigen</button>
     </div>
   </div>
-  {% endverbatim %}
 </section>
 
 
@@ -170,7 +163,6 @@
     </div>
   </div>
 
-  {% verbatim %}
   <!--filter-container for material-checkboxes-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
 
@@ -178,32 +170,15 @@
     <div class="container">
       <legend>Szenario-Filter</legend>
       <div layout="row" layout-align="space-around center">
+        {% for scenario in scenarios %}
+        {% if scenario is_in_selected_category %}
         <div>
-          <md-checkbox class="md-primary">Szenario 1</md-checkbox>
+          <md-checkbox class="md-primary">
+            {{ scenario }}
+          </md-checkbox>
         </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 2</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 3</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 4</md-checkbox>
-        </div>
-      </div>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Szenario 5</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 6</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 7</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 8</md-checkbox>
-        </div>
+        {% endif %}
+        {% endfor %}
       </div>
     </div>
 
@@ -240,22 +215,15 @@
       </div>
     </div>
   </div>
-  {% endverbatim %}
 
-
+  <!-- TODO samuel entweder du machst es dir extrem umständlich und lädst die django data in den
+  <!-- TODO angular controller oder machst es direkt alles mit django... was meinst? -->
   {% verbatim %}
   <!--filter-container for material-selects-->
   <div ng-controller="SelectOptGroupController" class="md-padding" ng-cloak>
 
     <div class="container">
       <div layout="row" layout-align="space-around center">
-
-        <md-input-container>
-          <label>Preissegment</label>
-          <md-select ng-model="size">
-            <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
-          </md-select>
-        </md-input-container>
 
         <md-input-container>
           <label>Produktkategorie</label>
