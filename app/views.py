@@ -6,13 +6,14 @@ from django.contrib import messages
 from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.middleware.csrf import get_token
 
 from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
     QuestionSet, Question, Answer
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.http import *
 
@@ -159,15 +160,14 @@ class StepperResultView(generic.ListView):
         return render(request, 'app/result.html')
 
 
-@csrf_protect
-@require_http_methods(["POST"])
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
 def stepper_check(request):
     if request.POST:
-        print(request.POST)
-        for x in request.POST.get:
-            print(x)
+        for key, value in request.POST.items():
+            print(key, value)
 
-    return render(request, 'app/result.html',)
+    return render(request, 'app/result.html', )
 
 
 @csrf_protect
