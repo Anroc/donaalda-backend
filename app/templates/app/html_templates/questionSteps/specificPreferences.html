@@ -1,8 +1,8 @@
-<md-step label="Spezifisch" md-complete="vm.stepData[0].data.completed"
-         ng-disabled="vm.stepProgress < 1">
+<md-step label="Spezifisch" md-complete="vm.stepData[2].data.completed"
+         ng-disabled="vm.stepProgress < 3">
 
   <md-step-body>
-    <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
+    <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[2].data)">
       <md-content class="md-padding">
         <div layout="row" layout-align="space-around start">
 
@@ -19,9 +19,9 @@
                     {% endfor %}
                     </md-radio-group>
                 {% elif question.answer_presentation == 'mc' %}
-                     <md-checkbox-group ng-model="data.addition" layout="column">
+                     <md-checkbox-group layout="column">
                      {% for answer in question.answer_set.all %}
-                        <md-checkbox value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
+                        <md-checkbox ng-model="data.question{{ question.pk }}.answer{{ answer.pk }}" value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
                      {% endfor %}
                      </md-checkbox-group>
                 {% elif question.answer_presentation == 'dc' %}
