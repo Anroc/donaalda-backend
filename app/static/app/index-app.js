@@ -59,32 +59,15 @@ function questionController($scope, $q, $timeout) {
         {step: 3, completed: false, optional: false, data: {}},
     ];
 
-    vm.getCookie = function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    var csrftoken = vm.getCookie('csrftoken');
-
     vm.post = function post(path) {
         var method = "post"; // Set method to post by default if not specified.
         var params = vm.stepData;
         // The rest of this code assumes you are not using a library.
         // It can be made less wordy if you use one.
         var form = document.createElement("form");
-        document.cookie = csrftoken;
         form.setAttribute("method", method);
         form.setAttribute("action", path);
+
         for (var key in params) {
             if (params.hasOwnProperty(key)) {
                 var hiddenField = document.createElement("input");
@@ -94,10 +77,9 @@ function questionController($scope, $q, $timeout) {
                 form.appendChild(hiddenField);
             }
         }
-        console.log(csrftoken)
         document.body.appendChild(form);
         form.submit();
-    }
+    };
 
     vm.enableNextStep = function nextStep() {
         //do not exceed into max step
@@ -109,13 +91,13 @@ function questionController($scope, $q, $timeout) {
             vm.stepProgress = vm.stepProgress + 1;
         }
         vm.selectedStep = vm.selectedStep + 1;
-    }
+    };
 
     vm.moveToPreviousStep = function moveToPreviousStep() {
         if (vm.selectedStep > 0) {
             vm.selectedStep = vm.selectedStep - 1;
         }
-    }
+    };
 
     vm.submitCurrentStep = function submitCurrentStep(stepData, isSkip) {
         var deferred = $q.defer();
@@ -129,18 +111,22 @@ function questionController($scope, $q, $timeout) {
                 deferred.resolve({status: 200, statusText: 'success', data: {}});
                 //move to next step when success
                 stepData.completed = true;
+                /*
                 var keys = [];
                 for (var k in stepData)
                     keys.push(k);
-                console.log("total " + keys.length + " keys: " + keys);
-                console.log("mittels Object.keys: " + Object.keys(stepData));
-                if (stepData.question4) {
-                    console.log("quesiton4:" + Object.keys(stepData.question4));
+                 console.log("total " + keys.length + " keys: " + keys);
+                 console.log("mittels Object.keys: " + Object.keys(stepData));
+                 if (stepData.question4) {
+                 console.log("quesiton4:" + Object.keys(stepData.question4));
 
-                    for (var a in stepData.question4)
-                        console.log("answerId: " + a)
-                }
+                 for (var a in stepData.question4)
+                 console.log("answerId: " + a)
+                 }
+                 console.log(stepData.completed);
+                 */
                 vm.enableNextStep();
+
             }, 1000)
         } else {
             vm.showBusyText = false;
