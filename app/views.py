@@ -2,6 +2,8 @@
 
 import datetime
 import re
+import json
+
 from django.contrib import messages
 from django.views import generic
 from django.contrib.auth import authenticate
@@ -160,12 +162,18 @@ class StepperResultView(generic.ListView):
         return render(request, 'app/result.html')
 
 
+# csrf_exempt cause i couldnt get the csrf_token to work with the custom vm.post method in index-app.js
 @csrf_exempt
 @require_http_methods(["GET", "POST"])
 def stepper_check(request):
-    if request.POST:
-        for key, value in request.POST.items():
-            print(key, value)
+    # dict should hold decoded JSON object from stepper
+    steps = {}
+    for key, value in request.POST.items():
+        steps[key] = json.loads(value)
+
+    # create dict only containing 'data' part of stepData of stepper
+    for key in steps:
+        resultdict = steps[key]['data']
 
     return render(request, 'app/result.html', )
 
