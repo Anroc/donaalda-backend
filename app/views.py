@@ -168,9 +168,11 @@ class StepperResultView(generic.ListView):
 def stepper_check(request):
     # dict should hold decoded JSON object from stepper
     steps = {}
+    # read from POST and interpret as JSON
     for key, value in request.POST.items():
         steps[key] = json.loads(value)
 
+    # "flatten" dict by recursively dismissing dicts by adding information to key
     def flatten_dict(d):
         def expand(key, value):
             if isinstance(value, dict):
@@ -182,19 +184,30 @@ def stepper_check(request):
 
         return dict(items)
 
+    # find unnecessary JSON data, that we dont have to work with
     regex = re.compile("[0-9].(optional|completed|step|data.completed)")
+
     result_dic = flatten_dict(steps)
+
+    # copy of flattened dict, to keep checking whether stuff works, can be removed on production version of function
     clean_result_dic = dict(result_dic)
+
+    # create list of unnecessary items
     delete_list = [i for i in result_dic.keys() if regex.search(i)]
+
+    # find correct answer PK to substitute YES dict values
     regex_build_value = re.compile("[\d\w]*.answer[0-9]+")
 
+    # clean clean_result_dic for testing purposes
     for item in delete_list:
         del clean_result_dic[item]
 
+    # create list with items to be "cleaned"
     clean_list = [i for i in clean_result_dic.keys() if regex_build_value.search(i)]
 
     print(clean_list)
 
+    #
     for k, v in list(clean_result_dic.items()):
         if k in clean_list:
             clean_result_dic[k] = re.sub('.*?([0-9]*)$', r'\1', k)
