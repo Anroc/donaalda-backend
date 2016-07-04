@@ -6,12 +6,12 @@
 <html class="no-js">
 <head>
 
-  {% include "app/html_templates/header/headerTemplate.html" %}
+  {% include "app/html_templates/header/headerTemplate.html" with navInfo='filter' %}
 
 </head>
 <body>
 
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='product'%}
+{% include "app/html_templates/header/navbarHeader.html" with navInfo='filter'%}
 
 <section id="fh5co-page" data-section="home"
          style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"

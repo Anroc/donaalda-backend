@@ -5,36 +5,47 @@
       <md-content class="md-padding">
         <div layout="column" layout-align="center top">
           {% if choose_category_question_set %}
-            {% for question in choose_category_question_set.question.all %}
-                <h4>{{ question.question_text }}</h4>
-                {% if question.answer_presentation == 'rc' %}
-                    <md-radio-group ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}">
-                    {% for answer in question.answer_set.all %}
-                          <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
-                    {% endfor %}
-                    </md-radio-group>
-                {% elif question.answer_presentation == 'mc' %}
-                     <md-checkbox-group layout="column">
-                     {% for answer in question.answer_set.all %}
-                        <md-checkbox ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}" value='{{ answer.pk }}' value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
-                     {% endfor %}
-                     </md-checkbox-group>
-                {% elif question.answer_presentation == 'dc' %}
-                    <md-input-container>
-                    <md-select ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}" placeholder="Select a state">
-                        {% for answer in question.answer_set.all %}
-                            <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
-                        {% endfor %}
-                    </md-select>
-                    </md-input-container>
-                {% elif question.answer_presentation == 'sc' %}
-                    <!-- INPUT SLIDER HERE -->
-                {% elif question.answer_presentation == 'rs' %}
-                    <!-- INPUT RANGE SLIDER HERE -->
-                {% endif %}
+          {% for question in choose_category_question_set.question.all %}
+          <h4>
+            {{ question.question_text }}
+          </h4>
+          {% if question.answer_presentation == 'rc' %}
+          <md-radio-group ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}">
+            {% for answer in question.answer_set.all %}
+            <md-radio-button value='{{ answer.pk }}'>
+              {{ answer.answer_text }}
+            </md-radio-button>
             {% endfor %}
-            {% else %}
-          <h2>FUCK THIS</h2>
+          </md-radio-group>
+          {% elif question.answer_presentation == 'mc' %}
+          <md-checkbox-group layout="column">
+            {% for answer in question.answer_set.all %}
+            <md-checkbox ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                         value='{{ answer.pk }}' value='{{ answer.pk }}'>{{ answer.answer_text }}
+            </md-checkbox>
+            {% endfor %}
+          </md-checkbox-group>
+          {% elif question.answer_presentation == 'dc' %}
+          <md-input-container>
+            <md-select ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                       placeholder="Select a state">
+              {% for answer in question.answer_set.all %}
+              <md-option value='{{ answer.pk }}'>
+                {{ answer.answer_text }}
+              </md-option>
+              {% endfor %}
+            </md-select>
+          </md-input-container>
+          {% elif question.answer_presentation == 'sc' %}
+          <!-- INPUT SLIDER HERE -->
+          {% elif question.answer_presentation == 'rs' %}
+          <!-- INPUT RANGE SLIDER HERE -->
+          {% endif %}
+          {% endfor %}
+          {% else %}
+          <h2>
+            Pups der Bär
+          </h2>
           {% endif %}
         </div>
 
@@ -42,18 +53,21 @@
       <md-step-actions layout="row">
         <div flex>
 
-          <md-button class="md-raised md-primary" ng-click="vm.moveToPreviousStep()">Zurück</md-button>
+          <md-button class="md-raised md-primary" ng-click="vm.moveToPreviousStep()">
+            Zurück
+          </md-button>
         </div>
-                      {% verbatim %}
+        {% verbatim %}
         <div flex layout="row" layout-align="end top">
-          <md-button class="md-warn">ABBRECHEN</md-button>
+          <md-button class="md-warn">
+            ABBRECHEN
+          </md-button>
           <md-button type="submit" ng-disabled=""
                      class="md-primary md-raised">
-
             {{ 'WEITER' }}
           </md-button>
         </div>
-                    {% endverbatim %}
+        {% endverbatim %}
       </md-step-actions>
     </form>
   </md-step-body>

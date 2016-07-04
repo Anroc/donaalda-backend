@@ -1,84 +1,6 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7">
-<html class="no-js lt-ie9 lt-ie8">
-<html class="no-js lt-ie9">
-<html class="no-js">
-<head>
+{% include "app/html_templates/header/headerTemplate.html" with navInfo='filter' %}
 
-  {% include "app/html_templates/header/headerTemplate.html" with navInfo = 'filter' %}
-
-  <!-- TODO: implement sass whey
-  {% comment %}
-  {% load compile_static %}
-  <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
-  {% endcomment %}
-  -->
-
-
-  <!--tags needed for angular material-->
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-
-  <!--range slider css-->
-  <style>
-    .range-slider-container {
-      position: relative;
-      height: 100px;
-    }
-
-    .range-slider-container md-slider {
-      margin: 0;
-    }
-
-    .range-track-line {
-      position: absolute;
-      height: 2px;
-      top: 23px;
-      background-color: blue;
-    }
-
-    .range-slider-container md-slider.md-default-theme.md-min .md-thumb:after {
-      background-color: blue !important;
-    }
-
-    .range-slider-left, .range-slider-right {
-      position: absolute;
-      top: 0px;
-    }
-
-    .range-slider-right {
-      right: 0px;
-    }
-
-    .range-slider-left md-slider .md-thumb-container {
-      transition: -webkit-transform 0s linear;
-      transition: transform 0s linear;
-    }
-
-    .range-slider-left md-slider.md-default-theme .md-track.md-track-fill {
-      background-color: blue) !important;
-    }
-
-    .range-slider-left md-slider.md-default-theme .md-track:not(.md-track-fill) {
-      background-color: blue !important;
-    }
-
-    .range-slider-container md-slider .md-thumb-container {
-      transition: -webkit-transform 0s linear;
-      transition: transform 0s linear;
-    }
-
-    .range-slider-container md-slider .md-track-container {
-      transition: -webkit-transform 0s linear;
-      transition: transform 0s linear;
-    }
-  </style>
-</head>
 
 <body ng-app="allProductsApp">
 
@@ -131,10 +53,10 @@
   </div>
 
   <!--filter-container for material-checkboxes-->
-  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+  <div ng-controller="AppCtrl" class="md-padding container" ng-cloak>
 
     <!--hersteller-filter-->
-    <div class="container">
+    <div>
       <legend>Hersteller-Filter</legend>
       <div layout="row" layout-align="space-around center">
         <div>
@@ -227,6 +149,8 @@
     <div class="container">
       <legend>Szenario-Filter</legend>
       <div layout="row" layout-align="space-around center">
+        <!--
+        {% comment %}
         {% for scenario in scenarios %}
         {% if scenario is_in_selected_category %}
         <div>
@@ -236,6 +160,8 @@
         </div>
         {% endif %}
         {% endfor %}
+        {% endcomment %}
+        -->
       </div>
     </div>
 
@@ -360,7 +286,7 @@
     {% if all_products %}
     {% for product in all_products %}
     <div class="col-md-4 col-sm-6 col-xxs-12">
-      <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item">
+      <a class="fh5co-project-item">
         <div class="img-responsive"
              style="background-image: url('{{ product.image1.url }}'); background-repeat: no-repeat; height: 250px;">
         </div>
@@ -412,7 +338,7 @@
 <script type="text/javascript">
   angular
     .module('allProductsApp', ['ngMaterial', "directives.rangeSlider"])
-    .controller('sorting', function($scope) {
+    .controller('sorting', function ($scope) {
       $scope.sorts = [
         "Preis aufsteigend",
         "Preis absteigend",
@@ -420,9 +346,9 @@
         "Alphabetisch A-Z"
       ];
     })
-    .controller('AppCtrl', function($scope) {
+    .controller('AppCtrl', function ($scope) {
     })
-    .controller('AppCtrl2', function($scope) {
+    .controller('AppCtrl2', function ($scope) {
       $scope.color = {
         blue: Math.floor(Math.random() * 255)
       };
@@ -432,22 +358,22 @@
   angular.module('directives.rangeSlider', ['ngMaterial'])
     .directive('rangeSlider', function () {
       return {
-        restrict   : "E",
-        scope      : {
-          max       : '=',
-          min       : '=',
-          gap       : '=?',
-          step      : '=?',
+        restrict: "E",
+        scope: {
+          max: '=',
+          min: '=',
+          gap: '=?',
+          step: '=?',
           lowerValue: "=",
           upperValue: "="
         },
         templateUrl: 'range-slider.tpl.html',
-        controller : ["$scope", function ($scope) {
+        controller: ["$scope", function ($scope) {
 
           var COMFORTABLE_STEP = $scope.step, // whether the step is comfortable that depends on u
             tracker = $scope.tracker = {    // track style
               width: 0,
-              left : 0,
+              left: 0,
               right: 0
             };
 
