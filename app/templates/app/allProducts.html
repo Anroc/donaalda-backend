@@ -58,11 +58,11 @@
       position: absolute;
       height: 2px;
       top: 23px;
-      background-color: blue;
+      background-color: rgb(255, 64, 129);
     }
 
     .range-slider-container md-slider.md-default-theme.md-min .md-thumb:after {
-      background-color: blue !important;
+      background-color: rgb(255, 64, 129) !important;
     }
 
     .range-slider-left, .range-slider-right {
@@ -80,11 +80,11 @@
     }
 
     .range-slider-left md-slider.md-default-theme .md-track.md-track-fill {
-      background-color: blue) !important;
+      background-color: rgba(188, 188, 188, 1) !important;
     }
 
     .range-slider-left md-slider.md-default-theme .md-track:not(.md-track-fill) {
-      background-color: blue !important;
+      background-color: rgb(255, 64, 129) !important;
     }
 
     .range-slider-container md-slider .md-thumb-container {
@@ -150,99 +150,50 @@
     </div>
   </div>
 
-
-
-
   <!--hersteller filter aus backend-->
-  <div class="container">
-    <legend>Hersteller-Filter</legend>
-    {% for provider in provider_list %}
-
-    {% endfor %}
-  </div>
-
-
-
-
-
-  {% verbatim %}
-  <!--filter-container for material-checkboxes-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-
-    <!--hersteller-filter-->
     <div class="container">
       <legend>Hersteller-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Hersteller 1</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 2</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 3</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 4</md-checkbox>
-        </div>
-      </div>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Hersteller 5</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 6</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 7</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 8</md-checkbox>
-        </div>
-      </div>
-    </div>
-
-    <!--preis-slider-->
-    <div ng-controller="AppCtrl2" ng-cloak>
-      <legend>Preis-Filter</legend>
-      <div class="container">
-        <div ng-init="lower=1;upper=40;gap=1;">
-          <md-content class="md-padding">
-            <range-slider min="1" max="40" step="1" lower-value="lower" upper-value="upper" gap="gap"></range-slider>
-            <div>
-              <p>min: {{lower}}€</p>
-              <p>max: {{upper}}€</p>
+        <div layout="row" layout-align="start center">
+        {% for provider in provider_list %}
+          <div flex>
+            <md-checkbox class="md-primary">{{ provider.name }}</md-checkbox>
+          </div>
+          {% if forloop.counter|divisibleby:"3" %}
             </div>
-          </md-content>
-        </div>
-      </div>
-    </div>
-
-    <!--kategorie-filter-->
-    <div class="container">
-      <legend>Kategorie-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Komfort</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Gesundheit</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sicherheit</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Energie</md-checkbox>
-        </div>
-      </div>
-    </div>
-
-    <!--button um section mit weiteren filtern anzuzeigen-->
-    <div class="container" style="text-align:center">
-      <button type="button" class="btn btn-link">Weitere Filter anzeigen</button>
+            <div layout="row" layout-align="start center">
+          {% endif %}
+          {% if forloop.last %}
+              </div>
+          {% endif %}
+        {% endfor %}
     </div>
   </div>
-  {% endverbatim %}
+
+  <!--kategorie filter aus backend-->
+  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+    <div class="container">
+      <legend>Kategorie-Filter</legend>
+      <div layout="row" layout-align="start center">
+        {% for category in category_list %}
+        <div flex>
+          <md-checkbox class="md-primary">{{ category.name }}</md-checkbox>
+        </div>
+        {% if forloop.counter|divisibleby:"4" %}
+      </div>
+      <div layout="row" layout-align="start center">
+        {% endif %}
+        {% if forloop.last %}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!--button um hidden section anzuzeigen-->
+  <div class="row" layout-align="center center">
+    <button type="button" class="btn btn-link">Weitere Filter anzeigen</button>
+  </div>
 </section>
 
 
@@ -259,6 +210,44 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!--preis-slider-->
+  <div ng-controller="AppCtrl2" class="md-padding" ng-cloak>
+    <legend>Preis-Filter</legend>
+    <div class="container">
+      <div ng-init="lower=1;upper=40;gap=1;">
+        <md-content class="md-padding" style="background-color:transparent">
+          <range-slider min="1" max="40" step="1" lower-value="lower" upper-value="upper" gap="gap"></range-slider>
+          <div>
+            {% verbatim %}
+            <p>min: {{lower}}€</p>
+            <p>max: {{upper}}€</p>
+            {% endverbatim %}
+          </div>
+        </md-content>
+      </div>
+    </div>
+  </div>
+
+  <!--Produkttyp filter aus backend-->
+  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+    <div class="container">
+      <legend>Produkttyp-Filter</legend>
+      <div layout="row" layout-align="start center">
+        {% for type in producttype_list %}
+        <div flex="33">
+          <md-checkbox class="md-primary">{{ type }}</md-checkbox>
+        </div>
+        {% if forloop.counter|divisibleby:"3" %}
+          </div>
+          <div layout="row" layout-align="start center">
+        {% endif %}
+        {% if forloop.last %}
+           </div>
+      {% endif %}
+      {% endfor %}
     </div>
   </div>
 
@@ -299,42 +288,14 @@
       </div>
     </div>
 
-    <!--produktkategorie-filter-->
-    <div class="container">
-      <legend>Produktkategorie-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Küchengeräte</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sensoren</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Aktoren</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Beleuchtung</md-checkbox>
-        </div>
-      </div>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Heimkino</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Brandschutz</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sirenen</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sonstiges</md-checkbox>
-        </div>
-      </div>
-    </div>
   </div>
   {% endverbatim %}
-</section>
 
+  <!--button um hidden section auszublenden-->
+  <div class="row" layout-align="center center">
+    <button type="button" class="btn btn-link">Weitere Filter ausblenden</button>
+  </div>
+</section>
 
 <section id="fh5co-testimonials" data-section="tecData">
 
