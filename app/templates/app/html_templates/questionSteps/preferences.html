@@ -8,20 +8,20 @@
             {% for question in choose_category_question_set.question.all %}
                 <h4>{{ question.question_text }}</h4>
                 {% if question.answer_presentation == 'rc' %}
-                    <md-radio-group ng-model="data.accommodation_name">
+                    <md-radio-group ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}">
                     {% for answer in question.answer_set.all %}
                           <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
                     {% endfor %}
                     </md-radio-group>
                 {% elif question.answer_presentation == 'mc' %}
-                     <md-checkbox-group ng-model="data.question{{ question.pk }}.answer{{ answer.pk }}" layout="column">
+                     <md-checkbox-group layout="column">
                      {% for answer in question.answer_set.all %}
-                        <md-checkbox value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
+                        <md-checkbox ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}" value='{{ answer.pk }}' value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
                      {% endfor %}
                      </md-checkbox-group>
                 {% elif question.answer_presentation == 'dc' %}
                     <md-input-container>
-                    <md-select ng-model="someModel" placeholder="Select a state">
+                    <md-select ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}" placeholder="Select a state">
                         {% for answer in question.answer_set.all %}
                             <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
                         {% endfor %}
