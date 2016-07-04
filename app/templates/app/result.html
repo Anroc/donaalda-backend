@@ -1,10 +1,391 @@
+{% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<html class="no-js lt-ie9 lt-ie8">
+<html class="no-js lt-ie9">
+<html class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <title>Resultpage</title>
+
+  {% include "app/html_templates/header/headerTemplate.html" with navInfo = 'filter' %}
+
+  <!-- TODO: implement sass whey
+  {% comment %}
+  {% load compile_static %}
+  <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
+  {% endcomment %}
+  -->
+
+
+  <!--tags needed for angular material-->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+
+  <!--range slider css-->
+  <style>
+    .range-slider-container {
+      position: relative;
+      height: 100px;
+    }
+
+    .range-slider-container md-slider {
+      margin: 0;
+    }
+
+    .range-track-line {
+      position: absolute;
+      height: 2px;
+      top: 23px;
+      background-color: blue;
+    }
+
+    .range-slider-container md-slider.md-default-theme.md-min .md-thumb:after {
+      background-color: blue !important;
+    }
+
+    .range-slider-left, .range-slider-right {
+      position: absolute;
+      top: 0px;
+    }
+
+    .range-slider-right {
+      right: 0px;
+    }
+
+    .range-slider-left md-slider .md-thumb-container {
+      transition: -webkit-transform 0s linear;
+      transition: transform 0s linear;
+    }
+
+    .range-slider-left md-slider.md-default-theme .md-track.md-track-fill {
+      background-color: blue) !important;
+    }
+
+    .range-slider-left md-slider.md-default-theme .md-track:not(.md-track-fill) {
+      background-color: blue !important;
+    }
+
+    .range-slider-container md-slider .md-thumb-container {
+      transition: -webkit-transform 0s linear;
+      transition: transform 0s linear;
+    }
+
+    .range-slider-container md-slider .md-track-container {
+      transition: -webkit-transform 0s linear;
+      transition: transform 0s linear;
+    }
+  </style>
 </head>
-<body>
-    SEE THIS RESULT
+
+<body ng-app="allProductsApp">
+
+{% include "app/html_templates/header/navbarHeader.html" with navInfo='filter'%}
+
+<section id="fh5co-page" data-section="home"
+         style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
+         data-stellar-background-ratio="0.5">
+  <div class="container">
+    <div class="text-wrap">
+      <div class="text-inner">
+        <div class="row">
+          <div class="col-md-8">
+            <h1 class="text-left">Filter-Seite</h1>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-default pull-right"
+                 style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
+              {% if product.provider.is_visible %}
+              <div class="btn">
+                {% else %}
+                <div>
+                  {% endif %}
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slant"></div>
+  </div>
+</section>
+
+<section id="fh5co-questions" data-section="filter">
+
+  <!--section-header-->
+  <div class="container">
+    <div class="row" style="width:100%">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Filter</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>Wählen Sie nach welchen Attributen die Produkte gefiltert werden sollen.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--filter-container for material-checkboxes-->
+  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+
+    <!--hersteller-filter-->
+    <div class="container">
+      <legend>Hersteller-Filter</legend>
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Hersteller 1</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 2</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 3</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 4</md-checkbox>
+        </div>
+      </div>
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Hersteller 5</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 6</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 7</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Hersteller 8</md-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <!--preis-slider-->
+    <div ng-controller="AppCtrl2" ng-cloak>
+      <legend>Preis-Filter</legend>
+      <div class="container">
+        <div ng-init="lower=1;upper=40;gap=1;">
+          <md-content class="md-padding">
+            <range-slider min="1" max="40" step="1" lower-value="lower" upper-value="upper" gap="gap"></range-slider>
+            <div>
+              <p>min: {{lower}}€</p>
+              <p>max: {{upper}}€</p>
+            </div>
+          </md-content>
+        </div>
+      </div>
+    </div>
+
+    <!--kategorie-filter-->
+    <div class="container">
+      <legend>Kategorie-Filter</legend>
+      <div layout="row" layout-align="space-around center">
+        {% for category in categories %}
+        <div>
+          <md-checkbox class="md-primary">
+            {{ category }}
+          </md-checkbox>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!--button um section mit weiteren filtern anzuzeigen-->
+    <div class="container" style="text-align:center">
+      <button type="button" class="btn btn-link">Weitere Filter anzeigen</button>
+    </div>
+  </div>
+</section>
+
+
+<section id="fh5co-work" data-section="preciseFilter">
+
+  <!--section-header-->
+  <div class="container">
+    <div class="row" style="width:100%">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Weitere Filter (hidden-section)</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>Wählen Sie noch präzisere Filter-Attribute.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--filter-container for material-checkboxes-->
+  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+
+    <!--szenario-filter-->
+    <div class="container">
+      <legend>Szenario-Filter</legend>
+      <div layout="row" layout-align="space-around center">
+        {% for scenario in scenarios %}
+        {% if scenario is_in_selected_category %}
+        <div>
+          <md-checkbox class="md-primary">
+            {{ scenario }}
+          </md-checkbox>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <!--produktkategorie-filter-->
+    <div class="container">
+      <legend>Produktkategorie-Filter</legend>
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Küchengeräte</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Sensoren</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Aktoren</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Beleuchtung</md-checkbox>
+        </div>
+      </div>
+      <div layout="row" layout-align="space-around center">
+        <div>
+          <md-checkbox class="md-primary">Heimkino</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Brandschutz</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Sirenen</md-checkbox>
+        </div>
+        <div>
+          <md-checkbox class="md-primary">Sonstiges</md-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TODO samuel entweder du machst es dir extrem umständlich und lädst die django data in den
+  <!-- TODO angular controller oder machst es direkt alles mit django... was meinst? -->
+  {% verbatim %}
+  <!--filter-container for material-selects-->
+  <div ng-controller="SelectOptGroupController" class="md-padding" ng-cloak>
+    <div class="container">
+      <div layout="row" layout-align="space-around center">
+        <md-input-container>
+          <label>Produktkategorie</label>
+          <md-select ng-model="selectedToppings" multiple>
+            <md-optgroup label="Küchengeräte">
+              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Küchengeräte' }">
+                {{topping.name}}
+              </md-option>
+            </md-optgroup>
+            <md-optgroup label="Sensoren">
+              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Sensoren' }">
+                {{topping.name}}
+              </md-option>
+            </md-optgroup>
+          </md-select>
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+  {% endverbatim %}
+</section>
+
+
+<section id="fh5co-testimonials" data-section="results">
+
+  <!--section-header-->
+  <div class="container">
+    <div class="row" style="width:100%">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Produkt-Liste</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>Die Produkt-Liste wurde nach ihren Interessen gefiltert. Sie haben nun die Möglichkeit diese zu
+              sortieren.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% verbatim %}
+  <!--sorting-selectbox-->
+  <div ng-controller="sorting" class="md-padding" ng-cloak>
+
+    <div class="container">
+      <div layout="row" layout-align="space-around center">
+
+        <md-input-container>
+          <label>Sortieren nach...</label>
+          <md-select ng-model="sort">
+            <md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+  {% endverbatim %}
+
+  <!--product-list-->
+  {% if all_products %}
+  {% for product in all_products %}
+  <div class="col-md-4 col-sm-6 col-xxs-12">
+    <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+      <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+    </a>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+
+  <div class="container">
+    <div class="row">
+      <div class="row row-bottom-padded-sm">
+        <div class="col-md-12 section-heading text-center">
+          <h2 class="to-animate">Szenarien</h2>
+        </div>
+      </div>
+    </div>
+    {% if all_products %}
+    {% for product in all_products %}
+    <div class="col-md-4 col-sm-6 col-xxs-12">
+      <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item">
+        <div class="img-responsive"
+             style="background-image: url('{{ product.image1.url }}'); background-repeat: no-repeat; height: 250px;">
+        </div>
+        <div class="fh5co-text">
+          <h3 class="text-muted">
+            {{ product.provider }}
+          </h3>
+          <div style="height: 80px;">
+            <h1>
+              {{ product.name }}
+            </h1>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% empty %}
+    <div>
+      Es wurden noch keine Szenarien hinzugefügt.
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+</section>
+
+{% include "app/html_templates/footer/bodyBackBone.html" %}
+
 </body>
 </html>
