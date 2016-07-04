@@ -1,30 +1,6 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7">
-<html class="no-js lt-ie9 lt-ie8">
-<html class="no-js lt-ie9">
-<html class="no-js">
-<head>
+{% include "app/html_templates/header/headerTemplate.html" with navInfo='filter' %}
 
-  {% include "app/html_templates/header/headerTemplate.html" with navInfo='filter' %}
-
-  <!-- TODO: implement sass whey
-  {% comment %}
-  {% load compile_static %}
-  <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
-  {% endcomment %}
-  -->
-
-
-  <!--tags needed for angular material-->
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-
-</head>
 
 <body ng-app="allProductsApp">
 
@@ -362,7 +338,7 @@
 <script type="text/javascript">
   angular
     .module('allProductsApp', ['ngMaterial', "directives.rangeSlider"])
-    .controller('sorting', function($scope) {
+    .controller('sorting', function ($scope) {
       $scope.sorts = [
         "Preis aufsteigend",
         "Preis absteigend",
@@ -370,9 +346,9 @@
         "Alphabetisch A-Z"
       ];
     })
-    .controller('AppCtrl', function($scope) {
+    .controller('AppCtrl', function ($scope) {
     })
-    .controller('AppCtrl2', function($scope) {
+    .controller('AppCtrl2', function ($scope) {
       $scope.color = {
         blue: Math.floor(Math.random() * 255)
       };
@@ -382,22 +358,22 @@
   angular.module('directives.rangeSlider', ['ngMaterial'])
     .directive('rangeSlider', function () {
       return {
-        restrict   : "E",
-        scope      : {
-          max       : '=',
-          min       : '=',
-          gap       : '=?',
-          step      : '=?',
+        restrict: "E",
+        scope: {
+          max: '=',
+          min: '=',
+          gap: '=?',
+          step: '=?',
           lowerValue: "=",
           upperValue: "="
         },
         templateUrl: 'range-slider.tpl.html',
-        controller : ["$scope", function ($scope) {
+        controller: ["$scope", function ($scope) {
 
           var COMFORTABLE_STEP = $scope.step, // whether the step is comfortable that depends on u
             tracker = $scope.tracker = {    // track style
               width: 0,
-              left : 0,
+              left: 0,
               right: 0
             };
 
