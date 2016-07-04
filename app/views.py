@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from collections import ChainMap
 
 from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
-    QuestionSet, Question, Answer
+    QuestionSet, Question, Answer, Tag
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -229,7 +229,8 @@ def stepper_check(request):
 
     print(clean_result_dic)
     print(steps)
-    return render(request, 'app/result.html', )
+    return render(request, 'app/result.html',
+                  {'result': Answer.objects.filter(pk__in=list(clean_result_dic.values())),})
 
 
 @csrf_protect
