@@ -1,112 +1,143 @@
 <md-step label="Allgemein" md-complete="vm.stepData[0].data.completed"
          ng-disabled="vm.stepProgress < 1">
 
-  <md-step-body>
-    <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
-      <md-content class="md-padding">
-        <div layout="row" layout-align="space-around start">
+    <md-step-body>
 
-          <div flex>
+        <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
+            <md-content class="md-padding">
+                <div layout="row" layout-align="space-around start">
 
-            <h4>Ich wohne...</h4>
+                    <div flex>
+                        {% if g_questionset %}
+                            {% for question in g_questionset.question.all %}
+                                <h4>{{ question.question_text }}</h4>
+                                {% if question.answer_presentation == 'rc' %}
+                                    <md-radio-group ng-model="vm.stepData[0].data.question{{ question.pk }}">
+                                        {% for answer in question.answer_set.all %}
+                                            <md-radio-button
+                                                    value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
+                                        {% endfor %}
+                                    </md-radio-group>
+                                {% elif question.answer_presentation == 'mc' %}
+                                    <md-checkbox-group layout="column">
+                                        {% for answer in question.answer_set.all %}
+                                            <md-checkbox ng-model="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}" value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
+                                        {% endfor %}
+                                    </md-checkbox-group>
+                                {% elif question.answer_presentation == 'dc' %}
+                                    <md-input-container>
+                                        <md-select ng-model="someModel" placeholder="Select a state">
+                                            {% for answer in question.answer_set.all %}
+                                                <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
+                                            {% endfor %}
+                                        </md-select>
+                                    </md-input-container>
+                                {% elif question.answer_presentation == 'sc' %}
+                                    <!-- INPUT SLIDER HERE -->
+                                {% elif question.answer_presentation == 'rs' %}
+                                    <!-- INPUT RANGE SLIDER HERE -->
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <h2>FUCK THIS</h2>
+                        {% endif %}
 
-            <md-radio-group ng-model="data.accommodation_name">
-              <md-radio-button value="deiner Wohnung">in einer Wohnung</md-radio-button>
-              <md-radio-button value="deinem Haus">in einem Haus</md-radio-button>
-            </md-radio-group>
+                        {% comment %}
+                        <div>
+                            <div style="padding-top: 12px">
+                                <h4>
+                                    Haben Sie aktuell Renovierungen geplant?
+                                </h4>
+                                <!-- WICHTIG NOCH ANZUPASSEN -->
+                                <md-radio-group ng-model="vm.stepData[0].data.ownershipOpen">
+                                    <md-radio-button value="Miete">Ja</md-radio-button>
+                                    <md-radio-button value="Eigentum">Nein</md-radio-button>
 
-            <!--<h4>Eigentum oder Miete?</h4> -->
+                                </md-radio-group>
+                            </div>
+                        </div>
+                        {% endcomment %}
+                    </div>
 
-            <md-radio-group ng-model="data.ownership">
-              <md-radio-button value="Miete">zur Miete</md-radio-button>
-              <md-radio-button value="Eigentum">im Eigentum</md-radio-button>
+                    {% comment %}
+                    <div flex>
+                        {% verbatim %}
+                        <h4>
+                            Ausstattung von {{ vm.stepData[0].data.accommodation_name }}
 
-            </md-radio-group>
-
-            <div>
-              <div style="padding-top: 12px">
-                <h4>
-                  Haben Sie aktuell Renovierungen geplant?
-                </h4>
-                <!-- WICHTIG NOCH ANZUPASSEN -->
-                <md-radio-group ng-model="data.ownershipOpen">
-                  <md-radio-button value="Miete">Ja </md-radio-button>
-                  <md-radio-button value="Eigentum">Nein</md-radio-button>
-
-                </md-radio-group>
-              </div>
-            </div>
-          </div>
-
-          <div flex>
-
-            <h4>
-              Ausstattung von {% verbatim %} {{ data.accommodation_name }} {% endverbatim %}
-            </h4>
-            <div class="row">
-
-
-              <md-checkbox-group ng-model="data.addition" layout="column">
-                <md-checkbox value="Garten">Garten</md-checkbox>
-                <md-checkbox value="Balkon">Balkon</md-checkbox>
-                <md-checkbox value="Terrasse">Terrasse</md-checkbox>
-                <md-checkbox value="Garage">Garage</md-checkbox>
-              </md-checkbox-group>
-            </div>
-          </div>
-
-          <div flex>
-            <h4>Unsere Wohnfläche umfasst Quadratmeter:</h4>
-            <div layout="row">
-              <div flex="50">
-                <md-slider class="md-primary" flex min="0" step="5" max="255" ng-model="data.square_meters"
-                           aria-label="blue" id="blue-slider"></md-slider>
-              </div>
-              <div flex="10">
-
-              </div>
-
-              <div flex="20" layout layout-align="center center" style="margin-right: 10px;">
-                <input flex
-                       type="number" min="0" max="5000" step="5"
-                       ng-model="data.square_meters"
-                       aria-label="blue" aria-controls="blue-slider"
-                       style="border: none; text-align: right"> m²
-              </div>
-
-              <div flex="10">
-
-              </div>
-            </div>
+                        </h4>
+                        {% endverbatim %}
+                        <div class="row">
 
 
-            <div flex style="padding-top:12px">
-              <h4>Wir sind im Haushalt Insgesamt: </h4>
-              <div layout="row">
+                            <md-checkbox-group ng-model="vm.stepData[0].data.addition" layout="column">
+                                <md-checkbox value="Garten">Garten</md-checkbox>
+                                <md-checkbox value="Balkon">Balkon</md-checkbox>
+                                <md-checkbox value="Terrasse">Terrasse</md-checkbox>
+                                <md-checkbox value="Garage">Garage</md-checkbox>
+                            </md-checkbox-group>
+                        </div>
+                    </div>
+                    {% endcomment %}
 
-                <input flex="20" type="number" min="1" max="20"
-                       ng-model="data.persons"
-                       aria-label="rating"
-                       aria-controls="rating-slider"
-                       style="text-align: right;
+
+                    <!--div flex>
+                        <h4>Unsere Wohnfläche umfasst Quadratmeter:</h4>
+                        <div layout="row">
+                            <div flex="50">
+                                <md-slider class="md-primary" flex min="0" step="5" max="255"
+                                           ng-model="vm.stepData[0].data.square_meters"
+                                           aria-label="blue" id="blue-slider"></md-slider>
+                            </div>
+                            <div flex="10">
+
+                            </div>
+
+                            <div flex="20" layout layout-align="center center" style="margin-right: 10px;">
+                                <input flex
+                                       type="number" min="0" max="5000" step="5"
+                                       ng-model="vm.stepData[0].data.square_meters"
+                                       aria-label="blue" aria-controls="blue-slider"
+                                       style="border: none; text-align: right"> m²
+                            </div>
+
+                            <div flex="10">
+
+                            </div>
+                        </div>
+
+
+                        <div flex style="padding-top:12px">
+                            <h4>Wir sind im Haushalt Insgesamt: </h4>
+                            <div layout="row">
+
+                                <input flex="20" type="number" min="1" max="20"
+                                       ng-model="vm.stepData[0].data.persons"
+                                       aria-label="rating"
+                                       aria-controls="rating-slider"
+                                       style="text-align: right;
                          ;">
-                <i flex="10" class="material-icons">people</i>
-                Personen
-              </div>
-            </div>
-          </div>
+                                <i flex="10" class="material-icons">people</i>
+                                Personen
+                            </div>
+                        </div>
 
-        </div>
-      </md-content>
-      <md-step-actions layout="row">
-        <div flex layout="row" layout-align="end top">
-          <md-button class="md-warn">ABBRECHEN</md-button>
-          <md-button type="submit"
-                     ng-disabled=""
-                     class="md-primary md-raised">WEITER
-          </md-button>
-        </div>
-      </md-step-actions>
-    </form>
-  </md-step-body>
+
+                    </div-->
+
+                </div>
+            </md-content>
+            <md-step-actions layout="row">
+                {% verbatim %}
+                <div flex layout="row" layout-align="end top">
+                    <md-button class="md-warn">ABBRECHEN</md-button>
+                    <md-button type="submit"
+                               ng-disabled="" class="md-primary md-raised">
+                        {{ 'WEITER' }}
+                    </md-button>
+                </div>
+                {% endverbatim %}
+            </md-step-actions>
+        </form>
+    </md-step-body>
 </md-step>

@@ -1,12 +1,55 @@
-<md-step label="Spezifisch" md-complete="vm.stepData[0].data.completed"
-         ng-disabled="vm.stepProgress < 1">
+<md-step label="Spezifisch" md-complete="vm.stepData[2].data.completed"
+         ng-disabled="vm.stepProgress < 3">
 
   <md-step-body>
-    <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
+    <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[2].data)">
       <md-content class="md-padding">
         <div layout="row" layout-align="space-around start">
 
           <div flex>
+          {% if categories_question_sets %}
+            {% for category_questions in categories_question_sets %}
+                <h3>Fragen zur {{ category_questions.name }}</h3>
+            {% for question in category_questions.question.all %}
+                <h4>{{ question.question_text }}</h4>
+                {% if question.answer_presentation == 'rc' %}
+                    <md-radio-group ng-model="data.accommodation_name">
+                    {% for answer in question.answer_set.all %}
+                          <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
+                    {% endfor %}
+                    </md-radio-group>
+                {% elif question.answer_presentation == 'mc' %}
+                     <md-checkbox-group layout="column">
+                     {% for answer in question.answer_set.all %}
+                        <md-checkbox ng-model="data.question{{ question.pk }}.answer{{ answer.pk }}" value='{{ answer.pk }}'>{{ answer.answer_text }}</md-checkbox>
+                     {% endfor %}
+                     </md-checkbox-group>
+                {% elif question.answer_presentation == 'dc' %}
+                    <md-input-container>
+                    <md-select ng-model="someModel" placeholder="Select a state">
+                        {% for answer in question.answer_set.all %}
+                            <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
+                        {% endfor %}
+                    </md-select>
+                    </md-input-container>
+                {% elif question.answer_presentation == 'sc' %}
+                    <!-- INPUT SLIDER HERE -->
+                {% elif question.answer_presentation == 'rs' %}
+                    <!-- INPUT RANGE SLIDER HERE -->
+                {% endif %}
+            {% endfor %}
+            {% endfor %}
+            {% else %}
+          <h2>FUCK THIS</h2>
+          {% endif %}
+
+
+
+
+
+
+
+
 
             <h4>Radiobutton frage</h4>
 
