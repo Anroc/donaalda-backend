@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from collections import ChainMap
 
 from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
-    QuestionSet, Question, Answer, Tag
+    QuestionSet, Question, Answer, Tag, ProductSet
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
