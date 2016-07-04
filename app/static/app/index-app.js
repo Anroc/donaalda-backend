@@ -6,8 +6,8 @@ console.log("angular code loaded.");
 
 
 var donaaldaApp = angular
-        .module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers'])
-    ;
+        .module('donaaldaApp',
+            ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers']);
 
 donaaldaApp.controller('questionController', questionController)
     .config(function ($mdThemingProvider) {
@@ -15,6 +15,7 @@ donaaldaApp.controller('questionController', questionController)
             .primaryPalette('orange')
             .accentPalette('orange')
     });
+
 function questionController($scope, $q, $timeout) {
 
     $scope.data = {
@@ -36,7 +37,7 @@ function questionController($scope, $q, $timeout) {
         has_garden: false,
         owns_estate: false,
         estate_age: false
-    }
+    };
 
     $scope.preferences = {
         heater_control: false,
@@ -45,7 +46,7 @@ function questionController($scope, $q, $timeout) {
         security_control: false,
         health_control: false,
         comfort_control: false
-    }
+    };
 
     var vm = this;
     var answer = [];
@@ -112,9 +113,9 @@ function questionController($scope, $q, $timeout) {
                 //move to next step when success
                 stepData.completed = true;
                 /*
-                var keys = [];
-                for (var k in stepData)
-                    keys.push(k);
+                 var keys = [];
+                 for (var k in stepData)
+                 keys.push(k);
                  console.log("total " + keys.length + " keys: " + keys);
                  console.log("mittels Object.keys: " + Object.keys(stepData));
                  if (stepData.question4) {
@@ -134,9 +135,9 @@ function questionController($scope, $q, $timeout) {
         }
     }
 
-};
+}
 
-;(function (angular, window) {
+(function (angular, window) {
     /*
      * Credit: Credit to angular md-tabs
      *         All codes are based on md-tabs by angular material
