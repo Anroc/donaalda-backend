@@ -186,8 +186,33 @@ def stepper_check(request):
     result_dic = flatten_dict(steps)
     clean_result_dic = dict(result_dic)
     delete_list = [i for i in result_dic.keys() if regex.search(i)]
+    regex_build_value = re.compile("[\d\w]*.answer[0-9]+")
+
     for item in delete_list:
         del clean_result_dic[item]
+
+    clean_list = [i for i in clean_result_dic.keys() if regex_build_value.search(i)]
+
+    print(clean_list)
+
+    for k, v in list(clean_result_dic.items()):
+        if k in clean_list:
+            clean_result_dic[k] = re.sub('.*?([0-9]*)$', r'\1', k)
+
+    """
+        for k in list(clean_result_dic.keys()):
+            result = re.match('.*?([0-9]+)', k)
+            if result is not None:
+                clean_result_dic[result.group(1)] = clean_result_dic.pop(k)
+
+        for k, v in list(clean_result_dic.items()):
+            try:
+                if isinstance(int(v), int):
+                    clean_result_dic[str(k)+".answer"+str(v)] = clean_result_dic.pop(k)
+                    clean_result_dic[str(k) + str(v)] = 'True'
+            except ValueError:
+                print(v+' is not int')
+    """
 
     print(clean_result_dic)
     print(steps)
