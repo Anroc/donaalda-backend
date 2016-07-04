@@ -10,7 +10,7 @@
 <html class="no-js"> <!--<![endif]-->
 <head>
 
-  {% include "app/html_templates/header/headerTemplate.html" with navInfo = 'contact' %}
+  {% include "app/html_templates/header/headerTemplate.html" with navInfo='contact' %}
 
 </head>
 <body>
@@ -18,12 +18,14 @@
 {% include "app/html_templates/header/navbarHeader.html" with navInfo='contact'%}
 
 <section id="fh5co-contactBanner" data-section="banner"
-         data-stellar-background-ratio="0.5">
+         data-stellar-background-ratio="0.5"
+         style="background-image: url({% static 'app/assets/resources/contact_smaller.jpg' %});
+         height: 900px;">
   <div class="container">
     <div class="text-wrap">
       <div class="text-inner">
         <div class="row col-md-5" style="text-align: left;">
-          <div style="margin-top: 50px;">
+          <div style="margin-top: 150px;">
             <h1>Donaalda ist noch jung.</h1>
           </div>
           <div>

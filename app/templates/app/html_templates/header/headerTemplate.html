@@ -17,7 +17,7 @@
 
 <!-- TODO create base css for every site zu be used -->
 
-<link rel="stylesheet" href="{% static 'app/assess/css/custom/base.css' %}">
+<link rel="stylesheet" href="{% static 'app/assets/css/custom/base.css' %}">
 
 <title>DONAALDA</title>
 
@@ -33,7 +33,7 @@
 {% if provider.public_name %}
 <title>DONAALDA - {{ provider.public_name }}</title>
 
-<link rel="stylesheet" href="{% static 'app/assets/css/styleProvider.css' %}">
+<link rel="stylesheet" href="{% static 'app/assets/css/custom/styleProvider.css' %}">
 {% endif %}
 
 {% elif navInfo == 'filter' %}
@@ -42,15 +42,16 @@
 
 {% elif navInfo == 'contact' %}
 
+<link rel="stylesheet" href="{% static 'app/assets/css/given/style.css' %}">
 <link rel="stylesheet" href="{% static 'app/assets/css/custom/contact.css' %}">
 
 {% elif navInfo == 'product' %}
 
-
+<link rel="stylesheet" href="{% static 'app/assets/css/custom/styleProduct.css' %}"
 
 {% else %}
 
-<link rel="stylesheet" href="{% static 'app/assets/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'app/assets/css/given/style.css' %}">
 {% endif %}
 
 
