@@ -207,7 +207,7 @@ def stepper_check(request):
 
     print(clean_list)
 
-    #
+    # replace the actual "True" answers
     for k, v in list(clean_result_dic.items()):
         if k in clean_list:
             clean_result_dic[k] = re.sub('.*?([0-9]*)$', r'\1', k)
