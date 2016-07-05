@@ -1,6 +1,98 @@
 {% load staticfiles %}
 {% include "app/html_templates/header/headerTemplate.html" with navInfo='filter' %}
 
+  {% include "app/html_templates/header/headerTemplate.html" %}
+
+  {% comment %}
+  {% load compile_static %}
+  <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
+  {% endcomment %}
+
+  <script>
+    $(document).ready(function(){
+      $('[data-show="tooltip"]').tooltip();
+    });
+  </script>
+
+  <script>
+    {% if product.provider.is_visible %}
+    function provider() {
+      location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
+    }
+    {% endif %}
+
+    function start() {
+      location.href = "/"
+    }
+  </script>
+
+  <script>
+    $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
+  </script>
+
+  <!--tags needed for angular material-->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+
+  <!--range slider css-->
+  <style>
+    .range-slider-container {
+      position: relative;
+      height: 100px;
+    }
+
+    .range-slider-container md-slider {
+      margin: 0;
+    }
+
+    .range-track-line {
+      position: absolute;
+      height: 2px;
+      top: 23px;
+      background-color: rgb(255, 64, 129);
+    }
+
+    .range-slider-container md-slider.md-default-theme.md-min .md-thumb:after {
+      background-color: rgb(255, 64, 129) !important;
+    }
+
+    .range-slider-left, .range-slider-right {
+      position: absolute;
+      top: 0px;
+    }
+
+    .range-slider-right {
+      right: 0px;
+    }
+
+    .range-slider-left md-slider .md-thumb-container {
+      transition: -webkit-transform 0s linear;
+      transition: transform 0s linear;
+    }
+
+    .range-slider-left md-slider.md-default-theme .md-track.md-track-fill {
+      background-color: rgba(188, 188, 188, 1) !important;
+    }
+
+    .range-slider-left md-slider.md-default-theme .md-track:not(.md-track-fill) {
+      background-color: rgb(255, 64, 129) !important;
+    }
+
+    .range-slider-container md-slider .md-thumb-container {
+      transition: -webkit-transform 0s linear;
+      transition: transform 0s linear;
+    }
+
+    .range-slider-container md-slider .md-track-container {
+      transition: -webkit-transform 0s linear;
+      transition: transform 0s linear;
+    }
+  </style>
+</head>
 
 <body ng-app="allProductsApp">
 
@@ -52,76 +144,54 @@
     </div>
   </div>
 
+  <!--hersteller filter aus backend-->
+  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+    <div class="container">
   <!--filter-container for material-checkboxes-->
   <div ng-controller="AppCtrl" class="md-padding container" ng-cloak>
 
     <!--hersteller-filter-->
     <div>
       <legend>Hersteller-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Hersteller 1</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 2</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 3</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 4</md-checkbox>
-        </div>
-      </div>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Hersteller 5</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 6</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 7</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 8</md-checkbox>
-        </div>
-      </div>
-    </div>
-
-    <!--preis-slider-->
-    <div ng-controller="AppCtrl2" ng-cloak>
-      <legend>Preis-Filter</legend>
-      <div class="container">
-        <div ng-init="lower=1;upper=40;gap=1;">
-          <md-content class="md-padding">
-            <range-slider min="1" max="40" step="1" lower-value="lower" upper-value="upper" gap="gap"></range-slider>
-            <div>
-              <p>min: {{lower}}€</p>
-              <p>max: {{upper}}€</p>
+        <div layout="row" layout-align="start center">
+        {% for provider in provider_list %}
+          <div flex>
+            <md-checkbox class="md-primary" name="hersteller-checkbox">{{ provider.name }}</md-checkbox>
+          </div>
+          {% if forloop.counter|divisibleby:"3" %}
             </div>
-          </md-content>
-        </div>
-      </div>
+            <div layout="row" layout-align="start center">
+          {% endif %}
+          {% if forloop.last %}
+              </div>
+          {% endif %}
+        {% endfor %}
     </div>
+  </div>
 
-    <!--kategorie-filter-->
+  <!--kategorie filter aus backend-->
+  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
     <div class="container">
       <legend>Kategorie-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        {% for category in categories %}
-        <div>
-          <md-checkbox class="md-primary">
-            {{ category }}
-          </md-checkbox>
+      <div layout="row" layout-align="start center">
+        {% for category in category_list %}
+        <div flex>
+          <md-checkbox class="md-primary">{{ category.name }}</md-checkbox>
         </div>
-        {% endfor %}
+        {% if forloop.counter|divisibleby:"4" %}
       </div>
+      <div layout="row" layout-align="start center">
+        {% endif %}
+        {% if forloop.last %}
+      </div>
+      {% endif %}
+      {% endfor %}
     </div>
+  </div>
 
-    <!--button um section mit weiteren filtern anzuzeigen-->
-    <div class="container" style="text-align:center">
-      <button type="button" class="btn btn-link">Weitere Filter anzeigen</button>
-    </div>
+  <!--button um hidden section anzuzeigen-->
+  <div class="row" layout-align="center center">
+    <button type="button" class="btn btn-link">Weitere Filter anzeigen</button>
   </div>
 </section>
 
@@ -142,91 +212,51 @@
     </div>
   </div>
 
-  <!--filter-container for material-checkboxes-->
+  <!--preis-slider-->
+  <div ng-controller="AppCtrl2" class="md-padding" ng-cloak>
+    <legend>Preis-Filter</legend>
+    <div class="container">
+      <div ng-init="lower=1;upper=40;gap=1;">
+        <md-content class="md-padding" style="background-color:transparent">
+          <range-slider min="1" max="40" step="1" lower-value="lower" upper-value="upper" gap="gap"></range-slider>
+          <div>
+            {% verbatim %}
+            <p>min: {{lower}}€</p>
+            <p>max: {{upper}}€</p>
+            {% endverbatim %}
+          </div>
+        </md-content>
+      </div>
+    </div>
+  </div>
+
+  <!--Produkttyp filter aus backend-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-
-    <!--szenario-filter-->
     <div class="container">
-      <legend>Szenario-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <!--
-        {% comment %}
-        {% for scenario in scenarios %}
-        {% if scenario is_in_selected_category %}
-        <div>
-          <md-checkbox class="md-primary">
-            {{ scenario }}
-          </md-checkbox>
+      <legend>Produkttyp-Filter</legend>
+      <div layout="row" layout-align="start center">
+        {% for type in producttype_list %}
+        <div flex="33">
+          <md-checkbox class="md-primary">{{ type }}</md-checkbox>
         </div>
+        {% if forloop.counter|divisibleby:"3" %}
+          </div>
+          <div layout="row" layout-align="start center">
         {% endif %}
-        {% endfor %}
-        {% endcomment %}
-        -->
-      </div>
-    </div>
-
-    <!--produktkategorie-filter-->
-    <div class="container">
-      <legend>Produktkategorie-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Küchengeräte</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sensoren</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Aktoren</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Beleuchtung</md-checkbox>
-        </div>
-      </div>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Heimkino</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Brandschutz</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sirenen</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sonstiges</md-checkbox>
-        </div>
-      </div>
+        {% if forloop.last %}
+           </div>
+      {% endif %}
+      {% endfor %}
     </div>
   </div>
 
-  <!-- TODO samuel entweder du machst es dir extrem umständlich und lädst die django data in den
-  <!-- TODO angular controller oder machst es direkt alles mit django... was meinst? -->
-  {% verbatim %}
-  <!--filter-container for material-selects-->
-  <div ng-controller="SelectOptGroupController" class="md-padding" ng-cloak>
-    <div class="container">
-      <div layout="row" layout-align="space-around center">
-        <md-input-container>
-          <label>Produktkategorie</label>
-          <md-select ng-model="selectedToppings" multiple>
-            <md-optgroup label="Küchengeräte">
-              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Küchengeräte' }">
-                {{topping.name}}
-              </md-option>
-            </md-optgroup>
-            <md-optgroup label="Sensoren">
-              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Sensoren' }">
-                {{topping.name}}
-              </md-option>
-            </md-optgroup>
-          </md-select>
-        </md-input-container>
-      </div>
-    </div>
+  <!--button um hidden section auszublenden-->
+  <div class="row" layout-align="center center" style="text-align:center">
+    <button type="button" class="btn btn-link">Weitere Filter ausblenden</button>
   </div>
-  {% endverbatim %}
 </section>
 
+<section id="fh5co-testimonials" data-section="tecData">
 
 <section id="fh5co-testimonials" data-section="results">
 
@@ -266,7 +296,7 @@
   <!--product-list-->
   {% if all_products %}
   {% for product in all_products %}
-  <div class="col-md-4 col-sm-6 col-xxs-12">
+  <div class="col-md-4 col-sm-6 col-xxs-12" data-hersteller="" data-kategorie="" data-produkttyp="">
     <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
       <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
     </a>
@@ -315,10 +345,32 @@
 
 {% include "app/html_templates/footer/bodyBackBone.html" %}
 
+<!--script for filter-function-->
+<script type="text/javascript">
+
+  // Pass the checkbox name to the function
+  function getCheckedBoxes(chkboxName) {
+    var checkboxes = document.getElementsByName(chkboxName);
+    var checkboxesChecked = [];
+    // loop over them all
+    for (var i=0; i<checkboxes.length; i++) {
+      // And stick the checked ones onto an array...
+      if (checkboxes[i].checked) {
+        checkboxesChecked.push(checkboxes[i]);
+      }
+    }
+
+    // Return the array if it is non-empty, or null
+    return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+  }
+
+  // Call as
+  var checkedBoxes = getCheckedBoxes("mycheckboxes");
+</script>
 
 <!--script for range slider-->
-{% verbatim %}
 <script type="text/ng-template" id="range-slider.tpl.html">
+{% verbatim %}
   <div class='range-slider-container'>
     <div class='range-slider-left' ng-style="{width:lowerWidth+'%'}">
       <md-slider ng-model="lowerValue" min='{{min}}' max='{{lowerMaxLimit}}' step="{{step}}"
@@ -331,14 +383,14 @@
                  aria-label="upperSlider"></md-slider>
     </div>
   </div>
-</script>
 {% endverbatim %}
+</script>
 
 <!--script for angular components-->
 <script type="text/javascript">
   angular
     .module('allProductsApp', ['ngMaterial', "directives.rangeSlider"])
-    .controller('sorting', function ($scope) {
+    .controller('sorting', function($scope) {
       $scope.sorts = [
         "Preis aufsteigend",
         "Preis absteigend",
@@ -346,9 +398,9 @@
         "Alphabetisch A-Z"
       ];
     })
-    .controller('AppCtrl', function ($scope) {
+    .controller('AppCtrl', function($scope) {
     })
-    .controller('AppCtrl2', function ($scope) {
+    .controller('AppCtrl2', function($scope) {
       $scope.color = {
         blue: Math.floor(Math.random() * 255)
       };
