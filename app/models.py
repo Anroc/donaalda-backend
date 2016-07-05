@@ -280,6 +280,7 @@ class Question(models.Model):
         default=MULTI_CHOICE,
         verbose_name="Anzeigenart der Anworten"
     )
+    order = models.PositiveIntegerField(default=1000)
 
     def __str__(self):
         return '%s -- %s' % (self.question_text, self.get_answer_presentation_display())
@@ -287,6 +288,7 @@ class Question(models.Model):
     class Meta:
         verbose_name = "Frage"
         verbose_name_plural = "Fragen"
+        ordering = ["order","pk"]
 
 
 class Answer(models.Model):
@@ -334,6 +336,7 @@ class QuestionSet(models.Model):
     question = models.ManyToManyField("Question", verbose_name="Dazugehörige Fragen")
     category = models.OneToOneField("Category", on_delete=models.CASCADE, null=True, blank=True,
                                     verbose_name="Dazugehörige Kategorie")
+    order = models.PositiveIntegerField(default=1000)
 
     def __str__(self):
         return '%s' % self.name
@@ -344,7 +347,7 @@ class QuestionSet(models.Model):
     class Meta:
         verbose_name = "Fragensammlung"
         verbose_name_plural = "Fragensammlungen"
-        ordering = ["name"]
+        ordering = ["order","pk"]
 
 
 class SessionTags(models.Model):
@@ -357,3 +360,7 @@ class SessionTags(models.Model):
     class Meta:
         verbose_name = 'Session Tag'
         verbose_name_plural = 'Session Tags'
+
+class QuestionStep(models.Model):
+    name = models.CharField(max_length=255)
+    question_steps = models.ManyToManyField('QuestionSet')
