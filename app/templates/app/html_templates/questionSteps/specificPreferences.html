@@ -7,10 +7,11 @@
         <div layout="row" layout-align="space-around start">
 
           <div flex>
-          {% if categories_question_sets %}
-            {% for category_questions in categories_question_sets %}
-                <h3>Fragen zur {{ category_questions.name }}</h3>
-            {% for question in category_questions.question.all %}
+                      {% if qs_category_specific %}
+            {% for questionstep in qs_category_specific %}
+            {% for questionset in questionstep.question_steps.all %}
+                <h3>{{ questionset.name }}</h3>
+                        {% for question in questionset.question.all %}
                 <h4>{{ question.question_text }}</h4>
                 {% if question.answer_presentation == 'rc' %}
                     <md-radio-group ng-model="vm.stepData[2].data.accommodation_name">
@@ -39,6 +40,7 @@
                 {% endif %}
             {% endfor %}
             {% endfor %}
+                          {% endfor %}
             {% else %}
           <h2>FUCK THIS</h2>
           {% endif %}

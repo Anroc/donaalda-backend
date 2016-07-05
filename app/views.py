@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from collections import ChainMap
 
 from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
-    QuestionSet, Question, Answer, Tag, ProductSet
+    QuestionSet, Question, Answer, Tag, ProductSet, QuestionStep
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -76,9 +76,9 @@ class CategoryView(generic.ListView):
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
                        'category_list': Category.objects.all(),
                        'category': Category.objects.get(name=category),
-                       'g_questionset': QuestionSet.objects.get(name='Allgemeine Fragen'),
-                       'categories_question_sets': QuestionSet.objects.exclude(category=None),
-                       'choose_category_question_set': QuestionSet.objects.get(name='Kategorieauswahl-Fragen'),
+                       'qs_general': QuestionStep.objects.filter(name="Allgemeines"),
+                       'qs_category': QuestionStep.objects.filter(name__contains="Auswahl"),
+                       'qs_category_specific': QuestionStep.objects.filter(name__contains="Detail"),
                        })
 
 
