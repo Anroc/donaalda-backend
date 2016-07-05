@@ -238,7 +238,9 @@ def stepper_check(request):
     print(clean_result_dic)
     print(steps)
     return render(request, 'app/result.html',
-                  {'result': Answer.objects.filter(pk__in=list(clean_result_dic.values())),})
+                  {'result': product_sets,
+                   'tags': used_tags,
+                   })
 
 
 @csrf_protect
