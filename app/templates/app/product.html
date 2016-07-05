@@ -1,40 +1,14 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
-<head>
+{% include "app/html_templates/header/headerTemplate.html" with navInfo='product' %}
 
-  {% include "app/html_templates/header/headerTemplate.html" %}
+<script>
+  {% if product.provider.is_visible %}
+  function provider() {
+    location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
+  }
+  {% endif %}
+</script>
 
-
-  <script>
-    $(document).ready(function () {
-      $('[data-show="tooltip"]').tooltip();
-    });
-  </script>
-
-  <script>
-    {% if product.provider.is_visible %}
-    function provider() {
-      location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
-    }
-    {% endif %}
-
-    function start() {
-      location.href = "/"
-    }
-
-  </script>
-  <script>
-    $.post("/updatepagehistory", {lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"});
-  </script>
-</head>
 <body>
 
 {% include "app/html_templates/header/navbarHeader.html" with navInfo='product' productName=product.name%}
@@ -160,11 +134,7 @@
 
 {% include "app/html_templates/sections/commentSection.html" %}
 
-<!-- Footer -->
-{% include "app/html_templates/footer/footerTemplate.html" %}
-
-{% include "app/html_templates/modals/modals.html" %}
-
+{% include "app/html_templates/footer/bodyBackBone.html" %}
 </body>
 </html>
 

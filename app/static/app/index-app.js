@@ -5,12 +5,9 @@
 console.log("angular code loaded.");
 
 
-
-
 var donaaldaApp = angular
-    .module('donaaldaApp', ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers'])
-
-    ;
+        .module('donaaldaApp',
+            ['ngAria', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'md-steppers']);
 
 donaaldaApp.controller('questionController', questionController)
     .config(function ($mdThemingProvider) {
@@ -18,6 +15,7 @@ donaaldaApp.controller('questionController', questionController)
             .primaryPalette('orange')
             .accentPalette('orange')
     });
+
 function questionController($scope, $q, $timeout) {
 
     $scope.data = {
@@ -39,7 +37,7 @@ function questionController($scope, $q, $timeout) {
         has_garden: false,
         owns_estate: false,
         estate_age: false
-    }
+    };
 
     $scope.preferences = {
         heater_control: false,
@@ -48,10 +46,10 @@ function questionController($scope, $q, $timeout) {
         security_control: false,
         health_control: false,
         comfort_control: false
-    }
+    };
 
     var vm = this;
-
+    var answer = [];
     vm.selectedStep = 0;
     vm.stepProgress = 1;
     vm.maxStep = 3;
@@ -61,6 +59,28 @@ function questionController($scope, $q, $timeout) {
         {step: 2, completed: false, optional: false, data: {}},
         {step: 3, completed: false, optional: false, data: {}},
     ];
+
+    vm.post = function post(path) {
+        var method = "post"; // Set method to post by default if not specified.
+        var params = vm.stepData;
+        // The rest of this code assumes you are not using a library.
+        // It can be made less wordy if you use one.
+        var form = document.createElement("form");
+        form.setAttribute("method", method);
+        form.setAttribute("action", path);
+
+        for (var key in params) {
+            if (params.hasOwnProperty(key)) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", JSON.stringify(params[key]));
+                form.appendChild(hiddenField);
+            }
+        }
+        document.body.appendChild(form);
+        form.submit();
+    };
 
     vm.enableNextStep = function nextStep() {
         //do not exceed into max step
@@ -72,13 +92,13 @@ function questionController($scope, $q, $timeout) {
             vm.stepProgress = vm.stepProgress + 1;
         }
         vm.selectedStep = vm.selectedStep + 1;
-    }
+    };
 
     vm.moveToPreviousStep = function moveToPreviousStep() {
         if (vm.selectedStep > 0) {
             vm.selectedStep = vm.selectedStep - 1;
         }
-    }
+    };
 
     vm.submitCurrentStep = function submitCurrentStep(stepData, isSkip) {
         var deferred = $q.defer();
@@ -92,7 +112,22 @@ function questionController($scope, $q, $timeout) {
                 deferred.resolve({status: 200, statusText: 'success', data: {}});
                 //move to next step when success
                 stepData.completed = true;
+                /*
+                 var keys = [];
+                 for (var k in stepData)
+                 keys.push(k);
+                 console.log("total " + keys.length + " keys: " + keys);
+                 console.log("mittels Object.keys: " + Object.keys(stepData));
+                 if (stepData.question4) {
+                 console.log("quesiton4:" + Object.keys(stepData.question4));
+
+                 for (var a in stepData.question4)
+                 console.log("answerId: " + a)
+                 }
+                 console.log(stepData.completed);
+                 */
                 vm.enableNextStep();
+
             }, 1000)
         } else {
             vm.showBusyText = false;
@@ -100,9 +135,9 @@ function questionController($scope, $q, $timeout) {
         }
     }
 
-};
+}
 
-;(function (angular, window) {
+(function (angular, window) {
     /*
      * Credit: Credit to angular md-tabs
      *         All codes are based on md-tabs by angular material

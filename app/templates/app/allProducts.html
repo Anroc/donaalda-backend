@@ -1,10 +1,5 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7">
-<html class="no-js lt-ie9 lt-ie8">
-<html class="no-js lt-ie9">
-<html class="no-js">
-<head>
+{% include "app/html_templates/header/headerTemplate.html" with navInfo='filter' %}
 
   {% include "app/html_templates/header/headerTemplate.html" %}
 
@@ -101,7 +96,7 @@
 
 <body ng-app="allProductsApp">
 
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='product'%}
+{% include "app/html_templates/header/navbarHeader.html" with navInfo='filter'%}
 
 <section id="fh5co-page" data-section="home"
          style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
@@ -133,8 +128,7 @@
   </div>
 </section>
 
-
-<section id="fh5co-questions" data-section="intro">
+<section id="fh5co-questions" data-section="filter">
 
   <!--section-header-->
   <div class="container">
@@ -153,6 +147,11 @@
   <!--hersteller filter aus backend-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
     <div class="container">
+  <!--filter-container for material-checkboxes-->
+  <div ng-controller="AppCtrl" class="md-padding container" ng-cloak>
+
+    <!--hersteller-filter-->
+    <div>
       <legend>Hersteller-Filter</legend>
         <div layout="row" layout-align="start center">
         {% for provider in provider_list %}
@@ -197,7 +196,7 @@
 </section>
 
 
-<section id="fh5co-work" data-section="images">
+<section id="fh5co-work" data-section="preciseFilter">
 
   <!--section-header-->
   <div class="container">
@@ -259,6 +258,8 @@
 
 <section id="fh5co-testimonials" data-section="tecData">
 
+<section id="fh5co-testimonials" data-section="results">
+
   <!--section-header-->
   <div class="container">
     <div class="row" style="width:100%">
@@ -266,7 +267,8 @@
         <h2 class="to-animate">Produkt-Liste</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Die Produkt-Liste wurde nach ihren Interessen gefiltert. Sie haben nun die Möglichkeit diese zu sortieren.</h3>
+            <h3>Die Produkt-Liste wurde nach ihren Interessen gefiltert. Sie haben nun die Möglichkeit diese zu
+              sortieren.</h3>
           </div>
         </div>
       </div>
@@ -301,13 +303,47 @@
   </div>
   {% endfor %}
   {% endif %}
+
+
+  <div class="container">
+    <div class="row">
+      <div class="row row-bottom-padded-sm">
+        <div class="col-md-12 section-heading text-center">
+          <h2 class="to-animate">Szenarien</h2>
+        </div>
+      </div>
+    </div>
+    {% if all_products %}
+    {% for product in all_products %}
+    <div class="col-md-4 col-sm-6 col-xxs-12">
+      <a class="fh5co-project-item">
+        <div class="img-responsive"
+             style="background-image: url('{{ product.image1.url }}'); background-repeat: no-repeat; height: 250px;">
+        </div>
+        <div class="fh5co-text">
+          <h3 class="text-muted">
+            {{ product.provider }}
+          </h3>
+          <div style="height: 80px;">
+            <h1>
+              {{ product.name }}
+            </h1>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% empty %}
+    <div>
+      Es wurden noch keine Szenarien hinzugefügt.
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
 </section>
 
 {% include "app/html_templates/sections/commentSection.html" %}
 
-{% include "app/html_templates/footer/footerTemplate.html" %}
-
-{% include "app/html_templates/modals/modals.html" %}
+{% include "app/html_templates/footer/bodyBackBone.html" %}
 
 <!--script for filter-function-->
 <script type="text/javascript">
@@ -374,22 +410,22 @@
   angular.module('directives.rangeSlider', ['ngMaterial'])
     .directive('rangeSlider', function () {
       return {
-        restrict   : "E",
-        scope      : {
-          max       : '=',
-          min       : '=',
-          gap       : '=?',
-          step      : '=?',
+        restrict: "E",
+        scope: {
+          max: '=',
+          min: '=',
+          gap: '=?',
+          step: '=?',
           lowerValue: "=",
           upperValue: "="
         },
         templateUrl: 'range-slider.tpl.html',
-        controller : ["$scope", function ($scope) {
+        controller: ["$scope", function ($scope) {
 
           var COMFORTABLE_STEP = $scope.step, // whether the step is comfortable that depends on u
             tracker = $scope.tracker = {    // track style
               width: 0,
-              left : 0,
+              left: 0,
               right: 0
             };
 
