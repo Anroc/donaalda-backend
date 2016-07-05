@@ -157,7 +157,7 @@
         <div layout="row" layout-align="start center">
         {% for provider in provider_list %}
           <div flex>
-            <md-checkbox class="md-primary">{{ provider.name }}</md-checkbox>
+            <md-checkbox class="md-primary" name="hersteller-checkbox">{{ provider.name }}</md-checkbox>
           </div>
           {% if forloop.counter|divisibleby:"3" %}
             </div>
@@ -251,48 +251,8 @@
     </div>
   </div>
 
-  {% verbatim %}
-  <!--filter-container for material-checkboxes-->
-  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-
-    <!--szenario-filter-->
-    <div class="container">
-      <legend>Szenario-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Szenario 1</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 2</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 3</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 4</md-checkbox>
-        </div>
-      </div>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Szenario 5</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 6</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 7</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 8</md-checkbox>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  {% endverbatim %}
-
   <!--button um hidden section auszublenden-->
-  <div class="row" layout-align="center center">
+  <div class="row" layout-align="center center" style="text-align:center">
     <button type="button" class="btn btn-link">Weitere Filter ausblenden</button>
   </div>
 </section>
@@ -334,7 +294,7 @@
   <!--product-list-->
   {% if all_products %}
   {% for product in all_products %}
-  <div class="col-md-4 col-sm-6 col-xxs-12">
+  <div class="col-md-4 col-sm-6 col-xxs-12" data-hersteller="" data-kategorie="" data-produkttyp="">
     <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
       <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
     </a>
@@ -349,10 +309,32 @@
 
 {% include "app/html_templates/modals/modals.html" %}
 
+<!--script for filter-function-->
+<script type="text/javascript">
+
+  // Pass the checkbox name to the function
+  function getCheckedBoxes(chkboxName) {
+    var checkboxes = document.getElementsByName(chkboxName);
+    var checkboxesChecked = [];
+    // loop over them all
+    for (var i=0; i<checkboxes.length; i++) {
+      // And stick the checked ones onto an array...
+      if (checkboxes[i].checked) {
+        checkboxesChecked.push(checkboxes[i]);
+      }
+    }
+
+    // Return the array if it is non-empty, or null
+    return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+  }
+
+  // Call as
+  var checkedBoxes = getCheckedBoxes("mycheckboxes");
+</script>
 
 <!--script for range slider-->
-{% verbatim %}
 <script type="text/ng-template" id="range-slider.tpl.html">
+{% verbatim %}
   <div class='range-slider-container'>
     <div class='range-slider-left' ng-style="{width:lowerWidth+'%'}">
       <md-slider ng-model="lowerValue" min='{{min}}' max='{{lowerMaxLimit}}' step="{{step}}"
@@ -365,8 +347,8 @@
                  aria-label="upperSlider"></md-slider>
     </div>
   </div>
-</script>
 {% endverbatim %}
+</script>
 
 <!--script for angular components-->
 <script type="text/javascript">
