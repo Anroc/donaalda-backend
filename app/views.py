@@ -163,13 +163,19 @@ class StepperResultView(generic.ListView):
 
 
 # csrf_exempt cause i couldnt get the csrf_token to work with the custom vm.post method in index-app.js
-@csrf_exempt
+@csrf_protect
 @require_http_methods(["GET", "POST"])
 def stepper_check(request):
     # dict should hold decoded JSON object from stepper
+    if(request.POST.get("csrfmiddlewaretoken") or request.POST.get("csrfmiddlewaretoken") is not None):
+        print(request.POST.get('csrfmiddlewaretoken'))
+
+    post = request.POST.copy()
+    if(request.POST.get("csrfmiddlewaretoken") or request.POST.get("csrfmiddlewaretoken") is not None):
+        del post["csrfmiddlewaretoken"]
     steps = {}
     # read from POST and interpret as JSON
-    for key, value in request.POST.items():
+    for key, value in post.items():
         steps[key] = json.loads(value)
 
     # "flatten" dict by recursively dismissing dicts by adding information to key
