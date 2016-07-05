@@ -363,4 +363,11 @@ class SessionTags(models.Model):
 
 class QuestionStep(models.Model):
     name = models.CharField(max_length=255)
-    question_steps = models.ManyToManyField('QuestionSet')
+    question_steps = models.ManyToManyField('QuestionSet', verbose_name="zusammen gehörende Fragen")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Fragen für Stepper-Schritt"
+        verbose_name_plural = "Fragen für Stepper-Schritte"
