@@ -166,13 +166,12 @@ class StepperResultView(generic.ListView):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def stepper_check(request):
-    # dict should hold decoded JSON object from stepper
-    if(request.POST.get("csrfmiddlewaretoken") or request.POST.get("csrfmiddlewaretoken") is not None):
-        print(request.POST.get('csrfmiddlewaretoken'))
-
+    # copy post object to delete csrf token, so can json.load
     post = request.POST.copy()
-    if(request.POST.get("csrfmiddlewaretoken") or request.POST.get("csrfmiddlewaretoken") is not None):
+    if(request.POST.get("csrfmiddlewaretoken") and request.POST.get("csrfmiddlewaretoken") is not None):
+        print(request.POST.get('csrfmiddlewaretoken'))
         del post["csrfmiddlewaretoken"]
+    # dict should hold decoded JSON object from stepper
     steps = {}
     # read from POST and interpret as JSON
     for key, value in post.items():
