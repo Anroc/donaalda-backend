@@ -227,6 +227,14 @@ def stepper_check(request):
                 print(v+' is not int')
     """
 
+    given_answers = Answer.objects.filter(pk__in=list(clean_result_dic.values()))
+    used_tags = [i.tag for i in given_answers]
+    product_sets = ProductSet.objects.filter(tags__in=used_tags)
+
+    print("\n Tags: \n")
+    print(used_tags)
+    print("\n Product_set: \n")
+    print(product_sets)
     print(clean_result_dic)
     print(steps)
     return render(request, 'app/result.html',
