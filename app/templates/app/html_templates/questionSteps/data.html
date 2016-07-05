@@ -5,8 +5,10 @@
       <md-content class="md-padding">
         <div layout="row" layout-align="space-around start">
           <div flex>
-            {% if g_questionset %}
-            {% for question in g_questionset.question.all %}
+            {% if qs_general %}
+            {% for questionstep in qs_general %}
+            {% for questionset in questionstep.question_steps.all %}
+            {% for question in questionset.question.all %}
             <h4>{{ question.question_text }}</h4>
             {% if question.answer_presentation == 'rc' %}
             <md-radio-group ng-model="vm.stepData[0].data.question{{ question.pk }}">
@@ -40,6 +42,8 @@
             {% elif question.answer_presentation == 'rs' %}
             <!-- INPUT RANGE SLIDER HERE -->
             {% endif %}
+            {% endfor %}
+            {% endfor %}
             {% endfor %}
             {% else %}
             <h2>

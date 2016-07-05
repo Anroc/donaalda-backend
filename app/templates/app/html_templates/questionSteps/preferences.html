@@ -4,8 +4,10 @@
     <form name="step2" ng-submit="vm.submitCurrentStep(vm.stepData[1].data)">
       <md-content class="md-padding">
         <div layout="column" layout-align="center top">
-          {% if choose_category_question_set %}
-          {% for question in choose_category_question_set.question.all %}
+          {% if qs_category %}
+            {% for questionstep in qs_category %}
+            {% for questionset in questionstep.question_steps.all %}
+            {% for question in questionset.question.all %}
           <h4>
             {{ question.question_text }}
           </h4>
@@ -42,6 +44,8 @@
           <!-- INPUT RANGE SLIDER HERE -->
           {% endif %}
           {% endfor %}
+        {% endfor %}
+        {% endfor %}
           {% else %}
           <h2>
             Pups der Bär
