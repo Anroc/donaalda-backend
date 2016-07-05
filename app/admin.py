@@ -22,6 +22,7 @@ from .models import (Category,
                      SessionTags,
                      QuestionSet,
                      GivenAnswers,
+                     QuestionStep
                      )
 
 
@@ -209,3 +210,4 @@ admin.site.register(Tag)
 admin.site.register(QuestionSet)
 admin.site.register(SessionTags)
 admin.site.register(GivenAnswers)
+admin.site.register(QuestionStep)
