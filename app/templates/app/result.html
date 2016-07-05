@@ -51,8 +51,9 @@
                         {% if result %}
                             {% for r in result %}
                                 <div>
-                                    {{ r.pk }}
+                                    {{ r.name }}
                                 </div>
+                                <div> {{ r.scenario_set.all }}</div>
                             {% endfor %}
                         {% endif %}
                     </div>
