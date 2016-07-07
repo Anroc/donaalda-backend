@@ -113,7 +113,8 @@
             }
         }, {
             offset: function () {
-                return -$(this.element).height() + 355;
+                return -$(this.element).height() + 3
+                55;
             }
         });
 

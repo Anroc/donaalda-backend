@@ -121,7 +121,7 @@
     {% for product in provider_products %}
     <div class="col-md-4 col-sm-6 col-xxs-12">
       <a href="{% url 'app:product' product.pk %}" class="fh5co-project-item to-animate">
-        <img src="{{ product.image1.url }}" alt="Image" class="img-responsive" style="background-repeat: no-repeat;
+        <img src="{{ product.image1.url }}" alt="Image" style="background-repeat: no-repeat;
          height: 250px;">
         <div class="fh5co-text">
           <h3 class="text-muted">
