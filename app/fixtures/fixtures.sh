@@ -1,9 +1,9 @@
 #!/bin/sh
 
 config="--format=json --indent=4 --exclude=app.employee"
-no_dependency="--exclude=app.category --exclude=app.producttype --exclude=app.provider"
+no_dependency="--exclude=app.category --exclude=app.producttype --exclude=app.provider --exclude=app.provider --exclude=app.tag --exclude=app.question"
 ex_auth="--exclude=auth"
-stage_two="--exclude=app.product --exclude=app.providerprofile"
+stage_two="--exclude=app.product --exclude=app.providerprofile --exclude=app.answer"
 product_set="--exclude=app.productset"
 scenario="--exclude=app.scenario"
 last="--exclude=app.scenariodescription --exclude=app.comment --exclude=app.userimage"

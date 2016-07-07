@@ -1,16 +1,21 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import re
+import json
+
 from django.contrib import messages
 from django.views import generic
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from collections import ChainMap
 
-from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage
+from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
+    QuestionSet, Question, Answer, Tag, ProductSet, QuestionStep
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.http import *
 
@@ -29,60 +34,6 @@ class IndexView(generic.DetailView):
                        'amount_products': Product.objects.all().count(),
                        'amount_provider': Provider.objects.all().count(),
                        })
-
-
-class IndexViewL(generic.ListView):
-    template_name = 'app/index.html'
-    context_object_name = 'category_list'
-
-    def get(self, request):
-        login_status = request.GET.get('login')
-        if login_status == 'failed':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'state': 'failed',
-                                                      'message': 'Wrong login data!',
-                                                      })
-        if login_status == 'success':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'state': 'success',
-                                                      # If the user type 'app/?login=success' in the url the
-                                                      # 'message' attribute will be empty. The toolbar template is
-                                                      # looking for this empty String and will not show 'Welcome [NO USER]'
-                                                      'message': request.user.username,
-                                                      })
-        registration_status = request.GET.get('registration')
-        if registration_status == 'blank_fields':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Bitte alle Felder ausfüllen!',
-                                                      })
-        if registration_status == 'success':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Registrierung erfolgreich!',
-                                                      })
-        if registration_status == 'taken':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Der Benutzername wird bereits verwendet!',
-                                                      })
-
-        profile_status = request.GET.get('profile')
-        if profile_status == 'blank_fields':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Zum Ändern des Passwortes altes und neues Passwort angegeben! Restliche Änderungen durchgeführt!',
-                                                      })
-        if profile_status == 'success':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Profil erfolgreich verändert!',
-                                                      })
-        if profile_status == 'wrong_password':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Passwort falsch! Das Passwort bleibt unverändert. Restliche Änderungen durchgeführt!',
-                                                      })
-        if profile_status == 'deleted':
-            return render(request, 'app/index.html', {'category_list': Category.objects.all(),
-                                                      'message': 'Ihr Account wurde gelöscht!',
-                                                      })
-
-        return render(request, 'app/index.html', {'category_list': Category.objects.all()})
 
 
 class ProviderProfileView(generic.ListView):
@@ -120,10 +71,14 @@ class CategoryView(generic.ListView):
 
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
+        print(QuestionSet.objects.exclude(category=None))
         return render(request, 'app/category.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
-                      'category_list': Category.objects.all(),
-                       'category': Category.objects.get(name=category)
+                       'category_list': Category.objects.all(),
+                       'category': Category.objects.get(name=category),
+                       'qs_general': QuestionStep.objects.filter(name="Allgemeines"),
+                       'qs_category': QuestionStep.objects.filter(name__contains="Auswahl"),
+                       'qs_category_specific': QuestionStep.objects.filter(name__contains="Detail"),
                        })
 
 
@@ -162,18 +117,22 @@ class ProductView(generic.DetailView):
                        })
 
 
-# for frontend testing
 class AllProductsView(generic.DetailView):
     template_name = 'app/allProducts.html'
     context_object_name = 'all_products'
 
     def get(self, request, *args, **kwargs):
         return render(request, 'app/allProducts.html',
-                      {'all_products': Product.objects.all()})
+                      {'all_products': Product.objects.all(),
+                       'category_list': Category.objects.all(),
+                       'provider_list': Provider.objects.all(),
+                       'producttype_list': ProductType.objects.all(),
+                       })
 
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
+# this view logs user in if existent and redirects to previous page
 def login_view(request):
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
@@ -195,8 +154,101 @@ def login_view(request):
     return render(request, 'app/html_templates/loginTemplate.html', {'login_form': form})
 
 
+class StepperResultView(generic.ListView):
+    template_name = 'app/result.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/result.html')
+
+
 @csrf_protect
 @require_http_methods(["GET", "POST"])
+def stepper_check(request):
+    # copy post object to delete csrf token, so json.load works
+    post = request.POST.copy()
+    if  request.POST.get("csrfmiddlewaretoken") and request.POST.get("csrfmiddlewaretoken") is not None:
+        print(request.POST.get('csrfmiddlewaretoken'))
+        del post["csrfmiddlewaretoken"]
+    # dict should hold decoded JSON objects from stepper
+    steps = {}
+    # read from POST and interpret as JSON
+    for key, value in post.items():
+        steps[key] = json.loads(value)
+
+    # "flatten" dict by recursively dismissing dicts and adding would be lost information to key
+    def flatten_dict(d):
+        def expand(key, value):
+            if isinstance(value, dict):
+                return [(str(key) + '.' + str(k), str(v)) for k, v in flatten_dict(value).items()]
+            else:
+                return [(key, value)]
+
+        items = [item for k, v in d.items() for item in expand(k, v)]
+
+        return dict(items)
+
+    # find unnecessary JSON data, that we dont have to work with
+    regex = re.compile("[0-9].(optional|completed|step|data.completed)")
+
+    result_dic = flatten_dict(steps)
+
+    # copy of flattened dict, to keep checking whether stuff works, can be removed on production version of function
+    clean_result_dic = dict(result_dic)
+
+    # create list of unnecessary items
+    delete_list = [i for i in result_dic.keys() if regex.search(i)]
+
+    # REGEX to find correct answer PK to substitute YES dict values
+    regex_build_value = re.compile("[\d\w]*.answer[0-9]+")
+
+    # clean clean_result_dic of non required POST data
+    for item in delete_list:
+        del clean_result_dic[item]
+
+    # create list with items to be "cleaned", IE items with answer PK in key
+    clean_list = [i for i in clean_result_dic.keys() if regex_build_value.search(i)]
+
+    print("Items with answer PK still in keys: " + clean_list)
+
+    # replace the actual "True" answers with corresponding answer PK
+    for k, v in list(clean_result_dic.items()):
+        if k in clean_list:
+            clean_result_dic[k] = re.sub('.*?([0-9]*)$', r'\1', k)
+
+    """
+        for k in list(clean_result_dic.keys()):
+            result = re.match('.*?([0-9]+)', k)
+            if result is not None:
+                clean_result_dic[result.group(1)] = clean_result_dic.pop(k)
+
+        for k, v in list(clean_result_dic.items()):
+            try:
+                if isinstance(int(v), int):
+                    clean_result_dic[str(k)+".answer"+str(v)] = clean_result_dic.pop(k)
+                    clean_result_dic[str(k) + str(v)] = 'True'
+            except ValueError:
+                print(v+' is not int')
+    """
+
+    given_answers = Answer.objects.filter(pk__in=list(clean_result_dic.values()))
+    used_tags = [i.tag for i in given_answers]
+    product_sets = ProductSet.objects.filter(tags__in=used_tags)
+
+    print("\n Tags: \n")
+    print(used_tags)
+    print("\n Product_set: \n")
+    print(product_sets)
+    print(clean_result_dic)
+    print(steps)
+    return render(request, 'app/result.html',
+                  {'result': product_sets,
+                   'tags': used_tags,
+                   })
+
+
+@csrf_protect
+@require_http_methods(["GET", "POST"])
+# this view logs user out if existent and redirects to previous page
 def log_out(request):
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
@@ -211,6 +263,9 @@ def log_out(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def register_user(request):
+    # this view registers a userprofile if username is not already taken
+    # redirects and returns statusmessage
+    # received formvariables: username,email,password,firstname,lastname
     username = request.POST.get('username')
     password = request.POST.get('password')
     email = request.POST.get('email')
@@ -227,6 +282,9 @@ def register_user(request):
         if username and password and email and firstname and lastname:
             if User.objects.filter(username=username).exists():
                 messages.error(request, 'Der Benutzername ist bereits vergeben!')
+                return HttpResponseRedirect(redirectpage)
+            if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+                messages.error(request, 'Das ist keine valide Emailadresse!')
                 return HttpResponseRedirect(redirectpage)
             user = User.objects.create_user(username, email, password)
             user.first_name = firstname
@@ -246,11 +304,17 @@ def register_user(request):
 @csrf_protect
 @require_http_methods("POST")
 def profile(request):
+    # this view modifies attributes in a useraccount if existent
+    # redirects and returns statusmessage
+    # received formvariables: email, firstname,lastname,avatar(imagefile)
     user = request.user
     email = request.POST.get('email')
     firstname = request.POST.get('firstname')
     lastname = request.POST.get('lastname')
-    avatar_image = request.FILES['avatar']
+    try:
+        avatar_image = request.FILES['avatar']
+    except:
+        avatar_image = None
 
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
@@ -258,7 +322,7 @@ def profile(request):
     else:
         redirectpage = request.META.get('HTTP_REFERER')
 
-    if user is None or not User.objects.filter(username=user.username).exists():  # existiert nicht
+    if user is None or not User.objects.filter(username=user.username).exists():
         messages.error(request, 'Benutzer existiert nicht!')
 
     else:
@@ -271,10 +335,15 @@ def profile(request):
             messages.success(request, 'Ihr Nachname wurde erfolgreich geändert')
 
         if email and not user.email == email:
-            user.email = email
-            messages.success(request, 'Ihre Email-Adresse wurde erfolgreich geändert')
+            if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+                messages.error(request, 'Das ist keine valide Emailadresse!')
+                HttpResponseRedirect(redirectpage)
+            else:
+                user.email = email
+                messages.success(request, 'Ihre Email-Adresse wurde erfolgreich geändert')
 
         if avatar_image:
+            print(avatar_image)
             userimage = None
 
             if UserImage.objects.filter(belongs_to_user=user).exists():
@@ -295,6 +364,9 @@ def profile(request):
 @csrf_protect
 @require_http_methods("POST")
 def change_password(request):
+    # this view changes userpassword if useraccount is existent
+    # redirects and returns statusmessage
+    # received formvariables: password_old, password_new
     user = request.user
     password_old = request.POST.get('password_old')
     password_new = request.POST.get('password_new')
@@ -334,6 +406,9 @@ def change_password(request):
 @csrf_protect
 @require_http_methods("POST")
 def delete_account(request):
+    # this view deletes a user account if existent
+    # redirects and returns statusmessage
+    # received formvariables: password(for verification)
     user = request.user
     password = request.POST.get("password")
 
@@ -370,13 +445,16 @@ def delete_account(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def back(request):
-    redirect="/";
+    # this view redirects you to last page saved in session and removes it from it(last page is second first page!)
+    # if there are less than 2 pages in history it redirects to mainpage "/"
+    redirect = "/";
 
-    if not 'history' in request.session or not request.session['history']:
+    if not 'history' in request.session or not request.session[
+        'history']:  # if there is no page in history redirect to mainpage(this is also the case when HTTP_REFERER is turned off)
         return HttpResponseRedirect("/")
     else:
-        if len(request.session['history'])>=2:
-            history= request.session['history']
+        if len(request.session['history']) >= 2:
+            history = request.session['history']
             history.pop()
             redirect = history.pop()
             request.session['history'] = history
@@ -387,50 +465,58 @@ def back(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def update_pagehistory(request):
-    if request.POST.get('reset') == "y":
+    # this view gets called to update the users page history
+    # current(cp) page gets accessed via HTTP_REFERER. HTTP_REFERER has to be turned on for this to work
+    # formvariables: reset(is "y" if userhistory should be reset. This is the case when the user enters the mainpage "/")
+    # pagehistory is saved to a list in session
+    if request.POST.get('reset') == "y":  # if history should be reset replace with empty list
         if 'history' in request.session and request.session['history']:
             request.session['history'] = []
         return HttpResponse("/")
 
     cp = request.META.get('HTTP_REFERER')
 
-    if 'history' in request.session and request.session['history']:  # wenn eine history
+    if 'history' in request.session and request.session['history']:  # check if there already is a history in session
         history = request.session['history']
 
-        if history[-1] == cp: # same page
+        if history[-1] == cp:  # if last page is the same as current page(probably redirected) do nothing to the history
             return HttpResponse("/")
-        else:
+        else:  # otherwise add current page to history
             history.append(cp)
             request.session['history'] = history
     else:
-        request.session['history'] = [cp]
+        request.session['history'] = [cp]  # if no historylist yet create one with current page in session
 
     return HttpResponse("/")
+
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def commentreceiver(request):
-    #Formvariables: text, title, rating, path
-    title= request.POST.get('title')
-    text= request.POST.get('text')
-    path= request.POST.get('path')
-    rating= request.POST.get('rating')
+    # this view adds a comment in the database to a certain page-url
+    # received  formvariables: text, title, rating(from 0 to 5 as string), path of the page the comment is on (hidden)
+    title = request.POST.get('title')
+    text = request.POST.get('text')
+    path = request.POST.get('path')
+    print(path)
+    rating = request.POST.get('rating')
     user = request.user
     if title is None or not title or text is None or not text or rating is None or not rating:
         messages.error(request, 'Bitte alle Felder ausfüllen!')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-    if path is None or not path:
+    if path is None or not path or not rating in ["0", "1", "2", "3", "4", "5"]:
         messages.error(request, 'Ein Fehler ist aufgetreten!')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-    if user is None or not User.objects.filter(username=user.username).exists():  # existiert nicht
+    if user is None or not User.objects.filter(username=user.username).exists():
         messages.error(request, 'Benutzer existiert nicht!')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-    path= path.rstrip("/")
-
-    comment = Comment(comment_title=title, comment_content=text, page_url=path,comment_from=user , rating=rating, creation_date = datetime.datetime.now())
+    if (not path == "/"):
+        path = path.rstrip("/")
+    print(path)
+    comment = Comment(comment_title=title, comment_content=text, page_url=path, comment_from=user, rating=rating,
+                      creation_date=datetime.datetime.now())
     comment.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

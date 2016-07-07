@@ -1,65 +1,32 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7">
-<html class="no-js lt-ie9 lt-ie8">
-<html class="no-js lt-ie9">
-<html class="no-js">
-<head>
+{% include "app/html_templates/header/headerTemplate.html" with navInfo='filter' %}
 
-  {% include "app/html_templates/header/headerTemplate.html" %}
+{% comment %}
+{% load compile_static %}
+<link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
+{% endcomment %}
 
-  {% comment %}
-  {% load compile_static %}
-  <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
-  {% endcomment %}
+<script>
+  {% if product.provider.is_visible %}
+  function provider() {
+    location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
+  }
+  {% endif %}
+</script>
 
-  <script>
-    $(document).ready(function(){
-      $('[data-show="tooltip"]').tooltip();
-    });
-  </script>
+<body ng-app="allProductsApp">
 
-  <script>
-    {% if product.provider.is_visible %}
-    function provider() {
-      location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
-    }
-    {% endif %}
-
-    function start() {
-      location.href = "/"
-    }
-  </script>
-  <script>
-    $.post( "/updatepagehistory", { lastpage: "{{request.META.HTTP_REFERER}}", csrfmiddlewaretoken: "{{ csrf_token }}"} );
-  </script>
-
-  <!--tags needed for angular material selects-->
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-
-</head>
-
-
-<body ng-app="selectDemoOptGroups">
-
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='product'%}
+{% include "app/html_templates/header/navbarHeader.html" with navInfo='filter'%}
 
 <section id="fh5co-page" data-section="home"
          style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
          data-stellar-background-ratio="0.5">
-  <div>
+  <div class="container">
     <div class="text-wrap">
       <div class="text-inner">
         <div class="row">
           <div class="col-md-8">
             <h1 class="text-left">Filter-Seite</h1>
-            <h3 class="text-left"
-                style="color: #ddd; margin-top: -20px;">Alle Produkte nach Attributen gefiltert</h3>
           </div>
           <div class="col-md-4">
             <div class="panel panel-default pull-right"
@@ -67,14 +34,9 @@
               {% if product.provider.is_visible %}
               <div class="btn">
                 {% else %}
-                <div class="panel-body">
+                <div>
                   {% endif %}
-                  <img style="max-height: 100%; max-width: 100%;"
-                       {% if product.provider.is_visible %}
-                       onclick="provider()"
-                       {% endif %}
-                       src="{{ product.provider.providerprofile.logo_image.url }}"
-                       alt="providerImg">
+
                 </div>
               </div>
             </div>
@@ -86,7 +48,7 @@
   </div>
 </section>
 
-<section id="fh5co-questions" data-section="intro">
+<section id="fh5co-questions" data-section="filter">
 
   <!--section-header-->
   <div class="container">
@@ -95,95 +57,66 @@
         <h2 class="to-animate">Filter</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Wählen Sie nach welchen Attributen die Produkte gefiltert werden.</h3>
+            <h3>Wählen Sie nach welchen Attributen die Produkte gefiltert werden sollen.</h3>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  {% verbatim %}
-  <!--filter-container for material-checkboxes-->
+  <!--hersteller filter aus backend-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-
-    <!--hersteller-filter-->
     <div class="container">
-      <legend>Hersteller-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Hersteller 1</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 2</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 3</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 4</md-checkbox>
-        </div>
-      </div>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Hersteller 5</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 6</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 7</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Hersteller 8</md-checkbox>
-        </div>
-      </div>
-    </div>
+      <!--filter-container for material-checkboxes-->
+      <div ng-controller="AppCtrl" class="md-padding container" ng-cloak>
 
-    <!--preis-filter-->
-    <div class="container">
-      <legend>Preis-Filter</legend>
-      <div layout="row" layout-align="space-around center">
+        <!--hersteller-filter-->
         <div>
-          <md-checkbox class="md-primary">Preissegment 1</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Preissegment 2</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Preissegment 3</md-checkbox>
-        </div>
-      </div>
-    </div>
-
-    <!--kategorie-filter-->
-    <div class="container">
-      <legend>Kategorie-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Komfort</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Gesundheit</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sicherheit</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Energie</md-checkbox>
+          <legend>Hersteller-Filter</legend>
+          <div layout="row" layout-align="start center">
+            {% for provider in provider_list %}
+            <div flex>
+              <md-checkbox class="md-primary" name="hersteller-checkbox">{{ provider.name }}</md-checkbox>
+            </div>
+            {% if forloop.counter|divisibleby:"3" %}
+          </div>
+          <div layout="row" layout-align="start center">
+            {% endif %}
+            {% if forloop.last %}
+          </div>
+          {% endif %}
+          {% endfor %}
         </div>
       </div>
-    </div>
 
-    <!--button um section mit weiteren filtern anzuzeigen-->
-    <div class="container" style="text-align:center">
-      <button type="button" class="btn btn-link">Weitere Filter anzeigen</button>
-    </div>
-  </div>
-  {% endverbatim %}
+      <!--kategorie filter aus backend-->
+      <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+        <div class="container">
+          <legend>Kategorie-Filter</legend>
+          <div layout="row" layout-align="start center">
+            {% for category in category_list %}
+            <div flex>
+              <md-checkbox class="md-primary">{{ category.name }}</md-checkbox>
+            </div>
+            {% if forloop.counter|divisibleby:"4" %}
+          </div>
+          <div layout="row" layout-align="start center">
+            {% endif %}
+            {% if forloop.last %}
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!--button um hidden section anzuzeigen-->
+      <div class="row" layout-align="center center">
+        <button type="button" class="btn btn-link">Weitere Filter anzeigen</button>
+      </div>
 </section>
 
 
-<section id="fh5co-work" data-section="images">
+<section id="fh5co-work" data-section="preciseFilter">
 
   <!--section-header-->
   <div class="container">
@@ -199,226 +132,270 @@
     </div>
   </div>
 
-  {% verbatim %}
-  <!--filter-container for material-checkboxes-->
+  <!--preis-slider-->
+  <div ng-controller="AppCtrl2" class="md-padding" ng-cloak>
+    <legend>Preis-Filter</legend>
+    <div class="container">
+      <div ng-init="lower=1;upper=40;gap=1;">
+        <md-content class="md-padding" style="background-color:transparent">
+          <range-slider min="1" max="40" step="1" lower-value="lower" upper-value="upper" gap="gap"></range-slider>
+          <div>
+            {% verbatim %}
+            <p>min: {{lower}}€</p>
+            <p>max: {{upper}}€</p>
+            {% endverbatim %}
+          </div>
+        </md-content>
+      </div>
+    </div>
+  </div>
+
+  <!--Produkttyp filter aus backend-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-
-    <!--szenario-filter-->
     <div class="container">
-      <legend>Szenario-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Szenario 1</md-checkbox>
+      <legend>Produkttyp-Filter</legend>
+      <div layout="row" layout-align="start center">
+        {% for type in producttype_list %}
+        <div flex="33">
+          <md-checkbox class="md-primary">{{ type }}</md-checkbox>
         </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 2</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 3</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 4</md-checkbox>
-        </div>
+        {% if forloop.counter|divisibleby:"3" %}
       </div>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Szenario 5</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 6</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 7</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Szenario 8</md-checkbox>
-        </div>
+      <div layout="row" layout-align="start center">
+        {% endif %}
+        {% if forloop.last %}
       </div>
-    </div>
-
-    <!--produktkategorie-filter-->
-    <div class="container">
-      <legend>Produktkategorie-Filter</legend>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Küchengeräte</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sensoren</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Aktoren</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Beleuchtung</md-checkbox>
-        </div>
-      </div>
-      <div layout="row" layout-align="space-around center">
-        <div>
-          <md-checkbox class="md-primary">Heimkino</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Brandschutz</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sirenen</md-checkbox>
-        </div>
-        <div>
-          <md-checkbox class="md-primary">Sonstiges</md-checkbox>
-        </div>
-      </div>
+      {% endif %}
+      {% endfor %}
     </div>
   </div>
-  {% endverbatim %}
 
-
-  {% verbatim %}
-  <!--filter-container for material-selects-->
-  <div ng-controller="SelectOptGroupController" class="md-padding" ng-cloak>
-
-    <div class="container">
-      <div layout="row" layout-align="space-around center">
-
-        <md-input-container>
-          <label>Preissegment</label>
-          <md-select ng-model="size">
-            <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
-          </md-select>
-        </md-input-container>
-
-        <md-input-container>
-          <label>Produktkategorie</label>
-          <md-select ng-model="selectedToppings" multiple>
-            <md-optgroup label="Küchengeräte">
-              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Küchengeräte' }">{{topping.name}}</md-option>
-            </md-optgroup>
-            <md-optgroup label="Sensoren">
-              <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'Sensoren' }">{{topping.name}}</md-option>
-            </md-optgroup>
-          </md-select>
-        </md-input-container>
-      </div>
-    </div>
+  <!--button um hidden section auszublenden-->
+  <div class="row" layout-align="center center" style="text-align:center">
+    <button type="button" class="btn btn-link">Weitere Filter ausblenden</button>
   </div>
-  {% endverbatim %}
 </section>
-
-
-
 
 <section id="fh5co-testimonials" data-section="tecData">
 
-  <!--section-header-->
-  <div class="container">
-    <div class="row" style="width:100%">
-      <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Produkt-Liste</h2>
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Die Produkt-Liste wurde nach ihren Interessen gefiltert. Sie haben nun die Möglichkeit diese zu sortieren.</h3>
+  <section id="fh5co-testimonials" data-section="results">
+
+    <!--section-header-->
+    <div class="container">
+      <div class="row" style="width:100%">
+        <div class="col-md-12 section-heading text-center">
+          <h2 class="to-animate">Produkt-Liste</h2>
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 subtext to-animate">
+              <h3>Die Produkt-Liste wurde nach ihren Interessen gefiltert. Sie haben nun die Möglichkeit diese zu
+                sortieren.</h3>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
+    {% verbatim %}
+    <!--sorting-selectbox-->
+    <div ng-controller="sorting" class="md-padding" ng-cloak>
 
-  {% verbatim %}
-  <!--sorting-selectbox-->
-  <div ng-controller="SelectOptGroupController2" class="md-padding" ng-cloak>
+      <div class="container">
+        <div layout="row" layout-align="space-around center">
 
-    <div class="container">
-      <div layout="row" layout-align="space-around center">
-
-        <md-input-container>
-          <label>Sortieren nach...</label>
-          <md-select ng-model="size">
-            <md-option ng-repeat="size in sizes" value="{{size}}">{{size}}</md-option>
-          </md-select>
-        </md-input-container>
+          <md-input-container>
+            <label>Sortieren nach...</label>
+            <md-select ng-model="sort">
+              <md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
+            </md-select>
+          </md-input-container>
+        </div>
       </div>
     </div>
-  </div>
-  {% endverbatim %}
+    {% endverbatim %}
 
-  <!--product-list-->
-  {% if all_products %}
-  {% for product in all_products %}
-  <div class="col-md-4 col-sm-6 col-xxs-12">
-    <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
-      <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
-    </a>
-  </div>
-  {% endfor %}
-  {% endif %}
-
-</section>
+    <!--product-list-->
+    {% if all_products %}
+    {% for product in all_products %}
+    <div class="col-md-4 col-sm-6 col-xxs-12" data-hersteller="" data-kategorie="" data-produkttyp="">
+      <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+        <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+      </a>
+    </div>
+    {% endfor %}
+    {% endif %}
 
 
+    <div class="container">
+      <div class="row">
+        <div class="row row-bottom-padded-sm">
+          <div class="col-md-12 section-heading text-center">
+            <h2 class="to-animate">Szenarien</h2>
+          </div>
+        </div>
+      </div>
+      {% if all_products %}
+      {% for product in all_products %}
+      <div class="col-md-4 col-sm-6 col-xxs-12">
+        <a class="fh5co-project-item">
+          <div class="img-responsive"
+               style="background-image: url('{{ product.image1.url }}'); background-repeat: no-repeat; height: 250px;">
+          </div>
+          <div class="fh5co-text">
+            <h3 class="text-muted">
+              {{ product.provider }}
+            </h3>
+            <div style="height: 80px;">
+              <h1>
+                {{ product.name }}
+              </h1>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% empty %}
+      <div>
+        Es wurden noch keine Szenarien hinzugefügt.
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </section>
 
+  {% include "app/html_templates/sections/commentSection.html" %}
 
+  {% include "app/html_templates/footer/bodyBackBone.html" %}
 
+  <!--script for filter-function-->
+  <script type="text/javascript">
 
-{% include "app/html_templates/sections/commentSection.html" %}
-
-<!-- Footer -->
-{% include "app/html_templates/footer/footerTemplate.html" %}
-
-{% include "app/html_templates/modals/modals.html" %}
-
-<!--script for angular selects-->
-<script type="text/javascript">
-  angular
-    .module('selectDemoOptGroups', ['ngMaterial'])
-    .controller('SelectOptGroupController', function($scope) {
-      $scope.sizes = [
-        "Preissegment 1",
-        "Preissegment 2",
-        "Preissegment 3",
-        "Preissegment 4"
-      ];
-      $scope.toppings = [
-        { category: 'Küchengeräte', name: 'Kühlschrank' },
-        { category: 'Küchengeräte', name: 'Herd' },
-        { category: 'Küchengeräte', name: 'Kaffemaschine' },
-        { category: 'Küchengeräte', name: 'Mikrowelle' },
-        { category: 'Sensoren', name: 'Bewegungsmelder' },
-        { category: 'Sensoren', name: 'Türkontakt' },
-        { category: 'Sensoren', name: 'Luftfeuchtigkeitsmesser' }
-      ];
-      $scope.selectedToppings = [];
-      $scope.printSelectedToppings = function printSelectedToppings() {
-        var numberOfToppings = this.selectedToppings.length;
-        // If there is more than one topping, we add an 'and'
-        // to be gramatically correct. If there are 3+ toppings
-        // we also add an oxford comma.
-        if (numberOfToppings > 1) {
-          var needsOxfordComma = numberOfToppings > 2;
-          var lastToppingConjunction = (needsOxfordComma ? ',' : '') + ' and ';
-          var lastTopping = lastToppingConjunction +
-            this.selectedToppings[this.selectedToppings.length - 1];
-          return this.selectedToppings.slice(0, -1).join(', ') + lastTopping;
+    // Pass the checkbox name to the function
+    function getCheckedBoxes(chkboxName) {
+      var checkboxes = document.getElementsByName(chkboxName);
+      var checkboxesChecked = [];
+      // loop over them all
+      for (var i = 0; i < checkboxes.length; i++) {
+        // And stick the checked ones onto an array...
+        if (checkboxes[i].checked) {
+          checkboxesChecked.push(checkboxes[i]);
         }
-        return this.selectedToppings.join('');
-      };
-    })
-    .controller('SelectOptGroupController2', function($scope) {
-      $scope.sizes = [
-        "Preis aufsteigend",
-        "Preis absteigend",
-        "Nach Hersteller",
-        "Alphabetisch A-Z"
-      ];
-    })
-    .controller('AppCtrl', function($scope) {
-      $scope.data = {};
-      $scope.data.cb1 = true;
-      $scope.data.cb2 = false;
-      $scope.data.cb3 = false;
-      $scope.data.cb4 = false;
-      $scope.data.cb5 = false;
-    });
+      }
 
-</script>
+      // Return the array if it is non-empty, or null
+      return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+    }
+
+    // Call as
+    var checkedBoxes = getCheckedBoxes("mycheckboxes");
+  </script>
+
+  <!--script for range slider-->
+  <script type="text/ng-template" id="range-slider.tpl.html">
+    {% verbatim %}
+    <div class='range-slider-container'>
+      <div class='range-slider-left' ng-style="{width:lowerWidth+'%'}">
+        <md-slider ng-model="lowerValue" min='{{min}}' max='{{lowerMaxLimit}}' step="{{step}}"
+                   aria-label="lowerSlider"></md-slider>
+      </div>
+      <div class="range-track-line"
+           ng-style="{width:tracker.width+'%',left:tracker.left+'%',right:tracker.right+'%'}"></div>
+      <div class='range-slider-right' ng-style="{width:upperWidth+'%'}">
+        <md-slider ng-model="upperValue" min="{{upperMinLimit}}" max="{{max}}" step="{{step}}"
+                   aria-label="upperSlider"></md-slider>
+      </div>
+    </div>
+    {% endverbatim %}
+  </script>
+
+  <!--script for angular components-->
+  <script type="text/javascript">
+    angular
+      .module('allProductsApp', ['ngMaterial', "directives.rangeSlider"])
+      .controller('sorting', function ($scope) {
+        $scope.sorts = [
+          "Preis aufsteigend",
+          "Preis absteigend",
+          "Nach Hersteller",
+          "Alphabetisch A-Z"
+        ];
+      })
+      .controller('AppCtrl', function ($scope) {
+      })
+      .controller('AppCtrl2', function ($scope) {
+        $scope.color = {
+          blue: Math.floor(Math.random() * 255)
+        };
+      });
+
+    //directive for range-slider
+    angular.module('directives.rangeSlider', ['ngMaterial'])
+      .directive('rangeSlider', function () {
+        return {
+          restrict: "E",
+          scope: {
+            max: '=',
+            min: '=',
+            gap: '=?',
+            step: '=?',
+            lowerValue: "=",
+            upperValue: "="
+          },
+          templateUrl: 'range-slider.tpl.html',
+          controller: ["$scope", function ($scope) {
+
+            var COMFORTABLE_STEP = $scope.step, // whether the step is comfortable that depends on u
+              tracker = $scope.tracker = {    // track style
+                width: 0,
+                left: 0,
+                right: 0
+              };
+
+            function updateSliders() {
+
+              if ($scope.upperValue - $scope.lowerValue > $scope.gap) {
+
+                $scope.lowerMaxLimit = $scope.lowerValue + COMFORTABLE_STEP;
+                $scope.upperMinLimit = $scope.upperValue - COMFORTABLE_STEP;
+
+              } else {
+                $scope.lowerMaxLimit = $scope.lowerValue;
+                $scope.upperMinLimit = $scope.upperValue;
+              }
+
+              updateSlidersStyle();
+
+            }
+
+            function updateSlidersStyle() {
+              // update sliders style
+              $scope.lowerWidth = $scope.lowerMaxLimit / $scope.max * 100;
+              $scope.upperWidth = ($scope.max - $scope.upperMinLimit) / $scope.max * 100;
+
+              // update tracker line style
+              tracker.width = 100 - $scope.lowerWidth - $scope.upperWidth;
+              tracker.left = $scope.lowerWidth || 0;
+              tracker.right = $scope.upperWidth || 0;
+            }
+
+            // watch lowerValue & upperValue to update sliders
+            $scope.$watchGroup(["lowerValue", "upperValue"], function (newVal) {
+
+              // filter the default initialization
+              if (newVal !== undefined) {
+                updateSliders();
+              }
+
+            });
+
+            // init
+            $scope.step = $scope.step || 1;
+            $scope.gap = $scope.gap || 0;
+            $scope.lowerMaxLimit = $scope.lowerValue + COMFORTABLE_STEP;
+            $scope.upperMinLimit = $scope.upperValue - COMFORTABLE_STEP;
+            updateSlidersStyle();
+          }]
+        };
+
+      })
+  </script>
 </body>
 </html>

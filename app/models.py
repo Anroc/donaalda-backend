@@ -4,6 +4,7 @@ import re
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 from imagekit.models import ImageSpecField
@@ -12,8 +13,6 @@ from random import *
 
 from .validators import validate_legal_chars
 
-
-# Create your models here.
 
 def url_alias(value):
     temp_alias = value.lower()
@@ -64,7 +63,6 @@ class Scenario(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-
         self.url_name = url_alias(self.name)
         super(Scenario, self).save(*args, **kwargs)
 
@@ -86,7 +84,7 @@ class ScenarioDescription(models.Model):
     order = models.IntegerField(verbose_name="Reihenfolge")
 
     def __str__(self):
-        return '%s %s' %(self.belongs_to_scenario, self.order)
+        return '%s %s' % (self.belongs_to_scenario, self.order)
 
     def natural_key(self):
         return [self.belongs_to_scenario.natural_key(), self.order]
@@ -126,7 +124,7 @@ class Product(models.Model):
     serial_number = models.CharField(max_length=255, default="------", verbose_name="Artikelnummer")
     description = models.TextField(verbose_name="Berschreibung")
     specifications = models.TextField(default="---", verbose_name="Technische Details")
-    image1 = models.ImageField(verbose_name="Bild 1",upload_to="products")
+    image1 = models.ImageField(verbose_name="Bild 1", upload_to="products")
     image2 = models.ImageField(null=True, blank=True, verbose_name="Bild 2",
                                upload_to="products")
     image3 = models.ImageField(null=True, blank=True, verbose_name="Bild 3",
@@ -255,7 +253,7 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "Kommentar"
         verbose_name_plural = "Kommentare"
-        ordering = ["-creation_date","comment_title", "-rating",]
+        ordering = ["-creation_date", "comment_title", "-rating", ]
 
 
 # TODO:Add reference field to tell frontend which step each question belongs to
@@ -265,12 +263,14 @@ class Question(models.Model):
     RADIO_CHOICE = 'rc'
     DROP_CHOICE = 'dc'
     SLIDER_CHOICE = 'sc'
+    RANGE_CHOICE = 'rs'
 
     ANSWER_PRESENTATION_CHOICES = (
         (MULTI_CHOICE, 'Multiple Choice'),
         (RADIO_CHOICE, 'Radiobutton'),
         (DROP_CHOICE, 'Dropdown'),
         (SLIDER_CHOICE, 'Slider'),
+        (RANGE_CHOICE, 'Range Slider'),
     )
 
     question_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Fragentext")
@@ -280,6 +280,7 @@ class Question(models.Model):
         default=MULTI_CHOICE,
         verbose_name="Anzeigenart der Anworten"
     )
+    order = models.PositiveIntegerField(default=1000)
 
     def __str__(self):
         return '%s -- %s' % (self.question_text, self.get_answer_presentation_display())
@@ -287,6 +288,7 @@ class Question(models.Model):
     class Meta:
         verbose_name = "Frage"
         verbose_name_plural = "Fragen"
+        ordering = ["order","pk"]
 
 
 class Answer(models.Model):
@@ -314,3 +316,58 @@ class Tag(models.Model):
         verbose_name = "Schlagwort"
         verbose_name_plural = "Schlagwörter"
         ordering = ['code', ]
+
+
+class GivenAnswers(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE, verbose_name="User")
+    user_answer = models.ManyToManyField(to="Answer", verbose_name="hat geantwortet")
+
+    def __str__(self):
+        return '%s hat geantwortet: \"%s\"' % (self.user, self.user_answer.answer_text)
+
+    class Meta:
+        verbose_name = "beantwortete Antwort"
+        verbose_name_plural = "beantwortete Antworten"
+        # ordering = ['user', ]
+
+
+class QuestionSet(models.Model):
+    name = models.CharField(max_length=255, default="---")
+    question = models.ManyToManyField("Question", verbose_name="Dazugehörige Fragen")
+    category = models.OneToOneField("Category", on_delete=models.CASCADE, null=True, blank=True,
+                                    verbose_name="Dazugehörige Kategorie")
+    order = models.PositiveIntegerField(default=1000)
+
+    def __str__(self):
+        return '%s' % self.name
+
+    def natural_key(self):
+        return [self.name]
+
+    class Meta:
+        verbose_name = "Fragensammlung"
+        verbose_name_plural = "Fragensammlungen"
+        ordering = ["order","pk"]
+
+
+class SessionTags(models.Model):
+    session = models.OneToOneField(Session, null=True, on_delete=models.SET_NULL, verbose_name="Zugehörige Session")
+    tag = models.ManyToManyField("Tag", verbose_name="Referenziert auf Tag")
+
+    def __str__(self):
+        return '%s' % self.name
+
+    class Meta:
+        verbose_name = 'Session Tag'
+        verbose_name_plural = 'Session Tags'
+
+class QuestionStep(models.Model):
+    name = models.CharField(max_length=255)
+    question_steps = models.ManyToManyField('QuestionSet', verbose_name="zusammen gehörende Fragen")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Fragen für Stepper-Schritt"
+        verbose_name_plural = "Fragen für Stepper-Schritte"

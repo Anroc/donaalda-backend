@@ -19,6 +19,7 @@ from . import views
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 # Beware: insert new urls minding the regex pattern matching goes top to bottom
 app_name = 'app'
@@ -26,6 +27,7 @@ urlpatterns = [
     url(r'^contact$', views.ContactView.as_view(), name='contact'),
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
+    url(r'^result/$', views.stepper_check, name='get_question_result'),
     url(r'^logout$', views.log_out, name='logout'),
     url(r'^commentreceiver$', views.commentreceiver, name='commentreceiver'),
     url(r'^scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
@@ -40,6 +42,5 @@ urlpatterns = [
     url(r'^deleteaccount$', views.delete_account, name='deleteAccount'),
     url(r'^all_products/$', views.AllProductsView.as_view(), name='product_all'),
     url(r'^(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
-    # for frontend testing
     url(r'^$', views.IndexView.as_view(), name='index'),
 ]

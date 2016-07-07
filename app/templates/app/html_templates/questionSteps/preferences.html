@@ -1,36 +1,77 @@
 <md-step label="Kategorienauswahl" md-complete="vm.stepData[1].data.completed"
          ng-disabled="vm.stepProgress < 2">
   <md-step-body>
-    <form name="step2">
+    <form name="step2" ng-submit="vm.submitCurrentStep(vm.stepData[1].data)">
       <md-content class="md-padding">
         <div layout="column" layout-align="center top">
+          {% if qs_category %}
+            {% for questionstep in qs_category %}
+            {% for questionset in questionstep.question_steps.all %}
+            {% for question in questionset.question.all %}
           <h4>
-            An welchen Smart Home-Bereich sind Sie interessiert?
+            {{ question.question_text }}
           </h4>
-          {% if category_list %}
-          {% for category in category_list %}
-          <md-checkbox>{{category}}</md-checkbox>
-          {% endfor %}
+          {% if question.answer_presentation == 'rc' %}
+          <md-radio-group ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}">
+            {% for answer in question.answer_set.all %}
+            <md-radio-button value='{{ answer.pk }}'>
+              {{ answer.answer_text }}
+            </md-radio-button>
+            {% endfor %}
+          </md-radio-group>
+          {% elif question.answer_presentation == 'mc' %}
+          <md-checkbox-group layout="column">
+            {% for answer in question.answer_set.all %}
+            <md-checkbox ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                         value='{{ answer.pk }}' value='{{ answer.pk }}'>{{ answer.answer_text }}
+            </md-checkbox>
+            {% endfor %}
+          </md-checkbox-group>
+          {% elif question.answer_presentation == 'dc' %}
+          <md-input-container>
+            <md-select ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                       placeholder="Select a state">
+              {% for answer in question.answer_set.all %}
+              <md-option value='{{ answer.pk }}'>
+                {{ answer.answer_text }}
+              </md-option>
+              {% endfor %}
+            </md-select>
+          </md-input-container>
+          {% elif question.answer_presentation == 'sc' %}
+          <!-- INPUT SLIDER HERE -->
+          {% elif question.answer_presentation == 'rs' %}
+          <!-- INPUT RANGE SLIDER HERE -->
           {% endif %}
-          <md-checkbox>Remote</md-checkbox>
+          {% endfor %}
+        {% endfor %}
+        {% endfor %}
+          {% else %}
+          <h2>
+            Pups der Bär
+          </h2>
+          {% endif %}
         </div>
 
       </md-content>
       <md-step-actions layout="row">
         <div flex>
 
-          <md-button class="md-raised md-primary" ng-click="vm.moveToPreviousStep()">Zurück</md-button>
-        </div>
-        <div flex layout="row" layout-align="end top">
-          <md-button class="md-warn">ABBRECHEN</md-button>
-          <md-button ng-disabled="vm.showBusyText"
-                     ng-click="vm.submitCurrentStep(vm.stepData[1].data, !(vm.stepData[1].data.firsname && vm.stepData[1].data.lastname))"
-                     class="md-primary md-raised">
-            {% verbatim %}
-            {{ vm.stepData[1].data.firsname && vm.stepData[1].data.lastname ? 'NEXT' : 'WEITER' }}
-            {% endverbatim %}
+          <md-button class="md-raised md-primary" ng-click="vm.moveToPreviousStep()">
+            Zurück
           </md-button>
         </div>
+        {% verbatim %}
+        <div flex layout="row" layout-align="end top">
+          <md-button class="md-warn">
+            ABBRECHEN
+          </md-button>
+          <md-button type="submit" ng-disabled=""
+                     class="md-primary md-raised">
+            {{ 'WEITER' }}
+          </md-button>
+        </div>
+        {% endverbatim %}
       </md-step-actions>
     </form>
   </md-step-body>

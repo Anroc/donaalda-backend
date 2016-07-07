@@ -1,23 +1,7 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
-<head>
-  <!-- header with all the needed js and css imports -->
-  {% include "app/html_templates/header/headerTemplate.html" %}
 
-  <script src="{% static 'app/index-app.js' %}"></script>
+{% include "app/html_templates/header/headerTemplate.html" with navInfo='category'%}
 
-
-
-  <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
-</head>
 <body>
 
 <!-- nav bar or tool bar -->
@@ -61,56 +45,38 @@
     </div>
   </div>
   <div class="container">
-      <div class="row row-bottom-padded-sm">
-        {% if scenario_list_from_category %}
-        {% for scenario in scenario_list_from_category %}
+    <div class="row row-bottom-padded-sm">
+      {% if scenario_list_from_category %}
+      {% for scenario in scenario_list_from_category %}
 
-        <div class="col-md-4 col-sm-6 col-xxs-12">
-          <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item to-animate">
-            <div src="{{ scenario.picture.url }}" alt="Image" style="background-image: url('{{ scenario.picture.url }}');
+      <div class="col-md-4 col-sm-6 col-xxs-12">
+        <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item to-animate">
+          <div src="{{ scenario.picture.url }}" alt="Image" style="background-image: url('{{ scenario.picture.url }}');
              background-repeat: no-repeat; height: 250px;"></div>
-            <div class="fh5co-text">
-                <h3 class="text-muted">
-                  {{ scenario.provider }}
-                </h3>
-                <div style="height: 80px;">
-                  <h1>
-                    {{ scenario.name }}
-                  </h1>
-                </div>
+          <div class="fh5co-text">
+            <h3 class="text-muted">
+              {{ scenario.provider }}
+            </h3>
+            <div style="height: 80px;">
+              <h1>
+                {{ scenario.name }}
+              </h1>
             </div>
-          </a>
-        </div>
-        <div class="clearfix visible-sm-block"></div>
-        {% endfor %}
-        {% else %}
-        <div>
-          no scenarios
-        </div>
-        {% endif %}
+          </div>
+        </a>
       </div>
+      <div class="clearfix visible-sm-block"></div>
+      {% endfor %}
+      {% else %}
+      <div>
+        no scenarios
+      </div>
+      {% endif %}
     </div>
+  </div>
 </section>
 
-
-<!-- Footer -->
-{% include "app/html_templates/footer/footerTemplate.html" %}
-
-<!-- Login Modal -->
-{% include "app/html_templates/modals/loginModal.html" %}
-
-<!-- Register Modale -->
-{% include "app/html_templates/modals/registerModal.html" %}
-
-<!-- Profile Modale -->
-{% include "app/html_templates/modals/profileModal.html" %}
-
-<!-- Password Modale -->
-{% include "app/html_templates/modals/passwordModal.html" %}
-
-<!-- Delete Account Modale -->
-{% include "app/html_templates/modals/deleteAccountModal.html" %}
-
+{% include "app/html_templates/footer/bodyBackBone.html" %}
 </body>
 </html>
 
