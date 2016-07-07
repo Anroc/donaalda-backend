@@ -42,6 +42,5 @@ urlpatterns = [
     url(r'^deleteaccount$', views.delete_account, name='deleteAccount'),
     url(r'^all_products/$', views.AllProductsView.as_view(), name='product_all'),
     url(r'^(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
-    # for frontend testing
     url(r'^$', views.IndexView.as_view(), name='index'),
 ]
