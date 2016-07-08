@@ -154,13 +154,12 @@ def login_view(request):
     return render(request, 'app/html_templates/loginTemplate.html', {'login_form': form})
 
 
-
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def stepper_check(request):
     # copy post object to delete csrf token, so json.load works
     post = request.POST.copy()
-    if  request.POST.get("csrfmiddlewaretoken") and request.POST.get("csrfmiddlewaretoken") is not None:
+    if request.POST.get("csrfmiddlewaretoken") and request.POST.get("csrfmiddlewaretoken") is not None:
         print(request.POST.get('csrfmiddlewaretoken'))
         del post["csrfmiddlewaretoken"]
     # dict should hold decoded JSON objects from stepper
