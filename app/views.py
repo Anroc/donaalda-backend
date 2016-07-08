@@ -154,12 +154,6 @@ def login_view(request):
     return render(request, 'app/html_templates/loginTemplate.html', {'login_form': form})
 
 
-class StepperResultView(generic.ListView):
-    template_name = 'app/result.html'
-
-    def get(self, request, *args, **kwargs):
-        return render(request, 'app/result.html')
-
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
