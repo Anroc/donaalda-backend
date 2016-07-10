@@ -144,15 +144,10 @@
     </div>
   </div>
 
-  <!--hersteller filter aus backend-->
+  <!--hersteller-filter-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+    <legend>Hersteller-Filter</legend>
     <div class="container">
-  <!--filter-container for material-checkboxes-->
-  <div ng-controller="AppCtrl" class="md-padding container" ng-cloak>
-
-    <!--hersteller-filter-->
-    <div>
-      <legend>Hersteller-Filter</legend>
         <div layout="row" layout-align="start center">
         {% for provider in provider_list %}
           <div flex>
@@ -171,8 +166,8 @@
 
   <!--kategorie filter aus backend-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+    <legend>Kategorie-Filter</legend>
     <div class="container">
-      <legend>Kategorie-Filter</legend>
       <div layout="row" layout-align="start center">
         {% for category in category_list %}
         <div flex>
@@ -232,12 +227,12 @@
 
   <!--Produkttyp filter aus backend-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+    <legend>Produkttyp-Filter</legend>
     <div class="container">
-      <legend>Produkttyp-Filter</legend>
       <div layout="row" layout-align="start center">
         {% for type in producttype_list %}
         <div flex="33">
-          <md-checkbox class="md-primary">{{ type }}</md-checkbox>
+          <md-checkbox class="md-primary">{{ type.type_name }}</md-checkbox>
         </div>
         {% if forloop.counter|divisibleby:"3" %}
           </div>
@@ -256,8 +251,6 @@
   </div>
 </section>
 
-<section id="fh5co-testimonials" data-section="tecData">
-
 <section id="fh5co-testimonials" data-section="results">
 
   <!--section-header-->
@@ -275,23 +268,23 @@
     </div>
   </div>
 
-  {% verbatim %}
+
   <!--sorting-selectbox-->
   <div ng-controller="sorting" class="md-padding" ng-cloak>
-
     <div class="container">
       <div layout="row" layout-align="space-around center">
-
         <md-input-container>
           <label>Sortieren nach...</label>
           <md-select ng-model="sort">
+            {% verbatim %}
             <md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
+            {% endverbatim %}
           </md-select>
         </md-input-container>
       </div>
     </div>
   </div>
-  {% endverbatim %}
+
 
   <!--product-list-->
   {% if all_products %}
