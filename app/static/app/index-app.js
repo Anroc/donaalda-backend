@@ -60,6 +60,24 @@ function questionController($scope, $q, $timeout) {
         {step: 3, completed: false, optional: false, data: {}},
     ];
 
+    function getCookie(name) {
+       var cookieValue = null;
+       if (document.cookie && document.cookie !== '') {
+           var cookies = document.cookie.split(';');
+           for (var i = 0; i < cookies.length; i++) {
+               var cookie = jQuery.trim(cookies[i]);
+               // Does this cookie string begin with the name we want?
+               if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                   cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                   break;
+               }
+           }
+       }
+       return cookieValue;
+    };
+
+    var csrftoken = getCookie('csrftoken');
+
     vm.post = function post(path) {
         var method = "post"; // Set method to post by default if not specified.
         var params = vm.stepData;
@@ -68,6 +86,12 @@ function questionController($scope, $q, $timeout) {
         var form = document.createElement("form");
         form.setAttribute("method", method);
         form.setAttribute("action", path);
+
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", 'csrfmiddlewaretoken');
+        hiddenField.setAttribute("value", getCookie('csrftoken'));
+        form.appendChild(hiddenField);
 
         for (var key in params) {
             if (params.hasOwnProperty(key)) {
@@ -78,6 +102,8 @@ function questionController($scope, $q, $timeout) {
                 form.appendChild(hiddenField);
             }
         }
+
+
         document.body.appendChild(form);
         form.submit();
     };

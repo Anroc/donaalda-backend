@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from collections import ChainMap
 
 from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
-    QuestionSet, Question, Answer, Tag, ProductSet
+    QuestionSet, Question, Answer, Tag, ProductSet, QuestionStep
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -76,9 +76,9 @@ class CategoryView(generic.ListView):
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
                        'category_list': Category.objects.all(),
                        'category': Category.objects.get(name=category),
-                       'g_questionset': QuestionSet.objects.get(name='Allgemeine Fragen'),
-                       'categories_question_sets': QuestionSet.objects.exclude(category=None),
-                       'choose_category_question_set': QuestionSet.objects.get(name='Kategorieauswahl-Fragen'),
+                       'qs_general': QuestionStep.objects.filter(name="Allgemeines"),
+                       'qs_category': QuestionStep.objects.filter(name__contains="Auswahl"),
+                       'qs_category_specific': QuestionStep.objects.filter(name__contains="Detail"),
                        })
 
 
@@ -117,7 +117,6 @@ class ProductView(generic.DetailView):
                        })
 
 
-# for frontend testing
 class AllProductsView(generic.DetailView):
     template_name = 'app/allProducts.html'
     context_object_name = 'all_products'
@@ -155,24 +154,21 @@ def login_view(request):
     return render(request, 'app/html_templates/loginTemplate.html', {'login_form': form})
 
 
-class StepperResultView(generic.ListView):
-    template_name = 'app/result.html'
-
-    def get(self, request, *args, **kwargs):
-        return render(request, 'app/result.html')
-
-
-# csrf_exempt cause i couldnt get the csrf_token to work with the custom vm.post method in index-app.js
-@csrf_exempt
+@csrf_protect
 @require_http_methods(["GET", "POST"])
 def stepper_check(request):
-    # dict should hold decoded JSON object from stepper
+    # copy post object to delete csrf token, so json.load works
+    post = request.POST.copy()
+    if request.POST.get("csrfmiddlewaretoken") and request.POST.get("csrfmiddlewaretoken") is not None:
+        print(request.POST.get('csrfmiddlewaretoken'))
+        del post["csrfmiddlewaretoken"]
+    # dict should hold decoded JSON objects from stepper
     steps = {}
     # read from POST and interpret as JSON
-    for key, value in request.POST.items():
+    for key, value in post.items():
         steps[key] = json.loads(value)
 
-    # "flatten" dict by recursively dismissing dicts by adding information to key
+    # "flatten" dict by recursively dismissing dicts and adding would be lost information to key
     def flatten_dict(d):
         def expand(key, value):
             if isinstance(value, dict):
@@ -195,19 +191,19 @@ def stepper_check(request):
     # create list of unnecessary items
     delete_list = [i for i in result_dic.keys() if regex.search(i)]
 
-    # find correct answer PK to substitute YES dict values
+    # REGEX to find correct answer PK to substitute YES dict values
     regex_build_value = re.compile("[\d\w]*.answer[0-9]+")
 
-    # clean clean_result_dic for testing purposes
+    # clean clean_result_dic of non required POST data
     for item in delete_list:
         del clean_result_dic[item]
 
-    # create list with items to be "cleaned"
+    # create list with items to be "cleaned", IE items with answer PK in key
     clean_list = [i for i in clean_result_dic.keys() if regex_build_value.search(i)]
 
-    print(clean_list)
+    print("Items with answer PK still in keys: " + clean_list)
 
-    # replace the actual "True" answers
+    # replace the actual "True" answers with corresponding answer PK
     for k, v in list(clean_result_dic.items()):
         if k in clean_list:
             clean_result_dic[k] = re.sub('.*?([0-9]*)$', r'\1', k)

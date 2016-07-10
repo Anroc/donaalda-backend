@@ -33,6 +33,8 @@
   <!-- for rendering the correct title and linking the correct specific stylesheet -->
   {% if navInfo == 'scenario' %}
     <title>DONAALDA - Szenario - {{ current_scenario.name }}</title>
+
+    <link rel="stylesheet" href="{% static 'app/assets/css/custom/styleProduct.css' %}">
     <link rel="stylesheet" href="{% static 'app/assets/css/custom/scenario.css' %}">
 
   {% elif navInfo == 'provider' %}
@@ -68,7 +70,7 @@
 
 
   <!-- TODO: fix this Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <link rel="shortcut icon" href="{% static 'app/favicon.ico' %}">
+  <link rel="shortcut icon" href="{% static 'app/assets/images/myAvatar_icon.png' %}">
 
   <!-- js files -->
 
