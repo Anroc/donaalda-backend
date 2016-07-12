@@ -6,10 +6,11 @@
       <md-content class="md-padding">
         <div layout="row" layout-align="space-around start">
 
-          <div flex>
+
                       {% if qs_category_specific %}
             {% for questionstep in qs_category_specific %}
             {% for questionset in questionstep.question_steps.all %}
+            <div flex style="margin-left: 10px;">
                 <h3>{{ questionset.name }}</h3>
                         {% for question in questionset.question.all %}
                 <h4>{{ question.question_text }}</h4>
@@ -38,6 +39,7 @@
                 {% elif question.answer_presentation == 'rs' %}
                     <!-- INPUT RANGE SLIDER HERE -->
                 {% endif %}
+            </div>
             {% endfor %}
             {% endfor %}
                           {% endfor %}
@@ -45,95 +47,6 @@
           <h2>FUCK THIS</h2>
           {% endif %}
 
-
-
-
-
-
-
-
-            {% comment %}
-            <h4>Radiobutton frage</h4>
-
-            <md-radio-group ng-model="vm.stepData[2].data.accommodation_name">
-              <md-radio-button value="Option 1">Option 1</md-radio-button>
-              <md-radio-button value="Option 2">Option 2</md-radio-button>
-            </md-radio-group>
-
-            <!--<h4>Eigentum oder Miete?</h4> -->
-
-            <md-radio-group ng-model="vm.stepData[2].data.ownership">
-              <md-radio-button value="Miete">zur Miete</md-radio-button>
-              <md-radio-button value="Eigentum">im Eigentum</md-radio-button>
-
-            </md-radio-group>
-
-            <div>
-              <div style="padding-top: 12px">
-                <h4>
-                  Haben Sie aktuell Renovierungen geplant?
-                </h4>
-                <!-- WICHTIG NOCH ANZUPASSEN -->
-                <md-radio-group ng-model="vm.stepData[2].data.ownershipOpen">
-                  <md-radio-button value="Ja">Ja </md-radio-button>
-                  <md-radio-button value="Nein">Nein</md-radio-button>
-
-                </md-radio-group>
-              </div>
-            </div>
-          </div>
-
-          <div flex>
-            <h4>
-              Ausstattung von {% verbatim %} {{ vm.stepData[2].data.accommodation_name }} {% endverbatim %}
-            </h4>
-
-            <div class="row">
-              <md-checkbox-group ng-model="vm.stepData[2].data.addition" layout="column">
-                <md-checkbox value="Garten">Garten</md-checkbox>
-                <md-checkbox value="Balkon">Balkon</md-checkbox>
-                <md-checkbox value="Terrasse">Terrasse</md-checkbox>
-                <md-checkbox value="Garage">Garage</md-checkbox>
-              </md-checkbox-group>
-            </div>
-          </div>
-
-          <div flex>
-            <h4>Unsere Wohnfläche umfasst Quadratmeter:</h4>
-            <div layout="row">
-              <div flex="50">
-                <md-slider class="md-primary" flex min="0" max="255" ng-model="vm.stepData[2].data.square_meters"
-                           aria-label="blue" id="blue-slider"></md-slider>
-              </div>
-              <div flex="10">
-
-              </div>
-              <div flex="20" layout layout-align="center center" style="margin-right: 10px;">
-                <input flex type="number" ng-model="vm.stepData[2].data.square_meters" aria-label="blue"
-                       aria-controls="blue-slider" style="border: none; text-align: right"> m²
-              </div>
-              <div flex="10">
-
-              </div>
-            </div>
-
-
-            <div flex style="padding-top:12px">
-              <h4>Wir sind im Haushalt Insgesamt: </h4>
-              <div layout="row">
-
-                <input flex="20" type="number"
-                       ng-model="vm.stepData[2].data.persons"
-                       aria-label="rating"
-                       aria-controls="rating-slider"
-                       style="text-align: right;
-                         ;">
-                <i flex="10" class="material-icons">people</i>
-                Personen
-              </div>
-            </div>
-            {% endcomment %}
-          </div>
 
         </div>
       </md-content>

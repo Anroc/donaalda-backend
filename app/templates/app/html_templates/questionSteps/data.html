@@ -4,11 +4,12 @@
     <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
       <md-content class="md-padding">
         <div layout="row" layout-align="space-around start">
-          <div flex>
+
             {% if qs_general %}
             {% for questionstep in qs_general %}
             {% for questionset in questionstep.question_steps.all %}
             {% for question in questionset.question.all %}
+          <div flex>
             <h4>{{ question.question_text }}</h4>
             {% if question.answer_presentation == 'rc' %}
             <md-radio-group ng-model="vm.stepData[0].data.question{{ question.pk }}">
@@ -41,7 +42,9 @@
             <!-- INPUT SLIDER HERE -->
             {% elif question.answer_presentation == 'rs' %}
             <!-- INPUT RANGE SLIDER HERE -->
+
             {% endif %}
+          </div>
             {% endfor %}
             {% endfor %}
             {% endfor %}
@@ -51,27 +54,6 @@
             </h2>
             {% endif %}
 
-            {% comment %}
-            <div>
-              <div style="padding-top: 12px">
-                <div>
-                  <h4>
-                    Haben Sie aktuell Renovierungen geplant?
-                  </h4>
-                  <md-checkbox>
-                    Ja oder Nein
-                  </md-checkbox>
-                </div>
-                <!-- WICHTIG NOCH ANZUPASSEN -->
-                <md-radio-group ng-model="vm.stepData[0].data.ownershipOpen">
-                  <md-radio-button value="Miete">Ja</md-radio-button>
-                  <md-radio-button value="Eigentum">Nein</md-radio-button>
-
-                </md-radio-group>
-              </div>
-            </div>
-            {% endcomment %}
-          </div>
 
           {% comment %}
           <div flex>
