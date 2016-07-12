@@ -89,6 +89,7 @@
         $el.find('li').removeClass('active');
         $el.each(function () {
             $(this).find('a[data-nav-section="' + section + '"]').closest('li').addClass('active');
+            $(this).find('a[id="' + section + '"]').closest('li').addClass('active');
         });
 
     };
@@ -103,7 +104,7 @@
                 navActive($(this.element).data('section'));
             }
         }, {
-            offset: '150px'
+            offset: '350px'
         });
 
         $section.waypoint(function (direction) {
@@ -112,7 +113,8 @@
             }
         }, {
             offset: function () {
-                return -$(this.element).height() + 155;
+                return -$(this.element).height() + 3
+                55;
             }
         });
 

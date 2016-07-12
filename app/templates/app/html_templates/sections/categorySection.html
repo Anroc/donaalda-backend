@@ -1,6 +1,7 @@
 {% load staticfiles %}
 
 <section id="fh5co-intro">
+<section id="fh5co-intro" data-section="categories">
   <!--div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-left">
@@ -22,11 +23,11 @@
           <h2>
             {{ category.name }}
           </h2>
-          <div style="height: 170px;">
+          <div style="height: 300px;">
             {{ category.description|safe|linebreaksbr }}
           </div>
           <p>
-            <a href="{% url 'app:category' category.name %}" class="btn btn-primary">
+            <a href="{% url 'app:category' category.name %}" class="btn btn-primary" style="text-align:center">
               Ich will {{ category.name }}
             </a>
           </p>
