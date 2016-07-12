@@ -201,7 +201,7 @@ def stepper_check(request):
     # create list with items to be "cleaned", IE items with answer PK in key
     clean_list = [i for i in clean_result_dic.keys() if regex_build_value.search(i)]
 
-    print("Items with answer PK still in keys: " + clean_list)
+    # print("Items with answer PK still in keys: " + clean_list)
 
     # replace the actual "True" answers with corresponding answer PK
     for k, v in list(clean_result_dic.items()):
