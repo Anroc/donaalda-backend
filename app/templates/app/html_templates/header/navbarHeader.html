@@ -1,5 +1,27 @@
 {% load staticfiles %}
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+window.setTimeout(function() {
+    $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+        $(this).remove();
+    });
+}, 3000);
+
+  $("#categories").click(function(){
+    $("html, body").animate({
+      scrollTop: $("#test").offset().top - 120
+    }, 500);
+    $(".active").removeClass("active");
+    $("#btn").parent().addClass("active");
+    });
+  });
+
+</script>
+
 <link rel="stylesheet" href="{% static 'app/assets/css/custom/navBarHeader.css' %}">
+
 <header role="banner" id="fh5co-header">
   <div class="container">
     <div class="row">
@@ -40,7 +62,7 @@
           <ul class="nav navbar-nav navbar-right">
             {% if navInfo == 'index' %}
             <li class="active"><a href="#" data-nav-section="home"><span>Start</span></a></li>
-            <li><a href="#" id="btn"><span>Kategorien</span></a></li>
+            <li><a href="#" id="categories"><span>Kategorien</span></a></li>
             <li><a href="#" data-nav-section="whatsIsDonaalda"><span>Donaalda</span></a></li>
             <li><a href="#" data-nav-section="livingSituation"><span>Wohnsituation</span></a></li>
             <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>

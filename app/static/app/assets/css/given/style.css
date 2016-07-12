@@ -696,7 +696,7 @@ h1, h2, h3, h4, h5, h6 {
     float: left;
     text-align: center;
     font-size: 16px;
-    min-height: 460px;
+    min-height: 530px;
     vertical-align: middle;
     padding: 40px;
     background: #fff;
@@ -1789,6 +1789,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn.btn-primary {
     background: #52d3aa;
+    max-width:11em;
+    max-height:30em;
+    word-wrap: normal;
+    white-space:normal;
     color: #fff;
     border: none !important;
     border: 2px solid transparent !important;
