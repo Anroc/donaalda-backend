@@ -1,13 +1,4 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
 <head>
   {% include "app/html_templates/header/headerTemplate.html" with navInfo='scenario'%}
 </head>
@@ -33,7 +24,7 @@
             {% endif %}
           </div>
 
-                         <div class="col-md-4">
+          <div class="col-md-4">
             <div class="panel panel-default pull-right"
                  style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
               {% if current_scenario.provider.is_visible %}
@@ -54,11 +45,11 @@
                 </div>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="slant"></div>
+    <div class="slant"></div>
 </section>
 
 <!-- Scenario description boxes -->
@@ -80,47 +71,47 @@
           </div>
           <div>
             {% if scenarios %}
-              {% for scenario in scenarios %}
-                <div class="container-fluid row">
-                  <div class="panel">
-                    <div class="panel-body">
-                      {% if scenario.left_right %}
-                        <div class="col-md-8">
-                          <p class="text-justify to-animate">
-                            {{scenario.description|safe|linebreaksbr}}
-                          </p>
-                        </div>
-                          {% comment %}
-                        <div class="col-md-4">
-                          <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
-                        </div>
-                        {% endcomment %}
-                          <div class="col-md-4">
-                            <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
-                                <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
-                                </a>
-                          </div>
-                      {% else %}
-                          {% comment %}
-                        <div class="col-md-4">
-                          <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
-                        </div>
-                        {% endcomment %}
-                          <div class="col-md-4">
-                            <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
-                                <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
-                                </a>
-                          </div>
-                        <div class="col-md-8">
-                          <p class="text-justify">
-                           {{scenario.description|safe|linebreaksbr}}
-                          </p>
-                        </div>
-                      {% endif %}
-                    </div>
+            {% for scenario in scenarios %}
+            <div class="container-fluid row">
+              <div class="panel">
+                <div class="panel-body">
+                  {% if scenario.left_right %}
+                  <div class="col-md-8">
+                    <p class="text-justify to-animate">
+                      {{scenario.description|safe|linebreaksbr}}
+                    </p>
                   </div>
+                  {% comment %}
+                  <div class="col-md-4">
+                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
+                  </div>
+                  {% endcomment %}
+                  <div class="col-md-4">
+                    <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
+                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
+                    </a>
+                  </div>
+                  {% else %}
+                  {% comment %}
+                  <div class="col-md-4">
+                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
+                  </div>
+                  {% endcomment %}
+                  <div class="col-md-4">
+                    <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
+                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
+                    </a>
+                  </div>
+                  <div class="col-md-8">
+                    <p class="text-justify">
+                      {{scenario.description|safe|linebreaksbr}}
+                    </p>
+                  </div>
+                  {% endif %}
                 </div>
-              {% endfor %}
+              </div>
+            </div>
+            {% endfor %}
             {% endif %}
           </div>
         </div>
@@ -149,38 +140,38 @@
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <!-- foreach product in products -->
-          {% for indicator in current_scenario.scenario_product_set.products.all %}
-            {% if forloop.counter0|divisibleby:3 %}
-                <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
-            {% endif %}
-          {% endfor %}
+        {% for indicator in current_scenario.scenario_product_set.products.all %}
+        {% if forloop.counter0|divisibleby:3 %}
+        <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
+        {% endif %}
+        {% endfor %}
       </ol>
 
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
         {% for item in current_scenario.scenario_product_set.products.all %}
-            {% if forloop.counter == 1 %}
-            <div class="item active" style="margin-left: 50px; margin-right: 50px;">
-            {% endif%}
-              <a href="{% url 'app:product' item.pk %}">
-                  <div class="col-md-4">
-                    <div class="card" style="background-color:white; border-radius:5px">
-                      <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                        <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ item.name }}</h4>
-                        <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ item.provider }}</h6>
-                      </div>
-                      <div style="height: 250px;">
-                        <img src="{{ item.image1.url }}" alt="" class="center-block" style="max-height: 95%; max-width: 95%;">
-                      </div>
-                    </div>
-                  </div>
-              </a>
-            {% if forloop.counter == current_scenario.scenario_product_set.products.all|length %}
+        {% if forloop.counter == 1 %}
+        <div class="item active" style="margin-left: 50px; margin-right: 50px;">
+          {% endif%}
+          <a href="{% url 'app:product' item.pk %}">
+            <div class="col-md-4">
+              <div class="card" style="background-color:white; border-radius:5px">
+                <div class="card-block" style="padding-top:10px; padding-bottom:10px">
+                  <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ item.name }}</h4>
+                  <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ item.provider }}</h6>
+                </div>
+                <div style="height: 250px;">
+                  <img src="{{ item.image1.url }}" alt="" class="center-block" style="max-height: 95%; max-width: 95%;">
+                </div>
+              </div>
             </div>
-            {% elif forloop.counter|divisibleby:3 %}
-            </div>
-            <div class="item" style="margin-left: 50px; margin-right: 50px;">
-            {% endif %}
+          </a>
+          {% if forloop.counter == current_scenario.scenario_product_set.products.all|length %}
+        </div>
+        {% elif forloop.counter|divisibleby:3 %}
+      </div>
+      <div class="item" style="margin-left: 50px; margin-right: 50px;">
+        {% endif %}
         {% endfor %}
       </div>
 
@@ -200,10 +191,6 @@
 
 {% include "app/html_templates/sections/commentSection.html" %}
 
-{% include "app/html_templates/footer/footerTemplate.html" %}
-
-{% include "app/html_templates/modals/modals.html" %}
-
+{% include "app/html_templates/footer/bodyBackBone.html" %}
 </body>
 </html>
-

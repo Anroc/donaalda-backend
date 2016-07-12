@@ -1,17 +1,6 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
-<head>
+{% include "app/html_templates/header/headerTemplate.html" with navInfo='provider'%}
 
-  {% include "app/html_templates/header/headerTemplate.html" with navInfo='provider'%}
-</head>
 <body>
 
 {% include "app/html_templates/header/navbarHeader.html" with navInfo='provider' providerName=provider.public_name %}
@@ -19,22 +8,24 @@
 <section id="fh5co-page" data-section="home"
          data-stellar-background-ratio="0.5"
          {% if provider.banner_image %}
-         style="background-image:url({{ provider.banner_image.url }}); {% endif %}">
+         style="background-image:url({{ provider.banner_image.url }});
+         {% endif %}">
   <div class="gradient">
-  <div class="container">
-    <div class="text-wrap">
-      <div class="text-inner">
-        <div class="row">
-          <div class="col-md-8">
-            <h1 class="text-left">{{ provider.public_name }}</h1>
-          </div>
-          <div class="col-md-4">
-            <div class="panel panel-default pull-right"
-                 style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
-              <div>
-                <img style="max-height: 100%; max-width: 100%;"
-                     src="{{ provider.logo_image.url }}"
-                     alt="providerImg">
+    <div class="container">
+      <div class="text-wrap">
+        <div class="text-inner">
+          <div class="row">
+            <div class="col-md-8">
+              <h1 class="text-left">{{ provider.public_name }}</h1>
+            </div>
+            <div class="col-md-4">
+              <div class="panel panel-default pull-right"
+                   style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
+                <div>
+                  <img style="max-height: 100%; max-width: 100%;"
+                       src="{{ provider.logo_image.url }}"
+                       alt="providerImg">
+                </div>
               </div>
             </div>
           </div>
@@ -42,7 +33,6 @@
       </div>
     </div>
   </div>
-    </div>
   <div class="slant">
   </div>
 </section>
@@ -71,42 +61,42 @@
         </div>
       </div>
     </div>
-      {% for scenario in scenario_list_from_provider %}
-      <div class="col-md-4 col-sm-6 col-xxs-12">
-        <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item">
-          <div class="img-responsive" style="background-image: url('{{ scenario.picture.url }}'); background-repeat: no-repeat; height: 250px;"></div>
-          <div class="fh5co-text">
-            <h3 class="text-muted">
-              {{ scenario.provider }}
-            </h3>
-            <div style="height: 80px;">
-              <h1>
-                {{ scenario.name }}
-              </h1>
-            </div>
-            <!-- too much content for cards -->
-            <!--<h3>{{ scenario.scenario_product_set }}</h3>
-            <h3>
-              {% for category in scenario.category_set.all %}
-              <p>
-                {{ category.name }}
-              </p>
-              {% endfor %}
-            </h3>
-            <h4> {{ scenario.description|safe|linebreaksbr }}</h4>-->
+    {% for scenario in scenario_list_from_provider %}
+    <div class="col-md-4 col-sm-6 col-xxs-12">
+      <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item">
+        <div class="img-responsive"
+             style="background-image: url('{{ scenario.picture.url }}'); background-repeat: no-repeat; height: 250px;"></div>
+        <div class="fh5co-text">
+          <h3 class="text-muted">
+            {{ scenario.provider }}
+          </h3>
+          <div style="height: 80px;">
+            <h1>
+              {{ scenario.name }}
+            </h1>
           </div>
-        </a>
-      </div>
-      {% empty %}
-      <div>
-        Es wurden noch keine Szenarien hinzugefügt.
-      </div>
-      {% endfor %}
-      </div>
+          <!-- too much content for cards -->
+          <!--<h3>{{ scenario.scenario_product_set }}</h3>
+          <h3>
+            {% for category in scenario.category_set.all %}
+            <p>
+              {{ category.name }}
+            </p>
+            {% endfor %}
+          </h3>
+          <h4> {{ scenario.description|safe|linebreaksbr }}</h4>-->
+        </div>
+      </a>
     </div>
+    {% empty %}
+    <div>
+      Es wurden noch keine Szenarien hinzugefügt.
+    </div>
+    {% endfor %}
+  </div>
 </section>
 
-<section id="fh5co-work-grid" data-section="products">
+<section id="fh5co-about" data-section="products">
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-center">
@@ -133,7 +123,7 @@
             </h1>
           </div>
           <!-- too much content for cards -->
-            {% comment %}
+          {% comment %}
           <!--<h3>{{ scenario.scenario_product_set }}</h3>
           <h3>
             {% for category in scenario.category_set.all %}
@@ -152,12 +142,12 @@
       Es wurden noch keine Produkte hinzugefügt.
     </div>
     {% endfor %}
-    </div>
+  </div>
   </div>
 </section>
 
 
-<section id="fh5co-about" data-section="tecData">
+<section id="fh5co-work-grid" data-section="tecData">
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-center">
@@ -179,13 +169,7 @@
 
 {% include "app/html_templates/sections/commentSection.html" %}
 
-<!-- Footer -->
-{% include "app/html_templates/footer/footerTemplate.html" %}
-
-
-{% include "app/html_templates/modals/modals.html" %}
-
-
+{% include "app/html_templates/footer/bodyBackBone.html" %}
 </body>
 </html>
 

@@ -42,15 +42,15 @@ window.setTimeout(function() {
         {% endfor %}
         {% endif %}
         {% endblock %}
-        <div style="margin-bottom:10px;">
+        <!-- TODO create own css classes -->
+        <div class="leftNavbar">
           <!-- Mobile Toggle Menu Button -->
           <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
              data-target="#navbar"
              aria-expanded="false" aria-controls="navbar"><i></i></a>
           <a class="navbar-brand" href="/">
             <div>
-              <img alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}"
-                   style="margin-bottom: 5px">
+              <img class="navbarIcon" alt="Brand" src="{% static 'app/assets/images/myAvatar_icon.png' %}">
               <span>Donaalda</span>
             </div>
           </a>
@@ -65,39 +65,43 @@ window.setTimeout(function() {
             <li><a href="#" data-nav-section="livingSituation"><span>Wohnsituation</span></a></li>
             <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
             <li><a href="#" data-nav-section="comments"><span>Bewertungen</span></a></li>
-            {% endif %}
-            {% if navInfo == 'category' %}
+            {% elif navInfo == 'category' %}
             <li><a href="#" onclick="back()">Zurück</a></li>
             <!-- id="start" removed from line below -->
             <li class="active"><a href="#" data-nav-section="home"><span>{{ categoryName }}</span></a></li>
             <li><a href="#" data-nav-section="questions"><span>Fragen</span></a></li>
             <li><a href="#" data-nav-section="information"><span>Szenarien</span></a></li>
-            {% endif %}
-            {% if navInfo == 'product' %}
+            {% elif navInfo == 'product' %}
             <li class="active"><a href="#" onclick="back()"><span>Zurück</span></a></li>
             <li class="active"><a href="#" data-nav-section="home"><span>{{ productName }}</span></a></li>
             <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
             <li><a href="#" data-nav-section="images"><span>Bilder</span></a></li>
             <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
-            {% endif %}
-            {% if navInfo == 'provider' %}
+            {% elif navInfo == 'filter' %}
+            <li class="active"><a href="#" onclick="back()"><span>Zurück</span></a></li>
+            <li class="active"><a href="#" data-nav-section="home"><span>Oben</span></a></li>
+            <li><a href="#" data-nav-section="filter"><span>Filter</span></a></li>
+            <li><a href="#" data-nav-section="results"><span>Ergebnisse</span></a></li>
+            {% elif navInfo == 'provider' %}
             <li><a href="#" onclick="back()"><span>Zurück</span></a></li>
             <li class="active"><a href="#" data-nav-section="home"><span>{{ providerName }}</span></a></li>
             <li><a href="#" data-nav-section="description"><span>Beschreibung</span></a></li>
             <li><a href="#" data-nav-section="scenarios"><span>Szenarien</span></a></li>
             <li><a href="#" data-nav-section="products"><span>Produkte</span></a></li>
             <li><a href="#" data-nav-section="tecData"><span>Technische Daten</span></a></li>
-            {% endif %}
-            {% if navInfo == 'scenario' %}
+            {% elif navInfo == 'scenario' %}
             <li><a href="#" onclick="back()"><span>Zurück</span></a></li>
             <li class="active"><a href="#" data-nav-section="home"><span>{{ scenarioName }}</span></a></li>
             <li><a href="#" data-nav-section="intro"><span>Beschreibung</span></a></li>
             <li><a href="#" data-nav-section="products"><span>Produkte</span></a></li>
             <li><a href="#" data-nav-section="comments"><span>Bewertungen</span></a></li>
-            {% endif %}
-            {% if navInfo == 'contact' %}
-            <li class="active"><a href="#" onclick="back()" data-nav-section="home"><span>Zurück</span></a></li>
+            {% elif navInfo == 'contact' %}
+            <li class="active"><a href="#" onclick="back()" data-nav-section="banner"><span>Zurück</span></a></li>
             <li class="active"><a href="#" data-nav-section="contact"><span>Frag Donaalda</span></a></li>
+            {% elif navInfo == 'result' %}
+            <li class="active"><a href="#" onclick="back()" data-nav-section="banner"><span>Zurück</span></a></li>
+            <li class="active"><a href="#" data-nav-section="fixme"><span>Fix me</span></a></li>
+
 
             {% endif %}
 
@@ -161,4 +165,24 @@ window.setTimeout(function() {
     </div>
   </div>
 </header>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function () {
+
+    window.setTimeout(function () {
+      $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+        $(this).remove();
+      });
+    }, 3000);
+
+    $("#btn").click(function () {
+      $("html, body").animate({
+        scrollTop: $("#test").offset().top - 120
+      }, 2000);
+    });
+  });
+
+</script>
 

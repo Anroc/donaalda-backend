@@ -40,13 +40,19 @@
             {% endfor %}
 
         </div>
-        {% if comment|length >= 1 and user.is_authenticated %}
+        {% if user.is_authenticated %}
+            <br>
             <button type="button" class="btn btn-primary btn-l navbar-btn"
                     data-show="tooltip" title="Comment" data-placement="bottom"
                     data-toggle="modal"
-                    data-target="#myModalComment">Hinterlass doch einen Kommentar
-                <i class="glyphicon glyphicon-comment"></i>
+                    data-target="#myModalComment" style="float: right;">Hinterlass doch einen Kommentar
+                <i class="glyphicon glyphicon-pencil"></i>
             </button>
+        {% else %}
+            <br>
+            <div class="panel panel-warning">
+                <div class="panel-body">Bitte melde dich an, um Kommentare abgeben zu können</div>
+            </div>
         {% endif %}
     </div>
     {% include "app/html_templates/modals/commentModal.html" %}
