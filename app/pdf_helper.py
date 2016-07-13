@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+"""
 from django.utils.encoding import smart_str
 from reportlab.lib.colors import Color
 from reportlab.lib.pagesizes import A4
@@ -181,3 +181,4 @@ class PdfA4Letter(object):
         # flush elems
         self.end_keep_together()
         self.doc.build(self.elements, self._drawPage)
+"""

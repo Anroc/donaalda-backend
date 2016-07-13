@@ -4,7 +4,7 @@ from io import BytesIO
 
 
 ''' this is for the pdf export '''
-
+"""
 def view(request):
 
     file = tempfile.NamedTemporaryFile()
@@ -16,7 +16,7 @@ def view(request):
     e.h1((u'Über Mich'))
     e.h3('Next header')
 
-    t = """
+    t = """"""
     ascasc<br />
     ascascasc<br />
     <ul>
@@ -26,7 +26,7 @@ def view(request):
     </ul>
     ascasc<br />
     ascasc<br />
-    """
+    """"""
 
     e.text(t)
     e.blankline(2)
@@ -38,8 +38,7 @@ def view(request):
     response.write(file.read())
     file.close()
     return response
-
-
+"""
 # another example
 
 def some_view(request):
