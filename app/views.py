@@ -80,7 +80,7 @@ class CategoryView(generic.ListView):
                        'qs_general': QuestionStep.objects.filter(name="Allgemeines"),
                        'qs_category': QuestionStep.objects.filter(name__contains="Auswahl"),
                        'qs_category_specific': QuestionStep.objects.filter(name__contains="Detail"),
-                       'given_answers': GivenAnswers.objects.filter(user=request.user),
+                       'given_answers': GivenAnswers.objects.get(user=request.user).user_answer.all(),
                        })
 
 
