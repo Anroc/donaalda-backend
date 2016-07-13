@@ -74,6 +74,9 @@ class CategoryView(generic.ListView):
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
         print(QuestionSet.objects.exclude(category=None))
+        given_answers = []
+        if request.user.is_authenticated():
+            given_answers = GivenAnswers.objects.get(user=request.user).user_answer.all()
         return render(request, 'app/category.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
                        'category_list': Category.objects.all(),
@@ -81,7 +84,7 @@ class CategoryView(generic.ListView):
                        'qs_general': QuestionStep.objects.filter(name="Allgemeines"),
                        'qs_category': QuestionStep.objects.filter(name__contains="Auswahl"),
                        'qs_category_specific': QuestionStep.objects.filter(name__contains="Detail"),
-                       #'given_answers': GivenAnswers.objects.get(user=request.user).user_answer.all(),
+                       'given_answers': given_answers,
                        })
 
 
