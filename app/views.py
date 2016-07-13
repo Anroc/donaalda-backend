@@ -3,6 +3,7 @@
 import datetime
 import re
 import json
+import pprint
 
 from django.contrib import messages
 from django.views import generic
@@ -11,7 +12,7 @@ from django.contrib.auth.models import User
 from collections import ChainMap
 
 from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
-    QuestionSet, Question, Answer, Tag, ProductSet, QuestionStep
+    QuestionSet, Question, Answer, Tag, ProductSet, QuestionStep, GivenAnswers
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -79,6 +80,7 @@ class CategoryView(generic.ListView):
                        'qs_general': QuestionStep.objects.filter(name="Allgemeines"),
                        'qs_category': QuestionStep.objects.filter(name__contains="Auswahl"),
                        'qs_category_specific': QuestionStep.objects.filter(name__contains="Detail"),
+                       'given_answers': GivenAnswers.objects.filter(user=request.user),
                        })
 
 
@@ -160,7 +162,7 @@ def stepper_check(request):
     # copy post object to delete csrf token, so json.load works
     post = request.POST.copy()
     if request.POST.get("csrfmiddlewaretoken") and request.POST.get("csrfmiddlewaretoken") is not None:
-        print(request.POST.get('csrfmiddlewaretoken'))
+        # print(request.POST.get('csrfmiddlewaretoken'))
         del post["csrfmiddlewaretoken"]
     # dict should hold decoded JSON objects from stepper
     steps = {}
@@ -201,8 +203,6 @@ def stepper_check(request):
     # create list with items to be "cleaned", IE items with answer PK in key
     clean_list = [i for i in clean_result_dic.keys() if regex_build_value.search(i)]
 
-    # print("Items with answer PK still in keys: " + clean_list)
-
     # replace the actual "True" answers with corresponding answer PK
     for k, v in list(clean_result_dic.items()):
         if k in clean_list:
@@ -227,12 +227,21 @@ def stepper_check(request):
     used_tags = [i.tag for i in given_answers]
     product_sets = ProductSet.objects.filter(tags__in=used_tags)
 
-    print("\n Tags: \n")
-    print(used_tags)
-    print("\n Product_set: \n")
-    print(product_sets)
-    print(clean_result_dic)
-    print(steps)
+    # Save given_answers to database for existing users
+    user = request.user
+    if user.is_authenticated():
+        for k, v in list(clean_result_dic.items()):
+            # given_answer = GivenAnswers.objects.get(user=user)
+            given_answer = GivenAnswers.objects.get(user=user)
+            given_answer.user_answer.add(Answer.objects.get(pk=int(v)))
+
+    pp = pprint.PrettyPrinter(indent=4)
+    # print("\n Tags: \n")
+    # print(used_tags)
+    # print("\n Product_set: \n")
+    # print(product_sets)
+    pp.pprint(clean_result_dic)
+    # print(steps)
     return render(request, 'app/result.html',
                   {'result': product_sets,
                    'tags': used_tags,
