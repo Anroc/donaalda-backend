@@ -230,9 +230,10 @@ def stepper_check(request):
     # Save given_answers to database for existing users
     user = request.user
     if user.is_authenticated():
+        # given_answer = GivenAnswers.objects.get(user=user)
+        given_answer = GivenAnswers.objects.get(user=user)
+        # set new answerset
         for k, v in list(clean_result_dic.items()):
-            # given_answer = GivenAnswers.objects.get(user=user)
-            given_answer = GivenAnswers.objects.get(user=user)
             given_answer.user_answer.add(Answer.objects.get(pk=int(v)))
 
     pp = pprint.PrettyPrinter(indent=4)

@@ -329,11 +329,8 @@ class GivenAnswers(models.Model):
     AttributeError: 'ManyRelatedManager' object has no attribute 'answer_text
     """
 
-    # def __str__(self):
-    #    return '%s hat geantwortet: \"%s\"' % (self.user, self.user_answer.answer_text)
-
     def __str__(self):
-        return '%s besitzt diese GivenAnswers' % (self.user)
+        return '%s hat geantwortet: '.join(self.user_answer.answer_text) % (self.user,)
 
     class Meta:
         verbose_name = "beantwortete Antwort"
