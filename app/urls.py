@@ -16,9 +16,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from . import views
-from django.conf.urls import include, patterns, url
-from django.conf import settings
-
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.conf import settings
@@ -50,5 +47,4 @@ urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^pdf/$', PDFTemplateView.as_view(template_name='result.html',
                                                filename='jakob_we_hope_you_are_happy.pdf'), name='pdf'),
-    #url(r'^__debug__/', include(debug_toolbar.urls)),
 ]
