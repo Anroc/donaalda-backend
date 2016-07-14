@@ -23,51 +23,18 @@ body {
     height: 100%;
     position: relative;
 }
-@media screen and (max-width: 500px) {
-    a {
-        color: #52d3aa;
-        -webkit-transition: 0.5s;
-        -o-transition: 0.5s;
-        transition: 0.5s;
-        height: 23em;
-        width: 20em
-    }
 
-    a:hover, a:active, a:focus {
-        color: #52d3aa;
-        outline: none;
-    }
-}
-@media screen and (max-width: 1300px) {
-    a {
-        color: #52d3aa;
-        -webkit-transition: 0.5s;
-        -o-transition: 0.5s;
-        transition: 0.5s;
-        height: 23em;
-        width: 18em
-    }
-
-    a:hover, a:active, a:focus {
-        color: #52d3aa;
-        outline: none;
-    }
+a {
+    color: #52d3aa;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
 }
 
-@media screen and (min-width: 1300px) {
-    a {
-        color: #52d3aa;
-        -webkit-transition: 0.5s;
-        -o-transition: 0.5s;
-        transition: 0.5s;
-    }
-
-    a:hover, a:active, a:focus {
-        color: #52d3aa;
-        outline: none;
-    }
+a:hover, a:active, a:focus {
+    color: #52d3aa;
+    outline: none;
 }
-
 
 p {
     margin-bottom: 1.5em;
