@@ -16,11 +16,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from . import views
-from django.conf.urls import url, include
-from django.conf.urls.static import static
-from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
-from wkhtmltopdf.views import PDFTemplateView
+from django.conf.urls import url
+
 
 
 # Beware: insert new urls minding the regex pattern matching goes top to bottom
@@ -45,6 +42,4 @@ urlpatterns = [
     url(r'^all_products/$', views.AllProductsView.as_view(), name='product_all'),
     url(r'^(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
     url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^pdf/$', PDFTemplateView.as_view(template_name='result.html',
-                                               filename='jakob_we_hope_you_are_happy.pdf'), name='pdf'),
 ]

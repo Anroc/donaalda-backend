@@ -29,8 +29,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'wkhtmltopdf',
-    'reportlab',
     'static_precompiler',
     'djangobower',
     'material',
