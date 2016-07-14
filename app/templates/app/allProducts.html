@@ -64,65 +64,66 @@
     </div>
   </div>
 
-  <!--hersteller filter aus backend-->
+  <!--hersteller-filter-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+    <legend>Hersteller-Filter</legend>
     <div class="container">
-      <!--filter-container for material-checkboxes-->
-      <div ng-controller="AppCtrl" class="md-padding container" ng-cloak>
-
-        <!--hersteller-filter-->
-        <div>
-          <legend>Hersteller-Filter</legend>
-          <div layout="row" layout-align="start center">
-            {% for provider in provider_list %}
-            <div flex>
-              <md-checkbox class="md-primary" name="hersteller-checkbox">{{ provider.name }}</md-checkbox>
-            </div>
-            {% if forloop.counter|divisibleby:"3" %}
-          </div>
-          <div layout="row" layout-align="start center">
-            {% endif %}
-            {% if forloop.last %}
-          </div>
-          {% endif %}
-          {% endfor %}
+      <div layout="row" layout-align="start center">
+        {% for provider in provider_list %}
+        <div flex>
+          <md-checkbox class="md-primary" name="hersteller-checkbox">{{ provider.name }}</md-checkbox>
         </div>
+        {% if forloop.counter|divisibleby:"3" %}
       </div>
+      <div layout="row" layout-align="start center">
+        {% endif %}
+        {% if forloop.last %}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 
-      <!--kategorie filter aus backend-->
-      <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-        <div class="container">
-          <legend>Kategorie-Filter</legend>
-          <div layout="row" layout-align="start center">
-            {% for category in category_list %}
-            <div flex>
-              <md-checkbox class="md-primary">{{ category.name }}</md-checkbox>
-            </div>
-            {% if forloop.counter|divisibleby:"4" %}
-          </div>
-          <div layout="row" layout-align="start center">
-            {% endif %}
-            {% if forloop.last %}
-          </div>
-          {% endif %}
-          {% endfor %}
+  <!--kategorie filter-->
+  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+    <legend>Kategorie-Filter</legend>
+    <div class="container">
+      <div layout="row" layout-align="start center">
+        {% for category in category_list %}
+        <div flex>
+          <md-checkbox class="md-primary">{{ category.name }}</md-checkbox>
         </div>
+        {% if forloop.counter|divisibleby:"4" %}
       </div>
+      <div layout="row" layout-align="start center">
+        {% endif %}
+        {% if forloop.last %}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 
-      <!--button um hidden section anzuzeigen-->
-      <div class="row" layout-align="center center">
-        <button type="button" class="btn btn-link">Weitere Filter anzeigen</button>
-      </div>
+  <!--button um hidden section anzuzeigen-->
+  <div class="row" layout-align="center center">
+    <button type="button" onclick="turnSectionVisible()" class="btn btn-link">Weitere Filter anzeigen</button>
+  </div>
+  <!--funtion for button-->
+  <script type="text/javascript">
+    function turnSectionVisible() {
+      document.getElementById("fh5co-work").style.display ="block";
+    }
+  </script>
 </section>
 
 
-<section id="fh5co-work" data-section="preciseFilter">
+<section id="fh5co-work" data-section="preciseFilter" style="display:none">
 
   <!--section-header-->
   <div class="container">
     <div class="row" style="width:100%">
       <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Weitere Filter (hidden-section)</h2>
+        <h2 class="to-animate">Weitere Filter</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
             <h3>Wählen Sie noch präzisere Filter-Attribute.</h3>
@@ -150,14 +151,14 @@
     </div>
   </div>
 
-  <!--Produkttyp filter aus backend-->
+  <!--Produkttyp filter-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+    <legend>Produkttyp-Filter</legend>
     <div class="container">
-      <legend>Produkttyp-Filter</legend>
       <div layout="row" layout-align="start center">
         {% for type in producttype_list %}
         <div flex="33">
-          <md-checkbox class="md-primary">{{ type }}</md-checkbox>
+          <md-checkbox class="md-primary">{{ type.type_name }}</md-checkbox>
         </div>
         {% if forloop.counter|divisibleby:"3" %}
       </div>
@@ -172,51 +173,55 @@
 
   <!--button um hidden section auszublenden-->
   <div class="row" layout-align="center center" style="text-align:center">
-    <button type="button" class="btn btn-link">Weitere Filter ausblenden</button>
+    <button type="button" class="btn btn-link" onclick="hideSection()">Weitere Filter ausblenden</button>
   </div>
+  <!--funtion for button-->
+  <script type="text/javascript">
+    function hideSection() {
+      document.getElementById("fh5co-work").style.display ="none";
+    }
+  </script>
 </section>
 
-<section id="fh5co-testimonials" data-section="tecData">
+<section id="fh5co-testimonials" data-section="results">
 
-  <section id="fh5co-testimonials" data-section="results">
-
-    <!--section-header-->
-    <div class="container">
-      <div class="row" style="width:100%">
-        <div class="col-md-12 section-heading text-center">
-          <h2 class="to-animate">Produkt-Liste</h2>
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2 subtext to-animate">
-              <h3>Die Produkt-Liste wurde nach ihren Interessen gefiltert. Sie haben nun die Möglichkeit diese zu
-                sortieren.</h3>
-            </div>
+  <!--section-header-->
+  <div class="container">
+    <div class="row" style="width:100%">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Produkt-Liste</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>Die Produkt-Liste wurde nach ihren Interessen gefiltert. Sie haben nun die Möglichkeit diese zu
+              sortieren.</h3>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    {% verbatim %}
-    <!--sorting-selectbox-->
-    <div ng-controller="sorting" class="md-padding" ng-cloak>
 
-      <div class="container">
-        <div layout="row" layout-align="space-around center">
-
-          <md-input-container>
-            <label>Sortieren nach...</label>
-            <md-select ng-model="sort">
-              <md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
-            </md-select>
-          </md-input-container>
-        </div>
+  <!--sorting-selectbox-->
+  <div ng-controller="sorting" class="md-padding" ng-cloak>
+    <div class="container">
+      <div layout="row" layout-align="space-around center">
+        <md-input-container>
+          <label>Sortieren nach...</label>
+          <md-select ng-model="sort">
+            {% verbatim %}
+            <md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
+            {% endverbatim %}
+          </md-select>
+        </md-input-container>
       </div>
     </div>
-    {% endverbatim %}
+  </div>
+
 
     <!--product-list-->
     {% if all_products %}
     {% for product in all_products %}
-    <div class="col-md-4 col-sm-6 col-xxs-12" data-hersteller="" data-kategorie="" data-produkttyp="">
+    <div class="col-md-4 col-sm-6 col-xxs-12">
       <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
         <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
       </a>
@@ -259,34 +264,11 @@
       {% endfor %}
       {% endif %}
     </div>
-  </section>
+</section>
 
   {% include "app/html_templates/sections/commentSection.html" %}
 
   {% include "app/html_templates/footer/bodyBackBone.html" %}
-
-  <!--script for filter-function-->
-  <script type="text/javascript">
-
-    // Pass the checkbox name to the function
-    function getCheckedBoxes(chkboxName) {
-      var checkboxes = document.getElementsByName(chkboxName);
-      var checkboxesChecked = [];
-      // loop over them all
-      for (var i = 0; i < checkboxes.length; i++) {
-        // And stick the checked ones onto an array...
-        if (checkboxes[i].checked) {
-          checkboxesChecked.push(checkboxes[i]);
-        }
-      }
-
-      // Return the array if it is non-empty, or null
-      return checkboxesChecked.length > 0 ? checkboxesChecked : null;
-    }
-
-    // Call as
-    var checkedBoxes = getCheckedBoxes("mycheckboxes");
-  </script>
 
   <!--script for range slider-->
   <script type="text/ng-template" id="range-slider.tpl.html">

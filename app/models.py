@@ -288,7 +288,7 @@ class Question(models.Model):
     class Meta:
         verbose_name = "Frage"
         verbose_name_plural = "Fragen"
-        ordering = ["order","pk"]
+        ordering = ["order", "pk"]
 
 
 class Answer(models.Model):
@@ -322,8 +322,15 @@ class GivenAnswers(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE, verbose_name="User")
     user_answer = models.ManyToManyField(to="Answer", verbose_name="hat geantwortet")
 
+    # TODO: self.user_answer.answer_text
+    """
+    File "D:\Git_Dev\de.dailab.aal2016.tornados\backend\advisor\app\models.py", line 326, in __str__
+    return '%s hat geantwortet: \"%s\"' % (self.user, self.user_answer.answer_text)
+    AttributeError: 'ManyRelatedManager' object has no attribute 'answer_text
+    """
+
     def __str__(self):
-        return '%s hat geantwortet: \"%s\"' % (self.user, self.user_answer.answer_text)
+        return '%s hat geantwortet: '.join(self.user_answer.answer_text) % (self.user,)
 
     class Meta:
         verbose_name = "beantwortete Antwort"
@@ -347,7 +354,7 @@ class QuestionSet(models.Model):
     class Meta:
         verbose_name = "Fragensammlung"
         verbose_name_plural = "Fragensammlungen"
-        ordering = ["order","pk"]
+        ordering = ["order", "pk"]
 
 
 class SessionTags(models.Model):
@@ -360,6 +367,7 @@ class SessionTags(models.Model):
     class Meta:
         verbose_name = 'Session Tag'
         verbose_name_plural = 'Session Tags'
+
 
 class QuestionStep(models.Model):
     name = models.CharField(max_length=255)
