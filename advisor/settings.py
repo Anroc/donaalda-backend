@@ -30,7 +30,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     #'debug_toolbar',
-    #'wkhtmltopdf',
+    'wkhtmltopdf',
+    'reportlab',
     'static_precompiler',
     'djangobower',
     'material',
