@@ -3,7 +3,7 @@
   <md-step-body>
     <form name="step2" ng-submit="vm.submitCurrentStep(vm.stepData[1].data)">
       <md-content class="md-padding">
-        <div layout="column" layout-align="center top">
+        <div layout="column" layout-align="center center">
           {% if qs_category %}
             {% for questionstep in qs_category %}
             {% for questionset in questionstep.question_steps.all %}

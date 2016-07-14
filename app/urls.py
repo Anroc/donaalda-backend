@@ -48,7 +48,7 @@ urlpatterns = [
     url(r'^all_products/$', views.AllProductsView.as_view(), name='product_all'),
     url(r'^(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
     url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^pdf/$', PDFTemplateView.as_view(template_name='result.html',
-                                               filename='jakob_we_hope_you_are_happy.pdf'), name='pdf'),
+    #url(r'^pdf/$', PDFTemplateView.as_view(template_name='result.html',
+    #                                           filename='jakob_we_hope_you_are_happy.pdf'), name='pdf'),
     #url(r'^__debug__/', include(debug_toolbar.urls)),
 ]
