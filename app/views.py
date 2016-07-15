@@ -13,7 +13,7 @@ from collections import ChainMap
 
 
 from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
-    QuestionSet, Question, Answer, Tag, ProductSet, QuestionStep, GivenAnswers
+    QuestionSet, Question, Answer, Tag, ProductSet, QuestionStep, GivenAnswers, SessionTags
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
@@ -230,6 +230,18 @@ def stepper_check(request):
     given_answers = Answer.objects.filter(pk__in=list(clean_result_dic.values()))
     used_tags = [i.tag for i in given_answers]
     product_sets = ProductSet.objects.filter(tags__in=used_tags)
+
+    if SessionTags.objects.filter(session=request.session).exists():
+        old_session = SessionTags.objects.get(session=request.session)
+        print(old_session)
+        old_session.session = None
+        old_session.save()
+        print(old_session)
+        new_session = SessionTags.objects.create(session=request.session)
+        print(new_session)
+        new_session.tags.extend(used_tags)
+        new_session.save()
+        print(new_session)
 
     # Save given_answers to database for existing users
     user = request.user
