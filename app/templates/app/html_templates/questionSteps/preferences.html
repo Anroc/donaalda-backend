@@ -3,16 +3,18 @@
   <md-step-body>
     <form name="step2" ng-submit="vm.submitCurrentStep(vm.stepData[1].data)">
       <md-content class="md-padding">
-        <div layout="column" layout-align="center top">
+        <div layout="column" layout-align="center center">
+          <div layout="column" layout-align="center left">
           {% if qs_category %}
-            {% for questionstep in qs_category %}
-            {% for questionset in questionstep.question_steps.all %}
-            {% for question in questionset.question.all %}
+          {% for questionstep in qs_category %}
+          {% for questionset in questionstep.question_steps.all %}
+          {% for question in questionset.question.all %}
           <h4>
             {{ question.question_text }}
           </h4>
           {% if question.answer_presentation == 'rc' %}
-          <md-radio-group ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}">
+          <md-radio-group ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
+          layout="column" layout-align="left">
             {% for answer in question.answer_set.all %}
             <md-radio-button value='{{ answer.pk }}'>
               {{ answer.answer_text }}
@@ -44,13 +46,14 @@
           <!-- INPUT RANGE SLIDER HERE -->
           {% endif %}
           {% endfor %}
-        {% endfor %}
-        {% endfor %}
+          {% endfor %}
+          {% endfor %}
           {% else %}
           <h2>
             Pups der Bär
           </h2>
           {% endif %}
+          </div>
         </div>
 
       </md-content>

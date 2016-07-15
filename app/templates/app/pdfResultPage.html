@@ -2,7 +2,8 @@
 
 {% include "app/html_templates/header/headerTemplate.html" with navInfo='result' %}
 
-<body>
+<body onload="window.print()">
+<embed src="pdf_result.pdf"></embed>
 
 {% include "app/html_templates/header/navbarHeader.html" with navInfo='result' %}
 
@@ -62,6 +63,7 @@
     </div>
   </div>
 </section>
+
 
 {% include "app/html_templates/footer/bodyBackBone.html" %}
 

@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'reportlab',
     'static_precompiler',
     'djangobower',
     'material',

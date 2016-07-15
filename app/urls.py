@@ -16,10 +16,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from . import views
-from django.conf.urls import url, include
-from django.conf.urls.static import static
-from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
+from django.conf.urls import url
+
+
 
 # Beware: insert new urls minding the regex pattern matching goes top to bottom
 app_name = 'app'
