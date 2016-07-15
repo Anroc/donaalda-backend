@@ -538,4 +538,4 @@ def commentreceiver(request):
                       creation_date=datetime.datetime.now())
     comment.save()
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER')+'#fh5co-testimonials')
