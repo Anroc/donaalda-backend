@@ -236,6 +236,8 @@ def stepper_check(request):
     if user.is_authenticated():
         # given_answer = GivenAnswers.objects.get(user=user)
         given_answer = GivenAnswers.objects.get(user=user)
+        # clear old answers to only store the newest and register the changes
+        given_answer.user_answer.clear()
         # set new answerset
         for k, v in list(clean_result_dic.items()):
             given_answer.user_answer.add(Answer.objects.get(pk=int(v)))
