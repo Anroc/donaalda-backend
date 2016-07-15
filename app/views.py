@@ -75,7 +75,7 @@ class CategoryView(generic.ListView):
         category = kwargs.get("category_name")
         print(QuestionSet.objects.exclude(category=None))
         given_answers = []
-        if request.user.is_authenticated():
+        if request.user.is_authenticated() and GivenAnswers.objects.filter(user=request.user).exists():
             given_answers = GivenAnswers.objects.get(user=request.user).user_answer.all()
         return render(request, 'app/category.html',
                       {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
