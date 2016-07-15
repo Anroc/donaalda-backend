@@ -27,7 +27,7 @@
     /* Android 2.3 */
     background-image: -webkit-repeating-linear-gradient(top left, yellow 0%, yellowgreen 100%);
     /* IE10+ */
-    background-image: repeating-linear-gradient(to bottom right, yellow 0%, yellow 100%);
+    background-image: repeating-linear-gradient(to bottom right, yellow 0%, yellowgreen 100%);
     background-image: -ms-repeating-linear-gradient(top left, yellow 0%, yellowgreen 100%);
 }
 
