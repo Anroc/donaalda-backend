@@ -233,21 +233,19 @@ def stepper_check(request):
 
     if SessionTags.objects.filter(session=request.session).exists():
         old_session = SessionTags.objects.get(session=request.session)
-        print(old_session)
         old_session.session = None
         old_session.save()
-        print(old_session)
+
         new_session = SessionTags.objects.create(session=request.session)
-        print(new_session)
         new_session.tags.extend(used_tags)
         new_session.save()
-        print(new_session)
+
 
     # Save given_answers to database for existing users
     user = request.user
     if user.is_authenticated():
         # given_answer = GivenAnswers.objects.get(user=user)
-        given_answer = GivenAnswers.objects.get(user=user)
+        given_answer, b = GivenAnswers.objects.get_or_create(user=user)
         # set new answerset
         for k, v in list(clean_result_dic.items()):
             given_answer.user_answer.add(Answer.objects.get(pk=int(v)))
