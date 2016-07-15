@@ -4,16 +4,22 @@
   <md-step-body>
     <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[2].data)">
       <md-content class="md-padding">
-        <div layout="row" layout-align="space-around start">
+        <table layout="column" layout-align="space-around start">
 
 
                       {% if qs_category_specific %}
+
             {% for questionstep in qs_category_specific %}
+
             {% for questionset in questionstep.question_steps.all %}
-            <div flex style="margin-left: 10px;">
+
+            <div class="column" flex style="margin-left: 10px;">
+              <div flex>
                 <h3>{{ questionset.name }}</h3>
                         {% for question in questionset.question.all %}
                 <h4>{{ question.question_text }}</h4>
+              </div>
+              <div flex>
                 {% if question.answer_presentation == 'rc' %}
                     <md-radio-group ng-model="vm.stepData[2].data.accommodation_name">
                     {% for answer in question.answer_set.all %}
@@ -39,16 +45,20 @@
                 {% elif question.answer_presentation == 'rs' %}
                     <!-- INPUT RANGE SLIDER HERE -->
                 {% endif %}
+              </div>
             </div>
+
             {% endfor %}
+
             {% endfor %}
+
                           {% endfor %}
             {% else %}
           <h2>FUCK THIS</h2>
           {% endif %}
 
 
-        </div>
+        </table>
       </md-content>
       <md-step-actions layout="row">
         <div flex layout="row" layout-align="end top">
