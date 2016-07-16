@@ -229,7 +229,8 @@ def stepper_check(request):
 
     given_answers = Answer.objects.filter(pk__in=list(clean_result_dic.values()))
     used_tags = [i.tag for i in given_answers]
-    product_sets = ProductSet.objects.filter(tags__in=used_tags)
+    product_sets = ProductSet.objects.all()
+    # ProductSet.objects.select_related('tags').filter(tags__in=used_tags)
 
     if SessionTags.objects.filter(session=request.session).exists():
         old_session = SessionTags.objects.get(session=request.session)
@@ -252,6 +253,26 @@ def stepper_check(request):
         # set new answerset
         for k, v in list(clean_result_dic.items()):
             given_answer.user_answer.add(Answer.objects.get(pk=int(v)))
+
+    ut_len = used_tags.count
+    t_list = []
+    for p in product_sets:
+        pt = p.tags.all()
+        pt_len = pt.count()
+        ct_len = list(set(used_tags).intersection(pt)).count
+        t_list.append(((ct_len/ut_len + ct_len/pt_len), p))
+
+    def get_key(item):
+        return item[0]
+
+    print(t_list)
+    sorted(t_list, key=get_key)
+    print(t_list)
+
+    product_sets = []
+
+    for _k, p in t_list:
+        product_sets.append(p)
 
     pp = pprint.PrettyPrinter(indent=4)
     # print("\n Tags: \n")
