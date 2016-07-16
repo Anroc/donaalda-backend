@@ -260,15 +260,15 @@ def stepper_check(request):
         print("Tags die Nutzer und Produktset gemeinsam haben: %s" % list(set(used_tags).intersection(pt)))
         ct_len = len(list(set(used_tags).intersection(pt)))
         if pt_len > 0 and ut_len > 0:
-            t_list.append(((ct_len / ut_len + ct_len / pt_len), p))
+            t_list.append((float(ct_len / ut_len + ct_len / pt_len), p))
         else:
-            t_list.append((0, p))
+            t_list.append((0.0, p))
 
     def get_key(item):
         return item[0]
 
     print(t_list)
-    sorted(t_list, key=get_key)
+    t_list = sorted(t_list, key=get_key, reverse=True)
     print(t_list)
 
     product_sets = []
