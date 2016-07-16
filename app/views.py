@@ -11,7 +11,6 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from collections import ChainMap
 
-
 from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
     QuestionSet, Question, Answer, Tag, ProductSet, QuestionStep, GivenAnswers, SessionTags
 from .forms import LoginForm
@@ -241,7 +240,6 @@ def stepper_check(request):
         new_session.tags.extend(used_tags)
         new_session.save()
 
-
     # Save given_answers to database for existing users
     user = request.user
     if user.is_authenticated():
@@ -260,7 +258,8 @@ def stepper_check(request):
         pt = p.tags.all()
         pt_len = pt.count()
         ct_len = list(set(used_tags).intersection(pt)).count
-        t_list.append(((ct_len/ut_len + ct_len/pt_len), p))
+        print(ct_len)
+        t_list.append(((int(ct_len) / int(ut_len) + int(ct_len) / int(pt_len)), p))
 
     def get_key(item):
         return item[0]
@@ -560,4 +559,4 @@ def commentreceiver(request):
                       creation_date=datetime.datetime.now())
     comment.save()
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER')+'#fh5co-testimonials')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER') + '#fh5co-testimonials')
