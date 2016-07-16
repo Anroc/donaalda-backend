@@ -1,5 +1,84 @@
 /* TODO holy fix this*/
 
+#fh5co-page-scenario {
+    background-color: transparent;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    width: 100%;
+    background-color: yellow;
+    color: #fff;
+    overflow: hidden;
+}
+
+#fh5co-page-scenario .gradient {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    opacity: .9;
+    -webkit-backface-visibility: hidden;
+    background-color: yellow;
+    /* IE9, iOS 3.2+ */
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiMzZjk1ZWEiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iIzUyZDNhYSIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
+    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, yellow), color-stop(1, yellowgreen));
+    /* Android 2.3 */
+    background-image: -webkit-repeating-linear-gradient(top left, yellow 0%, yellowgreen 100%);
+    /* IE10+ */
+    background-image: repeating-linear-gradient(to bottom right, yellow 0%, yellowgreen 100%);
+    background-image: -ms-repeating-linear-gradient(top left, yellow 0%, yellowgreen 100%);
+}
+
+#fh5co-page-scenario, #fh5co-page-scenario .text-wrap {
+    margin-top: 0px;
+    padding-top: 50px;
+    height: 400px;
+}
+
+#fh5co-page-scenario .text-wrap {
+    display: table;
+    width: 100%;
+    position: relative;
+    z-index: 4;
+}
+
+#fh5co-page-scenario .text-inner {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#fh5co-page-scenario .text-inner a {
+    color: white;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+}
+
+#fh5co-page-scenario .text-inner a:hover, #fh5co-page-scenario .text-inner a:active, #fh5co-page-scenario .text-inner a:focus {
+    text-decoration: none;
+    color: white;
+    border-bottom: 1px dashed white;
+}
+
+#fh5co-page-scenario .text-inner h1 {
+    font-size: 50px;
+    color: white;
+    margin: 0 0 20px 0;
+}
+
+#fh5co-page-scenario .text-inner h2 {
+    font-size: 28px;
+    line-height: 38px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+
 .carousel-control {
     width: 50px;
     opacity: 0.2;
@@ -31,7 +110,7 @@
     }
 
     #fh5co-header .navbar-brand {
-        color: #c24d67 !important;
+        color: yellowgreen !important;
     }
 
     #fh5co-header #navbar li a {
@@ -42,7 +121,7 @@
     }
 
     #fh5co-header #navbar li a:hover {
-        color: #c24d67 !important;
+        color: yellowgreen !important;
     }
 
     #fh5co-header #navbar li a span:before {
@@ -52,7 +131,7 @@
     #fh5co-header #navbar li.active a {
         background: transparent;
         background: none;
-        color: #c24d67 !important;
+        color: yellowgreen !important;
     }
 
     #fh5co-header #navbar li.active a span:before {
@@ -148,7 +227,7 @@
 }
 
 #fh5co-header.navbar-fixed-top .navbar-brand {
-    color: #c24d67;
+    color: yellowgreen;
 }
 
 #fh5co-header.navbar-fixed-top #navbar li a {
@@ -159,20 +238,20 @@
 }
 
 #fh5co-header.navbar-fixed-top #navbar li a:hover {
-    color: #c24d67;
+    color: yellowgreen;
 }
 
 #fh5co-header.navbar-fixed-top #navbar li.active a {
     background: transparent;
     background: none;
-    color: #c24d67;
+    color: yellowgreen;
 }
 
 #fh5co-header.navbar-fixed-top #navbar li.active a span:before {
     visibility: visible;
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
-    background-color: #c24d67;
+    background-color: yellowgreen;
 }
 
 #fh5co-header .navbar-default {
@@ -185,7 +264,7 @@
 }
 
 #fh5co-header .navbar-default .brand-slogan em {
-    color: #c24d67;
+    color: yellowgreen;
     font-style: normal;
 }
 
@@ -197,7 +276,7 @@
     background-attachment: fixed;
     position: relative;
     width: 100%;
-    background-color: #c24d67;
+    background-color: yellowgreen;
     color: #fff;
     overflow: hidden;
 }
@@ -211,15 +290,15 @@
     z-index: 2;
     opacity: .9;
     -webkit-backface-visibility: hidden;
-    background-color: #c24d67;
+    background-color: yellowgreen;
     /* IE9, iOS 3.2+ */
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiM3YjNmNzUiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iI2MyNGQ2NyIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
-    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, #7b3f75), color-stop(1, #c24d67));
+    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, yellowgreen), color-stop(1, yellowgreen));
     /* Android 2.3 */
-    background-image: -webkit-repeating-linear-gradient(top left, #7b3f75 0%, #c24d67 100%);
+    background-image: -webkit-repeating-linear-gradient(top left, yellowgreen 0%, yellowgreen 100%);
     /* IE10+ */
-    background-image: repeating-linear-gradient(to bottom right, #7b3f75 0%, #c24d67 100%);
-    background-image: -ms-repeating-linear-gradient(top left, #7b3f75 0%, #c24d67 100%);
+    background-image: repeating-linear-gradient(to bottom right, yellowgreen 0%, yellowgreen 100%);
+    background-image: -ms-repeating-linear-gradient(top left, yellowgreen 0%, yellowgreen 100%);
 }
 
 
@@ -245,15 +324,15 @@
 }
 
 #fh5co-services {
-    background-color: #c24d67;
+    background-color: yellowgreen;
     /* IE9, iOS 3.2+ */
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiM3YjNmNzUiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iI2MyNGQ2NyIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
-    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, #7b3f75), color-stop(1, #c24d67));
+    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, yellowgreen), color-stop(1, yellowgreen));
     /* Android 2.3 */
-    background-image: -webkit-repeating-linear-gradient(top left, #7b3f75 0%, #c24d67 100%);
+    background-image: -webkit-repeating-linear-gradient(top left, yellowgreen 0%, yellowgreen 100%);
     /* IE10+ */
-    background-image: repeating-linear-gradient(to bottom right, #7b3f75 0%, #c24d67 100%);
-    background-image: -ms-repeating-linear-gradient(top left, #7b3f75 0%, #c24d67 100%);
+    background-image: repeating-linear-gradient(to bottom right, yellowgreen 0%, yellowgreen 100%);
+    background-image: -ms-repeating-linear-gradient(top left, yellowgreen 0%, yellowgreen 100%);
     overflow: hidden;
     position: relative;
     color: rgba(255, 255, 255, 0.7);
@@ -316,7 +395,7 @@
 }
 
 #fh5co-counters {
-    background: #c24d67;
+    background: yellowgreen;
     overflow: hidden;
     background-color: transparent;
     background-size: cover;
@@ -408,7 +487,7 @@
 
 #fh5co-counters .fh5co-counter .fh5co-counter-icon {
     font-size: 40px;
-    color: #c24d67;
+    color: yellowgreen;
 }
 
 #fh5co-counters .fh5co-counter .fh5co-counter-number {
@@ -442,7 +521,7 @@
     border-left: none;
     padding: 30px;
     background: #fff;
-    background: #c24d67;
+    background: yellowgreen;
     font-size: 20px;
     font-weight: 300;
     position: relative;
@@ -459,7 +538,7 @@
     left: 40px;
     border-top: 10px solid black;
     border-top-color: #fff;
-    border-top-color: #c24d67;
+    border-top-color: yellowgreen;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
 }
@@ -478,7 +557,7 @@
 }
 
 #fh5co-testimonials .box-testimony .author a {
-    color: #c24d67;
+    color: yellowgreen;
 }
 
 #fh5co-testimonials .box-testimony .author a:hover {
@@ -514,15 +593,15 @@
     overflow: hidden;
     position: relative;
     color: rgba(255, 255, 255, 0.8);
-    background-color: #c24d67;
+    background-color: yellowgreen;
     /* IE9, iOS 3.2+ */
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiM3YjNmNzUiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iI2MyNGQ2NyIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
-    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, #7b3f75), color-stop(1, #c24d67));
+    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, yellowgreen), color-stop(1, yellowgreen));
     /* Android 2.3 */
-    background-image: -webkit-repeating-linear-gradient(top left, #7b3f75 0%, #c24d67 100%);
+    background-image: -webkit-repeating-linear-gradient(top left, yellow 0%, yellowgreen 100%);
     /* IE10+ */
-    background-image: repeating-linear-gradient(to bottom right, #7b3f75 0%, #c24d67 100%);
-    background-image: -ms-repeating-linear-gradient(top left, #7b3f75 0%, #c24d67 100%);
+    background-image: repeating-linear-gradient(to bottom right, yellow 0%, yellowgreen 100%);
+    background-image: -ms-repeating-linear-gradient(top left, yellow 0%, yellowgreen 100%);
 }
 
 #fh5co-work a {
@@ -693,7 +772,7 @@
 .form-control:active, .form-control:focus {
     outline: none;
     box-shadow: none;
-    border-color: #c24d67;
+    border-color: yellowgreen;
 }
 
 .btn {
@@ -755,7 +834,7 @@
     display: block;
     width: 80px;
     height: 2px;
-    background: #c24d67;
+    background: yellowgreen;
     left: 0%;
     margin-left: 0px;
     bottom: 0;
@@ -767,7 +846,7 @@
     display: block;
     width: 80px;
     height: 2px;
-    background: #c24d67;
+    background: yellowgreen;
     left: 50%;
     margin-left: -40px;
     bottom: 0;
@@ -806,7 +885,7 @@
 }
 
 .fh5co-nav-toggle.active i::before, .fh5co-nav-toggle.active i::after {
-    background: #c24d67;
+    background: yellowgreen;
 }
 
 .fh5co-nav-toggle:hover, .fh5co-nav-toggle:focus, .fh5co-nav-toggle:active {
@@ -822,11 +901,11 @@
     *display: inline;
     width: 25px;
     height: 3px;
-    color: #c24d67;
+    color: yellowgreen;
     font: bold 14px/.4 Helvetica;
     text-transform: uppercase;
     text-indent: -55px;
-    background: #c24d67;
+    background: yellowgreen;
     transition: all .2s ease-out;
 }
 
@@ -834,7 +913,7 @@
     content: '';
     width: 25px;
     height: 3px;
-    background: #c24d67;
+    background: yellowgreen;
     position: absolute;
     left: 0;
     -webkit-transition: 0.2s;
@@ -901,7 +980,7 @@
 }
 
 .btn.btn-primary {
-    background: #c24d67;
+    background: yellowgreen;
     color: #fff;
     border: none !important;
     border: 2px solid transparent !important;
@@ -909,16 +988,16 @@
 
 .btn.btn-primary:hover, .btn.btn-primary:active, .btn.btn-primary:focus {
     box-shadow: none;
-    background: #c24d67;
+    background: yellowgreen;
 }
 
 .social li a.social-box {
-    background: #c24d67;
+    background: yellowgreen;
     color: #fff;
 }
 
 .social li a.social-circle {
-    background: #c24d67;
+    background: yellowgreen;
     color: #fff;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -931,12 +1010,12 @@
 }
 
 .social.social-box a {
-    background: #c24d67;
+    background: yellowgreen;
     color: #fff;
 }
 
 .social.social-circle a {
-    background: #c24d67;
+    background: yellowgreen;
     color: #fff;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
