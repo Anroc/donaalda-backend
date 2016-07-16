@@ -30,7 +30,7 @@
             </md-checkbox-group>
             {% elif question.answer_presentation == 'dc' %}
             <md-input-container>
-              <md-select ng-model="someModel" placeholder="Bitte Anzahl angeben">
+              <md-select ng-model="vm.stepData[0].data.question{{ question.pk }}" placeholder="Bitte Anzahl angeben">
                 {% for answer in question.answer_set.all %}
                 <md-option value='{{ answer.pk }}'>
                   {{ answer.answer_text }}
