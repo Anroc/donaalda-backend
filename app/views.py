@@ -252,26 +252,29 @@ def stepper_check(request):
         for k, v in list(clean_result_dic.items()):
             given_answer.user_answer.add(Answer.objects.get(pk=int(v)))
 
-    ut_len = used_tags.count
+    ut_len = len(used_tags)
     t_list = []
     for p in product_sets:
         pt = p.tags.all()
         pt_len = pt.count()
-        ct_len = list(set(used_tags).intersection(pt)).count
-        print(ct_len)
-        # t_list.append(((int(ct_len) + int(ut_len) + int(ct_len) + int(pt_len)), p))
+        print("Tags die Nutzer und Produktset gemeinsam haben: %s" % list(set(used_tags).intersection(pt)))
+        ct_len = len(list(set(used_tags).intersection(pt)))
+        if pt_len > 0 and ut_len > 0:
+            t_list.append(((ct_len / ut_len + ct_len / pt_len), p))
+        else:
+            t_list.append((0, p))
 
     def get_key(item):
         return item[0]
 
-    #print(t_list)
-    #sorted(t_list, key=get_key)
-    #print(t_list)
+    print(t_list)
+    sorted(t_list, key=get_key)
+    print(t_list)
 
-    #product_sets = []
+    product_sets = []
 
-    #for _k, p in t_list:
-    #    product_sets.append(p)
+    for _k, p in t_list:
+        product_sets.append(p)
 
     pp = pprint.PrettyPrinter(indent=4)
     # print("\n Tags: \n")
@@ -281,7 +284,7 @@ def stepper_check(request):
     pp.pprint(clean_result_dic)
     # print(steps)
     return render(request, 'app/result.html',
-                  {'result': product_sets,
+                  {'result': product_sets[:5],
                    'tags': used_tags,
                    })
 
