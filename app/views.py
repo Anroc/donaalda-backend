@@ -259,19 +259,19 @@ def stepper_check(request):
         pt_len = pt.count()
         ct_len = list(set(used_tags).intersection(pt)).count
         print(ct_len)
-        t_list.append(((int(ct_len) / int(ut_len) + int(ct_len) / int(pt_len)), p))
+        # t_list.append(((int(ct_len) + int(ut_len) + int(ct_len) + int(pt_len)), p))
 
     def get_key(item):
         return item[0]
 
-    print(t_list)
-    sorted(t_list, key=get_key)
-    print(t_list)
+    #print(t_list)
+    #sorted(t_list, key=get_key)
+    #print(t_list)
 
-    product_sets = []
+    #product_sets = []
 
-    for _k, p in t_list:
-        product_sets.append(p)
+    #for _k, p in t_list:
+    #    product_sets.append(p)
 
     pp = pprint.PrettyPrinter(indent=4)
     # print("\n Tags: \n")
