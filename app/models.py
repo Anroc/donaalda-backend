@@ -330,7 +330,8 @@ class GivenAnswers(models.Model):
     """
 
     def __str__(self):
-        return '%s hat geantwortet: '.join(self.user_answer.answer_text) % (self.user,)
+        #return '%s hat geantwortet: '.join(self.user_answer.answer_text) % (self.user,)
+        return ''
 
     class Meta:
         verbose_name = "beantwortete Antwort"
