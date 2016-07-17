@@ -173,6 +173,8 @@ def stepper_check(request):
     for key, value in post.items():
         steps[key] = json.loads(value)
 
+    print(steps)
+
     # "flatten" dict by recursively dismissing dicts and adding would be lost information to key
     def flatten_dict(d):
         def expand(key, value):
@@ -206,9 +208,14 @@ def stepper_check(request):
     # create list with items to be "cleaned", IE items with answer PK in key
     clean_list = [i for i in clean_result_dic.keys() if regex_build_value.search(i)]
 
+    print(clean_result_dic)
+
     # replace the actual "True" answers with corresponding answer PK
     for k, v in list(clean_result_dic.items()):
         if k in clean_list:
+            if str(v) == "False":
+                del clean_result_dic[k]
+                continue
             clean_result_dic[k] = re.sub('.*?([0-9]*)$', r'\1', k)
 
     """
