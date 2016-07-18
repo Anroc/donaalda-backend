@@ -412,8 +412,7 @@ class GivenAnswers(models.Model):
     """
 
     def __str__(self):
-        #return '%s hat geantwortet: '.join(self.user_answer.answer_text) % (self.user,)
-        return ''
+        return '%s hat geantwortet: %s' % (self.user, list(self.user_answer.all()))
 
     class Meta:
         verbose_name = "beantwortete Antwort"
@@ -454,7 +453,7 @@ class SessionTags(models.Model):
     tag = models.ManyToManyField("Tag", verbose_name="Referenziert auf Tag")
 
     def __str__(self):
-        return '%s' % self.name
+        return '%s %s' % (self.session_id, str(list(self.tag.all())))
 
     class Meta:
         verbose_name = 'Session Tag'
