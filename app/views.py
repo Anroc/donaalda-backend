@@ -237,6 +237,7 @@ def stepper_check(request):
     used_tags = [i.tag for i in given_answers]
     # deduplicating the entries in used_tags
     used_tags = list(set(used_tags))
+    # TODO: only use product sets that have at least one tag in common with the one the users has chosen
     product_sets = ProductSet.objects.all()
     # ProductSet.objects.select_related('tags').filter(tags__in=used_tags)
 
@@ -247,26 +248,24 @@ def stepper_check(request):
     If a new entry is made, this checks if an old session is already stored and if it is set the session relation to null,
     than a new entry is stored.
     """
-    if SessionTags.objects.filter(session=request.session).exists():
-        old_session = SessionTags.objects.get(session=request.session)
+    if SessionTags.objects.filter(session_id=request.session.session_key).exists():
+        old_session = SessionTags.objects.get(session_id=request.session.session_key)
         old_session.session = None
         old_session.save()
 
-        new_session = SessionTags.objects.create(session=request.session)
-        new_session.tags.extend(used_tags)
-        new_session.save()
+    new_session = SessionTags.objects.create(session_id=request.session.session_key)
+    new_session.tag = used_tags
+    new_session.save()
 
     # Save given_answers to database for existing users
     user = request.user
     if user.is_authenticated():
         # given_answer = GivenAnswers.objects.get(user=user)
-        given_answer, b = GivenAnswers.objects.get_or_create(user=user)
-        given_answer = GivenAnswers.objects.get(user=user)
+        new_given_answer, b = GivenAnswers.objects.get_or_create(user=user)
         # clear old answers to only store the newest and register the changes
-        given_answer.user_answer.clear()
-        # set new answerset
-        for k, v in list(clean_result_dic.items()):
-            given_answer.user_answer.add(Answer.objects.get(pk=int(v)))
+        new_given_answer.user_answer.clear()
+        # set new answer set
+        new_given_answer.user_answer = list(given_answers)
 
     """
     evaluates the tags returned from the advisor run,
@@ -280,7 +279,7 @@ def stepper_check(request):
         # tags used in the product set
         pt = p.tags.all()
         pt_len = pt.count()
-        # tags user and productset have in common
+        # tags user and product set have in common
         ct_len = len(list(set(used_tags).intersection(pt)))
         if pt_len > 0 and ut_len > 0:
             """
