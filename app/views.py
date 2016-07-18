@@ -252,9 +252,9 @@ def stepper_check(request):
         old_session.session = None
         old_session.save()
 
-    new_session = SessionTags.objects.create(session=request.session)
-    new_session.tags.extend(used_tags)
-    new_session.save()
+        new_session = SessionTags.objects.create(session=request.session)
+        new_session.tags.extend(used_tags)
+        new_session.save()
 
     # Save given_answers to database for existing users
     user = request.user
