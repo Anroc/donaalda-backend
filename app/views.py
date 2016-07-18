@@ -233,8 +233,10 @@ def stepper_check(request):
                 print(v+' is not int')
     """
 
-    given_answers = Answer.objects.filter(pk__in=list(clean_result_dic.values()))
+    given_answers = Answer.objects.select_related('tag').filter(pk__in=list(clean_result_dic.values()))
     used_tags = [i.tag for i in given_answers]
+    # deduplicating the entries in used_tags
+    used_tags = list(set(used_tags))
     product_sets = ProductSet.objects.all()
     # ProductSet.objects.select_related('tags').filter(tags__in=used_tags)
 
