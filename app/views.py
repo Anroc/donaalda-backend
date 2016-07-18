@@ -248,7 +248,8 @@ def stepper_check(request):
     If a new entry is made, this checks if an old session is already stored and if it is set the session relation to null,
     than a new entry is stored.
     """
-    if SessionTags.objects.filter(session_id=request.session.session_key).exists():
+    # print("Session %s" % request.session.session_key)
+    if SessionTags.objects.filter(session_id=request.session.session_key).exists() and request.session.session_key is not None:
         old_session = SessionTags.objects.get(session_id=request.session.session_key)
         old_session.session = None
         old_session.save()
