@@ -238,14 +238,21 @@ def stepper_check(request):
     product_sets = ProductSet.objects.all()
     # ProductSet.objects.select_related('tags').filter(tags__in=used_tags)
 
+    """
+    All tags gathered from the a run through the advisor (stepper) are stored in the database,
+    this could be used if an error occurs, but is mostly intended to be used for analytical reasons (e.g. big data).
+
+    If a new entry is made, this checks if an old session is already stored and if it is set the session relation to null,
+    than a new entry is stored.
+    """
     if SessionTags.objects.filter(session=request.session).exists():
         old_session = SessionTags.objects.get(session=request.session)
         old_session.session = None
         old_session.save()
 
-        new_session = SessionTags.objects.create(session=request.session)
-        new_session.tags.extend(used_tags)
-        new_session.save()
+    new_session = SessionTags.objects.create(session=request.session)
+    new_session.tags.extend(used_tags)
+    new_session.save()
 
     # Save given_answers to database for existing users
     user = request.user
@@ -259,14 +266,25 @@ def stepper_check(request):
         for k, v in list(clean_result_dic.items()):
             given_answer.user_answer.add(Answer.objects.get(pk=int(v)))
 
+    """
+    evaluates the tags returned from the advisor run,
+    by comparing them with chose used in the productsets and then
+    creates a quotient to order those and return the best-fitting ones
+    """
+    # number of tags used by the user from advisor
     ut_len = len(used_tags)
     t_list = []
     for p in product_sets:
+        # tags used in the product set
         pt = p.tags.all()
         pt_len = pt.count()
-        #print("Tags die Nutzer und Produktset gemeinsam haben: %s" % list(set(used_tags).intersection(pt)))
+        # tags user and productset have in common
         ct_len = len(list(set(used_tags).intersection(pt)))
         if pt_len > 0 and ut_len > 0:
+            """
+            this quotient favors product sets who have many tags in common with the ones chosen by the user,
+            while neither punishing those with a high number nor those with a low number of tags.
+            """
             t_list.append((float(ct_len / ut_len + ct_len / pt_len), p))
         else:
             t_list.append((0.0, p))
@@ -274,9 +292,7 @@ def stepper_check(request):
     def get_key(item):
         return item[0]
 
-    #print(t_list)
     t_list = sorted(t_list, key=get_key, reverse=True)
-    #print(t_list)
 
     product_sets = []
 
