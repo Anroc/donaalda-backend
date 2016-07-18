@@ -1,17 +1,42 @@
 # -*- coding: utf-8 -*-
 
 import re
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.core.validators import MinValueValidator, MaxValueValidator
-
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from random import *
-
 from .validators import validate_legal_chars
+
+"""
+The different models described in this file can mostly be separated in three different parts
+advisor (also known as stepper), provider and user interaction.
+    The provider part includes:
+        -- Scenario
+        -- ScenarioDescription
+        -- ProductSet
+        -- Product
+        -- ProductType
+        -- Provider
+        -- ProviderProfile
+        -- Employee
+
+    The advisor part includes:
+        -- QuestionStep
+        -- QuestionSet
+        -- Question
+        -- Answer
+        -- Tag
+        -- SessionTags
+        -- GivenAnswers
+
+    The user interaction part includes:
+        -- UserImage
+        -- Comment
+
+"""
 
 
 def url_alias(value):
@@ -26,6 +51,10 @@ def url_alias(value):
 
 
 class Category(models.Model):
+    """
+    Describes a general category that is used to group scenarios and
+    is meant as a entry point for users that want to know what can be realized using smart home appliances.
+    """
     name = models.CharField(max_length=100, unique=True, validators=[validate_legal_chars])
     picture = models.ImageField(verbose_name="Bild für die Kategorie", upload_to="categories")
     backgroundPicture = models.ImageField(verbose_name="Bild für den Hintergrund", null=True, blank=True,
@@ -47,6 +76,11 @@ class Category(models.Model):
 
 
 class Scenario(models.Model):
+    """
+    Allows producers to present an idea of what can be achieved using smart home appliances.
+    Unlike Categories this is supposed to be a concrete representation of projects an user can realize.
+    Can be created by Employees.
+    """
     name = models.CharField(max_length=100, unique=True)
     url_name = models.CharField(max_length=100, unique=False, default=random(), verbose_name="URL-Name")
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
@@ -73,6 +107,10 @@ class Scenario(models.Model):
 
 
 class ScenarioDescription(models.Model):
+    """
+    Part of a scenario. Enables the producer to have more control how their scenario should look like.
+    Can be created by Employees.
+    """
     belongs_to_scenario = models.ForeignKey("Scenario", verbose_name="Beschreibung für Szenario",
                                             on_delete=models.CASCADE)
     description = models.TextField(verbose_name="Beschreibung")
@@ -96,6 +134,10 @@ class ScenarioDescription(models.Model):
 
 
 class ProductSet(models.Model):
+    """
+    A set of products that can be used to realize and is connected to specific scenarios or
+    just as a representation of things that are sold together. Can be created by Employees.
+    """
     name = models.CharField(max_length=100, default="------")
     description = models.TextField(blank=True, verbose_name="Beschreibung",
                                    help_text="Wenn dieses Produktset zu einem Szenario gehört,"
@@ -117,6 +159,9 @@ class ProductSet(models.Model):
 
 
 class Product(models.Model):
+    """
+    A database representation of an smart home appliance.Can be created by Employees.
+    """
     name = models.CharField(max_length=200)
     provider = models.ForeignKey("Provider", default="1", on_delete=models.CASCADE, verbose_name="Produzent")
     product_type = models.ForeignKey("ProductType", default="1", verbose_name="Produktart",
@@ -154,6 +199,11 @@ class Product(models.Model):
 
 
 class ProductType(models.Model):
+    """
+    A way to categorize and group Products.
+    Could be used to implement another kind of product set,
+    where you use general product types instead of specific products.
+    """
     type_name = models.CharField(max_length=255, unique=True, verbose_name="Name")
 
     def __str__(self):
@@ -169,6 +219,10 @@ class ProductType(models.Model):
 
 
 class Provider(models.Model):
+    """
+    Used to decouple provider and their public representation (ProviderProfile). Every provider profile, employee and
+    everything, an employee can create, is connected to this.
+    """
     name = models.CharField(max_length=200, unique=False, default=random())
     is_visible = models.BooleanField(default=False, verbose_name="sichtbar")
 
@@ -185,6 +239,11 @@ class Provider(models.Model):
 
 
 class ProviderProfile(models.Model):
+    """
+    The public representation of a provider on this website.
+    Contains information of the provider and also lists all products, product sets and scenarios
+    that are connected to the provider.
+    """
     public_name = models.CharField(max_length=200, unique=True, verbose_name="öffentlicher Name")
     url_name = models.CharField(max_length=200, unique=True, default=random())
     logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
@@ -213,6 +272,9 @@ class ProviderProfile(models.Model):
 
 
 class Employee(User):
+    """
+    Representation of an employee that has a connection to Provider identifying their employer
+    """
     employer = models.ForeignKey("Provider", on_delete=models.CASCADE, verbose_name="Arbeitgeber")
 
     class Meta:
@@ -222,6 +284,9 @@ class Employee(User):
 
 
 class UserImage(models.Model):
+    """
+    An image to be used in comments, every user can change it for themself
+    """
     belongs_to_user = models.OneToOneField(to=User, verbose_name="gehört zu Nutzer", on_delete=models.CASCADE)
     image = models.ImageField(upload_to="user", null=True, blank=True, verbose_name="Nutzerbild")
 
@@ -256,8 +321,10 @@ class Comment(models.Model):
         ordering = ["-creation_date", "comment_title", "-rating", ]
 
 
-# TODO:Add reference field to tell frontend which step each question belongs to
-# TODO:Maybe which category each question belongs to? manytomany to category?
+# DONE:Add reference field to tell frontend which step each question belongs to
+#       -- Realized using the QuestionStep model
+# DONE:Maybe which category each question belongs to? manytomany to category?
+#       -- See QuestionSet
 class Question(models.Model):
     MULTI_CHOICE = 'mc'
     RADIO_CHOICE = 'rc'
@@ -292,6 +359,9 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
+    """
+    Connects Tags with questions and enables tags to be used for multiple answers, but only one tag per answer.
+    """
     belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE, verbose_name="gehört zu Frage")
     answer_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Anworttext")
     tag = models.ForeignKey(to="Tag", on_delete=models.CASCADE, verbose_name="Schlagwort")
@@ -306,6 +376,11 @@ class Answer(models.Model):
 
 
 class Tag(models.Model):
+    """
+    A possibility for producers to add information to products and product sets,
+    that make them easier to match with the advisor.
+    Currently only product sets are used with the advisor.
+    """
     code = models.CharField(max_length=45)
     name = models.CharField(max_length=255)
 
@@ -319,6 +394,13 @@ class Tag(models.Model):
 
 
 class GivenAnswers(models.Model):
+    """
+    Used to pre-check answers a user has given the last time he was logged in and used the advisor.
+    This is independent of any session id that could expire
+    or something else that might have happend to the users computer.
+
+    It does not store a history the user could use to reuse old requests.
+    """
     user = models.OneToOneField(to=User, on_delete=models.CASCADE, verbose_name="User")
     user_answer = models.ManyToManyField(to="Answer", verbose_name="hat geantwortet")
 
@@ -340,6 +422,10 @@ class GivenAnswers(models.Model):
 
 
 class QuestionSet(models.Model):
+    """
+    A number of questions that have a contextual relationship and shall be grouped together.
+    Also enables an order between different sets, which Question should be shown at the top and which at the lower end.
+    """
     name = models.CharField(max_length=255, default="---")
     question = models.ManyToManyField("Question", verbose_name="Dazugehörige Fragen")
     category = models.OneToOneField("Category", on_delete=models.CASCADE, null=True, blank=True,
@@ -359,6 +445,11 @@ class QuestionSet(models.Model):
 
 
 class SessionTags(models.Model):
+    """
+    Stores tags associated with the use of the advisor.
+    Could be used for debugging purposes but is included for analytical and 'big data' reasons.
+    (This part is not implemented as it wasn't part of the assignment)
+    """
     session = models.OneToOneField(Session, null=True, on_delete=models.SET_NULL, verbose_name="Zugehörige Session")
     tag = models.ManyToManyField("Tag", verbose_name="Referenziert auf Tag")
 
