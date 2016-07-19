@@ -21,9 +21,12 @@
             {% if forloop.parentloop.counter0|divisibleby:2 %}
 
             <tr style="" flex>
-              <td style="width: 50%;">
-                <div class="column" style="visibility: hidden; padding-left: 5%; padding-top: 5%;"
-                     id="preference-{{ forloop.counter }}">
+              <td style="width: 50%;"
+                  id="preference-{{ forloop.counter }}"
+
+                  ng-style="{'visibility': vm.preferences[{{forloop.parentloop.counter0}}]?'visible':'hidden'}">
+                <div class="column"
+                     style="padding-left: 5%; padding-top: 5%;">
 
                   <div>
                     <h3>{{ questionset.name }}</h3>
@@ -66,7 +69,7 @@
 
               {% else %}
 
-              <td style="width: 50%;">
+              <td flex>
                 <div class="column" style="padding-left: 5%; padding-top: -5%;">
                   <div flex>
                     <h3>{{ questionset.name }}</h3>

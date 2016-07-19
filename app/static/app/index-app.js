@@ -58,9 +58,31 @@ function questionController($scope, $q, $timeout) {
 
 
         console.log("size: " + vm.preferences.length);
+
+        var currentBlock = "td#preference-" + id;
+
+        console.log(currentBlock);
+
+        $scope.currentBlock = {'visibility': 'hidden'};
+
+        $scope.currentBlock = {'visibility': 'visible'};
+
+        /*
+        var tmp = angular.element( document.querySelector(currentBlock));
+
+        if(vm.preferences[id] == true) {
+            console.log("true");
+            $(currentBlock).show();
+            tmp.show();
+        } else {
+            console.log("false");
+            $(currentBlock).hide();
+            tmp.hide();
+        }
+        */
     }
 
-    vm.preferences = new Array(10000).map(function(x, i) { return false; });
+    vm.preferences = new Array(10000).map(function() { return false; });
 
 
     var answer = [];
