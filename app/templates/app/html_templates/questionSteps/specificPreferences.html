@@ -22,8 +22,7 @@
 
             <tr style="" flex>
               <td style="width: 50%;"
-                  id="preference-{{ forloop.parentloop.counter0 }}"
-                  ng-style="{'visibility': vm.preferences[{{forloop.parentloop.counter0}}]?'visible':'hidden'}">
+                  >
                 <div class="column"
                      style="padding-left: 5%; padding-top: 5%;">
                   <div>
@@ -33,7 +32,7 @@
 
                     <div>
                       {% if question.answer_presentation == 'rc' %}
-                      <md-radio-group ng-model="vm.stepData[2].data.accommodation_name">
+                      <md-radio-group ng-model="vm.stepData[2].data.question{{ question.pk }}">
                         {% for answer in question.answer_set.all %}
                         <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
                         {% endfor %}
@@ -48,7 +47,7 @@
                       </md-checkbox-group>
                       {% elif question.answer_presentation == 'dc' %}
                       <md-input-container>
-                        <md-select ng-model="someModel" placeholder="Select a state">
+                        <md-select ng-model="vm.stepData[2].data.question{{ question.pk }}" placeholder="Wähl Bitte...">
                           {% for answer in question.answer_set.all %}
                           <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
                           {% endfor %}
@@ -67,9 +66,7 @@
 
               {% else %}
 
-              <td flex
-                  id="preference-{{ forloop.parentloop.counter0 }}"
-                  ng-style="{'visibility': vm.preferences[{{forloop.parentloop.counter0}}]?'visible':'hidden'}">
+              <td flex>
                 <div class="column" style="padding-left: 5%; padding-top: -5%;">
                   <div flex>
                     <h3>{{ questionset.name }}</h3>
@@ -78,7 +75,7 @@
                   </div>
                   <div flex>
                     {% if question.answer_presentation == 'rc' %}
-                    <md-radio-group ng-model="vm.stepData[2].data.accommodation_name">
+                    <md-radio-group ng-model="vm.stepData[2].data.question{{ question.pk }}">
                       {% for answer in question.answer_set.all %}
                       <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
                       {% endfor %}
@@ -93,7 +90,7 @@
                     </md-checkbox-group>
                     {% elif question.answer_presentation == 'dc' %}
                     <md-input-container>
-                      <md-select ng-model="someModel" placeholder="Select a state">
+                      <md-select ng-model="vm.stepData[2].data.question{{ question.pk }}" placeholder="Wähl Bitte...">
                         {% for answer in question.answer_set.all %}
                         <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
                         {% endfor %}
@@ -118,7 +115,6 @@
             {% endfor %}
 
             {% else %}
-            <h2>FUCK THIS</h2>
             {% endif %}
           </table>
 
