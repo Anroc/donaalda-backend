@@ -26,7 +26,7 @@
 
   <!-- TODO create base css for every site zu be used -->
 
-  <link rel="stylesheet" href="{% static 'app/assets/css/custom/base.css' %}">
+
 
   <title>DONAALDA</title>
 
@@ -35,13 +35,17 @@
     <title>DONAALDA - Szenario - {{ current_scenario.name }}</title>
 
     <!--link rel="stylesheet" href="{% static 'app/assets/css/custom/styleProduct.css' %}"-->
+  <link rel="stylesheet" href="{% static 'app/assets/css/custom/base.css' %}">
     <link rel="stylesheet" href="{% static 'app/assets/css/custom/scenario.css' %}">
 
   {% elif navInfo == 'provider' %}
+
     <title>DONAALDA - {{ provider.public_name }}</title>
     <link rel="stylesheet" href="{% static 'app/assets/css/custom/styleProvider.css' %}">
+  <link rel="stylesheet" href="{% static 'app/assets/css/custom/base.css' %}">
 
   {% elif navInfo == 'filter' %}
+  <link rel="stylesheet" href="{% static 'app/assets/css/custom/base.css' %}">
     <link rel="stylesheet" href="{% static 'app/assets/css/given/style.css' %}">
     <link rel="stylesheet" href="{% static 'app/assets/css/custom/filter.css' %}">
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
@@ -52,6 +56,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 
   {% elif navInfo == 'contact' %}
+  <link rel="stylesheet" href="{% static 'app/assets/css/custom/base.css' %}">
     <link rel="stylesheet" href="{% static 'app/assets/css/given/style.css' %}">
     <link rel="stylesheet" href="{% static 'app/assets/css/custom/contact.css' %}">
 
@@ -59,11 +64,13 @@
   <link rel="stylesheet" href="{% static 'app/assets/css/custom/styleProduct.css' %}">
 
   {% elif navInfo == 'category' %}
+  <link rel="stylesheet" href="{% static 'app/assets/css/custom/base.css' %}">
   <link rel="stylesheet" href="{% static 'app/assets/css/custom/category.css' %}">
   <script src="{% static 'app/index-app.js' %}"></script>
   <link rel="stylesheet" href="{% static 'app/index-style.css' %}">
 
   {% else %}
+  <link rel="stylesheet" href="{% static 'app/assets/css/custom/base.css' %}">
   <link rel="stylesheet" href="{% static 'app/assets/css/given/style.css' %}">
 
   {% endif %}

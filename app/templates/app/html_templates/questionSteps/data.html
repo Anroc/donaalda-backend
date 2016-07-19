@@ -15,24 +15,25 @@
             <md-radio-group ng-model="vm.stepData[0].data.question{{ question.pk }}">
               {% for answer in question.answer_set.all %}
               <md-radio-button
-                value='{{ answer.pk }}'>{{ answer.answer_text }}
+                value='{{ answer.pk }}' {% if answer in given_answers %} ng-value="True" {% endif %}>{{ answer.answer_text }}
               </md-radio-button>
               {% endfor %}
             </md-radio-group>
             {% elif question.answer_presentation == 'mc' %}
             <md-checkbox-group layout="column">
               {% for answer in question.answer_set.all %}
-              <md-checkbox ng-model="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}"
-                           value='{{ answer.pk }}'>
+              <md-checkbox  id="{{ answer.answer_text }}" value='{{ answer.pk }}'
+                            {% if answer in given_answers %} ng-init="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}=true"
+                            {% endif %} ng-model="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}">
                 {{ answer.answer_text }}
               </md-checkbox>
               {% endfor %}
             </md-checkbox-group>
             {% elif question.answer_presentation == 'dc' %}
             <md-input-container>
-              <md-select ng-model="someModel" placeholder="Bitte Anzahl angeben">
+              <md-select ng-select="1=1" ng-model="vm.stepData[0].data.question{{ question.pk }}" placeholder="Bitte Anzahl angeben">
                 {% for answer in question.answer_set.all %}
-                <md-option value='{{ answer.pk }}'>
+                <md-option value='{{ answer.pk }}' {% if answer in given_answers %} ng-value="True" {% endif %}>
                   {{ answer.answer_text }}
                 </md-option>
                 {% endfor %}

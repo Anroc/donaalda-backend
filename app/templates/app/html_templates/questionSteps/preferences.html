@@ -1,5 +1,6 @@
 <md-step label="Kategorienauswahl" md-complete="vm.stepData[1].data.completed"
          ng-disabled="vm.stepProgress < 2">
+
   <md-step-body>
     <form name="step2" ng-submit="vm.submitCurrentStep(vm.stepData[1].data)">
       <md-content class="md-padding">
@@ -12,38 +13,23 @@
           <h4>
             {{ question.question_text }}
           </h4>
-          {% if question.answer_presentation == 'rc' %}
-          <md-radio-group ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
-          layout="column" layout-align="left">
-            {% for answer in question.answer_set.all %}
-            <md-radio-button value='{{ answer.pk }}'>
-              {{ answer.answer_text }}
-            </md-radio-button>
-            {% endfor %}
-          </md-radio-group>
-          {% elif question.answer_presentation == 'mc' %}
+          {% if question.answer_presentation == 'mc' %}
           <md-checkbox-group layout="column">
             {% for answer in question.answer_set.all %}
-            <md-checkbox ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                           {% if answer.answer_text == category.name %}
+            <md-checkbox ng-init="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}=true"
+                          ng-model="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                         id="{{ answer.answer_text }}"
                          value='{{ answer.pk }}' value='{{ answer.pk }}'>{{ answer.answer_text }}
             </md-checkbox>
+
+            {% else %}
+                       <md-checkbox ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                         value='{{ answer.pk }}' value='{{ answer.pk }}'>{{ answer.answer_text }}
+            </md-checkbox>
+            {% endif  %}
             {% endfor %}
           </md-checkbox-group>
-          {% elif question.answer_presentation == 'dc' %}
-          <md-input-container>
-            <md-select ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
-                       placeholder="Select a state">
-              {% for answer in question.answer_set.all %}
-              <md-option value='{{ answer.pk }}'>
-                {{ answer.answer_text }}
-              </md-option>
-              {% endfor %}
-            </md-select>
-          </md-input-container>
-          {% elif question.answer_presentation == 'sc' %}
-          <!-- INPUT SLIDER HERE -->
-          {% elif question.answer_presentation == 'rs' %}
-          <!-- INPUT RANGE SLIDER HERE -->
           {% endif %}
           {% endfor %}
           {% endfor %}

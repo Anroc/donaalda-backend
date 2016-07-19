@@ -31,12 +31,18 @@ class ScenarioAdmin(admin.ModelAdmin):
 
     exclude = ['url_name']
 
+    list_filter = ['categories']
+
     def get_queryset(self, request):
         user = request.user
         qs = super(ScenarioAdmin, self).get_queryset(request)
 
+        self.list_filter = ['provider', 'categories']
+
         if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
+
+        self.list_filter = ['categories']
 
         self.exclude.extend(['provider'])
         return qs.filter(provider=user.employee.employer_id)
@@ -58,12 +64,18 @@ class ProductSetAdmin(admin.ModelAdmin):
 
     exclude = []
 
+    list_filter = ['tags', 'products']
+
     def get_queryset(self, request):
         user = request.user
         qs = super(ProductSetAdmin, self).get_queryset(request)
 
+        self.list_filter = ['creator', 'tags', 'products']
+
         if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
+
+        self.list_filter = ['tags', 'products']
 
         self.exclude.extend(['creator'])
         return qs.filter(creator=user.employee.employer_id)
@@ -82,15 +94,18 @@ class ProductAdmin(admin.ModelAdmin):
 
     exclude = []
 
-    list_display = ('name', 'serial_number', 'provider', 'product_type', 'end_of_life')
-
-    list_filter = ('provider', 'product_type', 'end_of_life')
-
     def get_queryset(self, request):
         user = request.user
         qs = super(ProductAdmin, self).get_queryset(request)
+
+        self.list_filter = ['product_type', 'provider', 'end_of_life', 'tags']
+        self.list_display = ['name', 'serial_number', 'provider', 'product_type', 'end_of_life', 'tags']
+
         if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
+
+        self.list_filter = ['product_type', 'end_of_life']
+        self.list_display = ['name', 'serial_number', 'product_type', 'end_of_life']
 
         self.exclude.extend(['provider'])
         return qs.filter(provider=user.employee.employer_id)
