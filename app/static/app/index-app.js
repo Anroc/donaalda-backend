@@ -18,12 +18,18 @@ donaaldaApp.controller('questionController', questionController)
 
 function questionController($scope, $q, $timeout) {
 
+
     function toggleCheckbox(element) {
         console.log("clicked element: " + element);
         element.checked = !element.checked;
     }
 
+    function aok() {
+        console.log("aok angular");
+    }
+
     $scope.data = {
+        account_selected: '',
         accommodation_name: "deiner Wohnung",
         accommodation_age: 5,
         addition: "Garage",
@@ -44,16 +50,44 @@ function questionController($scope, $q, $timeout) {
         estate_age: false
     };
 
-    $scope.preferences = {
-        heater_control: false,
-        light_control: false,
-        remote_control: false,
-        security_control: false,
-        health_control: false,
-        comfort_control: false
-    };
 
     var vm = this;
+
+    vm.changePreference = function changePreference(id) {
+        console.log("change preference with id " + id + " to " + vm.preferences[id]);
+
+
+        console.log("size: " + vm.preferences.length);
+
+        var currentBlock = "td#preference-" + id;
+
+        console.log(currentBlock);
+
+        console.log("preference changed.");
+
+        /*
+        $scope.currentBlock = {'visibility': 'hidden'};
+
+        $scope.currentBlock = {'visibility': 'visible'};
+
+        /*
+        var tmp = angular.element( document.querySelector(currentBlock));
+
+        if(vm.preferences[id] == true) {
+            console.log("true");
+            $(currentBlock).show();
+            tmp.show();
+        } else {
+            console.log("false");
+            $(currentBlock).hide();
+            tmp.hide();
+        }
+        */
+    }
+
+    vm.preferences = new Array(10000).map(function() { return false; });
+
+
     var answer = [];
     vm.selectedStep = 0;
     vm.stepProgress = 1;
