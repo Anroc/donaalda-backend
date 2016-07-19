@@ -8,11 +8,10 @@
         <div flex layout="column" layout-align="space-around start">
 
 
-          <table style="border: 1px solid black;" flex>
+          <table style="" flex>
             {% if qs_category_specific %}
 
             {% for questionstep in qs_category_specific %}
-
 
             {% for questionset in questionstep.question_steps.all %}
 
@@ -21,9 +20,9 @@
 
             {% if forloop.parentloop.counter0|divisibleby:2 %}
 
-            <tr style="border: 1px solid black;" flex>
-              <td style="border: 1px solid black; width: 50%;">
-                <div flex style="margin-left: 10px; margin-top: 20px;" id="preference-{{ forloop.counter }}">
+            <tr style="" flex>
+              <td style="width: 50%;">
+                <div class="column" style="padding-left: 5%; padding-top: 5%;" id="preference-{{ forloop.counter }}">
 
                   <div>
                     <h3>{{ questionset.name }}</h3>
@@ -67,8 +66,7 @@
               {% else %}
 
               <td style="width: 50%;">
-                <div class="column" layout="column" layout-align="center start" flex
-                     style="margin-left: 10px; margin-top: 20px;">
+                <div class="column" style="padding-left: 5%; padding-top: -5%;">
                   <div flex>
                     <h3>{{ questionset.name }}</h3>
                     {% for question in questionset.question.all %}
