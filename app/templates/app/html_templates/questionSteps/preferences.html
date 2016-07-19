@@ -1,44 +1,62 @@
 <md-step label="Kategorienauswahl" md-complete="vm.stepData[1].data.completed"
          ng-disabled="vm.stepProgress < 2">
 
+  <!-- TODO find out what the id of the loaded div blocks is, divElem is currently unknown -->
+  <script type="text/javascript">
+    function setVisibility(counter) {
+      console.log("Counter is: " + counter);
+      console.log("current block to set visible is: preference-" + counter);
+      var currentBlock = "preference-" + counter;
+      if($(currentBlock).hidden == true) {
+        $(currentBlock).show();
+      } else {
+        $(currentBlock).hide();
+      }
+    }
+
+
+  </script>
   <md-step-body>
     <form name="step2" ng-submit="vm.submitCurrentStep(vm.stepData[1].data)">
       <md-content class="md-padding">
         <div layout="column" layout-align="center center">
           <div layout="column" layout-align="center left">
-          {% if qs_category %}
-          {% for questionstep in qs_category %}
-          {% for questionset in questionstep.question_steps.all %}
-          {% for question in questionset.question.all %}
-          <h4>
-            {{ question.question_text }}
-          </h4>
-          {% if question.answer_presentation == 'mc' %}
-          <md-checkbox-group layout="column">
-            {% for answer in question.answer_set.all %}
-                           {% if answer.answer_text == category.name %}
-            <md-checkbox ng-init="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}=true"
-                          ng-model="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}"
-                         id="{{ answer.answer_text }}"
-                         value='{{ answer.pk }}' value='{{ answer.pk }}'>{{ answer.answer_text }}
-            </md-checkbox>
+            {% if qs_category %}
+            {% for questionstep in qs_category %}
+            {% for questionset in questionstep.question_steps.all %}
+            {% for question in questionset.question.all %}
+            <h4>
+              {{ question.question_text }}
+            </h4>
+            {% if question.answer_presentation == 'mc' %}
+            <md-checkbox-group layout="column">
+              {% for answer in question.answer_set.all %}
+              {% if answer.answer_text == category.name %}
+              <md-checkbox ng-init="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}=true"
+                           ng-model="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                           id="{{ answer.answer_text }}"
+                           value='{{ answer.pk }}' value='{{ answer.pk }}'
+                           ng-change="toggleCheckbox(this)">
+                {{ answer.answer_text }}
+              </md-checkbox>
 
-            {% else %}
-                       <md-checkbox ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
-                         value='{{ answer.pk }}' value='{{ answer.pk }}'>{{ answer.answer_text }}
-            </md-checkbox>
-            {% endif  %}
+              {% else %}
+              <md-checkbox ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                           value='{{ answer.pk }}' value='{{ answer.pk }}'>
+                {{ answer.answer_text }}
+              </md-checkbox>
+              {% endif %}
+              {% endfor %}
+            </md-checkbox-group>
+            {% endif %}
             {% endfor %}
-          </md-checkbox-group>
-          {% endif %}
-          {% endfor %}
-          {% endfor %}
-          {% endfor %}
-          {% else %}
-          <h2>
-            Pups der Bär
-          </h2>
-          {% endif %}
+            {% endfor %}
+            {% endfor %}
+            {% else %}
+            <h2>
+              Pups der Bär
+            </h2>
+            {% endif %}
           </div>
         </div>
 

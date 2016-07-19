@@ -55,6 +55,7 @@
 
             {% for questionstep in qs_category_specific %}
 
+
             {% for questionset in questionstep.question_steps.all %}
 
             <!-- TODO table wenn counter = 0, dann <tr> vor dem block -->
@@ -70,14 +71,15 @@
               }
             </script>
 
-            {% if forloop.counter == 1 %}
+            {% if forloop.parentloop.counter0|divisibleby:2 %}
             <script type="text/javascript">
               even();
             </script>
 
             <tr>
               <td>
-                <div flex style="margin-left: 10px;">
+                <div flex style="margin-left: 10px;" id="preference-{{ forloop.counter }}">
+
                   <div flex>
                     <h3>{{ questionset.name }}</h3>
                     {% for question in questionset.question.all %}

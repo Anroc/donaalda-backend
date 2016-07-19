@@ -18,6 +18,11 @@ donaaldaApp.controller('questionController', questionController)
 
 function questionController($scope, $q, $timeout) {
 
+    function toggleCheckbox(element) {
+        console.log("clicked element: " + element);
+        element.checked = !element.checked;
+    }
+
     $scope.data = {
         accommodation_name: "deiner Wohnung",
         accommodation_age: 5,
