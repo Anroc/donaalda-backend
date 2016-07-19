@@ -22,12 +22,10 @@
 
             <tr style="" flex>
               <td style="width: 50%;"
-                  id="preference-{{ forloop.counter }}"
-
+                  id="preference-{{ forloop.counter0 }}"
                   ng-style="{'visibility': vm.preferences[{{forloop.parentloop.counter0}}]?'visible':'hidden'}">
                 <div class="column"
                      style="padding-left: 5%; padding-top: 5%;">
-
                   <div>
                     <h3>{{ questionset.name }}</h3>
                     {% for question in questionset.question.all %}
@@ -69,7 +67,9 @@
 
               {% else %}
 
-              <td flex>
+              <td flex
+                  id="preference-{{ forloop.counter }}"
+                  ng-style="{'visibility': vm.preferences[{{forloop.parentloop.counter0}}]?'visible':'hidden'}">
                 <div class="column" style="padding-left: 5%; padding-top: -5%;">
                   <div flex>
                     <h3>{{ questionset.name }}</h3>
