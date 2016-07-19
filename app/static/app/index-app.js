@@ -63,6 +63,9 @@ function questionController($scope, $q, $timeout) {
 
         console.log(currentBlock);
 
+        console.log("preference changed.");
+
+        /*
         $scope.currentBlock = {'visibility': 'hidden'};
 
         $scope.currentBlock = {'visibility': 'visible'};

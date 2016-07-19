@@ -22,7 +22,7 @@
 
             <tr style="" flex>
               <td style="width: 50%;"
-                  id="preference-{{ forloop.counter0 }}"
+                  id="preference-{{ forloop.parentloop.counter0 }}"
                   ng-style="{'visibility': vm.preferences[{{forloop.parentloop.counter0}}]?'visible':'hidden'}">
                 <div class="column"
                      style="padding-left: 5%; padding-top: 5%;">
@@ -68,7 +68,7 @@
               {% else %}
 
               <td flex
-                  id="preference-{{ forloop.counter }}"
+                  id="preference-{{ forloop.parentloop.counter0 }}"
                   ng-style="{'visibility': vm.preferences[{{forloop.parentloop.counter0}}]?'visible':'hidden'}">
                 <div class="column" style="padding-left: 5%; padding-top: -5%;">
                   <div flex>
