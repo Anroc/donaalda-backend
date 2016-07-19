@@ -4,53 +4,12 @@
   <md-step-body>
     <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[2].data)">
       <md-content class="md-padding">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
-          <div class="carousel-inner" role="listbox">
-            {% for item in current_scenario.scenario_product_set.products.all %}
-            {% if forloop.counter == 1 %}
-            <div class="item active" style="margin-left: 50px; margin-right: 50px;">
-              {% endif%}
-              <a href="{% url 'app:product' item.pk %}">
-                <div class="col-md-4">
-                  <div class="card" style="background-color:white; border-radius:5px">
-                    <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                      <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ item.name }}</h4>
-                      <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ item.provider
-                        }}</h6>
-                    </div>
-                    <div style="height: 250px;">
-                      <img src="{{ item.image1.url }}" alt="" class="center-block"
-                           style="max-height: 95%; max-width: 95%;">
-                    </div>
-                  </div>
-                </div>
-              </a>
-              {% if forloop.counter == current_scenario.scenario_product_set.products.all|length %}
-            </div>
-            {% elif forloop.counter|divisibleby:3 %}
-          </div>
-          <div class="item" style="margin-left: 50px; margin-right: 50px;">
-            {% endif %}
-            {% endfor %}
-          </div>
-
-        </div>
-        <div class="col-sm-6" layout="column" layout-align="space-around start">
-
-          <table>
-            <tr>
-              <td>
-                cell 1
-              </td>
-              <td>
-                cell 2
-              </td>
-            </tr>
-          </table>
+        <div flex layout="column" layout-align="space-around start">
 
 
-          <table style="border: 1px solid black;">
+
+          <table style="border: 1px solid black;" flex>
             {% if qs_category_specific %}
 
             {% for questionstep in qs_category_specific %}
@@ -61,31 +20,18 @@
             <!-- TODO table wenn counter = 0, dann <tr> vor dem block -->
             <!-- TODO wenn counter = 1, dann </tr> nach dem block -->
 
-            <script type="text/javascript">
-              function even() {
-                console.log("even counter");
-              }
-
-              function uneven() {
-                console.log("uneven counter");
-              }
-            </script>
-
             {% if forloop.parentloop.counter0|divisibleby:2 %}
-            <script type="text/javascript">
-              even();
-            </script>
 
-            <tr>
-              <td>
-                <div flex style="margin-left: 10px;" id="preference-{{ forloop.counter }}">
+            <tr style="border: 1px solid black;" flex>
+              <td style="border: 1px solid black; width: 50%;">
+                <div flex style="margin-left: 10px; margin-top: 20px;" id="preference-{{ forloop.counter }}">
 
-                  <div flex>
+                  <div >
                     <h3>{{ questionset.name }}</h3>
                     {% for question in questionset.question.all %}
                     <h4>{{ question.question_text }}</h4>
 
-                    <div flex>
+                    <div>
                       {% if question.answer_presentation == 'rc' %}
                       <md-radio-group ng-model="vm.stepData[2].data.accommodation_name">
                         {% for answer in question.answer_set.all %}
@@ -120,12 +66,9 @@
               </td>
 
               {% else %}
-              <script type="text/javascript">
-                uneven();
-              </script>
 
-              <td>
-                <div class="column" flex style="margin-left: 10px;">
+              <td style="width: 50%;">
+                <div class="column" flex style="margin-left: 10px; margin-top: 20px;">
                   <div flex>
                     <h3>{{ questionset.name }}</h3>
                     {% for question in questionset.question.all %}
@@ -181,10 +124,13 @@
       </md-content>
       <md-step-actions layout="row">
         <div flex layout="row" layout-align="end top">
-          <md-button class="md-warn">ABBRECHEN</md-button>
+          <md-button class="md-warn">
+            ABBRECHEN
+          </md-button>
           <md-button type="submit"
                      ng-disabled=""
-                     class="md-primary md-raised">WEITER
+                     class="md-primary md-raised">
+            WEITER
           </md-button>
         </div>
       </md-step-actions>
