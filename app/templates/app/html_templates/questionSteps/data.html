@@ -15,7 +15,7 @@
             <md-radio-group ng-model="vm.stepData[0].data.question{{ question.pk }}">
               {% for answer in question.answer_set.all %}
               <md-radio-button
-                value='{{ answer.pk }}' {% if answer in given_answers %} ng-value="True" {% endif %}>{{ answer.answer_text }}
+               id='{{ answer.pk }}' value='{{ answer.pk }}' >{{ answer.answer_text }}
               </md-radio-button>
               {% endfor %}
             </md-radio-group>
@@ -130,7 +130,24 @@
           </md-button>
         </div>
         {% endverbatim %}
+
       </md-step-actions>
     </form>
   </md-step-body>
 </md-step>
+
+
+
+{% block extrahead %}
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+      {% for answer in given_answers %}
+      if(document.getElementById({{answer.pk}})){
+          document.getElementById({{answer.pk}}).click();
+    }
+
+    {% endfor %}
+});
+
+</script>
+{% endblock %}
