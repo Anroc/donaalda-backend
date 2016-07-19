@@ -60,8 +60,21 @@
             <!-- TODO table wenn counter = 0, dann <tr> vor dem block -->
             <!-- TODO wenn counter = 1, dann </tr> nach dem block -->
 
+            <script type="text/javascript">
+              function even() {
+                console.log("even counter");
+              }
 
-            {% if forloop.counter0|divisibleby:2 %}
+              function uneven() {
+                console.log("uneven counter");
+              }
+            </script>
+
+            {% if forloop.counter == 1 %}
+            <script type="text/javascript">
+              even();
+            </script>
+
             <tr>
               <td>
                 <div flex style="margin-left: 10px;">
@@ -105,6 +118,9 @@
               </td>
 
               {% else %}
+              <script type="text/javascript">
+                uneven();
+              </script>
 
               <td>
                 <div class="column" flex style="margin-left: 10px;">
