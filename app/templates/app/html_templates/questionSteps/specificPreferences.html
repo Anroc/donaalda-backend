@@ -15,14 +15,15 @@
 
             {% for questionset in questionstep.question_steps.all %}
 
-            <!-- TODO table wenn counter = 0, dann <tr> vor dem block -->
-            <!-- TODO wenn counter = 1, dann </tr> nach dem block -->
+            <!-- TODO setze visibility im style von jedem div block -->
+            <!-- TODO wenn in preferences.html checkbox angeklickt, dann show -->
 
             {% if forloop.parentloop.counter0|divisibleby:2 %}
 
             <tr style="" flex>
               <td style="width: 50%;">
-                <div class="column" style="padding-left: 5%; padding-top: 5%;" id="preference-{{ forloop.counter }}">
+                <div class="column" style="visibility: hidden; padding-left: 5%; padding-top: 5%;"
+                     id="preference-{{ forloop.counter }}">
 
                   <div>
                     <h3>{{ questionset.name }}</h3>

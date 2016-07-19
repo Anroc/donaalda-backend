@@ -13,7 +13,9 @@
         $(currentBlock).hide();
       }
     }
-
+    function aok() {
+      console.log("aok local");
+    }
 
   </script>
   <md-step-body>
@@ -33,16 +35,19 @@
               {% for answer in question.answer_set.all %}
               {% if answer.answer_text == category.name %}
               <md-checkbox ng-init="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}=true"
-                           ng-model="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                           ng-model="vm.preferences.health"
                            id="{{ answer.answer_text }}"
                            value='{{ answer.pk }}' value='{{ answer.pk }}'
-                           ng-change="toggleCheckbox(this)">
+
+                           ng-change="vm.changeHealth()"
+                           >
                 {{ answer.answer_text }}
               </md-checkbox>
 
               {% else %}
               <md-checkbox ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
-                           value='{{ answer.pk }}' value='{{ answer.pk }}'>
+                           value='{{ answer.pk }}' value='{{ answer.pk }}'
+                           ng-change="vm.aok()">
                 {{ answer.answer_text }}
               </md-checkbox>
               {% endif %}
