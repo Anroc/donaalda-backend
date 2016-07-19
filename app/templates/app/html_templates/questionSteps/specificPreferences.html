@@ -8,7 +8,6 @@
         <div flex layout="column" layout-align="space-around start">
 
 
-
           <table style="border: 1px solid black;" flex>
             {% if qs_category_specific %}
 
@@ -26,7 +25,7 @@
               <td style="border: 1px solid black; width: 50%;">
                 <div flex style="margin-left: 10px; margin-top: 20px;" id="preference-{{ forloop.counter }}">
 
-                  <div >
+                  <div>
                     <h3>{{ questionset.name }}</h3>
                     {% for question in questionset.question.all %}
                     <h4>{{ question.question_text }}</h4>
@@ -68,7 +67,8 @@
               {% else %}
 
               <td style="width: 50%;">
-                <div class="column" flex style="margin-left: 10px; margin-top: 20px;">
+                <div class="column" layout="column" layout-align="center start" flex
+                     style="margin-left: 10px; margin-top: 20px;">
                   <div flex>
                     <h3>{{ questionset.name }}</h3>
                     {% for question in questionset.question.all %}
