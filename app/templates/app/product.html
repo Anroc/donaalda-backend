@@ -9,6 +9,13 @@
   {% endif %}
 </script>
 
+<style>
+  .btn:hover {
+    background-color: transparent !important;/* Green */
+    color: transparent !important;
+  }
+</style>
+
 <body>
 
 {% include "app/html_templates/header/navbarHeader.html" with navInfo='product' productName=product.name%}
@@ -35,7 +42,7 @@
                   {% if product.provider_profile %}
                   <a href="{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}">
                     {% endif %}
-                    <img style="max-height: 100%; max-width: 100%;"
+                    <img style="max-height: 13em; max-width: 8em;"
                          {% if product.provider.is_visible %}
                          onclick="provider()"
                          {% endif %}
