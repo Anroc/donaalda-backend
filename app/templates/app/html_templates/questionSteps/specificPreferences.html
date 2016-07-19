@@ -38,107 +38,126 @@
         </div>
         <div class="col-sm-6" layout="column" layout-align="space-around start">
 
+          <table>
+            <tr>
+              <td>
+                cell 1
+              </td>
+              <td>
+                cell 2
+              </td>
+            </tr>
+          </table>
 
-          {% if qs_category_specific %}
 
-          {% for questionstep in qs_category_specific %}
+          <table style="border: 1px solid black;">
+            {% if qs_category_specific %}
 
-          {% for questionset in questionstep.question_steps.all %}
+            {% for questionstep in qs_category_specific %}
 
-          <!-- TODO table wenn counter = 0, dann <tr> vor dem block -->
-          <!-- TODO wenn counter = 1, dann </tr> nach dem block -->
+            {% for questionset in questionstep.question_steps.all %}
 
-          {% if forloop.counter0|divisibleby:2 %}
+            <!-- TODO table wenn counter = 0, dann <tr> vor dem block -->
+            <!-- TODO wenn counter = 1, dann </tr> nach dem block -->
 
-          <div class="column" flex style="margin-left: 10px;">
-            <div flex>
-              <h3>{{ questionset.name }}</h3>
-              {% for question in questionset.question.all %}
-              <h4>{{ question.question_text }}</h4>
-            </div>
-            <div flex>
-              {% if question.answer_presentation == 'rc' %}
-              <md-radio-group ng-model="vm.stepData[2].data.accommodation_name">
-                {% for answer in question.answer_set.all %}
-                <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
-                {% endfor %}
-              </md-radio-group>
-              {% elif question.answer_presentation == 'mc' %}
-              <md-checkbox-group layout="column">
-                {% for answer in question.answer_set.all %}
-                <md-checkbox ng-model="vm.stepData[2].data.question{{ question.pk }}.answer{{ answer.pk }}"
-                             value='{{ answer.pk }}'>{{ answer.answer_text }}
-                </md-checkbox>
-                {% endfor %}
-              </md-checkbox-group>
-              {% elif question.answer_presentation == 'dc' %}
-              <md-input-container>
-                <md-select ng-model="someModel" placeholder="Select a state">
-                  {% for answer in question.answer_set.all %}
-                  <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
+
+            {% if forloop.counter0|divisibleby:2 %}
+            <tr>
+              <td>
+                <div flex style="margin-left: 10px;">
+                  <div flex>
+                    <h3>{{ questionset.name }}</h3>
+                    {% for question in questionset.question.all %}
+                    <h4>{{ question.question_text }}</h4>
+
+                    <div flex>
+                      {% if question.answer_presentation == 'rc' %}
+                      <md-radio-group ng-model="vm.stepData[2].data.accommodation_name">
+                        {% for answer in question.answer_set.all %}
+                        <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
+                        {% endfor %}
+                      </md-radio-group>
+                      {% elif question.answer_presentation == 'mc' %}
+                      <md-checkbox-group layout="column">
+                        {% for answer in question.answer_set.all %}
+                        <md-checkbox ng-model="vm.stepData[2].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                                     value='{{ answer.pk }}'>{{ answer.answer_text }}
+                        </md-checkbox>
+                        {% endfor %}
+                      </md-checkbox-group>
+                      {% elif question.answer_presentation == 'dc' %}
+                      <md-input-container>
+                        <md-select ng-model="someModel" placeholder="Select a state">
+                          {% for answer in question.answer_set.all %}
+                          <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
+                          {% endfor %}
+                        </md-select>
+                      </md-input-container>
+                      {% elif question.answer_presentation == 'sc' %}
+                      <!-- INPUT SLIDER HERE -->
+                      {% elif question.answer_presentation == 'rs' %}
+                      <!-- INPUT RANGE SLIDER HERE -->
+                      {% endif %}
+                    </div>
+                  </div>
                   {% endfor %}
-                </md-select>
-              </md-input-container>
-              {% elif question.answer_presentation == 'sc' %}
-              <!-- INPUT SLIDER HERE -->
-              {% elif question.answer_presentation == 'rs' %}
-              <!-- INPUT RANGE SLIDER HERE -->
-              {% endif %}
-            </div>
-          </div>
-          {% endfor %}
+                </div>
+              </td>
 
-          {% else %}
+              {% else %}
 
-          <div class="column" flex style="margin-left: 10px;">
-            <div flex>
-              <h3>{{ questionset.name }}</h3>
-              {% for question in questionset.question.all %}
-              <h4>{{ question.question_text }}</h4>
-            </div>
-            <div flex>
-              {% if question.answer_presentation == 'rc' %}
-              <md-radio-group ng-model="vm.stepData[2].data.accommodation_name">
-                {% for answer in question.answer_set.all %}
-                <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
+              <td>
+                <div class="column" flex style="margin-left: 10px;">
+                  <div flex>
+                    <h3>{{ questionset.name }}</h3>
+                    {% for question in questionset.question.all %}
+                    <h4>{{ question.question_text }}</h4>
+                  </div>
+                  <div flex>
+                    {% if question.answer_presentation == 'rc' %}
+                    <md-radio-group ng-model="vm.stepData[2].data.accommodation_name">
+                      {% for answer in question.answer_set.all %}
+                      <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
+                      {% endfor %}
+                    </md-radio-group>
+                    {% elif question.answer_presentation == 'mc' %}
+                    <md-checkbox-group layout="column">
+                      {% for answer in question.answer_set.all %}
+                      <md-checkbox ng-model="vm.stepData[2].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                                   value='{{ answer.pk }}'>{{ answer.answer_text }}
+                      </md-checkbox>
+                      {% endfor %}
+                    </md-checkbox-group>
+                    {% elif question.answer_presentation == 'dc' %}
+                    <md-input-container>
+                      <md-select ng-model="someModel" placeholder="Select a state">
+                        {% for answer in question.answer_set.all %}
+                        <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
+                        {% endfor %}
+                      </md-select>
+                    </md-input-container>
+                    {% elif question.answer_presentation == 'sc' %}
+                    <!-- INPUT SLIDER HERE -->
+                    {% elif question.answer_presentation == 'rs' %}
+                    <!-- INPUT RANGE SLIDER HERE -->
+                    {% endif %}
+                  </div>
+                </div>
+
                 {% endfor %}
-              </md-radio-group>
-              {% elif question.answer_presentation == 'mc' %}
-              <md-checkbox-group layout="column">
-                {% for answer in question.answer_set.all %}
-                <md-checkbox ng-model="vm.stepData[2].data.question{{ question.pk }}.answer{{ answer.pk }}"
-                             value='{{ answer.pk }}'>{{ answer.answer_text }}
-                </md-checkbox>
-                {% endfor %}
-              </md-checkbox-group>
-              {% elif question.answer_presentation == 'dc' %}
-              <md-input-container>
-                <md-select ng-model="someModel" placeholder="Select a state">
-                  {% for answer in question.answer_set.all %}
-                  <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
-                  {% endfor %}
-                </md-select>
-              </md-input-container>
-              {% elif question.answer_presentation == 'sc' %}
-              <!-- INPUT SLIDER HERE -->
-              {% elif question.answer_presentation == 'rs' %}
-              <!-- INPUT RANGE SLIDER HERE -->
-              {% endif %}
-            </div>
-          </div>
+              </td>
+            </tr>
+            {% endif %}
 
-          {% endfor %}
 
-          {% endif %}
+            {% endfor %}
 
-          {% endfor %}
+            {% endfor %}
 
-          {% endfor %}
-
-          {% else %}
-          <h2>FUCK THIS</h2>
-          {% endif %}
-
+            {% else %}
+            <h2>FUCK THIS</h2>
+            {% endif %}
+          </table>
 
         </div>
       </md-content>
