@@ -34,20 +34,17 @@
             <md-checkbox-group layout="column">
               {% for answer in question.answer_set.all %}
               {% if answer.answer_text == category.name %}
-              <md-checkbox ng-init="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}=true"
-                           ng-model="vm.preferences[{{forloop.counter0}}]"
+              <md-checkbox ng-init="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}=true"
+                           ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
                            id="{{ answer.answer_text }}"
-                           value='{{ answer.pk }}' value='{{ answer.pk }}'
-
-                           ng-change="vm.changePreference({{forloop.counter0}})"
+                           value='{{ answer.pk }}'
                            >
                 {{ answer.answer_text }}
               </md-checkbox>
 
               {% else %}
-              <md-checkbox ng-model="vm.preferences[{{forloop.counter0}}]"
-                           value='{{ answer.pk }}' value='{{ answer.pk }}'
-                           ng-change="vm.changePreference({{forloop.counter0}})">
+              <md-checkbox ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                           value='{{ answer.pk }}'>
                 {{ answer.answer_text }}
               </md-checkbox>
               {% endif %}
@@ -58,9 +55,6 @@
             {% endfor %}
             {% endfor %}
             {% else %}
-            <h2>
-              Pups der Bär
-            </h2>
             {% endif %}
           </div>
         </div>
