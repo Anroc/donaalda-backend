@@ -35,19 +35,19 @@
               {% for answer in question.answer_set.all %}
               {% if answer.answer_text == category.name %}
               <md-checkbox ng-init="vm.stepData[0].data.question{{ question.pk }}.answer{{ answer.pk }}=true"
-                           ng-model="vm.preferences.health"
+                           ng-model="vm.preferences[{{forloop.counter0}}]"
                            id="{{ answer.answer_text }}"
                            value='{{ answer.pk }}' value='{{ answer.pk }}'
 
-                           ng-change="vm.changeHealth()"
+                           ng-change="vm.changePreference({{forloop.counter0}})"
                            >
                 {{ answer.answer_text }}
               </md-checkbox>
 
               {% else %}
-              <md-checkbox ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
+              <md-checkbox ng-model="vm.preferences[{{forloop.counter0}}]"
                            value='{{ answer.pk }}' value='{{ answer.pk }}'
-                           ng-change="vm.aok()">
+                           ng-change="vm.changePreference({{forloop.counter0}})">
                 {{ answer.answer_text }}
               </md-checkbox>
               {% endif %}

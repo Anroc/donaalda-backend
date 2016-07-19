@@ -54,17 +54,13 @@ function questionController($scope, $q, $timeout) {
     var vm = this;
 
     vm.changePreference = function changePreference(id) {
-        console.log("change preference with id " + id);
+        console.log("change preference with id " + id + " to " + vm.preferences[id]);
 
-        console.log(" to " + vm.preferences[id]);
+
+        console.log("size: " + vm.preferences.length);
     }
 
-    vm.preferences = [
-        false, // energie
-        false, // gesundheit
-        false, // komfort
-        false// sicherheit
-    ];
+    vm.preferences = new Array(10000).map(function(x, i) { return false; });
 
 
     var answer = [];
