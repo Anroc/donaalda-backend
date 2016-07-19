@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from app.adminForms import (EmployeeCreationForm,
+from .adminForms import (EmployeeCreationForm,
                             EmployeeChangeForm)
 
 # Register your models here.
