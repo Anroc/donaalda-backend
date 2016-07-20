@@ -50,6 +50,14 @@ function questionController($scope, $q, $timeout) {
         estate_age: false
     };
 
+    $scope.preferences = {
+        heater_control: false,
+        light_control: false,
+        remote_control: false,
+        security_control: false,
+        health_control: false,
+        comfort_control: false
+    };
 
     var vm = this;
 
