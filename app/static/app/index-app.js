@@ -95,20 +95,6 @@ function questionController($scope, $q, $timeout) {
 
     vm.preferences = new Array(10000).map(function() { return false; });
 
-
-    /**
-     * current work around to both submit and check the data
-     * @param stepData
-     * @param isSkip
-     */
-    vm.submitAndCheck = function submitAndCheck(stepData, isSkip) {
-
-        vm.submitCurrentStep(stepData, isSkip);
-
-
-    }
-
-
     var answer = [];
     vm.selectedStep = 0;
     vm.stepProgress = 1;
