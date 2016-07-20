@@ -13,12 +13,12 @@
           {% for questionset in questionstep.question_steps.all %}
 
 
-          <div style="flex:1 0 45%;"
+          <div style="flex:1 0 40%; padding-left:10%;"
                id="preference-{{ forloop.parentloop.counter0 }}"
-               ng-style="{'visibility': vm.stepData[1].data.question1.answer{{ forloop.parentloop.counter0|add:'40'}}?'visible':'hidden'}">
+               ng-style="{'display': vm.stepData[1].data.question1.answer{{ forloop.parentloop.counter0|add:'40'}}?'display':'none'}">
             <div class="column">
               <div>
-                <h3>{{ questionset.name }}</h3>
+                <h3 style="color: orangered"><b>{{ questionset.name }}</b></h3>
                 {% for question in questionset.question.all %}
                 <h4>{{ question.question_text }}</h4>
                 <div>
