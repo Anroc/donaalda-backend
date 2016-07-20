@@ -36,11 +36,14 @@
   </div>
 </section>
 
+
+
 <section id="fh5co-testimonials" data-section="results" style="overflow: hidden;">
 
   <!--section id="fh5co-work" data-section="results" style="overflow: hidden;"-->
 
   <div class="container">
+
     <div class="row">
       <div class="col-md-12 section-heading text-center">
         <h2 class="to-animate">Hey Du</h2>
@@ -57,9 +60,21 @@
               <p>
                 Deine Donaalda
               </p>
+
             </h3>
+            <br/>
+            <div
+              ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
+              ng-controller="{% block ng_controller_theme %}questionController as vm{% endblock %}"
+              ng-cloak>
+              <md-button class="md-primary md-raised"
+                         onclick="window.print();">
+                Drück mich!
+              </md-button>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -78,7 +93,7 @@
               <b>Smart Home</b> auf Deine Bedürfnisse anzupassen.
               Hier siehst Deine passendsten Szenarien in Donaalda.
               Um zurück zu kommen, klicke auf "Zurück", du <i><b>Dummerchen</b></i>.
-              </h3>
+            </h3>
           </div>
         </div>
       </div>
