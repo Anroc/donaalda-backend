@@ -13,13 +13,10 @@
         $(currentBlock).hide();
       }
     }
-    function aok() {
-      console.log("aok local");
-    }
 
   </script>
   <md-step-body>
-    <form name="step2" ng-submit="vm.submitCurrentStep(vm.stepData[1].data)">
+    <form name="step2" ng-submit="vm.submitAndCheck(vm.stepData[1].data)">
       <md-content class="md-padding">
         <div layout="column" layout-align="center center">
           <div layout="column" layout-align="center left">
@@ -44,6 +41,7 @@
                            ng-model="vm.stepData[1].data.question{{ question.pk }}.answer{{ answer.pk }}"
                            id="{{ answer.answer_text }}"
                            value='{{ answer.pk }}'
+                           ng-change="vm.stepData.aok()"
                            >
                 {{ answer.answer_text }}
               </md-checkbox>

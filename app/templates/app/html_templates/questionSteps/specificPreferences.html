@@ -7,7 +7,6 @@
 
         <div flex layout="column" layout-align="space-around start">
 
-
           <table style="" flex>
             {% if qs_category_specific %}
 
@@ -15,13 +14,12 @@
 
             {% for questionset in questionstep.question_steps.all %}
 
-            <!-- TODO setze visibility im style von jedem div block -->
-            <!-- TODO wenn in preferences.html checkbox angeklickt, dann show -->
-
             {% if forloop.parentloop.counter0|divisibleby:2 %}
 
             <tr style="" flex>
-              <td style="width: 50%;">
+              <td style="width: 50%;"
+                  id="preference-{{ forloop.parentloop.counter0 }}"
+                  ng-style="{'visibility': vm.stepData[1].data.question1.answer{{ forloop.parentloop.counter0|add:'40'}}?'visible':'hidden'}">
                 <div class="column"
                      style="padding-left: 5%; padding-top: 5%;">
                   <div>
@@ -66,17 +64,9 @@
 
               {% else %}
 
-              <!--
-              {% comment %}
-                fuer td
-                id="preference-{{ forloop.parentloop.counter0 }}"
-                  ng-style="{'visibility': vm.preferences[{{forloop.parentloop.counter0}}]?'visible':'hidden'}"
-
-              {% endcomment %}
-              -->
-
-              <td flex>
-                <div class="column" style="padding-left: 5%; padding-top: -5%;">
+              <td flex
+                  ng-style="{'visibility': vm.stepData[1].data.question1.answer{{ forloop.parentloop.counter0|add:'40'}}?'visible':'hidden'}">
+              <div class="column" style="padding-left: 5%; padding-top: -5%;">
                   <div flex>
                     <h3>{{ questionset.name }}</h3>
                     {% for question in questionset.question.all %}
