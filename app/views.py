@@ -72,7 +72,6 @@ class CategoryView(generic.ListView):
 
     def get(self, request, *args, **kwargs):
         category = kwargs.get("category_name")
-        print(QuestionSet.objects.exclude(category=None))
         given_answers = []
         if request.user.is_authenticated() and GivenAnswers.objects.filter(user=request.user).exists():
             given_answers = GivenAnswers.objects.get(user=request.user).user_answer.all()
