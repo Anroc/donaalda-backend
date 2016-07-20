@@ -27,14 +27,15 @@
         </p>
       </div>
     </div>
-    {%  if not user.is_authenticated %}
+    {% if not user.is_authenticated %}
     <div class="panel panel-warning">
-      <div class="panel-body">Wenn Du möchtest, dass ich mir Deine Wohnumstände merken soll,
-        melde Dich doch an oder registriere Dich.</div>
+      <div class="panel-body">
+        Wenn Du möchtest, dass ich mir Deine Wohnumstände merken soll,
+        melde Dich doch an oder registriere Dich.
+      </div>
     </div>
     {% endif %}
   </div>
-
 
 
   <div class="container">
@@ -48,11 +49,6 @@
         {% include "app/html_templates/questionSteps/preferences.html" %}
 
         {% include "app/html_templates/questionSteps/specificPreferences.html" %}
-
-
-        {% comment %}
-        {% include "app/html_templates/questionSteps/random.html" %}
-        {% endcomment %}
 
         {% include "app/html_templates/questionSteps/finish.html" %}
 

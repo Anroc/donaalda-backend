@@ -26,10 +26,8 @@
                     <h3>{{ questionset.name }}</h3>
                     {% for question in questionset.question.all %}
                     <h4>{{ question.question_text }}</h4>
-
                     <div>
                       {% if question.answer_presentation == 'rc' %}
-
                       <md-radio-group ng-model="vm.stepData[2].data.question{{ question.pk }}">
                         {% for answer in question.answer_set.all %}
                         <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
@@ -45,7 +43,8 @@
                       </md-checkbox-group>
                       {% elif question.answer_presentation == 'dc' %}
                       <md-input-container>
-                        <md-select ng-model="vm.stepData[2].data.question{{ question.pk }}" placeholder="Wähle Bitte...">
+                        <md-select ng-model="vm.stepData[2].data.question{{ question.pk }}"
+                                   placeholder="Wähle Bitte...">
                           {% for answer in question.answer_set.all %}
                           <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
                           {% endfor %}
@@ -66,7 +65,7 @@
 
               <td flex
                   ng-style="{'visibility': vm.stepData[1].data.question1.answer{{ forloop.parentloop.counter0|add:'40'}}?'visible':'hidden'}">
-              <div class="column" style="padding-left: 5%; padding-top: -5%;">
+                <div class="column" style="padding-left: 5%; padding-top: -5%;">
                   <div flex>
                     <h3>{{ questionset.name }}</h3>
                     {% for question in questionset.question.all %}
@@ -102,21 +101,15 @@
                     {% endif %}
                   </div>
                 </div>
-
                 {% endfor %}
               </td>
             </tr>
             {% endif %}
-
-
             {% endfor %}
-
             {% endfor %}
-
             {% else %}
             {% endif %}
           </table>
-
         </div>
       </md-content>
       <md-step-actions layout="row">
