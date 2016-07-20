@@ -5,112 +5,63 @@
     <form name="step1" ng-submit="vm.submitCurrentStep(vm.stepData[2].data)">
       <md-content class="md-padding">
 
-        <div flex layout="column" layout-align="space-around start">
+        <div style="flex-flow: row wrap; display: flex;">
+          {% if qs_category_specific %}
 
-          <table style="" flex>
-            {% if qs_category_specific %}
+          {% for questionstep in qs_category_specific %}
 
-            {% for questionstep in qs_category_specific %}
+          {% for questionset in questionstep.question_steps.all %}
 
-            {% for questionset in questionstep.question_steps.all %}
 
-            {% if forloop.parentloop.counter0|divisibleby:2 %}
-
-            <tr style="" flex>
-              <td style="width: 50%;"
-                  id="preference-{{ forloop.parentloop.counter0 }}"
-                  ng-style="{'visibility': vm.stepData[1].data.question1.answer{{ forloop.parentloop.counter0|add:'40'}}?'visible':'hidden'}">
-                <div class="column"
-                     style="padding-left: 5%; padding-top: 5%;">
-                  <div>
-                    <h3>{{ questionset.name }}</h3>
-                    {% for question in questionset.question.all %}
-                    <h4>{{ question.question_text }}</h4>
-                    <div>
-                      {% if question.answer_presentation == 'rc' %}
-                      <md-radio-group ng-model="vm.stepData[2].data.question{{ question.pk }}">
-                        {% for answer in question.answer_set.all %}
-                        <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
-                        {% endfor %}
-                      </md-radio-group>
-                      {% elif question.answer_presentation == 'mc' %}
-                      <md-checkbox-group layout="column">
-                        {% for answer in question.answer_set.all %}
-                        <md-checkbox ng-model="vm.stepData[2].data.question{{ question.pk }}.answer{{ answer.pk }}"
-                                     value='{{ answer.pk }}'>{{ answer.answer_text }}
-                        </md-checkbox>
-                        {% endfor %}
-                      </md-checkbox-group>
-                      {% elif question.answer_presentation == 'dc' %}
-                      <md-input-container>
-                        <md-select ng-model="vm.stepData[2].data.question{{ question.pk }}"
-                                   placeholder="Wähle Bitte...">
-                          {% for answer in question.answer_set.all %}
-                          <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
-                          {% endfor %}
-                        </md-select>
-                      </md-input-container>
-                      {% elif question.answer_presentation == 'sc' %}
-                      <!-- INPUT SLIDER HERE -->
-                      {% elif question.answer_presentation == 'rs' %}
-                      <!-- INPUT RANGE SLIDER HERE -->
-                      {% endif %}
-                    </div>
-                  </div>
-                  {% endfor %}
-                </div>
-              </td>
-
-              {% else %}
-
-              <td flex
-                  ng-style="{'visibility': vm.stepData[1].data.question1.answer{{ forloop.parentloop.counter0|add:'40'}}?'visible':'hidden'}">
-                <div class="column" style="padding-left: 5%; padding-top: -5%;">
-                  <div flex>
-                    <h3>{{ questionset.name }}</h3>
-                    {% for question in questionset.question.all %}
-                    <h4>{{ question.question_text }}</h4>
-                  </div>
-                  <div flex>
-                    {% if question.answer_presentation == 'rc' %}
-                    <md-radio-group ng-model="vm.stepData[2].data.question{{ question.pk }}">
+          <div style="flex:1 0 45%;"
+               id="preference-{{ forloop.parentloop.counter0 }}"
+               ng-style="{'visibility': vm.stepData[1].data.question1.answer{{ forloop.parentloop.counter0|add:'40'}}?'visible':'hidden'}">
+            <div class="column">
+              <div>
+                <h3>{{ questionset.name }}</h3>
+                {% for question in questionset.question.all %}
+                <h4>{{ question.question_text }}</h4>
+                <div>
+                  {% if question.answer_presentation == 'rc' %}
+                  <md-radio-group ng-model="vm.stepData[2].data.question{{ question.pk }}">
+                    {% for answer in question.answer_set.all %}
+                    <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
+                    {% endfor %}
+                  </md-radio-group>
+                  {% elif question.answer_presentation == 'mc' %}
+                  <md-checkbox-group layout="column">
+                    {% for answer in question.answer_set.all %}
+                    <md-checkbox ng-model="vm.stepData[2].data.question{{ question.pk }}.answer{{ answer.pk }}"
+                                 value='{{ answer.pk }}'>{{ answer.answer_text }}
+                    </md-checkbox>
+                    {% endfor %}
+                  </md-checkbox-group>
+                  {% elif question.answer_presentation == 'dc' %}
+                  <md-input-container>
+                    <md-select ng-model="vm.stepData[2].data.question{{ question.pk }}"
+                               placeholder="Wähle Bitte...">
                       {% for answer in question.answer_set.all %}
-                      <md-radio-button value='{{ answer.pk }}'>{{ answer.answer_text }}</md-radio-button>
+                      <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
                       {% endfor %}
-                    </md-radio-group>
-                    {% elif question.answer_presentation == 'mc' %}
-                    <md-checkbox-group layout="column">
-                      {% for answer in question.answer_set.all %}
-                      <md-checkbox ng-model="vm.stepData[2].data.question{{ question.pk }}.answer{{ answer.pk }}"
-                                   value='{{ answer.pk }}'>{{ answer.answer_text }}
-                      </md-checkbox>
-                      {% endfor %}
-                    </md-checkbox-group>
-                    {% elif question.answer_presentation == 'dc' %}
-                    <md-input-container>
-                      <md-select ng-model="vm.stepData[2].data.question{{ question.pk }}" placeholder="Wähle Bitte...">
-                        {% for answer in question.answer_set.all %}
-                        <md-option value='{{ answer.pk }}'>{{ answer.answer_text }}</md-option>
-                        {% endfor %}
-                      </md-select>
-                    </md-input-container>
-                    {% elif question.answer_presentation == 'sc' %}
-                    <!-- INPUT SLIDER HERE -->
-                    {% elif question.answer_presentation == 'rs' %}
-                    <!-- INPUT RANGE SLIDER HERE -->
-                    {% endif %}
-                  </div>
+                    </md-select>
+                  </md-input-container>
+                  {% elif question.answer_presentation == 'sc' %}
+                  <!-- INPUT SLIDER HERE -->
+                  {% elif question.answer_presentation == 'rs' %}
+                  <!-- INPUT RANGE SLIDER HERE -->
+                  {% endif %}
                 </div>
-                {% endfor %}
-              </td>
-            </tr>
-            {% endif %}
+
+              {% endfor %}
+              </div>
+            </div>
+          </div> <!-- spezifische fragen mit id {{ forloop.parentloop.counter0|add:'40'}}-->
             {% endfor %}
             {% endfor %}
             {% else %}
             {% endif %}
-          </table>
-        </div>
+          <!--/div-->
+        </div> <!-- container ended hier -->
       </md-content>
       <md-step-actions layout="row">
         <div flex layout="row" layout-align="end top">
