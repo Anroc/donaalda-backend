@@ -21,7 +21,6 @@ from django.conf.urls import url
 # Beware: insert new urls minding the regex pattern matching goes top to bottom
 app_name = 'app'
 urlpatterns = [
-    # url(r'^__debug__/', include(debug_toolbar.urls)),
     # api
     url(r'^api/v1/posts/$', views.post_collection, name='post_collection'),
     url(r'^api/v1/posts/(?P<pk>[0-9]+)$', views.post_element, name='post_element'),
