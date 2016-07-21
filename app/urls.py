@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^api/v1/scenariodescription/$', views.scenario_description_collection,
         name='scenario_description_collection'),
     url(r'^api/v1/productset/$', views.product_set_collection, name='product_set_collection'),
+    url(r'^api/v1/product/$', views.product_collection, name='product_collection'),
     url(r'^api/v1/producttype/$', views.product_type_collection, name='product_type_collection'),
     url(r'^api/v1/provider/$', views.provider_collection, name='provider_collection'),
     url(r'^api/v1/providerprofile/$', views.provider_profile_collection, name='provider_profile_collection'),
