@@ -8,184 +8,104 @@ import pprint
 from django.contrib import messages
 from django.views import generic
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
-from collections import ChainMap
-
-from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
-    QuestionSet, Question, Answer, Tag, ProductSet, QuestionStep, GivenAnswers, SessionTags
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.http import *
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
-from rest_framework import permissions, filters
+from rest_framework import generics
 from .serializers import *
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def category_collection(request):
-    if request.method == 'GET':
-        posts = Category.objects.all()
-        serializer = CategorySerializer(posts, many=True)
-        return Response(serializer.data)
+class CategoryList(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def scenario_collection(request):
-    if request.method == 'GET':
-        posts = Scenario.objects.all()
-        serializer = ScenarioSerializer(posts, many=True)
-        return Response(serializer.data)
+class ScenarioList(generics.ListCreateAPIView):
+    queryset = Scenario.objects.all()
+    serializer_class = ScenarioSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def scenario_description_collection(request):
-    if request.method == 'GET':
-        posts = ScenarioDescription.objects.all()
-        serializer = ScenarioDescriptionSerializer(posts, many=True)
-        return Response(serializer.data)
+class ScenarioDescriptionList(generics.ListCreateAPIView):
+    queryset = ScenarioDescription.objects.all()
+    serializer_class = ScenarioDescriptionSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def product_set_collection(request):
-    if request.method == 'GET':
-        posts = ProductSet.objects.all()
-        serializer = ProductSetSerializer(posts, many=True)
-        return Response(serializer.data)
+class ProductSetList(generics.ListCreateAPIView):
+    queryset = ProductSet.objects.all()
+    serializer_class = ProductSetSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def product_collection(request):
-    if request.method == 'GET':
-        posts = Product.objects.all()
-        serializer = ProductSerializer(posts, many=True)
-        return Response(serializer.data)
+class ProductList(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def product_type_collection(request):
-    if request.method == 'GET':
-        posts = ProductType.objects.all()
-        serializer = ProductTypeSerializer(posts, many=True)
-        return Response(serializer.data)
+class ProductTypeList(generics.ListCreateAPIView):
+    queryset = ProductType.objects.all()
+    serializer_class = ProductTypeSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def provider_collection(request):
-    if request.method == 'GET':
-        posts = Provider.objects.all()
-        serializer = ProviderSerializer(posts, many=True)
-        return Response(serializer.data)
+class ProviderList(generics.ListCreateAPIView):
+    queryset = Provider.objects.all()
+    serializer_class = ProviderSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def provider_profile_collection(request):
-    if request.method == 'GET':
-        posts = ProviderProfile.objects.all()
-        serializer = ProviderProfileSerializer(posts, many=True)
-        return Response(serializer.data)
+class ProviderProfileList(generics.ListCreateAPIView):
+    queryset = ProviderProfile.objects.all()
+    serializer_class = ProviderProfileSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def employee_collection(request):
-    if request.method == 'GET':
-        posts = Employee.objects.all()
-        serializer = EmployeeSerializer(posts, many=True)
-        return Response(serializer.data)
+class EmployeeList(generics.ListCreateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def user_image_collection(request):
-    if request.method == 'GET':
-        posts = UserImage.objects.all()
-        serializer = UserImageSerializer(posts, many=True)
-        return Response(serializer.data)
+class UserImageList(generics.ListCreateAPIView):
+    queryset = UserImage.objects.all()
+    serializer_class = UserImageSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def comment_collection(request):
-    if request.method == 'GET':
-        posts = Comment.objects.all()
-        serializer = CommentSerializer(posts, many=True)
-        return Response(serializer.data)
+class CommentList(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def question_collection(request):
-    if request.method == 'GET':
-        posts = Question.objects.all()
-        serializer = QuestionSerializer(posts, many=True)
-        return Response(serializer.data)
+class QuestionList(generics.ListCreateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def answer_collection(request):
-    if request.method == 'GET':
-        posts = Answer.objects.all()
-        serializer = AnswerSerializer(posts, many=True)
-        return Response(serializer.data)
+class AnswerList(generics.ListCreateAPIView):
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def tag_collection(request):
-    if request.method == 'GET':
-        posts = Tag.objects.all()
-        serializer = TagSerializer(posts, many=True)
-        return Response(serializer.data)
+class TagList(generics.ListCreateAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def given_answers_collection(request):
-    if request.method == 'GET':
-        posts = GivenAnswers.objects.all()
-        serializer = GivenAnswersSerializer(posts, many=True)
-        return Response(serializer.data)
+class GivenAnswersList(generics.ListCreateAPIView):
+    queryset = GivenAnswers.objects.all()
+    serializer_class = GivenAnswersSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def question_set_collection(request):
-    if request.method == 'GET':
-        posts = QuestionSet.objects.all()
-        serializer = QuestionSetSerializer(posts, many=True)
-        return Response(serializer.data)
+class QuestionSetList(generics.ListCreateAPIView):
+    queryset = QuestionSet.objects.all()
+    serializer_class = QuestionSetSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def session_tags_collection(request):
-    if request.method == 'GET':
-        posts = SessionTags.objects.all()
-        serializer = SessionTagsSerializer(posts, many=True)
-        return Response(serializer.data)
+class SessionTagsList(generics.ListCreateAPIView):
+    queryset = SessionTags.objects.all()
+    serializer_class = SessionTagsSerializer
 
 
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def question_step_collection(request):
-    if request.method == 'GET':
-        posts = QuestionStep.objects.all()
-        serializer = QuestionStepSerializer(posts, many=True)
-        return Response(serializer.data)
-
+class QuestionStepList(generics.ListCreateAPIView):
+    queryset = QuestionStep.objects.all()
+    serializer_class = QuestionStepSerializer
 
 
 class IndexView(generic.DetailView):
