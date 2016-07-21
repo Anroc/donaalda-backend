@@ -21,13 +21,13 @@ from django.views.decorators.http import require_http_methods
 from django.http import *
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework import permissions
-from .serializers import CategorySerializer
+from rest_framework import permissions, filters
+from .serializers import *
 
 
 @api_view(['GET'])
 @permission_classes((permissions.AllowAny,))
-def post_collection(request):
+def category_collection(request):
     if request.method == 'GET':
         posts = Category.objects.all()
         serializer = CategorySerializer(posts, many=True)
@@ -36,15 +36,156 @@ def post_collection(request):
 
 @api_view(['GET'])
 @permission_classes((permissions.AllowAny,))
-def post_element(request, pk):
-    try:
-        post = Category.objects.get(pk=pk)
-    except Category.DoesNotExist:
-        return HttpResponse(status=404)
-
+def scenario_collection(request):
     if request.method == 'GET':
-        serializer = CategorySerializer(post)
+        posts = Scenario.objects.all()
+        serializer = ScenarioSerializer(posts, many=True)
         return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def scenario_description_collection(request):
+    if request.method == 'GET':
+        posts = ScenarioDescription.objects.all()
+        serializer = ScenarioDescriptionSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def product_set_collection(request):
+    if request.method == 'GET':
+        posts = ProductSet.objects.all()
+        serializer = ProductSetSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def product_collection(request):
+    if request.method == 'GET':
+        posts = Product.objects.all()
+        serializer = ProductSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def product_type_collection(request):
+    if request.method == 'GET':
+        posts = ProductType.objects.all()
+        serializer = ProductTypeSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def provider_collection(request):
+    if request.method == 'GET':
+        posts = Provider.objects.all()
+        serializer = ProviderSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def provider_profile_collection(request):
+    if request.method == 'GET':
+        posts = ProviderProfile.objects.all()
+        serializer = ProviderProfileSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def employee_collection(request):
+    if request.method == 'GET':
+        posts = Employee.objects.all()
+        serializer = EmployeeSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def user_image_collection(request):
+    if request.method == 'GET':
+        posts = UserImage.objects.all()
+        serializer = UserImageSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def comment_collection(request):
+    if request.method == 'GET':
+        posts = Comment.objects.all()
+        serializer = CommentSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def question_collection(request):
+    if request.method == 'GET':
+        posts = Question.objects.all()
+        serializer = QuestionSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def answer_collection(request):
+    if request.method == 'GET':
+        posts = Answer.objects.all()
+        serializer = AnswerSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def tag_collection(request):
+    if request.method == 'GET':
+        posts = Tag.objects.all()
+        serializer = TagSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def given_answers_collection(request):
+    if request.method == 'GET':
+        posts = GivenAnswers.objects.all()
+        serializer = GivenAnswersSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def question_set_collection(request):
+    if request.method == 'GET':
+        posts = QuestionSet.objects.all()
+        serializer = QuestionSetSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def session_tags_collection(request):
+    if request.method == 'GET':
+        posts = SessionTags.objects.all()
+        serializer = SessionTagsSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def question_step_collection(request):
+    if request.method == 'GET':
+        posts = QuestionStep.objects.all()
+        serializer = QuestionStepSerializer(posts, many=True)
+        return Response(serializer.data)
+
 
 
 class IndexView(generic.DetailView):
