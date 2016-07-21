@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'debug_toolbar',
     'rest_framework',
     'markdown',
     'django_filters',
