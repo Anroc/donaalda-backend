@@ -22,8 +22,8 @@ from django.conf.urls import url, include
 app_name = 'app'
 urlpatterns = [
     # api
-    url(r'^api/v1/categoryList/$', views.CategoryList.as_view(), name='category_collection'),
-    url(r'^api/v1/scenarioList/$', views.ScenarioList.as_view(), name='scenario_collection'),
+    url(r'^api/v1/CategoryList/$', views.CategoryList.as_view(), name='category_collection'),
+    url(r'^api/v1/ScenarioList/$', views.ScenarioList.as_view(), name='scenario_collection'),
     url(r'^api/v1/ScenarioDescriptionList/$', views.ScenarioDescriptionList.as_view(),
         name='ScenarioDescription_collection'),
     url(r'^api/v1/ProductSetList/$', views.ProductSetList.as_view(), name='ProductSet_collection'),
