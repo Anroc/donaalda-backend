@@ -31,7 +31,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = (
             'name', 'provider', 'product_type', 'serial_number', 'description', 'specifications', 'image1', 'image2',
-            'image3', 'thumbnail', 'end_of_life', 'tags',)
+            'image3', 'end_of_life', 'tags',)
 
 
 class ProductTypeSerializer(serializers.ModelSerializer):
