@@ -22,8 +22,24 @@ from django.conf.urls import url
 app_name = 'app'
 urlpatterns = [
     # api
-    url(r'^api/v1/posts/$', views.post_collection, name='post_collection'),
-    url(r'^api/v1/posts/(?P<pk>[0-9]+)$', views.post_element, name='post_element'),
+    url(r'^api/v1/category/$', views.category_collection, name='category_collection'),
+    url(r'^api/v1/scenario/$', views.scenario_collection, name='scenario_collection'),
+    url(r'^api/v1/scenariodescription/$', views.scenario_description_collection,
+        name='scenario_description_collection'),
+    url(r'^api/v1/productset/$', views.product_set_collection, name='product_set_collection'),
+    url(r'^api/v1/producttype/$', views.product_type_collection, name='product_type_collection'),
+    url(r'^api/v1/provider/$', views.provider_collection, name='provider_collection'),
+    url(r'^api/v1/providerprofile/$', views.provider_profile_collection, name='provider_profile_collection'),
+    url(r'^api/v1/employee/$', views.employee_collection, name='employee_collection'),
+    url(r'^api/v1/userimage/$', views.user_image_collection, name='user_image_collection'),
+    url(r'^api/v1/comment/$', views.comment_collection, name='comment_collection'),
+    url(r'^api/v1/question/$', views.question_collection, name='question_collection'),
+    url(r'^api/v1/answer/$', views.answer_collection, name='answer_collection'),
+    url(r'^api/v1/tag/$', views.tag_collection, name='tag_collection'),
+    url(r'^api/v1/givenanswers/$', views.given_answers_collection, name='given_answers_collection'),
+    url(r'^api/v1/questionset/$', views.question_set_collection, name='question_set_collection'),
+    url(r'^api/v1/sessiontags/$', views.session_tags_collection, name='session_tags_collection'),
+    url(r'^api/v1/questionstep/$', views.question_step_collection, name='question_step_collection'),
     # api end
 
     url(r'^contact$', views.ContactView.as_view(), name='contact'),
