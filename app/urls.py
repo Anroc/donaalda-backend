@@ -21,9 +21,12 @@ from django.conf.urls import url, include
 # Beware: insert new urls minding the regex pattern matching goes top to bottom
 app_name = 'app'
 urlpatterns = [
+    # api root
+    url(r'^api/v1/$', views.api_root, name='api_root'),
     # api
-    url(r'^api/v1/CategoryList/$', views.CategoryList.as_view(), name='category_collection'),
-    url(r'^api/v1/ScenarioList/$', views.ScenarioList.as_view(), name='scenario_collection'),
+    # url(r'^api/v1/Category/(?P<pk>[0-9]+)/highlight/$', views.CategoryHighlight.as_view()),
+    url(r'^api/v1/CategoryList/$', views.CategoryList.as_view(), name='Category_collection'),
+    url(r'^api/v1/ScenarioList/$', views.ScenarioList.as_view(), name='Scenario_collection'),
     url(r'^api/v1/ScenarioDescriptionList/$', views.ScenarioDescriptionList.as_view(),
         name='ScenarioDescription_collection'),
     url(r'^api/v1/ProductSetList/$', views.ProductSetList.as_view(), name='ProductSet_collection'),
@@ -42,8 +45,8 @@ urlpatterns = [
     url(r'^api/v1/SessionTagsList/$', views.SessionTagsList.as_view(), name='SessionTags_collection'),
     url(r'^api/v1/QuestionStepList/$', views.QuestionStepList.as_view(), name='QuestionSteps_collection'),
     # specific items
-    url(r'^api/v1/categoryDetail/(?P<pk>[0-9]+)/$', views.CategoryDetail.as_view(), name='category_detail_collection'),
-    url(r'^api/v1/scenarioDetail/(?P<pk>[0-9]+)/$', views.ScenarioDetail.as_view(), name='scenario_detail_collection'),
+    url(r'^api/v1/CategoryDetail/(?P<pk>[0-9]+)/$', views.CategoryDetail.as_view(), name='Category_detail_collection'),
+    url(r'^api/v1/ScenarioDetail/(?P<pk>[0-9]+)/$', views.ScenarioDetail.as_view(), name='Scenario_detail_collection'),
     url(r'^api/v1/ScenarioDescriptionDetail/(?P<pk>[0-9]+)/$', views.ScenarioDescriptionDetail.as_view(),
         name='ScenarioDescription_detail_collection'),
     url(r'^api/v1/ProductSetDetail/(?P<pk>[0-9]+)/$', views.ProductSetDetail.as_view(), name='ProductSet_detail_collection'),
