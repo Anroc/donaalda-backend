@@ -60,21 +60,9 @@
               <p>
                 Deine Donaalda
               </p>
-
             </h3>
-            <br/>
-            <div
-              ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
-              ng-controller="{% block ng_controller_theme %}questionController as vm{% endblock %}"
-              ng-cloak>
-              <md-button class="md-primary md-raised"
-                         onclick="window.print();">
-                Drück mich!
-              </md-button>
-            </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -136,6 +124,28 @@
       {% endfor %}
       {% endfor %}
       {% endif %}
+    </div>
+  </div>
+</section>
+
+<section id="fh5co-about" data-section="print">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center to-animate">
+        <h2 class="to-animate">Vergesslich?</h2>
+        <div>
+          Hier kannst Du meine Vorschläge <b>abspeichern</b> oder <b>ausdrucken</b>.
+        </div>
+        <div
+          ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
+          ng-controller="{% block ng_controller_theme %}questionController as vm{% endblock %}"
+          ng-cloak>
+          <md-button class="md-primary md-raised"
+                     onclick="window.print();">
+            Drück mich!
+          </md-button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
