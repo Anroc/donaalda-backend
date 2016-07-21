@@ -29,8 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'debug_toolbar',
-    'wkhtmltopdf',
+    #'debug_toolbar',
     'static_precompiler',
     'djangobower',
     'material',
