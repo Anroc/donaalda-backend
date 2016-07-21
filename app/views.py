@@ -14,186 +14,223 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.http import *
-from rest_framework import generics
+from rest_framework import generics, permissions
 from .serializers import *
+from .permissions import *
 
 
 class CategoryList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
 
 class CategoryDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
 
 class ScenarioList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Scenario.objects.all()
     serializer_class = ScenarioSerializer
 
 
 class ScenarioDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = Scenario.objects.all()
     serializer_class = ScenarioSerializer
 
 
 class ScenarioDescriptionList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = ScenarioDescription.objects.all()
     serializer_class = ScenarioDescriptionSerializer
 
 
 class ScenarioDescriptionDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = ScenarioDescription.objects.all()
     serializer_class = ScenarioDescriptionSerializer
 
 
 class ProductSetList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = ProductSet.objects.all()
     serializer_class = ProductSetSerializer
 
 
 class ProductSetDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = ProductSet.objects.all()
     serializer_class = ProductSetSerializer
 
 
 class ProductList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
 class ProductDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
 class ProductTypeList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = ProductType.objects.all()
     serializer_class = ProductTypeSerializer
 
 
 class ProductTypeDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = ProductType.objects.all()
     serializer_class = ProductTypeSerializer
 
 
 class ProviderList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
 
 
 class ProviderDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
 
 
 class ProviderProfileList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = ProviderProfile.objects.all()
     serializer_class = ProviderProfileSerializer
 
 
 class ProviderProfileDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = ProviderProfile.objects.all()
     serializer_class = ProviderProfileSerializer
 
 
 class EmployeeList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
 
 class EmployeeDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
 
 class UserImageList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = UserImage.objects.all()
     serializer_class = UserImageSerializer
 
 
 class UserImageDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = UserImage.objects.all()
     serializer_class = UserImageSerializer
 
 
 class CommentList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
 
 class CommentDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
 
 class QuestionList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
 
 class QuestionDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
 
 class AnswerList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
 
 
 class AnswerDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
 
 
 class TagList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
 
 class TagDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
 
 class GivenAnswersList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = GivenAnswers.objects.all()
     serializer_class = GivenAnswersSerializer
 
 
 class GivenAnswersDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = GivenAnswers.objects.all()
     serializer_class = GivenAnswersSerializer
 
 
 class QuestionSetList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = QuestionSet.objects.all()
     serializer_class = QuestionSetSerializer
 
 
 class QuestionSetDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = QuestionSet.objects.all()
     serializer_class = QuestionSetSerializer
 
 
 class SessionTagsList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = SessionTags.objects.all()
     serializer_class = SessionTagsSerializer
 
 
 class SessionTagsDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = SessionTags.objects.all()
     serializer_class = SessionTagsSerializer
 
 
 class QuestionStepList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = QuestionStep.objects.all()
     serializer_class = QuestionStepSerializer
 
 
 class QuestionStepDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
     queryset = QuestionStep.objects.all()
     serializer_class = QuestionStepSerializer
 
