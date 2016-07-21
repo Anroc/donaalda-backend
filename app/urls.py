@@ -17,53 +17,34 @@ Including another URLconf
 """
 from . import views
 from django.conf.urls import url, include
+from rest_framework.routers import DefaultRouter
+
+
+router = DefaultRouter()
+router.register(r'Category', views.CategoryViewSet)
+router.register(r'Scenario', views.ScenarioViewSet)
+router.register(r'ScenarioDescription', views.ScenarioDescriptionViewSet)
+router.register(r'ProductSet', views.ProductSetViewSet)
+router.register(r'Product', views.ProductViewSet)
+router.register(r'ProductType', views.ProductTypeViewSet)
+router.register(r'Provider', views.ProviderViewSet)
+router.register(r'ProviderProfile', views.ProviderProfileViewSet)
+router.register(r'Employee', views.EmployeeViewSet)
+router.register(r'Comment', views.CommentViewSet)
+router.register(r'Question', views.QuestionViewSet)
+router.register(r'Answer', views.AnswerViewSet)
+router.register(r'Tag', views.TagViewSet)
+router.register(r'GivenAnswers', views.GivenAnswersViewSet)
+router.register(r'QuestionSet', views.QuestionSetViewSet)
+router.register(r'SessionTags', views.SessionTagsViewSet)
+router.register(r'QuestionStep', views.QuestionStepViewSet)
 
 # Beware: insert new urls minding the regex pattern matching goes top to bottom
 app_name = 'app'
 urlpatterns = [
-    # api root
-    url(r'^api/v1/$', views.api_root, name='api_root'),
     # api
     # url(r'^api/v1/Category/(?P<pk>[0-9]+)/highlight/$', views.CategoryHighlight.as_view()),
-    url(r'^api/v1/CategoryList/$', views.CategoryList.as_view(), name='Category_collection'),
-    url(r'^api/v1/ScenarioList/$', views.ScenarioList.as_view(), name='Scenario_collection'),
-    url(r'^api/v1/ScenarioDescriptionList/$', views.ScenarioDescriptionList.as_view(),
-        name='ScenarioDescription_collection'),
-    url(r'^api/v1/ProductSetList/$', views.ProductSetList.as_view(), name='ProductSet_collection'),
-    url(r'^api/v1/ProductList/$', views.ProductList.as_view(), name='Product_collection'),
-    url(r'^api/v1/ProductTypeList/$', views.ProductTypeList.as_view(), name='ProductType_collection'),
-    url(r'^api/v1/ProviderList/$', views.ProviderList.as_view(), name='Provider_collection'),
-    url(r'^api/v1/ProviderProfileList/$', views.ProviderProfileList.as_view(), name='ProviderProfile_collection'),
-    url(r'^api/v1/EmployeeList/$', views.EmployeeList.as_view(), name='Employee_collection'),
-    url(r'^api/v1/UserImageList/$', views.UserImageList.as_view(), name='UserImage_collection'),
-    url(r'^api/v1/CommentList/$', views.CommentList.as_view(), name='Comment_collection'),
-    url(r'^api/v1/QuestionList/$', views.QuestionList.as_view(), name='Question_collection'),
-    url(r'^api/v1/AnswerList/$', views.AnswerList.as_view(), name='Answer_collection'),
-    url(r'^api/v1/TagList/$', views.TagList.as_view(), name='Tag_collection'),
-    url(r'^api/v1/GivenAnswersList/$', views.GivenAnswersList.as_view(), name='GivenAnswers_collection'),
-    url(r'^api/v1/QuestionSetList/$', views.QuestionSetList.as_view(), name='QuestionSet_collection'),
-    url(r'^api/v1/SessionTagsList/$', views.SessionTagsList.as_view(), name='SessionTags_collection'),
-    url(r'^api/v1/QuestionStepList/$', views.QuestionStepList.as_view(), name='QuestionSteps_collection'),
-    # specific items
-    url(r'^api/v1/CategoryDetail/(?P<pk>[0-9]+)/$', views.CategoryDetail.as_view(), name='Category_detail_collection'),
-    url(r'^api/v1/ScenarioDetail/(?P<pk>[0-9]+)/$', views.ScenarioDetail.as_view(), name='Scenario_detail_collection'),
-    url(r'^api/v1/ScenarioDescriptionDetail/(?P<pk>[0-9]+)/$', views.ScenarioDescriptionDetail.as_view(),
-        name='ScenarioDescription_detail_collection'),
-    url(r'^api/v1/ProductSetDetail/(?P<pk>[0-9]+)/$', views.ProductSetDetail.as_view(), name='ProductSet_detail_collection'),
-    url(r'^api/v1/ProductDetail/(?P<pk>[0-9]+)/$', views.ProductDetail.as_view(), name='Product_detail_collection'),
-    url(r'^api/v1/ProductTypeDetail/(?P<pk>[0-9]+)/$', views.ProductTypeDetail.as_view(), name='ProductType_detail_collection'),
-    url(r'^api/v1/ProviderDetail/(?P<pk>[0-9]+)/$', views.ProviderDetail.as_view(), name='Provider_detail_collection'),
-    url(r'^api/v1/ProviderProfileDetailDetail/(?P<pk>[0-9]+)/$', views.ProviderProfileDetail.as_view(), name='ProviderProfile_detail_collection'),
-    url(r'^api/v1/EmployeeDetail/(?P<pk>[0-9]+)/$', views.EmployeeDetail.as_view(), name='Employee_detail_collection'),
-    url(r'^api/v1/UserImageDetail/(?P<pk>[0-9]+)/$', views.UserImageDetail.as_view(), name='UserImage_detail_collection'),
-    url(r'^api/v1/CommentDetail/(?P<pk>[0-9]+)/$', views.CommentDetail.as_view(), name='Comment_detail_collection'),
-    url(r'^api/v1/QuestionDetail/(?P<pk>[0-9]+)/$', views.QuestionDetail.as_view(), name='Question_detail_collection'),
-    url(r'^api/v1/AnswerDetail/(?P<pk>[0-9]+)/$', views.AnswerDetail.as_view(), name='Answer_detail_collection'),
-    url(r'^api/v1/TagDetail/(?P<pk>[0-9]+)/$', views.TagDetail.as_view(), name='Tag_detail_collection'),
-    url(r'^api/v1/GivenAnswersDetail/(?P<pk>[0-9]+)/$', views.GivenAnswersDetail.as_view(), name='GivenAnswers_detail_collection'),
-    url(r'^api/v1/QuestionSetDetail/(?P<pk>[0-9]+)/$', views.QuestionSetDetail.as_view(), name='QuestionSet_detail_collection'),
-    url(r'^api/v1/SessionTagsDetail/(?P<pk>[0-9]+)/$', views.SessionTagsDetail.as_view(), name='SessionTags_detail_collection'),
-    url(r'^api/v1/QuestionStepDetail/(?P<pk>[0-9]+)/$', views.QuestionStepDetail.as_view(), name='QuestionSteps_detail_collection'),
+    url(r'^api/v1/', include(router.urls)),
     # FIXME: login for api browser, somehow not working yet
     url(r'^api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # api end
