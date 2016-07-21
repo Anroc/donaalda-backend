@@ -19,6 +19,32 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.http import *
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework import permissions
+from .serializers import CategorySerializer
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def post_collection(request):
+    if request.method == 'GET':
+        posts = Category.objects.all()
+        serializer = CategorySerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def post_element(request, pk):
+    try:
+        post = Category.objects.get(pk=pk)
+    except Category.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = CategorySerializer(post)
+        return Response(serializer.data)
 
 
 class IndexView(generic.DetailView):
@@ -81,7 +107,8 @@ class CategoryView(generic.ListView):
                        'category': Category.objects.get(name=category),
                        'qs_general': QuestionStep.objects.filter(name="Allgemeines"),
                        'qs_category': QuestionStep.objects.filter(name__contains="Auswahl"),
-                       'qs_category_specific': QuestionStep.objects.filter(name__contains="Detail").order_by('question_steps__order'),
+                       'qs_category_specific': QuestionStep.objects.filter(name__contains="Detail").order_by(
+                           'question_steps__order'),
                        'given_answers': given_answers,
                        })
 
@@ -248,7 +275,8 @@ def stepper_check(request):
     than a new entry is stored.
     """
     # print("Session %s" % request.session.session_key)
-    if SessionTags.objects.filter(session_id=request.session.session_key).exists() and request.session.session_key is not None:
+    if SessionTags.objects.filter(
+        session_id=request.session.session_key).exists() and request.session.session_key is not None:
         old_session = SessionTags.objects.get(session_id=request.session.session_key)
         old_session.session = None
         old_session.save()
