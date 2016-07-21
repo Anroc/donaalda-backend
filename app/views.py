@@ -23,7 +23,17 @@ class CategoryList(generics.ListCreateAPIView):
     serializer_class = CategorySerializer
 
 
+class CategoryDetail(generics.RetrieveAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
 class ScenarioList(generics.ListCreateAPIView):
+    queryset = Scenario.objects.all()
+    serializer_class = ScenarioSerializer
+
+
+class ScenarioDetail(generics.RetrieveAPIView):
     queryset = Scenario.objects.all()
     serializer_class = ScenarioSerializer
 
@@ -33,7 +43,17 @@ class ScenarioDescriptionList(generics.ListCreateAPIView):
     serializer_class = ScenarioDescriptionSerializer
 
 
+class ScenarioDescriptionDetail(generics.RetrieveAPIView):
+    queryset = ScenarioDescription.objects.all()
+    serializer_class = ScenarioDescriptionSerializer
+
+
 class ProductSetList(generics.ListCreateAPIView):
+    queryset = ProductSet.objects.all()
+    serializer_class = ProductSetSerializer
+
+
+class ProductSetDetail(generics.RetrieveAPIView):
     queryset = ProductSet.objects.all()
     serializer_class = ProductSetSerializer
 
@@ -43,7 +63,17 @@ class ProductList(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
 
 
+class ProductDetail(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
 class ProductTypeList(generics.ListCreateAPIView):
+    queryset = ProductType.objects.all()
+    serializer_class = ProductTypeSerializer
+
+
+class ProductTypeDetail(generics.RetrieveAPIView):
     queryset = ProductType.objects.all()
     serializer_class = ProductTypeSerializer
 
@@ -53,7 +83,17 @@ class ProviderList(generics.ListCreateAPIView):
     serializer_class = ProviderSerializer
 
 
+class ProviderDetail(generics.RetrieveAPIView):
+    queryset = Provider.objects.all()
+    serializer_class = ProviderSerializer
+
+
 class ProviderProfileList(generics.ListCreateAPIView):
+    queryset = ProviderProfile.objects.all()
+    serializer_class = ProviderProfileSerializer
+
+
+class ProviderProfileDetail(generics.RetrieveAPIView):
     queryset = ProviderProfile.objects.all()
     serializer_class = ProviderProfileSerializer
 
@@ -63,7 +103,17 @@ class EmployeeList(generics.ListCreateAPIView):
     serializer_class = EmployeeSerializer
 
 
+class EmployeeDetail(generics.RetrieveAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
+
 class UserImageList(generics.ListCreateAPIView):
+    queryset = UserImage.objects.all()
+    serializer_class = UserImageSerializer
+
+
+class UserImageDetail(generics.RetrieveAPIView):
     queryset = UserImage.objects.all()
     serializer_class = UserImageSerializer
 
@@ -73,7 +123,17 @@ class CommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
 
 
+class CommentDetail(generics.RetrieveAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+
 class QuestionList(generics.ListCreateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+
+
+class QuestionDetail(generics.RetrieveAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
@@ -83,7 +143,17 @@ class AnswerList(generics.ListCreateAPIView):
     serializer_class = AnswerSerializer
 
 
+class AnswerDetail(generics.RetrieveAPIView):
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer
+
+
 class TagList(generics.ListCreateAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+
+class TagDetail(generics.RetrieveAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
@@ -93,7 +163,17 @@ class GivenAnswersList(generics.ListCreateAPIView):
     serializer_class = GivenAnswersSerializer
 
 
+class GivenAnswersDetail(generics.RetrieveAPIView):
+    queryset = GivenAnswers.objects.all()
+    serializer_class = GivenAnswersSerializer
+
+
 class QuestionSetList(generics.ListCreateAPIView):
+    queryset = QuestionSet.objects.all()
+    serializer_class = QuestionSetSerializer
+
+
+class QuestionSetDetail(generics.RetrieveAPIView):
     queryset = QuestionSet.objects.all()
     serializer_class = QuestionSetSerializer
 
@@ -103,7 +183,17 @@ class SessionTagsList(generics.ListCreateAPIView):
     serializer_class = SessionTagsSerializer
 
 
+class SessionTagsDetail(generics.RetrieveAPIView):
+    queryset = SessionTags.objects.all()
+    serializer_class = SessionTagsSerializer
+
+
 class QuestionStepList(generics.ListCreateAPIView):
+    queryset = QuestionStep.objects.all()
+    serializer_class = QuestionStepSerializer
+
+
+class QuestionStepDetail(generics.RetrieveAPIView):
     queryset = QuestionStep.objects.all()
     serializer_class = QuestionStepSerializer
 
