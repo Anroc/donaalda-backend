@@ -33,7 +33,7 @@
             <md-input-container>
               <md-select ng-select="1=1" ng-model="vm.stepData[0].data.question{{ question.pk }}" placeholder="Bitte Anzahl angeben">
                 {% for answer in question.answer_set.all %}
-                <md-option value='{{ answer.pk }}' {% if answer in given_answers %} ng-value="True" {% endif %}>
+                <md-option value='{{ answer.pk }}' {% if answer in given_answers %} selected {% endif %}>
                   {{ answer.answer_text }}
                 </md-option>
                 {% endfor %}
