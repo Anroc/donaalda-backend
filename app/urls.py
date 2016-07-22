@@ -19,7 +19,6 @@ from . import views
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 
-
 router = DefaultRouter(schema_title='Pastebin API')
 router.register(r'category', views.CategoryViewSet)
 router.register(r'scenario', views.ScenarioViewSet)
