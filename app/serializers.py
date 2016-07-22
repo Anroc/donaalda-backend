@@ -17,7 +17,7 @@ class ScenarioSerializer(serializers.ModelSerializer):
 class ScenarioDescriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = ScenarioDescription
-        fields = ('pk', 'belongs_to_scenario', 'description', 'image', 'thumbnail', 'left_right', 'order',)
+        fields = ('pk', 'belongs_to_scenario', 'description', 'image', 'left_right', 'order',)
 
 
 class ProductSetSerializer(serializers.ModelSerializer):
