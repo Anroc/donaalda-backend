@@ -15,6 +15,8 @@ class ScenarioSerializer(serializers.ModelSerializer):
 
 
 class ScenarioDescriptionSerializer(serializers.ModelSerializer):
+    belongs_to_scenario = ScenarioSerializer()
+
     class Meta:
         model = ScenarioDescription
         fields = ('pk', 'belongs_to_scenario', 'description', 'image', 'left_right', 'order',)
@@ -75,7 +77,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ('pk', 'question_text', 'answer_presentation', 'order',)
+        fields = ('pk', 'question_text', 'answer_presentation', 'order', 'answer_set')
 
 
 class AnswerSerializer(serializers.ModelSerializer):
