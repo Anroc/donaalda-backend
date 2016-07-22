@@ -11,7 +11,8 @@ class CategorySerializer(serializers.ModelSerializer):
 class ScenarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scenario
-        fields = ('pk', 'name', 'url_name', 'short_description', 'picture', 'provider', 'scenario_product_set', 'categories',)
+        fields = (
+            'pk', 'name', 'url_name', 'short_description', 'picture', 'provider', 'scenario_product_set', 'categories',)
 
 
 class ScenarioDescriptionSerializer(serializers.ModelSerializer):
@@ -32,8 +33,9 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ('pk',
-            'name', 'provider', 'product_type', 'serial_number', 'description', 'specifications', 'image1', 'image2',
-            'image3', 'end_of_life', 'tags',)
+                  'name', 'provider', 'product_type', 'serial_number', 'description', 'specifications', 'image1',
+                  'image2',
+                  'image3', 'end_of_life', 'tags',)
 
 
 class ProductTypeSerializer(serializers.ModelSerializer):
@@ -52,8 +54,9 @@ class ProviderProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProviderProfile
         fields = ('pk',
-            'public_name', 'url_name', 'logo_image', 'profile_image', 'banner_image', 'introduction', 'contact_email',
-            'website', 'owner',)
+                  'public_name', 'url_name', 'logo_image', 'profile_image', 'banner_image', 'introduction',
+                  'contact_email',
+                  'website', 'owner',)
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
