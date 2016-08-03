@@ -1,0 +1,18 @@
+{% load staticfiles %}
+<head>
+{% block head %}
+{% include "app/html_templates/header/headerTemplate.html" %}
+{% endblock %}
+</head>
+
+<body>
+{% block navbar %}
+{% include "app/html_templates/header/navbarHeader.html" %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% include "app/html_templates/footer/bodyBackBone.html" %}
+
+</body>
