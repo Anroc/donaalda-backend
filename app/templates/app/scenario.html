@@ -83,23 +83,27 @@
                   </div>
                   {% comment %}
                   <div class="col-md-4">
-                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
+                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}"
+                         alt="{{scenario.image}}">
                   </div>
                   {% endcomment %}
                   <div class="col-md-4">
                     <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
-                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
+                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}"
+                           alt="{{scenario.image.url}}">
                     </a>
                   </div>
                   {% else %}
                   {% comment %}
                   <div class="col-md-4">
-                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
+                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}"
+                         alt="{{scenario.image}}">
                   </div>
                   {% endcomment %}
                   <div class="col-md-4">
                     <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
-                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
+                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}"
+                           alt="{{scenario.image.url}}">
                     </a>
                   </div>
                   <div class="col-md-8">
@@ -122,7 +126,61 @@
 {% endwith %}
 
 {% if current_scenario %}
+
+
+<script src="{% static 'app/assets/js/owl.carousel.min.js' %}"></script>
+<script>
+  // Owl Carousel
+
+  var owlCarouselFeatureSlide = function() {
+
+    var owl2 = $('.owl-carousel-x');
+    owl2.owlCarousel({
+      pagination: true,
+      autoplay: true,
+      navigation: true,
+      dots: false,
+      stopOnHover: true,
+      paginationSpeed : 500,
+      items: 3,
+      loop: true,
+      margin: 0,
+      lazyLoad: true,
+      responsiveClass: true,
+      nav: true,
+      smartSpeed: 500,
+      navText: [
+        "WENIGER",
+        "MEHR"
+      ],
+      //navText: [
+      //  "<i class='ti-arrow-left owl-direction'></i>",
+      //  "<i class='ti-arrow-right owl-direction'></i>"
+      //],
+      responsive: {
+        0: {
+          items: 3,
+          nav: true
+        },
+        600: {
+          items: 3,
+        },
+        1000: {
+          items: 3,
+        }
+      }
+    });
+  };
+  console.log("hey there");
+  $(function(){
+    owlCarouselFeatureSlide();
+  });
+</script>
+
+
 <section id="fh5co-work" data-section="products">
+
+
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-center">
@@ -130,66 +188,84 @@
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
             <h3>
-              Damit Du dieses Scenario in deinem Smart Home realisieren kannst, schlägt Dir Donaalda folgende Produkte vor
+              Damit Du dieses Scenario in deinem Smart Home realisieren kannst, schlägt Dir Donaalda folgende Produkte
+              vor
             </h3>
           </div>
         </div>
       </div>
     </div>
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height:20em">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <!-- foreach product in products -->
-        {% for indicator in current_scenario.scenario_product_set.products.all %}
-        {% if forloop.counter0|divisibleby:3 %}
-        <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
-        {% endif %}
-        {% endfor %}
-      </ol>
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-        {% for item in current_scenario.scenario_product_set.products.all %}
-        {% if forloop.counter == 1 %}
-        <div class="item active" style="margin-left: 50px; margin-right: 50px;">
-          {% endif %}
-          <a href="{% url 'app:product' item.pk %}">
-            <div class="col-md-4">
-              <div class="card" style="background-color:white; border-radius:5px">
-                <div class="card-block" style="padding-top:10px; padding-bottom:10px">
-                  <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ item.name }}</h4>
-                  <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ item.provider }}</h6>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="owl-carousel-fullwidth fh5co-light-arrow owl-carousel-x">
+          {% for product in current_scenario.scenario_product_set.products.all %}
+          <div class="item">
+              <a href="{% url 'app:product' product.pk %}">
+                <div class="col-md-12">
+                  <div class="card" style="background-color:white; border-radius:5px">
+                    <div class="card-block" style="padding-top:10px; padding-bottom:10px">
+                      <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ product.name }}</h4>
+                      <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">
+                        {{ product.provider }}
+                      </h6>
+                    </div>
+                    <div style="height: 250px;">
+                      <img src="{{ product.image1.url }}" alt="" class="center-block" style="max-height: 95%; max-width: 95%;">
+                    </div>
+                  </div>
                 </div>
-                <div style="height: 250px;">
-                  <img src="{{ item.image1.url }}" alt="" class="center-block" style="max-height: 95%; max-width: 95%;">
-                </div>
-              </div>
-            </div>
-          </a>
-          {% if forloop.counter == current_scenario.scenario_product_set.products.all|length %}
+              </a>
+          </div>
+          <!-- END .item -->
+          {% endfor %}
+
         </div>
-        {% elif forloop.counter|divisibleby:3 %}
       </div>
-      <div class="item" style="margin-left: 50px; margin-right: 50px;">
-        {% endif %}
-        {% endfor %}
-      </div>
-
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
     </div>
   </div>
 </section>
+
+
 {% endif %}
 
 {% include "app/html_templates/sections/commentSection.html" %}
+
+
+
+<div class="fh5co-main">
+
+  <section id="fh5co-testimonial">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 class="fh5co-uppercase-heading-sm">Testimony</h2>
+          <div class="owl-carousel-fullwidth fh5co-light-arrow owl-carousel-x">
+            <div class="item">
+              <blockquote>
+                <p class="fh5co-serif">&ldquo;Design is not just what it looks like and feels like.
+                  Design is how it works.&rdquo;</p>
+                <p class="fh5co-testimonial-author"><cite>&mdash; Steve Jobs</cite></p>
+              </blockquote>
+            </div>
+            <!-- END .item -->
+            <div class="item">
+
+              <blockquote>
+                <p class="fh5co-serif">&ldquo;Design is not just what it looks like and feels like.
+                  Design is how it works.&rdquo;</p>
+                <p class="fh5co-testimonial-author"><cite>&mdash; Steve Jobs</cite></p>
+              </blockquote>
+            </div>
+            <!-- END .item -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
 
 {% include "app/html_templates/footer/bodyBackBone.html" %}
 </body>
