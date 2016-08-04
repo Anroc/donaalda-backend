@@ -136,19 +136,27 @@
 
     var owl2 = $('.owl-carousel-x');
     owl2.owlCarousel({
-      pagination: false,
+      pagination: true,
+      autoplay: true,
+      navigation: true,
+      dots: true,
+      stopOnHover: true,
+      paginationSpeed : 500,
       items: 3,
       loop: true,
       margin: 0,
       lazyLoad: true,
       responsiveClass: true,
       nav: true,
-      dots: false,
       smartSpeed: 500,
       navText: [
-        "<i class='ti-arrow-left owl-direction'></i>",
-        "<i class='ti-arrow-right owl-direction'></i>"
+        "WENIGER",
+        "MEHR"
       ],
+      //navText: [
+      //  "<i class='ti-arrow-left owl-direction'></i>",
+      //  "<i class='ti-arrow-right owl-direction'></i>"
+      //],
       responsive: {
         0: {
           items: 3,
