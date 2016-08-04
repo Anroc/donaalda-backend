@@ -126,8 +126,103 @@
 {% endwith %}
 
 {% if current_scenario %}
+
+
+<script src="{% static 'app/assets/js/owl.carousel.min.js' %}"></script>
+<script>
+  // Owl Carousel
+
+  var owlCarouselFeatureSlide = function() {
+
+    var owl2 = $('.owl-carousel-x');
+    owl2.owlCarousel({
+      items: 3,
+      loop: true,
+      margin: 0,
+      lazyLoad: true,
+      responsiveClass: true,
+      nav: true,
+      dots: true,
+      smartSpeed: 500,
+      navText: [
+        "<i class='ti-arrow-left owl-direction'></i>",
+        "<i class='ti-arrow-right owl-direction'></i>"
+      ],
+      responsive: {
+        0: {
+          items: 1,
+          nav: true
+        },
+        600: {
+          items: 1,
+          nav: true,
+        },
+        1000: {
+          items: 1,
+          nav: true,
+        }
+      }
+    });
+  };
+  console.log("hey there");
+  $(function(){
+    owlCarouselFeatureSlide();
+  });
+</script>
+
+
 <section id="fh5co-work" data-section="products">
+
+
   <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Produkte</h2>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 subtext to-animate">
+            <h3>
+              Damit Du dieses Scenario in deinem Smart Home realisieren kannst, schlägt Dir Donaalda folgende Produkte
+              vor
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="owl-carousel-fullwidth fh5co-light-arrow owl-carousel-x">
+          {% for product in current_scenario.scenario_product_set.products.all %}
+          <div class="item">
+              <a href="{% url 'app:product' product.pk %}">
+                <div class="col-md-4">
+                  <div class="card" style="background-color:white; border-radius:5px">
+                    <div class="card-block" style="padding-top:10px; padding-bottom:10px">
+                      <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ product.name }}</h4>
+                      <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">
+                        {{ product.provider }}
+                      </h6>
+                    </div>
+                    <div style="height: 250px;">
+                      <img src="{{ product.image1.url }}" alt="" class="center-block" style="max-height: 95%; max-width: 95%;">
+                    </div>
+                  </div>
+                </div>
+              </a>
+          </div>
+          <!-- END .item -->
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+
+
+
     <div class="row">
       <div class="col-md-12 section-heading text-center">
         <h2 class="to-animate">Produkte</h2>
@@ -202,47 +297,6 @@
 {% include "app/html_templates/sections/commentSection.html" %}
 
 
-<script src="{% static 'app/assets/js/owl.carousel.min.js' %}"></script>
-<script>
-  // Owl Carousel
-
-  var owlCarouselFeatureSlide = function() {
-
-    var owl2 = $('.owl-carousel-x');
-    owl2.owlCarousel({
-      items: 1,
-      loop: true,
-      margin: 0,
-      lazyLoad: true,
-      responsiveClass: true,
-      nav: true,
-      dots: true,
-      smartSpeed: 500,
-      navText: [
-        "<i class='ti-arrow-left owl-direction'></i>",
-        "<i class='ti-arrow-right owl-direction'></i>"
-      ],
-      responsive: {
-        0: {
-          items: 1,
-          nav: true
-        },
-        600: {
-          items: 1,
-          nav: true,
-        },
-        1000: {
-          items: 1,
-          nav: true,
-        }
-      }
-    });
-  };
-  console.log("hey there");
-  $(function(){
-    owlCarouselFeatureSlide();
-  });
-</script>
 
 <div class="fh5co-main">
 
