@@ -194,7 +194,7 @@
           {% for product in current_scenario.scenario_product_set.products.all %}
           <div class="item">
               <a href="{% url 'app:product' product.pk %}">
-                <div class="col-md-4">
+                <div class="col-md-12">
                   <div class="card" style="background-color:white; border-radius:5px">
                     <div class="card-block" style="padding-top:10px; padding-bottom:10px">
                       <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ product.name }}</h4>
