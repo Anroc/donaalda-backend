@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     #'debug_toolbar',
+    #'django_extensions',
     'static_precompiler',
     'djangobower',
     'material',
@@ -138,7 +139,8 @@ BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'app/static/bower_components')
 
 BOWER_INSTALLED_APPS = (
     'md-steppers#0.2.4',
-    'jquery'
+    'jquery',
+    'OwlCarousel',
 )
 
 FIXTURE_DIRS = (
@@ -172,4 +174,9 @@ STATIC_PRECOMPILER_COMPILERS = (
 )
 
 STATIC_PRECOMPILER_ROOT = os.path.join(BASE_DIR, 'app/static/app/assets')
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
 

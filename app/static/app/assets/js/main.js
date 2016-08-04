@@ -507,9 +507,10 @@
         }
     };
 
-
     // Document on load.
     $(function () {
+
+        // TODO owl carousel
 
         parallax();
 
@@ -536,6 +537,7 @@
         contactAnimate();
         homeGridAnimate();
         workGridAnimate();
+
     });
 
 

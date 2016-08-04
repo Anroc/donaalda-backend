@@ -83,23 +83,27 @@
                   </div>
                   {% comment %}
                   <div class="col-md-4">
-                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
+                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}"
+                         alt="{{scenario.image}}">
                   </div>
                   {% endcomment %}
                   <div class="col-md-4">
                     <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
-                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
+                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}"
+                           alt="{{scenario.image.url}}">
                     </a>
                   </div>
                   {% else %}
                   {% comment %}
                   <div class="col-md-4">
-                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image}}">
+                    <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}"
+                         alt="{{scenario.image}}">
                   </div>
                   {% endcomment %}
                   <div class="col-md-4">
                     <a href="{{ scenario.image.url }}" class="fh5co-project-item image-popup to-animate">
-                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}" alt="{{scenario.image.url}}">
+                      <img style="height:auto; width:100%; margin: 5px;" src="{{scenario.image.url}}"
+                           alt="{{scenario.image.url}}">
                     </a>
                   </div>
                   <div class="col-md-8">
@@ -130,7 +134,8 @@
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
             <h3>
-              Damit Du dieses Scenario in deinem Smart Home realisieren kannst, schlägt Dir Donaalda folgende Produkte vor
+              Damit Du dieses Scenario in deinem Smart Home realisieren kannst, schlägt Dir Donaalda folgende Produkte
+              vor
             </h3>
           </div>
         </div>
@@ -142,7 +147,8 @@
         <!-- foreach product in products -->
         {% for indicator in current_scenario.scenario_product_set.products.all %}
         {% if forloop.counter0|divisibleby:3 %}
-        <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
+        <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter0 == 0 %}
+            class="active" {% endif %}></li>
         {% endif %}
         {% endfor %}
       </ol>
@@ -158,7 +164,9 @@
               <div class="card" style="background-color:white; border-radius:5px">
                 <div class="card-block" style="padding-top:10px; padding-bottom:10px">
                   <h4 class="card-title" style="text-align:center; margin-bottom:0">{{ item.name }}</h4>
-                  <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">{{ item.provider }}</h6>
+                  <h6 class="card-subtitle text-muted" style="text-align:center; margin-bottom:0">
+                    {{ item.provider }}
+                  </h6>
                 </div>
                 <div style="height: 250px;">
                   <img src="{{ item.image1.url }}" alt="" class="center-block" style="max-height: 95%; max-width: 95%;">
@@ -187,9 +195,88 @@
     </div>
   </div>
 </section>
+
+
 {% endif %}
 
 {% include "app/html_templates/sections/commentSection.html" %}
+
+
+<script src="{% static 'app/assets/js/owl.carousel.min.js' %}"></script>
+<script>
+  // Owl Carousel
+
+  var owlCarouselFeatureSlide = function() {
+
+    var owl2 = $('.owl-carousel-x');
+    owl2.owlCarousel({
+      items: 1,
+      loop: true,
+      margin: 0,
+      lazyLoad: true,
+      responsiveClass: true,
+      nav: true,
+      dots: true,
+      smartSpeed: 500,
+      navText: [
+        "<i class='ti-arrow-left owl-direction'></i>",
+        "<i class='ti-arrow-right owl-direction'></i>"
+      ],
+      responsive: {
+        0: {
+          items: 1,
+          nav: true
+        },
+        600: {
+          items: 1,
+          nav: true,
+        },
+        1000: {
+          items: 1,
+          nav: true,
+        }
+      }
+    });
+  };
+  console.log("hey there");
+  $(function(){
+    owlCarouselFeatureSlide();
+  });
+</script>
+
+<div class="fh5co-main">
+
+  <section id="fh5co-testimonial">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 class="fh5co-uppercase-heading-sm">Testimony</h2>
+          <div class="owl-carousel-fullwidth fh5co-light-arrow owl-carousel-x">
+            <div class="item">
+              <blockquote>
+                <p class="fh5co-serif">&ldquo;Design is not just what it looks like and feels like.
+                  Design is how it works.&rdquo;</p>
+                <p class="fh5co-testimonial-author"><cite>&mdash; Steve Jobs</cite></p>
+              </blockquote>
+            </div>
+            <!-- END .item -->
+            <div class="item">
+
+              <blockquote>
+                <p class="fh5co-serif">&ldquo;Design is not just what it looks like and feels like.
+                  Design is how it works.&rdquo;</p>
+                <p class="fh5co-testimonial-author"><cite>&mdash; Steve Jobs</cite></p>
+              </blockquote>
+            </div>
+            <!-- END .item -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
 
 {% include "app/html_templates/footer/bodyBackBone.html" %}
 </body>
