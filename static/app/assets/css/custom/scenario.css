@@ -1022,3 +1022,221 @@
     -ms-border-radius: 50%;
     border-radius: 50%;
 }
+
+
+#fh5co-testimonial {
+    padding: 10em 0;
+    background: #000 url(../images/hero2.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+@media screen and (max-width: 768px) {
+    #fh5co-testimonial {
+        padding: 3em 0;
+    }
+}
+#fh5co-testimonial blockquote {
+    padding-left: 0;
+    width: 70%;
+    margin: 0 auto;
+    color: #ffffff;
+    border-left: none;
+    font-size: 45px;
+    line-height: 57px;
+}
+@media screen and (max-width: 768px) {
+    #fh5co-testimonial blockquote {
+        width: 100%;
+        font-size: 35px;
+        line-height: 47px;
+    }
+}
+#fh5co-testimonial blockquote p {
+    text-align: center;
+    color: #ffffff;
+}
+#fh5co-testimonial .fh5co-testimonial-author {
+    font-size: 18px;
+}
+#fh5co-testimonial .fh5co-uppercase-heading-sm {
+    color: #ffffff;
+}
+
+* Owl Override Style */
+.owl-carousel .owl-controls,
+.owl-carousel-posts .owl-controls {
+    margin-top: 0;
+}
+
+.owl-carousel .owl-controls .owl-nav .owl-next,
+.owl-carousel .owl-controls .owl-nav .owl-prev,
+.owl-carousel-posts .owl-controls .owl-nav .owl-next,
+.owl-carousel-posts .owl-controls .owl-nav .owl-prev {
+    top: 50%;
+    margin-top: -29px;
+    z-index: 9999;
+    position: absolute;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.owl-carousel-posts .owl-controls .owl-nav .owl-next,
+.owl-carousel-posts .owl-controls .owl-nav .owl-prev {
+    top: 24%;
+}
+
+.owl-carousel .owl-controls .owl-nav .owl-next,
+.owl-carousel-posts .owl-controls .owl-nav .owl-next {
+    right: -40px;
+}
+.owl-carousel .owl-controls .owl-nav .owl-next:hover,
+.owl-carousel-posts .owl-controls .owl-nav .owl-next:hover {
+    margin-right: -10px;
+}
+
+.owl-carousel .owl-controls .owl-nav .owl-prev,
+.owl-carousel-posts .owl-controls .owl-nav .owl-prev {
+    left: -40px;
+}
+.owl-carousel .owl-controls .owl-nav .owl-prev:hover,
+.owl-carousel-posts .owl-controls .owl-nav .owl-prev:hover {
+    margin-left: -10px;
+}
+
+.owl-carousel-posts .owl-controls .owl-nav .owl-next {
+    right: -50px;
+}
+@media screen and (max-width: 768px) {
+    .owl-carousel-posts .owl-controls .owl-nav .owl-next {
+        right: 0px;
+    }
+}
+
+.owl-carousel-posts .owl-controls .owl-nav .owl-prev {
+    left: -50px;
+}
+@media screen and (max-width: 768px) {
+    .owl-carousel-posts .owl-controls .owl-nav .owl-prev {
+        left: 0px;
+    }
+}
+
+.owl-carousel-posts .owl-controls .owl-nav .owl-next i,
+.owl-carousel-posts .owl-controls .owl-nav .owl-prev i,
+.owl-carousel-fullwidth .owl-controls .owl-nav .owl-next i,
+.owl-carousel-fullwidth .owl-controls .owl-nav .owl-prev i {
+    color: #2e2e2e;
+}
+.owl-carousel-posts .owl-controls .owl-nav .owl-next:hover i,
+.owl-carousel-posts .owl-controls .owl-nav .owl-prev:hover i,
+.owl-carousel-fullwidth .owl-controls .owl-nav .owl-next:hover i,
+.owl-carousel-fullwidth .owl-controls .owl-nav .owl-prev:hover i {
+    color: #000000;
+}
+
+.owl-carousel-fullwidth.fh5co-light-arrow .owl-controls .owl-nav .owl-next i,
+.owl-carousel-fullwidth.fh5co-light-arrow .owl-controls .owl-nav .owl-prev i {
+    color: #ffffff;
+}
+.owl-carousel-fullwidth.fh5co-light-arrow .owl-controls .owl-nav .owl-next:hover i,
+.owl-carousel-fullwidth.fh5co-light-arrow .owl-controls .owl-nav .owl-prev:hover i {
+    color: #ffffff;
+}
+
+@media screen and (max-width: 768px) {
+    .owl-theme .owl-controls .owl-nav {
+        display: none;
+    }
+}
+
+.owl-theme .owl-controls .owl-nav [class*="owl-"] {
+    background: none !important;
+}
+.owl-theme .owl-controls .owl-nav [class*="owl-"] i {
+    font-size: 30px;
+}
+.owl-theme .owl-controls .owl-nav [class*="owl-"] i:hover, .owl-theme .owl-controls .owl-nav [class*="owl-"] i:focus {
+    background: none !important;
+}
+.owl-theme .owl-controls .owl-nav [class*="owl-"]:hover, .owl-theme .owl-controls .owl-nav [class*="owl-"]:focus {
+    background: none !important;
+}
+
+.owl-theme .owl-dots {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.owl-carousel-fullwidth.owl-theme .owl-dots {
+    bottom: 0;
+    margin-bottom: -2.5em;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+    width: 15px;
+    height: 15px;
+    background: #28bbf8;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+.owl-theme .owl-dots .owl-dot span:hover {
+    background: none;
+    border: 2px solid #28bbf8;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: none;
+    border: 2px solid #28bbf8;
+}
+
+
+#fh5co-main {
+    margin-top: 600px;
+    padding-top: 50px;
+    z-index: 102;
+    position: relative;
+    background: #ffffff;
+}
+@media screen and (max-width: 768px) {
+    #fh5co-main {
+        margin-top: 0px;
+        padding-top: 20px;
+    }
+}
+
+body.inner-page #fh5co-main {
+    margin-top: 400px;
+}
+@media screen and (max-width: 768px) {
+    body.inner-page #fh5co-main {
+        margin-top: 0px;
+        padding-top: 20px;
+    }
+}
+
+#fh5co-hero,
+#fh5co-main,
+#fh5co-logo-mobile-wrap {
+    -moz-transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    transform: translateX(0px);
+}
+
+body.fh5co-mobile-menu-visible #fh5co-hero,
+body.fh5co-mobile-menu-visible #fh5co-main,
+body.fh5co-mobile-menu-visible #fh5co-logo-mobile-wrap {
+    -moz-transform: translateX(275px);
+    -webkit-transform: translateX(275px);
+    -ms-transform: translateX(275px);
+    transform: translateX(275px);
+}
