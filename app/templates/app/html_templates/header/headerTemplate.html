@@ -38,6 +38,10 @@
     <link rel="stylesheet" href="{% static 'app/assets/css/custom/base.css' %}">
     <link rel="stylesheet" href="{% static 'app/assets/css/custom/scenario.css' %}">
 
+    <!-- TODO check dat owl -->
+    <script src="{% static 'app/assets/js/owl.carousel.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'app/assets/css/given/owl.carousel.min.css' %}">
+
   {% elif navInfo == 'provider' %}
 
     <title>DONAALDA - {{ provider.public_name }}</title>
@@ -127,6 +131,7 @@
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
   <script src="{% static 'app/assets/js/google_map.js' %}"></script>
+
 
   <script>
     $(document).ready(function () {
