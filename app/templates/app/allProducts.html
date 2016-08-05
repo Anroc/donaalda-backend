@@ -6,13 +6,13 @@
 <link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
 {% endcomment %}
 
+{% if product.provider.is_visible %}
 <script>
-  {% if product.provider.is_visible %}
   function provider() {
     location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
   }
-  {% endif %}
 </script>
+{% endif %}
 
 <body ng-app="allProductsApp">
 

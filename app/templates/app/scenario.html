@@ -140,6 +140,9 @@
 
 
 <script src="{% static 'app/assets/js/owl.carousel.min.js' %}"></script>
+<link href="{% static 'app/assets/css/given/owl.carousel.min.css' %}">
+<link href="{% static 'app/assets/css/given/owl.theme.default.min.css' %}">
+
 <script>
   // Owl Carousel
 
@@ -161,12 +164,8 @@
       nav: true,
       smartSpeed: 500,
       navText: [
-        "LESS",
-        "MEHR"
-      ],
-      navText: [
-        "<i class='ti-arrow-left owl-direction'></i>",
-        "<i class='ti-arrow-right owl-direction'></i>"
+      "<i class='ti-arrow-left owl-direction'><</i>",
+      "<i class='ti-arrow-right owl-direction'>></i>"
       ],
       responsive: {
         0: {
