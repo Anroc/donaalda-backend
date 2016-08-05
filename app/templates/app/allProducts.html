@@ -1,22 +1,23 @@
+{% extends "app/base.html" %}
+
+{% block head %}
+  {% with navInfo="filter" %}
+    {{ block.super }}
+  {% endwith %}
+{% endblock %}
+
+{% block navbar %}
+  {% with navInfo="filter" %}
+    {{ block.super }}
+  {% endwith %}
+{% endblock %}
+
+{% block content %}
+
 {% load staticfiles %}
-{% include "app/html_templates/header/headerTemplate.html" with navInfo='filter' %}
 
-{% comment %}
-{% load compile_static %}
-<link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
-{% endcomment %}
-
-{% if product.provider.is_visible %}
-<script>
-  function provider() {
-    location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
-  }
-</script>
-{% endif %}
 
 <body ng-app="allProductsApp">
-
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='filter'%}
 
 <section id="fh5co-page" data-section="home"
          style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
@@ -66,8 +67,9 @@
 
   <!--hersteller-filter-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-    <legend>Hersteller-Filter</legend>
+
     <div class="container">
+      <legend>Hersteller-Filter</legend>
       <div layout="row" layout-align="start center">
         {% for provider in provider_list %}
         <div flex>
@@ -86,8 +88,8 @@
 
   <!--kategorie filter-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-    <legend>Kategorie-Filter</legend>
     <div class="container">
+      <legend>Kategorie-Filter</legend>
       <div layout="row" layout-align="start center">
         {% for category in category_list %}
         <div flex>
@@ -135,8 +137,8 @@
 
   <!--preis-slider-->
   <div ng-controller="AppCtrl2" class="md-padding" ng-cloak>
-    <legend>Preis-Filter</legend>
     <div class="container">
+      <legend>Preis-Filter</legend>
       <div ng-init="lower=1;upper=40;gap=1;">
         <md-content class="md-padding" style="background-color:transparent">
           <range-slider min="1" max="40" step="1" lower-value="lower" upper-value="upper" gap="gap"></range-slider>
@@ -153,8 +155,8 @@
 
   <!--Produkttyp filter-->
   <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-    <legend>Produkttyp-Filter</legend>
     <div class="container">
+      <legend>Produkttyp-Filter</legend>
       <div layout="row" layout-align="start center">
         {% for type in producttype_list %}
         <div flex="33">
@@ -380,4 +382,4 @@
       })
   </script>
 </body>
-</html>
+{% endblock %}
