@@ -1,10 +1,20 @@
+{% extends "app/base.html" %}
+
+{% block head %}
+  {% with navInfo="result" %}
+    {{ block.super }}
+  {% endwith %}
+{% endblock %}
+
+{% block navbar %}
+  {% with navInfo="result" %}
+    {{ block.super }}
+  {% endwith %}
+{% endblock %}
+
+{% block content %}
+
 {% load staticfiles %}
-
-{% include "app/html_templates/header/headerTemplate.html" with navInfo='result' %}
-
-<body>
-
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='result' %}
 
 <section id="fh5co-page" data-section="filtersite"
          style="margin-top:0px; background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
@@ -150,7 +160,4 @@
   </div>
 </section>
 
-{% include "app/html_templates/footer/bodyBackBone.html" %}
-
-</body>
-</html>
+{% endblock %}
