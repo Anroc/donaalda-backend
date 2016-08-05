@@ -329,15 +329,11 @@ class Question(models.Model):
     MULTI_CHOICE = 'mc'
     RADIO_CHOICE = 'rc'
     DROP_CHOICE = 'dc'
-    SLIDER_CHOICE = 'sc'
-    RANGE_CHOICE = 'rs'
 
     ANSWER_PRESENTATION_CHOICES = (
         (MULTI_CHOICE, 'Multiple Choice'),
         (RADIO_CHOICE, 'Radiobutton'),
         (DROP_CHOICE, 'Dropdown'),
-        (SLIDER_CHOICE, 'Slider'),
-        (RANGE_CHOICE, 'Range Slider'),
     )
 
     question_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Fragentext")
@@ -403,13 +399,6 @@ class GivenAnswers(models.Model):
     """
     user = models.OneToOneField(to=User, on_delete=models.CASCADE, verbose_name="User")
     user_answer = models.ManyToManyField(to="Answer", verbose_name="hat geantwortet")
-
-    # TODO: self.user_answer.answer_text
-    """
-    File "D:\Git_Dev\de.dailab.aal2016.tornados\backend\advisor\app\models.py", line 326, in __str__
-    return '%s hat geantwortet: \"%s\"' % (self.user, self.user_answer.answer_text)
-    AttributeError: 'ManyRelatedManager' object has no attribute 'answer_text
-    """
 
     def __str__(self):
         return '%s hat geantwortet: %s' % (self.user, str(list(self.user_answer.all())))
