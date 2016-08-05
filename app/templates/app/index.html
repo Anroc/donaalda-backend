@@ -1,51 +1,33 @@
 {% extends "app/base.html" %}
 
 {% block head %}
-
-{% with navInfo="index" %}
-{{ block.super }}
-{% endwith %}
-
+  {% with navInfo="index" %}
+    {{ block.super }}
+  {% endwith %}
 {% endblock %}
 
 {% block navbar %}
-
-
-{% with navInfo="index" %}
-{{ block.super }}
-{% endwith %}
-
+  {% with navInfo="index" %}
+    {{ block.super }}
+  {% endwith %}
 {% endblock %}
 
 {% block content %}
-
-<!-- nav bar -->
-
-
-<!-- Top Section: "Ask Donaalda" -->
-{% include "app/html_templates/sections/welcomeSection.html" %}
-
-<!-- Intro with categories -->
-{% include "app/html_templates/sections/categorySection.html" %}
-
-<!-- Was macht Donaalda -->
-{% include "app/html_templates/sections/generalInformationSection.html" %}
-
-<!-- Wohnsituation -->
-{% include "app/html_templates/sections/livingSituationSection.html" %}
-
-<!-- Vorgeschlagene Szenarios -->
-{% include "app/html_templates/sections/indexScenarioSection.html" %}
-
-<!-- Kommentare -->
-{% include "app/html_templates/sections/commentSection.html" %}
-
-<!-- Key Facts -->
-{% include "app/html_templates/sections/keyFactsSection.html" %}
-
-<!-- Kontact -->
-{% include "app/html_templates/sections/contactSection.html" %}
-
-
+  <!-- Top Section: "Ask Donaalda" -->
+  {% include "app/html_templates/sections/welcomeSection.html" %}
+  <!-- Intro with categories -->
+  {% include "app/html_templates/sections/categorySection.html" %}
+  <!-- Was macht Donaalda -->
+  {% include "app/html_templates/sections/generalInformationSection.html" %}
+  <!-- Wohnsituation -->
+  {% include "app/html_templates/sections/livingSituationSection.html" %}
+  <!-- Vorgeschlagene Szenarios -->
+  {% include "app/html_templates/sections/indexScenarioSection.html" %}
+  <!-- Kommentare -->
+  {% include "app/html_templates/sections/commentSection.html" %}
+  <!-- Key Facts -->
+  {% include "app/html_templates/sections/keyFactsSection.html" %}
+  <!-- Kontact -->
+  {% include "app/html_templates/sections/contactSection.html" %}
 {% endblock %}
 

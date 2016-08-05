@@ -1,10 +1,20 @@
+{% extends "app/base.html" %}
+
+{% block head %}
+  {% with navInfo="contact" %}
+    {{ block.super }}
+  {% endwith %}
+{% endblock %}
+
+{% block navbar %}
+  {% with navInfo="contact" %}
+    {{ block.super }}
+  {% endwith %}
+{% endblock %}
+
+{% block content %}
+
 {% load staticfiles %}
-
-{% include "app/html_templates/header/headerTemplate.html" with navInfo='contact' %}
-
-<body>
-
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='contact'%}
 
 <section id="fh5co-contactBanner" data-section="banner"
          data-stellar-background-ratio="0.5"
@@ -33,6 +43,4 @@
 
 {% include "app/html_templates/sections/contactSection.html" %}
 
-{% include "app/html_templates/footer/bodyBackBone.html" %}
-</body>
-</html>
+{% endblock %}

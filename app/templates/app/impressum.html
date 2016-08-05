@@ -1,5 +1,20 @@
+{% extends "app/base.html" %}
+
+{% block head %}
+  {% with navInfo="product" %}
+    {{ block.super }}
+  {% endwith %}
+{% endblock %}
+
+{% block navbar %}
+  {% with navInfo="impressum" %}
+    {{ block.super }}
+  {% endwith %}
+{% endblock %}
+
+{% block content %}
+
 {% load staticfiles %}
-{% include "app/html_templates/header/headerTemplate.html" with navInfo='product' %}
 
 <style>
   .btn:hover {
@@ -7,10 +22,6 @@
     color: transparent !important;
   }
 </style>
-
-<body>
-
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='impressum' productName=product.name%}
 
 <section id="fh5co-page" data-section="home"
          data-stellar-background-ratio="0.5">
@@ -29,8 +40,6 @@
   <div class="slant"></div>
   </div>
 </section>
-
-
 
 <section id="fh5co-intro" data-section="description">
 
@@ -161,7 +170,4 @@
 
 </section>
 
-{% include "app/html_templates/footer/bodyBackBone.html" %}
-</body>
-</html>
-
+{% endblock %}
