@@ -8,17 +8,127 @@ import pprint
 from django.contrib import messages
 from django.views import generic
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
-from collections import ChainMap
-
-from .models import Category, Product, Scenario, ProviderProfile, Comment, Provider, UserImage, ProductType, \
-    QuestionSet, Question, Answer, Tag, ProductSet, QuestionStep, GivenAnswers, SessionTags
 from .forms import LoginForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.http import *
+from rest_framework import generics, permissions, renderers, viewsets
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+from .serializers import *
+from .permissions import *
+
+
+#@api_view(['GET'])
+#def api_root(request, format=None):
+#    return Response({
+#        'categories': reverse('category-list', request=request, format=format),
+#    })
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class ScenarioViewSet(viewsets.ModelViewSet):
+    queryset = Scenario.objects.all()
+    serializer_class = ScenarioSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class ScenarioDescriptionViewSet(viewsets.ModelViewSet):
+    queryset = ScenarioDescription.objects.all()
+    serializer_class = ScenarioDescriptionSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class ProductSetViewSet(viewsets.ModelViewSet):
+    queryset = ProductSet.objects.all()
+    serializer_class = ProductSetSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class ProductTypeViewSet(viewsets.ModelViewSet):
+    queryset = ProductType.objects.all()
+    serializer_class = ProductTypeSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class ProviderViewSet(viewsets.ModelViewSet):
+    queryset = Provider.objects.all()
+    serializer_class = ProviderSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class ProviderProfileViewSet(viewsets.ModelViewSet):
+    queryset = ProviderProfile.objects.all()
+    serializer_class = ProviderProfileSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class EmployeeViewSet(viewsets.ModelViewSet):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class AnswerViewSet(viewsets.ModelViewSet):
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class GivenAnswersViewSet(viewsets.ModelViewSet):
+    queryset = GivenAnswers.objects.all()
+    serializer_class = GivenAnswersSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class QuestionSetViewSet(viewsets.ModelViewSet):
+    queryset = QuestionSet.objects.all()
+    serializer_class = QuestionSetSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class SessionTagsViewSet(viewsets.ModelViewSet):
+    queryset = SessionTags.objects.all()
+    serializer_class = SessionTagsSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+
+class QuestionStepViewSet(viewsets.ModelViewSet):
+    queryset = QuestionStep.objects.all()
+    serializer_class = QuestionStepSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
 
 
 class IndexView(generic.DetailView):
@@ -91,7 +201,8 @@ class CategoryView(generic.ListView):
                        'category': Category.objects.get(name=category),
                        'qs_general': QuestionStep.objects.filter(name="Allgemeines"),
                        'qs_category': QuestionStep.objects.filter(name__contains="Auswahl"),
-                       'qs_category_specific': QuestionStep.objects.filter(name__contains="Detail").order_by('question_steps__order'),
+                       'qs_category_specific': QuestionStep.objects.filter(name__contains="Detail").order_by(
+                           'question_steps__order'),
                        'given_answers': given_answers,
                        })
 
@@ -258,7 +369,8 @@ def stepper_check(request):
     than a new entry is stored.
     """
     # print("Session %s" % request.session.session_key)
-    if SessionTags.objects.filter(session_id=request.session.session_key).exists() and request.session.session_key is not None:
+    if SessionTags.objects.filter(
+        session_id=request.session.session_key).exists() and request.session.session_key is not None:
         old_session = SessionTags.objects.get(session_id=request.session.session_key)
         old_session.session = None
         old_session.save()

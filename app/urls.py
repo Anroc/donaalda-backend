@@ -16,13 +16,39 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from . import views
-from django.conf.urls import url
+from django.conf.urls import url, include
+from rest_framework.routers import DefaultRouter
 
 
+router = DefaultRouter()
+router.register(r'Category', views.CategoryViewSet)
+router.register(r'Scenario', views.ScenarioViewSet)
+router.register(r'ScenarioDescription', views.ScenarioDescriptionViewSet)
+router.register(r'ProductSet', views.ProductSetViewSet)
+router.register(r'Product', views.ProductViewSet)
+router.register(r'ProductType', views.ProductTypeViewSet)
+router.register(r'Provider', views.ProviderViewSet)
+router.register(r'ProviderProfile', views.ProviderProfileViewSet)
+router.register(r'Employee', views.EmployeeViewSet)
+router.register(r'Comment', views.CommentViewSet)
+router.register(r'Question', views.QuestionViewSet)
+router.register(r'Answer', views.AnswerViewSet)
+router.register(r'Tag', views.TagViewSet)
+router.register(r'GivenAnswers', views.GivenAnswersViewSet)
+router.register(r'QuestionSet', views.QuestionSetViewSet)
+router.register(r'SessionTags', views.SessionTagsViewSet)
+router.register(r'QuestionStep', views.QuestionStepViewSet)
 
 # Beware: insert new urls minding the regex pattern matching goes top to bottom
 app_name = 'app'
 urlpatterns = [
+    # api
+    # url(r'^api/v1/Category/(?P<pk>[0-9]+)/highlight/$', views.CategoryHighlight.as_view()),
+    url(r'^api/v1/', include(router.urls)),
+    # FIXME: login for api browser, somehow not working yet
+    url(r'^api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # api end
+
     #url(r'^__debug__/', include(debug_toolbar.urls)),
     url(r'^impressum$', views.ImpressumView.as_view(), name='impressum'),
 
