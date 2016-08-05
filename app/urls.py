@@ -24,6 +24,8 @@ from django.conf.urls import url
 app_name = 'app'
 urlpatterns = [
     #url(r'^__debug__/', include(debug_toolbar.urls)),
+    url(r'^impressum$', views.ImpressumView.as_view(), name='impressum'),
+
     url(r'^contact$', views.ContactView.as_view(), name='contact'),
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),

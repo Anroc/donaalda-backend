@@ -66,6 +66,16 @@ class ContactView(generic.ListView):
         return render(request, 'app/contact.html', {})
 
 
+class ImpressumView(generic.ListView):
+    template_name = 'app/impressum.html'
+
+    # context_object_name = 'impressum'
+
+    def get(self, request, *args, **kwargs):
+        # provider = kwargs.get("provider_url_name")
+        return render(request, 'app/impressum.html', {})
+
+
 class CategoryView(generic.ListView):
     template_name = 'app/category.html'
     context_object_name = 'scenario_list_from_category'
