@@ -1,23 +1,24 @@
 {% extends "app/base.html" %}
 
 {% block head %}
-  {% with navInfo="filter" %}
-    {{ block.super }}
-  {% endwith %}
+{% with navInfo="filter" %}
+{{ block.super }}
+{% endwith %}
 {% endblock %}
 
 {% block navbar %}
-  {% with navInfo="filter" %}
-    {{ block.super }}
-  {% endwith %}
+{% with navInfo="filter" %}
+{{ block.super }}
+{% endwith %}
 {% endblock %}
 
 {% block content %}
 
 {% load staticfiles %}
 
+<script src="{% static 'app/filter.js' %}"></script>
+<body ng-app="filterApp">
 
-<body ng-app="allProductsApp">
 
 <section id="fh5co-page" data-section="home"
          style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
@@ -113,7 +114,7 @@
   <!--funtion for button-->
   <script type="text/javascript">
     function turnSectionVisible() {
-      document.getElementById("fh5co-work").style.display ="block";
+      document.getElementById("fh5co-work").style.display = "block";
     }
   </script>
 </section>
@@ -180,7 +181,7 @@
   <!--funtion for button-->
   <script type="text/javascript">
     function hideSection() {
-      document.getElementById("fh5co-work").style.display ="none";
+      document.getElementById("fh5co-work").style.display = "none";
     }
   </script>
 </section>
@@ -220,166 +221,71 @@
   </div>
 
 
-    <!--product-list-->
+  <!--product-list-->
+  {% if all_products %}
+  {% for product in all_products %}
+  <div class="col-md-4 col-sm-6 col-xxs-12">
+    <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
+      <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+    </a>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+
+  <div class="container">
+    <div class="row">
+      <div class="row row-bottom-padded-sm">
+        <div class="col-md-12 section-heading text-center">
+          <h2 class="to-animate">Szenarien</h2>
+        </div>
+      </div>
+    </div>
     {% if all_products %}
     {% for product in all_products %}
     <div class="col-md-4 col-sm-6 col-xxs-12">
-      <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
-        <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
+      <a class="fh5co-project-item">
+        <div class="img-responsive"
+             style="background-image: url('{{ product.image1.url }}'); background-repeat: no-repeat; height: 250px;">
+        </div>
+        <div class="fh5co-text">
+          <h3 class="text-muted">
+            {{ product.provider }}
+          </h3>
+          <div style="height: 80px;">
+            <h1>
+              {{ product.name }}
+            </h1>
+          </div>
+        </div>
       </a>
+    </div>
+    {% empty %}
+    <div>
+      Es wurden noch keine Szenarien hinzugefügt.
     </div>
     {% endfor %}
     {% endif %}
-
-
-    <div class="container">
-      <div class="row">
-        <div class="row row-bottom-padded-sm">
-          <div class="col-md-12 section-heading text-center">
-            <h2 class="to-animate">Szenarien</h2>
-          </div>
-        </div>
-      </div>
-      {% if all_products %}
-      {% for product in all_products %}
-      <div class="col-md-4 col-sm-6 col-xxs-12">
-        <a class="fh5co-project-item">
-          <div class="img-responsive"
-               style="background-image: url('{{ product.image1.url }}'); background-repeat: no-repeat; height: 250px;">
-          </div>
-          <div class="fh5co-text">
-            <h3 class="text-muted">
-              {{ product.provider }}
-            </h3>
-            <div style="height: 80px;">
-              <h1>
-                {{ product.name }}
-              </h1>
-            </div>
-          </div>
-        </a>
-      </div>
-      {% empty %}
-      <div>
-        Es wurden noch keine Szenarien hinzugefügt.
-      </div>
-      {% endfor %}
-      {% endif %}
-    </div>
+  </div>
 </section>
 
-  {% include "app/html_templates/sections/commentSection.html" %}
-
-  {% include "app/html_templates/footer/bodyBackBone.html" %}
-
-  <!--script for range slider-->
-  <script type="text/ng-template" id="range-slider.tpl.html">
-    {% verbatim %}
-    <div class='range-slider-container'>
-      <div class='range-slider-left' ng-style="{width:lowerWidth+'%'}">
-        <md-slider ng-model="lowerValue" min='{{min}}' max='{{lowerMaxLimit}}' step="{{step}}"
-                   aria-label="lowerSlider"></md-slider>
-      </div>
-      <div class="range-track-line"
-           ng-style="{width:tracker.width+'%',left:tracker.left+'%',right:tracker.right+'%'}"></div>
-      <div class='range-slider-right' ng-style="{width:upperWidth+'%'}">
-        <md-slider ng-model="upperValue" min="{{upperMinLimit}}" max="{{max}}" step="{{step}}"
-                   aria-label="upperSlider"></md-slider>
-      </div>
+<!--script for range slider-->
+<script type="text/ng-template" id="range-slider.tpl.html">
+  {% verbatim %}
+  <div class='range-slider-container'>
+    <div class='range-slider-left' ng-style="{width:lowerWidth+'%'}">
+      <md-slider ng-model="lowerValue" min='{{min}}' max='{{lowerMaxLimit}}' step="{{step}}"
+                 aria-label="lowerSlider"></md-slider>
     </div>
-    {% endverbatim %}
-  </script>
+    <div class="range-track-line"
+         ng-style="{width:tracker.width+'%',left:tracker.left+'%',right:tracker.right+'%'}"></div>
+    <div class='range-slider-right' ng-style="{width:upperWidth+'%'}">
+      <md-slider ng-model="upperValue" min="{{upperMinLimit}}" max="{{max}}" step="{{step}}"
+                 aria-label="upperSlider"></md-slider>
+    </div>
+  </div>
+  {% endverbatim %}
+</script>
 
-  <!--script for angular components-->
-  <script type="text/javascript">
-    angular
-      .module('allProductsApp', ['ngMaterial', "directives.rangeSlider"])
-      .controller('sorting', function ($scope) {
-        $scope.sorts = [
-          "Preis aufsteigend",
-          "Preis absteigend",
-          "Nach Hersteller",
-          "Alphabetisch A-Z"
-        ];
-      })
-      .controller('AppCtrl', function ($scope) {
-      })
-      .controller('AppCtrl2', function ($scope) {
-        $scope.color = {
-          blue: Math.floor(Math.random() * 255)
-        };
-      });
-
-    //directive for range-slider
-    angular.module('directives.rangeSlider', ['ngMaterial'])
-      .directive('rangeSlider', function () {
-        return {
-          restrict: "E",
-          scope: {
-            max: '=',
-            min: '=',
-            gap: '=?',
-            step: '=?',
-            lowerValue: "=",
-            upperValue: "="
-          },
-          templateUrl: 'range-slider.tpl.html',
-          controller: ["$scope", function ($scope) {
-
-            var COMFORTABLE_STEP = $scope.step, // whether the step is comfortable that depends on u
-              tracker = $scope.tracker = {    // track style
-                width: 0,
-                left: 0,
-                right: 0
-              };
-
-            function updateSliders() {
-
-              if ($scope.upperValue - $scope.lowerValue > $scope.gap) {
-
-                $scope.lowerMaxLimit = $scope.lowerValue + COMFORTABLE_STEP;
-                $scope.upperMinLimit = $scope.upperValue - COMFORTABLE_STEP;
-
-              } else {
-                $scope.lowerMaxLimit = $scope.lowerValue;
-                $scope.upperMinLimit = $scope.upperValue;
-              }
-
-              updateSlidersStyle();
-
-            }
-
-            function updateSlidersStyle() {
-              // update sliders style
-              $scope.lowerWidth = $scope.lowerMaxLimit / $scope.max * 100;
-              $scope.upperWidth = ($scope.max - $scope.upperMinLimit) / $scope.max * 100;
-
-              // update tracker line style
-              tracker.width = 100 - $scope.lowerWidth - $scope.upperWidth;
-              tracker.left = $scope.lowerWidth || 0;
-              tracker.right = $scope.upperWidth || 0;
-            }
-
-            // watch lowerValue & upperValue to update sliders
-            $scope.$watchGroup(["lowerValue", "upperValue"], function (newVal) {
-
-              // filter the default initialization
-              if (newVal !== undefined) {
-                updateSliders();
-              }
-
-            });
-
-            // init
-            $scope.step = $scope.step || 1;
-            $scope.gap = $scope.gap || 0;
-            $scope.lowerMaxLimit = $scope.lowerValue + COMFORTABLE_STEP;
-            $scope.upperMinLimit = $scope.upperValue - COMFORTABLE_STEP;
-            updateSlidersStyle();
-          }]
-        };
-
-      })
-  </script>
 </body>
 {% endblock %}
