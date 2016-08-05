@@ -50,6 +50,14 @@ function questionController($scope, $q, $timeout) {
         estate_age: false
     };
 
+    $scope.preferences = {
+        heater_control: false,
+        light_control: false,
+        remote_control: false,
+        security_control: false,
+        health_control: false,
+        comfort_control: false
+    };
 
     var vm = this;
 
@@ -86,7 +94,6 @@ function questionController($scope, $q, $timeout) {
     }
 
     vm.preferences = new Array(10000).map(function() { return false; });
-
 
     var answer = [];
     vm.selectedStep = 0;
@@ -164,6 +171,7 @@ function questionController($scope, $q, $timeout) {
             vm.selectedStep = vm.selectedStep - 1;
         }
     };
+
 
     vm.submitCurrentStep = function submitCurrentStep(stepData, isSkip) {
         var deferred = $q.defer();

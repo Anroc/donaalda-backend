@@ -1,6 +1,7 @@
 from rest_framework import permissions
 
-#FIXME: change so that anyone with rights is able to change these objects
+
+# FIXME: change so that anyone with rights is able to change these objects
 class IsOwnerOrReadOnly(permissions.BasePermission):
     """
     Custom permission to only allow owners of an object to edit it.

@@ -19,25 +19,24 @@ from . import views
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 
-
-router = DefaultRouter()
-router.register(r'Category', views.CategoryViewSet)
-router.register(r'Scenario', views.ScenarioViewSet)
-router.register(r'ScenarioDescription', views.ScenarioDescriptionViewSet)
-router.register(r'ProductSet', views.ProductSetViewSet)
-router.register(r'Product', views.ProductViewSet)
-router.register(r'ProductType', views.ProductTypeViewSet)
-router.register(r'Provider', views.ProviderViewSet)
-router.register(r'ProviderProfile', views.ProviderProfileViewSet)
-router.register(r'Employee', views.EmployeeViewSet)
-router.register(r'Comment', views.CommentViewSet)
-router.register(r'Question', views.QuestionViewSet)
-router.register(r'Answer', views.AnswerViewSet)
-router.register(r'Tag', views.TagViewSet)
-router.register(r'GivenAnswers', views.GivenAnswersViewSet)
-router.register(r'QuestionSet', views.QuestionSetViewSet)
-router.register(r'SessionTags', views.SessionTagsViewSet)
-router.register(r'QuestionStep', views.QuestionStepViewSet)
+router = DefaultRouter(schema_title='Pastebin API')
+router.register(r'category', views.CategoryViewSet)
+router.register(r'scenario', views.ScenarioViewSet)
+router.register(r'scenarioDescription', views.ScenarioDescriptionViewSet)
+router.register(r'productSet', views.ProductSetViewSet)
+router.register(r'product', views.ProductViewSet)
+router.register(r'productType', views.ProductTypeViewSet)
+router.register(r'provider', views.ProviderViewSet)
+router.register(r'providerProfile', views.ProviderProfileViewSet)
+router.register(r'employee', views.EmployeeViewSet)
+router.register(r'comment', views.CommentViewSet)
+router.register(r'question', views.QuestionViewSet)
+router.register(r'answer', views.AnswerViewSet)
+router.register(r'tag', views.TagViewSet)
+router.register(r'givenAnswers', views.GivenAnswersViewSet)
+router.register(r'questionSet', views.QuestionSetViewSet)
+router.register(r'sessionTags', views.SessionTagsViewSet)
+router.register(r'questionStep', views.QuestionStepViewSet)
 
 # Beware: insert new urls minding the regex pattern matching goes top to bottom
 app_name = 'app'

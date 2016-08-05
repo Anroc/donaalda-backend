@@ -406,7 +406,6 @@ class GivenAnswers(models.Model):
     class Meta:
         verbose_name = "beantwortete Antwort"
         verbose_name_plural = "beantwortete Antworten"
-        # ordering = ['user', ]
 
 
 class QuestionSet(models.Model):
