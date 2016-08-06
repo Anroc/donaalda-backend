@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-4">
               <div class="panel panel-default pull-right"
-                   style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
+                   style="background-color: rgba(245, 245, 245, 0.6); max-width: 13em; max-height: 10em;">
                 <div>
                   <img style="max-height: 8em; max-width: 8em;"
                        src="{{ provider.logo_image.url }}"
@@ -75,7 +75,7 @@
     {% for scenario in scenario_list_from_provider %}
     <div class="col-md-4 col-sm-6 col-xxs-12">
       <a href="{% url 'app:scenario' scenario.url_name %}" class="fh5co-project-item">
-        <img src="{{ scenario.picture.url }}" style="height:13em">
+        <img src="{{ scenario.picture.url }}" style="height:13em; width:17.5em">
         <div class="fh5co-text">
           <h3 class="text-muted">
             {{ scenario.provider }}
@@ -121,7 +121,7 @@
     {% for product in provider_products %}
     <div class="col-md-4 col-sm-6 col-xxs-12">
       <a href="{% url 'app:product' product.pk %}" class="fh5co-project-item">
-        <img src="{{ product.image1.url }}" style="height: 13em">
+        <img src="{{ product.image1.url }}" style="height: 13em; width:17.5em">
         <div class="fh5co-text">
           <h3 class="text-muted">
             {{ product.product_type }}
