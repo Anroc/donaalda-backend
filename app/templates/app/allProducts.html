@@ -20,6 +20,7 @@
 <body ng-app="filterApp">
 
 
+
 <section id="fh5co-page" data-section="home"
          style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
          data-stellar-background-ratio="0.5">
@@ -36,6 +37,8 @@
   </div>
   <div class="slant"></div>
 </section>
+
+{% verbatim %}
 
 <section id="fh5co-questions" data-section="filter" ng-controller="ProductController">
   <!--section-header-->
@@ -56,8 +59,6 @@
   <div class="md-padding" ng-cloak>
     <div class="container">
       <legend>Kategorie-Filter</legend>
-      <!-- Angular solution -->
-      {% verbatim %}
       <div style="flex-flow: row wrap; display: flex;">
         <div style="flex:1 0 25%;"
              ng-repeat="category in categories">
@@ -68,44 +69,37 @@
           </md-checkbox>
         </div>
       </div>
-      {% endverbatim %}
     </div>
   </div>
 
   <div class="container">
     <legend>Produkttyp-Filter</legend>
-    <!-- Angular solution -->
-    {% verbatim %}
     <div style="flex-flow: row wrap; display: flex;">
       <div style="flex:1 0 25%;"
            ng-repeat="productType in productTypes">
         <md-checkbox class="md-primary"
-                     name="checkbox-{{productType.name}}"
-                     ng-click="$log.log('clicked productType')">
+                     name="checkbox-{{productType.type_name}}"
+                     ng-click="modifyFilter(productType.type_name)">
           {{ productType.type_name }}
         </md-checkbox>
       </div>
     </div>
-    {% endverbatim %}
   </div>
 
   <!--hersteller-filter-->
   <div class="md-padding" ng-cloak>
     <div class="container">
       <legend>Hersteller-Filter</legend>
-      <!-- Angular solution -->
-      {% verbatim %}
       <div style="flex-flow: row wrap; display: flex;">
         <div style="flex:1 0 30%;"
              ng-repeat="provider in providers">
-        <md-checkbox class="md-primary"
-                     name="checkbox-{{provider.name}}"
-                     ng-click="$log.log('clicked provider')">
-          {{ provider.name }}
-        </md-checkbox>
+          <md-checkbox class="md-primary"
+                       name="checkbox-{{provider.name}}"
+                       ng-click="$log.log('clicked provider')">
+            {{ provider.name }}
+          </md-checkbox>
         </div>
       </div>
-      {% endverbatim %}
     </div>
   </div>
 </section>
@@ -134,22 +128,18 @@
         <md-input-container>
           <label>Sortieren nach...</label>
           <md-select ng-model="sort">
-            {% verbatim %}
             <md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
-            {% endverbatim %}
           </md-select>
         </md-input-container>
       </div>
     </div>
   </div>
 
-
-  <div class="col-md-4 col-sm-6 col-xxs-12"
-       style="flex-flow: row wrap; display: flex;">
-    {% for product in all_products %}
-    <div style="flex:1 0 30%;">
-      <a href="{% url 'app:product' product.pk %}" class="fh5co-project-item">
-        <img src="{{ product.image1.url }}" style="height:13em; width:17.5em">
+  <div style="flex-flow: row wrap; display: flex;">
+    <div style="flex:1 0 20%;padding: 2.5%"
+         ng-repeat="product in products">
+      <a href="/products/{{product.pk}}" class="fh5co-project-item">
+        <img src="{{ product.image1 }}" style="height:13em; width:17.5em">
         <div class="fh5co-text">
           <h3 class="text-muted">
             {{ product.product_type }}
@@ -161,19 +151,9 @@
           </div>
         </div>
       </a>
-
-      {% comment %}
-      <md-checkbox class="md-primary"
-                   name="checkbox-{{provider.name}}"
-                   ng-click="$log.log('clicked provider')">
-        {{ provider.name }}
-      </md-checkbox>
-      {% endcomment %}
     </div>
-    {% endfor %}
   </div>
-
 </section>
-
+{% endverbatim %}
 </body>
 {% endblock %}

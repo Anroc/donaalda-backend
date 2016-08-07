@@ -27,6 +27,31 @@ angular
             }
         };
 
+        var filterList = [];
+
+        $scope.modifyFilter = function (item) {
+
+            console.log("adding item: " + item + " to list");
+
+            if (filterList.indexOf(item) !== -1) {
+
+                var index = filterList.indexOf(item);
+                if (index >= 0) {
+                    filterList.splice( index, 1 );
+                }
+                console.log("removed item");
+            } else {
+                // stuff
+                filterList.push(item);
+                console.log("added item");
+            }
+
+            console.log("new list: " + filterList);
+        }
+
+
+        // GET Methods
+
         // categories
         $http({
             method: 'GET',
