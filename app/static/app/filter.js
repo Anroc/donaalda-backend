@@ -12,42 +12,77 @@ angular
             "Alphabetisch A-Z"
         ];
     })
-    .controller('AppCtrl', function ($scope) {
-    })
-    .controller('AppCtrl2', function ($scope, $http) {
+    .controller('ProductController', ['$scope', '$http', '$log', function ($scope, $http, $log) {
 
-        console.log("angular test");
+        $scope.$log = $log;
+        $scope.message = 'Hello World!';
+
+        $scope.selectedProducts = [];
+
+        $scope.toggle = function (item, list) {
+            var idx = list.indexOf(item);
+            if (idx > -1) {
+                list.splice(idx, 1);
+            }
+            else {
+                list.push(item);
+            }
+        };
+
+        $http({
+            method: 'GET',
+            url: '/api/v1/category/?format=json'
+        }).then(function successCallback(response) {
+            console.log("success calling categories");
+
+            $scope.categories = response.data;
+
+        }, function errorCallback(response) {
+            console.log("error calling categories");
+        });
+
+        $http({
+            method: 'GET',
+            url: '/api/v1/productType/?format=json'
+        }).then(function successCallback(response) {
+            console.log("success calling product types");
+
+            $scope.productTypes = response.data;
+
+        }, function errorCallback(response) {
+            console.log("error calling product types");
+        });
+
+        $http({
+            method: 'GET',
+            url: '/api/v1/provider/?format=json'
+        }).then(function successCallback(response) {
+            console.log("success calling provider");
+
+            $scope.providers = response.data;
+
+        }, function errorCallback(response) {
+            console.log("error calling provider");
+        });
+
+        console.log("get products");
         $http({
             method: 'GET',
             url: '/api/v1/product/?format=json'
         }).then(function successCallback(response) {
-            // this callback will be called asynchronously
-            // when the response is available
 
-            console.log("success");
+            console.log("success calling products");
             console.log(response);
 
             console.log("data:");
             console.log(response.data);
 
-            var products = response.data;
-
-            console.log("Products is instance of: ");
-            for(var i = 0; i <= products.length; i++) {
-
-                var product = products[i];
-
-                console.log(product);
-
-                var provider = product.provider.name;
-                console.log("name: " + product.name + ", provider: " + provider);
-            }
+            $scope.products = response.data;
 
         }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            console.log("error on calling products");
         });
-    });
+    }]);
 
 //directive for range-slider
 angular.module('directives.rangeSlider', ['ngMaterial'])
@@ -66,7 +101,7 @@ angular.module('directives.rangeSlider', ['ngMaterial'])
             controller: ["$scope", function ($scope) {
 
                 var COMFORTABLE_STEP = $scope.step, // whether the step is comfortable that depends on u
-                    tracker = $scope.tracker = {    // track style
+                        tracker = $scope.tracker = {    // track style
                         width: 0,
                         left: 0,
                         right: 0

@@ -30,33 +30,19 @@
           <div class="col-md-8">
             <h1 class="text-left">Filter-Seite</h1>
           </div>
-          <div class="col-md-4">
-            <div class="panel panel-default pull-right"
-                 style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
-              {% if product.provider.is_visible %}
-              <div class="btn">
-                {% else %}
-                <div>
-                  {% endif %}
-
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
-    <div class="slant"></div>
   </div>
+  <div class="slant"></div>
 </section>
 
-<section id="fh5co-questions" data-section="filter">
-
+<section id="fh5co-questions" data-section="filter" ng-controller="ProductController">
   <!--section-header-->
   <div class="container">
     <div class="row" style="width:100%">
       <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Filter</h2>
+        <h2 class="to-animate">Produkt-Filter</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
             <h3>Wählen Sie nach welchen Attributen die Produkte gefiltert werden sollen.</h3>
@@ -66,124 +52,62 @@
     </div>
   </div>
 
-  <!--hersteller-filter-->
-  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-
-    <div class="container">
-      <legend>Hersteller-Filter</legend>
-      <div layout="row" layout-align="start center">
-        {% for provider in provider_list %}
-        <div flex>
-          <md-checkbox class="md-primary" name="hersteller-checkbox">{{ provider.name }}</md-checkbox>
-        </div>
-        {% if forloop.counter|divisibleby:"3" %}
-      </div>
-      <div layout="row" layout-align="start center">
-        {% endif %}
-        {% if forloop.last %}
-      </div>
-      {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-
   <!--kategorie filter-->
-  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
+  <div class="md-padding" ng-cloak>
     <div class="container">
       <legend>Kategorie-Filter</legend>
-      <div layout="row" layout-align="start center">
-        {% for category in category_list %}
-        <div flex>
-          <md-checkbox class="md-primary">{{ category.name }}</md-checkbox>
+      <!-- Angular solution -->
+      {% verbatim %}
+      <div style="flex-flow: row wrap; display: flex;">
+        <div style="flex:1 0 25%;"
+             ng-repeat="category in categories">
+          <md-checkbox class="md-primary"
+                       name="checkbox-{{category.name}}"
+                       ng-click="$log.log('clicked category')">
+            {{ category.name }}
+          </md-checkbox>
         </div>
-        {% if forloop.counter|divisibleby:"4" %}
       </div>
-      <div layout="row" layout-align="start center">
-        {% endif %}
-        {% if forloop.last %}
-      </div>
-      {% endif %}
-      {% endfor %}
+      {% endverbatim %}
     </div>
   </div>
 
-  <!--button um hidden section anzuzeigen-->
-  <div class="row" layout-align="center center">
-    <button type="button" onclick="turnSectionVisible()" class="btn btn-link">Weitere Filter anzeigen</button>
-  </div>
-  <!--funtion for button-->
-  <script type="text/javascript">
-    function turnSectionVisible() {
-      document.getElementById("fh5co-work").style.display = "block";
-    }
-  </script>
-</section>
-
-
-<section id="fh5co-work" data-section="preciseFilter" style="display:none">
-
-  <!--section-header-->
   <div class="container">
-    <div class="row" style="width:100%">
-      <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Weitere Filter</h2>
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Wählen Sie noch präzisere Filter-Attribute.</h3>
-          </div>
+    <legend>Produkttyp-Filter</legend>
+    <!-- Angular solution -->
+    {% verbatim %}
+    <div style="flex-flow: row wrap; display: flex;">
+      <div style="flex:1 0 25%;"
+           ng-repeat="productType in productTypes">
+        <md-checkbox class="md-primary"
+                     name="checkbox-{{productType.name}}"
+                     ng-click="$log.log('clicked productType')">
+          {{ productType.type_name }}
+        </md-checkbox>
+      </div>
+    </div>
+    {% endverbatim %}
+  </div>
+
+  <!--hersteller-filter-->
+  <div class="md-padding" ng-cloak>
+    <div class="container">
+      <legend>Hersteller-Filter</legend>
+      <!-- Angular solution -->
+      {% verbatim %}
+      <div style="flex-flow: row wrap; display: flex;">
+        <div style="flex:1 0 30%;"
+             ng-repeat="provider in providers">
+        <md-checkbox class="md-primary"
+                     name="checkbox-{{provider.name}}"
+                     ng-click="$log.log('clicked provider')">
+          {{ provider.name }}
+        </md-checkbox>
         </div>
       </div>
+      {% endverbatim %}
     </div>
   </div>
-
-  <!--preis-slider-->
-  <div ng-controller="AppCtrl2" class="md-padding" ng-cloak>
-    <div class="container">
-      <legend>Preis-Filter</legend>
-      <div ng-init="lower=1;upper=40;gap=1;">
-        <md-content class="md-padding" style="background-color:transparent">
-          <range-slider min="1" max="40" step="1" lower-value="lower" upper-value="upper" gap="gap"></range-slider>
-          <div>
-            {% verbatim %}
-            <p>min: {{lower}}€</p>
-            <p>max: {{upper}}€</p>
-            {% endverbatim %}
-          </div>
-        </md-content>
-      </div>
-    </div>
-  </div>
-
-  <!--Produkttyp filter-->
-  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-    <div class="container">
-      <legend>Produkttyp-Filter</legend>
-      <div layout="row" layout-align="start center">
-        {% for type in producttype_list %}
-        <div flex="33">
-          <md-checkbox class="md-primary">{{ type.type_name }}</md-checkbox>
-        </div>
-        {% if forloop.counter|divisibleby:"3" %}
-      </div>
-      <div layout="row" layout-align="start center">
-        {% endif %}
-        {% if forloop.last %}
-      </div>
-      {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-
-  <!--button um hidden section auszublenden-->
-  <div class="row" layout-align="center center" style="text-align:center">
-    <button type="button" class="btn btn-link" onclick="hideSection()">Weitere Filter ausblenden</button>
-  </div>
-  <!--funtion for button-->
-  <script type="text/javascript">
-    function hideSection() {
-      document.getElementById("fh5co-work").style.display = "none";
-    }
-  </script>
 </section>
 
 <section id="fh5co-testimonials" data-section="results">
@@ -203,7 +127,6 @@
     </div>
   </div>
 
-
   <!--sorting-selectbox-->
   <div ng-controller="sorting" class="md-padding" ng-cloak>
     <div class="container">
@@ -219,56 +142,9 @@
       </div>
     </div>
   </div>
-
-
-  <!--product-list-->
-  {% if all_products %}
-  {% for product in all_products %}
-  <div class="col-md-4 col-sm-6 col-xxs-12">
-    <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
-      <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
-    </a>
-  </div>
-  {% endfor %}
-  {% endif %}
-
-
-  <div class="container">
-    <div class="row">
-      <div class="row row-bottom-padded-sm">
-        <div class="col-md-12 section-heading text-center">
-          <h2 class="to-animate">Szenarien</h2>
-        </div>
-      </div>
-    </div>
-    {% if all_products %}
-    {% for product in all_products %}
-    <div class="col-md-4 col-sm-6 col-xxs-12">
-      <a class="fh5co-project-item">
-        <div class="img-responsive"
-             style="background-image: url('{{ product.image1.url }}'); background-repeat: no-repeat; height: 250px;">
-        </div>
-        <div class="fh5co-text">
-          <h3 class="text-muted">
-            {{ product.provider }}
-          </h3>
-          <div style="height: 80px;">
-            <h1>
-              {{ product.name }}
-            </h1>
-          </div>
-        </div>
-      </a>
-    </div>
-    {% empty %}
-    <div>
-      Es wurden noch keine Szenarien hinzugefügt.
-    </div>
-    {% endfor %}
-    {% endif %}
-  </div>
 </section>
 
+{% comment %}
 <!--script for range slider-->
 <script type="text/ng-template" id="range-slider.tpl.html">
   {% verbatim %}
@@ -286,6 +162,7 @@
   </div>
   {% endverbatim %}
 </script>
+{% endcomment %}
 
 </body>
 {% endblock %}
