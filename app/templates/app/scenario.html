@@ -43,9 +43,10 @@
                 <div class="panel-body">
                   {% endif %}
                   {% if current_scenario.provider.providerprofile %}
-                  <a href="{%  url 'app:provider_profile' current_scenario.provider.providerprofile.url_name %}">
+                  <a href="{%  url 'app:provider_profile' current_scenario.provider.providerprofile.url_name %}"
+                     style="width:8em; height:8em;">
                     {% endif %}
-                    <img style="max-height: 100%; max-width: 100%;"
+                    <img style="max-height: 8em; max-width: 8em;"
                          {% if current_scenario.provider.is_visible %}
                          onclick="provider()"
                          {% endif %}
