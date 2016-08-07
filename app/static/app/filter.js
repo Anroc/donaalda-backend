@@ -4,19 +4,16 @@
 
 angular
     .module('filterApp', ['ngMaterial'])
-    .controller('sorting', function ($scope) {
+    .controller('ProductController', ['$scope', '$http', '$log', function ($scope, $http, $log) {
+
+        $scope.$log = $log;
+
         $scope.sorts = [
             "Preis aufsteigend",
             "Preis absteigend",
             "Nach Hersteller",
             "Alphabetisch A-Z"
         ];
-    })
-    .controller('ProductController', ['$scope', '$http', '$log', function ($scope, $http, $log) {
-
-        $scope.$log = $log;
-
-        
 
         $scope.selectedProducts = [];
 
@@ -30,6 +27,7 @@ angular
             }
         };
 
+        // categories
         $http({
             method: 'GET',
             url: '/api/v1/category/?format=json'
@@ -42,6 +40,7 @@ angular
             console.log("error calling categories");
         });
 
+        // product types
         $http({
             method: 'GET',
             url: '/api/v1/productType/?format=json'
@@ -54,6 +53,7 @@ angular
             console.log("error calling product types");
         });
 
+        // provider
         $http({
             method: 'GET',
             url: '/api/v1/provider/?format=json'
@@ -66,17 +66,13 @@ angular
             console.log("error calling provider");
         });
 
-        console.log("get products");
+        //products
         $http({
             method: 'GET',
             url: '/api/v1/product/?format=json'
         }).then(function successCallback(response) {
 
             console.log("success calling products");
-            console.log(response);
-
-            console.log("data:");
-            console.log(response.data);
 
             $scope.products = response.data;
 

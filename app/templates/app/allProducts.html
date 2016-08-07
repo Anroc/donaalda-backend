@@ -110,7 +110,7 @@
   </div>
 </section>
 
-<section id="fh5co-testimonials" data-section="results">
+<section id="fh5co-work" data-section="results" ng-controller="ProductController">
 
   <!--section-header-->
   <div class="container">
@@ -128,7 +128,7 @@
   </div>
 
   <!--sorting-selectbox-->
-  <div ng-controller="sorting" class="md-padding" ng-cloak>
+  <div class="md-padding" ng-cloak>
     <div class="container">
       <div layout="row" layout-align="space-around center">
         <md-input-container>
@@ -142,6 +142,37 @@
       </div>
     </div>
   </div>
+
+
+  <div class="col-md-4 col-sm-6 col-xxs-12"
+       style="flex-flow: row wrap; display: flex;">
+    {% for product in all_products %}
+    <div style="flex:1 0 30%;">
+      <a href="{% url 'app:product' product.pk %}" class="fh5co-project-item">
+        <img src="{{ product.image1.url }}" style="height:13em; width:17.5em">
+        <div class="fh5co-text">
+          <h3 class="text-muted">
+            {{ product.product_type }}
+          </h3>
+          <div style="height: 80px;">
+            <h1>
+              {{ product.name }}
+            </h1>
+          </div>
+        </div>
+      </a>
+
+      {% comment %}
+      <md-checkbox class="md-primary"
+                   name="checkbox-{{provider.name}}"
+                   ng-click="$log.log('clicked provider')">
+        {{ provider.name }}
+      </md-checkbox>
+      {% endcomment %}
+    </div>
+    {% endfor %}
+  </div>
+
 </section>
 
 </body>
