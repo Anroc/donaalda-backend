@@ -4,50 +4,66 @@
 
 angular
     .module('filterApp', ['ngMaterial'])
-    .controller('ProductController', ['$scope', '$http', '$log', function ($scope, $http, $log) {
+    .controller('ProductController', ['$scope', '$http', '$filter', '$log', function ($scope, $http, $filter, $log) {
 
         $scope.$log = $log;
 
-        $scope.sorts = [
-            "Preis aufsteigend",
-            "Preis absteigend",
-            "Nach Hersteller",
-            "Alphabetisch A-Z"
-        ];
+        var products = [];
 
-        $scope.selectedProducts = [];
 
-        $scope.toggle = function (item, list) {
-            var idx = list.indexOf(item);
-            if (idx > -1) {
-                list.splice(idx, 1);
-            }
-            else {
-                list.push(item);
-            }
-        };
 
         var filterList = [];
 
-        $scope.modifyFilter = function (item) {
+        var shownProducts = [];
 
-            console.log("adding item: " + item + " to list");
+        var updateProductList = function($item) {
 
-            if (filterList.indexOf(item) !== -1) {
+            var index = filterList.indexOf($item);
+            if (index >= 0) {
+                console.log($item + " is in filter list");
 
-                var index = filterList.indexOf(item);
-                if (index >= 0) {
+                console.log(products);
+
+                // if product has an attribute that is in filterList then put into show
+
+                for(var i = 0; i < products.length; i++) {
+                    var p = products[i];
+                    var type = p.product_type;
+                    var type_index = filterList.indexOf(type);
+                    if(type_index > -1 && shownProducts.indexOf(p) == -1) {
+                        console.log("type: " + type + " is in filterlist so product p: " + p.name + " is shown");
+                        shownProducts.push(p);
+                    }
+                }
+                console.log(shownProducts.length);
+
+                $scope.products = shownProducts;
+            }
+        };
+
+        $scope.modifyFilter = function ($scope, $filter, $item) {
+
+            console.log("modifying item: " + $item + " to list");
+
+            if (filterList.indexOf($item) !== -1) {
+
+                var index = filterList.indexOf($item);
+                if (index > -1) {
                     filterList.splice( index, 1 );
                 }
-                console.log("removed item");
+
+                //$scope.filterList = $filter('filter')($scope.filterList, {name: '!' + item});
+
             } else {
-                // stuff
-                filterList.push(item);
-                console.log("added item");
+                filterList.push($item);
             }
 
-            console.log("new list: " + filterList);
-        }
+            console.log("new list: " + filterList + " " + $scope + " " + $item);
+
+            updateProductList($item);
+        };
+
+
 
 
         // GET Methods
@@ -100,8 +116,21 @@ angular
             console.log("success calling products");
 
             $scope.products = response.data;
+            products = $scope.products;
 
         }, function errorCallback(response) {
             console.log("error on calling products");
         });
+
+
+        // legacy
+
+        $scope.sorts = [
+            "Preis aufsteigend",
+            "Preis absteigend",
+            "Nach Hersteller",
+            "Alphabetisch A-Z"
+        ];
+
+        $scope.selectedProducts = [];
     }]);

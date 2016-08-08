@@ -17,7 +17,8 @@
 {% load staticfiles %}
 
 <script src="{% static 'app/filter.js' %}"></script>
-<body ng-app="filterApp">
+<body ng-app="filterApp"
+      ng-controller="ProductController">
 
 
 
@@ -40,7 +41,7 @@
 
 {% verbatim %}
 
-<section id="fh5co-questions" data-section="filter" ng-controller="ProductController">
+<section id="fh5co-questions" data-section="filter" >
   <!--section-header-->
   <div class="container">
     <div class="row" style="width:100%">
@@ -79,7 +80,7 @@
            ng-repeat="productType in productTypes">
         <md-checkbox class="md-primary"
                      name="checkbox-{{productType.type_name}}"
-                     ng-click="modifyFilter(productType.type_name)">
+                     ng-click="modifyFilter($scope, $filter, productType.pk)">
           {{ productType.type_name }}
         </md-checkbox>
       </div>
@@ -104,7 +105,7 @@
   </div>
 </section>
 
-<section id="fh5co-work" data-section="results" ng-controller="ProductController">
+<section id="fh5co-work" data-section="results">
 
   <!--section-header-->
   <div class="container">
