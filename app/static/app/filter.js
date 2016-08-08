@@ -11,14 +11,16 @@ angular
         var products = [];
 
 
-
         var filterList = [];
 
         var shownProducts = [];
 
-        var updateProductList = function($item) {
+        var updateProductList = function ($item) {
 
             var index = filterList.indexOf($item);
+
+            var p = new Object();
+            var type = new Object();
             if (index >= 0) {
                 console.log($item + " is in filter list");
 
@@ -26,19 +28,37 @@ angular
 
                 // if product has an attribute that is in filterList then put into show
 
-                for(var i = 0; i < products.length; i++) {
-                    var p = products[i];
-                    var type = p.product_type;
+                for (var i = 0; i < products.length; i++) {
+                    p = products[i];
+                    type = p.product_type;
                     var type_index = filterList.indexOf(type);
-                    if(type_index > -1 && shownProducts.indexOf(p) == -1) {
+                    if (type_index > -1 && shownProducts.indexOf(p) == -1) {
                         console.log("type: " + type + " is in filterlist so product p: " + p.name + " is shown");
                         shownProducts.push(p);
                     }
                 }
-                console.log(shownProducts.length);
+            } else {
+                var j = shownProducts.length - 1;
+                while(j >= 0) {
+                    p = shownProducts[j];
+                    type = p.product_type;
+                    console.log("for loop: " + j + " type: " + type + " item: " + $item);
+                    if (type === $item) {
 
-                $scope.products = shownProducts;
+                        console.log("time to splice");
+                        shownProducts.splice(j, 1);
+
+                    }
+
+                    j--;
+                }
+
+                console.log($item + " is not in filter list anymore");
             }
+
+            console.log(shownProducts.length);
+
+            $scope.products = shownProducts;
         };
 
         $scope.modifyFilter = function ($scope, $filter, $item) {
@@ -49,7 +69,7 @@ angular
 
                 var index = filterList.indexOf($item);
                 if (index > -1) {
-                    filterList.splice( index, 1 );
+                    filterList.splice(index, 1);
                 }
 
                 //$scope.filterList = $filter('filter')($scope.filterList, {name: '!' + item});
@@ -62,8 +82,6 @@ angular
 
             updateProductList($item);
         };
-
-
 
 
         // GET Methods
