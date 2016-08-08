@@ -16,13 +16,38 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from . import views
-from django.conf.urls import url
+from django.conf.urls import url, include
+from rest_framework.routers import DefaultRouter
 
-
+router = DefaultRouter(schema_title='Pastebin API')
+router.register(r'category', views.CategoryViewSet)
+router.register(r'scenario', views.ScenarioViewSet)
+router.register(r'scenarioDescription', views.ScenarioDescriptionViewSet)
+router.register(r'productSet', views.ProductSetViewSet)
+router.register(r'product', views.ProductViewSet)
+router.register(r'productType', views.ProductTypeViewSet)
+router.register(r'provider', views.ProviderViewSet)
+router.register(r'providerProfile', views.ProviderProfileViewSet)
+router.register(r'employee', views.EmployeeViewSet)
+router.register(r'comment', views.CommentViewSet)
+router.register(r'question', views.QuestionViewSet)
+router.register(r'answer', views.AnswerViewSet)
+router.register(r'tag', views.TagViewSet)
+router.register(r'givenAnswers', views.GivenAnswersViewSet)
+router.register(r'questionSet', views.QuestionSetViewSet)
+router.register(r'sessionTags', views.SessionTagsViewSet)
+router.register(r'questionStep', views.QuestionStepViewSet)
 
 # Beware: insert new urls minding the regex pattern matching goes top to bottom
 app_name = 'app'
 urlpatterns = [
+    # api
+    # url(r'^api/v1/Category/(?P<pk>[0-9]+)/highlight/$', views.CategoryHighlight.as_view()),
+    url(r'^api/v1/', include(router.urls)),
+    # FIXME: login for api browser, somehow not working yet
+    url(r'^api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # api end
+
     #url(r'^__debug__/', include(debug_toolbar.urls)),
     url(r'^impressum$', views.ImpressumView.as_view(), name='impressum'),
 
@@ -30,6 +55,7 @@ urlpatterns = [
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
     url(r'^result/$', views.stepper_check, name='get_question_result'),
+    url(r'^resultPrint/$', views.result_print, name='get_question_result_print'),
     url(r'^logout$', views.log_out, name='logout'),
     url(r'^commentreceiver$', views.commentreceiver, name='commentreceiver'),
     url(r'^scenarios/$', views.ScenariosView.as_view(), name='scenarios'),

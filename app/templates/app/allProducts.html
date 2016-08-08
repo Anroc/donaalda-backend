@@ -1,189 +1,109 @@
+{% extends "app/base.html" %}
+
+{% block head %}
+{% with navInfo="filter" %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}
+
+{% block navbar %}
+{% with navInfo="filter" %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}
+
+{% block content %}
+
 {% load staticfiles %}
-{% include "app/html_templates/header/headerTemplate.html" with navInfo='filter' %}
 
-{% comment %}
-{% load compile_static %}
-<link rel="stylesheet" href="{% static 'app/assets/sass/style.scss'|compile %}"/>
-{% endcomment %}
+<script src="{% static 'app/filter.js' %}"></script>
+<body ng-app="filterApp"
+      ng-controller="ProductController">
 
-{% if product.provider.is_visible %}
-<script>
-  function provider() {
-    location.href = "{%  url 'app:provider_profile' product.provider.providerprofile.url_name %}"
-  }
-</script>
-{% endif %}
 
-<body ng-app="allProductsApp">
-
-{% include "app/html_templates/header/navbarHeader.html" with navInfo='filter'%}
-
-<section id="fh5co-page" data-section="home"
-         style="background-image: url({% static 'app/assets/images/full_image_1.jpg' %});"
-         data-stellar-background-ratio="0.5">
+<section id="fh5co-home" data-section="home"
+         data-stellar-background-ratio="0.5" style="height: 10em">
   <div class="container">
     <div class="text-wrap">
       <div class="text-inner">
         <div class="row">
           <div class="col-md-8">
-            <h1 class="text-left">Filter-Seite</h1>
-          </div>
-          <div class="col-md-4">
-            <div class="panel panel-default pull-right"
-                 style="background-color: rgba(245, 245, 245, 0.6); max-width: 200px; max-height: 150px;">
-              {% if product.provider.is_visible %}
-              <div class="btn">
-                {% else %}
-                <div>
-                  {% endif %}
-
-                </div>
-              </div>
-            </div>
+            <h1 class="text-left"></h1>
           </div>
         </div>
       </div>
     </div>
-    <div class="slant"></div>
   </div>
+  <div class="slant"></div>
 </section>
+
+{% verbatim %}
 
 <section id="fh5co-questions" data-section="filter">
-
   <!--section-header-->
   <div class="container">
     <div class="row" style="width:100%">
       <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Filter</h2>
+        <h2 class="to-animate">Produkt-Filter</h2>
         <div class="row">
           <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Wählen Sie nach welchen Attributen die Produkte gefiltert werden sollen.</h3>
+            <h3>Wähle nach welchen Attributen die Produkte gefiltert werden sollen.</h3>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!--hersteller-filter-->
-  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-    <legend>Hersteller-Filter</legend>
+  <!--kategorie filter>
+  <div class="md-padding" ng-cloak>
     <div class="container">
-      <div layout="row" layout-align="start center">
-        {% for provider in provider_list %}
-        <div flex>
-          <md-checkbox class="md-primary" name="hersteller-checkbox">{{ provider.name }}</md-checkbox>
+      <legend>Kategorie-Filter</legend>
+      <div style="flex-flow: row wrap; display: flex;">
+        <div style="flex:1 0 25%;"
+             ng-repeat="category in categories">
+          <md-checkbox class="md-primary"
+                       name="checkbox-{{category.name}}"
+                       ng-click="$log.log('clicked category')">
+            {{ category.name }}
+          </md-checkbox>
         </div>
-        {% if forloop.counter|divisibleby:"3" %}
       </div>
-      <div layout="row" layout-align="start center">
-        {% endif %}
-        {% if forloop.last %}
-      </div>
-      {% endif %}
-      {% endfor %}
     </div>
-  </div>
+  </div-->
 
-  <!--kategorie filter-->
-  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
-    <legend>Kategorie-Filter</legend>
-    <div class="container">
-      <div layout="row" layout-align="start center">
-        {% for category in category_list %}
-        <div flex>
-          <md-checkbox class="md-primary">{{ category.name }}</md-checkbox>
-        </div>
-        {% if forloop.counter|divisibleby:"4" %}
-      </div>
-      <div layout="row" layout-align="start center">
-        {% endif %}
-        {% if forloop.last %}
-      </div>
-      {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-
-  <!--button um hidden section anzuzeigen-->
-  <div class="row" layout-align="center center">
-    <button type="button" onclick="turnSectionVisible()" class="btn btn-link">Weitere Filter anzeigen</button>
-  </div>
-  <!--funtion for button-->
-  <script type="text/javascript">
-    function turnSectionVisible() {
-      document.getElementById("fh5co-work").style.display ="block";
-    }
-  </script>
-</section>
-
-
-<section id="fh5co-work" data-section="preciseFilter" style="display:none">
-
-  <!--section-header-->
   <div class="container">
-    <div class="row" style="width:100%">
-      <div class="col-md-12 section-heading text-center">
-        <h2 class="to-animate">Weitere Filter</h2>
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2 subtext to-animate">
-            <h3>Wählen Sie noch präzisere Filter-Attribute.</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--preis-slider-->
-  <div ng-controller="AppCtrl2" class="md-padding" ng-cloak>
-    <legend>Preis-Filter</legend>
-    <div class="container">
-      <div ng-init="lower=1;upper=40;gap=1;">
-        <md-content class="md-padding" style="background-color:transparent">
-          <range-slider min="1" max="40" step="1" lower-value="lower" upper-value="upper" gap="gap"></range-slider>
-          <div>
-            {% verbatim %}
-            <p>min: {{lower}}€</p>
-            <p>max: {{upper}}€</p>
-            {% endverbatim %}
-          </div>
-        </md-content>
-      </div>
-    </div>
-  </div>
-
-  <!--Produkttyp filter-->
-  <div ng-controller="AppCtrl" class="md-padding" ng-cloak>
     <legend>Produkttyp-Filter</legend>
-    <div class="container">
-      <div layout="row" layout-align="start center">
-        {% for type in producttype_list %}
-        <div flex="33">
-          <md-checkbox class="md-primary">{{ type.type_name }}</md-checkbox>
-        </div>
-        {% if forloop.counter|divisibleby:"3" %}
+    <div style="flex-flow: row wrap; display: flex;">
+      <div style="flex:1 0 25%;"
+           ng-repeat="productType in productTypes">
+        <md-checkbox class="md-primary"
+                     name="checkbox-{{productType.type_name}}"
+                     ng-click="modifyFilter($scope, $filter, productType.pk)">
+          {{ productType.type_name }}
+        </md-checkbox>
       </div>
-      <div layout="row" layout-align="start center">
-        {% endif %}
-        {% if forloop.last %}
-      </div>
-      {% endif %}
-      {% endfor %}
     </div>
   </div>
 
-  <!--button um hidden section auszublenden-->
-  <div class="row" layout-align="center center" style="text-align:center">
-    <button type="button" class="btn btn-link" onclick="hideSection()">Weitere Filter ausblenden</button>
-  </div>
-  <!--funtion for button-->
-  <script type="text/javascript">
-    function hideSection() {
-      document.getElementById("fh5co-work").style.display ="none";
-    }
-  </script>
+  <!--hersteller-filter>
+  <div class="md-padding" ng-cloak>
+    <div class="container">
+      <legend>Hersteller-Filter</legend>
+      <div style="flex-flow: row wrap; display: flex;">
+        <div style="flex:1 0 30%;"
+             ng-repeat="provider in providers">
+          <md-checkbox class="md-primary"
+                       name="checkbox-{{provider.name}}"
+                       ng-click="$log.log('clicked provider')">
+            {{ provider.name }}
+          </md-checkbox>
+        </div>
+      </div>
+    </div>
+  </div-->
 </section>
 
-<section id="fh5co-testimonials" data-section="results">
+<section id="fh5co-work" data-section="results">
 
   <!--section-header-->
   <div class="container">
@@ -200,55 +120,27 @@
     </div>
   </div>
 
-
-  <!--sorting-selectbox-->
-  <div ng-controller="sorting" class="md-padding" ng-cloak>
+  <!--sorting-selectbox>
+  <div class="md-padding" ng-cloak>
     <div class="container">
       <div layout="row" layout-align="space-around center">
         <md-input-container>
           <label>Sortieren nach...</label>
           <md-select ng-model="sort">
-            {% verbatim %}
             <md-option ng-repeat="sort in sorts" value="{{sort}}">{{sort}}</md-option>
-            {% endverbatim %}
           </md-select>
         </md-input-container>
       </div>
     </div>
-  </div>
+  </div-->
 
-
-    <!--product-list-->
-    {% if all_products %}
-    {% for product in all_products %}
-    <div class="col-md-4 col-sm-6 col-xxs-12">
-      <a href="{{ product.image1.url }}" class="fh5co-project-item image-popup to-animate">
-        <img src="{{ product.image1.url }}" alt="Image" class="img-responsive">
-      </a>
-    </div>
-    {% endfor %}
-    {% endif %}
-
-
-    <div class="container">
-      <div class="row">
-        <div class="row row-bottom-padded-sm">
-          <div class="col-md-12 section-heading text-center">
-            <h2 class="to-animate">Szenarien</h2>
-          </div>
-        </div>
-      </div>
-      {% if all_products %}
-      {% for product in all_products %}
-      <div class="col-md-4 col-sm-6 col-xxs-12">
-        <a class="fh5co-project-item">
-          <div class="img-responsive"
-               style="background-image: url('{{ product.image1.url }}'); background-repeat: no-repeat; height: 250px;">
-          </div>
+  <div class="container">
+    <div style="flex-flow: row wrap; display: flex;">
+      <div style="flex:0 0 20%;padding: 2.5%"
+           ng-repeat="product in products">
+        <a href="/products/{{product.pk}}" class="fh5co-project-item">
+          <img src="{{ product.image1 }}" style="height:13em; width:16em">
           <div class="fh5co-text">
-            <h3 class="text-muted">
-              {{ product.provider }}
-            </h3>
             <div style="height: 80px;">
               <h1>
                 {{ product.name }}
@@ -257,127 +149,9 @@
           </div>
         </a>
       </div>
-      {% empty %}
-      <div>
-        Es wurden noch keine Szenarien hinzugefügt.
-      </div>
-      {% endfor %}
-      {% endif %}
     </div>
+  </div>
 </section>
-
-  {% include "app/html_templates/sections/commentSection.html" %}
-
-  {% include "app/html_templates/footer/bodyBackBone.html" %}
-
-  <!--script for range slider-->
-  <script type="text/ng-template" id="range-slider.tpl.html">
-    {% verbatim %}
-    <div class='range-slider-container'>
-      <div class='range-slider-left' ng-style="{width:lowerWidth+'%'}">
-        <md-slider ng-model="lowerValue" min='{{min}}' max='{{lowerMaxLimit}}' step="{{step}}"
-                   aria-label="lowerSlider"></md-slider>
-      </div>
-      <div class="range-track-line"
-           ng-style="{width:tracker.width+'%',left:tracker.left+'%',right:tracker.right+'%'}"></div>
-      <div class='range-slider-right' ng-style="{width:upperWidth+'%'}">
-        <md-slider ng-model="upperValue" min="{{upperMinLimit}}" max="{{max}}" step="{{step}}"
-                   aria-label="upperSlider"></md-slider>
-      </div>
-    </div>
-    {% endverbatim %}
-  </script>
-
-  <!--script for angular components-->
-  <script type="text/javascript">
-    angular
-      .module('allProductsApp', ['ngMaterial', "directives.rangeSlider"])
-      .controller('sorting', function ($scope) {
-        $scope.sorts = [
-          "Preis aufsteigend",
-          "Preis absteigend",
-          "Nach Hersteller",
-          "Alphabetisch A-Z"
-        ];
-      })
-      .controller('AppCtrl', function ($scope) {
-      })
-      .controller('AppCtrl2', function ($scope) {
-        $scope.color = {
-          blue: Math.floor(Math.random() * 255)
-        };
-      });
-
-    //directive for range-slider
-    angular.module('directives.rangeSlider', ['ngMaterial'])
-      .directive('rangeSlider', function () {
-        return {
-          restrict: "E",
-          scope: {
-            max: '=',
-            min: '=',
-            gap: '=?',
-            step: '=?',
-            lowerValue: "=",
-            upperValue: "="
-          },
-          templateUrl: 'range-slider.tpl.html',
-          controller: ["$scope", function ($scope) {
-
-            var COMFORTABLE_STEP = $scope.step, // whether the step is comfortable that depends on u
-              tracker = $scope.tracker = {    // track style
-                width: 0,
-                left: 0,
-                right: 0
-              };
-
-            function updateSliders() {
-
-              if ($scope.upperValue - $scope.lowerValue > $scope.gap) {
-
-                $scope.lowerMaxLimit = $scope.lowerValue + COMFORTABLE_STEP;
-                $scope.upperMinLimit = $scope.upperValue - COMFORTABLE_STEP;
-
-              } else {
-                $scope.lowerMaxLimit = $scope.lowerValue;
-                $scope.upperMinLimit = $scope.upperValue;
-              }
-
-              updateSlidersStyle();
-
-            }
-
-            function updateSlidersStyle() {
-              // update sliders style
-              $scope.lowerWidth = $scope.lowerMaxLimit / $scope.max * 100;
-              $scope.upperWidth = ($scope.max - $scope.upperMinLimit) / $scope.max * 100;
-
-              // update tracker line style
-              tracker.width = 100 - $scope.lowerWidth - $scope.upperWidth;
-              tracker.left = $scope.lowerWidth || 0;
-              tracker.right = $scope.upperWidth || 0;
-            }
-
-            // watch lowerValue & upperValue to update sliders
-            $scope.$watchGroup(["lowerValue", "upperValue"], function (newVal) {
-
-              // filter the default initialization
-              if (newVal !== undefined) {
-                updateSliders();
-              }
-
-            });
-
-            // init
-            $scope.step = $scope.step || 1;
-            $scope.gap = $scope.gap || 0;
-            $scope.lowerMaxLimit = $scope.lowerValue + COMFORTABLE_STEP;
-            $scope.upperMinLimit = $scope.upperValue - COMFORTABLE_STEP;
-            updateSlidersStyle();
-          }]
-        };
-
-      })
-  </script>
+{% endverbatim %}
 </body>
-</html>
+{% endblock %}

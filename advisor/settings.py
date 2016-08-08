@@ -31,6 +31,10 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     #'debug_toolbar',
     #'django_extensions',
+    'crispy_forms',
+    'rest_framework',
+    'markdown',
+    'django_filters',
     'static_precompiler',
     'djangobower',
     'material',
@@ -83,7 +87,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'advisor',
+        'NAME': 'advisor_test',
         'USER': 'django',
         'PASSWORD': 'djangoDBpw',
         'HOST': 'dailab-advisor.cgxenmplsqo5.eu-central-1.rds.amazonaws.com',
@@ -133,9 +137,7 @@ STATICFILES_FINDERS = (
     'djangobower.finders.BowerFinder',
 )
 
-
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'app/static/bower_components')
-
 
 BOWER_INSTALLED_APPS = (
     'md-steppers#0.2.4',
@@ -162,10 +164,10 @@ MEDIA_URL = '/media/'
 STATIC_PRECOMPILER_COMPILERS = (
     ('static_precompiler.compilers.CoffeeScript', {"executable": "/usr/bin/coffeescript"}),
     ('static_precompiler.compilers.SCSS', {
-            "sourcemap_enabled": True,
-            "compass_enabled": True,
-            "precision": 8,
-            "output_style": "compressed"}),
+        "sourcemap_enabled": True,
+        "compass_enabled": True,
+        "precision": 8,
+        "output_style": "compressed"}),
     'static_precompiler.compilers.Babel',
     'static_precompiler.compilers.Handlebars',
     'static_precompiler.compilers.SASS',
@@ -180,3 +182,12 @@ GRAPH_MODELS = {
   'group_models': True,
 }
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    #'PAGE_SIZE': 5,
+}

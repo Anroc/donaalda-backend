@@ -1,0 +1,64 @@
+{% load staticfiles %}
+<head>
+  {% block head %}
+  {% include "app/html_templates/header/headerTemplate.html" %}
+  {% endblock %}
+</head>
+<div class="row" style="margin: 5px;">
+  <button class="btn btn-success col-md-2 block-center" type="submit" onclick="window.print();">Drucken</button>
+</div>
+<h1>Donaalda - Deine Matches</h1>
+
+<h3>Hier findest Du die Szenarien, die mit Deinen Angaben am besten übereinstimmen. Damit Du weist was Du kaufen kannst, druckt Dir diese Liste aus.</h3>
+
+<div style="margin-left: 20px; margin-right: 20px;">
+  <div>
+    {% if result %}
+    {% for r in result %}
+    {% for scenario in r.scenario_set.all|slice:":6" %}
+    <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title" style="font-size: 20px;"><strong>{{ scenario.provider }}</strong> - {{ scenario.name }}</h3>
+        </div>
+        <div class="panel-body" style="background-color: white;">
+          <p>{{ scenario.short_description|safe|linebreaksbr }}</p>
+          Produkte
+          <table class="table table-striped" width="100%">
+            <thead>
+            <tr>
+              <th>Hersteller</th>
+              <th>Name</th>
+              <th>Produktart</th>
+              <th>Artikelnummer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in scenario.scenario_product_set.products.all %}
+            <tr>
+              <td>{{ product.provider }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.product_type.type_name }}</td>
+              <td>{{ product.serial_number }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div>
+      Es wurden noch keine Szenarien hinzugefügt.
+    </div>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+<footer id="footer">
+    <div class="col-md-12 text-center">
+      &copy; DONAALDA. All Rights Reserved.
+    </div>
+</footer>

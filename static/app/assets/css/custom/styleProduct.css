@@ -1053,9 +1053,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn {
+  text-transform: uppercase;
+  letter-spacing: 2px;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
+}
+
+.btn:hover, .btn:active, .btn:focus {
+  background: #393e46 !important;
+  color: #fff;
+  outline: none !important;
 }
 
 .fh5co-nav-toggle {
@@ -1190,13 +1198,42 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0px;
   padding-bottom: 0;
 }
+#fh5co-testimonial {
+  padding: 10em 0;
+  background: #000 url(../images/hero2.jpg) no-repeat center center;
+  background-size: cover;
+}
 
-.btn {
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
+@media screen and (max-width: 768px) {
+  #fh5co-testimonial {
+    padding: 3em 0;
+  }
+}
+#fh5co-testimonial blockquote {
+  padding-left: 0;
+  width: 70%;
+  margin: 0 auto;
+  color: #ffffff;
+  border-left: none;
+  font-size: 45px;
+  line-height: 57px;
+}
+@media screen and (max-width: 768px) {
+  #fh5co-testimonial blockquote {
+    width: 100%;
+    font-size: 35px;
+    line-height: 47px;
+  }
+}
+#fh5co-testimonial blockquote p {
+  text-align: center;
+  color: #ffffff;
+}
+#fh5co-testimonial .fh5co-testimonial-author {
+  font-size: 18px;
+}
+#fh5co-testimonial .fh5co-uppercase-heading-sm {
+  color: #ffffff;
 }
 .btn.btn-primary {
   background: #c24d67;
@@ -1207,14 +1244,6 @@ h1, h2, h3, h4, h5, h6 {
 .btn.btn-primary:hover, .btn.btn-primary:active, .btn.btn-primary:focus {
   box-shadow: none;
   background: #c24d67;
-}
-.btn:hover, .btn:active, .btn:focus {
-  background: #393e46 !important;
-  color: #fff;
-  outline: none !important;
-}
-.btn.btn-default:hover, .btn.btn-default:focus, .btn.btn-default:active {
-  border-color: transparent;
 }
 
 .social {
