@@ -56,7 +56,7 @@
     </div>
   </div>
 
-  <!--kategorie filter-->
+  <!--kategorie filter>
   <div class="md-padding" ng-cloak>
     <div class="container">
       <legend>Kategorie-Filter</legend>
@@ -71,7 +71,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div-->
 
   <div class="container">
     <legend>Produkttyp-Filter</legend>
@@ -87,7 +87,7 @@
     </div>
   </div>
 
-  <!--hersteller-filter-->
+  <!--hersteller-filter>
   <div class="md-padding" ng-cloak>
     <div class="container">
       <legend>Hersteller-Filter</legend>
@@ -102,7 +102,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div-->
 </section>
 
 <section id="fh5co-work" data-section="results">
@@ -122,7 +122,7 @@
     </div>
   </div>
 
-  <!--sorting-selectbox-->
+  <!--sorting-selectbox>
   <div class="md-padding" ng-cloak>
     <div class="container">
       <div layout="row" layout-align="space-around center">
@@ -134,17 +134,14 @@
         </md-input-container>
       </div>
     </div>
-  </div>
+  </div-->
 
   <div style="flex-flow: row wrap; display: flex;">
-    <div style="flex:1 0 20%;padding: 2.5%"
+    <div style="flex:0 0 20%;padding: 2.5%"
          ng-repeat="product in products">
       <a href="/products/{{product.pk}}" class="fh5co-project-item">
         <img src="{{ product.image1 }}" style="height:13em; width:17.5em">
         <div class="fh5co-text">
-          <h3 class="text-muted">
-            {{ product.product_type }}
-          </h3>
           <div style="height: 80px;">
             <h1>
               {{ product.name }}
