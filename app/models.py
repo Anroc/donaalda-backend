@@ -438,10 +438,11 @@ class SessionTags(models.Model):
     (This part is not implemented as it wasn't part of the assignment)
     """
     session = models.OneToOneField(Session, null=True, on_delete=models.SET_NULL, verbose_name="Zugehörige Session")
+    created = models.DateTimeField("Datum", auto_now_add=True, null=True, )
     tag = models.ManyToManyField("Tag", verbose_name="Referenziert auf Tag")
 
     def __str__(self):
-        return '%s %s' % (self.session_id, str(list(self.tag.all())))
+        return '%s %s %s' % (self.created, self.session_id, str(list(self.tag.all())))
 
     class Meta:
         verbose_name = 'Session Tag'
