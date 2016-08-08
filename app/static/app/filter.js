@@ -10,14 +10,16 @@ angular
 
         var products = [];
 
+        var typeFilterList = [];
 
-        var filterList = [];
+        // TODO add filter for providers
+        var providerFilterList = [];
 
         var shownProducts = [];
 
         var updateProductList = function ($item) {
 
-            var index = filterList.indexOf($item);
+            var index = typeFilterList.indexOf($item);
 
             var p = new Object();
             var type = new Object();
@@ -26,14 +28,14 @@ angular
 
                 console.log(products);
 
-                // if product has an attribute that is in filterList then put into show
+                // if product has an attribute that is in typeFilterList then put into show
 
                 for (var i = 0; i < products.length; i++) {
                     p = products[i];
                     type = p.product_type;
-                    var type_index = filterList.indexOf(type);
+                    var type_index = typeFilterList.indexOf(type);
                     if (type_index > -1 && shownProducts.indexOf(p) == -1) {
-                        console.log("type: " + type + " is in filterlist so product p: " + p.name + " is shown");
+                        console.log("type: " + type + " is in typefilterlist so product p: " + p.name + " is shown");
                         shownProducts.push(p);
                     }
                 }
@@ -65,20 +67,20 @@ angular
 
             console.log("modifying item: " + $item + " to list");
 
-            if (filterList.indexOf($item) !== -1) {
+            if (typeFilterList.indexOf($item) !== -1) {
 
-                var index = filterList.indexOf($item);
+                var index = typeFilterList.indexOf($item);
                 if (index > -1) {
-                    filterList.splice(index, 1);
+                    typeFilterList.splice(index, 1);
                 }
 
-                //$scope.filterList = $filter('filter')($scope.filterList, {name: '!' + item});
+                //$scope.typeFilterList = $filter('filter')($scope.typeFilterList, {name: '!' + item});
 
             } else {
-                filterList.push($item);
+                typeFilterList.push($item);
             }
 
-            console.log("new list: " + filterList + " " + $scope + " " + $item);
+            console.log("new list: " + typeFilterList + " " + $scope + " " + $item);
 
             updateProductList($item);
         };
