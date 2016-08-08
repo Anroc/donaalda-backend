@@ -55,6 +55,7 @@ urlpatterns = [
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
     url(r'^result/$', views.stepper_check, name='get_question_result'),
+    url(r'^resultPrint/$', views.result_print, name='get_question_result_print'),
     url(r'^logout$', views.log_out, name='logout'),
     url(r'^commentreceiver$', views.commentreceiver, name='commentreceiver'),
     url(r'^scenarios/$', views.ScenariosView.as_view(), name='scenarios'),

@@ -426,6 +426,161 @@ def stepper_check(request):
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
+def result_print(request):
+    # copy post object to delete csrf token, so json.load works
+    post = request.POST.copy()
+    if request.POST.get("csrfmiddlewaretoken") and request.POST.get("csrfmiddlewaretoken") is not None:
+        # print(request.POST.get('csrfmiddlewaretoken'))
+        del post["csrfmiddlewaretoken"]
+    # dict should hold decoded JSON objects from stepper
+    steps = {}
+    # read from POST and interpret as JSON
+    for key, value in post.items():
+        steps[key] = json.loads(value)
+
+    print(steps)
+
+    # "flatten" dict by recursively dismissing dicts and adding would be lost information to key
+    def flatten_dict(d):
+        def expand(key, value):
+            if isinstance(value, dict):
+                return [(str(key) + '.' + str(k), str(v)) for k, v in flatten_dict(value).items()]
+            else:
+                return [(key, value)]
+
+        items = [item for k, v in d.items() for item in expand(k, v)]
+
+        return dict(items)
+
+    # find unnecessary JSON data, that we dont have to work with
+    regex = re.compile("[0-9].(optional|completed|step|data.completed)")
+
+    result_dic = flatten_dict(steps)
+
+    # copy of flattened dict, to keep checking whether stuff works, can be removed on production version of function
+    clean_result_dic = dict(result_dic)
+
+    # create list of unnecessary items
+    delete_list = [i for i in result_dic.keys() if regex.search(i)]
+
+    # REGEX to find correct answer PK to substitute YES dict values
+    regex_build_value = re.compile("[\d\w]*.answer[0-9]+")
+
+    # clean clean_result_dic of non required POST data
+    for item in delete_list:
+        del clean_result_dic[item]
+
+    # create list with items to be "cleaned", IE items with answer PK in key
+    clean_list = [i for i in clean_result_dic.keys() if regex_build_value.search(i)]
+
+    print(clean_result_dic)
+
+    # replace the actual "True" answers with corresponding answer PK
+    for k, v in list(clean_result_dic.items()):
+        if k in clean_list:
+            if str(v) != "True":
+                del clean_result_dic[k]
+                continue
+            clean_result_dic[k] = re.sub('.*?([0-9]*)$', r'\1', k)
+
+    """
+        for k in list(clean_result_dic.keys()):
+            result = re.match('.*?([0-9]+)', k)
+            if result is not None:
+                clean_result_dic[result.group(1)] = clean_result_dic.pop(k)
+
+        for k, v in list(clean_result_dic.items()):
+            try:
+                if isinstance(int(v), int):
+                    clean_result_dic[str(k)+".answer"+str(v)] = clean_result_dic.pop(k)
+                    clean_result_dic[str(k) + str(v)] = 'True'
+            except ValueError:
+                print(v+' is not int')
+    """
+
+    given_answers = Answer.objects.select_related('tag').filter(pk__in=list(clean_result_dic.values()))
+    used_tags = [i.tag for i in given_answers]
+    # deduplicating the entries in used_tags
+    used_tags = list(set(used_tags))
+    # TODO: only use product sets that have at least one tag in common with the one the users has chosen
+    product_sets = ProductSet.objects.all()
+    # ProductSet.objects.select_related('tags').filter(tags__in=used_tags)
+
+    """
+    All tags gathered from the a run through the advisor (stepper) are stored in the database,
+    this could be used if an error occurs, but is mostly intended to be used for analytical reasons (e.g. big data).
+
+    If a new entry is made, this checks if an old session is already stored and if it is set the session relation to null,
+    than a new entry is stored.
+    """
+    # print("Session %s" % request.session.session_key)
+    if SessionTags.objects.filter(
+        session_id=request.session.session_key).exists() and request.session.session_key is not None:
+        old_session = SessionTags.objects.get(session_id=request.session.session_key)
+        old_session.session = None
+        old_session.save()
+
+    new_session = SessionTags.objects.create(session_id=request.session.session_key)
+    new_session.tag = used_tags
+    new_session.save()
+
+    # Save given_answers to database for existing users
+    user = request.user
+    if user.is_authenticated():
+        # given_answer = GivenAnswers.objects.get(user=user)
+        new_given_answer, b = GivenAnswers.objects.get_or_create(user=user)
+        # clear old answers to only store the newest and register the changes
+        new_given_answer.user_answer.clear()
+        # set new answer set
+        new_given_answer.user_answer = list(given_answers)
+
+    """
+    evaluates the tags returned from the advisor run,
+    by comparing them with chose used in the productsets and then
+    creates a quotient to order those and return the best-fitting ones
+    """
+    # number of tags used by the user from advisor
+    ut_len = len(used_tags)
+    t_list = []
+    for p in product_sets:
+        # tags used in the product set
+        pt = p.tags.all()
+        pt_len = pt.count()
+        # tags user and product set have in common
+        ct_len = len(list(set(used_tags).intersection(pt)))
+        if pt_len > 0 and ut_len > 0:
+            """
+            this quotient favors product sets who have many tags in common with the ones chosen by the user,
+            while neither punishing those with a high number nor those with a low number of tags.
+            """
+            t_list.append((float(ct_len / ut_len + ct_len / pt_len), p))
+        else:
+            t_list.append((0.0, p))
+
+    def get_key(item):
+        return item[0]
+
+    t_list = sorted(t_list, key=get_key, reverse=True)
+
+    product_sets = []
+
+    for _k, p in t_list:
+        product_sets.append(p)
+
+    pp = pprint.PrettyPrinter(indent=4)
+    # print("\n Tags: \n")
+    # print(used_tags)
+    # print("\n Product_set: \n")
+    # print(product_sets)
+    pp.pprint(clean_result_dic)
+    # print(steps)
+    return render(request, 'app/resultPrint.html',
+                  {'result': product_sets[:5],
+                   'tags': used_tags,
+                   })
+
+@csrf_protect
+@require_http_methods(["GET", "POST"])
 # this view logs user out if existent and redirects to previous page
 def log_out(request):
     if (request.META.get('HTTP_REFERER') is None):

@@ -62,7 +62,7 @@
             <h3>
               <p>
                 Ich habe Dir hier ein paar Szenarien zusammengestellt, die Dich interessieren könnten.
-                Natürlich kannst Du Dir die Liste im PDF-Dateiformat herunterladen.
+                Es sind die Szenarien, die mit Deinen Angaben am besten übereinstimmen.
               </p>
             </h3>
           </div>
@@ -84,7 +84,7 @@
               Dabei gehen die Szenarien auf unterschiedliche Möglichkeiten ein, um Dein
               <b>Smart Home</b> auf Deine Bedürfnisse anzupassen.
               Hier siehst Deine passendsten Szenarien in Donaalda.
-              Um zurück zu kommen, klicke auf "Zurück", Du <i><b>Dummerchen</b></i>.
+              Um zurück zu kommen, klicke auf "Zurück"
             </h3>
           </div>
         </div>
@@ -136,17 +136,21 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-heading text-center to-animate">
-        <h2 class="to-animate">Vergesslich?</h2>
+        <h2 class="to-animate">Kaufen?</h2>
         <div>
-          Hier kannst Du meine Vorschläge <b>abspeichern</b> oder <b>ausdrucken</b>.
+          Hier kannst Du meine Vorschläge <b>ausdrucken</b>.
         </div>
         <div
           ng-app="{% block ng_app %}donaaldaApp{% endblock %}"
           ng-controller="{% block ng_controller_theme %}questionController as vm{% endblock %}"
           ng-cloak>
-          <md-button class="md-primary md-raised"
+          <!--<md-button class="md-primary md-raised"
                      onclick="window.print();">
             Drück mich!
+          </md-button>-->
+          <md-button
+            class="md-primary md-raised" type="submit"
+            ng-click="vm.post('{% url 'app:get_question_result_print' %}')">Vorschläge anzeigen
           </md-button>
         </div>
       </div>
