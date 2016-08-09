@@ -147,7 +147,7 @@ class SessionTagsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SessionTags
-        fields = ('pk', 'session', 'tag',)
+        fields = ('pk', 'created','session', 'tag',)
 
 
 class QuestionStepSerializer(serializers.ModelSerializer):
