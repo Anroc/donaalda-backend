@@ -129,7 +129,7 @@ class IndexView(generic.DetailView):
                       {'category_list': Category.objects.all(),
                        'scenarios': Scenario.objects.all(),
                        'products': Product.objects.all(),
-                       'comment': Comment.objects.filter(page_url='/')[:5],
+                       'comment': Comment.objects.filter(page_url='/')[:6],
                        'amount_scenarios': Scenario.objects.all().count(),
                        'amount_products': Product.objects.all().count(),
                        'amount_provider': Provider.objects.all().count(),
@@ -147,7 +147,7 @@ class ProviderProfileView(generic.ListView):
                                                                 provider=ProviderProfile.objects.get(
                                                                     url_name=provider).owner.pk),
                                                             'comment': Comment.objects.filter(
-                                                                page_url='/provider/' + provider)[:5],
+                                                                page_url='/provider/' + provider)[:6],
                                                             'scenario_list_from_provider': Scenario.objects.filter(
                                                                 provider=(
                                                                     ProviderProfile.objects.get(
@@ -215,7 +215,7 @@ class ScenarioView(generic.DetailView):
         scenario = kwargs.get("current_scenario")
         return render(request, 'app/scenario.html',
                       {'current_scenario': Scenario.objects.get(url_name=scenario),
-                       'comment': Comment.objects.filter(page_url='/scenarios/' + scenario)[:5],
+                       'comment': Comment.objects.filter(page_url='/scenarios/' + scenario)[:6],
                        })
 
 
@@ -227,7 +227,7 @@ class ProductView(generic.DetailView):
         product = kwargs.get("pk")
         return render(request, 'app/product.html',
                       {'product': Product.objects.get(pk=product),
-                       'comment': Comment.objects.filter(page_url='/products/' + product)[:5],
+                       'comment': Comment.objects.filter(page_url='/products/' + product)[:6],
                        })
 
 
@@ -419,7 +419,7 @@ def stepper_check(request):
     pp.pprint(clean_result_dic)
     # print(steps)
     return render(request, 'app/result.html',
-                  {'result': product_sets[:5],
+                  {'result': product_sets[:6],
                    'tags': used_tags,
                    })
 
@@ -575,7 +575,7 @@ def result_print(request):
     pp.pprint(clean_result_dic)
     # print(steps)
     return render(request, 'app/resultPrint.html',
-                  {'result': product_sets[:5],
+                  {'result': product_sets[:6],
                    'tags': used_tags,
                    })
 
