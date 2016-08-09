@@ -1,10 +1,11 @@
 @font-face {
     font-family: 'icomoon';
-    src: url("../../fonts/icomoon/icomoon.eot?srf3rx");
-    src: url("../../fonts/icomoon/icomoon.eot?srf3rx#iefix") format("embedded-opentype"), url("../../fonts/icomoon/icomoon.ttf?srf3rx") format("truetype"), url("../../fonts/icomoon/icomoon.woff?srf3rx") format("woff"), url("../../fonts/icomoon/icomoon.svg?srf3rx#icomoon") format("svg");
+    src: url("../fonts/icomoon/icomoon.eot?srf3rx");
+    src: url("../fonts/icomoon/icomoon.eot?srf3rx#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.ttf?srf3rx") format("truetype"), url("../fonts/icomoon/icomoon.woff?srf3rx") format("woff"), url("../fonts/icomoon/icomoon.svg?srf3rx#icomoon") format("svg");
     font-weight: normal;
     font-style: normal;
 }
+
 /* =======================================================
 *
 * 	Template Style
@@ -12,7 +13,7 @@
 *
 * ======================================================= */
 body {
-    font-family: "Roboto", Arial, sans-serif;
+    font-family: "Source Sans Pro", Arial, sans-serif;
     font-weight: 300;
     font-size: 20px;
     line-height: 1.5;
@@ -24,13 +25,14 @@ body {
 }
 
 a {
-    color: darkslateblue;
+    color: #52d3aa;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
 }
+
 a:hover, a:active, a:focus {
-    color: darkslateblue;
+    color: #52d3aa;
     outline: none;
 }
 
@@ -560,7 +562,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     position: relative;
     top: 0;
-    background: #fff;
+    background: darkslateblue;
     overflow: hidden;
     z-index: 9;
     margin-bottom: 30px;
@@ -593,7 +595,8 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 #fh5co-about .fh5co-project-item .fh5co-text h1 {
-    font-size: 30px;
+    font-size: 26px;
+    color:white;
 }
 #fh5co-about .fh5co-project-item .fh5co-text span {
     color: #b3b3b3;
@@ -1004,6 +1007,9 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     margin: 0;
 }
+#fh5co-work .fh5co-project-item .fh5co-text h1 {
+    font-size: 26px;
+}
 #fh5co-work .fh5co-project-item .fh5co-text span {
     color: #b3b3b3;
     font-size: 16px;
@@ -1380,9 +1386,10 @@ h1, h2, h3, h4, h5, h6 {
 
 #footer {
     padding: 50px 0;
-    color: darkslateblue;
+    color: #7f7f7f;
     position: relative;
 }
+
 #footer .gotop {
     position: absolute;
     top: -20px;
@@ -1404,10 +1411,12 @@ h1, h2, h3, h4, h5, h6 {
     -o-transition: 0.2s;
     transition: 0.2s;
 }
+
 #footer .gotop:hover, #footer .gotop:focus {
     top: -25px;
     text-decoration: none !important;
 }
+
 #footer .copyright {
     font-size: 16px;
     margin-bottom: 0px;

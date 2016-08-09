@@ -6,7 +6,7 @@
     background-attachment: fixed;
     position: relative;
     width: 100%;
-    background-color: yellow;
+    background-color: MediumSeaGreen;
     color: #fff;
     overflow: hidden;
 }
@@ -20,15 +20,15 @@
     z-index: 2;
     opacity: .9;
     -webkit-backface-visibility: hidden;
-    background-color: yellow;
+    background-color: MediumSeaGreen;
     /* IE9, iOS 3.2+ */
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiMzZjk1ZWEiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iIzUyZDNhYSIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
-    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, yellow), color-stop(1, yellowgreen));
+    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, MediumSpringGreen), color-stop(1, MediumSeaGreen));
     /* Android 2.3 */
-    background-image: -webkit-repeating-linear-gradient(top left, yellow 0%, yellowgreen 100%);
+    background-image: -webkit-repeating-linear-gradient(top left, MediumSpringGreen 0%, MediumSeaGreen 100%);
     /* IE10+ */
-    background-image: repeating-linear-gradient(to bottom right, yellow 0%, yellowgreen 100%);
-    background-image: -ms-repeating-linear-gradient(top left, yellow 0%, yellowgreen 100%);
+    background-image: repeating-linear-gradient(to bottom right, MediumSpringGreen 0%, MediumSeaGreen 100%);
+    background-image: -ms-repeating-linear-gradient(top left, MediumSpringGreen 0%, MediumSeaGreen 100%);
 }
 
 #fh5co-page-scenario, #fh5co-page-scenario .text-wrap {
@@ -110,7 +110,7 @@
     }
 
     #fh5co-header .navbar-brand {
-        color: yellowgreen !important;
+        color: MediumSeaGreen !important;
     }
 
     #fh5co-header #navbar li a {
@@ -121,7 +121,7 @@
     }
 
     #fh5co-header #navbar li a:hover {
-        color: yellowgreen !important;
+        color: MediumSeaGreen !important;
     }
 
     #fh5co-header #navbar li a span:before {
@@ -131,7 +131,7 @@
     #fh5co-header #navbar li.active a {
         background: transparent;
         background: none;
-        color: yellowgreen !important;
+        color: MediumSeaGreen !important;
     }
 
     #fh5co-header #navbar li.active a span:before {
@@ -227,7 +227,7 @@
 }
 
 #fh5co-header.navbar-fixed-top .navbar-brand {
-    color: yellowgreen;
+    color: MediumSeaGreen;
 }
 
 #fh5co-header.navbar-fixed-top #navbar li a {
@@ -238,20 +238,20 @@
 }
 
 #fh5co-header.navbar-fixed-top #navbar li a:hover {
-    color: yellowgreen;
+    color: MediumSeaGreen;
 }
 
 #fh5co-header.navbar-fixed-top #navbar li.active a {
     background: transparent;
     background: none;
-    color: yellowgreen;
+    color: MediumSeaGreen;
 }
 
 #fh5co-header.navbar-fixed-top #navbar li.active a span:before {
     visibility: visible;
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
-    background-color: yellowgreen;
+    background-color: MediumSeaGreen;
 }
 
 #fh5co-header .navbar-default {
@@ -264,7 +264,7 @@
 }
 
 #fh5co-header .navbar-default .brand-slogan em {
-    color: yellowgreen;
+    color: MediumSeaGreen;
     font-style: normal;
 }
 
@@ -276,7 +276,7 @@
     background-attachment: fixed;
     position: relative;
     width: 100%;
-    background-color: yellowgreen;
+    background-color: MediumSeaGreen;
     color: #fff;
     overflow: hidden;
 }
@@ -290,15 +290,15 @@
     z-index: 2;
     opacity: .9;
     -webkit-backface-visibility: hidden;
-    background-color: yellowgreen;
+    background-color: MediumSeaGreen;
     /* IE9, iOS 3.2+ */
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiM3YjNmNzUiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iI2MyNGQ2NyIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
-    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, yellowgreen), color-stop(1, yellowgreen));
+    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, MediumSeaGreen), color-stop(1, MediumSeaGreen));
     /* Android 2.3 */
-    background-image: -webkit-repeating-linear-gradient(top left, yellowgreen 0%, yellowgreen 100%);
+    background-image: -webkit-repeating-linear-gradient(top left, MediumSeaGreen 0%, MediumSeaGreen 100%);
     /* IE10+ */
-    background-image: repeating-linear-gradient(to bottom right, yellowgreen 0%, yellowgreen 100%);
-    background-image: -ms-repeating-linear-gradient(top left, yellowgreen 0%, yellowgreen 100%);
+    background-image: repeating-linear-gradient(to bottom right, MediumSeaGreen 0%, MediumSeaGreen 100%);
+    background-image: -ms-repeating-linear-gradient(top left, MediumSeaGreen 0%, MediumSeaGreen 100%);
 }
 
 
@@ -324,15 +324,15 @@
 }
 
 #fh5co-services {
-    background-color: yellowgreen;
+    background-color: MediumSeaGreen;
     /* IE9, iOS 3.2+ */
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiM3YjNmNzUiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iI2MyNGQ2NyIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
-    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, yellowgreen), color-stop(1, yellowgreen));
+    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, MediumSeaGreen), color-stop(1, MediumSpringGreen));
     /* Android 2.3 */
-    background-image: -webkit-repeating-linear-gradient(top left, yellowgreen 0%, yellowgreen 100%);
+    background-image: -webkit-repeating-linear-gradient(top left, MediumSeaGreen 0%, MediumSpringGreen 100%);
     /* IE10+ */
-    background-image: repeating-linear-gradient(to bottom right, yellowgreen 0%, yellowgreen 100%);
-    background-image: -ms-repeating-linear-gradient(top left, yellowgreen 0%, yellowgreen 100%);
+    background-image: repeating-linear-gradient(to bottom right, MediumSeaGreen 0%, MediumSpringGreen 100%);
+    background-image: -ms-repeating-linear-gradient(top left, MediumSeaGreen 0%, MediumSpringGreen 100%);
     overflow: hidden;
     position: relative;
     color: rgba(255, 255, 255, 0.7);
@@ -395,7 +395,7 @@
 }
 
 #fh5co-counters {
-    background: yellowgreen;
+    background: MediumSeaGreen;
     overflow: hidden;
     background-color: transparent;
     background-size: cover;
@@ -487,7 +487,7 @@
 
 #fh5co-counters .fh5co-counter .fh5co-counter-icon {
     font-size: 40px;
-    color: yellowgreen;
+    color: MediumSeaGreen;
 }
 
 #fh5co-counters .fh5co-counter .fh5co-counter-number {
@@ -521,7 +521,7 @@
     border-left: none;
     padding: 30px;
     background: #fff;
-    background: yellowgreen;
+    background: MediumSeaGreen;
     font-size: 20px;
     font-weight: 300;
     position: relative;
@@ -538,7 +538,7 @@
     left: 40px;
     border-top: 10px solid black;
     border-top-color: #fff;
-    border-top-color: yellowgreen;
+    border-top-color: MediumSeaGreen;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
 }
@@ -557,7 +557,7 @@
 }
 
 #fh5co-testimonials .box-testimony .author a {
-    color: yellowgreen;
+    color: MediumSeaGreen;
 }
 
 #fh5co-testimonials .box-testimony .author a:hover {
@@ -593,15 +593,15 @@
     overflow: hidden;
     position: relative;
     color: rgba(255, 255, 255, 0.8);
-    background-color: yellowgreen;
+    background-color: MediumSeaGreen;
     /* IE9, iOS 3.2+ */
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiM3YjNmNzUiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iI2MyNGQ2NyIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
-    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, yellowgreen), color-stop(1, yellowgreen));
+    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, MediumSpringGreen), color-stop(1, MediumSeaGreen));
     /* Android 2.3 */
-    background-image: -webkit-repeating-linear-gradient(top left, yellow 0%, yellowgreen 100%);
+    background-image: -webkit-repeating-linear-gradient(top left, MediumSpringGreen 0%, MediumSeaGreen 100%);
     /* IE10+ */
-    background-image: repeating-linear-gradient(to bottom right, yellow 0%, yellowgreen 100%);
-    background-image: -ms-repeating-linear-gradient(top left, yellow 0%, yellowgreen 100%);
+    background-image: repeating-linear-gradient(to bottom right, MediumSpringGreen 0%, MediumSeaGreen 100%);
+    background-image: -ms-repeating-linear-gradient(top left, MediumSpringGreen 0%, MediumSeaGreen 100%);
 }
 
 #fh5co-work a {
@@ -772,7 +772,7 @@
 .form-control:active, .form-control:focus {
     outline: none;
     box-shadow: none;
-    border-color: yellowgreen;
+    border-color: MediumSeaGreen;
 }
 
 .btn {
@@ -834,7 +834,7 @@
     display: block;
     width: 80px;
     height: 2px;
-    background: yellowgreen;
+    background: MediumSeaGreen;
     left: 0%;
     margin-left: 0px;
     bottom: 0;
@@ -846,7 +846,7 @@
     display: block;
     width: 80px;
     height: 2px;
-    background: yellowgreen;
+    background: MediumSeaGreen;
     left: 50%;
     margin-left: -40px;
     bottom: 0;
@@ -885,7 +885,7 @@
 }
 
 .fh5co-nav-toggle.active i::before, .fh5co-nav-toggle.active i::after {
-    background: yellowgreen;
+    background: MediumSeaGreen;
 }
 
 .fh5co-nav-toggle:hover, .fh5co-nav-toggle:focus, .fh5co-nav-toggle:active {
@@ -901,11 +901,11 @@
     *display: inline;
     width: 25px;
     height: 3px;
-    color: yellowgreen;
+    color: MediumSeaGreen;
     font: bold 14px/.4 Helvetica;
     text-transform: uppercase;
     text-indent: -55px;
-    background: yellowgreen;
+    background: MediumSeaGreen;
     transition: all .2s ease-out;
 }
 
@@ -913,7 +913,7 @@
     content: '';
     width: 25px;
     height: 3px;
-    background: yellowgreen;
+    background: MediumSeaGreen;
     position: absolute;
     left: 0;
     -webkit-transition: 0.2s;
@@ -980,7 +980,7 @@
 }
 
 .btn.btn-primary {
-    background: yellowgreen;
+    background: MediumSeaGreen;
     color: #fff;
     border: none !important;
     border: 2px solid transparent !important;
@@ -988,16 +988,16 @@
 
 .btn.btn-primary:hover, .btn.btn-primary:active, .btn.btn-primary:focus {
     box-shadow: none;
-    background: yellowgreen;
+    background: MediumSeaGreen;
 }
 
 .social li a.social-box {
-    background: yellowgreen;
+    background: MediumSeaGreen;
     color: #fff;
 }
 
 .social li a.social-circle {
-    background: yellowgreen;
+    background: MediumSeaGreen;
     color: #fff;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -1010,12 +1010,12 @@
 }
 
 .social.social-box a {
-    background: yellowgreen;
+    background: MediumSeaGreen;
     color: #fff;
 }
 
 .social.social-circle a {
-    background: yellowgreen;
+    background: MediumSeaGreen;
     color: #fff;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
