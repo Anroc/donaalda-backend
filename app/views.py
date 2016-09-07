@@ -158,20 +158,14 @@ class ProviderProfileView(generic.ListView):
 class ContactView(generic.ListView):
     template_name = 'app/contact.html'
 
-    # context_object_name = 'provider'
-
     def get(self, request, *args, **kwargs):
-        # provider = kwargs.get("provider_url_name")
         return render(request, 'app/contact.html', {})
 
 
 class ImpressumView(generic.ListView):
     template_name = 'app/impressum.html'
 
-    # context_object_name = 'impressum'
-
     def get(self, request, *args, **kwargs):
-        # provider = kwargs.get("provider_url_name")
         return render(request, 'app/impressum.html', {})
 
 
@@ -209,8 +203,6 @@ class ScenariosView(generic.ListView):
 class ScenarioView(generic.DetailView):
     template_name = 'scenario.html'
 
-    # context_object_name = 'scenario'
-
     def get(self, request, *args, **kwargs):
         scenario = kwargs.get("current_scenario")
         return render(request, 'app/scenario.html',
@@ -246,8 +238,14 @@ class AllProductsView(generic.DetailView):
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
-# this view logs user in if existent and redirects to previous page
 def login_view(request):
+    """
+    this view logs user in if existent and redirects to previous page
+
+    :param request: web request made by client to server containing all available information.
+    :return: webpage to redirect to and message wether login was successful or not.
+    """
+
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
         print("none")
@@ -271,6 +269,13 @@ def login_view(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def stepper_check(request):
+    """
+    Get the answers given by a user to questions in the stepper,stores them in the database and returns the best fitting to the user.
+
+    :param request: Web request to server containing the given answers.
+    :return: Productsets matching to the users preferences
+    """
+
     # copy post object to delete csrf token, so json.load works
     post = request.POST.copy()
     if request.POST.get("csrfmiddlewaretoken") and request.POST.get("csrfmiddlewaretoken") is not None:
@@ -327,23 +332,9 @@ def stepper_check(request):
                 continue
             clean_result_dic[k] = re.sub('.*?([0-9]*)$', r'\1', k)
 
-    """
-        for k in list(clean_result_dic.keys()):
-            result = re.match('.*?([0-9]+)', k)
-            if result is not None:
-                clean_result_dic[result.group(1)] = clean_result_dic.pop(k)
-
-        for k, v in list(clean_result_dic.items()):
-            try:
-                if isinstance(int(v), int):
-                    clean_result_dic[str(k)+".answer"+str(v)] = clean_result_dic.pop(k)
-                    clean_result_dic[str(k) + str(v)] = 'True'
-            except ValueError:
-                print(v+' is not int')
-    """
-
     given_answers = Answer.objects.select_related('tag').filter(pk__in=list(clean_result_dic.values()))
     used_tags = [i.tag for i in given_answers]
+
     # deduplicating the entries in used_tags
     used_tags = list(set(used_tags))
     # TODO: only use product sets that have at least one tag in common with the one the users has chosen
@@ -357,7 +348,7 @@ def stepper_check(request):
     If a new entry is made, this checks if an old session is already stored and if it is set the session relation to null,
     than a new entry is stored.
     """
-    # print("Session %s" % request.session.session_key)
+
     if SessionTags.objects.filter(
         session_id=request.session.session_key).exists() and request.session.session_key is not None:
         old_session = SessionTags.objects.get(session_id=request.session.session_key)
@@ -373,23 +364,27 @@ def stepper_check(request):
     if user.is_authenticated():
         # given_answer = GivenAnswers.objects.get(user=user)
         new_given_answer, b = GivenAnswers.objects.get_or_create(user=user)
+
         # clear old answers to only store the newest and register the changes
         new_given_answer.user_answer.clear()
+
         # set new answer set
         new_given_answer.user_answer = list(given_answers)
-
     """
     evaluates the tags returned from the advisor run,
     by comparing them with chose used in the productsets and then
     creates a quotient to order those and return the best-fitting ones
     """
+
     # number of tags used by the user from advisor
     ut_len = len(used_tags)
     t_list = []
     for p in product_sets:
+
         # tags used in the product set
         pt = p.tags.all()
         pt_len = pt.count()
+
         # tags user and product set have in common
         ct_len = len(list(set(used_tags).intersection(pt)))
         if pt_len > 0 and ut_len > 0:
@@ -397,6 +392,7 @@ def stepper_check(request):
             this quotient favors product sets who have many tags in common with the ones chosen by the user,
             while neither punishing those with a high number nor those with a low number of tags.
             """
+
             t_list.append((float(ct_len / ut_len + ct_len / pt_len), p))
         else:
             t_list.append((0.0, p))
@@ -412,12 +408,8 @@ def stepper_check(request):
         product_sets.append(p)
 
     pp = pprint.PrettyPrinter(indent=4)
-    # print("\n Tags: \n")
-    # print(used_tags)
-    # print("\n Product_set: \n")
-    # print(product_sets)
     pp.pprint(clean_result_dic)
-    # print(steps)
+
     return render(request, 'app/result.html',
                   {'result': product_sets[:6],
                    'tags': used_tags,
@@ -427,6 +419,8 @@ def stepper_check(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def result_print(request):
+    """Identical to stepper_check"""
+
     # copy post object to delete csrf token, so json.load works
     post = request.POST.copy()
     if request.POST.get("csrfmiddlewaretoken") and request.POST.get("csrfmiddlewaretoken") is not None:
@@ -483,29 +477,14 @@ def result_print(request):
                 continue
             clean_result_dic[k] = re.sub('.*?([0-9]*)$', r'\1', k)
 
-    """
-        for k in list(clean_result_dic.keys()):
-            result = re.match('.*?([0-9]+)', k)
-            if result is not None:
-                clean_result_dic[result.group(1)] = clean_result_dic.pop(k)
-
-        for k, v in list(clean_result_dic.items()):
-            try:
-                if isinstance(int(v), int):
-                    clean_result_dic[str(k)+".answer"+str(v)] = clean_result_dic.pop(k)
-                    clean_result_dic[str(k) + str(v)] = 'True'
-            except ValueError:
-                print(v+' is not int')
-    """
-
     given_answers = Answer.objects.select_related('tag').filter(pk__in=list(clean_result_dic.values()))
     used_tags = [i.tag for i in given_answers]
+
     # deduplicating the entries in used_tags
     used_tags = list(set(used_tags))
     # TODO: only use product sets that have at least one tag in common with the one the users has chosen
     product_sets = ProductSet.objects.all()
     # ProductSet.objects.select_related('tags').filter(tags__in=used_tags)
-
     """
     All tags gathered from the a run through the advisor (stepper) are stored in the database,
     this could be used if an error occurs, but is mostly intended to be used for analytical reasons (e.g. big data).
@@ -513,7 +492,7 @@ def result_print(request):
     If a new entry is made, this checks if an old session is already stored and if it is set the session relation to null,
     than a new entry is stored.
     """
-    # print("Session %s" % request.session.session_key)
+
     if SessionTags.objects.filter(
         session_id=request.session.session_key).exists() and request.session.session_key is not None:
         old_session = SessionTags.objects.get(session_id=request.session.session_key)
@@ -527,25 +506,28 @@ def result_print(request):
     # Save given_answers to database for existing users
     user = request.user
     if user.is_authenticated():
-        # given_answer = GivenAnswers.objects.get(user=user)
         new_given_answer, b = GivenAnswers.objects.get_or_create(user=user)
+
         # clear old answers to only store the newest and register the changes
         new_given_answer.user_answer.clear()
+
         # set new answer set
         new_given_answer.user_answer = list(given_answers)
-
     """
     evaluates the tags returned from the advisor run,
     by comparing them with chose used in the productsets and then
     creates a quotient to order those and return the best-fitting ones
     """
+
     # number of tags used by the user from advisor
     ut_len = len(used_tags)
     t_list = []
     for p in product_sets:
+
         # tags used in the product set
         pt = p.tags.all()
         pt_len = pt.count()
+
         # tags user and product set have in common
         ct_len = len(list(set(used_tags).intersection(pt)))
         if pt_len > 0 and ut_len > 0:
@@ -553,6 +535,7 @@ def result_print(request):
             this quotient favors product sets who have many tags in common with the ones chosen by the user,
             while neither punishing those with a high number nor those with a low number of tags.
             """
+
             t_list.append((float(ct_len / ut_len + ct_len / pt_len), p))
         else:
             t_list.append((0.0, p))
@@ -568,12 +551,7 @@ def result_print(request):
         product_sets.append(p)
 
     pp = pprint.PrettyPrinter(indent=4)
-    # print("\n Tags: \n")
-    # print(used_tags)
-    # print("\n Product_set: \n")
-    # print(product_sets)
     pp.pprint(clean_result_dic)
-    # print(steps)
     return render(request, 'app/resultPrint.html',
                   {'result': product_sets[:6],
                    'tags': used_tags,
@@ -581,8 +559,9 @@ def result_print(request):
 
 @csrf_protect
 @require_http_methods(["GET", "POST"])
-# this view logs user out if existent and redirects to previous page
 def log_out(request):
+    """this view logs user out if existent and redirects to previous page"""
+
     if (request.META.get('HTTP_REFERER') is None):
         redirectpage = "/"
         print("none")
@@ -596,9 +575,13 @@ def log_out(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def register_user(request):
-    # this view registers a userprofile if username is not already taken
-    # redirects and returns statusmessage
-    # received formvariables: username,email,password,firstname,lastname
+    """
+    this view registers a userprofile if username is not already taken.
+
+    :param request: received formvariables: username,email,password,firstname,lastname
+    :return: redirects and returns statusmessage
+    """
+
     username = request.POST.get('username')
     password = request.POST.get('password')
     email = request.POST.get('email')
@@ -637,9 +620,13 @@ def register_user(request):
 @csrf_protect
 @require_http_methods("POST")
 def profile(request):
-    # this view modifies attributes in a useraccount if existent
-    # redirects and returns statusmessage
-    # received formvariables: email, firstname,lastname,avatar(imagefile)
+    """
+    this view modifies attributes in a useraccount if existent
+
+    :param request: received formvariables: email, firstname,lastname,avatar(imagefile)
+    :return: redirects and returns statusmessage
+    """
+
     user = request.user
     email = request.POST.get('email')
     firstname = request.POST.get('firstname')
@@ -697,9 +684,13 @@ def profile(request):
 @csrf_protect
 @require_http_methods("POST")
 def change_password(request):
-    # this view changes userpassword if useraccount is existent
-    # redirects and returns statusmessage
-    # received formvariables: password_old, password_new
+    """
+    this view changes userpassword if useraccount is existent
+
+    :param request: received formvariables: password_old, password_new
+    :return: redirects and returns statusmessage
+    """
+
     user = request.user
     password_old = request.POST.get('password_old')
     password_new = request.POST.get('password_new')
@@ -739,9 +730,13 @@ def change_password(request):
 @csrf_protect
 @require_http_methods("POST")
 def delete_account(request):
-    # this view deletes a user account if existent
-    # redirects and returns statusmessage
-    # received formvariables: password(for verification)
+    """
+    this view deletes a user account if existent
+
+    :param request: received formvariables: password(for verification)
+    :return: redirects and returns statusmessage
+    """
+
     user = request.user
     password = request.POST.get("password")
 
@@ -778,12 +773,21 @@ def delete_account(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def back(request):
-    # this view redirects you to last page saved in session and removes it from it(last page is second first page!)
-    # if there are less than 2 pages in history it redirects to mainpage "/"
+    """
+    this view redirects you to last page saved in session and removes it from it(last page is second first page!)
+
+    :param request: A http request to the server
+    :return: if there are less than 2 pages in history it redirects to mainpage "/"
+    """
+
     redirect = "/";
 
-    if not 'history' in request.session or not request.session[
-        'history']:  # if there is no page in history redirect to mainpage(this is also the case when HTTP_REFERER is turned off)
+    if not 'history' in request.session or not request.session['history']:
+        """
+        if there is no page in history redirect to mainpage
+        (this is also the case when HTTP_REFERER is turned off)
+        """
+
         return HttpResponseRedirect("/")
     else:
         if len(request.session['history']) >= 2:
@@ -798,10 +802,19 @@ def back(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def update_pagehistory(request):
-    # this view gets called to update the users page history
-    # current(cp) page gets accessed via HTTP_REFERER. HTTP_REFERER has to be turned on for this to work
-    # formvariables: reset(is "y" if userhistory should be reset. This is the case when the user enters the mainpage "/")
-    # pagehistory is saved to a list in session
+    """
+    this view gets called to update the users page history
+
+    :param request: http request to the server
+    :return: Redirect to /
+    """
+
+    """
+    current(cp) page gets accessed via HTTP_REFERER. HTTP_REFERER has to be turned on for this to work
+    formvariables: reset(is "y" if userhistory should be reset. This is the case when the user enters the mainpage "/")
+    pagehistory is saved to a list in session
+    """
+
     if request.POST.get('reset') == "y":  # if history should be reset replace with empty list
         if 'history' in request.session and request.session['history']:
             request.session['history'] = []
@@ -826,8 +839,13 @@ def update_pagehistory(request):
 @csrf_protect
 @require_http_methods(["GET", "POST"])
 def commentreceiver(request):
-    # this view adds a comment in the database to a certain page-url
-    # received  formvariables: text, title, rating(from 0 to 5 as string), path of the page the comment is on (hidden)
+    """
+    this view adds a comment in the database to a certain page-url
+
+    :param request: received  formvariables: text, title, rating, path of the page the comment is on
+    :return: Redirect to last page the user visited
+    """
+
     title = request.POST.get('title')
     text = request.POST.get('text')
     path = request.POST.get('path')
