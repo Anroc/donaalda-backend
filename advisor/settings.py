@@ -145,6 +145,7 @@ BOWER_INSTALLED_APPS = (
     'md-steppers#0.2.4',
     'jquery',
     'OwlCarousel',
+    'yuglify',
 )
 
 FIXTURE_DIRS = (
