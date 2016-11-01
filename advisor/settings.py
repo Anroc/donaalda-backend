@@ -181,13 +181,14 @@ STATIC_PRECOMPILER_COMPILERS = (
 STATIC_PRECOMPILER_ROOT = os.path.join(BASE_DIR, 'app/static/app/assets')
 """
 
+# FIXME: the following warning
 PIPELINE = {
     'STYLESHEETS': {
         'colors': {
             'source_filenames': (
-              'css/core.css',
-              'css/colors/*.css',
-              'css/layers.css'
+                'css/core.css',
+                'css/colors/*.css',
+                'css/layers.css'
             ),
             'output_filename': 'css/colors.css',
             'extra_context': {
@@ -198,15 +199,20 @@ PIPELINE = {
     'JAVASCRIPT': {
         'stats': {
             'source_filenames': (
-              'js/jquery.js',
-              'js/d3.js',
-              'js/collections/*.js',
-              'js/application.js',
+                'js/jquery.js',
+                'js/d3.js',
+                'js/collections/*.js',
+                'js/application.js',
             ),
             'output_filename': 'js/stats.js',
         }
     }
 }
+
+PIPELINE['COMPILERS'] = (
+    'pipeline.compilers.sass.SASSCompiler',
+    'pipeline.compilers.es6.ES6Compiler',
+)
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
