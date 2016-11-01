@@ -181,6 +181,33 @@ STATIC_PRECOMPILER_COMPILERS = (
 STATIC_PRECOMPILER_ROOT = os.path.join(BASE_DIR, 'app/static/app/assets')
 """
 
+PIPELINE = {
+    'STYLESHEETS': {
+        'colors': {
+            'source_filenames': (
+              'css/core.css',
+              'css/colors/*.css',
+              'css/layers.css'
+            ),
+            'output_filename': 'css/colors.css',
+            'extra_context': {
+                'media': 'screen,projection',
+            },
+        },
+    },
+    'JAVASCRIPT': {
+        'stats': {
+            'source_filenames': (
+              'js/jquery.js',
+              'js/d3.js',
+              'js/collections/*.js',
+              'js/application.js',
+            ),
+            'output_filename': 'js/stats.js',
+        }
+    }
+}
+
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 GRAPH_MODELS = {
