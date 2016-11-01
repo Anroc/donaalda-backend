@@ -29,13 +29,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'debug_toolbar',
-    #'django_extensions',
+    # 'debug_toolbar',
+    # 'django_extensions',
     'crispy_forms',
     'rest_framework',
     'markdown',
     'django_filters',
-    'static_precompiler',
+    'pipeline',
+    # 'static_precompiler',
     'djangobower',
     'material',
     'material.admin',
@@ -133,7 +134,8 @@ USE_TZ = True
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'static_precompiler.finders.StaticPrecompilerFinder',
+    # 'static_precompiler.finders.StaticPrecompilerFinder',
+    'pipeline.finders.PipelineFinder',
     'djangobower.finders.BowerFinder',
 )
 
@@ -160,7 +162,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 MEDIA_URL = '/media/'
-
+"""
 STATIC_PRECOMPILER_COMPILERS = (
     ('static_precompiler.compilers.CoffeeScript', {"executable": "/usr/bin/coffeescript"}),
     ('static_precompiler.compilers.SCSS', {
@@ -176,10 +178,13 @@ STATIC_PRECOMPILER_COMPILERS = (
 )
 
 STATIC_PRECOMPILER_ROOT = os.path.join(BASE_DIR, 'app/static/app/assets')
+"""
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
+    'all_applications': True,
+    'group_models': True,
 }
 
 REST_FRAMEWORK = {
@@ -189,5 +194,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
-    #'PAGE_SIZE': 5,
+    # 'PAGE_SIZE': 5,
 }
