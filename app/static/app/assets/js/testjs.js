@@ -4,4 +4,3 @@
 
 // just to see if the file has correctly been loaded
 console.log("found");
-alert("hello");

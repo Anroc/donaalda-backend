@@ -198,7 +198,28 @@ REST_FRAMEWORK = {
 
 
 # FIXME: the following warning, @oskar did this
+"""
+installation of packages needed in order to compile sass and typescript:
 
+sudo apt-get install npm
+which npm
+sudo npm install -g typscript
+which tsc
+
+# note: get out of virtualenv
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
+# note: replace "Oskar"
+source /home/Oskar/.rvm/scripts/rvm
+rvm --default use 2.3.0
+rvm use 2.3.0
+ruby -v
+which ruby
+
+gem install sass
+
+
+"""
 """
 in html it is supposed to look like this (maybe with some more params):
 {% block site_css %}
@@ -215,9 +236,9 @@ PIPELINE = {
     'STYLESHEETS': {
         'main': {
                 'source_filenames': (
-                    'app/assets/sass/style2.scss',
+                    'app/assets/sass/test.scss',
                 ),
-                'output_filename': 'static/app/assets/sass/compiled/css/main-bundle.css',
+                'output_filename': 'app/assets/sass/compiled/css/main-bundle.css',
             },
         'colors': {
             'source_filenames': (
@@ -236,7 +257,13 @@ PIPELINE = {
             'source_filenames': (
                 'app/assets/js/testjs.js',
             ),
-            'output_filename': 'static/app/assets/js/compiledjs/testjs.js',
+            'output_filename': 'static/app/assets/js/testjsjs.js',
+        },
+        'testts': {
+            'source_filenames': (
+                'app/assets/js/test.ts',
+            ),
+            'output_filename': 'static/app/assets/js/testts.js',
         },
         'stats': {
             'source_filenames': (
@@ -252,8 +279,12 @@ PIPELINE = {
 
 PIPELINE['COMPILERS'] = (
     # not necessarily needed 'pipeline.compilers.es6.ES6Compiler',
-    'pipeline.compilers.sass.SASSCompiler',
+
     'pipeline_typescript.compilers.TypescriptCompiler',
+    'pipeline.compilers.sass.SASSCompiler',
 )
+
+PIPELINE_SASS_BINARY='usr/AppData/Roaming/npm/node_modules/sass'
+PIPELINE_YUGLIFY_BINARY='usr/AppData/Roaming/npm/node_modules/yuglify/bin'
 
 # which one? maybe PIPELINE_STORAGE = 'pipeline.storage.PipelineCachedStorage'

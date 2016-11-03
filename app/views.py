@@ -166,7 +166,7 @@ class TestView(generic.ListView):
     template_name = 'app/test.html'
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'app/test.html', {})
+        return render(request, 'app/test.html')
 
 
 class ImpressumView(generic.ListView):
