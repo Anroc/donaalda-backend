@@ -181,42 +181,6 @@ STATIC_PRECOMPILER_COMPILERS = (
 STATIC_PRECOMPILER_ROOT = os.path.join(BASE_DIR, 'app/static/app/assets')
 """
 
-# FIXME: the following warning
-PIPELINE = {
-    'STYLESHEETS': {
-        'colors': {
-            'source_filenames': (
-                'css/core.css',
-                'css/colors/*.css',
-                'css/layers.css'
-            ),
-            'output_filename': 'css/colors.css',
-            'extra_context': {
-                'media': 'screen,projection',
-            },
-        },
-    },
-    'JAVASCRIPT': {
-        'stats': {
-            'source_filenames': (
-                'js/jquery.js',
-                'js/d3.js',
-                'js/collections/*.js',
-                'js/application.js',
-            ),
-            'output_filename': 'js/stats.js',
-        }
-    }
-}
-
-PIPELINE['COMPILERS'] = (
-    # not necessarily needed 'pipeline.compilers.es6.ES6Compiler',
-    'pipeline.compilers.sass.SASSCompiler',
-    'pipeline_typescript.compilers.TypescriptCompiler',
-)
-
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-
 GRAPH_MODELS = {
     'all_applications': True,
     'group_models': True,
@@ -231,3 +195,65 @@ REST_FRAMEWORK = {
     ],
     # 'PAGE_SIZE': 5,
 }
+
+
+# FIXME: the following warning, @oskar did this
+
+"""
+in html it is supposed to look like this (maybe with some more params):
+{% block site_css %}
+  {% stylesheet 'main' %}
+{% endblock %}
+"""
+
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+PIPELINE = {
+    # if assets shall be compressed uncomment this 'PIPELINE_ENABLED': True,
+    # 'SHOW_ERRORS_INLINE': True,
+    'STYLESHEETS': {
+        'main': {
+                'source_filenames': (
+                    'app/assets/sass/style2.scss',
+                ),
+                'output_filename': 'static/app/assets/sass/compiled/css/main-bundle.css',
+            },
+        'colors': {
+            'source_filenames': (
+                'css/core.css',
+                'css/colors/*.css',
+                'css/layers.css'
+            ),
+            'output_filename': 'css/colors.css',
+            'extra_context': {
+                'media': 'screen,projection',
+            },
+        },
+    },
+    'JAVASCRIPT': {
+        'testjs': {
+            'source_filenames': (
+                'app/assets/js/testjs.js',
+            ),
+            'output_filename': 'static/app/assets/js/compiledjs/testjs.js',
+        },
+        'stats': {
+            'source_filenames': (
+                'js/jquery.js',
+                'js/d3.js',
+                'js/collections/*.js',
+                'js/application.js',
+            ),
+            'output_filename': 'js/stats.js',
+        },
+    }
+}
+
+PIPELINE['COMPILERS'] = (
+    # not necessarily needed 'pipeline.compilers.es6.ES6Compiler',
+    'pipeline.compilers.sass.SASSCompiler',
+    'pipeline_typescript.compilers.TypescriptCompiler',
+)
+
+# which one? maybe PIPELINE_STORAGE = 'pipeline.storage.PipelineCachedStorage'

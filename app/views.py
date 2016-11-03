@@ -161,6 +161,13 @@ class ContactView(generic.ListView):
     def get(self, request, *args, **kwargs):
         return render(request, 'app/contact.html', {})
 
+# TODO: TestView for testing pipeline's functionality, class copied from ImpressumView below
+class TestView(generic.ListView):
+    template_name = 'app/test.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/test.html', {})
+
 
 class ImpressumView(generic.ListView):
     template_name = 'app/impressum.html'

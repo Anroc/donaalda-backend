@@ -49,6 +49,8 @@ urlpatterns = [
     # api end
 
     #url(r'^__debug__/', include(debug_toolbar.urls)),
+    # TODO: this is a test view for testing pipeline's functionality
+    url(r'^test$', views.TestView.as_view(), name='testView'),
     url(r'^impressum$', views.ImpressumView.as_view(), name='impressum'),
 
     url(r'^contact$', views.ContactView.as_view(), name='contact'),
