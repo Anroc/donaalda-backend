@@ -210,8 +210,9 @@ PIPELINE = {
 }
 
 PIPELINE['COMPILERS'] = (
+    # not necessarily needed 'pipeline.compilers.es6.ES6Compiler',
     'pipeline.compilers.sass.SASSCompiler',
-    'pipeline.compilers.es6.ES6Compiler',
+    'pipeline_typescript.compilers.TypescriptCompiler',
 )
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
