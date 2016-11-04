@@ -202,9 +202,21 @@ REST_FRAMEWORK = {
 installation of packages needed in order to compile sass and typescript:
 
 sudo apt-get install npm
+sudo npm install -g typescript
+sudo apt-get install nodejs
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+sudo apt-get install -g less
+
+# check that every package is properly installed in /usr/bin/[package]
+
 which npm
-sudo npm install -g typscript
 which tsc
+which nodejs
+which node
+which less
+which lessc
+
+
 
 # note: get out of virtualenv
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
@@ -217,6 +229,8 @@ ruby -v
 which ruby
 
 gem install sass
+
+sudo apt-get remove rvm
 
 
 """
@@ -261,9 +275,9 @@ PIPELINE = {
         },
         'testts': {
             'source_filenames': (
-                'app/assets/js/test.ts',
+                'app/assets/ts/test.ts',
             ),
-            'output_filename': 'static/app/assets/js/testts.js',
+            'output_filename': 'app/assets/ts/testts.js',
         },
         'stats': {
             'source_filenames': (
@@ -281,7 +295,7 @@ PIPELINE['COMPILERS'] = (
     # not necessarily needed 'pipeline.compilers.es6.ES6Compiler',
 
     'pipeline_typescript.compilers.TypescriptCompiler',
-    'pipeline.compilers.sass.SASSCompiler',
+    'pipeline.compilers.less.LessCompiler',
 )
 
 PIPELINE_SASS_BINARY='usr/AppData/Roaming/npm/node_modules/sass'
