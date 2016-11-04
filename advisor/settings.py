@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'markdown',
     'django_filters',
+    'pipeline_typescript',
     'pipeline',
     # 'static_precompiler',
     'djangobower',
@@ -244,10 +245,20 @@ in html it is supposed to look like this (maybe with some more params):
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
+# PIPELINE_LESS_BINARY = '/usr/local/bin/lessc'
+
+# PIPELINE_TYPESCRIPT_BINARY = '/usr/local/bin/tsc'
+
 PIPELINE = {
     # if assets shall be compressed uncomment this 'PIPELINE_ENABLED': True,
     # 'SHOW_ERRORS_INLINE': True,
     'STYLESHEETS': {
+        'testless': {
+            'source_filenames': (
+                'app/assets/less/test.less',
+            ),
+            'output_filename': 'app/assets/less/testless.js',
+         },
         'main': {
                 'source_filenames': (
                     'app/assets/sass/test.scss',
@@ -267,6 +278,7 @@ PIPELINE = {
         },
     },
     'JAVASCRIPT': {
+
         'testjs': {
             'source_filenames': (
                 'app/assets/js/testjs.js',
@@ -277,7 +289,7 @@ PIPELINE = {
             'source_filenames': (
                 'app/assets/ts/test.ts',
             ),
-            'output_filename': 'app/assets/ts/testts.js',
+            'output_filename': 'app/assets/ts/testNew.js',
         },
         'stats': {
             'source_filenames': (
@@ -297,8 +309,5 @@ PIPELINE['COMPILERS'] = (
     'pipeline_typescript.compilers.TypescriptCompiler',
     'pipeline.compilers.less.LessCompiler',
 )
-
-PIPELINE_SASS_BINARY='usr/AppData/Roaming/npm/node_modules/sass'
-PIPELINE_YUGLIFY_BINARY='usr/AppData/Roaming/npm/node_modules/yuglify/bin'
 
 # which one? maybe PIPELINE_STORAGE = 'pipeline.storage.PipelineCachedStorage'

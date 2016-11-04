@@ -1,5 +1,10 @@
 @base: #f938ab;
 
+body {
+  color: green;
+  background-color: pink;
+}
+
 .box-shadow(@style, @c) when (iscolor(@c)) {
   -webkit-box-shadow: @style @c;
   box-shadow:         @style @c;
