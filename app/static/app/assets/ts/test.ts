@@ -7,4 +7,6 @@ class Greeter {
 
 var greeter = new Greeter("Hello, world!");
 
-document.body.innerHTML = greeter.greet();
+//document.body.innerHTML = greeter.greet();
+
+console.log("hello world this is typescript");
