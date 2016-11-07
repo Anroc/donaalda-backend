@@ -18,6 +18,9 @@ Including another URLconf
 from . import views
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Pastebin API')
 
 router = DefaultRouter(schema_title='Pastebin API')
 router.register(r'category', views.CategoryViewSet)
@@ -43,6 +46,7 @@ app_name = 'app'
 urlpatterns = [
     # api
     # url(r'^api/v1/Category/(?P<pk>[0-9]+)/highlight/$', views.CategoryHighlight.as_view()),
+    url(r'^api/v2/', schema_view),
     url(r'^api/v1/', include(router.urls)),
     # FIXME: login for api browser, somehow not working yet
     url(r'^api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
