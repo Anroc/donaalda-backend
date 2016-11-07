@@ -53,6 +53,7 @@ urlpatterns = [
     url(r'^api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # api end
     url(r'accounts/login', RedirectView.as_view(url='/admin/login/?next=/api/v2/')),
+    url(r'accounts/logout', views.log_out),
     # url(r'accounts/login', views.login_view),
     #url(r'^__debug__/', include(debug_toolbar.urls)),
     url(r'^impressum$', views.ImpressumView.as_view(), name='impressum'),
