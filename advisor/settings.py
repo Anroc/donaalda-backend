@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     #'debug_toolbar',
     #'django_extensions',
+    'rest_framework_swagger',
     'crispy_forms',
     'rest_framework',
     'markdown',
