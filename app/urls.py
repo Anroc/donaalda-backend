@@ -19,6 +19,7 @@ from . import views
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_swagger.views import get_swagger_view
+from django.views.generic import RedirectView
 
 schema_view = get_swagger_view(title='Pastebin API')
 
@@ -51,7 +52,8 @@ urlpatterns = [
     # FIXME: login for api browser, somehow not working yet
     url(r'^api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # api end
-    url(r'accounts/login', views.login_view),
+    url(r'accounts/login', RedirectView.as_view(url='/admin/login/?next=/api/v2/')),
+    # url(r'accounts/login', views.login_view),
     #url(r'^__debug__/', include(debug_toolbar.urls)),
     url(r'^impressum$', views.ImpressumView.as_view(), name='impressum'),
 
