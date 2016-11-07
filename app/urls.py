@@ -49,7 +49,7 @@ urlpatterns = [
     # url(r'^api/v1/Category/(?P<pk>[0-9]+)/highlight/$', views.CategoryHighlight.as_view()),
     url(r'^api/v2/', schema_view),
     url(r'^api/v1/', include(router.urls)),
-    # FIXME: login for api browser, somehow not working yet
+    # FIXME: login for api/v1/ browser, somehow not working yet
     url(r'^api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # api end
     url(r'accounts/login', RedirectView.as_view(url='/admin/login/?next=/api/v2/')),
