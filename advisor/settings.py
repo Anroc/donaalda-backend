@@ -29,9 +29,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'debug_toolbar',
-    #'django_extensions',
+    # 'debug_toolbar',
+    # 'django_extensions',
     'rest_framework_swagger',
+    'rest_framework_docs',
     'crispy_forms',
     'rest_framework',
     'markdown',
@@ -179,8 +180,8 @@ STATIC_PRECOMPILER_COMPILERS = (
 STATIC_PRECOMPILER_ROOT = os.path.join(BASE_DIR, 'app/static/app/assets')
 
 GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
+    'all_applications': True,
+    'group_models': True,
 }
 
 REST_FRAMEWORK = {
@@ -190,5 +191,38 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
-    #'PAGE_SIZE': 5,
+    # 'PAGE_SIZE': 5,
 }
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+    'APIS_SORTER': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+    'OPERATIONS_SORTER': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+    'SHOW_REQUEST_HEADERS': {
+        'basic': {
+            'type': 'True'
+        }
+    },
+    'DOC_EXPANSION': {
+        'basic': {
+            'type': 'full'
+        }
+    },
+}
+
+REST_FRAMEWORK_DOCS = {
+    'HIDE_DOCS': False  # Default: False
+}
+
