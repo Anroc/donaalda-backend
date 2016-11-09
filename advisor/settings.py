@@ -194,6 +194,9 @@ REST_FRAMEWORK = {
     # 'PAGE_SIZE': 5,
 }
 
+LOGIN_URL = '/accounts/login'
+LOGOUT_URL = '/accounts/logout'
+
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
         'basic': {
