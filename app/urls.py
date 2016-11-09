@@ -52,7 +52,7 @@ urlpatterns = [
     url(r'^api/docs/', include('rest_framework_docs.urls')),
     # FIXME: login for api/v1/ browser, somehow not working yet
     # url(r'^api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'accounts/login', RedirectView.as_view(url='/admin/login/?next=/api/v2/')),
+    url(r'accounts/login', RedirectView.as_view(url='/admin/login/?next=/api/swagger/')),
     url(r'accounts/logout', views.log_out),
     # api end
     # url(r'accounts/login', views.login_view),
