@@ -156,3 +156,13 @@ class QuestionStepSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestionStep
         fields = ('pk', 'name', 'question_steps',)
+
+
+class OnboardingDataSerializer(serializers.ModelSerializer):
+    # TODO: add all required serializers, for example an AnswerSerializer
+    # answer_set = AnswerSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = OnboardingData
+        # TODO: Add all required fields that should be shown in api
+        fields = ()
