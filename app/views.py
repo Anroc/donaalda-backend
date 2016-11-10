@@ -459,6 +459,32 @@ class QuestionStepViewSet(viewsets.ModelViewSet):
         """Delete a QuestionStep"""
         return super(QuestionStepViewSet, self).destroy(request, pk)
 
+# TODO: Decide whether to use a CBV or FBV and then either change or fill this out
+class OnboardingViewSet(viewsets.ModelViewSet):
+    # queryset = OnboardingData.objects.all()
+    # serializer_class = OnboardingDataSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+
+    def create(self, request, *args, **kwargs):
+        """ creates an Object containing all data entered during the Onboarding process """
+        return super(OnboardingViewSet, self).create(request)
+
+    def retrieve(self, request, pk=None, **kwargs):
+        """Returns the data pertaining to the requested user"""
+        return super(OnboardingViewSet, self).retrieve(request, pk)
+
+    def update(self, request, *args, **kwargs):
+        """Updates a single Onboarding item"""
+        return super(OnboardingViewSet, self).update(request, *args, **kwargs)
+
+    def partial_update(self, request, *args, **kwargs):
+        """Partial update a Onboarding """
+        return super(OnboardingViewSet, self).partial_update(request, *args, **kwargs)
+
+    def destroy(self, request, pk=None, **kwargs):
+        """Delete a Onboarding"""
+        return super(OnboardingViewSet, self).destroy(request, pk)
+
 
 class IndexView(generic.DetailView):
     template_name = 'app/index.html'
