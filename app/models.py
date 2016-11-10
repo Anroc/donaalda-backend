@@ -484,3 +484,11 @@ class QuestionStep(models.Model):
     class Meta:
         verbose_name = "Fragen für Stepper-Schritt"
         verbose_name_plural = "Fragen für Stepper-Schritte"
+
+
+class OnboardingData(models.Model):
+    """
+    Stores all gathered onboarding data, that is gathered during the onboarding process.
+    """
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE, verbose_name="User")
+    # TODO: add onboarding data to model
