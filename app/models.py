@@ -98,6 +98,8 @@ class Scenario(models.Model):
     scenario_product_set = models.ForeignKey("ProductSet", null=True, verbose_name="dazugehörige Produktsammlung",
                                              on_delete=models.SET_NULL)
     categories = models.ManyToManyField("Category", verbose_name="passende Kategorien")
+    meta_devices = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaDevices")
+    tags = models.ManyToManyField(to="Tag", verbose_name="Spezifiziert")
 
     def __str__(self):
         return '%s' % self.name
@@ -193,6 +195,7 @@ class Product(models.Model):
                                format='JPEG')
     end_of_life = models.BooleanField(default=False, verbose_name="EOL")
     tags = models.ManyToManyField(to="Tag", verbose_name="Schlagwörter")
+    protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll")
 
     def __str__(self):
         return '%s' % self.name
@@ -213,6 +216,16 @@ class Product(models.Model):
         verbose_name = "Produkt"
         verbose_name_plural = "Produkte"
         ordering = ["name"]
+
+
+class Broker(Product):
+    def __str__(self):
+        return '%s' % self.name
+
+
+class Endpoint(Product):
+    def __str__(self):
+        return '%s' % self.name
 
 
 class ProductType(models.Model):
@@ -484,3 +497,33 @@ class QuestionStep(models.Model):
     class Meta:
         verbose_name = "Fragen für Stepper-Schritt"
         verbose_name_plural = "Fragen für Stepper-Schritte"
+
+
+class Protocol(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class Feature(models.Model):
+    name = models.CharField(max_length=255)
+    implemented_by = models.ManyToManyField(to="Product", verbose_name="Feature")
+
+    def __str__(self):
+        return self.name
+
+
+class MetaDevice(models.Model):
+    name = models.CharField(max_length=255)
+    defined_by = models.ManyToManyField(to="Feature", verbose_name="MetaDevice")
+
+
+class MetaBroker(MetaDevice):
+    def __str__(self):
+        return self.name
+
+
+class MetaEndpoint(MetaDevice):
+    def __str__(self):
+        return self.name
