@@ -515,6 +515,7 @@ class Feature(models.Model):
 
 
 class MetaDevice(models.Model):
+    productSet = models.ForeignKey(to="ProductSet", default="1", verbose_name="Produktset", on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     defined_by = models.ManyToManyField(to="Feature", verbose_name="MetaDevice")
 
