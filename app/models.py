@@ -521,10 +521,12 @@ class MetaDevice(models.Model):
 
 
 class MetaBroker(MetaDevice):
+    # TODO: more attributes
     def __str__(self):
         return self.name
 
 
 class MetaEndpoint(MetaDevice):
+    # TODO: more attributes
     def __str__(self):
         return self.name
