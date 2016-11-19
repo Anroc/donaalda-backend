@@ -35,10 +35,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'markdown',
     'django_filters',
-    'pipeline_typescript',
-    'pipeline',
-    # 'static_precompiler',
-    'djangobower',
     'material',
     'material.admin',
     'django.contrib.admin',
@@ -54,7 +50,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -131,24 +126,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'static_precompiler.finders.StaticPrecompilerFinder',
-    'pipeline.finders.PipelineFinder',
-    'djangobower.finders.BowerFinder',
-)
-
-BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'app/static/bower_components')
-
-BOWER_INSTALLED_APPS = (
-    'md-steppers#0.2.4',
-    'jquery',
-    'OwlCarousel',
-    'yuglify',
-)
-
 FIXTURE_DIRS = (
     os.path.join(BASE_DIR, 'app/fixtures/'),
 )
@@ -164,28 +141,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 MEDIA_URL = '/media/'
-"""
-STATIC_PRECOMPILER_COMPILERS = (
-    ('static_precompiler.compilers.CoffeeScript', {"executable": "/usr/bin/coffeescript"}),
-    ('static_precompiler.compilers.SCSS', {
-        "sourcemap_enabled": True,
-        "compass_enabled": True,
-        "precision": 8,
-        "output_style": "compressed"}),
-    'static_precompiler.compilers.Babel',
-    'static_precompiler.compilers.Handlebars',
-    'static_precompiler.compilers.SASS',
-    'static_precompiler.compilers.LESS',
-    'static_precompiler.compilers.Stylus',
-)
-
-STATIC_PRECOMPILER_ROOT = os.path.join(BASE_DIR, 'app/static/app/assets')
-"""
-
-GRAPH_MODELS = {
-    'all_applications': True,
-    'group_models': True,
-}
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -196,118 +151,3 @@ REST_FRAMEWORK = {
     ],
     # 'PAGE_SIZE': 5,
 }
-
-
-# FIXME: the following warning, @oskar did this
-"""
-installation of packages needed in order to compile sass and typescript:
-
-sudo apt-get install npm
-sudo npm install -g typescript
-sudo apt-get install nodejs
-sudo ln -s /usr/bin/nodejs /usr/bin/node
-sudo apt-get install -g less
-
-# check that every package is properly installed in /usr/bin/[package]
-
-which npm
-which tsc
-which nodejs
-which node
-which less
-which lessc
-
-
-
-# note: get out of virtualenv
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-\curl -sSL https://get.rvm.io | bash -s stable --ruby
-# note: replace "Oskar"
-source /home/Oskar/.rvm/scripts/rvm
-rvm --default use 2.3.0
-rvm use 2.3.0
-ruby -v
-which ruby
-
-gem install sass
-
-sudo apt-get remove rvm
-
-
-"""
-"""
-in html it is supposed to look like this (maybe with some more params):
-{% block site_css %}
-  {% stylesheet 'main' %}
-{% endblock %}
-"""
-
-
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-
-# PIPELINE_LESS_BINARY = '/usr/local/bin/lessc'
-
-# PIPELINE_TYPESCRIPT_BINARY = '/usr/local/bin/tsc'
-
-PIPELINE = {
-    # if assets shall be compressed uncomment this 'PIPELINE_ENABLED': True,
-    # 'SHOW_ERRORS_INLINE': True,
-    'STYLESHEETS': {
-        'testless': {
-            'source_filenames': (
-                'app/assets/less/test.less',
-            ),
-            'output_filename': 'app/assets/less/testless.js',
-         },
-        'main': {
-                'source_filenames': (
-                    'app/assets/sass/test.scss',
-                ),
-                'output_filename': 'app/assets/sass/compiled/css/main-bundle.css',
-            },
-        'colors': {
-            'source_filenames': (
-                'css/core.css',
-                'css/colors/*.css',
-                'css/layers.css'
-            ),
-            'output_filename': 'css/colors.css',
-            'extra_context': {
-                'media': 'screen,projection',
-            },
-        },
-    },
-    'JAVASCRIPT': {
-
-        'testjs': {
-            'source_filenames': (
-                'app/assets/js/testjs.js',
-            ),
-            'output_filename': 'static/app/assets/js/testjsjs.js',
-        },
-        'testts': {
-            'source_filenames': (
-                'app/assets/ts/test.ts',
-            ),
-            'output_filename': 'app/assets/ts/testNew.js',
-        },
-        'stats': {
-            'source_filenames': (
-                'js/jquery.js',
-                'js/d3.js',
-                'js/collections/*.js',
-                'js/application.js',
-            ),
-            'output_filename': 'js/stats.js',
-        },
-    }
-}
-
-PIPELINE['COMPILERS'] = (
-    # not necessarily needed 'pipeline.compilers.es6.ES6Compiler',
-
-    'pipeline_typescript.compilers.TypescriptCompiler',
-    'pipeline.compilers.less.LessCompiler',
-)
-
-# which one? maybe PIPELINE_STORAGE = 'pipeline.storage.PipelineCachedStorage'
