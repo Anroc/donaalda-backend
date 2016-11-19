@@ -9,12 +9,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username')
 
 
-class TagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tag
-        fields = ('pk', 'code', 'name',)
-
-
 class ProviderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Provider
@@ -40,23 +34,21 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     provider = ProviderSerializer()
-    tags = TagSerializer(read_only=True, many=True)
 
     class Meta:
         model = Product
         fields = ('pk',
                   'name', 'provider', 'product_type', 'serial_number', 'description', 'specifications', 'image1',
                   'image2',
-                  'image3', 'end_of_life', 'tags',)
+                  'image3', 'end_of_life',)
 
 
 class ProductSetSerializer(serializers.ModelSerializer):
     products = ProductSerializer(read_only=True, many=True)
-    tags = TagSerializer(read_only=True, many=True)
 
     class Meta:
         model = ProductSet
-        fields = ('pk', 'name', 'description', 'products', 'creator', 'tags',)
+        fields = ('pk', 'name', 'description', 'products', 'creator',)
 
 
 class ProductTypeSerializer(serializers.ModelSerializer):
@@ -109,11 +101,15 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class AnswerSerializer(serializers.ModelSerializer):
-    tag = TagSerializer()
-
     class Meta:
         model = Answer
-        fields = ('pk', 'belongs_to_question', 'answer_text', 'tag',)
+        fields = ('pk', 'belongs_to_question', 'answer_text',)
+
+
+class AnswerSliderSerializer(AnswerSerializer):
+    class Meta:
+        model = AnswerSlider
+        fields = (AnswerSerializer.fields, 'rating_value')
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -135,19 +131,10 @@ class GivenAnswersSerializer(serializers.ModelSerializer):
 
 class QuestionSetSerializer(serializers.ModelSerializer):
     question = QuestionSerializer(read_only=True, many=True)
-    category = CategorySerializer()
 
     class Meta:
         model = QuestionSet
-        fields = ('pk', 'name', 'question', 'category', 'order',)
-
-
-class SessionTagsSerializer(serializers.ModelSerializer):
-    tag = TagSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = SessionTags
-        fields = ('pk', 'created', 'session', 'tag',)
+        fields = ('pk', 'name', 'question', 'order',)
 
 
 class QuestionStepSerializer(serializers.ModelSerializer):
@@ -156,3 +143,11 @@ class QuestionStepSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestionStep
         fields = ('pk', 'name', 'question_steps',)
+
+
+class ShoppingBasketSerializer(serializers.ModelSerializer):
+    scenarios = ScenarioSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = ShoppingBasket
+        fields = ('user', 'scenarios')

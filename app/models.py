@@ -97,9 +97,9 @@ class Scenario(models.Model):
     provider = models.ForeignKey("Provider", default="1", verbose_name="Versorger", on_delete=models.CASCADE)
     scenario_product_set = models.ForeignKey("ProductSet", null=True, verbose_name="dazugehörige Produktsammlung",
                                              on_delete=models.SET_NULL)
-    categories = models.ManyToManyField("Category", verbose_name="passende Kategorien")
+    categories = models.ManyToManyField("Category", verbose_name="Bewertung")
     meta_devices = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaDevices")
-    tags = models.ManyToManyField(to="Tag", verbose_name="Spezifiziert")
+    subcategory = models.ManyToManyField(to='SubCategory', verbose_name="Dieses Szenario ist Teil dieser Subkategorie")
 
     def __str__(self):
         return '%s' % self.name
@@ -194,8 +194,10 @@ class Product(models.Model):
                                processors=[ResizeToFill(200, 100)],
                                format='JPEG')
     end_of_life = models.BooleanField(default=False, verbose_name="EOL")
+    # TODO: Ask Frontend whether tags like 'Editors choice 2020' is required
     tags = models.ManyToManyField(to="Tag", verbose_name="Schlagwörter")
     protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll")
+    features = models.ManyToManyField(to="Feature", verbose_name="Hat Features")
 
     def __str__(self):
         return '%s' % self.name
@@ -236,6 +238,7 @@ class ProductType(models.Model):
     """
 
     type_name = models.CharField(max_length=255, unique=True, verbose_name="Name")
+    used_as_product_type_filter_by = models.ManyToManyField(to=User, verbose_name="Als Produkttypfilter verwendet von")
 
     def __str__(self):
         return '%s' % self.type_name
@@ -362,11 +365,13 @@ class Question(models.Model):
     MULTI_CHOICE = 'mc'
     RADIO_CHOICE = 'rc'
     DROP_CHOICE = 'dc'
+    SLIDER_CHOICE = 'sc'
 
     ANSWER_PRESENTATION_CHOICES = (
         (MULTI_CHOICE, 'Multiple Choice'),
         (RADIO_CHOICE, 'Radiobutton'),
         (DROP_CHOICE, 'Dropdown'),
+        (SLIDER_CHOICE, 'Slider')
     )
 
     question_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Fragentext")
@@ -394,7 +399,6 @@ class Answer(models.Model):
 
     belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE, verbose_name="gehört zu Frage")
     answer_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Anworttext")
-    tag = models.ForeignKey(to="Tag", on_delete=models.CASCADE, verbose_name="Schlagwort")
 
     def __str__(self):
         return '%s zu "%s"' % (self.answer_text, self.belongs_to_question.question_text)
@@ -403,6 +407,14 @@ class Answer(models.Model):
         verbose_name = "Antwort"
         verbose_name_plural = "Antworten"
         ordering = ['belongs_to_question_id', 'pk', ]
+
+
+class AnswerSlider(Answer):
+    # TODO: NAME STILL UP FOR GRABS
+    rating_value = models.PositiveIntegerField(default=5, validators=[MinValueValidator(0), MaxValueValidator(10)])
+
+    def __str__(self):
+        return '%s zu "%s"' % (self.answer_text, self.belongs_to_question.question_text)
 
 
 class Tag(models.Model):
@@ -452,8 +464,6 @@ class QuestionSet(models.Model):
 
     name = models.CharField(max_length=255, default="---")
     question = models.ManyToManyField("Question", verbose_name="Dazugehörige Fragen")
-    category = models.OneToOneField("Category", on_delete=models.CASCADE, null=True, blank=True,
-                                    verbose_name="Dazugehörige Kategorie")
     order = models.PositiveIntegerField(default=1000)
 
     def __str__(self):
@@ -502,22 +512,24 @@ class QuestionStep(models.Model):
 class Protocol(models.Model):
     name = models.CharField(max_length=255)
 
+    # TODO: Upcomming attribute Sender/Receiver to differentiate whether a device is capabable to receive traffic
     def __str__(self):
         return self.name
 
 
 class Feature(models.Model):
     name = models.CharField(max_length=255)
-    implemented_by = models.ManyToManyField(to="Product", verbose_name="Feature")
 
     def __str__(self):
         return self.name
 
 
 class MetaDevice(models.Model):
-    productSet = models.ForeignKey(to="ProductSet", default="1", verbose_name="Produktset", on_delete=models.CASCADE)
+    productSet = models.ForeignKey(to="ProductSet", null=True, default="1", verbose_name="Produktset",
+                                   on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    defined_by = models.ManyToManyField(to="Feature", verbose_name="MetaDevice")
+    implementation_requires = models.ManyToManyField(to="Feature",
+                                                     verbose_name="Definiert von folgender Featuresammlung")
 
 
 class MetaBroker(MetaDevice):
@@ -528,5 +540,23 @@ class MetaBroker(MetaDevice):
 
 class MetaEndpoint(MetaDevice):
     # TODO: more attributes
+    def __str__(self):
+        return self.name
+
+
+class ShoppingBasket(models.Model):
+    user = models.OneToOneField(to=User, verbose_name="Besitzer dieses Einkaufswagens", on_delete=models.CASCADE)
+    scenarios = models.ManyToManyField(to="Scenario", verbose_name="Szenarios die Teil dieses Einkaufswagens sind")
+
+    def __str__(self):
+        return '%s hat folgende Szenarien %s in seinem Warenkorb' % self.user % self.scenarios
+
+
+class SubCategory(models.Model):
+    name = models.CharField(max_length=255)
+    belongs_to_category = models.ManyToManyField(to="Category", verbose_name="Gehört zu den folgenden Kategorien")
+    used_as_filter_by = models.ManyToManyField(to=User,
+                                               verbose_name="Benutzer die diese Subkategorie als Szenariofilter verwenden")
+
     def __str__(self):
         return self.name

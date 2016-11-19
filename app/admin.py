@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .adminForms import (EmployeeCreationForm,
-                            EmployeeChangeForm)
+                         EmployeeChangeForm)
 
 # Register your models here.
 from .models import (Category,
@@ -22,7 +22,7 @@ from .models import (Category,
                      SessionTags,
                      QuestionSet,
                      GivenAnswers,
-                     QuestionStep
+                     QuestionStep, Broker, MetaBroker, MetaEndpoint, Endpoint, Feature, AnswerSlider,
                      )
 
 
@@ -226,3 +226,9 @@ admin.site.register(QuestionSet)
 admin.site.register(SessionTags)
 admin.site.register(GivenAnswers)
 admin.site.register(QuestionStep)
+admin.site.register(Feature)
+admin.site.register(Broker)
+admin.site.register(MetaEndpoint)
+admin.site.register(MetaBroker)
+admin.site.register(Endpoint)
+admin.site.register(AnswerSlider)

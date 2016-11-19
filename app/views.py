@@ -18,84 +18,22 @@ from .serializers import *
 from .permissions import *
 
 
-class CategoryViewSet(viewsets.ModelViewSet):
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a Category object """
-        return super(CategoryViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single Category item"""
-        return super(CategoryViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single Category item"""
-        return super(CategoryViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a Category """
-        return super(CategoryViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a Category"""
-        return super(CategoryViewSet, self).destroy(request, pk)
 
 
-class ScenarioViewSet(viewsets.ModelViewSet):
+class ScenarioViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Scenario.objects.all()
     serializer_class = ScenarioSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a Scenario object """
-        return super(ScenarioViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single Scenario item"""
-        return super(ScenarioViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single Scenario item"""
-        return super(ScenarioViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a Scenario """
-        return super(ScenarioViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a Scenario"""
-        return super(ScenarioViewSet, self).destroy(request, pk)
 
 
-class ScenarioDescriptionViewSet(viewsets.ModelViewSet):
+class ScenarioDescriptionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ScenarioDescription.objects.all()
     serializer_class = ScenarioDescriptionSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a ScenarioDescription object """
-        return super(ScenarioDescriptionViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single ScenarioDescription item"""
-        return super(ScenarioDescriptionViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single ScenarioDescription item"""
-        return super(ScenarioDescriptionViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a ScenarioDescription """
-        return super(ScenarioDescriptionViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a ScenarioDescription"""
-        return super(ScenarioDescriptionViewSet, self).destroy(request, pk)
 
 
+# TODO: Define all required actions
 class ProductSetViewSet(viewsets.ModelViewSet):
     queryset = ProductSet.objects.all()
     serializer_class = ProductSetSerializer
@@ -122,7 +60,7 @@ class ProductSetViewSet(viewsets.ModelViewSet):
         return super(ProductSetViewSet, self).destroy(request, pk)
 
 
-class ProductViewSet(viewsets.ModelViewSet):
+class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.filter(end_of_life=False)
     serializer_class = ProductSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
@@ -148,108 +86,19 @@ class ProductViewSet(viewsets.ModelViewSet):
         return super(ProductViewSet, self).destroy(request, pk)
 
 
-class ProductTypeViewSet(viewsets.ModelViewSet):
+class ProductTypeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ProductType.objects.all()
     serializer_class = ProductTypeSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a ProductType object """
-        return super(ProductTypeViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single ProductType item"""
-        return super(ProductTypeViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single ProductType item"""
-        return super(ProductTypeViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a ProductType """
-        return super(ProductTypeViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a ProductType"""
-        return super(ProductTypeViewSet, self).destroy(request, pk)
 
 
-class ProviderViewSet(viewsets.ModelViewSet):
+class ProviderViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a Provider object """
-        return super(ProviderViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single Provider item"""
-        return super(ProviderViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single Provider item"""
-        return super(ProviderViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a Provider """
-        return super(ProviderViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a Provider"""
-        return super(ProviderViewSet, self).destroy(request, pk)
 
 
-class ProviderProfileViewSet(viewsets.ModelViewSet):
+class ProviderProfileViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ProviderProfile.objects.all()
-    serializer_class = ProviderProfileSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a ProviderProfile object """
-        return super(ProviderProfileViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single ProviderProfile item"""
-        return super(ProviderProfileViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single ProviderProfile item"""
-        return super(ProviderProfileViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a ProviderProfile """
-        return super(ProviderProfileViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a ProviderProfile"""
-        return super(ProviderProfileViewSet, self).destroy(request, pk)
-
-
-class EmployeeViewSet(viewsets.ModelViewSet):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a Employee object """
-        return super(EmployeeViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single Employee item"""
-        return super(EmployeeViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single Employee item"""
-        return super(EmployeeViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a Employee """
-        return super(EmployeeViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a Employee"""
-        return super(EmployeeViewSet, self).destroy(request, pk)
+    serializer_class = ProviderSerializer
 
 
 class CommentViewSet(viewsets.ModelViewSet):
@@ -278,84 +127,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         return super(CommentViewSet, self).destroy(request, pk)
 
 
-class QuestionViewSet(viewsets.ModelViewSet):
-    queryset = Question.objects.all()
-    serializer_class = QuestionSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a Question object """
-        return super(QuestionViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single Question item"""
-        return super(QuestionViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single Question item"""
-        return super(QuestionViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a Question """
-        return super(QuestionViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a Question"""
-        return super(QuestionViewSet, self).destroy(request, pk)
-
-
-class AnswerViewSet(viewsets.ModelViewSet):
-    queryset = Answer.objects.all()
-    serializer_class = AnswerSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a Answer object """
-        return super(AnswerViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single Answer item"""
-        return super(AnswerViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single Answer item"""
-        return super(AnswerViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a Answer """
-        return super(AnswerViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a Answer"""
-        return super(AnswerViewSet, self).destroy(request, pk)
-
-
-class TagViewSet(viewsets.ModelViewSet):
-    queryset = Tag.objects.all()
-    serializer_class = TagSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a Tag object """
-        return super(TagViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single Tag item"""
-        return super(TagViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single Tag item"""
-        return super(TagViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a Tag """
-        return super(TagViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a Tag"""
-        return super(TagViewSet, self).destroy(request, pk)
-
-
+# TODO: Refactor this endpoint to work with the current design of the process
 class GivenAnswersViewSet(viewsets.ModelViewSet):
     queryset = GivenAnswers.objects.all()
     serializer_class = GivenAnswersSerializer
@@ -382,82 +154,20 @@ class GivenAnswersViewSet(viewsets.ModelViewSet):
         return super(GivenAnswersViewSet, self).destroy(request, pk)
 
 
-class QuestionSetViewSet(viewsets.ModelViewSet):
-    queryset = QuestionSet.objects.all()
-    serializer_class = QuestionSetSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a QuestionSet object """
-        return super(QuestionSetViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single QuestionSet item"""
-        return super(QuestionSetViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single QuestionSet item"""
-        return super(QuestionSetViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a QuestionSet """
-        return super(QuestionSetViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a QuestionSet"""
-        return super(QuestionSetViewSet, self).destroy(request, pk)
-
-
-class SessionTagsViewSet(viewsets.ModelViewSet):
-    queryset = SessionTags.objects.all()
-    serializer_class = SessionTagsSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a SessionTags object """
-        return super(SessionTagsViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single SessionTags item"""
-        return super(SessionTagsViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single SessionTags item"""
-        return super(SessionTagsViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a SessionTags """
-        return super(SessionTagsViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a SessionTags"""
-        return super(SessionTagsViewSet, self).destroy(request, pk)
-
-
-class QuestionStepViewSet(viewsets.ModelViewSet):
+class QuestionStepViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = QuestionStep.objects.all()
     serializer_class = QuestionStepSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
 
-    def create(self, request, *args, **kwargs):
-        """ creates a QuestionStep object """
-        return super(QuestionStepViewSet, self).create(request)
 
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single QuestionStep item"""
-        return super(QuestionStepViewSet, self).retrieve(request, pk)
+# TODO: Find correct SuperClass if it exists, else implement self
+class SuggestedScenarioViewSet():
+    pass
 
-    def update(self, request, *args, **kwargs):
-        """Updates a single QuestionStep item"""
-        return super(QuestionStepViewSet, self).update(request, *args, **kwargs)
 
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a QuestionStep """
-        return super(QuestionStepViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a QuestionStep"""
-        return super(QuestionStepViewSet, self).destroy(request, pk)
+class ShoppingBasketViewSet(viewsets.ModelViewSet):
+    queryset = ShoppingBasket.objects.all()
+    serializer_class = ShoppingBasketSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
 
 class IndexView(generic.DetailView):

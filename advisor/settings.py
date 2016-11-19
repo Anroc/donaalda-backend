@@ -89,7 +89,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'advisor_test',
+        'NAME': 'advisor_test_2',
         'USER': 'django',
         'PASSWORD': 'djangoDBpw',
         'HOST': 'dailab-advisor.cgxenmplsqo5.eu-central-1.rds.amazonaws.com',
@@ -228,4 +228,3 @@ SWAGGER_SETTINGS = {
 REST_FRAMEWORK_DOCS = {
     'HIDE_DOCS': False  # Default: False
 }
-
