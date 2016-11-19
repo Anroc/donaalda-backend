@@ -49,28 +49,12 @@ urlpatterns = [
     # api end
 
     #url(r'^__debug__/', include(debug_toolbar.urls)),
-    # TODO: this is a test view for testing pipeline's functionality
-    url(r'^test$', views.TestView.as_view(), name='testView'),
-    url(r'^impressum$', views.ImpressumView.as_view(), name='impressum'),
-
-    url(r'^contact$', views.ContactView.as_view(), name='contact'),
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
-    url(r'^result/$', views.stepper_check, name='get_question_result'),
-    url(r'^resultPrint/$', views.result_print, name='get_question_result_print'),
     url(r'^logout$', views.log_out, name='logout'),
     url(r'^commentreceiver$', views.commentreceiver, name='commentreceiver'),
-    url(r'^scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
     url(r'^back$', views.back, name='back'),
-    url(r'^updatepagehistory$', views.update_pagehistory, name='update_pagehistory'),
-    url(r'^scenarios/(?P<current_scenario>[\w]+)/$',
-        views.ScenarioView.as_view(), name='scenario'),
-    url(r'^products/(?P<pk>[0-9]+)/$', views.ProductView.as_view(), name='product'),
-    url(r'^provider/(?P<provider_url_name>[\w]+)$', views.ProviderProfileView.as_view(), name='provider_profile'),
     url(r'^profile$', views.profile, name='profile'),
     url(r'^password$', views.change_password, name='password_changing'),
     url(r'^deleteaccount$', views.delete_account, name='deleteAccount'),
-    url(r'^all_products/$', views.AllProductsView.as_view(), name='product_all'),
-    url(r'^(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
-    url(r'^$', views.IndexView.as_view(), name='index'),
 ]
