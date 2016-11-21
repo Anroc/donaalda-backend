@@ -23,6 +23,7 @@ from .models import (Category,
                      QuestionSet,
                      GivenAnswers,
                      QuestionStep, Broker, MetaBroker, MetaEndpoint, Endpoint, Feature, AnswerSlider,
+                     ScenarioCategoryRating,
                      )
 
 
@@ -232,3 +233,4 @@ admin.site.register(MetaEndpoint)
 admin.site.register(MetaBroker)
 admin.site.register(Endpoint)
 admin.site.register(AnswerSlider)
+admin.site.register(ScenarioCategoryRating)
