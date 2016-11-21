@@ -97,7 +97,8 @@ class Scenario(models.Model):
     provider = models.ForeignKey("Provider", default="1", verbose_name="Versorger", on_delete=models.CASCADE)
     scenario_product_set = models.ForeignKey("ProductSet", null=True, verbose_name="dazugehörige Produktsammlung",
                                              on_delete=models.SET_NULL)
-    categories = models.ManyToManyField("Category", verbose_name="Bewertung")
+    categories = models.ManyToManyField("Category", through="ScenarioCategoryRating",
+                                        through_fields=('scenario', 'category'), verbose_name="Bewertung")
     meta_devices = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaDevices")
     subcategory = models.ManyToManyField(to='SubCategory', verbose_name="Dieses Szenario ist Teil dieser Subkategorie")
 
@@ -560,3 +561,13 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ScenarioCategoryRating(models.Model):
+    scenario = models.ForeignKey(to="Scenario", verbose_name="Szenario")
+    category = models.ForeignKey(to="Category", verbose_name="Kategorie")
+    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)],
+                                              verbose_name="Passfaehigkeit")
+
+    def __str__(self):
+        return "%s passt zu %s mit rating %d" % (self.scenario, self.category, self.rating)
