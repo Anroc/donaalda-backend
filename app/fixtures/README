@@ -1,0 +1,35 @@
+to dump the database use the command (make sure that the database is migrated to
+the current version of the model first by running `python manage.py
+showmigrations` first and reading up on django migrations if there are some
+boxes without checkmarks)
+
+```
+python manage.py dumpdata --format=json app auth sessions > app/fixtures/initial_data.json
+```
+
+sessions is currently included because some part of the model (sessiontags I
+think) refers to it. If we remove sessiontags, we don't need to dump the
+sessions. This is desirable because the session data changes very very
+frequently.
+
+to verify that the data was dumped correctl switch the database in
+advisor/settings.py over to sqlite3 and run
+
+```
+python manage.py migrate
+python manage.py loaddata initial_data
+```
+
+The two commands should run without errors. IF THEY PRODUCE ERRORS, SOMETHING IS
+VERY WRONG AND SHOULD PROBABLY BE FIXED.
+
+To restore the database from scratch, the easiest way would be to DROP the
+database with psql (@m.chlepakov how do you do that), recreate it (also with
+psql) and run
+
+```
+python manage.py migrate
+python manage.py loaddata initial_data
+```
+
+again.
