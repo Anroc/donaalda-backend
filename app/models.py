@@ -28,8 +28,6 @@ advisor (also known as stepper), provider and user interaction.
         -- QuestionSet
         -- Question
         -- Answer
-        -- Tag
-        -- SessionTags
         -- GivenAnswers
 
     The user interaction part includes:
@@ -160,7 +158,6 @@ class ProductSet(models.Model):
                                              "dann geben Sie das bitte hier mit an")
     products = models.ManyToManyField("Product", verbose_name="Dazugehörige Produkte")
     creator = models.ForeignKey("Provider", default="1", verbose_name="Ersteller", on_delete=models.CASCADE)
-    tags = models.ManyToManyField(to="Tag", verbose_name="Schlagwörter")
 
     def __str__(self):
         return '%s' % self.name
@@ -195,8 +192,6 @@ class Product(models.Model):
                                processors=[ResizeToFill(200, 100)],
                                format='JPEG')
     end_of_life = models.BooleanField(default=False, verbose_name="EOL")
-    # TODO: Ask Frontend whether tags like 'Editors choice 2020' is required
-    tags = models.ManyToManyField(to="Tag", verbose_name="Schlagwörter")
     protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll")
     features = models.ManyToManyField(to="Feature", verbose_name="Hat Features")
 
@@ -394,10 +389,6 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    """
-    Connects Tags with questions and enables tags to be used for multiple answers, but only one tag per answer.
-    """
-
     belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE, verbose_name="gehört zu Frage")
     answer_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Anworttext")
 
@@ -416,25 +407,6 @@ class AnswerSlider(Answer):
 
     def __str__(self):
         return '%s zu "%s"' % (self.answer_text, self.belongs_to_question.question_text)
-
-
-class Tag(models.Model):
-    """
-    A possibility for producers to add information to products and product sets,
-    that make them easier to match with the advisor.
-    Currently only the tags of product sets are used in the advisor.
-    """
-
-    code = models.CharField(max_length=45)
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return '%s (%s)' % (self.name, self.code)
-
-    class Meta:
-        verbose_name = "Schlagwort"
-        verbose_name_plural = "Schlagwörter"
-        ordering = ['code', ]
 
 
 class GivenAnswers(models.Model):
@@ -477,25 +449,6 @@ class QuestionSet(models.Model):
         verbose_name = "Fragensammlung"
         verbose_name_plural = "Fragensammlungen"
         ordering = ["order", "pk"]
-
-
-class SessionTags(models.Model):
-    """
-    Stores tags associated with the use of the advisor.
-    Could be used for debugging purposes but is included for analytical and 'big data' reasons.
-    (This part is not implemented as it wasn't part of the assignment)
-    """
-
-    session = models.OneToOneField(Session, null=True, on_delete=models.SET_NULL, verbose_name="Zugehörige Session")
-    created = models.DateTimeField("Datum", auto_now_add=True, null=True, )
-    tag = models.ManyToManyField("Tag", verbose_name="Referenziert auf Tag")
-
-    def __str__(self):
-        return '%s %s %s' % (self.created, self.session_id, str(list(self.tag.all())))
-
-    class Meta:
-        verbose_name = 'Session Tag'
-        verbose_name_plural = 'Session Tags'
 
 
 class QuestionStep(models.Model):
