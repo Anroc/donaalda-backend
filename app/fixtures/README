@@ -27,6 +27,10 @@ To restore the database from scratch, the easiest way would be to DROP the
 database with psql (@m.chlepakov how do you do that), recreate it (also with
 psql) and run
 
+createdb -h dailab-advisor.cgxenmplsqo5.eu-central-1.rds.amazonaws.com -p 5432 -e -U django -W -O django -T 158-through-rating <DB_NAME>
+
+dropdb -h dailab-advisor.cgxenmplsqo5.eu-central-1.rds.amazonaws.com -p 5432 -i -e -U django -W <DB_NAME>
+
 ```
 python manage.py migrate
 python manage.py loaddata initial_data
