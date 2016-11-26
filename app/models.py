@@ -16,7 +16,6 @@ advisor (also known as stepper), provider and user interaction.
     The provider part includes:
         -- Scenario
         -- ScenarioDescription
-        -- ProductSet
         -- Product
         -- ProductType
         -- Provider
@@ -28,8 +27,6 @@ advisor (also known as stepper), provider and user interaction.
         -- QuestionSet
         -- Question
         -- Answer
-        -- Tag
-        -- SessionTags
         -- GivenAnswers
 
     The user interaction part includes:
@@ -95,8 +92,6 @@ class Scenario(models.Model):
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
     provider = models.ForeignKey("Provider", default="1", verbose_name="Versorger", on_delete=models.CASCADE)
-    scenario_product_set = models.ForeignKey("ProductSet", null=True, verbose_name="dazugehörige Produktsammlung",
-                                             on_delete=models.SET_NULL)
     categories = models.ManyToManyField("Category", through="ScenarioCategoryRating",
                                         through_fields=('scenario', 'category'), verbose_name="Bewertung")
     meta_devices = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaDevices")
@@ -148,32 +143,6 @@ class ScenarioDescription(models.Model):
         ordering = ["order"]
 
 
-class ProductSet(models.Model):
-    """
-    A set of products that can be used to realize and is connected to specific scenarios or
-    just as a representation of things that are sold together. Can be created by Employees.
-    """
-
-    name = models.CharField(max_length=100, default="------")
-    description = models.TextField(blank=True, verbose_name="Beschreibung",
-                                   help_text="Wenn dieses Produktset zu einem Szenario gehört,"
-                                             "dann geben Sie das bitte hier mit an")
-    products = models.ManyToManyField("Product", verbose_name="Dazugehörige Produkte")
-    creator = models.ForeignKey("Provider", default="1", verbose_name="Ersteller", on_delete=models.CASCADE)
-    tags = models.ManyToManyField(to="Tag", verbose_name="Schlagwörter")
-
-    def __str__(self):
-        return '%s' % self.name
-
-    def natural_key(self):
-        return [self.creator.natural_key(), self.name]
-
-    class Meta:
-        verbose_name = "Produktsammlung"
-        verbose_name_plural = "Produktsammlungen"
-        ordering = ["name"]
-
-
 class Product(models.Model):
     """
     A database representation of an smart home appliance.Can be created by Employees.
@@ -195,8 +164,6 @@ class Product(models.Model):
                                processors=[ResizeToFill(200, 100)],
                                format='JPEG')
     end_of_life = models.BooleanField(default=False, verbose_name="EOL")
-    # TODO: Ask Frontend whether tags like 'Editors choice 2020' is required
-    tags = models.ManyToManyField(to="Tag", verbose_name="Schlagwörter")
     protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll")
     features = models.ManyToManyField(to="Feature", verbose_name="Hat Features")
 
@@ -239,7 +206,7 @@ class ProductType(models.Model):
     """
 
     type_name = models.CharField(max_length=255, unique=True, verbose_name="Name")
-    used_as_product_type_filter_by = models.ManyToManyField(to=User, verbose_name="Als Produkttypfilter verwendet von")
+    used_as_product_type_filter_by = models.ManyToManyField(to=Session, verbose_name="Als Produkttypfilter verwendet von")
 
     def __str__(self):
         return '%s' % self.type_name
@@ -394,10 +361,6 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    """
-    Connects Tags with questions and enables tags to be used for multiple answers, but only one tag per answer.
-    """
-
     belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE, verbose_name="gehört zu Frage")
     answer_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Anworttext")
 
@@ -416,25 +379,6 @@ class AnswerSlider(Answer):
 
     def __str__(self):
         return '%s zu "%s"' % (self.answer_text, self.belongs_to_question.question_text)
-
-
-class Tag(models.Model):
-    """
-    A possibility for producers to add information to products and product sets,
-    that make them easier to match with the advisor.
-    Currently only the tags of product sets are used in the advisor.
-    """
-
-    code = models.CharField(max_length=45)
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return '%s (%s)' % (self.name, self.code)
-
-    class Meta:
-        verbose_name = "Schlagwort"
-        verbose_name_plural = "Schlagwörter"
-        ordering = ['code', ]
 
 
 class GivenAnswers(models.Model):
@@ -479,25 +423,6 @@ class QuestionSet(models.Model):
         ordering = ["order", "pk"]
 
 
-class SessionTags(models.Model):
-    """
-    Stores tags associated with the use of the advisor.
-    Could be used for debugging purposes but is included for analytical and 'big data' reasons.
-    (This part is not implemented as it wasn't part of the assignment)
-    """
-
-    session = models.OneToOneField(Session, null=True, on_delete=models.SET_NULL, verbose_name="Zugehörige Session")
-    created = models.DateTimeField("Datum", auto_now_add=True, null=True, )
-    tag = models.ManyToManyField("Tag", verbose_name="Referenziert auf Tag")
-
-    def __str__(self):
-        return '%s %s %s' % (self.created, self.session_id, str(list(self.tag.all())))
-
-    class Meta:
-        verbose_name = 'Session Tag'
-        verbose_name_plural = 'Session Tags'
-
-
 class QuestionStep(models.Model):
     name = models.CharField(max_length=255)
     question_steps = models.ManyToManyField('QuestionSet', verbose_name="zusammen gehörende Fragen")
@@ -512,8 +437,8 @@ class QuestionStep(models.Model):
 
 class Protocol(models.Model):
     name = models.CharField(max_length=255)
+    is_leader = models.BooleanField(default=False, verbose_name="Kann als Broker fungieren")
 
-    # TODO: Upcomming attribute Sender/Receiver to differentiate whether a device is capabable to receive traffic
     def __str__(self):
         return self.name
 
@@ -526,8 +451,6 @@ class Feature(models.Model):
 
 
 class MetaDevice(models.Model):
-    productSet = models.ForeignKey(to="ProductSet", null=True, default="1", verbose_name="Produktset",
-                                   on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     implementation_requires = models.ManyToManyField(to="Feature",
                                                      verbose_name="Definiert von folgender Featuresammlung")
@@ -545,18 +468,13 @@ class MetaEndpoint(MetaDevice):
         return self.name
 
 
-class ShoppingBasket(models.Model):
-    user = models.OneToOneField(to=User, verbose_name="Besitzer dieses Einkaufswagens", on_delete=models.CASCADE)
-    scenarios = models.ManyToManyField(to="Scenario", verbose_name="Szenarios die Teil dieses Einkaufswagens sind")
 
-    def __str__(self):
-        return '%s hat folgende Szenarien %s in seinem Warenkorb' % self.user % self.scenarios
 
 
 class SubCategory(models.Model):
     name = models.CharField(max_length=255)
     belongs_to_category = models.ManyToManyField(to="Category", verbose_name="Gehört zu den folgenden Kategorien")
-    used_as_filter_by = models.ManyToManyField(to=User,
+    used_as_filter_by = models.ManyToManyField(to=Session,
                                                verbose_name="Benutzer die diese Subkategorie als Szenariofilter verwenden")
 
     def __str__(self):

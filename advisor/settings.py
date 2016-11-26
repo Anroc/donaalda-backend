@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'markdown',
     'django_filters',
-    'static_precompiler',
-    'djangobower',
     'material',
     'material.admin',
     'django.contrib.admin',
@@ -54,7 +52,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -131,22 +128,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'static_precompiler.finders.StaticPrecompilerFinder',
-    'djangobower.finders.BowerFinder',
-)
-
-BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'app/static/bower_components')
-
-BOWER_INSTALLED_APPS = (
-    'md-steppers#0.2.4',
-    'jquery',
-    'OwlCarousel',
-)
-
 FIXTURE_DIRS = (
     os.path.join(BASE_DIR, 'app/fixtures/'),
 )
@@ -162,27 +143,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 MEDIA_URL = '/media/'
-
-STATIC_PRECOMPILER_COMPILERS = (
-    ('static_precompiler.compilers.CoffeeScript', {"executable": "/usr/bin/coffeescript"}),
-    ('static_precompiler.compilers.SCSS', {
-        "sourcemap_enabled": True,
-        "compass_enabled": True,
-        "precision": 8,
-        "output_style": "compressed"}),
-    'static_precompiler.compilers.Babel',
-    'static_precompiler.compilers.Handlebars',
-    'static_precompiler.compilers.SASS',
-    'static_precompiler.compilers.LESS',
-    'static_precompiler.compilers.Stylus',
-)
-
-STATIC_PRECOMPILER_ROOT = os.path.join(BASE_DIR, 'app/static/app/assets')
-
-GRAPH_MODELS = {
-    'all_applications': True,
-    'group_models': True,
-}
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,

@@ -1,0 +1,4 @@
+#this directory just contains collected static files they can be put here
+#automatically with python manage.py collectstatic
+*
+!.gitignore

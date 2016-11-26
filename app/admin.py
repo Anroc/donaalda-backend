@@ -6,7 +6,6 @@ from .adminForms import (EmployeeCreationForm,
 # Register your models here.
 from .models import (Category,
                      Scenario,
-                     ProductSet,
                      Product,
                      ProductType,
                      Provider,
@@ -18,8 +17,6 @@ from .models import (Category,
                      User,
                      Question,
                      Answer,
-                     Tag,
-                     SessionTags,
                      QuestionSet,
                      GivenAnswers,
                      QuestionStep, Broker, MetaBroker, MetaEndpoint, Endpoint, Feature, AnswerSlider,
@@ -60,36 +57,6 @@ class CommentAdmin(admin.ModelAdmin):
     actions = []
 
 
-class ProductSetAdmin(admin.ModelAdmin):
-    actions = []
-
-    exclude = []
-
-    list_filter = ['tags', 'products']
-
-    def get_queryset(self, request):
-        user = request.user
-        qs = super(ProductSetAdmin, self).get_queryset(request)
-
-        self.list_filter = ['creator', 'tags', 'products']
-
-        if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
-            return qs
-
-        self.list_filter = ['tags', 'products']
-
-        self.exclude.extend(['creator'])
-        return qs.filter(creator=user.employee.employer_id)
-
-    def save_model(self, request, obj, form, change):
-        user = request.user
-
-        if Employee.objects.filter(pk=user.pk).exists():
-            obj.creator = user.employee.employer
-
-        obj.save()
-
-
 class ProductAdmin(admin.ModelAdmin):
     actions = []
 
@@ -99,8 +66,8 @@ class ProductAdmin(admin.ModelAdmin):
         user = request.user
         qs = super(ProductAdmin, self).get_queryset(request)
 
-        self.list_filter = ['product_type', 'provider', 'end_of_life', 'tags']
-        self.list_display = ['name', 'serial_number', 'provider', 'product_type', 'end_of_life', 'tags']
+        self.list_filter = ['product_type', 'provider', 'end_of_life']
+        self.list_display = ['name', 'serial_number', 'provider', 'product_type', 'end_of_life']
 
         if user.is_staff and not Employee.objects.filter(pk=user.pk).exists():
             return qs
@@ -211,7 +178,6 @@ class QuestionAdmin(admin.ModelAdmin):
 admin.site.unregister(User)
 admin.site.register(Category)
 admin.site.register(Scenario, ScenarioAdmin)
-admin.site.register(ProductSet, ProductSetAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Employee, EmployeeAdmin)
 admin.site.register(Provider)
@@ -222,9 +188,7 @@ admin.site.register(Comment, CommentAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
-admin.site.register(Tag)
 admin.site.register(QuestionSet)
-admin.site.register(SessionTags)
 admin.site.register(GivenAnswers)
 admin.site.register(QuestionStep)
 admin.site.register(Feature)

@@ -29,7 +29,6 @@ router.register(r'scenario', views.ScenarioViewSet)
 router.register(r'scenarioDescription', views.ScenarioDescriptionViewSet)
 # TODO: returns optimal(TODO: Define optimal) productSet possible constellation for a given set of scenarios in the
 # TODO: shopping basket
-router.register(r'productSet', views.ProductSetViewSet)
 router.register(r'product', views.ProductViewSet)
 router.register(r'productType', views.ProductTypeViewSet)
 router.register(r'provider', views.ProviderViewSet)
@@ -41,7 +40,6 @@ router.register(r'comment', views.CommentViewSet)
 router.register(r'givenAnswers', views.GivenAnswersViewSet)
 router.register(r'questionStep', views.QuestionStepViewSet)
 # TODO: router.register(r'filter'), views.FilterStepViewSet); This will be do'ne through the SuggestedScenarioViewSet
-router.register(r'shopping_basket', views.ShoppingBasketViewSet)
 # implements all interactions with a users shopping basket
 # TODO: router.register (r'meta_device'), views.MetaDeviceViewSet)
 # implements all functions required to get all meta devices of a given meta_device_type
@@ -68,21 +66,10 @@ urlpatterns = [
     url(r'^contact$', views.ContactView.as_view(), name='contact'),
     url(r'^login$', views.login_view, name='login'),
     url(r'^register$', views.register_user, name='register_user'),
-    url(r'^result/$', views.stepper_check, name='get_question_result'),
-    url(r'^resultPrint/$', views.result_print, name='get_question_result_print'),
     url(r'^logout$', views.log_out, name='logout'),
     url(r'^commentreceiver$', views.commentreceiver, name='commentreceiver'),
-    url(r'^scenarios/$', views.ScenariosView.as_view(), name='scenarios'),
     url(r'^back$', views.back, name='back'),
-    url(r'^updatepagehistory$', views.update_pagehistory, name='update_pagehistory'),
-    url(r'^scenarios/(?P<current_scenario>[\w]+)/$',
-        views.ScenarioView.as_view(), name='scenario'),
-    url(r'^products/(?P<pk>[0-9]+)/$', views.ProductView.as_view(), name='product'),
-    url(r'^provider/(?P<provider_url_name>[\w]+)$', views.ProviderProfileView.as_view(), name='provider_profile'),
     url(r'^profile$', views.profile, name='profile'),
     url(r'^password$', views.change_password, name='password_changing'),
     url(r'^deleteaccount$', views.delete_account, name='deleteAccount'),
-    url(r'^all_products/$', views.AllProductsView.as_view(), name='product_all'),
-    url(r'^(?P<category_name>[\w]+)/$', views.CategoryView.as_view(), name='category'),
-    url(r'^$', views.IndexView.as_view(), name='index'),
 ]
