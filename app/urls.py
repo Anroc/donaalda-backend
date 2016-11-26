@@ -29,7 +29,6 @@ router.register(r'scenario', views.ScenarioViewSet)
 router.register(r'scenarioDescription', views.ScenarioDescriptionViewSet)
 # TODO: returns optimal(TODO: Define optimal) productSet possible constellation for a given set of scenarios in the
 # TODO: shopping basket
-router.register(r'productSet', views.ProductSetViewSet)
 router.register(r'product', views.ProductViewSet)
 router.register(r'productType', views.ProductTypeViewSet)
 router.register(r'provider', views.ProviderViewSet)
@@ -41,7 +40,6 @@ router.register(r'comment', views.CommentViewSet)
 router.register(r'givenAnswers', views.GivenAnswersViewSet)
 router.register(r'questionStep', views.QuestionStepViewSet)
 # TODO: router.register(r'filter'), views.FilterStepViewSet); This will be do'ne through the SuggestedScenarioViewSet
-router.register(r'shopping_basket', views.ShoppingBasketViewSet)
 # implements all interactions with a users shopping basket
 # TODO: router.register (r'meta_device'), views.MetaDeviceViewSet)
 # implements all functions required to get all meta devices of a given meta_device_type

@@ -16,7 +16,6 @@ advisor (also known as stepper), provider and user interaction.
     The provider part includes:
         -- Scenario
         -- ScenarioDescription
-        -- ProductSet
         -- Product
         -- ProductType
         -- Provider
@@ -93,8 +92,6 @@ class Scenario(models.Model):
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
     provider = models.ForeignKey("Provider", default="1", verbose_name="Versorger", on_delete=models.CASCADE)
-    scenario_product_set = models.ForeignKey("ProductSet", null=True, verbose_name="dazugehörige Produktsammlung",
-                                             on_delete=models.SET_NULL)
     categories = models.ManyToManyField("Category", through="ScenarioCategoryRating",
                                         through_fields=('scenario', 'category'), verbose_name="Bewertung")
     meta_devices = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaDevices")
@@ -144,31 +141,6 @@ class ScenarioDescription(models.Model):
         verbose_name = "Szenariobeschreibung"
         verbose_name_plural = "Szenariobeschreibungen"
         ordering = ["order"]
-
-
-class ProductSet(models.Model):
-    """
-    A set of products that can be used to realize and is connected to specific scenarios or
-    just as a representation of things that are sold together. Can be created by Employees.
-    """
-
-    name = models.CharField(max_length=100, default="------")
-    description = models.TextField(blank=True, verbose_name="Beschreibung",
-                                   help_text="Wenn dieses Produktset zu einem Szenario gehört,"
-                                             "dann geben Sie das bitte hier mit an")
-    products = models.ManyToManyField("Product", verbose_name="Dazugehörige Produkte")
-    creator = models.ForeignKey("Provider", default="1", verbose_name="Ersteller", on_delete=models.CASCADE)
-
-    def __str__(self):
-        return '%s' % self.name
-
-    def natural_key(self):
-        return [self.creator.natural_key(), self.name]
-
-    class Meta:
-        verbose_name = "Produktsammlung"
-        verbose_name_plural = "Produktsammlungen"
-        ordering = ["name"]
 
 
 class Product(models.Model):
@@ -234,7 +206,7 @@ class ProductType(models.Model):
     """
 
     type_name = models.CharField(max_length=255, unique=True, verbose_name="Name")
-    used_as_product_type_filter_by = models.ManyToManyField(to=User, verbose_name="Als Produkttypfilter verwendet von")
+    used_as_product_type_filter_by = models.ManyToManyField(to=Session, verbose_name="Als Produkttypfilter verwendet von")
 
     def __str__(self):
         return '%s' % self.type_name
@@ -465,8 +437,8 @@ class QuestionStep(models.Model):
 
 class Protocol(models.Model):
     name = models.CharField(max_length=255)
+    is_leader = models.BooleanField(default=False, verbose_name="Kann als Broker fungieren")
 
-    # TODO: Upcomming attribute Sender/Receiver to differentiate whether a device is capabable to receive traffic
     def __str__(self):
         return self.name
 
@@ -479,8 +451,6 @@ class Feature(models.Model):
 
 
 class MetaDevice(models.Model):
-    productSet = models.ForeignKey(to="ProductSet", null=True, default="1", verbose_name="Produktset",
-                                   on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     implementation_requires = models.ManyToManyField(to="Feature",
                                                      verbose_name="Definiert von folgender Featuresammlung")
@@ -498,18 +468,13 @@ class MetaEndpoint(MetaDevice):
         return self.name
 
 
-class ShoppingBasket(models.Model):
-    user = models.OneToOneField(to=User, verbose_name="Besitzer dieses Einkaufswagens", on_delete=models.CASCADE)
-    scenarios = models.ManyToManyField(to="Scenario", verbose_name="Szenarios die Teil dieses Einkaufswagens sind")
 
-    def __str__(self):
-        return '%s hat folgende Szenarien %s in seinem Warenkorb' % self.user % self.scenarios
 
 
 class SubCategory(models.Model):
     name = models.CharField(max_length=255)
     belongs_to_category = models.ManyToManyField(to="Category", verbose_name="Gehört zu den folgenden Kategorien")
-    used_as_filter_by = models.ManyToManyField(to=User,
+    used_as_filter_by = models.ManyToManyField(to=Session,
                                                verbose_name="Benutzer die diese Subkategorie als Szenariofilter verwenden")
 
     def __str__(self):

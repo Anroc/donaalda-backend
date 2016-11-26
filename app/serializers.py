@@ -43,14 +43,6 @@ class ProductSerializer(serializers.ModelSerializer):
                   'image3', 'end_of_life',)
 
 
-class ProductSetSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = ProductSet
-        fields = ('pk', 'name', 'description', 'products', 'creator',)
-
-
 class ProductTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductType
@@ -59,13 +51,12 @@ class ProductTypeSerializer(serializers.ModelSerializer):
 
 class ScenarioSerializer(serializers.ModelSerializer):
     provider = ProviderSerializer()
-    scenario_product_set = ProductSetSerializer()
     categories = CategorySerializer(read_only=True, many=True)
 
     class Meta:
         model = Scenario
         fields = (
-            'pk', 'name', 'url_name', 'short_description', 'picture', 'provider', 'scenario_product_set', 'categories',)
+            'pk', 'name', 'url_name', 'short_description', 'picture', 'provider', 'categories',)
 
 
 class ScenarioDescriptionSerializer(serializers.ModelSerializer):
@@ -143,11 +134,3 @@ class QuestionStepSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestionStep
         fields = ('pk', 'name', 'question_steps',)
-
-
-class ShoppingBasketSerializer(serializers.ModelSerializer):
-    scenarios = ScenarioSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = ShoppingBasket
-        fields = ('user', 'scenarios')

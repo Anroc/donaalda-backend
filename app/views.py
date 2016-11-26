@@ -33,33 +33,6 @@ class ScenarioDescriptionViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ScenarioDescriptionSerializer
 
 
-# TODO: Define all required actions
-class ProductSetViewSet(viewsets.ModelViewSet):
-    queryset = ProductSet.objects.all()
-    serializer_class = ProductSetSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a ProductSet object """
-        return super(ProductSetViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single ProductSet item"""
-        return super(ProductSetViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single ProductSet item"""
-        return super(ProductSetViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a ProductSet """
-        return super(ProductSetViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a ProductSet"""
-        return super(ProductSetViewSet, self).destroy(request, pk)
-
-
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.filter(end_of_life=False)
     serializer_class = ProductSerializer
@@ -164,10 +137,120 @@ class SuggestedScenarioViewSet():
     pass
 
 
-class ShoppingBasketViewSet(viewsets.ModelViewSet):
-    queryset = ShoppingBasket.objects.all()
-    serializer_class = ShoppingBasketSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+class IndexView(generic.DetailView):
+    template_name = 'app/index.html'
+    context_object_name = 'test'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/index.html',
+                      {'category_list': Category.objects.all(),
+                       'scenarios': Scenario.objects.all(),
+                       'products': Product.objects.all(),
+                       'comment': Comment.objects.filter(page_url='/')[:6],
+                       'amount_scenarios': Scenario.objects.all().count(),
+                       'amount_products': Product.objects.all().count(),
+                       'amount_provider': Provider.objects.all().count(),
+                       })
+
+
+class ProviderProfileView(generic.ListView):
+    template_name = 'app/providerProfile.html'
+    context_object_name = 'provider'
+
+    def get(self, request, *args, **kwargs):
+        provider = kwargs.get("provider_url_name")
+        return render(request, 'app/providerProfile.html', {'provider': ProviderProfile.objects.get(url_name=provider),
+                                                            'provider_products': Product.objects.filter(
+                                                                provider=ProviderProfile.objects.get(
+                                                                    url_name=provider).owner.pk),
+                                                            'comment': Comment.objects.filter(
+                                                                page_url='/provider/' + provider)[:6],
+                                                            'scenario_list_from_provider': Scenario.objects.filter(
+                                                                provider=(
+                                                                    ProviderProfile.objects.get(
+                                                                        url_name=provider).owner.pk))
+                                                            })
+
+
+class ContactView(generic.ListView):
+    template_name = 'app/contact.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/contact.html', {})
+
+
+class ImpressumView(generic.ListView):
+    template_name = 'app/impressum.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/impressum.html', {})
+
+
+class CategoryView(generic.ListView):
+    template_name = 'app/category.html'
+    context_object_name = 'scenario_list_from_category'
+
+    def get(self, request, *args, **kwargs):
+        category = kwargs.get("category_name")
+        given_answers = []
+        if request.user.is_authenticated() and GivenAnswers.objects.filter(user=request.user).exists():
+            given_answers = GivenAnswers.objects.get(user=request.user).user_answer.all()
+        return render(request, 'app/category.html',
+                      {'scenario_list_from_category': Category.objects.get(name=category).scenario_set.all(),
+                       'category_list': Category.objects.all(),
+                       'category': Category.objects.get(name=category),
+                       'qs_general': QuestionStep.objects.filter(name="Allgemeines"),
+                       'qs_category': QuestionStep.objects.filter(name__contains="Auswahl"),
+                       'qs_category_specific': QuestionStep.objects.filter(name__contains="Detail").order_by(
+                           'question_steps__order'),
+                       'given_answers': given_answers,
+                       })
+
+
+class ScenariosView(generic.ListView):
+    template_name = 'app/category.html'
+    context_object_name = 'scenario_list_from_category'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name,
+                      {'scenario_list_from_category': Scenario.objects.all(),
+                       })
+
+
+class ScenarioView(generic.DetailView):
+    template_name = 'scenario.html'
+
+    def get(self, request, *args, **kwargs):
+        scenario = kwargs.get("current_scenario")
+        return render(request, 'app/scenario.html',
+                      {'current_scenario': Scenario.objects.get(url_name=scenario),
+                       'comment': Comment.objects.filter(page_url='/scenarios/' + scenario)[:6],
+                       })
+
+
+class ProductView(generic.DetailView):
+    template_name = 'app/product.html'
+    context_object_name = 'product'
+
+    def get(self, request, *args, **kwargs):
+        product = kwargs.get("pk")
+        return render(request, 'app/product.html',
+                      {'product': Product.objects.get(pk=product),
+                       'comment': Comment.objects.filter(page_url='/products/' + product)[:6],
+                       })
+
+
+class AllProductsView(generic.DetailView):
+    template_name = 'app/allProducts.html'
+    context_object_name = 'all_products'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'app/allProducts.html',
+                      {'all_products': Product.objects.all(),
+                       'category_list': Category.objects.all(),
+                       'provider_list': Provider.objects.all(),
+                       'producttype_list': ProductType.objects.all(),
+                       })
 
 
 @csrf_protect
@@ -198,6 +281,18 @@ def login_view(request):
             messages.error(request, 'Ihre Anmeldung ist fehlgeschlagen. Versuchen sie es erneut.')
             return HttpResponseRedirect(redirectpage)
     return render(request, 'app/html_templates/loginTemplate.html', {'login_form': form})
+
+
+@csrf_protect
+@require_http_methods(["GET", "POST"])
+def stepper_check(request):
+    """
+    Get the answers given by a user to questions in the stepper,stores them in the database and returns the best fitting to the user.
+
+    :param request: Web request to server containing the given answers.
+    :return: Productsets matching to the users preferences
+    """
+    return render(request, 'app/result.html', )
 
 
 @csrf_protect
