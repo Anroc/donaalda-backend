@@ -206,7 +206,8 @@ class ProductType(models.Model):
     """
 
     type_name = models.CharField(max_length=255, unique=True, verbose_name="Name")
-    used_as_product_type_filter_by = models.ManyToManyField(to=Session, verbose_name="Als Produkttypfilter verwendet von")
+    used_as_product_type_filter_by = models.ManyToManyField(to=Session,
+                                                            verbose_name="Als Produkttypfilter verwendet von")
 
     def __str__(self):
         return '%s' % self.type_name
@@ -468,9 +469,6 @@ class MetaEndpoint(MetaDevice):
         return self.name
 
 
-
-
-
 class SubCategory(models.Model):
     name = models.CharField(max_length=255)
     belongs_to_category = models.ManyToManyField(to="Category", verbose_name="Gehört zu den folgenden Kategorien")
@@ -489,3 +487,11 @@ class ScenarioCategoryRating(models.Model):
 
     def __str__(self):
         return "%s passt zu %s mit rating %d" % (self.scenario, self.category, self.rating)
+
+
+class ShoppingBasket(models.Model):
+    session = models.OneToOneField(to=Session, verbose_name="Besitzer dieses Einkaufswagens", on_delete=models.CASCADE)
+    scenarios = models.ManyToManyField(to="Scenario", verbose_name="Szenarios die Teil dieses Einkaufswagens sind")
+
+    def __str__(self):
+        return '%s hat folgende Szenarien %s in seinem Warenkorb' % self.session % self.scenarios

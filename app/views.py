@@ -132,6 +132,12 @@ class QuestionStepViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = QuestionStepSerializer
 
 
+class ShoppingBasketViewSet(viewsets.ModelViewSet):
+    queryset = ShoppingBasket.objects.all()
+    serializer_class = ShoppingBasketSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
+
+
 # TODO: Find correct SuperClass if it exists, else implement self
 class SuggestedScenarioViewSet():
     pass
