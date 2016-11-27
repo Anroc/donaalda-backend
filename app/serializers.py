@@ -134,11 +134,3 @@ class QuestionStepSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestionStep
         fields = ('pk', 'name', 'question_steps',)
-
-
-class ShoppingBasketSerializer(serializers.ModelSerializer):
-    scenarios = ScenarioSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = ShoppingBasket
-        fields = ('session', 'scenarios')

@@ -40,6 +40,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
 
     def create(self, request, *args, **kwargs):
         """ creates a Product object """
+        qs = ShoppingBasket.objects.get(session=request.session)
         return super(ProductViewSet, self).create(request)
 
     def retrieve(self, request, pk=None, **kwargs):
@@ -130,12 +131,6 @@ class GivenAnswersViewSet(viewsets.ModelViewSet):
 class QuestionStepViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = QuestionStep.objects.all()
     serializer_class = QuestionStepSerializer
-
-
-class ShoppingBasketViewSet(viewsets.ModelViewSet):
-    queryset = ShoppingBasket.objects.all()
-    serializer_class = ShoppingBasketSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
 
 
 # TODO: Find correct SuperClass if it exists, else implement self

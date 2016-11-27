@@ -96,6 +96,8 @@ class Scenario(models.Model):
                                         through_fields=('scenario', 'category'), verbose_name="Bewertung")
     meta_devices = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaDevices")
     subcategory = models.ManyToManyField(to='SubCategory', verbose_name="Dieses Szenario ist Teil dieser Subkategorie")
+    in_shopping_basket_of = models.ManyToManyField(to=Session,
+                                                   verbose_name="Dieses Szenario liegt im Warenkorb von Session")
 
     def __str__(self):
         return '%s' % self.name
@@ -487,11 +489,3 @@ class ScenarioCategoryRating(models.Model):
 
     def __str__(self):
         return "%s passt zu %s mit rating %d" % (self.scenario, self.category, self.rating)
-
-
-class ShoppingBasket(models.Model):
-    session = models.OneToOneField(to=Session, verbose_name="Besitzer dieses Einkaufswagens", on_delete=models.CASCADE)
-    scenarios = models.ManyToManyField(to="Scenario", verbose_name="Szenarios die Teil dieses Einkaufswagens sind")
-
-    def __str__(self):
-        return '%s hat folgende Szenarien %s in seinem Warenkorb' % self.session % self.scenarios
