@@ -40,7 +40,6 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
 
     def create(self, request, *args, **kwargs):
         """ creates a Product object """
-        qs = ShoppingBasket.objects.get(session=request.session)
         return super(ProductViewSet, self).create(request)
 
     def retrieve(self, request, pk=None, **kwargs):
