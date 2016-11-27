@@ -20,7 +20,7 @@ from .permissions import *
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
 from rest_framework.decorators import *
-from rest_framework import status
+from rest_framework import generics, mixins, views, status
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -142,11 +142,11 @@ class SuggestedScenarioViewSet():
     pass
 
 
-class Suggestions(viewsets.GenericViewSet):
+class Suggestions(viewsets.GenericViewSet, mixins.ListModelMixin):
     authentication_classes = (authentication.TokenAuthentication,)
     serializer_class = ScenarioSerializer
     queryset = Scenario.objects.all()
-
+    """
     # copy post object to delete csrf token, so json.load works
     @list_route(methods=['GET'])
     def get(self, request):
@@ -155,7 +155,7 @@ class Suggestions(viewsets.GenericViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
+    """
     @list_route(methods=['POST'])
     def post(self, request):
         queryset = Scenario.objects.all()
