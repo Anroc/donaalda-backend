@@ -142,23 +142,19 @@ class SuggestedScenarioViewSet():
     pass
 
 
-@api_view()
-@list_route(methods=['get', 'post'])
+@api_view(['POST'])
+@list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
 def suggestions(request):
-
-    if request.method == 'GET':
-        snippets = Scenario.objects.all()
-        serializer = ScenarioSerializer(snippets, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
+    if request.method == 'POST':
         json_data = json.loads(request.body)
         serializer = ScenarioSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class IndexView(generic.DetailView):

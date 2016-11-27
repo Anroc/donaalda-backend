@@ -52,7 +52,7 @@ app_name = 'app'
 urlpatterns = [
     # api
     # url(r'^api/v1/Category/(?P<pk>[0-9]+)/highlight/$', views.CategoryHighlight.as_view()),
-    url(r'api/swagger/suggestions', views.suggestions),
+    url(r'^api/swagger/suggestions', views.suggestions),
     url(r'^api/swagger/', schema_view),
     url(r'^api/v1/', include(router.urls)),
     url(r'^api/docs/', include('rest_framework_docs.urls')),
