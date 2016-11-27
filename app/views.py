@@ -142,36 +142,23 @@ class SuggestedScenarioViewSet():
     pass
 
 
-class Suggestions(viewsets.GenericViewSet, mixins.ListModelMixin):
-    authentication_classes = (authentication.TokenAuthentication,)
-    serializer_class = ScenarioSerializer
-    queryset = Scenario.objects.all()
-    """
-    # copy post object to delete csrf token, so json.load works
-    @list_route(methods=['GET'])
-    def get(self, request):
-        serializer = ScenarioSerializer(data=Scenario.objects.all())
+@api_view()
+@list_route(methods=['get', 'post'])
+@permission_classes((permissions.AllowAny,))
+def suggestions(request):
+
+    if request.method == 'GET':
+        snippets = Scenario.objects.all()
+        serializer = ScenarioSerializer(snippets, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        json_data = json.loads(request.body)
+        serializer = ScenarioSerializer(data=request.data)
         if serializer.is_valid():
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-    """
-    @list_route(methods=['POST'])
-    def post(self, request):
-        queryset = Scenario.objects.all()
-        post = request.POST.copy()
-
-        if request.POST.get("csrfmiddlewaretoken") and request.POST.get("csrfmiddlewaretoken") is not None:
-            # print(request.POST.get('csrfmiddlewaretoken'))
-            del post["csrfmiddlewaretoken"]
-
-        steps = json.loads(request.body)
-
-        json_object = serial.serialize("JSON", queryset)
-
-        print(json_object)
-
-        return Response(queryset)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class IndexView(generic.DetailView):

@@ -39,7 +39,7 @@ router.register(r'comment', views.CommentViewSet)
 # router.register(r'tag', views.TagViewSet)
 router.register(r'givenAnswers', views.GivenAnswersViewSet)
 router.register(r'questionStep', views.QuestionStepViewSet)
-router.register(r'suggestions', views.Suggestions)
+# router.register(r'suggestions', views.suggestions)
 # TODO: router.register(r'filter'), views.FilterStepViewSet); This will be do'ne through the SuggestedScenarioViewSet
 # implements all interactions with a users shopping basket
 # TODO: router.register (r'meta_device'), views.MetaDeviceViewSet)
@@ -52,6 +52,7 @@ app_name = 'app'
 urlpatterns = [
     # api
     # url(r'^api/v1/Category/(?P<pk>[0-9]+)/highlight/$', views.CategoryHighlight.as_view()),
+    url(r'api/swagger/suggestions', views.suggestions),
     url(r'^api/swagger/', schema_view),
     url(r'^api/v1/', include(router.urls)),
     url(r'^api/docs/', include('rest_framework_docs.urls')),
