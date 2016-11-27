@@ -39,6 +39,7 @@ router.register(r'comment', views.CommentViewSet)
 # router.register(r'tag', views.TagViewSet)
 router.register(r'givenAnswers', views.GivenAnswersViewSet)
 router.register(r'questionStep', views.QuestionStepViewSet)
+router.register(r'suggestions', views.Suggestions)
 # TODO: router.register(r'filter'), views.FilterStepViewSet); This will be do'ne through the SuggestedScenarioViewSet
 # implements all interactions with a users shopping basket
 # TODO: router.register (r'meta_device'), views.MetaDeviceViewSet)

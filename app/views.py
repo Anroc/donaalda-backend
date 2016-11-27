@@ -14,8 +14,13 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.http import *
 from rest_framework import viewsets
+from django.core import serializers as serial
 from .serializers import *
 from .permissions import *
+from rest_framework.response import Response
+from rest_framework import authentication, permissions
+from rest_framework.decorators import *
+from rest_framework import status
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -135,6 +140,38 @@ class QuestionStepViewSet(viewsets.ReadOnlyModelViewSet):
 # TODO: Find correct SuperClass if it exists, else implement self
 class SuggestedScenarioViewSet():
     pass
+
+
+class Suggestions(viewsets.GenericViewSet):
+    authentication_classes = (authentication.TokenAuthentication,)
+    serializer_class = ScenarioSerializer
+    queryset = Scenario.objects.all()
+
+    # copy post object to delete csrf token, so json.load works
+    @list_route(methods=['GET'])
+    def get(self, request):
+        serializer = ScenarioSerializer(data=Scenario.objects.all())
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    @list_route(methods=['POST'])
+    def post(self, request):
+        queryset = Scenario.objects.all()
+        post = request.POST.copy()
+
+        if request.POST.get("csrfmiddlewaretoken") and request.POST.get("csrfmiddlewaretoken") is not None:
+            # print(request.POST.get('csrfmiddlewaretoken'))
+            del post["csrfmiddlewaretoken"]
+
+        steps = json.loads(request.body)
+
+        json_object = serial.serialize("JSON", queryset)
+
+        print(json_object)
+
+        return Response(queryset)
 
 
 class IndexView(generic.DetailView):
