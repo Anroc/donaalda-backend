@@ -12,9 +12,7 @@ def validate_legal_chars(value):
 
 
 def validate_suggestions_input(value, categories):
-    asd = set(c.name for c in categories)
-    pprint(asd)
-    if value.category_preference.keys() != asd:
+    if value.category_preference.keys() != set(c.name for c in categories):
         raise ValidationError('Category_preference should contain exactly all categories.')
 
     for key, value in value.category_preference.items():
