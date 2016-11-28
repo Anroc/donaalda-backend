@@ -147,7 +147,8 @@ class SuggestedScenarioViewSet():
 @permission_classes((permissions.AllowAny,))
 def suggestions(request):
     if request.method == 'POST':
-        json_data = json.loads(request.body)
+        json_data = json.loads(request.body.decode('utf-8'))
+        print(json_data)
         serializer = ScenarioSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
