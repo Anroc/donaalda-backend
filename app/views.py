@@ -149,7 +149,7 @@ def suggestions(request):
     if request.method == 'POST':
         json_data = json.loads(request.body.decode('utf-8'))
         print(json_data)
-        serializer = ScenarioSerializer(data=request.data)
+        serializer = ScenarioSerializer(data=Scenario.objects.all(), many=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
