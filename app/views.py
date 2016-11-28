@@ -21,7 +21,9 @@ from rest_framework.response import Response
 from rest_framework import authentication, permissions
 from rest_framework.decorators import *
 from rest_framework import generics, mixins, views, status
-
+from collections import namedtuple
+from .validators import *
+from django.core.exceptions import ValidationError
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
@@ -146,14 +148,17 @@ class SuggestedScenarioViewSet():
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
 def suggestions(request):
+    OnboardingAnswers = namedtuple("OnboadringAnswers", ["category_preference", "user_preference", "renovation_preference"])
+
     if request.method == 'POST':
         json_data = json.loads(request.body.decode('utf-8'))
-        print(json_data)
-        serializer = ScenarioSerializer(data=Scenario.objects.all(), many=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            onboarding_answers = OnboardingAnswers(**json_data)
+            validate_suggestions_input(onboarding_answers, Category.objects.all())
+        except (TypeError, ValidationError) as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
+        serializer = ScenarioSerializer(Scenario.objects.all(), many=True)
+        return JsonResponse(serializer.data, status=status.HTTP_200_OK, safe=False)
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
 

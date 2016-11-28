@@ -51,12 +51,11 @@ class ProductTypeSerializer(serializers.ModelSerializer):
 
 class ScenarioSerializer(serializers.ModelSerializer):
     provider = ProviderSerializer()
-    categories = CategorySerializer(read_only=True, many=True)
 
     class Meta:
         model = Scenario
         fields = (
-            'pk', 'name', 'url_name', 'short_description', 'picture', 'provider', 'categories',)
+            'pk', 'name', 'url_name', 'short_description', 'picture', 'provider',)
 
 
 class ScenarioDescriptionSerializer(serializers.ModelSerializer):
