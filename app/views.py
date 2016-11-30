@@ -165,6 +165,12 @@ class Suggestions(APIView):
         serializer = ScenarioSerializer(Scenario.objects.all(), many=True)
         return JsonResponse(serializer.data, status=status.HTTP_200_OK, safe=False)
 
+    def get_queryset(self):
+        if self.request.session.session_key is None:
+            raise Exception("requesting session has no key!")
+        else:
+            return Scenario.objects.all()
+
 
 class IndexView(generic.DetailView):
     template_name = 'app/index.html'
