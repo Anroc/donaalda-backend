@@ -148,9 +148,8 @@ class SuggestedScenarioViewSet():
 # @api_view(['POST'])
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
-class Suggestions(APIView):
+class Suggestions(generics.GenericAPIView):
     def get(self, request, format=None):
-
         pass
 
     def post(self, request, format=None):
@@ -163,13 +162,18 @@ class Suggestions(APIView):
         except (TypeError, ValidationError) as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
         serializer = ScenarioSerializer(Scenario.objects.all(), many=True)
-        return JsonResponse(serializer.data, status=status.HTTP_200_OK, safe=False)
+        return self.get_paginated_response(self, serializer.data)
 
     def get_queryset(self):
         if self.request.session.session_key is None:
             raise Exception("requesting session has no key!")
         else:
+            # scenarios = Session.objects.get(id=self.request.session.session_key).saved_scenarios
+            # return scenarios
             return Scenario.objects.all()
+
+    def get_serializer_class(self):
+        return ScenarioSerializer
 
 
 class IndexView(generic.DetailView):
