@@ -7,7 +7,6 @@ from django.contrib.sessions.models import Session
 from django.core.validators import MinValueValidator, MaxValueValidator
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
-from random import *
 from .validators import validate_legal_chars
 
 """
@@ -88,7 +87,7 @@ class Scenario(models.Model):
     """
 
     name = models.CharField(max_length=100, unique=True)
-    url_name = models.CharField(max_length=100, unique=False, default=random(), verbose_name="URL-Name")
+    url_name = models.CharField(max_length=100, unique=False, verbose_name="URL-Name")
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
     provider = models.ForeignKey("Provider", default="1", verbose_name="Versorger", on_delete=models.CASCADE)
@@ -229,7 +228,7 @@ class Provider(models.Model):
     everything, an employee can create, is connected to this.
     """
 
-    name = models.CharField(max_length=200, unique=False, default=random())
+    name = models.CharField(max_length=200, unique=False)
     is_visible = models.BooleanField(default=False, verbose_name="sichtbar")
 
     def __str__(self):
@@ -252,7 +251,7 @@ class ProviderProfile(models.Model):
     """
 
     public_name = models.CharField(max_length=200, unique=True, verbose_name="öffentlicher Name")
-    url_name = models.CharField(max_length=200, unique=True, default=random())
+    url_name = models.CharField(max_length=200, unique=True)
     logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
                                    help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt.")
     profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True)

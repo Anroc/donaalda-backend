@@ -4,7 +4,7 @@ showmigrations` first and reading up on django migrations if there are some
 boxes without checkmarks)
 
 ```
-python manage.py dumpdata --format=json app auth sessions > app/fixtures/initial_data.json
+python manage.py dumpdata --format=json --indent=2 app auth sessions > app/fixtures/initial_data.json
 ```
 
 sessions is currently included because some part of the model (sessiontags I

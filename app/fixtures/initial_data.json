@@ -2722,6 +2722,33 @@
   }
 },
 {
+  "model": "auth.permission",
+  "pk": 157,
+  "fields": {
+    "name": "Can add shopping basket",
+    "content_type": 37,
+    "codename": "add_shoppingbasket"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 158,
+  "fields": {
+    "name": "Can change shopping basket",
+    "content_type": 37,
+    "codename": "change_shoppingbasket"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 159,
+  "fields": {
+    "name": "Can delete shopping basket",
+    "content_type": 37,
+    "codename": "delete_shoppingbasket"
+  }
+},
+{
   "model": "auth.group",
   "pk": 1,
   "fields": {
@@ -3106,6 +3133,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "2riylx15l9mdrhtghd07rhqnz63oodrd",
+  "fields": {
+    "session_data": "ZGM5ZDY5ODM0ZGMwMGI4NDc2NTIxNDg1OGU4ZDEzNzJiNDYyNDIxMjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2Q2MmNjNDViY2I0M2IxYjE2MjE0MzE4YzIwNWQ5MTNjMDczYmUxMCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2016-12-12T16:36:02.215Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "39ipodun55hid903n8si97zwg1u087l5",
   "fields": {
     "session_data": "YmYzNzQ0MzFhMmM0MWM2ZjQ4OTliNGRjYjU4YzA4MWQzM2NlOTZkNjp7Imhpc3RvcnkiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3Byb2R1Y3RzLzMzLyJdfQ==",
@@ -3302,6 +3337,14 @@
   "fields": {
     "session_data": "NTA4OGJlZWM3MDY3Njg4ZGZhMGJiMDA1NTMwM2E2ZjI2YjRhNWI5YTp7Imhpc3RvcnkiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3Byb2R1Y3RzLzMvIl19",
     "expire_date": "2016-07-10T03:02:02.767Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "eygkjni1qdb5bpzaji7zz62p0dokc0h3",
+  "fields": {
+    "session_data": "OWNkMjM4ZTY1ZTgzZDlmMGUwOWUxMWQzNGUzM2RkMzE0ZjIyN2EzMDp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2016-12-12T15:07:56.357Z"
   }
 },
 {
@@ -3510,6 +3553,14 @@
   "fields": {
     "session_data": "NDQ5YmZkMTE4Mjk2ZWJkNWNkYjQ3YmMxMzcxNjRlZmI3NGYzM2I0Mzp7Imhpc3RvcnkiOlsiaHR0cDovLzUyLjU5LjE4LjI1NC8iXX0=",
     "expire_date": "2016-07-07T10:26:39.211Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "w59u04ku84ox818222e4x51xrgy3e833",
+  "fields": {
+    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
+    "expire_date": "2016-12-11T16:37:58.865Z"
   }
 },
 {
@@ -4656,7 +4707,8 @@
     "picture": "scenarios/scenario-Schlafanreize.jpg",
     "provider": 5,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4669,7 +4721,8 @@
     "picture": "scenarios/scenario-W\u00e4rmesteuerung.jpg",
     "provider": 7,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4682,7 +4735,8 @@
     "picture": "scenarios/scenario-Energieverbrauch.jpg",
     "provider": 5,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4695,7 +4749,8 @@
     "picture": "scenarios/scenario-Vitaldaten.jpg",
     "provider": 1,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4708,7 +4763,8 @@
     "picture": "scenarios/scenario_aktivitatsgrad.jpg",
     "provider": 7,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4721,7 +4777,8 @@
     "picture": "scenarios/scenario-Aufwachanreiz.jpg",
     "provider": 5,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4734,7 +4791,8 @@
     "picture": "scenarios/scenario-lichtsteuerung.jpg",
     "provider": 17,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4747,7 +4805,8 @@
     "picture": "scenarios/scenario-Wasser.jpg",
     "provider": 4,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4760,7 +4819,8 @@
     "picture": "scenarios/Elektro-_Busch-Jaeger_Rollladensteuerung-1.jpg",
     "provider": 5,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4773,7 +4833,8 @@
     "picture": "scenarios/Sensory-Sky-05-kleiner.jpg",
     "provider": 4,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4786,7 +4847,8 @@
     "picture": "scenarios/smart-home-macht-einbrechern-das-leben-schwer.jpg",
     "provider": 23,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4799,7 +4861,8 @@
     "picture": "scenarios/smarthome-energie.jpg",
     "provider": 11,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
@@ -4812,7 +4875,8 @@
     "picture": "scenarios/smarthomesafetytips-1200x732.jpg",
     "provider": 23,
     "meta_devices": [],
-    "subcategory": []
+    "subcategory": [],
+    "in_shopping_basket_of": []
   }
 },
 {
