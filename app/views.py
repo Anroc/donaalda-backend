@@ -25,6 +25,7 @@ from collections import namedtuple
 from .validators import *
 from django.core.exceptions import ValidationError
 
+
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
@@ -144,13 +145,17 @@ class SuggestedScenarioViewSet():
     pass
 
 
-@api_view(['POST'])
+# @api_view(['POST'])
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
-def suggestions(request):
-    OnboardingAnswers = namedtuple("OnboadringAnswers", ["category_preference", "user_preference", "renovation_preference"])
+class Suggestions(APIView):
+    def get(self, request, format=None):
 
-    if request.method == 'POST':
+        pass
+
+    def post(self, request, format=None):
+        OnboardingAnswers = namedtuple("OnboardingAnswers",
+                                       ["category_preference", "user_preference", "renovation_preference"])
         json_data = json.loads(request.body.decode('utf-8'))
         try:
             onboarding_answers = OnboardingAnswers(**json_data)
@@ -159,8 +164,6 @@ def suggestions(request):
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
         serializer = ScenarioSerializer(Scenario.objects.all(), many=True)
         return JsonResponse(serializer.data, status=status.HTTP_200_OK, safe=False)
-    else:
-        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class IndexView(generic.DetailView):
