@@ -1,4 +1,17 @@
+"""
+1.  Call find_implementing_product for each meta device in the scenrio
+2.  for each Broker -> Endpoint combination find pahts with: find_communication_partner(endpoint, broker)
+3.  Merge the result: for each broker in look if it can reach all endpoints.
+    If it do so: create a product set of the current configuration
+4.  Apply U_pref on to all product sets for each broker to find the current best solution for the current broker-product-set
+5.  Apply U_pref on all product sets for each different broker to find the over all best solution for the current scenrio
+"""
+
 from .models import *
+
+def implement_scenario(scenario):
+    meta_devices = scenario.meta_devices
+
 
 
 def find_implementing_product(meta_device):
@@ -19,7 +32,7 @@ def find_implementing_product(meta_device):
 
 def __find_matching_products(meta_device, leader=True):
     """
-    Find all matching products to a given meta_device.
+    Find all implementing products to a given meta_device.
 
     :param
         meta_device: the meta device that should be implemented
@@ -41,45 +54,7 @@ def __find_matching_products(meta_device, leader=True):
     return matching_products
 
 
-def find_matching_product_sets(broker, *endpoints, max_deph=3):
-    """
-    Assembles to the given broker and endpoints valid product sets that allows
-    the broker to communicate with all endpoints.
-
-    :param
-        broker: the master broker in this product set configuration
-    :param
-        endpoints: varargs of endpoints that should be slaves of the broker
-    :param
-        max_deph: the number of maximal number bridges that should be included in
-        the search set.
-    :return:
-        A set of product sets that are a valid in that kind that the broker
-        can communicate with each endpoint (directly or over bridges)
-        Or 'none' if no matching product set could be found
-    :raises:
-        ConfigurationException if the given parameter were in some kind invalid
-    """
-    broker_protcols = __get_protocols(broker, True)
-    return_set = set()
-    bridges = get_bridges().difference(broker)
-    for endpoint in endpoints:
-        protocols = __get_protocols(endpoint, False)
-
-        # if endpoint is direct compatible to broker add to tuple and continue
-        if __direct_compatible(broker_protcols, protocols):
-            __add_to_set(return_set, (endpoint, ))
-            continue
-
-        # if not then check first level broker
-        for bridge in bridges:
-            if __direct_compatible(__get_protocols(bridge, True), protocols):
-                if __direct_compatible(broker_protcols, __get_protocols(bridge, False)):
-                    __add_to_set(return_set, (endpoint, bridge, ))
-                    continue
-
-
-def __find_communication_partner(endpoint, target, path=set(), max_deph=5, bridges_visited=set()):
+def find_communication_partner(endpoint, target, path=set(), max_deph=5, bridges_visited=set()):
     if max_deph <= 0:
         raise Exception("max_deph exeeded")
 
@@ -97,12 +72,10 @@ def __find_communication_partner(endpoint, target, path=set(), max_deph=5, bridg
             if bridge is target:
                 paths.add(path.add(target))
             else:
-                next_path = __find_communication_partner(bridge, target, path, max_deph - 1, bridges)
+                next_path = find_communication_partner(bridge, target, path, max_deph - 1, bridges)
                 if len(next_path) != 0:
                     paths.union(next_path)
     return paths
-
-
 
 
 def __add_to_set(_set, _tuple):
@@ -121,7 +94,6 @@ def __direct_compatible(broker_protocols, endpoint_protocols):
             if protocol.name is broker_protocol.name:
                 return True
     return False
-
 
 
 def __get_protocols(product, leader):
@@ -148,7 +120,6 @@ def get_bridges():
         if leader and follower:
             return_set.add(product)
     return return_set
-
 
 
 def get_products():
