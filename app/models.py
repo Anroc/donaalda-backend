@@ -7,7 +7,6 @@ from django.contrib.sessions.models import Session
 from django.core.validators import MinValueValidator, MaxValueValidator
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
-from random import *
 from .validators import validate_legal_chars
 
 """
@@ -71,9 +70,6 @@ class Category(models.Model):
     def __str__(self):
         return '%s' % self.name
 
-    def natural_key(self):
-        return self.name
-
     class Meta:
         verbose_name = "Kategorie"
         verbose_name_plural = "Kategorien"
@@ -88,7 +84,7 @@ class Scenario(models.Model):
     """
 
     name = models.CharField(max_length=100, unique=True)
-    url_name = models.CharField(max_length=100, unique=False, default=random(), verbose_name="URL-Name")
+    url_name = models.CharField(max_length=100, unique=False, verbose_name="URL-Name")
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
     provider = models.ForeignKey("Provider", default="1", verbose_name="Versorger", on_delete=models.CASCADE)
@@ -101,9 +97,6 @@ class Scenario(models.Model):
 
     def __str__(self):
         return '%s' % self.name
-
-    def natural_key(self):
-        return self.name
 
     def save(self, *args, **kwargs):
         """Saves an instance of a Scenario and sets url_name to a cleaned version of name"""
@@ -135,9 +128,6 @@ class ScenarioDescription(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.belongs_to_scenario, self.order)
-
-    def natural_key(self):
-        return [self.belongs_to_scenario.natural_key(), self.order]
 
     class Meta:
         verbose_name = "Szenariobeschreibung"
@@ -181,9 +171,6 @@ class Product(models.Model):
         self.end_of_life = True
         self.save()
 
-    def natural_key(self):
-        return [self.provider.natural_key(), self.serial_number]
-
     class Meta:
         verbose_name = "Produkt"
         verbose_name_plural = "Produkte"
@@ -214,9 +201,6 @@ class ProductType(models.Model):
     def __str__(self):
         return '%s' % self.type_name
 
-    def natural_key(self):
-        return self.type_name
-
     class Meta:
         verbose_name = "Produktart"
         verbose_name_plural = "Produktarten"
@@ -229,14 +213,11 @@ class Provider(models.Model):
     everything, an employee can create, is connected to this.
     """
 
-    name = models.CharField(max_length=200, unique=False, default=random())
+    name = models.CharField(max_length=200, unique=False)
     is_visible = models.BooleanField(default=False, verbose_name="sichtbar")
 
     def __str__(self):
         return '%s' % self.name
-
-    def natural_key(self):
-        return self.name
 
     class Meta:
         verbose_name = "Hersteller"
@@ -252,7 +233,7 @@ class ProviderProfile(models.Model):
     """
 
     public_name = models.CharField(max_length=200, unique=True, verbose_name="öffentlicher Name")
-    url_name = models.CharField(max_length=200, unique=True, default=random())
+    url_name = models.CharField(max_length=200, unique=True)
     logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
                                    help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt.")
     profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True)
@@ -264,9 +245,6 @@ class ProviderProfile(models.Model):
 
     def __str__(self):
         return '%s' % self.public_name
-
-    def natural_key(self):
-        return self.owner.natural_key()
 
     def save(self, *args, **kwargs):
         """sets url_name to a cleaned version of name before saving"""
@@ -303,9 +281,6 @@ class UserImage(models.Model):
 
     def __str__(self):
         return "Bild für " + self.belongs_to_user.username
-
-    def natural_key(self):
-        self.belongs_to_user.natural_key()
 
     class Meta:
         verbose_name = "Nutzerbild"
@@ -416,9 +391,6 @@ class QuestionSet(models.Model):
 
     def __str__(self):
         return '%s' % self.name
-
-    def natural_key(self):
-        return [self.name]
 
     class Meta:
         verbose_name = "Fragensammlung"

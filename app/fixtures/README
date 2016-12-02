@@ -4,13 +4,24 @@ showmigrations` first and reading up on django migrations if there are some
 boxes without checkmarks)
 
 ```
-python manage.py dumpdata --format=json app auth sessions > app/fixtures/initial_data.json
+python manage.py dumpdata --natural-foreign --natural-primary --format=json --indent=2 -e auth.Permission app auth sessions -o app/fixtures/initial_data.json
 ```
 
-sessions is currently included because some part of the model (sessiontags I
-think) refers to it. If we remove sessiontags, we don't need to dump the
-sessions. This is desirable because the session data changes very very
-frequently.
+Let's break this up a bit
+- `--natural-foreign` save foreign keys in their "natural" form if it exists.
+  This means that instead of permission:[1,5,8] the dump will contain
+  permission:["add_stuff", "burn_stuff", "do_stuff"]. This is important because
+  permissions are automatically generated if the database is dropped which will
+  cause their primary key to change. The natural keys however will stay the
+  same.
+- `--format=json` self explanatory
+- `--indent=2` create human readable output
+- `-e auth.Permission` don't include the model auth.Permission in the dump (it
+  gets automatically generated as mentioned above)
+- `app auth sessions` the apps to dump (app self explanatory, auth for user data
+  and sessions because some things in app refer to session)
+- `-o ...` the file to dump to. This will create the file with the right
+  encoding and show a nice progress bar
 
 to verify that the data was dumped correctl switch the database in
 advisor/settings.py over to sqlite3 and run
