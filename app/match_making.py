@@ -8,7 +8,15 @@
 """
 
 from .models import *
+import operator
 
+class Metadevice_Implemenation(object):
+    product = None
+    meta_device = None
+
+    def __init__(self, product, meta_device):
+        self.product = product
+        self.meta_device = meta_device
 
 def implement_scenario(scenario):
     """
@@ -16,9 +24,11 @@ def implement_scenario(scenario):
     :param scenario:
     :return:
     """
+    print('Scenario: %s' % scenario.short_description)
     meta_broker = scenario.meta_broker
-    meta_endpoints = scenario.meta_endpoints.all()
+    meta_endpoints = set(scenario.meta_endpoints.all())
 
+    # 1. find implementing products
     impl_of_meta_device = dict()
     print('Metabroker: %s' % meta_broker)
     impl_of_meta_device[meta_broker] = find_implementing_product(meta_broker)
@@ -27,6 +37,9 @@ def implement_scenario(scenario):
     if len(impl_of_meta_device[meta_broker]) == 0:
         return set()
 
+    # needed for later propose
+    used_products = impl_of_meta_device[meta_broker]
+
     for meta_endpoint in meta_endpoints:
         print('Metaendpoint: %s' % meta_endpoint)
         impl_of_meta_device[meta_endpoint] = find_implementing_product(meta_endpoint)
@@ -34,16 +47,103 @@ def implement_scenario(scenario):
         # no implementation was found
         if len(impl_of_meta_device[meta_endpoint]) == 0:
             return set()
+        used_products = used_products.union(impl_of_meta_device[meta_endpoint])
 
-    # start running F
+    # 2. start running F
+    # we already validated that each endpoint have at least one implementation
+    product_sets = set()
     for broker_impl in impl_of_meta_device[meta_broker]:
+        possible_paths = dict()
         for meta_endpoint in meta_endpoints:
             for endpoint_impl in impl_of_meta_device[meta_endpoint]:
-
+                # 2.1 call f
                 # take an broker impl and an endpoint impl and find the matching ways
-                paths = find_communication_partner(endpoint_impl, broker_impl)
-                print('%s->%s: %s' % (endpoint_impl, broker_impl, paths))
+                res = find_communication_partner(endpoint_impl, broker_impl)
+                if len(res) > 0:
+                    # convert inner set to frozenset and list to set
+                    res = set(
+                            ((frozenset(e))
+                                for e in res
+                            )
+                        )
+                    try:
+                        possible_paths[meta_endpoint] = possible_paths[meta_endpoint].union(res)
+                    except KeyError:
+                        possible_paths[meta_endpoint] = res
+                    print('%s->%s: %s' % (endpoint_impl, broker_impl, res))
 
+        # check if current broker impl can reach every endpoint
+        if len(possible_paths) == 0:
+            continue
+
+        possible_sets = __merge_paths(meta_endpoints, possible_paths)
+        # 3. apply cost function U_pref to get one product set
+        # TODO: change to user preference
+        possible_sets = cost_function(possible_sets, "extensible", used_products)
+        # 4. merge all product sets
+        product_sets.add(possible_sets)
+
+    # 5. apply cost function U_pref to get the best product set
+    product_sets = cost_function(product_sets, "extensible", used_products)
+
+    # return the product set
+    return product_sets
+
+
+def cost_function(product_sets, preference, used_products):
+    """
+    Cost function which decides which product set matches the user preferences.
+
+    :param product_sets:
+        set of possible product implementations
+    :param preference:
+        Preference value of "extensible", "cost", "efficiency"
+    :param used_products:
+        The broker and endpoint implementations that was used to assemble this product sets.
+    :return:
+        The product set that will match the user preferences the best.
+    """
+    if len(product_sets) == 0:
+        return set()
+
+    sorting = dict()
+    for current_set in product_sets:
+        bridges = product_sets.difference(used_products)
+
+        x = 1
+        if preference == "extensible":
+            x = 0
+            for product in current_set:
+                x += len(product.protocol.all())
+        elif preference == "cost":
+            # TODO: implement
+            pass
+        elif preference == "efficiency":
+            # TODO: implement
+            pass
+        else:
+            raise(AttributeError("Unsupported preference %s" % preference))
+        sorting[current_set] = 1./x * 0.95**len(bridges)
+
+    return sorted(sorting.items(), key=operator.itemgetter(1))[0][0]
+
+
+def __merge_paths(meta_endpoints, possible_paths):
+    endpoints = list(meta_endpoints.copy())
+    if len(endpoints) == 0:
+        return set()
+    ret = possible_paths[endpoints[0]]
+    for elem in endpoints[1:]:
+        ret = __product(ret, possible_paths[elem])
+    return ret
+
+
+def __product(a, b):
+    ret = set()
+    for elem_a in a:
+        for elem_b in b:
+            ret.add(frozenset(elem_a.union(elem_b)))
+    return ret
 
 def find_implementing_product(meta_device):
     """
