@@ -21,6 +21,8 @@ from .models import (Category,
                      GivenAnswers,
                      QuestionStep, Broker, MetaBroker, MetaEndpoint, Endpoint, Feature, AnswerSlider,
                      ScenarioCategoryRating,
+                     Protocol,
+                     SubCategory,
                      )
 
 
@@ -198,3 +200,5 @@ admin.site.register(MetaBroker)
 admin.site.register(Endpoint)
 admin.site.register(AnswerSlider)
 admin.site.register(ScenarioCategoryRating)
+admin.site.register(Protocol)
+admin.site.register(SubCategory)
