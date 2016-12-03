@@ -42,8 +42,7 @@ def implement_scenario(scenario):
 
                 # take an broker impl and an endpoint impl and find the matching ways
                 paths = find_communication_partner(endpoint_impl, broker_impl)
-                print(paths)
-
+                print('%s->%s: %s' % (endpoint_impl, broker_impl, paths))
 
 
 def find_implementing_product(meta_device):
@@ -85,40 +84,96 @@ def __find_matching_products(meta_device, leader=True):
     return matching_products
 
 
-def find_communication_partner(endpoint, target, path=set(), max_deph=5, bridges_visited=set()):
-    if max_deph <= 0:
+def find_communication_partner(endpoint, target, path=None, max_depth=None, bridges_visited=None):
+    """
+    This function will serve the propose we called small "f". It will find all ways from a given endpoint
+    to a given target (most likely the master broker in the scenario/system). For this it will recursively
+    traverse through the graph of which products can communicate with which other products.
+
+    :param endpoint:
+        the endpoint where the current path should start searching
+    :param target:
+        the target which is broker or the master broker
+    :param path:
+        the current path this method traveled, only used in recursive calls
+    :param max_depth:
+        the maximal depth the algorithms should search; in loops it may be stuck and can't escape.
+    :param bridges_visited:
+        the reference to product bridges which was already visited, only used in recursive calls
+    :return:
+        list of sets of all matching product sets that allow the endpoint to communicate with the target
+    """
+    # init default parameter
+    # see "http://effbot.org/zone/default-values.htm" why we have do this in this way
+    # we need also create a new reference to the object else python will reuse this objects in recursive calls
+    if path is None:
+        current_path = set()
+    else:
+        current_path = path.copy()
+    if max_depth is None:
+        max_depth = 5
+    if bridges_visited is None:
+        current_bridges_visited = set()
+    else:
+        current_bridges_visited = bridges_visited.copy()
+
+    # begin of the algorithm
+    if max_depth <= 0:
         raise Exception("max_deph exeeded")
 
     # define methods for follower/leader protocols
     endpoint_protocols = __get_protocols(endpoint, False)
-    bridges = get_bridges().difference({endpoint}).difference(bridges_visited).union({target})
+    bridges = get_bridges().difference({endpoint}).difference(current_bridges_visited).union({target})
 
     if len(bridges) == 0:
-        return set()
+        return list()
 
-    path.add(endpoint)
-    paths = set()
+    current_path.add(endpoint)
+    paths = list()
     for bridge in bridges:
         if __direct_compatible(__get_protocols(bridge, True), endpoint_protocols):
-            if bridge is target:
-                paths.add(path.add(target))
+            if bridge == target:
+                current_path.add(target)
+                paths.append(current_path)
             else:
-                next_path = find_communication_partner(bridge, target, path, max_deph - 1, bridges)
+                # recursive call with the current bridge as a new endpoint
+                next_path = find_communication_partner(bridge, target, current_path, max_depth - 1, bridges)
                 if len(next_path) != 0:
-                    paths.union(next_path)
+                    paths.extend(next_path)
     return paths
 
 
 def __direct_compatible(broker_protocols, endpoint_protocols):
+    """
+    Checks if the given broker_protocols can communicate with the given endpoint_protocols.
+
+    :param broker_protocols:
+        protocols in leader mode
+    :param endpoint_protocols:
+        protocols in follower mode
+    :return:
+        if the given broker_protocols can communicate with the given endpoint_protocols
+    """
+    # TODO: if follower and leader protocol names differ in the future then the if check have to be changed as well
     # check if endpoint can talk directly with broker
     for protocol in endpoint_protocols:
         for broker_protocol in broker_protocols:
-            if protocol.name is broker_protocol.name:
+            if protocol.name == broker_protocol.name:
                 return True
     return False
 
 
 def __get_protocols(product, leader):
+    """
+    Returns all the protocols of the given product that matches the given mode.
+
+    :param product:
+        the product which speaks a set of protocols
+    :param leader:
+        if the protocols should be in leader (True) or in follower (False) mode
+    :return:
+        all spoken protocols by the product in the given mode.
+    """
     protocols = set(product.protocol.all())
     return_set = set()
     for protocol in protocols:
@@ -151,4 +206,10 @@ def get_bridges():
 
 
 def get_products():
+    """
+    Returns all the product as a set.
+
+    :return:
+        A set of all known products.
+    """
     return set(Product.objects.all())
