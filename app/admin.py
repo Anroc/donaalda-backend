@@ -28,6 +28,8 @@ from .models import (
     Endpoint,
     Feature,
     ScenarioCategoryRating,
+    Protocol,
+    SubCategory,
 )
 
 
@@ -205,3 +207,5 @@ admin.site.register(MetaEndpoint)
 admin.site.register(MetaBroker)
 admin.site.register(Endpoint)
 admin.site.register(ScenarioCategoryRating)
+admin.site.register(Protocol)
+admin.site.register(SubCategory)

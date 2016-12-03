@@ -87,13 +87,16 @@ class Scenario(models.Model):
     url_name = models.CharField(max_length=100, unique=False, verbose_name="URL-Name")
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
-    provider = models.ForeignKey("Provider", default="1", verbose_name="Versorger", on_delete=models.CASCADE)
+    provider = models.ForeignKey("Provider", default="1", verbose_name="Erstellt von", on_delete=models.CASCADE)
     categories = models.ManyToManyField("Category", through="ScenarioCategoryRating",
                                         through_fields=('scenario', 'category'), verbose_name="Bewertung")
-    meta_devices = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaDevices")
+    meta_broker = models.ForeignKey("MetaBroker", default="1", verbose_name="Besteht aus einem Metabroker",
+                                    on_delete=models.CASCADE)
+    meta_endpoints = models.ManyToManyField(to="MetaEndpoint", verbose_name="Besteht aus MetaEndpointDevices")
     subcategory = models.ManyToManyField(to='SubCategory', verbose_name="Dieses Szenario ist Teil dieser Subkategorie")
     in_shopping_basket_of = models.ManyToManyField(to=Session,
-                                                   verbose_name="Dieses Szenario liegt im Warenkorb von Session")
+                                                   verbose_name="Dieses Szenario liegt im Warenkorb von Session",
+                                                   blank=True)
 
     def __str__(self):
         return '%s' % self.name
@@ -196,7 +199,8 @@ class ProductType(models.Model):
 
     type_name = models.CharField(max_length=255, unique=True, verbose_name="Name")
     used_as_product_type_filter_by = models.ManyToManyField(to=Session,
-                                                            verbose_name="Als Produkttypfilter verwendet von")
+                                                            verbose_name="Als Produkttypfilter verwendet von",
+                                                            blank=True)
 
     def __str__(self):
         return '%s' % self.type_name
@@ -459,7 +463,8 @@ class SubCategory(models.Model):
     name = models.CharField(max_length=255)
     belongs_to_category = models.ManyToManyField(to="Category", verbose_name="Gehört zu den folgenden Kategorien")
     used_as_filter_by = models.ManyToManyField(to=Session,
-                                               verbose_name="Benutzer die diese Subkategorie als Szenariofilter verwenden")
+                                               verbose_name="Benutzer die diese Subkategorie als Szenariofilter verwenden",
+                                               blank=True)
 
     def __str__(self):
         return self.name
