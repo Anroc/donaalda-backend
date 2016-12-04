@@ -329,6 +329,13 @@ class Question(models.Model):
     )
     order = models.PositiveIntegerField(default=1000)
 
+    # only for slider questions
+    # TODO: add validation logic
+    rating_min = models.IntegerField("Minimaler Wert für Antworten",
+                                     null=True, blank=True)
+    rating_max = models.IntegerField("Maximaler Wert für Antworten",
+                                     null=True, blank=True)
+
     def __str__(self):
         return '%s -- %s' % (self.question_text, self.get_answer_presentation_display())
 
@@ -336,14 +343,6 @@ class Question(models.Model):
         verbose_name = "Frage"
         verbose_name_plural = "Fragen"
         ordering = ["order", "pk"]
-
-
-class SliderQuestion(Question):
-    rating_min = models.IntegerField("Minimaler Wert für Antworten")
-    rating_max = models.IntegerField("Maximaler Wert für Antworten")
-
-    def __str__(self):
-        return "%s (%d - %d)" % (str(super), self.rating_min, self.rating_max)
 
 
 class Answer(models.Model):
@@ -371,24 +370,16 @@ class GivenAnswers(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE, verbose_name="User")
     user_answer = models.ManyToManyField(to="Answer", verbose_name="hat geantwortet")
 
+    # only for slider Answers
+    # TODO: add validation logic
+    rating_value = models.IntegerField(null=True, blank=True)
+
     def __str__(self):
         return '%s hat geantwortet: %s' % (self.user, str(list(self.user_answer.all())))
 
     class Meta:
         verbose_name = "beantwortete Antwort"
         verbose_name_plural = "beantwortete Antworten"
-
-
-class GivenSliderAnswer(GivenAnswers):
-    rating_value = models.IntegerField()
-
-    def __str__(self):
-        fields = (
-            self.answer_text,
-            self.belongs_to_question.question_text,
-            self.rating_value,
-        )
-        return '%s zu "%s" bewertet mit %d' % fields
 
 
 class QuestionSet(models.Model):

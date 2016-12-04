@@ -2183,7 +2183,9 @@
   "fields": {
     "question_text": "F\u00fcr welche Bereiche interessieren Sie sich?",
     "answer_presentation": "mc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2192,7 +2194,9 @@
   "fields": {
     "question_text": "Ich wohne in ...",
     "answer_presentation": "rc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2201,7 +2205,9 @@
   "fields": {
     "question_text": "Ich habe in Zukunft Renovierungen geplant",
     "answer_presentation": "rc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2210,7 +2216,9 @@
   "fields": {
     "question_text": "Die Ausstattung meiner Wohnung ...",
     "answer_presentation": "mc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2219,7 +2227,9 @@
   "fields": {
     "question_text": "Anzahl der Personen im Haushalt",
     "answer_presentation": "sc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2228,7 +2238,9 @@
   "fields": {
     "question_text": "Anzahl der Kinder",
     "answer_presentation": "dc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2237,7 +2249,9 @@
   "fields": {
     "question_text": "Ich m\u00f6chte als Energiefeatures",
     "answer_presentation": "mc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2246,7 +2260,9 @@
   "fields": {
     "question_text": "Ich m\u00f6chte als Sicherheitsfeatures ...",
     "answer_presentation": "mc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2255,7 +2271,9 @@
   "fields": {
     "question_text": "Ich m\u00f6chte die folgenden Dinge unterwegs steuern k\u00f6nnen:",
     "answer_presentation": "mc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2264,7 +2282,9 @@
   "fields": {
     "question_text": "Ich m\u00f6chte als Gesundheitsfeatures",
     "answer_presentation": "mc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2273,7 +2293,9 @@
   "fields": {
     "question_text": "Wie wichtig sind dir folgende Kategorien?",
     "answer_presentation": "sc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2282,7 +2304,9 @@
   "fields": {
     "question_text": "Welcher dieser Aspekte ist dir am Wichtigsten?",
     "answer_presentation": "rc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2291,7 +2315,9 @@
   "fields": {
     "question_text": "Sind dir Bauma\u00dfnahmen zu l\u00e4stig?",
     "answer_presentation": "rc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2300,7 +2326,9 @@
   "fields": {
     "question_text": "Sind dir Bauma\u00dfnahmen zu l\u00e4stig?",
     "answer_presentation": "rc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -3648,6 +3676,7 @@
     "user": [
       "admin"
     ],
+    "rating_value": null,
     "user_answer": []
   }
 },
@@ -3951,21 +3980,6 @@
       "j"
     ],
     "image": "user/Fiabro_Smoke_Sensor_1_uiWMUiU.jpg"
-  }
-},
-{
-  "model": "app.employee",
-  "fields": {
-    "employer": 1,
-    "groups": [
-      [
-        "Marketing"
-      ],
-      [
-        "Personalverwaltung"
-      ]
-    ],
-    "user_permissions": []
   }
 }
 ]
