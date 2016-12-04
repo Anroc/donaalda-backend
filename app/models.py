@@ -338,6 +338,14 @@ class Question(models.Model):
         ordering = ["order", "pk"]
 
 
+class SliderQuestion(Question):
+    rating_min = models.IntegerField("Minimaler Wert für Antworten")
+    rating_max = models.IntegerField("Maximaler Wert für Antworten")
+
+    def __str__(self):
+        return "%s (%d - %d)" % (str(super), self.rating_min, self.rating_max)
+
+
 class Answer(models.Model):
     belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE, verbose_name="gehört zu Frage")
     answer_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Anworttext")
@@ -349,14 +357,6 @@ class Answer(models.Model):
         verbose_name = "Antwort"
         verbose_name_plural = "Antworten"
         ordering = ['belongs_to_question_id', 'pk', ]
-
-
-class AnswerSlider(Answer):
-    # TODO: NAME STILL UP FOR GRABS
-    rating_value = models.PositiveIntegerField(default=5, validators=[MinValueValidator(0), MaxValueValidator(10)])
-
-    def __str__(self):
-        return '%s zu "%s"' % (self.answer_text, self.belongs_to_question.question_text)
 
 
 class GivenAnswers(models.Model):
@@ -377,6 +377,18 @@ class GivenAnswers(models.Model):
     class Meta:
         verbose_name = "beantwortete Antwort"
         verbose_name_plural = "beantwortete Antworten"
+
+
+class GivenSliderAnswer(GivenAnswers):
+    rating_value = models.IntegerField()
+
+    def __str__(self):
+        fields = (
+            self.answer_text,
+            self.belongs_to_question.question_text,
+            self.rating_value,
+        )
+        return '%s zu "%s" bewertet mit %d' % fields
 
 
 class QuestionSet(models.Model):
