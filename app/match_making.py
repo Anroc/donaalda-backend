@@ -1,22 +1,20 @@
-"""
-1.  Call find_implementing_product for each meta device in the scenrio
-2.  for each Broker -> Endpoint combination find pahts with: find_communication_partner(endpoint, broker)
-3.  Merge the result: for each broker in look if it can reach all endpoints.
-    If it do so: create a product set of the current configuration
-4.  Apply U_pref on to all product sets for each broker to find the current best solution for the current broker-product-set
-5.  Apply U_pref on all product sets for each different broker to find the over all best solution for the current scenrio
-"""
-
 from .models import *
 import operator
 
 
 def implement_scenario(scenario):
     """
-    Will return an empty set if no matching product implemenatation was found.
-    :param scenario:
-    :return:
+    1.  Call find_implementing_product for each meta device in the scenrio
+    2.  for each Broker -> Endpoint combination find pahts with: find_communication_partner(endpoint, broker)
+    3.  Merge the result: for each broker in look if it can reach all endpoints.
+        If it do so: create a product set of the current configuration
+    4.  Apply U_pref on to all product sets for each broker to find the current best solution for the current broker-product-set
+    5.  Apply U_pref on all product sets for each different broker to find the over all best solution for the current scenrio
+
+    :return a set of implementing products that matches the best the user preferences
     """
+    prepare_matching()
+
     print('Scenario: %s' % scenario.name)
     meta_broker = scenario.meta_broker
     meta_endpoints = set(scenario.meta_endpoints.all())
@@ -59,9 +57,9 @@ def implement_scenario(scenario):
                                 for e in res
                             )
                         )
-                    try:
+                    if meta_endpoint in possible_paths:
                         possible_paths[meta_endpoint] = possible_paths[meta_endpoint].union(res)
-                    except KeyError:
+                    else:
                         possible_paths[meta_endpoint] = res
                     print('%s->%s: %s' % (endpoint_impl, broker_impl, res))
 
@@ -107,7 +105,7 @@ def cost_function(product_sets, preference, used_products):
         if preference == "extensible":
             x = 0
             for product in current_set:
-                x += len(product.leader_protocol.all()) + len(product.follower_protocol.all())
+                x += len(__get_protocols(product, True)) + len(__get_protocols(product, False))
         elif preference == "cost":
             # TODO: implement
             pass
@@ -221,6 +219,28 @@ def find_communication_partner(endpoint, target, path=None, max_depth=None, brid
     return paths
 
 
+# public caching variables
+__direct_compatible_cache = None
+__get_protocols_cache = None
+__get_bridges_cache = None
+__get_products_cache = None
+__get_protocols_cache = None
+
+
+def prepare_matching():
+    """
+    Init caching for empty values.
+    """
+    global __direct_compatible_cache
+    __direct_compatible_cache = dict()
+    global __get_protocols_cache
+    __get_protocols_cache = dict()
+    global __get_bridges_cache
+    __get_bridges_cache = set()
+    global __get_products_cache
+    __get_products_cache = set()
+
+
 def __direct_compatible(broker_protocols, endpoint_protocols):
     """
     Checks if the given broker_protocols can communicate with the given endpoint_protocols.
@@ -232,12 +252,17 @@ def __direct_compatible(broker_protocols, endpoint_protocols):
     :return:
         if the given broker_protocols can communicate with the given endpoint_protocols
     """
-    # TODO: if follower and leader protocol names differ in the future then the if check have to be changed as well
+    input_tupel = (frozenset(broker_protocols), frozenset(endpoint_protocols))
+    if input_tupel in __direct_compatible_cache:
+        return __direct_compatible_cache[input_tupel]
+
     # check if endpoint can talk directly with broker
     for protocol in endpoint_protocols:
         for broker_protocol in broker_protocols:
             if protocol.name == broker_protocol.name:
+                __direct_compatible_cache[input_tupel] = True
                 return True
+    __direct_compatible_cache[input_tupel] = False
     return False
 
 
@@ -252,10 +277,15 @@ def __get_protocols(product, leader):
     :return:
         all spoken protocols by the product in the given mode.
     """
+    if (product, leader) in __get_protocols_cache:
+        return __get_protocols_cache[(product, leader)]
+
     if leader:
-        return set(product.leader_protocol.all())
+        __get_protocols_cache[(product, leader)] = set(product.leader_protocol.all())
+        return __get_protocols_cache[(product, leader)]
     else:
-        return set(product.follower_protocol.all())
+        __get_protocols_cache[(product, leader)] = set(product.follower_protocol.all())
+        return __get_protocols_cache[(product, leader)]
 
 
 def get_bridges():
@@ -265,11 +295,17 @@ def get_bridges():
     :return:
         set of all bridges in the product query set.
     """
+    global __get_bridges_cache
+    if len(__get_bridges_cache) > 0:
+        return __get_bridges_cache
+
     products = get_products()
     return_set = set()
     for product in products:
-        if len(product.leader_protocol.all()) > 0 and len(product.follower_protocol.all()) > 0:
+        if len(__get_protocols(product, True)) > 0 and len(__get_protocols(product, False)) > 0:
             return_set.add(product)
+
+    __get_bridges_cache = return_set.copy()
     return return_set
 
 
@@ -280,4 +316,9 @@ def get_products():
     :return:
         A set of all known products.
     """
-    return set(Product.objects.all())
+    global __get_products_cache
+    if len(__get_products_cache) > 0:
+        return __get_products_cache
+
+    __get_products_cache = set(Product.objects.all())
+    return __get_products_cache
