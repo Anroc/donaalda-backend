@@ -26,7 +26,7 @@ schema_view = get_swagger_view(title='Pastebin API')
 router = DefaultRouter(schema_title='Pastebin API')
 router.register(r'category', views.CategoryViewSet)
 router.register(r'scenario', views.ScenarioViewSet)
-router.register(r'scenarioDescription', views.ScenarioDescriptionViewSet)
+router.register(r'subCategoryDescription', views.SubCategoryDescriptionViewSet)
 # TODO: returns optimal(TODO: Define optimal) productSet possible constellation for a given set of scenarios in the
 # TODO: shopping basket
 router.register(r'product', views.ProductViewSet)

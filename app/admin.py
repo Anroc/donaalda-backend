@@ -12,7 +12,7 @@ from .models import (
     Provider,
     ProviderProfile,
     Employee,
-    ScenarioDescription,
+    SubCategoryDescription,
     Comment,
     UserImage,
     User,
@@ -192,7 +192,7 @@ admin.site.register(Employee, EmployeeAdmin)
 admin.site.register(Provider)
 admin.site.register(ProviderProfile, ProviderProfileAdmin)
 admin.site.register(ProductType)
-admin.site.register(ScenarioDescription)
+admin.site.register(SubCategoryDescription)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Question, QuestionAdmin)

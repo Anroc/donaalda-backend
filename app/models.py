@@ -14,7 +14,7 @@ The different models described in this file can mostly be separated in three dif
 advisor (also known as stepper), provider and user interaction.
     The provider part includes:
         -- Scenario
-        -- ScenarioDescription
+        -- SubCategoryDescription
         -- Product
         -- ProductType
         -- Provider
@@ -113,16 +113,16 @@ class Scenario(models.Model):
         ordering = ["name"]
 
 
-class ScenarioDescription(models.Model):
+class SubCategoryDescription(models.Model):
     """
-    Part of a scenario. Enables the producer to have more control how their scenario should look like.
+    Part of a sub category. Enables the producer to have more control how their subcategory should look like.
     Can be created by Employees.
     """
 
-    belongs_to_scenario = models.ForeignKey("Scenario", verbose_name="Beschreibung für Szenario",
-                                            on_delete=models.CASCADE)
+    belongs_to_subcategory = models.ForeignKey("SubCategory", verbose_name="Beschreibung für SubKateogrie",
+                                               on_delete=models.CASCADE)
     description = models.TextField(verbose_name="Beschreibung")
-    image = models.ImageField(upload_to="scenarioDesc", verbose_name="Bild")
+    image = models.ImageField(upload_to="subcategoryDesc", verbose_name="Bild")
     thumbnail = ImageSpecField(source='image',
                                processors=[ResizeToFill(200, 100)],
                                format='JPEG')
@@ -130,11 +130,11 @@ class ScenarioDescription(models.Model):
     order = models.IntegerField(verbose_name="Reihenfolge")
 
     def __str__(self):
-        return '%s %s' % (self.belongs_to_scenario, self.order)
+        return '%s %s' % (self.belongs_to_subcategory, self.order)
 
     class Meta:
-        verbose_name = "Szenariobeschreibung"
-        verbose_name_plural = "Szenariobeschreibungen"
+        verbose_name = "SubKategoriebeschreibung"
+        verbose_name_plural = "SubKategoriebeschreibungen"
         ordering = ["order"]
 
 
@@ -462,6 +462,9 @@ class MetaEndpoint(MetaDevice):
 
 class SubCategory(models.Model):
     name = models.CharField(max_length=255)
+    url_name = models.CharField(max_length=100, unique=False, verbose_name="URL-Name", null=True, blank=True)
+    short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
+    picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="subcategories")
     belongs_to_category = models.ManyToManyField(to="Category", verbose_name="Gehört zu den folgenden Kategorien")
     used_as_filter_by = models.ManyToManyField(to=Session,
                                                verbose_name="Benutzer die diese Subkategorie als Szenariofilter verwenden",
