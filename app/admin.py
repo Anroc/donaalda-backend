@@ -4,26 +4,33 @@ from .adminForms import (EmployeeCreationForm,
                          EmployeeChangeForm)
 
 # Register your models here.
-from .models import (Category,
-                     Scenario,
-                     Product,
-                     ProductType,
-                     Provider,
-                     ProviderProfile,
-                     Employee,
-                     ScenarioDescription,
-                     Comment,
-                     UserImage,
-                     User,
-                     Question,
-                     Answer,
-                     QuestionSet,
-                     GivenAnswers,
-                     QuestionStep, Broker, MetaBroker, MetaEndpoint, Endpoint, Feature, AnswerSlider,
-                     ScenarioCategoryRating,
-                     Protocol,
-                     SubCategory,
-                     )
+from .models import (
+    Category,
+    Scenario,
+    Product,
+    ProductType,
+    Provider,
+    ProviderProfile,
+    Employee,
+    ScenarioDescription,
+    Comment,
+    UserImage,
+    User,
+    Question,
+    SliderQuestion,
+    Answer,
+    QuestionSet,
+    GivenAnswers,
+    QuestionStep,
+    Broker,
+    MetaBroker,
+    MetaEndpoint,
+    Endpoint,
+    Feature,
+    ScenarioCategoryRating,
+    Protocol,
+    SubCategory,
+)
 
 
 class ScenarioAdmin(admin.ModelAdmin):
@@ -189,6 +196,7 @@ admin.site.register(ScenarioDescription)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(SliderQuestion)
 admin.site.register(Answer)
 admin.site.register(QuestionSet)
 admin.site.register(GivenAnswers)
@@ -198,7 +206,6 @@ admin.site.register(Broker)
 admin.site.register(MetaEndpoint)
 admin.site.register(MetaBroker)
 admin.site.register(Endpoint)
-admin.site.register(AnswerSlider)
 admin.site.register(ScenarioCategoryRating)
 admin.site.register(Protocol)
 admin.site.register(SubCategory)

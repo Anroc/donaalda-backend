@@ -90,8 +90,8 @@ class Scenario(models.Model):
     provider = models.ForeignKey("Provider", default="1", verbose_name="Erstellt von", on_delete=models.CASCADE)
     categories = models.ManyToManyField("Category", through="ScenarioCategoryRating",
                                         through_fields=('scenario', 'category'), verbose_name="Bewertung")
-    meta_broker = models.ForeignKey("MetaBroker", default="1", verbose_name="Besteht aus einem Metabroker",
-                                    on_delete=models.CASCADE)
+    meta_broker = models.ForeignKey("MetaBroker", default=None, verbose_name="Besteht aus einem Metabroker",
+                                    on_delete=models.CASCADE, null=True, blank=True)
     meta_endpoints = models.ManyToManyField(to="MetaEndpoint", verbose_name="Besteht aus MetaEndpointDevices")
     subcategory = models.ManyToManyField(to='SubCategory', verbose_name="Dieses Szenario ist Teil dieser Subkategorie")
     in_shopping_basket_of = models.ManyToManyField(to=Session,
@@ -240,7 +240,8 @@ class ProviderProfile(models.Model):
     url_name = models.CharField(max_length=200, unique=True)
     logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
                                    help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt.")
-    profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True)
+    profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True,
+                                      blank=True)
     banner_image = models.ImageField(verbose_name="Banner für Profilseite", upload_to="provider")
     introduction = models.TextField(verbose_name="Einleitung")
     contact_email = models.EmailField(verbose_name="Kontakt-Email")
@@ -342,6 +343,14 @@ class Question(models.Model):
         ordering = ["order", "pk"]
 
 
+class SliderQuestion(Question):
+    rating_min = models.IntegerField("Minimaler Wert für Antworten")
+    rating_max = models.IntegerField("Maximaler Wert für Antworten")
+
+    def __str__(self):
+        return "%s (%d - %d)" % (str(super), self.rating_min, self.rating_max)
+
+
 class Answer(models.Model):
     belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE, verbose_name="gehört zu Frage")
     answer_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Anworttext")
@@ -353,14 +362,6 @@ class Answer(models.Model):
         verbose_name = "Antwort"
         verbose_name_plural = "Antworten"
         ordering = ['belongs_to_question_id', 'pk', ]
-
-
-class AnswerSlider(Answer):
-    # TODO: NAME STILL UP FOR GRABS
-    rating_value = models.PositiveIntegerField(default=5, validators=[MinValueValidator(0), MaxValueValidator(10)])
-
-    def __str__(self):
-        return '%s zu "%s"' % (self.answer_text, self.belongs_to_question.question_text)
 
 
 class GivenAnswers(models.Model):
@@ -381,6 +382,18 @@ class GivenAnswers(models.Model):
     class Meta:
         verbose_name = "beantwortete Antwort"
         verbose_name_plural = "beantwortete Antworten"
+
+
+class GivenSliderAnswer(GivenAnswers):
+    rating_value = models.IntegerField()
+
+    def __str__(self):
+        fields = (
+            self.answer_text,
+            self.belongs_to_question.question_text,
+            self.rating_value,
+        )
+        return '%s zu "%s" bewertet mit %d' % fields
 
 
 class QuestionSet(models.Model):

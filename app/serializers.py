@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from . import utils
 from django.contrib.auth.models import User
 
 
@@ -96,27 +97,33 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = ('pk', 'belongs_to_question', 'answer_text',)
 
 
-class AnswerSliderSerializer(AnswerSerializer):
-    class Meta:
-        model = AnswerSlider
-        fields = (AnswerSerializer.fields, 'rating_value')
-
-
-class QuestionSerializer(serializers.ModelSerializer):
+class QuestionSerializer(utils.SubmodelSerializer):
     answer_set = AnswerSerializer(read_only=True, many=True)
 
     class Meta:
         model = Question
-        fields = ('pk', 'question_text', 'answer_presentation', 'order', 'answer_set')
+        fields = (
+            'pk',
+            'question_text',
+            'answer_presentation',
+            'order',
+            'answer_set',
+        )
+        optional_field_sets = (
+            ('rating_min', 'rating_max'),
+        )
 
 
-class GivenAnswersSerializer(serializers.ModelSerializer):
+class GivenAnswersSerializer(utils.SubmodelSerializer):
     user = UserSerializer()
     user_answer = AnswerSerializer(read_only=True, many=True)
 
     class Meta:
         model = GivenAnswers
         fields = ('pk', 'user', 'user_answer',)
+        optional_field_sets = (
+            ('rating_value',),
+        )
 
 
 class QuestionSetSerializer(serializers.ModelSerializer):
