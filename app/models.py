@@ -161,9 +161,9 @@ class Product(models.Model):
                                format='JPEG')
     end_of_life = models.BooleanField(default=False, verbose_name="EOL")
     leader_protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll im leader modus",
-                                             related_name="protocol_leader")
+                                             related_name="protocol_leader", blank=True)
     follower_protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll im follower modus",
-                                               related_name="protocol_follower")
+                                               related_name="protocol_follower", blank=True)
     features = models.ManyToManyField(to="Feature", verbose_name="Hat Features")
 
     def __str__(self):

@@ -17,7 +17,7 @@ def implement_scenario(scenario):
     :param scenario:
     :return:
     """
-    print('Scenario: %s' % scenario.short_description)
+    print('Scenario: %s' % scenario.name)
     meta_broker = scenario.meta_broker
     meta_endpoints = set(scenario.meta_endpoints.all())
 
@@ -255,7 +255,7 @@ def __get_protocols(product, leader):
     if leader:
         return set(product.leader_protocol.all())
     else:
-        return set(product.follower_protocl.all())
+        return set(product.follower_protocol.all())
 
 
 def get_bridges():
