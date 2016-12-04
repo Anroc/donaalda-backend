@@ -90,8 +90,8 @@ class Scenario(models.Model):
     provider = models.ForeignKey("Provider", default="1", verbose_name="Erstellt von", on_delete=models.CASCADE)
     categories = models.ManyToManyField("Category", through="ScenarioCategoryRating",
                                         through_fields=('scenario', 'category'), verbose_name="Bewertung")
-    meta_broker = models.ForeignKey("MetaBroker", default="1", verbose_name="Besteht aus einem Metabroker",
-                                    on_delete=models.CASCADE)
+    meta_broker = models.ForeignKey("MetaBroker", default=None, verbose_name="Besteht aus einem Metabroker",
+                                    on_delete=models.CASCADE, null=True, blank=True)
     meta_endpoints = models.ManyToManyField(to="MetaEndpoint", verbose_name="Besteht aus MetaEndpointDevices")
     subcategory = models.ManyToManyField(to='SubCategory', verbose_name="Dieses Szenario ist Teil dieser Subkategorie")
     in_shopping_basket_of = models.ManyToManyField(to=Session,
@@ -240,7 +240,8 @@ class ProviderProfile(models.Model):
     url_name = models.CharField(max_length=200, unique=True)
     logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
                                    help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt.")
-    profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True)
+    profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True,
+                                      blank=True)
     banner_image = models.ImageField(verbose_name="Banner für Profilseite", upload_to="provider")
     introduction = models.TextField(verbose_name="Einleitung")
     contact_email = models.EmailField(verbose_name="Kontakt-Email")
