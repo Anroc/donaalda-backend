@@ -160,7 +160,10 @@ class Product(models.Model):
                                processors=[ResizeToFill(200, 100)],
                                format='JPEG')
     end_of_life = models.BooleanField(default=False, verbose_name="EOL")
-    protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll")
+    leader_protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll im leader modus",
+                                             related_name="protocol_leader")
+    follower_protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll im follower modus",
+                                               related_name="protocol_follower")
     features = models.ManyToManyField(to="Feature", verbose_name="Hat Features")
 
     def __str__(self):
@@ -420,7 +423,6 @@ class QuestionStep(models.Model):
 
 class Protocol(models.Model):
     name = models.CharField(max_length=255)
-    is_leader = models.BooleanField(default=False, verbose_name="Kann als Broker fungieren")
 
     def __str__(self):
         return self.name
@@ -437,6 +439,13 @@ class MetaDevice(models.Model):
     is_broker = models.BooleanField(default=True, verbose_name="Ist das Metadevice ein Broker")
     implementation_requires = models.ManyToManyField(to="Feature",
                                                      verbose_name="Definiert von folgender Featuresammlung")
+
+    def __str__(self):
+        if self.is_broker:
+            string = "Broker: "
+        else:
+            string = "Endpoint: "
+        return string + ", ".join([i.name for i in self.implementation_requires.all()])
 
 
 class SubCategory(models.Model):

@@ -24,7 +24,7 @@ def implement_scenario(scenario):
     # 1. find implementing products
     impl_of_meta_device = dict()
     print('Metabroker: %s' % meta_broker)
-    impl_of_meta_device[meta_broker] = find_implementing_product(meta_broker)
+    impl_of_meta_device[meta_broker] = find_implementing_product(meta_broker, True)
     print(impl_of_meta_device[meta_broker])
     # no implementation was found
     if len(impl_of_meta_device[meta_broker]) == 0:
@@ -35,7 +35,7 @@ def implement_scenario(scenario):
 
     for meta_endpoint in meta_endpoints:
         print('Metaendpoint: %s' % meta_endpoint)
-        impl_of_meta_device[meta_endpoint] = find_implementing_product(meta_endpoint)
+        impl_of_meta_device[meta_endpoint] = find_implementing_product(meta_endpoint, False)
         print('%s : %s' % (meta_endpoint, impl_of_meta_device[meta_endpoint]))
         # no implementation was found
         if len(impl_of_meta_device[meta_endpoint]) == 0:
@@ -107,7 +107,7 @@ def cost_function(product_sets, preference, used_products):
         if preference == "extensible":
             x = 0
             for product in current_set:
-                x += len(product.protocol.all())
+                x += len(product.leader_protocol.all()) + len(product.follower_protocol.all())
         elif preference == "cost":
             # TODO: implement
             pass
@@ -138,23 +138,8 @@ def __product(a, b):
             ret.add(frozenset(elem_a.union(elem_b)))
     return ret
 
-def find_implementing_product(meta_device):
-    """
-    Finds implementing products to a given meta device.
-    This device should either be a meta broker or an meta endpoint.
 
-    :param
-        meta_device: the meta device (either broker or endpoint)
-    :return:
-        set of all products that could implement the given meta broker
-    """
-    if type(meta_device) is MetaBroker:
-        return __find_matching_products(meta_device, True)
-    else:
-        return __find_matching_products(meta_device, False)
-
-
-def __find_matching_products(meta_device, leader=True):
+def find_implementing_product(meta_device, leader):
     """
     Find all implementing products to a given meta_device.
 
@@ -267,12 +252,10 @@ def __get_protocols(product, leader):
     :return:
         all spoken protocols by the product in the given mode.
     """
-    protocols = set(product.protocol.all())
-    return_set = set()
-    for protocol in protocols:
-        if protocol.is_leader == leader:
-            return_set.add(protocol)
-    return return_set
+    if leader:
+        return set(product.leader_protocol.all())
+    else:
+        return set(product.follower_protocl.all())
 
 
 def get_bridges():
@@ -285,15 +268,7 @@ def get_bridges():
     products = get_products()
     return_set = set()
     for product in products:
-        leader = False
-        follower = False
-        protocols = set(product.protocol.all())
-        for protocol in protocols:
-            if protocol.is_leader:
-                leader = True
-            else:
-                follower = True
-        if leader and follower:
+        if len(product.leader_protocol.all()) > 0 and len(product.follower_protocol.all()) > 0:
             return_set.add(product)
     return return_set
 
