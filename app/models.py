@@ -85,14 +85,15 @@ class Scenario(models.Model):
 
     name = models.CharField(max_length=100, unique=True)
     url_name = models.CharField(max_length=100, unique=False, verbose_name="URL-Name")
-    short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
+    description = models.TextField(verbose_name="Kurzbeschreibung", max_length="500", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
     provider = models.ForeignKey("Provider", default="1", verbose_name="Erstellt von", on_delete=models.CASCADE)
     categories = models.ManyToManyField("Category", through="ScenarioCategoryRating",
                                         through_fields=('scenario', 'category'), verbose_name="Bewertung")
-    meta_broker = models.ForeignKey("MetaBroker", default=None, verbose_name="Besteht aus einem Metabroker",
-                                    on_delete=models.CASCADE, null=True, blank=True)
-    meta_endpoints = models.ManyToManyField(to="MetaEndpoint", verbose_name="Besteht aus MetaEndpointDevices")
+    meta_broker = models.ForeignKey("MetaDevice", default=None, verbose_name="Besteht aus einem Metabroker",
+                                    on_delete=models.CASCADE, null=True, blank=True, related_name="meta_broker")
+    meta_endpoints = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaEndpointDevices",
+                                            related_name="meta_endpoint")
     subcategory = models.ManyToManyField(to='SubCategory', verbose_name="Dieses Szenario ist Teil dieser Subkategorie")
     in_shopping_basket_of = models.ManyToManyField(to=Session,
                                                    verbose_name="Dieses Szenario liegt im Warenkorb von Session",
@@ -178,16 +179,6 @@ class Product(models.Model):
         verbose_name = "Produkt"
         verbose_name_plural = "Produkte"
         ordering = ["name"]
-
-
-class Broker(Product):
-    def __str__(self):
-        return '%s' % self.name
-
-
-class Endpoint(Product):
-    def __str__(self):
-        return '%s' % self.name
 
 
 class ProductType(models.Model):
@@ -443,21 +434,9 @@ class Feature(models.Model):
 
 
 class MetaDevice(models.Model):
-    name = models.CharField(max_length=255)
+    is_broker = models.BooleanField(default=True, verbose_name="Ist das Metadevice ein Broker")
     implementation_requires = models.ManyToManyField(to="Feature",
                                                      verbose_name="Definiert von folgender Featuresammlung")
-
-
-class MetaBroker(MetaDevice):
-    # TODO: more attributes
-    def __str__(self):
-        return self.name
-
-
-class MetaEndpoint(MetaDevice):
-    # TODO: more attributes
-    def __str__(self):
-        return self.name
 
 
 class SubCategory(models.Model):

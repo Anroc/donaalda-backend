@@ -22,10 +22,7 @@ from .models import (
     QuestionSet,
     GivenAnswers,
     QuestionStep,
-    Broker,
-    MetaBroker,
-    MetaEndpoint,
-    Endpoint,
+    MetaDevice,
     Feature,
     ScenarioCategoryRating,
     Protocol,
@@ -202,10 +199,7 @@ admin.site.register(QuestionSet)
 admin.site.register(GivenAnswers)
 admin.site.register(QuestionStep)
 admin.site.register(Feature)
-admin.site.register(Broker)
-admin.site.register(MetaEndpoint)
-admin.site.register(MetaBroker)
-admin.site.register(Endpoint)
+admin.site.register(MetaDevice)
 admin.site.register(ScenarioCategoryRating)
 admin.site.register(Protocol)
 admin.site.register(SubCategory)

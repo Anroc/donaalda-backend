@@ -10,13 +10,6 @@
 from .models import *
 import operator
 
-class Metadevice_Implemenation(object):
-    product = None
-    meta_device = None
-
-    def __init__(self, product, meta_device):
-        self.product = product
-        self.meta_device = meta_device
 
 def implement_scenario(scenario):
     """
