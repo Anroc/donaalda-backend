@@ -182,6 +182,14 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = (QuestionAnswerInline,)
 
 
+class SliderQuestionAnswerInline(admin.StackedInline):
+    model = Answer
+
+
+class SliderQuestionAdmin(admin.ModelAdmin):
+    inlines = (SliderQuestionAnswerInline,)
+
+
 admin.site.unregister(User)
 admin.site.register(Category)
 admin.site.register(Scenario, ScenarioAdmin)
@@ -194,7 +202,7 @@ admin.site.register(ScenarioDescription)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(SliderQuestion)
+admin.site.register(SliderQuestion, SliderQuestionAdmin)
 admin.site.register(Answer)
 admin.site.register(QuestionSet)
 admin.site.register(GivenAnswers)
