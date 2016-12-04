@@ -169,7 +169,7 @@ def suggestions(request):
 @list_route(methods=['GET'])
 @permission_classes((permissions.AllowAny,))
 def matching(request):
-    implement_scenario(Scenario.objects.first())
+    implement_scenario(Scenario.objects.first(), "extensible")
     return Response(status=status.HTTP_200_OK)
 
 

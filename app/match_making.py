@@ -2,7 +2,7 @@ from .models import *
 import operator
 
 
-def implement_scenario(scenario):
+def implement_scenario(scenario, user_preference):
     """
     1.  Call find_implementing_product for each meta device in the scenrio
     2.  for each Broker -> Endpoint combination find pahts with: find_communication_partner(endpoint, broker)
@@ -69,13 +69,12 @@ def implement_scenario(scenario):
 
         possible_sets = __merge_paths(meta_endpoints, possible_paths)
         # 3. apply cost function U_pref to get one product set
-        # TODO: change to user preference
-        possible_sets = cost_function(possible_sets, "extensible", used_products)
+        possible_sets = cost_function(possible_sets, user_preference, used_products)
         # 4. merge all product sets
         product_sets.add(possible_sets)
 
     # 5. apply cost function U_pref to get the best product set
-    product_sets = cost_function(product_sets, "extensible", used_products)
+    product_sets = cost_function(product_sets, user_preference, used_products)
 
     # return the product set
     return product_sets
