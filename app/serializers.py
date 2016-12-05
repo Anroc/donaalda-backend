@@ -60,19 +60,19 @@ class ScenarioSerializer(serializers.ModelSerializer):
 
 
 class SubCategorySerializer(serializers.ModelSerializer):
-    belongs_to_scenario = CategorySerializer()
+    belongs_to_category = CategorySerializer()
 
     class Meta:
         model = SubCategory
-        fields = ('pk', 'belongs_to_scenario', 'name', 'url_name', 'short_description', 'picture',)
+        fields = ('pk', 'belongs_to_category', 'name', 'url_name', 'short_description', 'picture',)
 
 
 class SubCategoryDescriptionSerializer(serializers.ModelSerializer):
-    belongs_to_scenario = SubCategorySerializer()
+    belongs_to_subcategory = SubCategorySerializer()
 
     class Meta:
         model = SubCategoryDescription
-        fields = ('pk', 'belongs_to_scenario', 'description', 'image', 'left_right', 'order',)
+        fields = ('pk', 'belongs_to_subcategory', 'description', 'image', 'left_right', 'order',)
 
 
 class EmployeeSerializer(serializers.ModelSerializer):

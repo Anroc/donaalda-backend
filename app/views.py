@@ -27,6 +27,7 @@ from django.core.exceptions import ValidationError
 
 from .match_making import implement_scenario
 
+
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
@@ -45,27 +46,6 @@ class SubCategoryDescriptionViewSet(viewsets.ReadOnlyModelViewSet):
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.filter(end_of_life=False)
     serializer_class = ProductSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-
-    def create(self, request, *args, **kwargs):
-        """ creates a Product object """
-        return super(ProductViewSet, self).create(request)
-
-    def retrieve(self, request, pk=None, **kwargs):
-        """Returns a single Product item"""
-        return super(ProductViewSet, self).retrieve(request, pk)
-
-    def update(self, request, *args, **kwargs):
-        """Updates a single Product item"""
-        return super(ProductViewSet, self).update(request, *args, **kwargs)
-
-    def partial_update(self, request, *args, **kwargs):
-        """Partial update a Product """
-        return super(ProductViewSet, self).partial_update(request, *args, **kwargs)
-
-    def destroy(self, request, pk=None, **kwargs):
-        """Delete a Product"""
-        return super(ProductViewSet, self).destroy(request, pk)
 
 
 class ProductTypeViewSet(viewsets.ReadOnlyModelViewSet):
@@ -150,7 +130,8 @@ class SuggestedScenarioViewSet():
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
 def suggestions(request):
-    OnboardingAnswers = namedtuple("OnboadringAnswers", ["category_preference", "user_preference", "renovation_preference"])
+    OnboardingAnswers = namedtuple("OnboadringAnswers",
+                                   ["category_preference", "user_preference", "renovation_preference"])
 
     if request.method == 'POST':
         json_data = json.loads(request.body.decode('utf-8'))

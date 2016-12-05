@@ -4,15 +4,16 @@ import operator
 
 def implement_scenario(scenario, user_preference):
     """
-    1.  Call find_implementing_product for each meta device in the scenrio
-    2.  for each Broker -> Endpoint combination find pahts with: find_communication_partner(endpoint, broker)
-    3.  Merge the result: for each broker in look if it can reach all endpoints.
-        If it do so: create a product set of the current configuration
-    4.  Apply U_pref on to all product sets for each broker to find the current best solution for the current broker-product-set
-    5.  Apply U_pref on all product sets for each different broker to find the over all best solution for the current scenrio
+    1.  Call find_implementing_product for each meta device in the scenario
+    2.  for each Broker -> Endpoint combination find paths with: find_communication_partner(endpoint, broker)
+    3.  Merge the result: for each broker check if it can reach all endpoints.
+        If possible: create a product set of the current configuration
+    4.  Apply U_pref on all product sets for each broker to find the current best solution for the current broker-product-set
+    5.  Apply U_pref on all product sets for each different broker to find the overall best solution for the current scenario
 
-    :return a set of implementing products that matches the best the user preferences
+    :return a set of implementing products that matches the user preferences optimally.
     """
+    # TODO: replace with django cache backend
     prepare_matching()
 
     print('Scenario: %s' % scenario.name)
@@ -53,10 +54,10 @@ def implement_scenario(scenario, user_preference):
                 if len(res) > 0:
                     # convert inner set to frozenset and list to set
                     res = set(
-                            ((frozenset(e))
-                                for e in res
-                            )
-                        )
+                        ((frozenset(e))
+                         for e in res
+                         )
+                    )
                     if meta_endpoint in possible_paths:
                         possible_paths[meta_endpoint] = possible_paths[meta_endpoint].union(res)
                     else:
@@ -112,8 +113,8 @@ def cost_function(product_sets, preference, used_products):
             # TODO: implement
             pass
         else:
-            raise(AttributeError("Unsupported preference %s" % preference))
-        sorting[current_set] = 1./x * 0.95**len(bridges)
+            raise (AttributeError("Unsupported preference %s" % preference))
+        sorting[current_set] = 1. / x * 0.95 ** len(bridges)
 
     return sorted(sorting.items(), key=operator.itemgetter(1))[0][0]
 
@@ -143,6 +144,7 @@ def find_implementing_product(meta_device, leader):
     :param
         meta_device: the meta device that should be implemented
     :param
+    TODO: replace with meta_device.is_broker
         leader: if the given meta device is a meta broker
     :return:
         set of all matching products that have at least one protocol matching
@@ -161,7 +163,7 @@ def find_implementing_product(meta_device, leader):
 
 def find_communication_partner(endpoint, target, path=None, max_depth=None, bridges_visited=None):
     """
-    This function will serve the propose we called small "f". It will find all ways from a given endpoint
+    This function will serve the purpose we called small "f". It will find all ways from a given endpoint
     to a given target (most likely the master broker in the scenario/system). For this it will recursively
     traverse through the graph of which products can communicate with which other products.
 
@@ -194,7 +196,7 @@ def find_communication_partner(endpoint, target, path=None, max_depth=None, brid
 
     # begin of the algorithm
     if max_depth <= 0:
-        raise Exception("max_deph exeeded")
+        raise Exception("max_depth exceeded")
 
     # define methods for follower/leader protocols
     endpoint_protocols = __get_protocols(endpoint, False)
