@@ -76,7 +76,7 @@ def implement_scenario(scenario, user_preference):
 
     # 5. apply cost function U_pref to get the best product set
     product_sets = cost_function(product_sets, user_preference, used_products)
-
+    print(product_sets)
     # return the product set
     return product_sets
 
@@ -99,23 +99,25 @@ def cost_function(product_sets, preference, used_products):
 
     sorting = dict()
     for current_set in product_sets:
-        bridges = product_sets.difference(used_products)
+        bridges = current_set.difference(used_products)
 
         x = 1
         if preference == "extensible":
             x = 0
             for product in current_set:
                 x += len(__get_protocols(product, True)) + len(__get_protocols(product, False))
+            sorting[current_set] = float((1+len(bridges))**2) / x
         elif preference == "cost":
             # TODO: implement
+            sorting[current_set] = 1. / x * 0.95 ** len(bridges)
             pass
         elif preference == "efficiency":
             # TODO: implement
+            sorting[current_set] = 1. / x * 0.95 ** len(bridges)
             pass
         else:
-            raise (AttributeError("Unsupported preference %s" % preference))
-        sorting[current_set] = 1. / x * 0.95 ** len(bridges)
-
+            raise(AttributeError("Unsupported preference %s" % preference))
+        # search for minimum
     return sorted(sorting.items(), key=operator.itemgetter(1))[0][0]
 
 
@@ -140,6 +142,9 @@ def __product(a, b):
 def find_implementing_product(meta_device, leader):
     """
     Find all implementing products to a given meta_device.
+    This have to fit two criteria:
+    1. the product must implement all features of the meta device
+    2. the product must speak at least one protocol in the given mode
 
     :param
         meta_device: the meta device that should be implemented
@@ -225,7 +230,6 @@ __direct_compatible_cache = None
 __get_protocols_cache = None
 __get_bridges_cache = None
 __get_products_cache = None
-__get_protocols_cache = None
 
 
 def prepare_matching():
