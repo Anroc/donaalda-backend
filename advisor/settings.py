@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 'debug_toolbar',
     # 'django_extensions',
+    'corsheaders',
     'rest_framework_swagger',
     'rest_framework_docs',
     'crispy_forms',
@@ -56,6 +57,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'advisor.urls'
@@ -188,3 +190,12 @@ SWAGGER_SETTINGS = {
 REST_FRAMEWORK_DOCS = {
     'HIDE_DOCS': False  # Default: False
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+   'localhost:3000',
+)
+CORS_ORIGIN_REGEX_WHITELIST = (
+   'localhost:3000',
+)
