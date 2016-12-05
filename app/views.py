@@ -38,6 +38,11 @@ class ScenarioViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ScenarioSerializer
 
 
+class SubCategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = SubCategory.objects.all()
+    serializer_class = SubCategorySerializer
+
+
 class SubCategoryDescriptionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = SubCategoryDescription.objects.all()
     serializer_class = SubCategoryDescriptionSerializer

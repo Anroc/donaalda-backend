@@ -58,8 +58,8 @@
     "provider": 1,
     "meta_broker": 1,
     "meta_endpoints": [
-      6,
-      8
+      8,
+      6
     ],
     "subcategory": [
       8
@@ -763,9 +763,9 @@
       3
     ],
     "features": [
-      8,
+      5,
       7,
-      5
+      8
     ]
   }
 },
@@ -940,9 +940,9 @@
       3
     ],
     "features": [
-      8,
+      5,
       7,
-      5
+      8
     ]
   }
 },
@@ -1693,7 +1693,9 @@
   "fields": {
     "question_text": "Sind dir Bauma\u00dfnahmen zu l\u00e4stig?",
     "answer_presentation": "rc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -1702,7 +1704,9 @@
   "fields": {
     "question_text": "Wie wichtig sind dir folgende Kategorien?",
     "answer_presentation": "sc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": 1,
+    "rating_max": 10
   }
 },
 {
@@ -1711,15 +1715,9 @@
   "fields": {
     "question_text": "Welches dieser Kriterien ist dir am Wichtigsten?",
     "answer_presentation": "rc",
-    "order": 1000
-  }
-},
-{
-  "model": "app.sliderquestion",
-  "pk": 15,
-  "fields": {
-    "rating_min": 1,
-    "rating_max": 10
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -2158,7 +2156,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$30000$1SNZTPCnQ5JQ$9UOgz+vmgt8/9wehyiy9uJUVhu0mBDwFrlcoF5RQhr4=",
-    "last_login": "2016-12-04T20:38:41.940Z",
+    "last_login": "2016-12-05T18:18:43.390Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Herr",
@@ -2493,6 +2491,14 @@
   "fields": {
     "session_data": "NDQ5YmZkMTE4Mjk2ZWJkNWNkYjQ3YmMxMzcxNjRlZmI3NGYzM2I0Mzp7Imhpc3RvcnkiOlsiaHR0cDovLzUyLjU5LjE4LjI1NC8iXX0=",
     "expire_date": "2016-07-08T20:42:29.409Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "2k0h0o97dlv5x1to5a96rxh80d2imals",
+  "fields": {
+    "session_data": "N2RkYjg0MzMzNWI2Njc3ODFiNDExM2Y2NWNlMTcyNTA2MjJjMGMyMzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2Q2MmNjNDViY2I0M2IxYjE2MjE0MzE4YzIwNWQ5MTNjMDczYmUxMCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
+    "expire_date": "2016-12-19T18:18:43.396Z"
   }
 },
 {
@@ -2913,6 +2919,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "td922khly05btonypu8r62jwpzn2s0fd",
+  "fields": {
+    "session_data": "N2RkYjg0MzMzNWI2Njc3ODFiNDExM2Y2NWNlMTcyNTA2MjJjMGMyMzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2Q2MmNjNDViY2I0M2IxYjE2MjE0MzE4YzIwNWQ5MTNjMDczYmUxMCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
+    "expire_date": "2016-12-19T17:54:02.896Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "v4yw1h7eex7shzw6yfmpw5qzos1jb208",
   "fields": {
     "session_data": "MjgxZDdjOTkxNDQ3OWNmNzI3OGYwZmI2OGI3MmFlNDk5ZDg1NjlhMzp7Imhpc3RvcnkiOlsiaHR0cDovLzUyLjU5LjE4LjI1NC8iLCJodHRwOi8vNTIuNTkuMTguMjU0L0VuZXJnaWUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9zY2VuYXJpb3MvYXVzc2NoYWx0ZW5fZGVyX2VsZWt0cm9nZXJhdGUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9wcm9kdWN0cy8yMy8iLCJodHRwOi8vNTIuNTkuMTguMjU0L3Byb3ZpZGVyL21pZWxlX19fY2llX19rZyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvcHJvZHVjdHMvMjMvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9zY2VuYXJpb3MvYXVzc2NoYWx0ZW5fZGVyX2VsZWt0cm9nZXJhdGUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9wcm92aWRlci9taWVsZV9fX2NpZV9fa2ciLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvR2VzdW5kaGVpdC8iLCJodHRwOi8vNTIuNTkuMTguMjU0L2NvbnRhY3QiLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0L2NvbnRhY3QiLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0L3Jlc3VsdC8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvR2VzdW5kaGVpdC8iLCJodHRwOi8vNTIuNTkuMTguMjU0L3Jlc3VsdC8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iXSwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1NDYxNTNhZjY0MzdmMGY3ZTgxYjc2M2U4MjkxOWY2NmU2YmE1MjgwIiwiX2F1dGhfdXNlcl9pZCI6IjEifQ==",
@@ -2990,6 +3004,7 @@
     "user": [
       "admin"
     ],
+    "rating_value": null,
     "user_answer": []
   }
 },
