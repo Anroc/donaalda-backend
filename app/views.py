@@ -27,6 +27,7 @@ from django.core.exceptions import ValidationError
 
 from .match_making import implement_scenario
 
+
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
@@ -35,6 +36,11 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 class ScenarioViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Scenario.objects.all()
     serializer_class = ScenarioSerializer
+
+
+class SubCategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = SubCategory.objects.all()
+    serializer_class = SubCategorySerializer
 
 
 class SubCategoryDescriptionViewSet(viewsets.ReadOnlyModelViewSet):
@@ -150,7 +156,8 @@ class SuggestedScenarioViewSet():
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
 def suggestions(request):
-    OnboardingAnswers = namedtuple("OnboadringAnswers", ["category_preference", "user_preference", "renovation_preference"])
+    OnboardingAnswers = namedtuple("OnboadringAnswers",
+                                   ["category_preference", "user_preference", "renovation_preference"])
 
     if request.method == 'POST':
         json_data = json.loads(request.body.decode('utf-8'))
