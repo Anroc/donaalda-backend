@@ -48,6 +48,26 @@
   }
 },
 {
+  "model": "app.scenario",
+  "pk": 1,
+  "fields": {
+    "name": "Wenn die Waschmachine fertig ist, soll eine Lampe gruen leuchten.",
+    "url_name": "wenn_die_waschmachine_fertig_ist__soll_eine_lampe_gruen_leuchten_",
+    "description": "Um anzuzeigen, dass die Waschmaschine fertig ist, soll ein visueller Anreiz gegeben werden. Dazu soll eine Lampe im Haushalt gr\u00fcn aufleuchten. Dazu wird ein Regelwerk, eine Waschmaschine und eine Lampe ben\u00f6tigt.",
+    "picture": "scenarios/icon-home-auto-1.png",
+    "provider": 1,
+    "meta_broker": 1,
+    "meta_endpoints": [
+      6,
+      8
+    ],
+    "subcategory": [
+      8
+    ],
+    "in_shopping_basket_of": []
+  }
+},
+{
   "model": "app.product",
   "pk": 1,
   "fields": {
@@ -61,7 +81,8 @@
     "image2": "products/81eatl5_gHw2fCv.jpeg",
     "image3": "products/81eatl5_WqTQUxU.jpeg",
     "end_of_life": true,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -79,7 +100,8 @@
     "image2": "",
     "image3": "",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -97,7 +119,8 @@
     "image2": "products/Jung_CO2-Sensor_2.jpg",
     "image3": "products/Jung_CO2-Sensor_3.png",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -115,7 +138,8 @@
     "image2": "products/Eurotronic_Comet_2.jpg",
     "image3": "products/Eurotronic_Comet_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -133,7 +157,8 @@
     "image2": "products/Fiabro_Wall_Plug_2.JPG",
     "image3": "products/Fiabro_Wall_Plug_4.JPG",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -151,7 +176,8 @@
     "image2": "products/Jung_Presence_Detector_1.jpg",
     "image3": "products/Jung_Presence_Detector_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -169,7 +195,8 @@
     "image2": "products/Fiabro_Smoke_Sensor_3.jpg",
     "image3": "products/Fiabro_Smoke_Sensor_1.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -187,7 +214,8 @@
     "image2": "products/fritzbox_2.png",
     "image3": "products/fritzbox_3.png",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -205,7 +233,8 @@
     "image2": "products/Thermokon_SWR01_5_2.png",
     "image3": "products/Thermokon_SWR01_5_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -223,7 +252,8 @@
     "image2": "products/nodon-stp-2-1-05-temperatursensor_2.jpg",
     "image3": "products/nodon-stp-2-1-05-temperatursensor_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -241,7 +271,8 @@
     "image2": "products/tmk_web_02_slider_easySens_SR04.png",
     "image3": "products/tmk_web_03_slider_easySens_SR04.png",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -259,7 +290,8 @@
     "image2": "products/PSC234_2.jpg",
     "image3": "products/PSC234_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -277,7 +309,8 @@
     "image2": "products/tmk_web_02_slider_easySens_SR_MOC.png",
     "image3": "products/sr-mds-solar-2.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -295,7 +328,8 @@
     "image2": "products/tmk_SAB02_2.jpg",
     "image3": "products/tmk_SAB02_3.png",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -313,7 +347,8 @@
     "image2": "products/jung-2316_16_reghe_02.jpg",
     "image3": "products/jung-2316_16_reghe_03.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -331,7 +366,8 @@
     "image2": "products/jung-2308_16_regchm-knx-ns0828035_02.jpg",
     "image3": "products/jung-2308_16_regchm-knx-ns0828035_06.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -349,7 +385,8 @@
     "image2": "products/Gira_217400_2.jpg",
     "image3": "",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -367,7 +404,8 @@
     "image2": "products/jung-2336_reg_hz_he-knx-ns6516434_02.jpg",
     "image3": "products/jung-2336_reg_hz_he-knx-ns6516434_04.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -385,7 +423,8 @@
     "image2": "products/bms_quadra_2.jpg",
     "image3": "products/bms_quadra_3.png",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -403,7 +442,8 @@
     "image2": "products/miele_g_6992_scvi_k2o_2.jpg",
     "image3": "products/miele_g_6992_scvi_k2o_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -421,7 +461,8 @@
     "image2": "products/miele_TMM840WPS_2.png",
     "image3": "products/miele_TMM840WPS_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -439,8 +480,14 @@
     "image2": "products/miele_WMR861WPSP_2.png",
     "image3": "products/miele_WMR861WPSP_3.jpg",
     "end_of_life": false,
-    "protocol": [],
-    "features": []
+    "leader_protocol": [],
+    "follower_protocol": [
+      1
+    ],
+    "features": [
+      2,
+      6
+    ]
   }
 },
 {
@@ -457,7 +504,8 @@
     "image2": "products/miele_ofen_2.jpg",
     "image3": "products/Miele_ofen_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -475,7 +523,8 @@
     "image2": "products/miele_kochfeld_2.jpg",
     "image3": "products/Miele_kochfeld_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -493,7 +542,8 @@
     "image2": "products/miele_dunst_2.jpg",
     "image3": "products/miele_dunst_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -511,7 +561,8 @@
     "image2": "products/miele_kaffee_2.jpg",
     "image3": "products/miele_kaffee_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -529,7 +580,8 @@
     "image2": "products/miele_kuhl_2.jpg",
     "image3": "products/miele_kuhl_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -547,8 +599,15 @@
     "image2": "products/miele_gate_2.jpg",
     "image3": "",
     "end_of_life": false,
-    "protocol": [],
-    "features": []
+    "leader_protocol": [
+      1
+    ],
+    "follower_protocol": [
+      3
+    ],
+    "features": [
+      1
+    ]
   }
 },
 {
@@ -565,7 +624,8 @@
     "image2": "products/polar_92044305-P_2.jpg",
     "image3": "products/polar_92044305-P_3.png",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -583,7 +643,8 @@
     "image2": "products/epson_blut_2.jpg",
     "image3": "products/epson_blut_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -601,7 +662,8 @@
     "image2": "products/eQ_thermo_2.jpg",
     "image3": "products/eQ_thermo_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -619,7 +681,8 @@
     "image2": "products/beddi_2.jpg",
     "image3": "products/beddi_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -637,7 +700,8 @@
     "image2": "products/avm_plug_2.jpg",
     "image3": "",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -655,7 +719,8 @@
     "image2": "products/comet_temp_2.jpg",
     "image3": "",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -673,7 +738,8 @@
     "image2": "products/hue_start_2.jpg",
     "image3": "products/hue_start_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -691,8 +757,16 @@
     "image2": "products/hue_single_2.jpg",
     "image3": "products/hue_single_3.jpg",
     "end_of_life": false,
-    "protocol": [],
-    "features": []
+    "leader_protocol": [],
+    "follower_protocol": [
+      1,
+      3
+    ],
+    "features": [
+      8,
+      7,
+      5
+    ]
   }
 },
 {
@@ -709,7 +783,8 @@
     "image2": "products/dlink_kamera_2.png",
     "image3": "products/dlink_kamera_3.gif",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -727,7 +802,8 @@
     "image2": "products/kingmak_klingel_2.jpg",
     "image3": "products/kingmak_klingel_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -745,7 +821,8 @@
     "image2": "products/danfoss_2.jpg",
     "image3": "products/danfoss_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -763,7 +840,8 @@
     "image2": "products/fibaro_motion_2.jpg",
     "image3": "products/fibaro_motion_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -781,7 +859,8 @@
     "image2": "products/fibaro_tur_2.jpg",
     "image3": "products/fibaro_tur_3.png",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -799,7 +878,8 @@
     "image2": "products/aeon_alarm_2.jpg",
     "image3": "products/aeon_alarm_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -817,7 +897,8 @@
     "image2": "products/FIBARO-FLOOD-SENSOR-FGFS101_2.jpg",
     "image3": "products/FIBARO-FLOOD-SENSOR-FGFS101_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -835,7 +916,8 @@
     "image2": "products/aeon_multi_2.jpg",
     "image3": "products/aeon_multi_3.jpg",
     "end_of_life": false,
-    "protocol": [],
+    "leader_protocol": [],
+    "follower_protocol": [],
     "features": []
   }
 },
@@ -853,8 +935,39 @@
     "image2": "products/aeon_led_2.png",
     "image3": "products/aeon_led_3.jpg",
     "end_of_life": false,
-    "protocol": [],
-    "features": []
+    "leader_protocol": [],
+    "follower_protocol": [
+      3
+    ],
+    "features": [
+      8,
+      7,
+      5
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 47,
+  "fields": {
+    "name": "IOLITE",
+    "provider": 26,
+    "product_type": 1,
+    "serial_number": "------",
+    "description": "Our solution enables elderly to continue their normal lifes in their known homes as long as possible. This comfortable and safe support is powered by a range of assisting applications and the high compatibility towards existing devices in the field of ambient assisted living.",
+    "specifications": "---",
+    "image1": "products/IOLITE_gateway.png",
+    "image2": "products/IOLITE_all-devices.png",
+    "image3": "products/IOLITE-LOGO_Complex.png",
+    "end_of_life": false,
+    "leader_protocol": [
+      2,
+      3
+    ],
+    "follower_protocol": [],
+    "features": [
+      1
+    ]
   }
 },
 {
@@ -1282,6 +1395,14 @@
   }
 },
 {
+  "model": "app.provider",
+  "pk": 26,
+  "fields": {
+    "name": "IOLITE",
+    "is_visible": true
+  }
+},
+{
   "model": "app.providerprofile",
   "pk": 1,
   "fields": {
@@ -1568,29 +1689,13 @@
 },
 {
   "model": "app.question",
-  "pk": 3,
-  "fields": {
-    "question_text": "Ich habe in Zukunft Renovierungen geplant",
-    "answer_presentation": "rc",
-    "order": 1000
-  }
-},
-{
-  "model": "app.question",
   "pk": 13,
   "fields": {
     "question_text": "Sind dir Bauma\u00dfnahmen zu l\u00e4stig?",
     "answer_presentation": "rc",
-    "order": 1000
-  }
-},
-{
-  "model": "app.question",
-  "pk": 14,
-  "fields": {
-    "question_text": "Sind dir Bauma\u00dfnahmen zu l\u00e4stig?",
-    "answer_presentation": "rc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -1599,31 +1704,20 @@
   "fields": {
     "question_text": "Wie wichtig sind dir folgende Kategorien?",
     "answer_presentation": "sc",
-    "order": 1000
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
-  "model": "app.sliderquestion",
-  "pk": 15,
+  "model": "app.question",
+  "pk": 16,
   "fields": {
-    "rating_min": 1,
-    "rating_max": 10
-  }
-},
-{
-  "model": "app.answer",
-  "pk": 35,
-  "fields": {
-    "belongs_to_question": 3,
-    "answer_text": "Ja"
-  }
-},
-{
-  "model": "app.answer",
-  "pk": 36,
-  "fields": {
-    "belongs_to_question": 3,
-    "answer_text": "Nein"
+    "question_text": "Welches dieser Kriterien ist dir am Wichtigsten?",
+    "answer_presentation": "rc",
+    "order": 1000,
+    "rating_min": null,
+    "rating_max": null
   }
 },
 {
@@ -1676,74 +1770,26 @@
 },
 {
   "model": "app.answer",
-  "pk": 57,
+  "pk": 59,
   "fields": {
-    "belongs_to_question": 14,
-    "answer_text": "Ja"
+    "belongs_to_question": 16,
+    "answer_text": "Energieeffizienz"
   }
 },
 {
   "model": "app.answer",
-  "pk": 58,
+  "pk": 60,
   "fields": {
-    "belongs_to_question": 14,
-    "answer_text": "Nein"
+    "belongs_to_question": 16,
+    "answer_text": "Preis"
   }
 },
 {
-  "model": "app.questionset",
-  "pk": 1,
+  "model": "app.answer",
+  "pk": 61,
   "fields": {
-    "name": "Allgemeine Fragen",
-    "order": 1000,
-    "question": [
-      3
-    ]
-  }
-},
-{
-  "model": "app.questionset",
-  "pk": 2,
-  "fields": {
-    "name": "Kategorieauswahl-Fragen",
-    "order": 1000,
-    "question": []
-  }
-},
-{
-  "model": "app.questionset",
-  "pk": 3,
-  "fields": {
-    "name": "Fragen zu Komfort",
-    "order": 1000,
-    "question": []
-  }
-},
-{
-  "model": "app.questionset",
-  "pk": 4,
-  "fields": {
-    "name": "Fragen zu Energie",
-    "order": 1000,
-    "question": []
-  }
-},
-{
-  "model": "app.questionset",
-  "pk": 5,
-  "fields": {
-    "name": "Fragen zu Gesundheit",
-    "order": 1000,
-    "question": []
-  }
-},
-{
-  "model": "app.questionset",
-  "pk": 6,
-  "fields": {
-    "name": "Fragen zu Sicherheit",
-    "order": 1000,
-    "question": []
+    "belongs_to_question": 16,
+    "answer_text": "Erweiterbarkeit"
   }
 },
 {
@@ -1752,7 +1798,9 @@
   "fields": {
     "name": "Category_Preferences",
     "order": 500,
-    "question": []
+    "question": [
+      15
+    ]
   }
 },
 {
@@ -1761,7 +1809,9 @@
   "fields": {
     "name": "User_Preferences",
     "order": 700,
-    "question": []
+    "question": [
+      16
+    ]
   }
 },
 {
@@ -1771,67 +1821,7 @@
     "name": "Renovation_Preferences",
     "order": 900,
     "question": [
-      14
-    ]
-  }
-},
-{
-  "model": "app.questionstep",
-  "pk": 1,
-  "fields": {
-    "name": "Allgemeines",
-    "question_steps": [
-      1
-    ]
-  }
-},
-{
-  "model": "app.questionstep",
-  "pk": 2,
-  "fields": {
-    "name": "Kategorie-Auswahl",
-    "question_steps": [
-      2
-    ]
-  }
-},
-{
-  "model": "app.questionstep",
-  "pk": 3,
-  "fields": {
-    "name": "Energie-Detailfragen",
-    "question_steps": [
-      4
-    ]
-  }
-},
-{
-  "model": "app.questionstep",
-  "pk": 4,
-  "fields": {
-    "name": "Sicherheit-Detailfragen",
-    "question_steps": [
-      6
-    ]
-  }
-},
-{
-  "model": "app.questionstep",
-  "pk": 5,
-  "fields": {
-    "name": "Gesundheit-Detailfragen",
-    "question_steps": [
-      5
-    ]
-  }
-},
-{
-  "model": "app.questionstep",
-  "pk": 6,
-  "fields": {
-    "name": "Komfort-Detailfragen",
-    "question_steps": [
-      3
+      13
     ]
   }
 },
@@ -1844,6 +1834,99 @@
       7,
       8,
       9
+    ]
+  }
+},
+{
+  "model": "app.protocol",
+  "pk": 1,
+  "fields": {
+    "name": "wlan_miele-miele@home_gateway"
+  }
+},
+{
+  "model": "app.protocol",
+  "pk": 2,
+  "fields": {
+    "name": "UPNP_samsung-smart-TV"
+  }
+},
+{
+  "model": "app.protocol",
+  "pk": 3,
+  "fields": {
+    "name": "wlan_IOLITE"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 1,
+  "fields": {
+    "name": "Regelwerk"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 2,
+  "fields": {
+    "name": "waschen"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 5,
+  "fields": {
+    "name": "leuchtet gruen"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 6,
+  "fields": {
+    "name": "dampf w\u00e4sche"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 7,
+  "fields": {
+    "name": "leuchtet blau"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 8,
+  "fields": {
+    "name": "leuchtet rot"
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 1,
+  "fields": {
+    "is_broker": true,
+    "implementation_requires": [
+      1
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 6,
+  "fields": {
+    "is_broker": false,
+    "implementation_requires": [
+      2
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 8,
+  "fields": {
+    "is_broker": false,
+    "implementation_requires": [
+      5
     ]
   }
 },
@@ -2047,6 +2130,15 @@
   }
 },
 {
+  "model": "app.scenariocategoryrating",
+  "pk": 1,
+  "fields": {
+    "scenario": 1,
+    "category": 7,
+    "rating": 10
+  }
+},
+{
   "model": "auth.group",
   "fields": {
     "name": "Marketing",
@@ -2064,7 +2156,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$30000$1SNZTPCnQ5JQ$9UOgz+vmgt8/9wehyiy9uJUVhu0mBDwFrlcoF5RQhr4=",
-    "last_login": "2016-12-04T18:01:05.693Z",
+    "last_login": "2016-12-04T20:38:41.940Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Herr",
@@ -2555,6 +2647,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "be2v1sjrwakaese5h2aplc38r3fk1ze1",
+  "fields": {
+    "session_data": "MWU0MTc2ZGFkMDBjYTAyOWZjNWMxODIyMThiNjEwZjU4Njg5NTg1NDp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2lkIjoiMjUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCJ9",
+    "expire_date": "2016-12-18T20:38:41.978Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "bsaaem8xagnz77xp8hyhoch8va21ph0k",
   "fields": {
     "session_data": "NDQ5YmZkMTE4Mjk2ZWJkNWNkYjQ3YmMxMzcxNjRlZmI3NGYzM2I0Mzp7Imhpc3RvcnkiOlsiaHR0cDovLzUyLjU5LjE4LjI1NC8iXX0=",
@@ -2599,14 +2699,6 @@
   "fields": {
     "session_data": "NTA4OGJlZWM3MDY3Njg4ZGZhMGJiMDA1NTMwM2E2ZjI2YjRhNWI5YTp7Imhpc3RvcnkiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3Byb2R1Y3RzLzMvIl19",
     "expire_date": "2016-07-10T03:02:02.767Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "ebdxc2fsg9nx5vijs73mlvrk1fbmmz17",
-  "fields": {
-    "session_data": "ODkyNjg4MTNhMDhhOTU4ZjE0ZDkzNjVkYzczNGIwYjhiOTM0YTQyYTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
-    "expire_date": "2016-12-18T16:45:09.637Z"
   }
 },
 {
@@ -2896,6 +2988,7 @@
     "user": [
       "admin"
     ],
+    "rating_value": null,
     "user_answer": []
   }
 },

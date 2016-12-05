@@ -17,7 +17,6 @@ from .models import (
     UserImage,
     User,
     Question,
-    SliderQuestion,
     Answer,
     QuestionSet,
     GivenAnswers,
@@ -193,7 +192,6 @@ admin.site.register(SubCategoryDescription)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(SliderQuestion)
 admin.site.register(Answer)
 admin.site.register(QuestionSet)
 admin.site.register(GivenAnswers)

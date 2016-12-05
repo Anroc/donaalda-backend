@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import *
-from . import utils
 from django.contrib.auth.models import User
 
 
@@ -105,7 +104,7 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = ('pk', 'belongs_to_question', 'answer_text',)
 
 
-class QuestionSerializer(utils.SubmodelSerializer):
+class QuestionSerializer(serializers.ModelSerializer):
     answer_set = AnswerSerializer(read_only=True, many=True)
 
     class Meta:
@@ -116,22 +115,18 @@ class QuestionSerializer(utils.SubmodelSerializer):
             'answer_presentation',
             'order',
             'answer_set',
-        )
-        optional_field_sets = (
-            ('rating_min', 'rating_max'),
+            'rating_min',
+            'rating_max',
         )
 
 
-class GivenAnswersSerializer(utils.SubmodelSerializer):
+class GivenAnswersSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     user_answer = AnswerSerializer(read_only=True, many=True)
 
     class Meta:
         model = GivenAnswers
-        fields = ('pk', 'user', 'user_answer',)
-        optional_field_sets = (
-            ('rating_value',),
-        )
+        fields = ('pk', 'user', 'user_answer', 'rating_value',)
 
 
 class QuestionSetSerializer(serializers.ModelSerializer):
