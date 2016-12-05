@@ -14,7 +14,7 @@ The different models described in this file can mostly be separated in three dif
 advisor (also known as stepper), provider and user interaction.
     The provider part includes:
         -- Scenario
-        -- ScenarioDescription
+        -- SubCategoryDescription
         -- Product
         -- ProductType
         -- Provider
@@ -85,15 +85,19 @@ class Scenario(models.Model):
 
     name = models.CharField(max_length=100, unique=True)
     url_name = models.CharField(max_length=100, unique=False, verbose_name="URL-Name")
-    short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
+    description = models.TextField(verbose_name="Kurzbeschreibung", max_length="500", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
-    provider = models.ForeignKey("Provider", default="1", verbose_name="Versorger", on_delete=models.CASCADE)
+    provider = models.ForeignKey("Provider", default="1", verbose_name="Erstellt von", on_delete=models.CASCADE)
     categories = models.ManyToManyField("Category", through="ScenarioCategoryRating",
                                         through_fields=('scenario', 'category'), verbose_name="Bewertung")
-    meta_devices = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaDevices")
+    meta_broker = models.ForeignKey("MetaDevice", default=None, verbose_name="Besteht aus einem Metabroker",
+                                    on_delete=models.CASCADE, null=True, blank=True, related_name="meta_broker")
+    meta_endpoints = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaEndpointDevices",
+                                            related_name="meta_endpoint")
     subcategory = models.ManyToManyField(to='SubCategory', verbose_name="Dieses Szenario ist Teil dieser Subkategorie")
     in_shopping_basket_of = models.ManyToManyField(to=Session,
-                                                   verbose_name="Dieses Szenario liegt im Warenkorb von Session")
+                                                   verbose_name="Dieses Szenario liegt im Warenkorb von Session",
+                                                   blank=True)
 
     def __str__(self):
         return '%s' % self.name
@@ -110,16 +114,16 @@ class Scenario(models.Model):
         ordering = ["name"]
 
 
-class ScenarioDescription(models.Model):
+class SubCategoryDescription(models.Model):
     """
-    Part of a scenario. Enables the producer to have more control how their scenario should look like.
+    Part of a sub category. Enables the producer to have more control how their subcategory should look like.
     Can be created by Employees.
     """
 
-    belongs_to_scenario = models.ForeignKey("Scenario", verbose_name="Beschreibung für Szenario",
-                                            on_delete=models.CASCADE)
+    belongs_to_subcategory = models.ForeignKey("SubCategory", verbose_name="Beschreibung für SubKateogrie",
+                                               on_delete=models.CASCADE)
     description = models.TextField(verbose_name="Beschreibung")
-    image = models.ImageField(upload_to="scenarioDesc", verbose_name="Bild")
+    image = models.ImageField(upload_to="subcategoryDesc", verbose_name="Bild")
     thumbnail = ImageSpecField(source='image',
                                processors=[ResizeToFill(200, 100)],
                                format='JPEG')
@@ -127,11 +131,11 @@ class ScenarioDescription(models.Model):
     order = models.IntegerField(verbose_name="Reihenfolge")
 
     def __str__(self):
-        return '%s %s' % (self.belongs_to_scenario, self.order)
+        return '%s %s' % (self.belongs_to_subcategory, self.order)
 
     class Meta:
-        verbose_name = "Szenariobeschreibung"
-        verbose_name_plural = "Szenariobeschreibungen"
+        verbose_name = "SubKategoriebeschreibung"
+        verbose_name_plural = "SubKategoriebeschreibungen"
         ordering = ["order"]
 
 
@@ -156,7 +160,10 @@ class Product(models.Model):
                                processors=[ResizeToFill(200, 100)],
                                format='JPEG')
     end_of_life = models.BooleanField(default=False, verbose_name="EOL")
-    protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll")
+    leader_protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll im leader modus",
+                                             related_name="protocol_leader", blank=True)
+    follower_protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll im follower modus",
+                                               related_name="protocol_follower", blank=True)
     features = models.ManyToManyField(to="Feature", verbose_name="Hat Features")
 
     def __str__(self):
@@ -177,16 +184,6 @@ class Product(models.Model):
         ordering = ["name"]
 
 
-class Broker(Product):
-    def __str__(self):
-        return '%s' % self.name
-
-
-class Endpoint(Product):
-    def __str__(self):
-        return '%s' % self.name
-
-
 class ProductType(models.Model):
     """
     A way to categorize and group Products.
@@ -196,7 +193,8 @@ class ProductType(models.Model):
 
     type_name = models.CharField(max_length=255, unique=True, verbose_name="Name")
     used_as_product_type_filter_by = models.ManyToManyField(to=Session,
-                                                            verbose_name="Als Produkttypfilter verwendet von")
+                                                            verbose_name="Als Produkttypfilter verwendet von",
+                                                            blank=True)
 
     def __str__(self):
         return '%s' % self.type_name
@@ -236,7 +234,8 @@ class ProviderProfile(models.Model):
     url_name = models.CharField(max_length=200, unique=True)
     logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
                                    help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt.")
-    profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True)
+    profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True,
+                                      blank=True)
     banner_image = models.ImageField(verbose_name="Banner für Profilseite", upload_to="provider")
     introduction = models.TextField(verbose_name="Einleitung")
     contact_email = models.EmailField(verbose_name="Kontakt-Email")
@@ -338,6 +337,14 @@ class Question(models.Model):
         ordering = ["order", "pk"]
 
 
+class SliderQuestion(Question):
+    rating_min = models.IntegerField("Minimaler Wert für Antworten")
+    rating_max = models.IntegerField("Maximaler Wert für Antworten")
+
+    def __str__(self):
+        return "%s (%d - %d)" % (str(super), self.rating_min, self.rating_max)
+
+
 class Answer(models.Model):
     belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE, verbose_name="gehört zu Frage")
     answer_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Anworttext")
@@ -349,14 +356,6 @@ class Answer(models.Model):
         verbose_name = "Antwort"
         verbose_name_plural = "Antworten"
         ordering = ['belongs_to_question_id', 'pk', ]
-
-
-class AnswerSlider(Answer):
-    # TODO: NAME STILL UP FOR GRABS
-    rating_value = models.PositiveIntegerField(default=5, validators=[MinValueValidator(0), MaxValueValidator(10)])
-
-    def __str__(self):
-        return '%s zu "%s"' % (self.answer_text, self.belongs_to_question.question_text)
 
 
 class GivenAnswers(models.Model):
@@ -377,6 +376,18 @@ class GivenAnswers(models.Model):
     class Meta:
         verbose_name = "beantwortete Antwort"
         verbose_name_plural = "beantwortete Antworten"
+
+
+class GivenSliderAnswer(GivenAnswers):
+    rating_value = models.IntegerField()
+
+    def __str__(self):
+        fields = (
+            self.answer_text,
+            self.belongs_to_question.question_text,
+            self.rating_value,
+        )
+        return '%s zu "%s" bewertet mit %d' % fields
 
 
 class QuestionSet(models.Model):
@@ -412,7 +423,6 @@ class QuestionStep(models.Model):
 
 class Protocol(models.Model):
     name = models.CharField(max_length=255)
-    is_leader = models.BooleanField(default=False, verbose_name="Kann als Broker fungieren")
 
     def __str__(self):
         return self.name
@@ -426,28 +436,27 @@ class Feature(models.Model):
 
 
 class MetaDevice(models.Model):
-    name = models.CharField(max_length=255)
+    is_broker = models.BooleanField(default=True, verbose_name="Ist das Metadevice ein Broker")
     implementation_requires = models.ManyToManyField(to="Feature",
                                                      verbose_name="Definiert von folgender Featuresammlung")
 
-
-class MetaBroker(MetaDevice):
-    # TODO: more attributes
     def __str__(self):
-        return self.name
-
-
-class MetaEndpoint(MetaDevice):
-    # TODO: more attributes
-    def __str__(self):
-        return self.name
+        if self.is_broker:
+            string = "Broker: "
+        else:
+            string = "Endpoint: "
+        return string + ", ".join([i.name for i in self.implementation_requires.all()])
 
 
 class SubCategory(models.Model):
     name = models.CharField(max_length=255)
+    url_name = models.CharField(max_length=100, unique=False, verbose_name="URL-Name", null=True, blank=True)
+    short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length="80", null=True, blank=True)
+    picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="subcategories")
     belongs_to_category = models.ManyToManyField(to="Category", verbose_name="Gehört zu den folgenden Kategorien")
     used_as_filter_by = models.ManyToManyField(to=Session,
-                                               verbose_name="Benutzer die diese Subkategorie als Szenariofilter verwenden")
+                                               verbose_name="Benutzer die diese Subkategorie als Szenariofilter verwenden",
+                                               blank=True)
 
     def __str__(self):
         return self.name

@@ -25,6 +25,8 @@ from collections import namedtuple
 from .validators import *
 from django.core.exceptions import ValidationError
 
+from .match_making import implement_scenario
+
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
@@ -35,9 +37,9 @@ class ScenarioViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ScenarioSerializer
 
 
-class ScenarioDescriptionViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = ScenarioDescription.objects.all()
-    serializer_class = ScenarioDescriptionSerializer
+class SubCategoryDescriptionViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = SubCategoryDescription.objects.all()
+    serializer_class = SubCategoryDescriptionSerializer
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
@@ -161,6 +163,14 @@ def suggestions(request):
         return JsonResponse(serializer.data, status=status.HTTP_200_OK, safe=False)
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@list_route(methods=['GET'])
+@permission_classes((permissions.AllowAny,))
+def matching(request):
+    implement_scenario(Scenario.objects.first(), "extensible")
+    return Response(status=status.HTTP_200_OK)
 
 
 class IndexView(generic.DetailView):
