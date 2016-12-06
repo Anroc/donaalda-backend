@@ -1,5 +1,11 @@
 from .models import *
 import operator
+from django.core.cache import cache
+
+# 1h
+EXPIRATION_TIME = 60 * 60
+BRIDGES_CACHE_ID = 'matching.bridges.cache'
+PRODUCT_CACHE_ID = 'matching.product.cache'
 
 
 def implement_scenario(scenario, user_preference):
@@ -13,8 +19,6 @@ def implement_scenario(scenario, user_preference):
 
     :return a set of implementing products that matches the user preferences optimally.
     """
-    # TODO: replace with django cache backend
-    prepare_matching()
 
     print('Scenario: %s' % scenario.name)
     meta_broker = scenario.meta_broker
@@ -225,27 +229,6 @@ def find_communication_partner(endpoint, target, path=None, max_depth=None, brid
     return paths
 
 
-# public caching variables
-__direct_compatible_cache = None
-__get_protocols_cache = None
-__get_bridges_cache = None
-__get_products_cache = None
-
-
-def prepare_matching():
-    """
-    Init caching for empty values.
-    """
-    global __direct_compatible_cache
-    __direct_compatible_cache = dict()
-    global __get_protocols_cache
-    __get_protocols_cache = dict()
-    global __get_bridges_cache
-    __get_bridges_cache = set()
-    global __get_products_cache
-    __get_products_cache = set()
-
-
 def __direct_compatible(broker_protocols, endpoint_protocols):
     """
     Checks if the given broker_protocols can communicate with the given endpoint_protocols.
@@ -258,16 +241,16 @@ def __direct_compatible(broker_protocols, endpoint_protocols):
         if the given broker_protocols can communicate with the given endpoint_protocols
     """
     input_tupel = (frozenset(broker_protocols), frozenset(endpoint_protocols))
-    if input_tupel in __direct_compatible_cache:
-        return __direct_compatible_cache[input_tupel]
+    if cache.get(input_tupel) is not None:
+        return cache.get(input_tupel)
 
     # check if endpoint can talk directly with broker
     for protocol in endpoint_protocols:
         for broker_protocol in broker_protocols:
             if protocol.name == broker_protocol.name:
-                __direct_compatible_cache[input_tupel] = True
+                cache.set(input_tupel, True, EXPIRATION_TIME)
                 return True
-    __direct_compatible_cache[input_tupel] = False
+    cache.set(input_tupel, False)
     return False
 
 
@@ -282,15 +265,14 @@ def __get_protocols(product, leader):
     :return:
         all spoken protocols by the product in the given mode.
     """
-    if (product, leader) in __get_protocols_cache:
-        return __get_protocols_cache[(product, leader)]
+    if cache.get((product, leader)) is not None:
+        return cache.get((product, leader))
 
     if leader:
-        __get_protocols_cache[(product, leader)] = set(product.leader_protocol.all())
-        return __get_protocols_cache[(product, leader)]
+        cache.set((product, leader), set(product.leader_protocol.all()), EXPIRATION_TIME)
     else:
-        __get_protocols_cache[(product, leader)] = set(product.follower_protocol.all())
-        return __get_protocols_cache[(product, leader)]
+        cache.set((product, leader), set(product.follower_protocol.all()), EXPIRATION_TIME)
+    return cache.get((product, leader))
 
 
 def get_bridges():
@@ -300,9 +282,8 @@ def get_bridges():
     :return:
         set of all bridges in the product query set.
     """
-    global __get_bridges_cache
-    if len(__get_bridges_cache) > 0:
-        return __get_bridges_cache
+    if cache.get(BRIDGES_CACHE_ID) is not None:
+        return cache.get(BRIDGES_CACHE_ID)
 
     products = get_products()
     return_set = set()
@@ -310,7 +291,7 @@ def get_bridges():
         if len(__get_protocols(product, True)) > 0 and len(__get_protocols(product, False)) > 0:
             return_set.add(product)
 
-    __get_bridges_cache = return_set.copy()
+    cache.set(BRIDGES_CACHE_ID, return_set.copy(), EXPIRATION_TIME)
     return return_set
 
 
@@ -321,9 +302,4 @@ def get_products():
     :return:
         A set of all known products.
     """
-    global __get_products_cache
-    if len(__get_products_cache) > 0:
-        return __get_products_cache
-
-    __get_products_cache = set(Product.objects.all())
-    return __get_products_cache
+    return cache.get_or_set(PRODUCT_CACHE_ID, set(Product.objects.all()), EXPIRATION_TIME)
