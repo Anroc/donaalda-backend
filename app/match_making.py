@@ -23,7 +23,7 @@ def implement_scenario(scenario, user_preference):
     # 1. find implementing products
     impl_of_meta_device = dict()
     print('Metabroker: %s' % meta_broker)
-    impl_of_meta_device[meta_broker] = find_implementing_product(meta_broker, True)
+    impl_of_meta_device[meta_broker] = find_implementing_product(meta_broker)
     print(impl_of_meta_device[meta_broker])
     # no implementation was found
     if len(impl_of_meta_device[meta_broker]) == 0:
@@ -34,7 +34,7 @@ def implement_scenario(scenario, user_preference):
 
     for meta_endpoint in meta_endpoints:
         print('Metaendpoint: %s' % meta_endpoint)
-        impl_of_meta_device[meta_endpoint] = find_implementing_product(meta_endpoint, False)
+        impl_of_meta_device[meta_endpoint] = find_implementing_product(meta_endpoint)
         print('%s : %s' % (meta_endpoint, impl_of_meta_device[meta_endpoint]))
         # no implementation was found
         if len(impl_of_meta_device[meta_endpoint]) == 0:
@@ -76,7 +76,7 @@ def implement_scenario(scenario, user_preference):
 
     # 5. apply cost function U_pref to get the best product set
     product_sets = cost_function(product_sets, user_preference, used_products)
-    print(product_sets)
+
     # return the product set
     return product_sets
 
@@ -139,7 +139,7 @@ def __product(a, b):
     return ret
 
 
-def find_implementing_product(meta_device, leader):
+def find_implementing_product(meta_device):
     """
     Find all implementing products to a given meta_device.
     This have to fit two criteria:
@@ -148,9 +148,6 @@ def find_implementing_product(meta_device, leader):
 
     :param
         meta_device: the meta device that should be implemented
-    :param
-    TODO: replace with meta_device.is_broker
-        leader: if the given meta device is a meta broker
     :return:
         set of all matching products that have at least one protocol matching
         the defined behavior (e.g. borker -> least one leader protocol;
@@ -161,7 +158,7 @@ def find_implementing_product(meta_device, leader):
     matching_products = set()
     for product in products:
         if meta_feature.issubset(set(product.features.all())):
-            if len(__get_protocols(product, leader)) != 0:
+            if len(__get_protocols(product, meta_device.is_broker)) != 0:
                 matching_products.add(product)
     return matching_products
 
