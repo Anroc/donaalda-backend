@@ -1,11 +1,14 @@
 from .models import *
 import operator
+import logging
 from django.core.cache import cache
 
 # 1h
 EXPIRATION_TIME = 60 * 60
 BRIDGES_CACHE_ID = 'matching.bridges.cache'
 PRODUCT_CACHE_ID = 'matching.product.cache'
+
+LOGGER = logging.getLogger(__name__)
 
 
 def implement_scenario(scenario, user_preference):
@@ -20,15 +23,15 @@ def implement_scenario(scenario, user_preference):
     :return a set of implementing products that matches the user preferences optimally.
     """
 
-    print('Scenario: %s' % scenario.name)
+    LOGGER.debug('Scenario: %s' % scenario.name)
     meta_broker = scenario.meta_broker
     meta_endpoints = set(scenario.meta_endpoints.all())
 
     # 1. find implementing products
     impl_of_meta_device = dict()
-    print('Metabroker: %s' % meta_broker)
+    LOGGER.debug('Metabroker: %s' % meta_broker)
     impl_of_meta_device[meta_broker] = find_implementing_product(meta_broker)
-    print(impl_of_meta_device[meta_broker])
+    LOGGER.debug(impl_of_meta_device[meta_broker])
     # no implementation was found
     if len(impl_of_meta_device[meta_broker]) == 0:
         return set()
@@ -37,9 +40,9 @@ def implement_scenario(scenario, user_preference):
     used_products = impl_of_meta_device[meta_broker]
 
     for meta_endpoint in meta_endpoints:
-        print('Metaendpoint: %s' % meta_endpoint)
+        LOGGER.debug('Metaendpoint: %s' % meta_endpoint)
         impl_of_meta_device[meta_endpoint] = find_implementing_product(meta_endpoint)
-        print('%s : %s' % (meta_endpoint, impl_of_meta_device[meta_endpoint]))
+        LOGGER.debug('%s : %s' % (meta_endpoint, impl_of_meta_device[meta_endpoint]))
         # no implementation was found
         if len(impl_of_meta_device[meta_endpoint]) == 0:
             return set()
@@ -66,7 +69,7 @@ def implement_scenario(scenario, user_preference):
                         possible_paths[meta_endpoint] = possible_paths[meta_endpoint].union(res)
                     else:
                         possible_paths[meta_endpoint] = res
-                    print('%s->%s: %s' % (endpoint_impl, broker_impl, res))
+                    LOGGER.debug('%s->%s: %s' % (endpoint_impl, broker_impl, res))
 
         # check if current broker impl can reach every endpoint
         if len(possible_paths) == 0:
@@ -81,6 +84,7 @@ def implement_scenario(scenario, user_preference):
     # 5. apply cost function U_pref to get the best product set
     product_sets = cost_function(product_sets, user_preference, used_products)
 
+    LOGGER.info('Start matching for scenario: "%s", found matching product set "%s"' % (scenario.name, product_sets))
     # return the product set
     return product_sets
 
@@ -202,6 +206,7 @@ def find_communication_partner(endpoint, target, path=None, max_depth=None, brid
 
     # begin of the algorithm
     if max_depth <= 0:
+        LOGGER.error('Recursive call exceeded maximal depth.')
         raise Exception("max_depth exceeded")
 
     # define methods for follower/leader protocols
