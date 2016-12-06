@@ -4,8 +4,8 @@ from django.core.cache import cache
 
 # 1h
 EXPIRATION_TIME = 60 * 60
-BRIDGES_ID_HASH = 'matching.bridges.cache'.__hash__()
-PRODUCT_ID_HASH = 'matching.product.cache'.__hash__()
+BRIDGES_ID_HASH = hash('matching.bridges.cache')
+PRODUCT_ID_HASH = hash('matching.product.cache')
 
 
 def implement_scenario(scenario, user_preference):
@@ -240,7 +240,7 @@ def __direct_compatible(broker_protocols, endpoint_protocols):
     :return:
         if the given broker_protocols can communicate with the given endpoint_protocols
     """
-    input_hash = (frozenset(broker_protocols), frozenset(endpoint_protocols)).__hash__()
+    input_hash = hash((frozenset(broker_protocols), frozenset(endpoint_protocols)))
     if cache.get(input_hash) is not None:
         return cache.get(input_hash)
 
@@ -265,7 +265,7 @@ def __get_protocols(product, leader):
     :return:
         all spoken protocols by the product in the given mode.
     """
-    input_hash = (product, leader).__hash__()
+    input_hash = hash((product, leader))
     if cache.get(input_hash) is not None:
         return cache.get(input_hash)
 
