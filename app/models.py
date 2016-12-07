@@ -325,6 +325,7 @@ class Question(models.Model):
     )
     description = models.CharField(max_length=255, null=True, blank=True,
                                    default="Diese Frage hat noch keine Beschreibung erhalten")
+    icon_name = models.CharField(max_length=100, null=True, blank=True)
 
     question_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Fragentext")
     answer_presentation = models.CharField(
