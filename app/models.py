@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import re
+import re, os
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
@@ -98,6 +98,7 @@ class Scenario(models.Model):
     in_shopping_basket_of = models.ManyToManyField(to=Session,
                                                    verbose_name="Dieses Szenario liegt im Warenkorb von Session",
                                                    blank=True)
+    thumbnail = ImageSpecField(source='picture', processors=[ResizeToFill(200, 100)], format='JPEG')
 
     def __str__(self):
         return '%s' % self.name
@@ -195,6 +196,10 @@ class ProductType(models.Model):
     used_as_product_type_filter_by = models.ManyToManyField(to=Session,
                                                             verbose_name="Als Produkttypfilter verwendet von",
                                                             blank=True)
+    thumbnail = models.ImageField(verbose_name="Bild", null=True, blank=True,
+                                  upload_to=os.path.join("productType", "thumbnail"))
+    house_overlay_picture = models.ImageField(verbose_name="Bild", null=True, blank=True,
+                                              upload_to=os.path.join("productType", "house_overlay_picture"))
 
     def __str__(self):
         return '%s' % self.type_name
@@ -318,6 +323,9 @@ class Question(models.Model):
         (DROP_CHOICE, 'Dropdown'),
         (SLIDER_CHOICE, 'Slider')
     )
+    description = models.CharField(max_length=255, null=True, blank=True,
+                                   default="Diese Frage hat noch keine Beschreibung erhalten")
+    icon_name = models.CharField(max_length=100, null=True, blank=True)
 
     question_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Fragentext")
     answer_presentation = models.CharField(
@@ -345,6 +353,8 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
+    description = models.CharField(max_length=255, null=True, blank=True,
+                                   default="Diese Antwort hat noch keine Beschreibung erhalten")
     belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE, verbose_name="gehört zu Frage")
     answer_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Anworttext")
 

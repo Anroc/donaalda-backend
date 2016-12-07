@@ -1,29 +1,37 @@
 from .models import *
 import operator
+import logging
+from django.core.cache import cache
+
+# 1h
+EXPIRATION_TIME = 60 * 60
+BRIDGES_CACHE_ID = 'matching.bridges.cache'
+PRODUCT_CACHE_ID = 'matching.product.cache'
+
+LOGGER = logging.getLogger(__name__)
 
 
 def implement_scenario(scenario, user_preference):
     """
-    1.  Call find_implementing_product for each meta device in the scenrio
-    2.  for each Broker -> Endpoint combination find pahts with: find_communication_partner(endpoint, broker)
-    3.  Merge the result: for each broker in look if it can reach all endpoints.
-        If it do so: create a product set of the current configuration
-    4.  Apply U_pref on to all product sets for each broker to find the current best solution for the current broker-product-set
-    5.  Apply U_pref on all product sets for each different broker to find the over all best solution for the current scenrio
+    1.  Call find_implementing_product for each meta device in the scenario
+    2.  for each Broker -> Endpoint combination find paths with: find_communication_partner(endpoint, broker)
+    3.  Merge the result: for each broker check if it can reach all endpoints.
+        If possible: create a product set of the current configuration
+    4.  Apply U_pref on all product sets for each broker to find the current best solution for the current broker-product-set
+    5.  Apply U_pref on all product sets for each different broker to find the overall best solution for the current scenario
 
-    :return a set of implementing products that matches the best the user preferences
+    :return a set of implementing products that matches the user preferences optimally.
     """
-    prepare_matching()
 
-    print('Scenario: %s' % scenario.name)
+    LOGGER.debug('Scenario: %s' % scenario.name)
     meta_broker = scenario.meta_broker
     meta_endpoints = set(scenario.meta_endpoints.all())
 
     # 1. find implementing products
     impl_of_meta_device = dict()
-    print('Metabroker: %s' % meta_broker)
-    impl_of_meta_device[meta_broker] = find_implementing_product(meta_broker, True)
-    print(impl_of_meta_device[meta_broker])
+    LOGGER.debug('Metabroker: %s' % meta_broker)
+    impl_of_meta_device[meta_broker] = find_implementing_product(meta_broker)
+    LOGGER.debug(impl_of_meta_device[meta_broker])
     # no implementation was found
     if len(impl_of_meta_device[meta_broker]) == 0:
         return set()
@@ -32,9 +40,9 @@ def implement_scenario(scenario, user_preference):
     used_products = impl_of_meta_device[meta_broker]
 
     for meta_endpoint in meta_endpoints:
-        print('Metaendpoint: %s' % meta_endpoint)
-        impl_of_meta_device[meta_endpoint] = find_implementing_product(meta_endpoint, False)
-        print('%s : %s' % (meta_endpoint, impl_of_meta_device[meta_endpoint]))
+        LOGGER.debug('Metaendpoint: %s' % meta_endpoint)
+        impl_of_meta_device[meta_endpoint] = find_implementing_product(meta_endpoint)
+        LOGGER.debug('%s : %s' % (meta_endpoint, impl_of_meta_device[meta_endpoint]))
         # no implementation was found
         if len(impl_of_meta_device[meta_endpoint]) == 0:
             return set()
@@ -53,15 +61,15 @@ def implement_scenario(scenario, user_preference):
                 if len(res) > 0:
                     # convert inner set to frozenset and list to set
                     res = set(
-                            ((frozenset(e))
-                                for e in res
-                            )
-                        )
+                        ((frozenset(e))
+                         for e in res
+                         )
+                    )
                     if meta_endpoint in possible_paths:
                         possible_paths[meta_endpoint] = possible_paths[meta_endpoint].union(res)
                     else:
                         possible_paths[meta_endpoint] = res
-                    print('%s->%s: %s' % (endpoint_impl, broker_impl, res))
+                    LOGGER.debug('%s->%s: %s' % (endpoint_impl, broker_impl, res))
 
         # check if current broker impl can reach every endpoint
         if len(possible_paths) == 0:
@@ -76,6 +84,7 @@ def implement_scenario(scenario, user_preference):
     # 5. apply cost function U_pref to get the best product set
     product_sets = cost_function(product_sets, user_preference, used_products)
 
+    LOGGER.info('Start matching for scenario: "%s", found matching product set "%s"' % (scenario.name, product_sets))
     # return the product set
     return product_sets
 
@@ -98,23 +107,25 @@ def cost_function(product_sets, preference, used_products):
 
     sorting = dict()
     for current_set in product_sets:
-        bridges = product_sets.difference(used_products)
+        bridges = current_set.difference(used_products)
 
         x = 1
         if preference == "extensible":
             x = 0
             for product in current_set:
                 x += len(__get_protocols(product, True)) + len(__get_protocols(product, False))
+            sorting[current_set] = float((1+len(bridges))**2) / x
         elif preference == "cost":
             # TODO: implement
+            sorting[current_set] = 1. / x * 0.95 ** len(bridges)
             pass
         elif preference == "efficiency":
             # TODO: implement
+            sorting[current_set] = 1. / x * 0.95 ** len(bridges)
             pass
         else:
             raise(AttributeError("Unsupported preference %s" % preference))
-        sorting[current_set] = 1./x * 0.95**len(bridges)
-
+        # search for minimum
     return sorted(sorting.items(), key=operator.itemgetter(1))[0][0]
 
 
@@ -136,14 +147,15 @@ def __product(a, b):
     return ret
 
 
-def find_implementing_product(meta_device, leader):
+def find_implementing_product(meta_device):
     """
     Find all implementing products to a given meta_device.
+    This have to fit two criteria:
+    1. the product must implement all features of the meta device
+    2. the product must speak at least one protocol in the given mode
 
     :param
         meta_device: the meta device that should be implemented
-    :param
-        leader: if the given meta device is a meta broker
     :return:
         set of all matching products that have at least one protocol matching
         the defined behavior (e.g. borker -> least one leader protocol;
@@ -154,14 +166,14 @@ def find_implementing_product(meta_device, leader):
     matching_products = set()
     for product in products:
         if meta_feature.issubset(set(product.features.all())):
-            if len(__get_protocols(product, leader)) != 0:
+            if len(__get_protocols(product, meta_device.is_broker)) != 0:
                 matching_products.add(product)
     return matching_products
 
 
 def find_communication_partner(endpoint, target, path=None, max_depth=None, bridges_visited=None):
     """
-    This function will serve the propose we called small "f". It will find all ways from a given endpoint
+    This function will serve the purpose we called small "f". It will find all ways from a given endpoint
     to a given target (most likely the master broker in the scenario/system). For this it will recursively
     traverse through the graph of which products can communicate with which other products.
 
@@ -194,7 +206,8 @@ def find_communication_partner(endpoint, target, path=None, max_depth=None, brid
 
     # begin of the algorithm
     if max_depth <= 0:
-        raise Exception("max_deph exeeded")
+        LOGGER.error('Recursive call exceeded maximal depth.')
+        raise Exception("max_depth exceeded")
 
     # define methods for follower/leader protocols
     endpoint_protocols = __get_protocols(endpoint, False)
@@ -218,28 +231,6 @@ def find_communication_partner(endpoint, target, path=None, max_depth=None, brid
     return paths
 
 
-# public caching variables
-__direct_compatible_cache = None
-__get_protocols_cache = None
-__get_bridges_cache = None
-__get_products_cache = None
-__get_protocols_cache = None
-
-
-def prepare_matching():
-    """
-    Init caching for empty values.
-    """
-    global __direct_compatible_cache
-    __direct_compatible_cache = dict()
-    global __get_protocols_cache
-    __get_protocols_cache = dict()
-    global __get_bridges_cache
-    __get_bridges_cache = set()
-    global __get_products_cache
-    __get_products_cache = set()
-
-
 def __direct_compatible(broker_protocols, endpoint_protocols):
     """
     Checks if the given broker_protocols can communicate with the given endpoint_protocols.
@@ -252,16 +243,16 @@ def __direct_compatible(broker_protocols, endpoint_protocols):
         if the given broker_protocols can communicate with the given endpoint_protocols
     """
     input_tupel = (frozenset(broker_protocols), frozenset(endpoint_protocols))
-    if input_tupel in __direct_compatible_cache:
-        return __direct_compatible_cache[input_tupel]
+    if cache.get(input_tupel) is not None:
+        return cache.get(input_tupel)
 
     # check if endpoint can talk directly with broker
     for protocol in endpoint_protocols:
         for broker_protocol in broker_protocols:
             if protocol.name == broker_protocol.name:
-                __direct_compatible_cache[input_tupel] = True
+                cache.set(input_tupel, True, EXPIRATION_TIME)
                 return True
-    __direct_compatible_cache[input_tupel] = False
+    cache.set(input_tupel, False)
     return False
 
 
@@ -276,15 +267,14 @@ def __get_protocols(product, leader):
     :return:
         all spoken protocols by the product in the given mode.
     """
-    if (product, leader) in __get_protocols_cache:
-        return __get_protocols_cache[(product, leader)]
+    if cache.get((product, leader)) is not None:
+        return cache.get((product, leader))
 
     if leader:
-        __get_protocols_cache[(product, leader)] = set(product.leader_protocol.all())
-        return __get_protocols_cache[(product, leader)]
+        cache.set((product, leader), set(product.leader_protocol.all()), EXPIRATION_TIME)
     else:
-        __get_protocols_cache[(product, leader)] = set(product.follower_protocol.all())
-        return __get_protocols_cache[(product, leader)]
+        cache.set((product, leader), set(product.follower_protocol.all()), EXPIRATION_TIME)
+    return cache.get((product, leader))
 
 
 def get_bridges():
@@ -294,9 +284,8 @@ def get_bridges():
     :return:
         set of all bridges in the product query set.
     """
-    global __get_bridges_cache
-    if len(__get_bridges_cache) > 0:
-        return __get_bridges_cache
+    if cache.get(BRIDGES_CACHE_ID) is not None:
+        return cache.get(BRIDGES_CACHE_ID)
 
     products = get_products()
     return_set = set()
@@ -304,7 +293,7 @@ def get_bridges():
         if len(__get_protocols(product, True)) > 0 and len(__get_protocols(product, False)) > 0:
             return_set.add(product)
 
-    __get_bridges_cache = return_set.copy()
+    cache.set(BRIDGES_CACHE_ID, return_set.copy(), EXPIRATION_TIME)
     return return_set
 
 
@@ -315,9 +304,4 @@ def get_products():
     :return:
         A set of all known products.
     """
-    global __get_products_cache
-    if len(__get_products_cache) > 0:
-        return __get_products_cache
-
-    __get_products_cache = set(Product.objects.all())
-    return __get_products_cache
+    return cache.get_or_set(PRODUCT_CACHE_ID, set(Product.objects.all()), EXPIRATION_TIME)

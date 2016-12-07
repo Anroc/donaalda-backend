@@ -58,8 +58,8 @@
     "provider": 1,
     "meta_broker": 1,
     "meta_endpoints": [
-      6,
-      8
+      8,
+      6
     ],
     "subcategory": [
       8
@@ -763,9 +763,9 @@
       3
     ],
     "features": [
-      8,
+      5,
       7,
-      5
+      8
     ]
   }
 },
@@ -940,9 +940,9 @@
       3
     ],
     "features": [
-      8,
+      5,
       7,
-      5
+      8
     ]
   }
 },
@@ -1705,8 +1705,8 @@
     "question_text": "Wie wichtig sind dir folgende Kategorien?",
     "answer_presentation": "sc",
     "order": 1000,
-    "rating_min": null,
-    "rating_max": null
+    "rating_min": 1,
+    "rating_max": 10
   }
 },
 {
@@ -2156,7 +2156,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$30000$1SNZTPCnQ5JQ$9UOgz+vmgt8/9wehyiy9uJUVhu0mBDwFrlcoF5RQhr4=",
-    "last_login": "2016-12-04T20:38:41.940Z",
+    "last_login": "2016-12-05T18:18:43.390Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Herr",
@@ -2491,6 +2491,14 @@
   "fields": {
     "session_data": "NDQ5YmZkMTE4Mjk2ZWJkNWNkYjQ3YmMxMzcxNjRlZmI3NGYzM2I0Mzp7Imhpc3RvcnkiOlsiaHR0cDovLzUyLjU5LjE4LjI1NC8iXX0=",
     "expire_date": "2016-07-08T20:42:29.409Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "2k0h0o97dlv5x1to5a96rxh80d2imals",
+  "fields": {
+    "session_data": "N2RkYjg0MzMzNWI2Njc3ODFiNDExM2Y2NWNlMTcyNTA2MjJjMGMyMzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2Q2MmNjNDViY2I0M2IxYjE2MjE0MzE4YzIwNWQ5MTNjMDczYmUxMCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
+    "expire_date": "2016-12-19T18:18:43.396Z"
   }
 },
 {
@@ -2907,6 +2915,14 @@
   "fields": {
     "session_data": "YzZjMzRiOWFkMjcwNjYzZjNiMDk4Njc1YmI3NmJjNjhmYmYyY2IxYTp7Imhpc3RvcnkiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDAwLyIsImh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9FbmVyZ2llLyIsImh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC8iLCJodHRwOi8vbG9jYWxob3N0OjgwMDAvRW5lcmdpZS8iXX0=",
     "expire_date": "2016-07-21T12:02:25.092Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "td922khly05btonypu8r62jwpzn2s0fd",
+  "fields": {
+    "session_data": "N2RkYjg0MzMzNWI2Njc3ODFiNDExM2Y2NWNlMTcyNTA2MjJjMGMyMzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2Q2MmNjNDViY2I0M2IxYjE2MjE0MzE4YzIwNWQ5MTNjMDczYmUxMCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
+    "expire_date": "2016-12-19T17:54:02.896Z"
   }
 },
 {
