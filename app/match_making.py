@@ -5,8 +5,8 @@ from django.core.cache import cache
 
 # 1h
 EXPIRATION_TIME = 60 * 60
-BRIDGES_CACHE_ID = 'matching.bridges.cache'
-PRODUCT_CACHE_ID = 'matching.product.cache'
+BRIDGES_ID_HASH = hash('matching.bridges.cache')
+PRODUCT_ID_HASH = hash('matching.product.cache')
 
 LOGGER = logging.getLogger(__name__)
 
@@ -242,17 +242,17 @@ def __direct_compatible(broker_protocols, endpoint_protocols):
     :return:
         if the given broker_protocols can communicate with the given endpoint_protocols
     """
-    input_tupel = (frozenset(broker_protocols), frozenset(endpoint_protocols))
-    if cache.get(input_tupel) is not None:
-        return cache.get(input_tupel)
+    input_hash = hash((frozenset(broker_protocols), frozenset(endpoint_protocols)))
+    if cache.get(input_hash) is not None:
+        return cache.get(input_hash)
 
     # check if endpoint can talk directly with broker
     for protocol in endpoint_protocols:
         for broker_protocol in broker_protocols:
             if protocol.name == broker_protocol.name:
-                cache.set(input_tupel, True, EXPIRATION_TIME)
+                cache.set(input_hash, True, EXPIRATION_TIME)
                 return True
-    cache.set(input_tupel, False)
+    cache.set(input_hash, False)
     return False
 
 
@@ -267,14 +267,15 @@ def __get_protocols(product, leader):
     :return:
         all spoken protocols by the product in the given mode.
     """
-    if cache.get((product, leader)) is not None:
-        return cache.get((product, leader))
+    input_hash = hash((product, leader))
+    if cache.get(input_hash) is not None:
+        return cache.get(input_hash)
 
     if leader:
-        cache.set((product, leader), set(product.leader_protocol.all()), EXPIRATION_TIME)
+        cache.set(input_hash, set(product.leader_protocol.all()), EXPIRATION_TIME)
     else:
-        cache.set((product, leader), set(product.follower_protocol.all()), EXPIRATION_TIME)
-    return cache.get((product, leader))
+        cache.set(input_hash, set(product.follower_protocol.all()), EXPIRATION_TIME)
+    return cache.get(input_hash)
 
 
 def get_bridges():
@@ -284,8 +285,8 @@ def get_bridges():
     :return:
         set of all bridges in the product query set.
     """
-    if cache.get(BRIDGES_CACHE_ID) is not None:
-        return cache.get(BRIDGES_CACHE_ID)
+    if cache.get(BRIDGES_ID_HASH) is not None:
+        return cache.get(BRIDGES_ID_HASH)
 
     products = get_products()
     return_set = set()
@@ -293,7 +294,7 @@ def get_bridges():
         if len(__get_protocols(product, True)) > 0 and len(__get_protocols(product, False)) > 0:
             return_set.add(product)
 
-    cache.set(BRIDGES_CACHE_ID, return_set.copy(), EXPIRATION_TIME)
+    cache.set(BRIDGES_ID_HASH, return_set.copy(), EXPIRATION_TIME)
     return return_set
 
 
@@ -304,4 +305,4 @@ def get_products():
     :return:
         A set of all known products.
     """
-    return cache.get_or_set(PRODUCT_CACHE_ID, set(Product.objects.all()), EXPIRATION_TIME)
+    return cache.get_or_set(PRODUCT_ID_HASH, set(Product.objects.all()), EXPIRATION_TIME)
