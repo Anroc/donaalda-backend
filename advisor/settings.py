@@ -11,6 +11,16 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import sys
+
+try:
+    from .db_settings import DATABASES
+except:
+    print("""
+        You don't have a database configuration file.
+        Copy db_settings_example.py to advisor/db_settings.py
+    """)
+    sys.exit(1)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -79,22 +89,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'advisor.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '158-through-rating',
-        'USER': 'django',
-        'PASSWORD': 'djangoDBpw',
-        'HOST': 'dailab-advisor.cgxenmplsqo5.eu-central-1.rds.amazonaws.com',
-        'PORT': '5432',
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

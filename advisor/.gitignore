@@ -1,0 +1,2 @@
+# Ignore developer specific database settings
+db_settings.py
