@@ -131,14 +131,15 @@ class SuggestedScenarioViewSet():
     pass
 
 
-@api_view(['POST'])
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
-def suggestions(request):
-    OnboardingAnswers = namedtuple("OnboadringAnswers",
-                                   ["category_preference", "user_preference", "renovation_preference"])
+class Suggestions(generics.GenericAPIView):
+    def get(self, request, format=None):
+        pass
 
-    if request.method == 'POST':
+    def post(self, request, format=None):
+        OnboardingAnswers = namedtuple("OnboardingAnswers",
+                                       ["category_preference", "user_preference", "renovation_preference"])
         json_data = json.loads(request.body.decode('utf-8'))
         try:
             onboarding_answers = OnboardingAnswers(**json_data)
@@ -146,9 +147,18 @@ def suggestions(request):
         except (TypeError, ValidationError) as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
         serializer = ScenarioSerializer(Scenario.objects.all(), many=True)
-        return JsonResponse(serializer.data, status=status.HTTP_200_OK, safe=False)
-    else:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return self.get_paginated_response(self, serializer.data)
+
+    def get_queryset(self):
+        if self.request.session.session_key is None:
+            raise Exception("requesting session has no key!")
+        else:
+            # scenarios = Session.objects.get(id=self.request.session.session_key).saved_scenarios
+            # return scenarios
+            return Scenario.objects.all()
+
+    def get_serializer_class(self):
+        return ScenarioSerializer
 
 
 @api_view(['GET'])
