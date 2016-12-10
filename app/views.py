@@ -26,6 +26,7 @@ from .validators import *
 from django.core.exceptions import ValidationError
 
 from .match_making import implement_scenario
+from .suggestions import SuggestionsPagination
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -128,6 +129,7 @@ class QuestionStepViewSet(viewsets.ReadOnlyModelViewSet):
 
 @permission_classes((permissions.AllowAny,))
 class Suggestions(generics.ListAPIView):
+    pagination_class = SuggestionsPagination
     def post(self, request, format=None):
         OnboardingAnswers = namedtuple("OnboardingAnswers",
                                        ["category_preference", "user_preference", "renovation_preference"])
