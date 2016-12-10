@@ -133,7 +133,7 @@ class SuggestedScenarioViewSet():
 
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
-class Suggestions(generics.GenericAPIView):
+class Suggestions(generics.ListAPIView):
     def get(self, request, format=None):
         pass
 
@@ -145,8 +145,7 @@ class Suggestions(generics.GenericAPIView):
             validate_suggestions_input(onboarding_answers, Category.objects.all())
         except (TypeError, ValidationError) as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
-        serializer = ScenarioSerializer(Scenario.objects.all(), many=True)
-        return self.get_paginated_response(self, serializer.data)
+        return self.list(request)
 
     def get_queryset(self):
         return Scenario.objects.all()
