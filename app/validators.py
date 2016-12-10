@@ -1,7 +1,9 @@
 # -*- coding: utf-8
+import re
 
 from django.core.exceptions import ValidationError
-import re
+
+from . import models
 
 
 def validate_legal_chars(value):
@@ -11,10 +13,13 @@ def validate_legal_chars(value):
                               params={'value': value}, code='illegal_character')
 
 
-def validate_suggestions_input(value, categories):
-    if value.category_preference.keys() != set(c.name for c in categories):
-        raise ValidationError('Category_preference should contain exactly all categories.')
+_ERR_CATEGORIES = 'Category_preference should contain exactly all categories.'
+_ERR_VALUES = 'Values should be in the range of 0 to 10'
+def validate_suggestions_input(value):
+    categories = models.Category.objects.values_list('name', flat=True)
+    if value.category_preference.keys() != set(categories):
+        raise ValidationError(_ERR_CATEGORIES)
 
     for key, value in value.category_preference.items():
         if not 1 <= value <= 10:
-            raise ValidationError('Values should be in the range of 0 to 10')
+            raise ValidationError(_ERR_VALUES)

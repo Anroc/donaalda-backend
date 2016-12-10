@@ -142,7 +142,7 @@ class Suggestions(generics.ListAPIView):
                                        ["category_preference", "user_preference", "renovation_preference"])
         try:
             onboarding_answers = OnboardingAnswers(**request.data)
-            validate_suggestions_input(onboarding_answers, Category.objects.all())
+            validate_suggestions_input(onboarding_answers)
         except (TypeError, ValidationError) as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
         return self.list(request)
