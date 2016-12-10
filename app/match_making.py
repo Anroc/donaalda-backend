@@ -68,7 +68,7 @@ def implement_scenario(scenario, user_preference):
                     LOGGER.debug('%s->%s: %s' % (endpoint_impl, broker_impl, res))
 
         # check if current broker impl can reach every endpoint
-        if len(possible_paths) == 0:
+        if len(meta_endpoints) != len(possible_paths):
             continue
 
         merged_set = __merge_paths(meta_endpoints, possible_paths)
