@@ -127,10 +127,7 @@ class QuestionStepViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 @permission_classes((permissions.AllowAny,))
-class Suggestions(generics.GenericAPIView):
-    def get(self, request, format=None):
-        pass
-
+class Suggestions(generics.ListAPIView):
     def post(self, request, format=None):
         OnboardingAnswers = namedtuple("OnboardingAnswers",
                                        ["category_preference", "user_preference", "renovation_preference"])
@@ -140,8 +137,7 @@ class Suggestions(generics.GenericAPIView):
             validate_suggestions_input(onboarding_answers, Category.objects.all())
         except (TypeError, ValidationError) as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
-        serializer = ScenarioSerializer(Scenario.objects.all(), many=True)
-        return self.get_paginated_response(self, serializer.data)
+        return self.list(request)
 
     def get_queryset(self):
         return Scenario.objects.all()
