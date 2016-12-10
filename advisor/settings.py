@@ -193,3 +193,10 @@ CORS_ORIGIN_WHITELIST = (
 CORS_ORIGIN_REGEX_WHITELIST = (
    'localhost:3000',
 )
+
+ALLOWED_HOSTS = [
+    '::1',
+    'localhost',
+    '127.0.0.1',
+    'donaalda.baguette.management',
+]
