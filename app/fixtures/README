@@ -1,0 +1,50 @@
+to dump the database use the command (make sure that the database is migrated to
+the current version of the model first by running `python manage.py
+showmigrations` first and reading up on django migrations if there are some
+boxes without checkmarks)
+
+```
+python manage.py dumpdata --natural-foreign --natural-primary --format=json --indent=2 -e auth.Permission app auth sessions -o app/fixtures/initial_data.json
+```
+
+Let's break this up a bit
+- `--natural-foreign` save foreign keys in their "natural" form if it exists.
+  This means that instead of permission:[1,5,8] the dump will contain
+  permission:["add_stuff", "burn_stuff", "do_stuff"]. This is important because
+  permissions are automatically generated if the database is dropped which will
+  cause their primary key to change. The natural keys however will stay the
+  same.
+- `--format=json` self explanatory
+- `--indent=2` create human readable output
+- `-e auth.Permission` don't include the model auth.Permission in the dump (it
+  gets automatically generated as mentioned above)
+- `app auth sessions` the apps to dump (app self explanatory, auth for user data
+  and sessions because some things in app refer to session)
+- `-o ...` the file to dump to. This will create the file with the right
+  encoding and show a nice progress bar
+
+to verify that the data was dumped correctl switch the database in
+advisor/settings.py over to sqlite3 and run
+
+```
+python manage.py migrate
+python manage.py loaddata initial_data
+```
+
+The two commands should run without errors. IF THEY PRODUCE ERRORS, SOMETHING IS
+VERY WRONG AND SHOULD PROBABLY BE FIXED.
+
+To restore the database from scratch, the easiest way would be to DROP the
+database with psql (@m.chlepakov how do you do that), recreate it (also with
+psql) and run
+
+createdb -h dailab-advisor.cgxenmplsqo5.eu-central-1.rds.amazonaws.com -p 5432 -e -U django -W -O django -T 158-through-rating <DB_NAME>
+
+dropdb -h dailab-advisor.cgxenmplsqo5.eu-central-1.rds.amazonaws.com -p 5432 -i -e -U django -W <DB_NAME>
+
+```
+python manage.py migrate
+python manage.py loaddata initial_data
+```
+
+again.
