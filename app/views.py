@@ -150,12 +150,7 @@ class Suggestions(generics.GenericAPIView):
         return self.get_paginated_response(self, serializer.data)
 
     def get_queryset(self):
-        if self.request.session.session_key is None:
-            raise Exception("requesting session has no key!")
-        else:
-            # scenarios = Session.objects.get(id=self.request.session.session_key).saved_scenarios
-            # return scenarios
-            return Scenario.objects.all()
+        return Scenario.objects.all()
 
     def get_serializer_class(self):
         return ScenarioSerializer
