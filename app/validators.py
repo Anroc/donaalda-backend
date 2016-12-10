@@ -15,11 +15,11 @@ def validate_legal_chars(value):
 
 _ERR_CATEGORIES = 'Category_preference should contain exactly all categories.'
 _ERR_VALUES = 'Values should be in the range of 0 to 10'
-def validate_suggestions_input(value):
+def validate_scenario_preference(value):
     categories = models.Category.objects.values_list('name', flat=True)
-    if value.category_preference.keys() != set(categories):
+    if value.keys() != set(categories):
         raise ValidationError(_ERR_CATEGORIES)
 
-    for key, value in value.category_preference.items():
+    for key, value in value.items():
         if not 1 <= value <= 10:
             raise ValidationError(_ERR_VALUES)

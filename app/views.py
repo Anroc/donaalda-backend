@@ -141,10 +141,10 @@ class Suggestions(generics.ListAPIView):
         OnboardingAnswers = namedtuple("OnboardingAnswers",
                                        ["category_preference", "user_preference", "renovation_preference"])
         try:
-            onboarding_answers = OnboardingAnswers(**request.data)
-            validate_suggestions_input(onboarding_answers)
+            validate_scenario_preference(request.data['category_preference'])
         except (TypeError, ValidationError) as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
+        onboarding_answers = OnboardingAnswers(**request.data)
         return self.list(request)
 
     def get_queryset(self):
