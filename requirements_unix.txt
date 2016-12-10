@@ -1,0 +1,2 @@
+-r requirements_general_dont_use_this.txt
+psycopg2 <= 2.6.1
