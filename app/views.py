@@ -140,9 +140,8 @@ class Suggestions(generics.GenericAPIView):
     def post(self, request, format=None):
         OnboardingAnswers = namedtuple("OnboardingAnswers",
                                        ["category_preference", "user_preference", "renovation_preference"])
-        json_data = json.loads(request.body.decode('utf-8'))
         try:
-            onboarding_answers = OnboardingAnswers(**json_data)
+            onboarding_answers = OnboardingAnswers(**request.data)
             validate_suggestions_input(onboarding_answers, Category.objects.all())
         except (TypeError, ValidationError) as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
