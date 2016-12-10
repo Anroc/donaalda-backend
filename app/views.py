@@ -26,6 +26,7 @@ from .validators import *
 from django.core.exceptions import ValidationError
 
 from .match_making import implement_scenario
+from .suggestions import SuggestionsInputSerializer
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -138,13 +139,11 @@ class Suggestions(generics.ListAPIView):
         pass
 
     def post(self, request, format=None):
-        OnboardingAnswers = namedtuple("OnboardingAnswers",
-                                       ["category_preference", "user_preference", "renovation_preference"])
-        try:
-            validate_scenario_preference(request.data['category_preference'])
-        except (TypeError, ValidationError) as e:
-            return Response(e, status=status.HTTP_400_BAD_REQUEST)
-        onboarding_answers = OnboardingAnswers(**request.data)
+        input_serializer = SuggestionsInputSerializer(data=request.data)
+        if not input_serializer.is_valid():
+            return Response(input_serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
+        suggestions_input = input_serializer.save()
         return self.list(request)
 
     def get_queryset(self):
