@@ -52,10 +52,15 @@ class ProductTypeSerializer(serializers.ModelSerializer):
 class ScenarioSerializer(serializers.ModelSerializer):
     provider = ProviderSerializer()
 
+    price = serializers.SerializerMethodField('_get_price')
+
+    def _get_price(self, obj):
+        return self.context.get('price')
+
     class Meta:
         model = Scenario
         fields = (
-            'pk', 'name', 'url_name', 'picture', 'provider',)
+            'pk', 'name', 'url_name', 'picture', 'provider', 'price', )
 
 
 class SubCategorySerializer(serializers.ModelSerializer):

@@ -35,7 +35,7 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ScenarioViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Scenario.objects.all()
-    serializer_class = ScenarioSerializer
+    serializer_class = ScenarioSerializer(context={'price': '0'})
 
 
 class SubCategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -146,14 +146,38 @@ class Suggestions(generics.GenericAPIView):
             validate_suggestions_input(onboarding_answers, Category.objects.all())
         except (TypeError, ValidationError) as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
-        serializer = ScenarioSerializer(Scenario.objects.all(), many=True)
-        return self.get_paginated_response(self, serializer.data)
+
+        product_sets = dict()
+        for scenario in self.get_queryset():
+            product_sets[scenario] = Suggestions.ScenarioImpl(
+                implement_scenario(scenario, onboarding_answers.user_preference.lower().strip())
+            )
+        serializer = ScenarioSerializer(Scenario.objects.all(), many=True, context={'product_sets': product_sets})
+        return Response(status=status.HTTP_200_OK, data=serializer.data)
 
     def get_queryset(self):
         return Scenario.objects.all()
 
     def get_serializer_class(self):
         return ScenarioSerializer
+
+    class ScenarioImpl(object):
+        product_set = None
+        price = 0.0
+        efficiency = 0
+        extendability = 0
+
+        def __init__(self, product_set):
+            self.product_set = product_set
+            self.compute_specs()
+
+        def compute_specs(self):
+            protocols = set()
+            for product in self.product_set:
+                self.price += product.price
+                self.efficiency += product.efficiency
+                protocols = protocols.union(product.leader_protocol.union(product.follower_protocol))
+            self.extendability = len(protocols)
 
 
 @api_view(['GET'])
