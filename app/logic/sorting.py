@@ -1,6 +1,8 @@
 from operator import itemgetter
 from backend.advisor.app.models import *
 
+MINIMAL_RATING_VALUE = 1
+
 
 def sort_scenarios(scenarios, scenario_preference):
     """
@@ -54,7 +56,7 @@ def __normalize(dictionary, default_key_set=None):
 
     length = 0
     for key in default_key_set:
-        length += ret.get(key, "1") ** 2
+        length += ret.get(key, MINIMAL_RATING_VALUE) ** 2
     length **= 0.5
 
     for key in default_key_set:
