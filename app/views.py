@@ -157,7 +157,7 @@ class Suggestions(generics.ListAPIView):
 @list_route(methods=['GET'])
 @permission_classes((permissions.AllowAny,))
 def matching(request):
-    product_set = implement_scenario(Scenario.objects.first(), "extensible")
+    product_set = implement_scenario(Scenario.objects.first(), request.GET.get('preference', 'cost'))
     print(product_set)
     return Response(status=status.HTTP_200_OK)
 

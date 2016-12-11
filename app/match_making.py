@@ -23,7 +23,7 @@ def implement_scenario(scenario, user_preference):
     :return a set of implementing products that matches the user preferences optimally.
     """
 
-    LOGGER.debug('Scenario: %s' % scenario.name)
+    LOGGER.debug('Scenario: %s; preference: %s' % (scenario.name, user_preference))
     meta_broker = scenario.meta_broker
     meta_endpoints = set(scenario.meta_endpoints.all())
 
@@ -112,18 +112,20 @@ def cost_function(product_sets, preference):
             for product in current_set:
                 x += len(__get_protocols(product, True)) + len(__get_protocols(product, False))
             sorting[current_set] = float(len(broker)**2) / x
+            return sorted(sorting.items(), key=operator.itemgetter(1))[0][0]
         elif preference == "cost":
-            # TODO: implement
+            for product in current_set:
+                x += product.price
             sorting[current_set] = 1. / x * 0.95 ** len(broker)
-            pass
         elif preference == "efficiency":
-            # TODO: implement
+            for product in current_set:
+                x += product.efficiency
             sorting[current_set] = 1. / x * 0.95 ** len(broker)
-            pass
         else:
             raise(AttributeError("Unsupported preference %s" % preference))
         # search for minimum
-    return sorted(sorting.items(), key=operator.itemgetter(1))[0][0]
+    # only cost and efficiency
+    return sorted(sorting.items(), key=operator.itemgetter(1))[-1][0]
 
 
 def __merge_paths(meta_endpoints, possible_paths):

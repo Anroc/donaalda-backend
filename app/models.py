@@ -150,6 +150,8 @@ class Product(models.Model):
     product_type = models.ForeignKey("ProductType", default="1", verbose_name="Produktart",
                                      on_delete=models.SET_DEFAULT)
     serial_number = models.CharField(max_length=255, default="------", verbose_name="Artikelnummer")
+    price = models.FloatField(verbose_name="Preis in Euro", default=0.0)
+    efficiency = models.IntegerField(verbose_name="Verbrauch in Watt", default=0)
     description = models.TextField(verbose_name="Berschreibung")
     specifications = models.TextField(default="---", verbose_name="Technische Details")
     image1 = models.ImageField(verbose_name="Bild 1", upload_to="products")
