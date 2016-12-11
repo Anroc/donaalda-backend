@@ -36,7 +36,7 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ScenarioViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Scenario.objects.all()
-    serializer_class = ScenarioSerializer()
+    serializer_class = ScenarioSerializer
 
 
 class SubCategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -146,15 +146,19 @@ class Suggestions(generics.ListAPIView):
             return Response(input_serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
         suggestions_input = input_serializer.save()
-        for scenario in self.get_queryset():
-            self.product_sets[scenario] = Suggestions.ScenarioImpl(
-                implement_scenario(scenario, suggestions_input.product_preference.lower().strip())
-            )
+        self.request.session['suggestions_input'] = suggestions_input
 
         return self.list(request)
 
     def get_queryset(self):
-        return Scenario.objects.all()
+        suggestions_input = self.request.session['suggestions_input']
+        scenarios = Scenario.objects.all()
+
+        for scenario in scenarios:
+            self.product_sets[scenario] = Suggestions.ScenarioImpl(
+                implement_scenario(scenario, suggestions_input.product_preference.lower().strip())
+            )
+        return scenarios
 
     def get_serializer_class(self):
         return ScenarioSerializer
