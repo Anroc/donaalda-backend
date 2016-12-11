@@ -135,6 +135,8 @@ class SuggestedScenarioViewSet():
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
 class Suggestions(generics.ListAPIView):
+    product_sets = dict()
+
     def get(self, request, format=None):
         pass
 
@@ -144,12 +146,11 @@ class Suggestions(generics.ListAPIView):
             return Response(input_serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
         suggestions_input = input_serializer.save()
-
-        product_sets = dict()
         for scenario in self.get_queryset():
-            product_sets[scenario] = Suggestions.ScenarioImpl(
-                implement_scenario(scenario, suggestions_input.user_preference.lower().strip())
+            self.product_sets[scenario] = Suggestions.ScenarioImpl(
+                implement_scenario(scenario, suggestions_input.product_preference.lower().strip())
             )
+
         return self.list(request)
 
     def get_queryset(self):
@@ -157,6 +158,9 @@ class Suggestions(generics.ListAPIView):
 
     def get_serializer_class(self):
         return ScenarioSerializer
+
+    def get_serializer_context(self):
+        return {'product_sets': self.product_sets}
 
     class ScenarioImpl(object):
         product_set = None
