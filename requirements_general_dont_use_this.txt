@@ -1,0 +1,15 @@
+Django == 1.10.3
+django_imagekit <= 3.3
+Pillow <= 3.2.0
+django-material <= 0.7.0
+django-bower <= 5.1.0
+django_static_precompiler <= 1.4
+djangorestframework == 3.5.3
+markdown <= 2.6.6
+django-filter == 0.15.3
+coreapi == 2.0.9
+django-crispy-forms <= 1.6.0
+django-rest-swagger == 2.1.0
+drfdocs == 0.0.11
+future == 0.16.0
+django-cors-headers == 1.1.0
