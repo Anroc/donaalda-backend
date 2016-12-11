@@ -135,7 +135,6 @@ class SuggestedScenarioViewSet():
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
 class Suggestions(generics.ListAPIView):
-    suggested_scenarios = list()
 
     def get(self, request, format=None):
         pass
@@ -146,17 +145,20 @@ class Suggestions(generics.ListAPIView):
             return Response(input_serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
         suggestions_input = input_serializer.save()
-
-        # call scenario sorting
-        sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input.scenario_preference)
-        for tuple_elem in sorted_tuple_list:
-            self.suggested_scenarios.append(tuple_elem[0])
-            # TODO: save matching value to send to frontend
+        self.request.session['suggestions_input'] = suggestions_input
 
         return self.list(request)
 
     def get_queryset(self):
-        return self.suggested_scenarios
+        suggested_scenarios = list()
+        suggestions_input = self.request.session['suggestions_input']
+
+        # call scenario sorting
+        sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input.scenario_preference)
+        for tuple_elem in sorted_tuple_list:
+            suggested_scenarios.append(tuple_elem[0])
+            # TODO: save matching value to send to frontend
+        return suggested_scenarios
 
     def get_serializer_class(self):
         return ScenarioSerializer
