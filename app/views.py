@@ -1,32 +1,26 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-import json
-import pprint
 
 from django.contrib import messages
-from django.views import generic
 from django.contrib.auth import authenticate
-from .forms import LoginForm
 from django.contrib.auth import login, logout
+from django.http import *
 from django.shortcuts import render
+from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
-from django.http import *
+from rest_framework import generics, status
 from rest_framework import viewsets
-from django.core import serializers as serial
-from .serializers import *
-from .permissions import *
-from rest_framework.response import Response
-from rest_framework import authentication, permissions
 from rest_framework.decorators import *
-from rest_framework import generics, mixins, views, status
-from collections import namedtuple
-from .validators import *
-from django.core.exceptions import ValidationError
+from rest_framework.response import Response
 
-from .match_making import implement_scenario
-from .suggestions import SuggestionsInputSerializer, sort_scenarios
+from backend.advisor.app.logic.match_making import implement_scenario, sort_scenarios
+from .forms import LoginForm
+from .permissions import *
+from .serializers import *
+from .suggestions import SuggestionsInputSerializer
+from .validators import *
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
