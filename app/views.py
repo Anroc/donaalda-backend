@@ -176,17 +176,9 @@ class Suggestions(generics.GenericAPIView):
             for product in self.product_set:
                 self.price += product.price
                 self.efficiency += product.efficiency
-                protocols = protocols.union(product.leader_protocol.union(product.follower_protocol))
+                protocols = protocols.union(
+                    set(product.leader_protocol.all()).union(set(product.follower_protocol.all())))
             self.extendability = len(protocols)
-
-
-@api_view(['GET'])
-@list_route(methods=['GET'])
-@permission_classes((permissions.AllowAny,))
-def matching(request):
-    product_set = implement_scenario(Scenario.objects.first(), request.GET.get('preference', 'cost'))
-    print(product_set)
-    return Response(status=status.HTTP_200_OK)
 
 
 class IndexView(generic.DetailView):
