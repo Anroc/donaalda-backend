@@ -107,17 +107,17 @@ def cost_function(product_sets, preference):
         broker = __get_broker_of_products(current_set)
 
         x = 1
-        if preference == "extensible":
+        if preference == "extensible" or preference == "erweiterbarkeit":
             x = 0
             for product in current_set:
                 x += len(__get_protocols(product, True)) + len(__get_protocols(product, False))
             sorting[current_set] = float(len(broker)**2) / x
             return sorted(sorting.items(), key=operator.itemgetter(1))[0][0]
-        elif preference == "cost":
+        elif preference == "price" or preference == "preis":
             for product in current_set:
                 x += product.price
             sorting[current_set] = 1. / x * 0.95 ** len(broker)
-        elif preference == "efficiency":
+        elif preference == "efficiency" or preference == "effizienz":
             for product in current_set:
                 x += product.efficiency
             sorting[current_set] = 1. / x * 0.95 ** len(broker)

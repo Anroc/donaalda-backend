@@ -55,7 +55,7 @@ class ScenarioSerializer(serializers.ModelSerializer):
     price = serializers.SerializerMethodField('_get_price')
 
     def _get_price(self, obj):
-        return self.context.get('price')
+        return self.context.get('product_set')[self].price
 
     class Meta:
         model = Scenario
