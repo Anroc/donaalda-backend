@@ -1,4 +1,4 @@
-from backend.advisor.app.models import *
+from ..models import *
 import operator
 import logging
 from django.core.cache import cache

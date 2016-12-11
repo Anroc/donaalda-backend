@@ -1,5 +1,5 @@
 from operator import itemgetter
-from backend.advisor.app.models import *
+from ..models import Category
 
 MINIMAL_RATING_VALUE = 1
 
@@ -17,7 +17,7 @@ def sort_scenarios(scenarios, scenario_preference):
         (smaller is better)
     """
     scenario_soring = list()
-    category_names = models.Category.objects.values_list('name', flat=True)
+    category_names = Category.objects.values_list('name', flat=True)
     scenario_preference = __normalize(scenario_preference, category_names)
 
     for scenario in scenarios:
@@ -28,8 +28,8 @@ def sort_scenarios(scenarios, scenario_preference):
 
         scenario_vector = __normalize(scenario_vector, category_names)
         distance = 0
-        for key, value in scenario_preference:
-            distance += (value - scenario_vector[key]) ** 2
+        for key in scenario_preference.keys():
+            distance += (scenario_preference[key] - scenario_vector[key]) ** 2
         distance **= 0.5
 
         scenario_soring.append((scenario, distance))
@@ -56,7 +56,9 @@ def __normalize(dictionary, default_key_set=None):
 
     length = 0
     for key in default_key_set:
-        length += ret.get(key, MINIMAL_RATING_VALUE) ** 2
+        if key not in ret:
+            ret[key] = MINIMAL_RATING_VALUE
+        length += ret[key] ** 2
     length **= 0.5
 
     for key in default_key_set:

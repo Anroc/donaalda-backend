@@ -15,7 +15,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import *
 from rest_framework.response import Response
 
-from backend.advisor.app.logic.match_making import implement_scenario, sort_scenarios
+from .logic.match_making import implement_scenario
+from .logic.sorting import sort_scenarios
 from .forms import LoginForm
 from .permissions import *
 from .serializers import *
@@ -145,6 +146,8 @@ class Suggestions(generics.ListAPIView):
 
     def get_queryset(self):
         suggested_scenarios = list()
+        if 'suggestions_input' not in self.request.session:
+            return Scenario.objects.all()
         suggestions_input = self.request.session['suggestions_input']
 
         # call scenario sorting
