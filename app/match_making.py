@@ -36,9 +36,6 @@ def implement_scenario(scenario, user_preference):
     if len(impl_of_meta_device[meta_broker]) == 0:
         return set()
 
-    # needed for later propose
-    used_products = impl_of_meta_device[meta_broker]
-
     for meta_endpoint in meta_endpoints:
         LOGGER.debug('Metaendpoint: %s' % meta_endpoint)
         impl_of_meta_device[meta_endpoint] = find_implementing_product(meta_endpoint)
@@ -46,7 +43,6 @@ def implement_scenario(scenario, user_preference):
         # no implementation was found
         if len(impl_of_meta_device[meta_endpoint]) == 0:
             return set()
-        used_products = used_products.union(impl_of_meta_device[meta_endpoint])
 
     # 2. start running F
     # we already validated that each endpoint have at least one implementation
@@ -72,24 +68,24 @@ def implement_scenario(scenario, user_preference):
                     LOGGER.debug('%s->%s: %s' % (endpoint_impl, broker_impl, res))
 
         # check if current broker impl can reach every endpoint
-        if len(possible_paths) == 0:
+        if len(meta_endpoints) != len(possible_paths):
             continue
 
-        possible_sets = __merge_paths(meta_endpoints, possible_paths)
+        merged_set = __merge_paths(meta_endpoints, possible_paths)
         # 3. apply cost function U_pref to get one product set
-        possible_sets = cost_function(possible_sets, user_preference, used_products)
+        merged_set = cost_function(merged_set, user_preference)
         # 4. merge all product sets
-        product_sets.add(possible_sets)
+        product_sets.add(merged_set)
 
     # 5. apply cost function U_pref to get the best product set
-    product_sets = cost_function(product_sets, user_preference, used_products)
+    product_sets = cost_function(product_sets, user_preference)
 
     LOGGER.info('Start matching for scenario: "%s", found matching product set "%s"' % (scenario.name, product_sets))
     # return the product set
     return product_sets
 
 
-def cost_function(product_sets, preference, used_products):
+def cost_function(product_sets, preference):
     """
     Cost function which decides which product set matches the user preferences.
 
@@ -107,21 +103,22 @@ def cost_function(product_sets, preference, used_products):
 
     sorting = dict()
     for current_set in product_sets:
-        bridges = current_set.difference(used_products)
+        # will resolve in set that contains the master broker and other bridges; this set is at least on element big
+        broker = __get_broker_of_products(current_set)
 
         x = 1
         if preference == "extensible":
             x = 0
             for product in current_set:
                 x += len(__get_protocols(product, True)) + len(__get_protocols(product, False))
-            sorting[current_set] = float((1+len(bridges))**2) / x
+            sorting[current_set] = float(len(broker)**2) / x
         elif preference == "cost":
             # TODO: implement
-            sorting[current_set] = 1. / x * 0.95 ** len(bridges)
+            sorting[current_set] = 1. / x * 0.95 ** len(broker)
             pass
         elif preference == "efficiency":
             # TODO: implement
-            sorting[current_set] = 1. / x * 0.95 ** len(bridges)
+            sorting[current_set] = 1. / x * 0.95 ** len(broker)
             pass
         else:
             raise(AttributeError("Unsupported preference %s" % preference))
@@ -306,3 +303,12 @@ def get_products():
         A set of all known products.
     """
     return cache.get_or_set(PRODUCT_ID_HASH, set(Product.objects.all()), EXPIRATION_TIME)
+
+
+def __get_broker_of_products(product_set):
+    return_set = set()
+    for product in product_set:
+        if len(__get_protocols(product, True)) > 0:
+            return_set.add(product)
+
+    return return_set
