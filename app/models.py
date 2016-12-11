@@ -469,7 +469,7 @@ class SubCategory(models.Model):
 class ScenarioCategoryRating(models.Model):
     scenario = models.ForeignKey(to="Scenario", verbose_name="Szenario")
     category = models.ForeignKey(to="Category", verbose_name="Kategorie")
-    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)],
+    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)],
                                               verbose_name="Passfaehigkeit")
 
     def __str__(self):
