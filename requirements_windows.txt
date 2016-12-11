@@ -1,0 +1,25 @@
+-r requirements_general_dont_use_this.txt
+# win32
+# -e git+https://github.com/nwcell/psycopg2-windows.git@win32-py34#egg=psycopg2 ; (sys_platform == 'win32' and python_version >= '3.4')
+# -e git+https://github.com/nwcell/psycopg2-windows.git@win32-py33#egg=psycopg2 ; (sys_platform == 'win32' and python_version == '3.3')
+# -e git+https://github.com/nwcell/psycopg2-windows.git@win32-py32#egg=psycopg2 ; (sys_platform == 'win32' and python_version == '3.2')
+# -e git+https://github.com/nwcell/psycopg2-windows.git@win32-py27#egg=psycopg2 ; (sys_platform == 'win32' and python_version == '2.7')
+# win64 this is redundant, since python will ALWAYS return 'win32' for Windows no matter the actual version, fuck you
+# https://mail.python.org/pipermail/patches/2000-May/000648.html
+# Use "win32" for sys.platform on Win64 instead of "win32" because:
+#1. While it may be confusing to the Python scriptor on Win64 that he has to
+#   check for win*32*, that is something that he will learn the first time. It
+#   is better than the alternative of the scriptor happily using "win64" and
+#   then that code not running on Win32 for no good reason. <- really no good reason? 32vs64bit may just be reason enough
+#2. The main question is: is Win64 so much more like Win32 than different from
+#   it that the common-case general Python programmer should not ever have to
+#   make the differentiation in his Python code. Or, at least, enough so that
+#   such differentiation by the Python scriptor is rare enough that some other
+#   provided mechanism is sufficient (even preferable). Currently the answer
+#   is yes. Hopefully MS will not change this answer.
+# -e git+https://github.com/nwcell/psycopg2-windows.git@win64-py34#egg=psycopg2 ; (sys_platform == 'win64' and python_version >= '3.4')
+# -e git+https://github.com/nwcell/psycopg2-windows.git@win64-py33#egg=psycopg2 ; (sys_platform == 'win64' and python_version == '3.3')
+# -e git+https://github.com/nwcell/psycopg2-windows.git@win64-py32#egg=psycopg2 ; (sys_platform == 'win64' and python_version == '3.2')
+# -e git+https://github.com/nwcell/psycopg2-windows.git@win64-py27#egg=psycopg2 ; (sys_platform == 'win64' and python_version == '2.7')
+
+
