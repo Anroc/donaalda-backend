@@ -36,7 +36,7 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ScenarioViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Scenario.objects.all()
-    serializer_class = ScenarioSerializer(context={'price': '0'})
+    serializer_class = ScenarioSerializer()
 
 
 class SubCategoryViewSet(viewsets.ReadOnlyModelViewSet):
