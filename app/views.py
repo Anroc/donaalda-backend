@@ -1,32 +1,28 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-import json
-import pprint
 
 from django.contrib import messages
-from django.views import generic
 from django.contrib.auth import authenticate
-from .forms import LoginForm
 from django.contrib.auth import login, logout
+from django.http import *
 from django.shortcuts import render
+from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
-from django.http import *
+from rest_framework import generics, status
 from rest_framework import viewsets
-from django.core import serializers as serial
-from .serializers import *
-from .permissions import *
-from rest_framework.response import Response
-from rest_framework import authentication, permissions
 from rest_framework.decorators import *
-from rest_framework import generics, mixins, views, status
-from collections import namedtuple
-from .validators import *
-from django.core.exceptions import ValidationError
+from rest_framework.response import Response
 
-from .match_making import implement_scenario
-from .suggestions import SuggestionsPagination
+from .logic.match_making import implement_scenario
+from .logic.sorting import sort_scenarios
+from .forms import LoginForm
+from .permissions import *
+from .serializers import *
+from .validators import *
+from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, InvalidGETException
+from .constants import SUGGESTIONS_INPUT_SESSION_KEY
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -131,30 +127,31 @@ class QuestionStepViewSet(viewsets.ReadOnlyModelViewSet):
 class Suggestions(generics.ListAPIView):
     pagination_class = SuggestionsPagination
     def post(self, request, format=None):
-        OnboardingAnswers = namedtuple("OnboardingAnswers",
-                                       ["category_preference", "user_preference", "renovation_preference"])
-        json_data = json.loads(request.body.decode('utf-8'))
-        try:
-            onboarding_answers = OnboardingAnswers(**json_data)
-            validate_suggestions_input(onboarding_answers, Category.objects.all())
-        except (TypeError, ValidationError) as e:
-            return Response(e, status=status.HTTP_400_BAD_REQUEST)
+        input_serializer = SuggestionsInputSerializer(data=request.data)
+        if not input_serializer.is_valid():
+            return Response(input_serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
+        suggestions_input = input_serializer.save()
+        self.request.session[SUGGESTIONS_INPUT_SESSION_KEY] = suggestions_input
         return self.list(request)
 
     def get_queryset(self):
-        return Scenario.objects.all()
+        suggestions_input = self.request.session.get(
+                SUGGESTIONS_INPUT_SESSION_KEY, None)
+        if suggestions_input is None:
+            raise InvalidGETException
+
+        suggested_scenarios = list()
+        # call scenario sorting
+        sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input.scenario_preference)
+        for scenario, rating in sorted_tuple_list:
+            product_set = implement_scenario(
+                    scenario, suggestions_input.product_preference)
+            if product_set:
+                yield ScenarioImpl(product_set, scenario, rating)
 
     def get_serializer_class(self):
-        return ScenarioSerializer
-
-
-@api_view(['GET'])
-@list_route(methods=['GET'])
-@permission_classes((permissions.AllowAny,))
-def matching(request):
-    product_set = implement_scenario(Scenario.objects.first(), "extensible")
-    print(product_set)
-    return Response(status=status.HTTP_200_OK)
+        return SuggestionsOutputSerializer
 
 
 class IndexView(generic.DetailView):

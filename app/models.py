@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import re, os
+import re
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
@@ -8,6 +8,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from .validators import validate_legal_chars
+from .constants import MINIMAL_RATING_VALUE, MAXIMAL_RATING_VALUE
 
 """
 The different models described in this file can mostly be separated in three different parts
@@ -83,8 +84,8 @@ class Scenario(models.Model):
     Can be created by Employees.
     """
 
-    name = models.CharField(max_length=100, unique=True)
-    url_name = models.CharField(max_length=100, unique=False, verbose_name="URL-Name")
+    name = models.CharField(max_length=255, unique=True)
+    url_name = models.CharField(max_length=255, unique=False, verbose_name="URL-Name")
     description = models.TextField(verbose_name="Kurzbeschreibung", max_length="500", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
     provider = models.ForeignKey("Provider", default="1", verbose_name="Erstellt von", on_delete=models.CASCADE)
@@ -150,6 +151,8 @@ class Product(models.Model):
     product_type = models.ForeignKey("ProductType", default="1", verbose_name="Produktart",
                                      on_delete=models.SET_DEFAULT)
     serial_number = models.CharField(max_length=255, default="------", verbose_name="Artikelnummer")
+    price = models.FloatField(verbose_name="Preis in Euro", default=0.0)
+    efficiency = models.IntegerField(verbose_name="Verbrauch in Watt", default=0)
     description = models.TextField(verbose_name="Berschreibung")
     specifications = models.TextField(default="---", verbose_name="Technische Details")
     image1 = models.ImageField(verbose_name="Bild 1", upload_to="products")
@@ -192,14 +195,17 @@ class ProductType(models.Model):
     where you use general product types instead of specific products.
     """
 
-    type_name = models.CharField(max_length=255, unique=True, verbose_name="Name")
-    used_as_product_type_filter_by = models.ManyToManyField(to=Session,
-                                                            verbose_name="Als Produkttypfilter verwendet von",
-                                                            blank=True)
-    thumbnail = models.ImageField(verbose_name="Bild", null=True, blank=True,
-                                  upload_to=os.path.join("productType", "thumbnail"))
-    house_overlay_picture = models.ImageField(verbose_name="Bild", null=True, blank=True,
-                                              upload_to=os.path.join("productType", "house_overlay_picture"))
+    type_name = models.CharField(
+            max_length=255, unique=True, verbose_name="Name")
+    used_as_product_type_filter_by = models.ManyToManyField(
+            to=Session, verbose_name="Als Produkttypfilter verwendet von",
+            blank=True)
+    thumbnail = models.ImageField(
+            verbose_name="Thumbnail", null=True, blank=True,
+            upload_to="productType/thumbnail")
+    house_overlay_picture = models.ImageField(
+            verbose_name="Bildicon in der Hausvorschau", null=True, blank=True,
+            upload_to="productType/house_overlay_picture")
 
     def __str__(self):
         return '%s' % self.type_name
@@ -466,8 +472,9 @@ class SubCategory(models.Model):
 class ScenarioCategoryRating(models.Model):
     scenario = models.ForeignKey(to="Scenario", verbose_name="Szenario")
     category = models.ForeignKey(to="Category", verbose_name="Kategorie")
-    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)],
-                                              verbose_name="Passfaehigkeit")
+    rating = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(MINIMAL_RATING_VALUE), MaxValueValidator(MAXIMAL_RATING_VALUE)],
+        verbose_name="Passfaehigkeit")
 
     def __str__(self):
         return "%s passt zu %s mit rating %d" % (self.scenario, self.category, self.rating)

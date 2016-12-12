@@ -14,10 +14,10 @@ import os
 import sys
 
 try:
-    from .db_settings import DATABASES
-except:
+    from .db_settings import *
+except ImportError:
     print("""
-        You don't have a database configuration file.
+        You don't have a current database configuration file.
         Copy db_settings_example.py to advisor/db_settings.py
     """)
     sys.exit(1)
@@ -41,6 +41,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 'debug_toolbar',
     # 'django_extensions',
+    'memcache',
     'corsheaders',
     'rest_framework_swagger',
     'rest_framework_docs',
@@ -143,6 +144,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ]
     # 'PAGE_SIZE': 5,
 }
 
@@ -196,3 +200,38 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'donaalda.baguette.management',
 ]
+
+LOGGING = {
+    'version': 1,
+    #'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(message)s',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'debug.log'),
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+        'app.logic.match_making': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
+    },
+}
