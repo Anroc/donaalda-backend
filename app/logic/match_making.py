@@ -174,6 +174,10 @@ def __matches_renovation_preference(product_set, renovation_preference):
     return res
 
 
+def __filter_product_set(product_set, product_type_filter):
+    pass
+
+
 def __find_implementing_product(meta_device):
     """
     Find all implementing products to a given meta_device.
