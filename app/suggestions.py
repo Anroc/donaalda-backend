@@ -1,6 +1,7 @@
 import collections
 
-from rest_framework import serializers
+from rest_framework import serializers, exceptions
+
 from .constants import *
 from .serializers import ScenarioSerializer
 
@@ -69,3 +70,9 @@ class SuggestionsOutputSerializer(serializers.Serializer):
     price = serializers.FloatField()
     efficiency = serializers.IntegerField()
     extendability = serializers.IntegerField()
+
+
+class InvalidGETException(exceptions.APIException):
+    status_code = 400
+    default_code = 'client error'
+    default_detail = 'A POST requests that sets the onboarding preferences is required before a GET to the suggestions endpoint is possible'
