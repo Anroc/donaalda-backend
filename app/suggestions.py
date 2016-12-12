@@ -1,6 +1,7 @@
 import collections
 
 from rest_framework import serializers
+from .constants import *
 
 from .models import Category
 from .validators import (
@@ -25,7 +26,7 @@ class SuggestionsInputSerializer(serializers.Serializer):
             child=serializers.IntegerField(),
             validators=[validate_scenario_preference])
     product_preference = serializers.ChoiceField(
-            choices=['Preis', 'Energie', 'Erweiterbarkeit'])
+            choices=[PRODUCT_PREF_PRICE, PRODUCT_PREF_EFFICIENCY, PRODUCT_PREF_EXTENDABILITY])
     renovation_preference = serializers.BooleanField()
 
     product_type_filter = serializers.ListField(
