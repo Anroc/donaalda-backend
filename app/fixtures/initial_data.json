@@ -166,47 +166,6 @@
   }
 },
 {
-  "model": "app.scenario",
-  "pk": 7,
-  "fields": {
-    "name": "Wenn mein Kind nach Hause kommt sollen einige elektronische Ger\u00e4te nicht mehr aktivierbar sein.",
-    "url_name": "wenn_mein_kind_nach_hause_kommt_sollen_einige_elektronische_gerate_nicht_mehr_aktivierbar_sein_",
-    "description": "Da wir als Eltern beide arbeiten und unser Kind meist fr\u00fcher von der Schule nach Hause\r\nkommt wie wir, sollen sich alle Ger\u00e4te im Haushalt, die das Kind bewusst oder unbewusst\r\nbet\u00e4tigen k\u00f6nnte und an denen es sich verletzen k\u00f6nnte. Dies beinhaltet bspw. den Herd oder den Backofen.\r\nAuch m\u00f6chten wir Konrolle \u00fcber den Fernseher haben.",
-    "picture": "scenarios/house_with_heart.jpg",
-    "provider": 27,
-    "meta_broker": 1,
-    "meta_endpoints": [
-      24,
-      21,
-      22,
-      23
-    ],
-    "subcategory": [
-      18
-    ],
-    "in_shopping_basket_of": []
-  }
-},
-{
-  "model": "app.scenario",
-  "pk": 8,
-  "fields": {
-    "name": "Falls mein Opa hinf\u00e4llt m\u00f6chte ich, dass der Krankenwagen gerufen wird.",
-    "url_name": "falls_mein_opa_hinfallt_mochte_ich__dass_der_krankenwagen_gerufen_wird_",
-    "description": "Mein Opa ist sehr gebrechlich, m\u00f6chte aber nicht ins Heim, weswegen er bei mir wohnt.\r\nWenn ich unterwegs bin habe ich immer Angst, dass er hinf\u00e4llt und keine Hilfe mehr rufen kann.\r\nDewegen soll mein Opa nun ein SmartWatch tragen, welche erkennt, ob er gest\u00fcrzt ist und \r\nden Notruf bescheid geben. Um Fehlalrame zu vermeiden meldet sich das SmartWatch mit einem lauten \r\nAlarmtom und falls nach 2 Minuten keine Eingabe erfolgt wird der Notruf benachrichtigt.",
-    "picture": "scenarios/jpeg-148132007B3B12CD-20120425-img_36231964.original.large-4-3-800-0-311-2600-2258.jpg",
-    "provider": 27,
-    "meta_broker": 1,
-    "meta_endpoints": [
-      25
-    ],
-    "subcategory": [
-      9
-    ],
-    "in_shopping_basket_of": []
-  }
-},
-{
   "model": "app.product",
   "pk": 1,
   "fields": {
@@ -356,12 +315,8 @@
     "end_of_life": false,
     "renovation_required": false,
     "leader_protocol": [],
-    "follower_protocol": [
-      3
-    ],
-    "features": [
-      26
-    ]
+    "follower_protocol": [],
+    "features": []
   }
 },
 {
@@ -404,12 +359,8 @@
     "end_of_life": false,
     "renovation_required": false,
     "leader_protocol": [],
-    "follower_protocol": [
-      3
-    ],
-    "features": [
-      24
-    ]
+    "follower_protocol": [],
+    "features": []
   }
 },
 {
@@ -597,8 +548,8 @@
       3
     ],
     "features": [
-      17,
-      13
+      13,
+      17
     ]
   }
 },
@@ -752,8 +703,7 @@
       3
     ],
     "features": [
-      13,
-      20
+      13
     ]
   }
 },
@@ -779,8 +729,7 @@
       1
     ],
     "features": [
-      13,
-      22
+      13
     ]
   }
 },
@@ -978,8 +927,7 @@
     ],
     "features": [
       9,
-      13,
-      27
+      13
     ]
   }
 },
@@ -1051,8 +999,8 @@
       3
     ],
     "features": [
-      17,
-      13
+      13,
+      17
     ]
   }
 },
@@ -1080,9 +1028,9 @@
       4
     ],
     "features": [
-      8,
       5,
-      7
+      7,
+      8
     ]
   }
 },
@@ -1127,10 +1075,7 @@
     "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
-    "features": [
-      24,
-      23
-    ]
+    "features": []
   }
 },
 {
@@ -1218,10 +1163,7 @@
     "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
-    "features": [
-      8,
-      26
-    ]
+    "features": []
   }
 },
 {
@@ -1290,9 +1232,9 @@
       3
     ],
     "features": [
-      8,
       5,
       7,
+      8,
       13
     ]
   }
@@ -2428,69 +2370,6 @@
   }
 },
 {
-  "model": "app.feature",
-  "pk": 20,
-  "fields": {
-    "name": "backofen remote turn on lock"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 21,
-  "fields": {
-    "name": "Fernseher remote turn on lock"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 22,
-  "fields": {
-    "name": "Herd remote turn on lock"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 23,
-  "fields": {
-    "name": "erkennt person"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 24,
-  "fields": {
-    "name": "\u00f6ffnet t\u00fcr"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 25,
-  "fields": {
-    "name": "Sturzerkennung"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 26,
-  "fields": {
-    "name": "Alarmtongenegierung"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 27,
-  "fields": {
-    "name": "Eingabem\u00f6glichkeit"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 28,
-  "fields": {
-    "name": "Dritten kontaktieren"
-  }
-},
-{
   "model": "app.metadevice",
   "pk": 1,
   "fields": {
@@ -2639,62 +2518,8 @@
   "fields": {
     "is_broker": false,
     "implementation_requires": [
-      19,
-      13
-    ]
-  }
-},
-{
-  "model": "app.metadevice",
-  "pk": 21,
-  "fields": {
-    "is_broker": false,
-    "implementation_requires": [
-      20
-    ]
-  }
-},
-{
-  "model": "app.metadevice",
-  "pk": 22,
-  "fields": {
-    "is_broker": false,
-    "implementation_requires": [
-      21
-    ]
-  }
-},
-{
-  "model": "app.metadevice",
-  "pk": 23,
-  "fields": {
-    "is_broker": false,
-    "implementation_requires": [
-      22
-    ]
-  }
-},
-{
-  "model": "app.metadevice",
-  "pk": 24,
-  "fields": {
-    "is_broker": false,
-    "implementation_requires": [
-      24,
-      23
-    ]
-  }
-},
-{
-  "model": "app.metadevice",
-  "pk": 25,
-  "fields": {
-    "is_broker": false,
-    "implementation_requires": [
-      25,
-      26,
-      27,
-      28
+      13,
+      19
     ]
   }
 },
@@ -2998,42 +2823,6 @@
   }
 },
 {
-  "model": "app.scenariocategoryrating",
-  "pk": 9,
-  "fields": {
-    "scenario": 7,
-    "category": 7,
-    "rating": 2
-  }
-},
-{
-  "model": "app.scenariocategoryrating",
-  "pk": 10,
-  "fields": {
-    "scenario": 7,
-    "category": 9,
-    "rating": 6
-  }
-},
-{
-  "model": "app.scenariocategoryrating",
-  "pk": 11,
-  "fields": {
-    "scenario": 7,
-    "category": 10,
-    "rating": 3
-  }
-},
-{
-  "model": "app.scenariocategoryrating",
-  "pk": 12,
-  "fields": {
-    "scenario": 8,
-    "category": 10,
-    "rating": 10
-  }
-},
-{
   "model": "auth.group",
   "fields": {
     "name": "Marketing",
@@ -3051,7 +2840,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$30000$1SNZTPCnQ5JQ$9UOgz+vmgt8/9wehyiy9uJUVhu0mBDwFrlcoF5RQhr4=",
-    "last_login": "2016-12-12T16:44:26.289Z",
+    "last_login": "2016-12-12T18:50:30.763Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Herr",
@@ -3454,6 +3243,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "6b2t3j83a2486aedfwpu84zx3si3mlqw",
+  "fields": {
+    "session_data": "OWNkMjM4ZTY1ZTgzZDlmMGUwOWUxMWQzNGUzM2RkMzE0ZjIyN2EzMDp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2016-12-26T18:50:12.194Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "6kdkzzq0xg0hzgc5r43nwpselrdx1yja",
   "fields": {
     "session_data": "NTA4OGJlZWM3MDY3Njg4ZGZhMGJiMDA1NTMwM2E2ZjI2YjRhNWI5YTp7Imhpc3RvcnkiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3Byb2R1Y3RzLzMvIl19",
@@ -3544,8 +3341,8 @@
   "model": "sessions.session",
   "pk": "aldwx2y1n7mt878zw5be0pm1rj6qlqyd",
   "fields": {
-    "session_data": "NmI0ZGUwZTg4ZmVkOWY4YjQ0ZGM0YWI2N2JhNjBiMjgyYTQwMTg4Mjp7InN1Z2dlc3Rpb25zX2lucHV0IjpbeyJTaWNoZXJoZWl0IjoxLCJHZXN1bmRoZWl0IjoxLCJFbmVyZ2llIjoxLCJLb21mb3J0IjoxMH0sIlByZWlzIixmYWxzZSxbXSxbXV19",
-    "expire_date": "2016-12-26T17:13:22.844Z"
+    "session_data": "MzgwNzA1NzRhNjBhZGRhNTEyNTVjYjExNjZhY2E4ZmE4ZDA2MDE4MTp7InN1Z2dlc3Rpb25zX2lucHV0IjpbeyJHZXN1bmRoZWl0IjoxLCJFbmVyZ2llIjoxLCJTaWNoZXJoZWl0IjoxLCJLb21mb3J0IjoxMH0sIlByZWlzIixmYWxzZSxbXSxbXV19",
+    "expire_date": "2016-12-26T14:03:14.213Z"
   }
 },
 {
@@ -3554,14 +3351,6 @@
   "fields": {
     "session_data": "NjE3MjBhNGEwYmIwMzUyZmMyNjJmM2RiMWVhZTJlOThkMjlmNjIxZjp7Il9hdXRoX3VzZXJfaGFzaCI6IjU0NjE1M2FmNjQzN2YwZjdlODFiNzYzZTgyOTE5ZjY2ZTZiYTUyODAiLCJoaXN0b3J5IjpbImh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zY2VuYXJpb3MvYXVzc2NoYWx0ZW5fZGVyX2VsZWt0cm9nZXJhdGUvIiwiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2NvbnRhY3QiLCJodHRwOi8vMTI3LjAuMC4xOjgwMDAvc2NlbmFyaW9zL2F1c3NjaGFsdGVuX2Rlcl9lbGVrdHJvZ2VyYXRlLyJdLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
     "expire_date": "2016-07-10T12:44:57.155Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "b5r3xowmrdz99deq8p3vm134a6b5xy0i",
-  "fields": {
-    "session_data": "N2RkYjg0MzMzNWI2Njc3ODFiNDExM2Y2NWNlMTcyNTA2MjJjMGMyMzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2Q2MmNjNDViY2I0M2IxYjE2MjE0MzE4YzIwNWQ5MTNjMDczYmUxMCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
-    "expire_date": "2016-12-26T16:41:20.276Z"
   }
 },
 {
@@ -3710,6 +3499,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "jyhz5u4fqy5lhy4j6ja05zoi2otpy854",
+  "fields": {
+    "session_data": "ZTZjOTAwODgzMTNlZWIxYjI1MWY5NjUyZGE3YWRlYjA3OWQzZDQwMzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwic3VnZ2VzdGlvbnNfaW5wdXQiOlt7IktvbWZvcnQiOjEsIkdlc3VuZGhlaXQiOjEsIlNpY2hlcmhlaXQiOjEsIkVuZXJnaWUiOjF9LCJQcmVpcyIsdHJ1ZSxbXSxbXV0sIl9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2Q2MmNjNDViY2I0M2IxYjE2MjE0MzE4YzIwNWQ5MTNjMDczYmUxMCJ9",
+    "expire_date": "2016-12-26T19:15:07.584Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "k9r7zpdivwnk508auomwpmqm1czy9s4n",
   "fields": {
     "session_data": "NGY2N2VjMmI4YzZlMWY1NWFmMjBmYWU5YTUzYWM5Njg2YzI3NjQ0Mzp7InN1Z2dlc3Rpb25zX2lucHV0IjpbeyJFbmVyZ2llIjoxLCJLb21mb3J0IjoxMCwiR2VzdW5kaGVpdCI6MSwiU2ljaGVyaGVpdCI6MX0sIlByZWlzIixmYWxzZSxbXSxbXV0sIl9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
@@ -3762,14 +3559,6 @@
   "fields": {
     "session_data": "MGJiN2NjZDA3NDk4OTJiYmMzNmNlMWYwN2Q3NjY5MTUwNGQ2NGJmNDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTQ2MTUzYWY2NDM3ZjBmN2U4MWI3NjNlODI5MTlmNjZlNmJhNTI4MCIsImhpc3RvcnkiOlsiaHR0cDovLzUyLjU5LjE4LjI1NC8iLCJodHRwOi8vNTIuNTkuMTguMjU0L3NjZW5hcmlvcy9hdWZ6ZWljaG51bmdfZGVzX2FrdGl2aXRhdHNncmFkcy8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvc2NlbmFyaW9zL2F1ZnplaWNobnVuZ19kZXNfYWt0aXZpdGF0c2dyYWRzLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9zY2VuYXJpb3MvYXVmemVpY2hudW5nX2Rlc19ha3Rpdml0YXRzZ3JhZHMvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9wcm92aWRlci90aGVybW9rb25fc2Vuc29ydGVjaG5pa19nbWJoIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9zY2VuYXJpb3MvYXVmemVpY2hudW5nX2Rlc19ha3Rpdml0YXRzZ3JhZHMvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9wcm92aWRlci90aGVybW9rb25fc2Vuc29ydGVjaG5pa19nbWJoIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9zY2VuYXJpb3MvaW50ZWxsaWdlbnRlX3dhcm1lc3RldWVydW5nLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvcHJvdmlkZXIvdGhlcm1va29uX3NlbnNvcnRlY2huaWtfZ21iaCIsImh0dHA6Ly81Mi41OS4xOC4yNTQvc2NlbmFyaW9zL2ludGVsbGlnZW50ZV93YXJtZXN0ZXVlcnVuZy8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvc2NlbmFyaW9zLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvc2NlbmFyaW9zL2ludGVsbGlnZW50ZV93YXJtZXN0ZXVlcnVuZy8iLCJodHRwOi8vNTIuNTkuMTguMjU0L3NjZW5hcmlvcy8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0L2NvbnRhY3QiLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0L2FsbF9wcm9kdWN0cy8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0L3NjZW5hcmlvcy9hdXNzY2hhbHRlbl9kZXJfZWxla3Ryb2dlcmF0ZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0L2NvbnRhY3QiLCJodHRwOi8vNTIuNTkuMTguMjU0L0VuZXJnaWUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC8iLCJodHRwOi8vNTIuNTkuMTguMjU0L0VuZXJnaWUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC8iLCJodHRwOi8vNTIuNTkuMTguMjU0L0VuZXJnaWUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC8iLCJodHRwOi8vNTIuNTkuMTguMjU0L0VuZXJnaWUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC8iLCJodHRwOi8vNTIuNTkuMTguMjU0L0VuZXJnaWUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9zY2VuYXJpb3MvYXVzc2NoYWx0ZW5fZGVyX2VsZWt0cm9nZXJhdGUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC8iLCJodHRwOi8vNTIuNTkuMTguMjU0L0VuZXJnaWUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC8iLCJodHRwOi8vNTIuNTkuMTguMjU0L0VuZXJnaWUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9zY2VuYXJpb3MvYXVzc2NoYWx0ZW5fZGVyX2VsZWt0cm9nZXJhdGUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9FbmVyZ2llLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9FbmVyZ2llLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvc2NlbmFyaW9zL2F1c3NjaGFsdGVuX2Rlcl9lbGVrdHJvZ2VyYXRlLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9FbmVyZ2llLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9HZXN1bmRoZWl0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9FbmVyZ2llLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9FbmVyZ2llLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9FbmVyZ2llLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9FbmVyZ2llLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvY29udGFjdCIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvRW5lcmdpZS8iLCJodHRwOi8vNTIuNTkuMTguMjU0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvR2VzdW5kaGVpdC8iLCJodHRwOi8vNTIuNTkuMTguMjU0L0VuZXJnaWUvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9HZXN1bmRoZWl0LyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9FbmVyZ2llLyIsImh0dHA6Ly81Mi41OS4xOC4yNTQvIiwiaHR0cDovLzUyLjU5LjE4LjI1NC9FbmVyZ2llLyJdLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCJ9",
     "expire_date": "2016-07-25T09:57:27.989Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "n63qmti212ls6iq9riaixep47fzfcy4a",
-  "fields": {
-    "session_data": "ODkyNjg4MTNhMDhhOTU4ZjE0ZDkzNjVkYzczNGIwYjhiOTM0YTQyYTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
-    "expire_date": "2016-12-26T16:44:26.295Z"
   }
 },
 {
@@ -3842,6 +3631,14 @@
   "fields": {
     "session_data": "YzZjMzRiOWFkMjcwNjYzZjNiMDk4Njc1YmI3NmJjNjhmYmYyY2IxYTp7Imhpc3RvcnkiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDAwLyIsImh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9FbmVyZ2llLyIsImh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC8iLCJodHRwOi8vbG9jYWxob3N0OjgwMDAvRW5lcmdpZS8iXX0=",
     "expire_date": "2016-07-21T12:02:25.092Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "td922khly05btonypu8r62jwpzn2s0fd",
+  "fields": {
+    "session_data": "N2RkYjg0MzMzNWI2Njc3ODFiNDExM2Y2NWNlMTcyNTA2MjJjMGMyMzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2Q2MmNjNDViY2I0M2IxYjE2MjE0MzE4YzIwNWQ5MTNjMDczYmUxMCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
+    "expire_date": "2016-12-19T17:54:02.896Z"
   }
 },
 {
