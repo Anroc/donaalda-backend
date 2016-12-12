@@ -152,13 +152,17 @@ class Suggestions(generics.ListAPIView):
 
     def get_queryset(self):
         suggestions_input = self.request.session['suggestions_input']
-        scenarios = Scenario.objects.all()
+        scenarios = set(Scenario.objects.all())
+        ret = scenarios.copy()
 
         for scenario in scenarios:
-            self.product_sets[scenario] = Suggestions.ScenarioImpl(
-                implement_scenario(scenario, suggestions_input.product_preference.lower().strip())
-            )
-        return scenarios
+            product_set = implement_scenario(scenario, suggestions_input.product_preference.lower().strip())
+            if len(product_set) > 0:
+                self.product_sets[scenario] = Suggestions.ScenarioImpl(product_set)
+            else:
+                # can't find implementing product set
+                ret.remove(scenario)
+        return ret
 
     def get_serializer_class(self):
         return ScenarioSerializer
