@@ -52,6 +52,13 @@ class ProductTypeSerializer(serializers.ModelSerializer):
 class ScenarioSerializer(serializers.ModelSerializer):
     provider = ProviderSerializer()
 
+    class Meta:
+        model = Scenario
+        fields = (
+            'pk', 'name', 'url_name', 'picture', 'provider', )
+
+
+class SuggestionsOutputSerializer(ScenarioSerializer):
     price = serializers.SerializerMethodField('_get_price')
     efficiency = serializers.SerializerMethodField('_get_efficiency')
     extendability = serializers.SerializerMethodField('_get_extendability')

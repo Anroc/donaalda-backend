@@ -156,7 +156,7 @@ class Suggestions(generics.ListAPIView):
         ret = scenarios.copy()
 
         for scenario in scenarios:
-            product_set = implement_scenario(scenario, suggestions_input.product_preference.lower().strip())
+            product_set = implement_scenario(scenario, suggestions_input.product_preference)
             if len(product_set) > 0:
                 self.product_sets[scenario] = Suggestions.ScenarioImpl(product_set)
             else:
@@ -165,7 +165,7 @@ class Suggestions(generics.ListAPIView):
         return ret
 
     def get_serializer_class(self):
-        return ScenarioSerializer
+        return SuggestionsOutputSerializer
 
     def get_serializer_context(self):
         return {'product_sets': self.product_sets}
