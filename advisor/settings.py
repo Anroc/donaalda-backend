@@ -14,10 +14,10 @@ import os
 import sys
 
 try:
-    from .db_settings import DATABASES
-except:
+    from .db_settings import *
+except ImportError:
     print("""
-        You don't have a database configuration file.
+        You don't have a current database configuration file.
         Copy db_settings_example.py to advisor/db_settings.py
     """)
     sys.exit(1)
@@ -234,11 +234,4 @@ LOGGING = {
             'propagate': True,
         }
     },
-}
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    }
 }
