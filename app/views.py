@@ -21,7 +21,7 @@ from .forms import LoginForm
 from .permissions import *
 from .serializers import *
 from .validators import *
-from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, InvalidGETException
+from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, InvalidGETException
 from .constants import SUGGESTIONS_INPUT_SESSION_KEY
 
 
@@ -123,14 +123,9 @@ class QuestionStepViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = QuestionStepSerializer
 
 
-# TODO: Find correct SuperClass if it exists, else implement self
-class SuggestedScenarioViewSet():
-    pass
-
-
-@list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
 class Suggestions(generics.ListAPIView):
+    pagination_class = SuggestionsPagination
     def post(self, request, format=None):
         input_serializer = SuggestionsInputSerializer(data=request.data)
         if not input_serializer.is_valid():
