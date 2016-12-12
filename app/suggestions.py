@@ -1,6 +1,6 @@
 import collections
 
-from rest_framework import serializers
+from rest_framework import serializers, exceptions
 
 from .models import Category
 from .validators import (
@@ -37,3 +37,9 @@ class SuggestionsInputSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         return SuggestionsInput(**validated_data)
+
+
+class InvalidGETException(exceptions.APIException):
+    status_code = 400
+    default_code = 'client error'
+    default_detail = 'A POST requests that sets the onboarding preferences is required before a GET to the suggestions endpoint is possible'

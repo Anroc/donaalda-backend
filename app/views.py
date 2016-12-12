@@ -26,7 +26,8 @@ from .validators import *
 from django.core.exceptions import ValidationError
 
 from .match_making import implement_scenario
-from .suggestions import SuggestionsInputSerializer
+from .suggestions import SuggestionsInputSerializer, InvalidGETException
+from .constants import SUGGESTIONS_INPUT_SESSION_KEY
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -135,19 +136,26 @@ class SuggestedScenarioViewSet():
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
 class Suggestions(generics.ListAPIView):
-    def get(self, request, format=None):
-        pass
-
     def post(self, request, format=None):
         input_serializer = SuggestionsInputSerializer(data=request.data)
         if not input_serializer.is_valid():
             return Response(input_serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
         suggestions_input = input_serializer.save()
+        self.request.session[SUGGESTIONS_INPUT_SESSION_KEY] = suggestions_input
         return self.list(request)
 
     def get_queryset(self):
-        return Scenario.objects.all()
+        suggestions_input = self.request.session.get(
+                SUGGESTIONS_INPUT_SESSION_KEY, None)
+        if suggestions_input is None:
+            raise InvalidGETException
+
+        for scenario in Scenario.objects.all():
+            product_set = implement_scenario(
+                    scenario, suggestions_input.product_preference)
+            if product_set:
+                yield scenario
 
     def get_serializer_class(self):
         return ScenarioSerializer
