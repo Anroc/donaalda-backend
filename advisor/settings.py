@@ -14,10 +14,10 @@ import os
 import sys
 
 try:
-    from .db_settings import DATABASES
-except:
+    from .db_settings import *
+except ImportError:
     print("""
-        You don't have a database configuration file.
+        You don't have a current database configuration file.
         Copy db_settings_example.py to advisor/db_settings.py
     """)
     sys.exit(1)
@@ -41,6 +41,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 'debug_toolbar',
     # 'django_extensions',
+    'memcache',
     'corsheaders',
     'rest_framework_swagger',
     'rest_framework_docs',
