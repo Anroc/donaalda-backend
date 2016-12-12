@@ -12,7 +12,7 @@ PRODUCT_ID_HASH = hash('matching.product.cache')
 LOGGER = logging.getLogger(__name__)
 
 
-def implement_scenario(scenario, user_preference, renovation_preference):
+def implement_scenario(scenario, preference):
     """
     1.  Call find_implementing_product for each meta device in the scenario
     2.  for each Broker -> Endpoint combination find paths with: find_communication_partner(endpoint, broker)
@@ -20,11 +20,14 @@ def implement_scenario(scenario, user_preference, renovation_preference):
         If possible: create a product set of the current configuration
     4.  Apply U_pref on all product sets for each broker to find the current best solution for the current broker-product-set
     5.  Apply U_pref on all product sets for each different broker to find the overall best solution for the current scenario
-
+    :param scenario
+        the scenario where a implementation should be found
+    :param preference
+        the user preference that was passed by the client
     :return a set of implementing products that matches the user preferences optimally.
     """
 
-    LOGGER.debug('Scenario: %s; preference: %s' % (scenario.name, user_preference))
+    LOGGER.debug('Scenario: %s' % scenario.name)
     meta_broker = scenario.meta_broker
     meta_endpoints = set(scenario.meta_endpoints.all())
 
@@ -74,32 +77,28 @@ def implement_scenario(scenario, user_preference, renovation_preference):
 
         merged_set = __merge_paths(meta_endpoints, possible_paths)
         # 3. apply cost function U_pref to get one product set
-        merged_set = __cost_function(merged_set, user_preference, renovation_preference)
+        merged_set = __cost_function(merged_set, preference)
 
         if merged_set:
             # 4. merge all product sets
             product_sets.add(merged_set)
 
     # 5. apply cost function U_pref to get the best product set
-    product_sets = __cost_function(product_sets, user_preference, renovation_preference)
+    product_sets = __cost_function(product_sets, preference)
 
     LOGGER.info('Start matching for scenario: "%s", found matching product set "%s"' % (scenario.name, product_sets))
     # return the product set
     return product_sets
 
 
-def __cost_function(product_sets, preference, renovation_preference):
+def __cost_function(product_sets, preference):
     """
     Cost function which decides which product set matches the user preferences.
 
     :param product_sets:
         set of possible product implementations
     :param preference:
-        Preference value of "extensible", "cost", "efficiency"
-    :param used_products:
-        The broker and endpoint implementations that was used to assemble this product sets.
-    :param renovation_preference:
-        If the user is able to fix install products
+        preference that was defined by the client; containing all the user preferences
     :return:
         The product set that will match the user preferences the best.
     """
@@ -108,28 +107,28 @@ def __cost_function(product_sets, preference, renovation_preference):
 
     sorting = dict()
     for current_set in product_sets:
-        if not __matches_renovation_preference(current_set, renovation_preference):
+        if not __matches_renovation_preference(current_set, preference.renovation_preference):
             continue
 
         # will resolve in set that contains the master broker and other bridges; this set is at least on element big
         broker = __get_broker_of_products(current_set)
 
         x = 1
-        if preference == PRODUCT_PREF_EXTENDABILITY:
+        if preference.product_preference == PRODUCT_PREF_EXTENDABILITY:
             x = 0
             for product in current_set:
                 x += len(__get_protocols(product, True)) + len(__get_protocols(product, False))
             sorting[current_set] = 1.0 / (float(len(broker)**2) / x)
-        elif preference == PRODUCT_PREF_PRICE:
+        elif preference.product_preference == PRODUCT_PREF_PRICE:
             for product in current_set:
                 x += product.price
             sorting[current_set] = 1. / x * 0.95 ** len(broker)
-        elif preference == PRODUCT_PREF_EFFICIENCY:
+        elif preference.product_preference == PRODUCT_PREF_EFFICIENCY:
             for product in current_set:
                 x += product.efficiency
             sorting[current_set] = 1. / x * 0.95 ** len(broker)
         else:
-            raise(AttributeError("Unsupported preference %s" % preference))
+            raise(AttributeError("Unsupported preference %s" % preference.product_preference))
         # search for minimum
     if sorting:
         return sorted(sorting.items(), key=operator.itemgetter(1))[-1][0]

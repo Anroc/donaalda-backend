@@ -149,8 +149,7 @@ class Suggestions(generics.ListAPIView):
         # call scenario sorting
         sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input.scenario_preference)
         for scenario, rating in sorted_tuple_list:
-            product_set = implement_scenario(
-                    scenario, suggestions_input.product_preference, suggestions_input.renovation_preference)
+            product_set = implement_scenario(scenario, suggestions_input)
             if product_set:
                 yield ScenarioImpl(product_set, scenario, rating)
 
