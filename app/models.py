@@ -8,6 +8,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from .validators import validate_legal_chars
+from .constants import MINIMAL_RATING_VALUE, MAXIMAL_RATING_VALUE
 
 """
 The different models described in this file can mostly be separated in three different parts
@@ -471,8 +472,9 @@ class SubCategory(models.Model):
 class ScenarioCategoryRating(models.Model):
     scenario = models.ForeignKey(to="Scenario", verbose_name="Szenario")
     category = models.ForeignKey(to="Category", verbose_name="Kategorie")
-    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)],
-                                              verbose_name="Passfaehigkeit")
+    rating = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(MINIMAL_RATING_VALUE), MaxValueValidator(MAXIMAL_RATING_VALUE)],
+        verbose_name="Passfaehigkeit")
 
     def __str__(self):
         return "%s passt zu %s mit rating %d" % (self.scenario, self.category, self.rating)

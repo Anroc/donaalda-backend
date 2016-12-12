@@ -1,7 +1,6 @@
 from operator import itemgetter
 from ..models import Category
-
-MINIMAL_RATING_VALUE = 1
+from ..constants import MINIMAL_RATING_VALUE
 
 
 def sort_scenarios(scenarios, scenario_preference):
