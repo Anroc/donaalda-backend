@@ -154,12 +154,7 @@ def __product(a, b):
 
 
 def __matches_renovation_preference(product_set, renovation_preference):
-    if renovation_preference:
-        return True
-    for product in product_set:
-        if product.renovation_required:
-            return False
-    return True
+    return not renovation_preference or (not any(product.renovation_required for product in product_set))
 
 
 def __find_implementing_product(meta_device):
