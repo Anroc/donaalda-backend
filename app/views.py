@@ -26,7 +26,7 @@ from .validators import *
 from django.core.exceptions import ValidationError
 
 from .match_making import implement_scenario
-from .suggestions import SuggestionsInputSerializer
+from .suggestions import SuggestionsInputSerializer, SuggestionsOutputSerializer, ScenarioImpl
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -135,7 +135,6 @@ class SuggestedScenarioViewSet():
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
 class Suggestions(generics.ListAPIView):
-    product_sets = dict()
 
     def get(self, request, format=None):
         pass
@@ -157,33 +156,10 @@ class Suggestions(generics.ListAPIView):
         for scenario in scenarios:
             product_set = implement_scenario(scenario, suggestions_input.product_preference)
             if len(product_set) > 0:
-                self.product_sets[scenario] = Suggestions.ScenarioImpl(product_set)
-                yield scenario
+                yield ScenarioImpl(product_set, scenario)
 
     def get_serializer_class(self):
         return SuggestionsOutputSerializer
-
-    def get_serializer_context(self):
-        return {'product_sets': self.product_sets}
-
-    class ScenarioImpl(object):
-        product_set = None
-        price = 0.0
-        efficiency = 0
-        extendability = 0
-
-        def __init__(self, product_set):
-            self.product_set = product_set
-            self.compute_specs()
-
-        def compute_specs(self):
-            protocols = set()
-            for product in self.product_set:
-                self.price += product.price
-                self.efficiency += product.efficiency
-                protocols = protocols.union(
-                    set(product.leader_protocol.all()).union(set(product.follower_protocol.all())))
-            self.extendability = len(protocols)
 
 
 class IndexView(generic.DetailView):

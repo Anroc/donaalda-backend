@@ -58,26 +58,6 @@ class ScenarioSerializer(serializers.ModelSerializer):
             'pk', 'name', 'url_name', 'picture', 'provider', )
 
 
-class SuggestionsOutputSerializer(ScenarioSerializer):
-    price = serializers.SerializerMethodField('_get_price')
-    efficiency = serializers.SerializerMethodField('_get_efficiency')
-    extendability = serializers.SerializerMethodField('_get_extendability')
-
-    def _get_price(self, obj):
-        return self.context.get('product_sets')[obj].price
-
-    def _get_efficiency(self, obj):
-        return self.context.get('product_sets')[obj].efficiency
-
-    def _get_extendability(self, obj):
-        return self.context.get('product_sets')[obj].extendability
-
-    class Meta:
-        model = Scenario
-        fields = (
-            'pk', 'name', 'url_name', 'picture', 'provider', 'price', 'efficiency', 'extendability', )
-
-
 class SubCategorySerializer(serializers.ModelSerializer):
     belongs_to_category = CategorySerializer(read_only=True, many=True)
 

@@ -2,6 +2,7 @@ import collections
 
 from rest_framework import serializers
 from .constants import *
+from .serializers import ScenarioSerializer
 
 from .models import Category
 from .validators import (
@@ -38,3 +39,33 @@ class SuggestionsInputSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         return SuggestionsInput(**validated_data)
+
+
+class ScenarioImpl(object):
+    product_set = None
+    price = 0.0
+    efficiency = 0
+    extendability = 0
+    scenario = None
+
+    def __init__(self, product_set, scenario):
+        self.product_set = product_set
+        self.compute_specs()
+        self.scenario = scenario
+
+    def compute_specs(self):
+        protocols = set()
+        for product in self.product_set:
+            self.price += product.price
+            self.efficiency += product.efficiency
+            protocols = protocols.union(
+                set(product.leader_protocol.all()).union(set(product.follower_protocol.all())))
+        self.extendability = len(protocols)
+
+
+class SuggestionsOutputSerializer(serializers.Serializer):
+    scenario = ScenarioSerializer()
+
+    price = serializers.FloatField()
+    efficiency = serializers.IntegerField()
+    extendability = serializers.IntegerField()
