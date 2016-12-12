@@ -27,6 +27,7 @@ from django.core.exceptions import ValidationError
 
 from .match_making import implement_scenario
 from .suggestions import SuggestionsInputSerializer, InvalidGETException
+from .constants import SUGGESTIONS_INPUT_SESSION_KEY
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -140,11 +141,13 @@ class Suggestions(generics.ListAPIView):
         if not input_serializer.is_valid():
             return Response(input_serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
-        self.request.session['suggestions_input'] = input_serializer.save()
+        suggestions_input = input_serializer.save()
+        self.request.session[SUGGESTIONS_INPUT_SESSION_KEY] = suggestions_input
         return self.list(request)
 
     def get_queryset(self):
-        suggestions_input = self.request.session.get('suggestions_input', None)
+        suggestions_input = self.request.session.get(
+                SUGGESTIONS_INPUT_SESSION_KEY, None)
         if suggestions_input is None:
             raise InvalidGETException
 
