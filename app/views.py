@@ -132,23 +132,22 @@ class SuggestedScenarioViewSet():
 @permission_classes((permissions.AllowAny,))
 class Suggestions(generics.ListAPIView):
     def post(self, request, format=None):
-        input_serializer = SuggestionsInputSerializer(data=request.data)
-        if not input_serializer.is_valid():
-            return Response(input_serializer.errors,
-                            status=status.HTTP_400_BAD_REQUEST)
-        suggestions_input = input_serializer.save()
-        self.request.session[SUGGESTIONS_INPUT_SESSION_KEY] = suggestions_input
+        self.request.session[SUGGESTIONS_INPUT_SESSION_KEY] = request.data
         return self.list(request)
 
     def get_queryset(self):
-        suggestions_input = self.request.session.get(
+        request_data = self.request.session.get(
                 SUGGESTIONS_INPUT_SESSION_KEY, None)
-        if suggestions_input is None:
+        if request_data is None:
             raise InvalidGETException
 
-        suggested_scenarios = list()
+        input_serializer = SuggestionsInputSerializer(data=request_data)
+        input_serializer.is_valid(raise_exception=True)
+        suggestions_input = input_serializer.save()
+
         # call scenario sorting
-        sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input.scenario_preference)
+        sorted_tuple_list = sort_scenarios(
+                Scenario.objects.all(), suggestions_input.scenario_preference)
         for scenario, rating in sorted_tuple_list:
             product_set = implement_scenario(
                     scenario, suggestions_input.product_preference)
