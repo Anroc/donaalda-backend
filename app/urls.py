@@ -54,7 +54,6 @@ urlpatterns = [
     # api
     # url(r'^api/v1/Category/(?P<pk>[0-9]+)/highlight/$', views.CategoryHighlight.as_view()),
     url(r'^api/swagger/suggestions', views.Suggestions.as_view()),
-    url(r'^api/swagger/matching', views.matching),
     url(r'^api/swagger/', schema_view),
     url(r'^api/v1/', include(router.urls)),
     url(r'^api/docs/', include('rest_framework_docs.urls')),

@@ -55,7 +55,7 @@ class ScenarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scenario
         fields = (
-            'pk', 'name', 'url_name', 'picture', 'provider',)
+            'pk', 'name', 'url_name', 'picture', 'provider', )
 
 
 class SubCategorySerializer(serializers.ModelSerializer):

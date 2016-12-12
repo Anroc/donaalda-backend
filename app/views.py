@@ -21,7 +21,7 @@ from .forms import LoginForm
 from .permissions import *
 from .serializers import *
 from .validators import *
-from .suggestions import SuggestionsInputSerializer, InvalidGETException
+from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, InvalidGETException
 from .constants import SUGGESTIONS_INPUT_SESSION_KEY
 
 
@@ -157,20 +157,10 @@ class Suggestions(generics.ListAPIView):
             product_set = implement_scenario(
                     scenario, suggestions_input.product_preference)
             if product_set:
-                yield scenario
+                yield ScenarioImpl(product_set, scenario)
 
     def get_serializer_class(self):
-        return ScenarioSerializer
-
-
-@api_view(['GET'])
-@list_route(methods=['GET'])
-@permission_classes((permissions.AllowAny,))
-def matching(request):
-    for scenario in set(Scenario.objects.all()):
-        product_set = implement_scenario(scenario, request.GET.get('preference', 'cost'))
-        print(product_set)
-    return Response(status=status.HTTP_200_OK)
+        return SuggestionsOutputSerializer
 
 
 class IndexView(generic.DetailView):
