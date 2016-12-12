@@ -227,7 +227,7 @@ LOGGING = {
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': False,
         },
-        'app.match_making': {
+        'app.logic.match_making': {
             'handlers': ['file', 'console'],
             'level': 'DEBUG',
             'propagate': True,

@@ -150,14 +150,10 @@ class Suggestions(generics.ListAPIView):
         # call scenario sorting
         sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input.scenario_preference)
         for scenario, rating in sorted_tuple_list:
-            suggested_scenarios.append(scenario)
-            # TODO: save matching value to send to frontend
-
-        for scenario in suggested_scenarios:
             product_set = implement_scenario(
                     scenario, suggestions_input.product_preference)
             if product_set:
-                yield ScenarioImpl(product_set, scenario)
+                yield ScenarioImpl(product_set, scenario, rating)
 
     def get_serializer_class(self):
         return SuggestionsOutputSerializer

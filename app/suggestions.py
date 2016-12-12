@@ -42,16 +42,14 @@ class SuggestionsInputSerializer(serializers.Serializer):
 
 
 class ScenarioImpl(object):
-    product_set = None
-    price = 0.0
-    efficiency = 0
-    extendability = 0
-    scenario = None
-
-    def __init__(self, product_set, scenario):
-        self.product_set = product_set
-        self.compute_specs()
+    def __init__(self, product_set, scenario, rating):
         self.scenario = scenario
+        self.rating = rating
+        self.product_set = product_set
+        self.price = 0.0
+        self.efficiency = 0
+        self.extendability = 0
+        self.compute_specs()
 
     def compute_specs(self):
         protocols = set()
@@ -69,6 +67,7 @@ class SuggestionsOutputSerializer(serializers.Serializer):
     price = serializers.FloatField()
     efficiency = serializers.IntegerField()
     extendability = serializers.IntegerField()
+    rating = serializers.FloatField()
 
 
 class InvalidGETException(exceptions.APIException):
