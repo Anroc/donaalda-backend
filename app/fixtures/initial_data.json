@@ -181,6 +181,7 @@
     "image2": "products/81eatl5_gHw2fCv.jpeg",
     "image3": "products/81eatl5_WqTQUxU.jpeg",
     "end_of_life": true,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -202,6 +203,7 @@
     "image2": "",
     "image3": "",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -223,6 +225,7 @@
     "image2": "products/Jung_CO2-Sensor_2.jpg",
     "image3": "products/Jung_CO2-Sensor_3.png",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -244,6 +247,7 @@
     "image2": "products/Eurotronic_Comet_2.jpg",
     "image3": "products/Eurotronic_Comet_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -265,6 +269,7 @@
     "image2": "products/Fiabro_Wall_Plug_2.JPG",
     "image3": "products/Fiabro_Wall_Plug_4.JPG",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -286,6 +291,7 @@
     "image2": "products/Jung_Presence_Detector_1.jpg",
     "image3": "products/Jung_Presence_Detector_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -307,6 +313,7 @@
     "image2": "products/Fiabro_Smoke_Sensor_3.jpg",
     "image3": "products/Fiabro_Smoke_Sensor_1.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -328,6 +335,7 @@
     "image2": "products/fritzbox_2.png",
     "image3": "products/fritzbox_3.png",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -349,6 +357,7 @@
     "image2": "products/Thermokon_SWR01_5_2.png",
     "image3": "products/Thermokon_SWR01_5_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -370,6 +379,7 @@
     "image2": "products/nodon-stp-2-1-05-temperatursensor_2.jpg",
     "image3": "products/nodon-stp-2-1-05-temperatursensor_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -391,6 +401,7 @@
     "image2": "products/tmk_web_02_slider_easySens_SR04.png",
     "image3": "products/tmk_web_03_slider_easySens_SR04.png",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -412,6 +423,7 @@
     "image2": "products/PSC234_2.jpg",
     "image3": "products/PSC234_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -433,6 +445,7 @@
     "image2": "products/tmk_web_02_slider_easySens_SR_MOC.png",
     "image3": "products/sr-mds-solar-2.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -454,6 +467,7 @@
     "image2": "products/tmk_SAB02_2.jpg",
     "image3": "products/tmk_SAB02_3.png",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -475,6 +489,7 @@
     "image2": "products/jung-2316_16_reghe_02.jpg",
     "image3": "products/jung-2316_16_reghe_03.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       3
@@ -501,6 +516,7 @@
     "image2": "products/jung-2308_16_regchm-knx-ns0828035_02.jpg",
     "image3": "products/jung-2308_16_regchm-knx-ns0828035_06.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       3
@@ -526,13 +542,14 @@
     "image2": "products/Gira_217400_2.jpg",
     "image3": "",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       3
     ],
     "features": [
-      17,
-      13
+      13,
+      17
     ]
   }
 },
@@ -552,6 +569,7 @@
     "image2": "products/jung-2336_reg_hz_he-knx-ns6516434_02.jpg",
     "image3": "products/jung-2336_reg_hz_he-knx-ns6516434_04.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -573,6 +591,7 @@
     "image2": "products/bms_quadra_2.jpg",
     "image3": "products/bms_quadra_3.png",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       3
@@ -598,6 +617,7 @@
     "image2": "products/miele_g_6992_scvi_k2o_2.jpg",
     "image3": "products/miele_g_6992_scvi_k2o_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       3
@@ -623,6 +643,7 @@
     "image2": "products/miele_TMM840WPS_2.png",
     "image3": "products/miele_TMM840WPS_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       1
@@ -648,6 +669,7 @@
     "image2": "products/miele_WMR861WPSP_2.png",
     "image3": "products/miele_WMR861WPSP_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       1
@@ -675,6 +697,7 @@
     "image2": "products/miele_ofen_2.jpg",
     "image3": "products/Miele_ofen_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       3
@@ -700,6 +723,7 @@
     "image2": "products/miele_kochfeld_2.jpg",
     "image3": "products/Miele_kochfeld_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       1
@@ -725,6 +749,7 @@
     "image2": "products/miele_dunst_2.jpg",
     "image3": "products/miele_dunst_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -746,6 +771,7 @@
     "image2": "products/miele_kaffee_2.jpg",
     "image3": "products/miele_kaffee_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       1
@@ -772,6 +798,7 @@
     "image2": "products/miele_kuhl_2.jpg",
     "image3": "products/miele_kuhl_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       1
@@ -797,6 +824,7 @@
     "image2": "products/miele_gate_2.jpg",
     "image3": "",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [
       1
     ],
@@ -826,6 +854,7 @@
     "image2": "products/polar_92044305-P_2.jpg",
     "image3": "products/polar_92044305-P_3.png",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -847,6 +876,7 @@
     "image2": "products/epson_blut_2.jpg",
     "image3": "products/epson_blut_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -868,6 +898,7 @@
     "image2": "products/eQ_thermo_2.jpg",
     "image3": "products/eQ_thermo_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -889,6 +920,7 @@
     "image2": "products/beddi_2.jpg",
     "image3": "products/beddi_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       3
@@ -915,6 +947,7 @@
     "image2": "products/avm_plug_2.jpg",
     "image3": "",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -936,6 +969,7 @@
     "image2": "products/comet_temp_2.jpg",
     "image3": "",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -957,6 +991,7 @@
     "image2": "products/hue_start_2.jpg",
     "image3": "products/hue_start_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [
       4
     ],
@@ -964,8 +999,8 @@
       3
     ],
     "features": [
-      17,
-      13
+      13,
+      17
     ]
   }
 },
@@ -985,6 +1020,7 @@
     "image2": "products/hue_single_2.jpg",
     "image3": "products/hue_single_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       1,
@@ -992,9 +1028,9 @@
       4
     ],
     "features": [
-      8,
       5,
-      7
+      7,
+      8
     ]
   }
 },
@@ -1014,6 +1050,7 @@
     "image2": "products/dlink_kamera_2.png",
     "image3": "products/dlink_kamera_3.gif",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -1035,6 +1072,7 @@
     "image2": "products/kingmak_klingel_2.jpg",
     "image3": "products/kingmak_klingel_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -1056,6 +1094,7 @@
     "image2": "products/danfoss_2.jpg",
     "image3": "products/danfoss_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -1077,6 +1116,7 @@
     "image2": "products/fibaro_motion_2.jpg",
     "image3": "products/fibaro_motion_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -1098,6 +1138,7 @@
     "image2": "products/fibaro_tur_2.jpg",
     "image3": "products/fibaro_tur_3.png",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -1119,6 +1160,7 @@
     "image2": "products/aeon_alarm_2.jpg",
     "image3": "products/aeon_alarm_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -1140,6 +1182,7 @@
     "image2": "products/FIBARO-FLOOD-SENSOR-FGFS101_2.jpg",
     "image3": "products/FIBARO-FLOOD-SENSOR-FGFS101_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -1161,6 +1204,7 @@
     "image2": "products/aeon_multi_2.jpg",
     "image3": "products/aeon_multi_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [],
     "features": []
@@ -1182,14 +1226,15 @@
     "image2": "products/aeon_led_2.png",
     "image3": "products/aeon_led_3.jpg",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       3
     ],
     "features": [
-      8,
       5,
       7,
+      8,
       13
     ]
   }
@@ -1210,6 +1255,7 @@
     "image2": "products/IOLITE_all-devices.png",
     "image3": "products/IOLITE-LOGO_Complex.png",
     "end_of_life": false,
+    "renovation_required": false,
     "leader_protocol": [
       2,
       3
@@ -2472,8 +2518,8 @@
   "fields": {
     "is_broker": false,
     "implementation_requires": [
-      19,
-      13
+      13,
+      19
     ]
   }
 },
@@ -2794,7 +2840,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$30000$1SNZTPCnQ5JQ$9UOgz+vmgt8/9wehyiy9uJUVhu0mBDwFrlcoF5RQhr4=",
-    "last_login": "2016-12-10T14:18:41.960Z",
+    "last_login": "2016-12-12T18:50:30.763Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Herr",
@@ -3197,6 +3243,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "6b2t3j83a2486aedfwpu84zx3si3mlqw",
+  "fields": {
+    "session_data": "OWNkMjM4ZTY1ZTgzZDlmMGUwOWUxMWQzNGUzM2RkMzE0ZjIyN2EzMDp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2016-12-26T18:50:12.194Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "6kdkzzq0xg0hzgc5r43nwpselrdx1yja",
   "fields": {
     "session_data": "NTA4OGJlZWM3MDY3Njg4ZGZhMGJiMDA1NTMwM2E2ZjI2YjRhNWI5YTp7Imhpc3RvcnkiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3Byb2R1Y3RzLzMvIl19",
@@ -3441,6 +3495,14 @@
   "fields": {
     "session_data": "NDQ5YmZkMTE4Mjk2ZWJkNWNkYjQ3YmMxMzcxNjRlZmI3NGYzM2I0Mzp7Imhpc3RvcnkiOlsiaHR0cDovLzUyLjU5LjE4LjI1NC8iXX0=",
     "expire_date": "2016-07-06T14:07:41.717Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "jyhz5u4fqy5lhy4j6ja05zoi2otpy854",
+  "fields": {
+    "session_data": "ZTZjOTAwODgzMTNlZWIxYjI1MWY5NjUyZGE3YWRlYjA3OWQzZDQwMzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwic3VnZ2VzdGlvbnNfaW5wdXQiOlt7IktvbWZvcnQiOjEsIkdlc3VuZGhlaXQiOjEsIlNpY2hlcmhlaXQiOjEsIkVuZXJnaWUiOjF9LCJQcmVpcyIsdHJ1ZSxbXSxbXV0sIl9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2Q2MmNjNDViY2I0M2IxYjE2MjE0MzE4YzIwNWQ5MTNjMDczYmUxMCJ9",
+    "expire_date": "2016-12-26T19:15:07.584Z"
   }
 },
 {

@@ -126,6 +126,7 @@ class QuestionStepViewSet(viewsets.ReadOnlyModelViewSet):
 @permission_classes((permissions.AllowAny,))
 class Suggestions(generics.ListAPIView):
     pagination_class = SuggestionsPagination
+
     def post(self, request, format=None):
         self.request.session[SUGGESTIONS_INPUT_SESSION_KEY] = request.data
         return self.list(request)
@@ -144,8 +145,7 @@ class Suggestions(generics.ListAPIView):
         sorted_tuple_list = sort_scenarios(
                 Scenario.objects.all(), suggestions_input.scenario_preference)
         for scenario, rating in sorted_tuple_list:
-            product_set = implement_scenario(
-                    scenario, suggestions_input.product_preference)
+            product_set = implement_scenario(scenario, suggestions_input)
             if product_set:
                 yield ScenarioImpl(product_set, scenario, rating)
 
