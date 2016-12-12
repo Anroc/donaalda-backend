@@ -154,7 +154,24 @@ def __product(a, b):
 
 
 def __matches_renovation_preference(product_set, renovation_preference):
-    return not renovation_preference or (not any(product.renovation_required for product in product_set))
+    """
+    Returns true if the given product set matches the given renovation preference, else false.
+
+    :param product_set:
+        the product set that should be checked
+    :param renovation_preference:
+        the renovation preference of the user, either True or False
+    :return:
+        True if the given product set matches the requirements
+    """
+    if renovation_preference:
+        return True
+    input_hash = hash(frozenset(product_set))
+    if cache.get(input_hash) is not None:
+        return cache.get(input_hash)
+    res = all(not product.renovation_required for product in product_set)
+    cache.set(input_hash, res)
+    return res
 
 
 def __find_implementing_product(meta_device):

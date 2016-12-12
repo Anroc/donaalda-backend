@@ -126,6 +126,7 @@ class QuestionStepViewSet(viewsets.ReadOnlyModelViewSet):
 @permission_classes((permissions.AllowAny,))
 class Suggestions(generics.ListAPIView):
     pagination_class = SuggestionsPagination
+
     def post(self, request, format=None):
         self.request.session[SUGGESTIONS_INPUT_SESSION_KEY] = request.data
         return self.list(request)
