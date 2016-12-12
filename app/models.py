@@ -164,6 +164,7 @@ class Product(models.Model):
                                processors=[ResizeToFill(200, 100)],
                                format='JPEG')
     end_of_life = models.BooleanField(default=False, verbose_name="EOL")
+    renovation_required = models.BooleanField(default=False, verbose_name="Erfodert Renovierung")
     leader_protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll im leader modus",
                                              related_name="protocol_leader", blank=True)
     follower_protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll im follower modus",

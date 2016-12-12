@@ -12,7 +12,7 @@ PRODUCT_ID_HASH = hash('matching.product.cache')
 LOGGER = logging.getLogger(__name__)
 
 
-def implement_scenario(scenario, user_preference):
+def implement_scenario(scenario, user_preference, renovation_preference):
     """
     1.  Call find_implementing_product for each meta device in the scenario
     2.  for each Broker -> Endpoint combination find paths with: find_communication_partner(endpoint, broker)
@@ -74,19 +74,21 @@ def implement_scenario(scenario, user_preference):
 
         merged_set = __merge_paths(meta_endpoints, possible_paths)
         # 3. apply cost function U_pref to get one product set
-        merged_set = __cost_function(merged_set, user_preference)
-        # 4. merge all product sets
-        product_sets.add(merged_set)
+        merged_set = __cost_function(merged_set, user_preference, renovation_preference)
+
+        if merged_set:
+            # 4. merge all product sets
+            product_sets.add(merged_set)
 
     # 5. apply cost function U_pref to get the best product set
-    product_sets = __cost_function(product_sets, user_preference)
+    product_sets = __cost_function(product_sets, user_preference, renovation_preference)
 
     LOGGER.info('Start matching for scenario: "%s", found matching product set "%s"' % (scenario.name, product_sets))
     # return the product set
     return product_sets
 
 
-def __cost_function(product_sets, preference):
+def __cost_function(product_sets, preference, renovation_preference):
     """
     Cost function which decides which product set matches the user preferences.
 
@@ -96,6 +98,8 @@ def __cost_function(product_sets, preference):
         Preference value of "extensible", "cost", "efficiency"
     :param used_products:
         The broker and endpoint implementations that was used to assemble this product sets.
+    :param renovation_preference:
+        If the user is able to fix install products
     :return:
         The product set that will match the user preferences the best.
     """
@@ -104,6 +108,9 @@ def __cost_function(product_sets, preference):
 
     sorting = dict()
     for current_set in product_sets:
+        if not __matches_renovation_preference(current_set, renovation_preference):
+            continue
+
         # will resolve in set that contains the master broker and other bridges; this set is at least on element big
         broker = __get_broker_of_products(current_set)
 
@@ -112,8 +119,7 @@ def __cost_function(product_sets, preference):
             x = 0
             for product in current_set:
                 x += len(__get_protocols(product, True)) + len(__get_protocols(product, False))
-            sorting[current_set] = float(len(broker)**2) / x
-            return sorted(sorting.items(), key=operator.itemgetter(1))[0][0]
+            sorting[current_set] = 1.0 / (float(len(broker)**2) / x)
         elif preference == PRODUCT_PREF_PRICE:
             for product in current_set:
                 x += product.price
@@ -125,8 +131,9 @@ def __cost_function(product_sets, preference):
         else:
             raise(AttributeError("Unsupported preference %s" % preference))
         # search for minimum
-    # only cost and efficiency
-    return sorted(sorting.items(), key=operator.itemgetter(1))[-1][0]
+    if sorting:
+        return sorted(sorting.items(), key=operator.itemgetter(1))[-1][0]
+    return set()
 
 
 def __merge_paths(meta_endpoints, possible_paths):
@@ -145,6 +152,15 @@ def __product(a, b):
         for elem_b in b:
             ret.add(frozenset(elem_a.union(elem_b)))
     return ret
+
+
+def __matches_renovation_preference(product_set, renovation_preference):
+    if renovation_preference:
+        return True
+    for product in product_set:
+        if product.renovation_required:
+            return False
+    return True
 
 
 def __find_implementing_product(meta_device):
