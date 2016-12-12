@@ -83,8 +83,8 @@ class Scenario(models.Model):
     Can be created by Employees.
     """
 
-    name = models.CharField(max_length=100, unique=True)
-    url_name = models.CharField(max_length=100, unique=False, verbose_name="URL-Name")
+    name = models.CharField(max_length=255, unique=True)
+    url_name = models.CharField(max_length=255, unique=False, verbose_name="URL-Name")
     description = models.TextField(verbose_name="Kurzbeschreibung", max_length="500", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
     provider = models.ForeignKey("Provider", default="1", verbose_name="Erstellt von", on_delete=models.CASCADE)
@@ -200,10 +200,10 @@ class ProductType(models.Model):
             to=Session, verbose_name="Als Produkttypfilter verwendet von",
             blank=True)
     thumbnail = models.ImageField(
-            verbose_name="Bild", null=True, blank=True,
+            verbose_name="Thumbnail", null=True, blank=True,
             upload_to="productType/thumbnail")
     house_overlay_picture = models.ImageField(
-            verbose_name="Bild", null=True, blank=True,
+            verbose_name="Bildicon in der Hausvorschau", null=True, blank=True,
             upload_to="productType/house_overlay_picture")
 
     def __str__(self):

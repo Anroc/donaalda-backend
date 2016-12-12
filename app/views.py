@@ -20,8 +20,9 @@ from .logic.sorting import sort_scenarios
 from .forms import LoginForm
 from .permissions import *
 from .serializers import *
-from .suggestions import SuggestionsInputSerializer
 from .validators import *
+from .suggestions import SuggestionsInputSerializer, InvalidGETException
+from .constants import SUGGESTIONS_INPUT_SESSION_KEY
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -130,32 +131,33 @@ class SuggestedScenarioViewSet():
 @list_route(methods=['POST'])
 @permission_classes((permissions.AllowAny,))
 class Suggestions(generics.ListAPIView):
-
-    def get(self, request, format=None):
-        pass
-
     def post(self, request, format=None):
         input_serializer = SuggestionsInputSerializer(data=request.data)
         if not input_serializer.is_valid():
             return Response(input_serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
         suggestions_input = input_serializer.save()
-        self.request.session['suggestions_input'] = suggestions_input
-
+        self.request.session[SUGGESTIONS_INPUT_SESSION_KEY] = suggestions_input
         return self.list(request)
 
     def get_queryset(self):
-        suggested_scenarios = list()
-        if 'suggestions_input' not in self.request.session:
-            return Scenario.objects.all()
-        suggestions_input = self.request.session['suggestions_input']
+        suggestions_input = self.request.session.get(
+                SUGGESTIONS_INPUT_SESSION_KEY, None)
+        if suggestions_input is None:
+            raise InvalidGETException
 
+        suggested_scenarios = list()
         # call scenario sorting
         sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input.scenario_preference)
         for scenario, rating in sorted_tuple_list:
             suggested_scenarios.append(scenario)
             # TODO: save matching value to send to frontend
-        return suggested_scenarios
+
+        for scenario in suggested_scenarios:
+            product_set = implement_scenario(
+                    scenario, suggestions_input.product_preference)
+            if product_set:
+                yield scenario
 
     def get_serializer_class(self):
         return ScenarioSerializer
@@ -165,8 +167,9 @@ class Suggestions(generics.ListAPIView):
 @list_route(methods=['GET'])
 @permission_classes((permissions.AllowAny,))
 def matching(request):
-    product_set = implement_scenario(Scenario.objects.first(), request.GET.get('preference', 'cost'))
-    print(product_set)
+    for scenario in set(Scenario.objects.all()):
+        product_set = implement_scenario(scenario, request.GET.get('preference', 'cost'))
+        print(product_set)
     return Response(status=status.HTTP_200_OK)
 
 

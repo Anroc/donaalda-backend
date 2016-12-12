@@ -146,6 +146,26 @@
   }
 },
 {
+  "model": "app.scenario",
+  "pk": 6,
+  "fields": {
+    "name": "Wenn meine Lieblingsserie im Fernsehen l\u00e4uft soll der Fernseher angeschaltet und der Raum abgedunkelt werden.",
+    "url_name": "wenn_meine_lieblingsserie_im_fernsehen_lauft_soll_der_fernseher_angeschaltet_und_der_raum_abgedunkelt_werden_",
+    "description": "Wenn man sowieso jede Woche zur selben Uhrzeit den Fernseher anschaltet kann das ja auch automatisch passieren. Dazu braucht man ein Regelwerk, eine online Programmauskunft (z.b. als app im smart home control center), einen fern steuerbaren Fernseher und Dimmbare Lampen.",
+    "picture": "scenarios/Smart-TV-Makers-Voice-Security_8bzcIP6.jpg",
+    "provider": 27,
+    "meta_broker": 18,
+    "meta_endpoints": [
+      19,
+      20
+    ],
+    "subcategory": [
+      20
+    ],
+    "in_shopping_basket_of": []
+  }
+},
+{
   "model": "app.product",
   "pk": 1,
   "fields": {
@@ -2290,6 +2310,20 @@
   }
 },
 {
+  "model": "app.feature",
+  "pk": 18,
+  "fields": {
+    "name": "Online Fernseh Programmauskunft"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 19,
+  "fields": {
+    "name": "Fernsteuerbare Programmauswahl"
+  }
+},
+{
   "model": "app.metadevice",
   "pk": 1,
   "fields": {
@@ -2408,6 +2442,38 @@
     "is_broker": false,
     "implementation_requires": [
       15
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 18,
+  "fields": {
+    "is_broker": true,
+    "implementation_requires": [
+      1,
+      18
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 19,
+  "fields": {
+    "is_broker": false,
+    "implementation_requires": [
+      17
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 20,
+  "fields": {
+    "is_broker": false,
+    "implementation_requires": [
+      19,
+      13
     ]
   }
 },
@@ -2625,6 +2691,20 @@
   }
 },
 {
+  "model": "app.subcategory",
+  "pk": 20,
+  "fields": {
+    "name": "Automatisierung von Routinet\u00e4tigkeiten",
+    "url_name": "automatisierung-von-routinetaetigkeiten",
+    "short_description": "Der Alltag wird einfacher wenn man sich bestimmte Routinierten abnehmen l\u00e4sst.",
+    "picture": "subcategories/routine-2.jpg",
+    "belongs_to_category": [
+      7
+    ],
+    "used_as_filter_by": []
+  }
+},
+{
   "model": "app.scenariocategoryrating",
   "pk": 1,
   "fields": {
@@ -2685,6 +2765,15 @@
     "scenario": 5,
     "category": 10,
     "rating": 5
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 8,
+  "fields": {
+    "scenario": 6,
+    "category": 7,
+    "rating": 10
   }
 },
 {
@@ -3192,6 +3281,14 @@
   "fields": {
     "session_data": "NTVhMWU4YmI2ZDk5MTdmOWIzYmQxZjc0NGQ1ZTZkMTQ4NTYyMjRkOTp7Imhpc3RvcnkiOlsiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2FsbF9wcm9kdWN0cy8iXX0=",
     "expire_date": "2016-07-14T14:27:16.692Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "aldwx2y1n7mt878zw5be0pm1rj6qlqyd",
+  "fields": {
+    "session_data": "ZGI5NTI0ODYxNzc5MDI3NTEyODlhY2E5YmY0MzRmZmZmOWNkNWFlODp7InN1Z2dlc3Rpb25zX2lucHV0IjpbeyJLb21mb3J0IjoxMCwiRW5lcmdpZSI6MSwiU2ljaGVyaGVpdCI6MSwiR2VzdW5kaGVpdCI6MX0sIlByZWlzIixmYWxzZSxbXSxbXV19",
+    "expire_date": "2016-12-25T20:17:41.051Z"
   }
 },
 {

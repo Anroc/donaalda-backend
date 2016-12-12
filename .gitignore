@@ -7,3 +7,4 @@ advisorEnv
 advisor.sock
 deployment_script.sh
 db.sqlite3
+*.log
