@@ -152,8 +152,8 @@ class Suggestions(generics.ListAPIView):
 
         # call scenario sorting
         sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input.scenario_preference)
-        for tuple_elem in sorted_tuple_list:
-            suggested_scenarios.append(tuple_elem[0])
+        for scenario, rating in sorted_tuple_list:
+            suggested_scenarios.append(scenario)
             # TODO: save matching value to send to frontend
         return suggested_scenarios
 
