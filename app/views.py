@@ -142,8 +142,7 @@ class Suggestions(generics.ListAPIView):
         suggestions_input = input_serializer.save()
 
         # call scenario sorting
-        sorted_tuple_list = sort_scenarios(
-                Scenario.objects.all(), suggestions_input.scenario_preference)
+        sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input)
         for scenario, rating in sorted_tuple_list:
             product_set = implement_scenario(scenario, suggestions_input)
             if product_set:
