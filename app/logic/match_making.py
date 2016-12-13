@@ -111,6 +111,8 @@ def __cost_function(product_sets, preference):
 
     sorting = dict()
     for current_set in product_sets:
+        if not __matches_product_type_preference(current_set, preference.product_type_filter):
+            continue
         # will resolve in set that contains the master broker and other bridges; this set is at least on element big
         broker = __get_broker_of_products(current_set)
 
@@ -154,6 +156,34 @@ def __product(a, b):
     return ret
 
 
+def __matches_product_type_preference(product_set, product_type_filters):
+    """
+    Filters a given product set for the given product type filters.
+
+    :param product_set:
+        the given product set
+    :param product_type_filters:
+        the given product type filters (list of pk of product types)
+    :return:
+        if the product set contains all of the given product type filters
+    """
+    if not product_type_filters:
+        return True
+    input_hash = hash((frozenset(product_set), tuple(product_type_filters)))
+
+    tmp = cache.get(input_hash)
+    if tmp is not None:
+        return tmp
+
+    product_types = set()
+    for product in product_set:
+        product_types.add(product.product_type_id)
+
+    res = all(product_type in product_types for product_type in product_type_filters)
+    cache.set(input_hash, res)
+    return res
+
+
 def __find_implementing_product(meta_device, renovation_allowed):
     """
     Find all implementing products to a given meta_device.
@@ -165,7 +195,7 @@ def __find_implementing_product(meta_device, renovation_allowed):
         meta_device: the meta device that should be implemented
     :return:
         set of all matching products that have at least one protocol matching
-        the defined behavior (e.g. borker -> least one leader protocol;
+        the defined behavior (e.g. broker -> least one leader protocol;
         endpoint -> at least one follower protocol.)
     """
     products = __get_products(renovation_allowed)

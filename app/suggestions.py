@@ -5,7 +5,7 @@ from rest_framework import pagination, serializers, exceptions
 from rest_framework.utils.urls import replace_query_param
 
 from .constants import *
-from .serializers import ScenarioSerializer
+from .serializers import ScenarioSerializer, ProductTypeSerializer
 
 from .validators import (
         validate_scenario_preference,
@@ -96,6 +96,7 @@ class ScenarioImpl(object):
         self.price = 0.0
         self.efficiency = 0
         self.extendability = 0
+        self.product_types = set()
         self.compute_specs()
 
     def compute_specs(self):
@@ -105,6 +106,7 @@ class ScenarioImpl(object):
             self.efficiency += product.efficiency
             protocols = protocols.union(
                 set(product.leader_protocol.all()).union(set(product.follower_protocol.all())))
+            self.product_types.add(product.product_type)
         self.extendability = len(protocols)
 
 
@@ -115,6 +117,7 @@ class SuggestionsOutputSerializer(serializers.Serializer):
     efficiency = serializers.IntegerField()
     extendability = serializers.IntegerField()
     rating = serializers.FloatField()
+    product_types = ProductTypeSerializer(many=True)
 
 
 class InvalidGETException(exceptions.APIException):
