@@ -49,8 +49,8 @@ def implement_scenario(scenario, preference):
         if len(impl_of_meta_device[meta_endpoint]) == 0:
             return set()
 
-    # TODO: check if the product type filter can be somehow satisfied
-
+    if not __matches_product_type_preference(impl_of_meta_device.values(), preference.product_type_filter):
+        return set()
 
     # 2. start running F
     # we already validated that each endpoint have at least one implementation
