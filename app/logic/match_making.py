@@ -109,7 +109,7 @@ def __cost_function(product_sets, preference):
     for current_set in product_sets:
         if not __matches_renovation_preference(current_set, preference.renovation_preference):
             continue
-        if not __filter_product_set(current_set, preference.product_type_filter):
+        if not __matches_product_type_preference(current_set, preference.product_type_filter):
             continue
         # will resolve in set that contains the master broker and other bridges; this set is at least on element big
         broker = __get_broker_of_products(current_set)
@@ -175,7 +175,7 @@ def __matches_renovation_preference(product_set, renovation_preference):
     return res
 
 
-def __filter_product_set(product_set, product_type_filters):
+def __matches_product_type_preference(product_set, product_type_filters):
     """
     Filters a given product set for the given product type filters.
 
