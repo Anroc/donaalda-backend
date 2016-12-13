@@ -188,7 +188,7 @@ def __filter_product_set(product_set, product_type_filters):
     """
     if not product_type_filters:
         return True
-    input_hash = hash((frozenset(product_set), product_type_filters))
+    input_hash = hash((frozenset(product_set), tuple(product_type_filters)))
     if cache.get(input_hash) is not None:
         return cache.get(input_hash)
 
@@ -196,7 +196,7 @@ def __filter_product_set(product_set, product_type_filters):
     for product in product_set:
         product_types.add(product.product_type_id)
 
-    res = product_type_filters in product_types
+    res = all(product_type in product_types for product_type in product_type_filters)
     cache.set(input_hash, res)
     return res
 
