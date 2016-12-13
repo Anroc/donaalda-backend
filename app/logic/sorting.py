@@ -72,9 +72,4 @@ def __normalize(dictionary, default_key_set=None):
 def __filter_scenarios(scenarios, subcategory_filter):
     if not subcategory_filter:
         return scenarios
-
-    ret = set()
-    for scenario in scenarios:
-        if scenario.subcategory.filter(pk__in=subcategory_filter):
-            ret.add(scenario)
-    return ret
+    return {scenario for scenario in scenarios if scenario.subcategory.filter(pk__in=subcategory_filter)}
