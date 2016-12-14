@@ -364,6 +364,7 @@ class Answer(models.Model):
                                    default="Diese Antwort hat noch keine Beschreibung erhalten")
     belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE, verbose_name="gehört zu Frage")
     answer_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Anworttext")
+    icon_name = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return '%s zu "%s"' % (self.answer_text, self.belongs_to_question.question_text)

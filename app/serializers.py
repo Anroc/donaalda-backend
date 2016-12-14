@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 class PkToIdSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(source='pk')
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -58,7 +59,7 @@ class ScenarioSerializer(PkToIdSerializer):
     class Meta:
         model = Scenario
         fields = (
-            'id', 'name', 'url_name', 'picture', 'provider', )
+            'id', 'name', 'description', 'url_name', 'picture', 'provider',)
 
 
 class SubCategorySerializer(PkToIdSerializer):
@@ -104,7 +105,7 @@ class CommentSerializer(PkToIdSerializer):
 class AnswerSerializer(PkToIdSerializer):
     class Meta:
         model = Answer
-        fields = ('id', 'belongs_to_question', 'answer_text',)
+        fields = ('id', 'description', 'belongs_to_question', 'answer_text', 'icon_name')
 
 
 class QuestionSerializer(PkToIdSerializer):
@@ -115,11 +116,13 @@ class QuestionSerializer(PkToIdSerializer):
         fields = (
             'id',
             'question_text',
+            'description',
             'answer_presentation',
             'order',
             'answer_set',
             'rating_min',
             'rating_max',
+            'icon_name',
         )
 
 
