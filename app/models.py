@@ -197,16 +197,16 @@ class ProductType(models.Model):
     """
 
     type_name = models.CharField(
-        max_length=255, unique=True, verbose_name="Name")
+            max_length=255, unique=True, verbose_name="Name")
     used_as_product_type_filter_by = models.ManyToManyField(
-        to=Session, verbose_name="Als Produkttypfilter verwendet von",
-        blank=True)
+            to=Session, verbose_name="Als Produkttypfilter verwendet von",
+            blank=True)
     thumbnail = models.ImageField(
-        verbose_name="Thumbnail", null=True, blank=True,
-        upload_to="productType/thumbnail")
+            verbose_name="Thumbnail", null=True, blank=True,
+            upload_to="productType/thumbnail")
     house_overlay_picture = models.ImageField(
-        verbose_name="Bildicon in der Hausvorschau", null=True, blank=True,
-        upload_to="productType/house_overlay_picture")
+            verbose_name="Bildicon in der Hausvorschau", null=True, blank=True,
+            upload_to="productType/house_overlay_picture")
 
     def __str__(self):
         return '%s' % self.type_name
