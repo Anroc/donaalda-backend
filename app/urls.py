@@ -35,11 +35,10 @@ router.register(r'productType', views.ProductTypeViewSet)
 router.register(r'provider', views.ProviderViewSet)
 router.register(r'providerProfile', views.ProviderProfileViewSet)
 router.register(r'comment', views.CommentViewSet)
-# router.register(r'question', views.QuestionViewSet)
 # router.register(r'answer', views.AnswerViewSet)
 # router.register(r'tag', views.TagViewSet)
 router.register(r'givenAnswers', views.GivenAnswersViewSet)
-router.register(r'questionStep', views.QuestionStepViewSet)
+router.register(r'questions', views.QuestionViewSet)
 # router.register(r'suggestions', views.suggestions)
 # TODO: router.register(r'filter'), views.FilterStepViewSet); This will be do'ne through the SuggestedScenarioViewSet
 # implements all interactions with a users shopping basket

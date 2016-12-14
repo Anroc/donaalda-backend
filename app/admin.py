@@ -18,9 +18,7 @@ from .models import (
     User,
     Question,
     Answer,
-    QuestionSet,
     GivenAnswers,
-    QuestionStep,
     MetaDevice,
     Feature,
     ScenarioCategoryRating,
@@ -193,9 +191,7 @@ admin.site.register(Comment, CommentAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
-admin.site.register(QuestionSet)
 admin.site.register(GivenAnswers)
-admin.site.register(QuestionStep)
 admin.site.register(Feature)
 admin.site.register(MetaDevice)
 admin.site.register(ScenarioCategoryRating)

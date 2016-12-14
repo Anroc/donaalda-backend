@@ -23,8 +23,6 @@ advisor (also known as stepper), provider and user interaction.
         -- Employee
 
     The advisor part includes:
-        -- QuestionStep
-        -- QuestionSet
         -- Question
         -- Answer
         -- GivenAnswers
@@ -397,37 +395,6 @@ class GivenAnswers(models.Model):
     class Meta:
         verbose_name = "beantwortete Antwort"
         verbose_name_plural = "beantwortete Antworten"
-
-
-class QuestionSet(models.Model):
-    """
-    A number of questions that have a contextual relationship and shall be grouped together.
-    Also enables an order between different sets, which Question should be shown at the top and which at the lower end.
-    """
-
-    name = models.CharField(max_length=255, default="---")
-    question = models.ManyToManyField("Question", verbose_name="Dazugehörige Fragen")
-    order = models.PositiveIntegerField(default=1000)
-
-    def __str__(self):
-        return '%s' % self.name
-
-    class Meta:
-        verbose_name = "Fragensammlung"
-        verbose_name_plural = "Fragensammlungen"
-        ordering = ["order", "pk"]
-
-
-class QuestionStep(models.Model):
-    name = models.CharField(max_length=255)
-    question_steps = models.ManyToManyField('QuestionSet', verbose_name="zusammen gehörende Fragen")
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "Fragen für Stepper-Schritt"
-        verbose_name_plural = "Fragen für Stepper-Schritte"
 
 
 class Protocol(models.Model):
