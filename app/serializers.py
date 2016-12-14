@@ -55,7 +55,7 @@ class ScenarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scenario
         fields = (
-            'pk', 'name', 'url_name', 'picture', 'provider', )
+            'pk', 'name', 'description', 'url_name', 'picture', 'provider',)
 
 
 class SubCategorySerializer(serializers.ModelSerializer):
@@ -101,7 +101,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ('pk', 'belongs_to_question', 'answer_text',)
+        fields = ('pk', 'description', 'belongs_to_question', 'answer_text', 'icon_name')
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -112,11 +112,13 @@ class QuestionSerializer(serializers.ModelSerializer):
         fields = (
             'pk',
             'question_text',
+            'description',
             'answer_presentation',
             'order',
             'answer_set',
             'rating_min',
             'rating_max',
+            'icon_name',
         )
 
 
