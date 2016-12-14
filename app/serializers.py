@@ -59,7 +59,7 @@ class ScenarioSerializer(PkToIdSerializer):
     class Meta:
         model = Scenario
         fields = (
-            'pk', 'name', 'description', 'url_name', 'picture', 'provider',)
+            'id', 'name', 'description', 'url_name', 'picture', 'provider',)
 
 
 class SubCategorySerializer(PkToIdSerializer):
@@ -105,7 +105,7 @@ class CommentSerializer(PkToIdSerializer):
 class AnswerSerializer(PkToIdSerializer):
     class Meta:
         model = Answer
-        fields = ('pk', 'description', 'belongs_to_question', 'answer_text', 'icon_name')
+        fields = ('id', 'description', 'belongs_to_question', 'answer_text', 'icon_name')
 
 
 class QuestionSerializer(PkToIdSerializer):
