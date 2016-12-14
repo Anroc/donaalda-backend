@@ -3,53 +3,57 @@ from .models import *
 from django.contrib.auth.models import User
 
 
+class PkToIdSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(source='pk')
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username')
 
 
-class ProviderSerializer(serializers.ModelSerializer):
+class ProviderSerializer(PkToIdSerializer):
     class Meta:
         model = Provider
-        fields = ('pk', 'name', 'is_visible',)
+        fields = ('id', 'name', 'is_visible',)
 
 
-class ProviderProfileSerializer(serializers.ModelSerializer):
+class ProviderProfileSerializer(PkToIdSerializer):
     owner = ProviderSerializer()
 
     class Meta:
         model = ProviderProfile
-        fields = ('pk',
+        fields = ('id',
                   'public_name', 'url_name', 'logo_image', 'profile_image', 'banner_image', 'introduction',
                   'contact_email',
                   'website', 'owner',)
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(PkToIdSerializer):
     class Meta:
         model = Category
-        fields = ('pk', 'name', 'picture', 'backgroundPicture', 'short_description', 'description', 'iconString',)
+        fields = ('id', 'name', 'picture', 'backgroundPicture', 'short_description', 'description', 'iconString',)
 
 
-class ProductSerializer(serializers.ModelSerializer):
+class ProductSerializer(PkToIdSerializer):
     provider = ProviderSerializer()
 
     class Meta:
         model = Product
-        fields = ('pk',
+        fields = ('id',
                   'name', 'provider', 'product_type', 'serial_number', 'description', 'specifications', 'image1',
                   'image2',
                   'image3', 'end_of_life',)
 
 
-class ProductTypeSerializer(serializers.ModelSerializer):
+class ProductTypeSerializer(PkToIdSerializer):
     class Meta:
         model = ProductType
-        fields = ('pk', 'type_name',)
+        fields = ('id', 'type_name',)
 
 
-class ScenarioSerializer(serializers.ModelSerializer):
+class ScenarioSerializer(PkToIdSerializer):
     provider = ProviderSerializer()
 
     class Meta:
@@ -58,59 +62,59 @@ class ScenarioSerializer(serializers.ModelSerializer):
             'pk', 'name', 'description', 'url_name', 'picture', 'provider',)
 
 
-class SubCategorySerializer(serializers.ModelSerializer):
+class SubCategorySerializer(PkToIdSerializer):
     belongs_to_category = CategorySerializer(read_only=True, many=True)
 
     class Meta:
         model = SubCategory
-        fields = ('pk', 'belongs_to_category', 'name', 'url_name', 'short_description', 'picture',)
+        fields = ('id', 'belongs_to_category', 'name', 'url_name', 'short_description', 'picture',)
 
 
-class SubCategoryDescriptionSerializer(serializers.ModelSerializer):
+class SubCategoryDescriptionSerializer(PkToIdSerializer):
     belongs_to_subcategory = SubCategorySerializer()
 
     class Meta:
         model = SubCategoryDescription
-        fields = ('pk', 'belongs_to_subcategory', 'description', 'image', 'left_right', 'order',)
+        fields = ('id', 'belongs_to_subcategory', 'description', 'image', 'left_right', 'order',)
 
 
-class EmployeeSerializer(serializers.ModelSerializer):
+class EmployeeSerializer(PkToIdSerializer):
     employer = ProviderSerializer()
 
     class Meta:
         model = Employee
-        fields = ('pk', 'employer',)
+        fields = ('id', 'employer',)
 
 
-class UserImageSerializer(serializers.ModelSerializer):
+class UserImageSerializer(PkToIdSerializer):
     belongs_to_user = UserSerializer()
 
     class Meta:
         model = UserImage
-        fields = ('pk', 'belongs_to_user', 'image',)
+        fields = ('id', 'belongs_to_user', 'image',)
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class CommentSerializer(PkToIdSerializer):
     comment_from = UserSerializer()
 
     class Meta:
         model = Comment
-        fields = ('pk', 'comment_from', 'comment_title', 'comment_content', 'rating', 'creation_date', 'page_url',)
+        fields = ('id', 'comment_from', 'comment_title', 'comment_content', 'rating', 'creation_date', 'page_url',)
 
 
-class AnswerSerializer(serializers.ModelSerializer):
+class AnswerSerializer(PkToIdSerializer):
     class Meta:
         model = Answer
         fields = ('pk', 'description', 'belongs_to_question', 'answer_text', 'icon_name')
 
 
-class QuestionSerializer(serializers.ModelSerializer):
+class QuestionSerializer(PkToIdSerializer):
     answer_set = AnswerSerializer(read_only=True, many=True)
 
     class Meta:
         model = Question
         fields = (
-            'pk',
+            'id',
             'question_text',
             'description',
             'answer_presentation',
@@ -122,26 +126,26 @@ class QuestionSerializer(serializers.ModelSerializer):
         )
 
 
-class GivenAnswersSerializer(serializers.ModelSerializer):
+class GivenAnswersSerializer(PkToIdSerializer):
     user = UserSerializer()
     user_answer = AnswerSerializer(read_only=True, many=True)
 
     class Meta:
         model = GivenAnswers
-        fields = ('pk', 'user', 'user_answer', 'rating_value',)
+        fields = ('id', 'user', 'user_answer', 'rating_value',)
 
 
-class QuestionSetSerializer(serializers.ModelSerializer):
+class QuestionSetSerializer(PkToIdSerializer):
     question = QuestionSerializer(read_only=True, many=True)
 
     class Meta:
         model = QuestionSet
-        fields = ('pk', 'name', 'question', 'order',)
+        fields = ('id', 'name', 'question', 'order',)
 
 
-class QuestionStepSerializer(serializers.ModelSerializer):
+class QuestionStepSerializer(PkToIdSerializer):
     question_steps = QuestionSetSerializer(read_only=True, many=True)
 
     class Meta:
         model = QuestionStep
-        fields = ('pk', 'name', 'question_steps',)
+        fields = ('id', 'name', 'question_steps',)
