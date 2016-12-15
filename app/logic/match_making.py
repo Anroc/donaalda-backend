@@ -169,7 +169,8 @@ def __matches_product_type_preference(product_set, product_type_filters):
     """
     if not product_type_filters:
         return True
-    input_hash = hash((frozenset(product_set), tuple(product_type_filters)))
+
+    input_hash = hash((frozenset(product_set), frozenset(product_type_filters)))
 
     tmp = cache.get(input_hash)
     if tmp is not None:
