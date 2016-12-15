@@ -333,6 +333,8 @@ class Question(models.Model):
     icon_name = models.CharField(max_length=100, null=True, blank=True)
 
     question_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Fragentext")
+    title = models.CharField(
+            max_length=80, blank=True, verbose_name="Titel für Onboarding")
     answer_presentation = models.CharField(
         max_length=2,
         choices=ANSWER_PRESENTATION_CHOICES,

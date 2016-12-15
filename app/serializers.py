@@ -115,14 +115,15 @@ class QuestionSerializer(PkToIdSerializer):
         model = Question
         fields = (
             'id',
+            'title',
             'question_text',
             'description',
             'answer_presentation',
             'order',
-            'answer_set',
             'rating_min',
             'rating_max',
             'icon_name',
+            'answer_set',
         )
 
 
