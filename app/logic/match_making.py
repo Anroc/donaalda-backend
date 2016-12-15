@@ -49,7 +49,8 @@ def implement_scenario(scenario, preference):
         if len(impl_of_meta_device[meta_endpoint]) == 0:
             return set()
 
-    if not __matches_product_type_preference(impl_of_meta_device.values(), preference.product_type_filter):
+    if not __product_type_filter_satisfiable(
+            impl_of_meta_device.values(), preference.product_type_filter):
         return set()
 
     # 2. start running F
@@ -154,6 +155,44 @@ def __product(a, b):
         for elem_b in b:
             ret.add(frozenset(elem_a.union(elem_b)))
     return ret
+
+
+def __product_type_filter_satisfiable(meta_implementations, filters):
+    """
+    Checks if a given set of product implementations of meta devices contains a
+    configuration that satisfies the given product type filter.
+
+    :param meta_implementations:
+        a set containing sets of all products that implement each meta device in
+        a scenario
+    :param filters:
+        the set of product type filters
+    :return:
+        whether or not there is a way to choose a product from each set so that
+        all product types in the filters are satisfied by the choice
+    """
+    # start by creating a set that contains a frozenset of the filters
+    remaining_filters = set()
+    remaining_filters.add(frozenset(filters))
+    # now go over each meta device that will be implemented
+    for ps in meta_implementations:
+        previous_filters = remaining_filters.copy()
+        # and over each product that implements this meta device
+        for p in ps:
+            # and see what product type filters we would still need to satisfy
+            # if we chose this product. (f - frozenset((p.product_type.id,)))
+            # The remaining_filters set represents the choices we already took.
+            # It is necessary because two implementations of a certain meta
+            # device might each be able to satisfy one of the product type
+            # filters but we can only choose one of them. In this case, the
+            # remaining_filters set (assuming the complete set of filters is
+            # {1,2}) would be {{1} if we chose the first product, {2} if we
+            # chose the second product, {1,2} if we chose neither}
+            remaining_filters |= set(
+                    f - frozenset((p.product_type.id,))
+                    for f in previous_filters)
+
+    return frozenset() in remaining_filters
 
 
 def __matches_product_type_preference(product_set, product_type_filters):
