@@ -62,7 +62,7 @@ class ProviderViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ProviderProfileViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ProviderProfile.objects.all()
-    serializer_class = ProviderSerializer
+    serializer_class = ProviderProfileSerializer
 
 
 class CommentViewSet(viewsets.ModelViewSet):
