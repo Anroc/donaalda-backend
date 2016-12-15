@@ -118,9 +118,9 @@ class GivenAnswersViewSet(viewsets.ModelViewSet):
         return super(GivenAnswersViewSet, self).destroy(request, pk)
 
 
-class QuestionStepViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = QuestionStep.objects.all()
-    serializer_class = QuestionStepSerializer
+class QuestionViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
 
 
 @permission_classes((permissions.AllowAny,))

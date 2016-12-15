@@ -133,19 +133,3 @@ class GivenAnswersSerializer(PkToIdSerializer):
     class Meta:
         model = GivenAnswers
         fields = ('id', 'user', 'user_answer', 'rating_value',)
-
-
-class QuestionSetSerializer(PkToIdSerializer):
-    question = QuestionSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = QuestionSet
-        fields = ('id', 'name', 'question', 'order',)
-
-
-class QuestionStepSerializer(PkToIdSerializer):
-    question_steps = QuestionSetSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = QuestionStep
-        fields = ('id', 'name', 'question_steps',)

@@ -2065,7 +2065,7 @@
     "icon_name": null,
     "question_text": "Sind dir Bauma\u00dfnahmen zu l\u00e4stig?",
     "answer_presentation": "rc",
-    "order": 1000,
+    "order": 3,
     "rating_min": null,
     "rating_max": null
   }
@@ -2078,9 +2078,9 @@
     "icon_name": null,
     "question_text": "Wie wichtig sind dir folgende Kategorien?",
     "answer_presentation": "sc",
-    "order": 1000,
-    "rating_min": null,
-    "rating_max": null
+    "order": 1,
+    "rating_min": 1,
+    "rating_max": 10
   }
 },
 {
@@ -2091,7 +2091,7 @@
     "icon_name": null,
     "question_text": "Welches dieser Kriterien ist dir am Wichtigsten?",
     "answer_presentation": "rc",
-    "order": 1000,
+    "order": 2,
     "rating_min": null,
     "rating_max": null
   }
@@ -2102,7 +2102,8 @@
   "fields": {
     "description": "Diese Antwort hat noch keine Beschreibung erhalten",
     "belongs_to_question": 15,
-    "answer_text": "Energie"
+    "answer_text": "Energie",
+    "icon_name": null
   }
 },
 {
@@ -2111,7 +2112,8 @@
   "fields": {
     "description": "Diese Antwort hat noch keine Beschreibung erhalten",
     "belongs_to_question": 15,
-    "answer_text": "Gesundheit"
+    "answer_text": "Gesundheit",
+    "icon_name": null
   }
 },
 {
@@ -2120,7 +2122,8 @@
   "fields": {
     "description": "Diese Antwort hat noch keine Beschreibung erhalten",
     "belongs_to_question": 15,
-    "answer_text": "Sicherheit"
+    "answer_text": "Sicherheit",
+    "icon_name": null
   }
 },
 {
@@ -2129,7 +2132,8 @@
   "fields": {
     "description": "Diese Antwort hat noch keine Beschreibung erhalten",
     "belongs_to_question": 15,
-    "answer_text": "Komfort"
+    "answer_text": "Komfort",
+    "icon_name": null
   }
 },
 {
@@ -2138,7 +2142,8 @@
   "fields": {
     "description": "Diese Antwort hat noch keine Beschreibung erhalten",
     "belongs_to_question": 13,
-    "answer_text": "Ja"
+    "answer_text": "Ja",
+    "icon_name": null
   }
 },
 {
@@ -2147,7 +2152,8 @@
   "fields": {
     "description": "Diese Antwort hat noch keine Beschreibung erhalten",
     "belongs_to_question": 13,
-    "answer_text": "Nein"
+    "answer_text": "Nein",
+    "icon_name": null
   }
 },
 {
@@ -2156,7 +2162,8 @@
   "fields": {
     "description": "Diese Antwort hat noch keine Beschreibung erhalten",
     "belongs_to_question": 16,
-    "answer_text": "Energieeffizienz"
+    "answer_text": "Energieeffizienz",
+    "icon_name": null
   }
 },
 {
@@ -2165,7 +2172,8 @@
   "fields": {
     "description": "Diese Antwort hat noch keine Beschreibung erhalten",
     "belongs_to_question": 16,
-    "answer_text": "Preis"
+    "answer_text": "Preis",
+    "icon_name": null
   }
 },
 {
@@ -2174,52 +2182,8 @@
   "fields": {
     "description": "Diese Antwort hat noch keine Beschreibung erhalten",
     "belongs_to_question": 16,
-    "answer_text": "Erweiterbarkeit"
-  }
-},
-{
-  "model": "app.questionset",
-  "pk": 7,
-  "fields": {
-    "name": "Category_Preferences",
-    "order": 500,
-    "question": [
-      15
-    ]
-  }
-},
-{
-  "model": "app.questionset",
-  "pk": 8,
-  "fields": {
-    "name": "User_Preferences",
-    "order": 700,
-    "question": [
-      16
-    ]
-  }
-},
-{
-  "model": "app.questionset",
-  "pk": 9,
-  "fields": {
-    "name": "Renovation_Preferences",
-    "order": 900,
-    "question": [
-      13
-    ]
-  }
-},
-{
-  "model": "app.questionstep",
-  "pk": 7,
-  "fields": {
-    "name": "Onboarding",
-    "question_steps": [
-      7,
-      8,
-      9
-    ]
+    "answer_text": "Erweiterbarkeit",
+    "icon_name": null
   }
 },
 {
