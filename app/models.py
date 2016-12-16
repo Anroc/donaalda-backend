@@ -84,7 +84,7 @@ class Scenario(models.Model):
 
     name = models.CharField(max_length=255, unique=True)
     url_name = models.CharField(max_length=255, unique=False, verbose_name="URL-Name")
-    description = models.TextField(verbose_name="Kurzbeschreibung", max_length="500", null=True, blank=True)
+    description = models.TextField(verbose_name="Beschreibung", null=True, blank=True)
     picture = models.ImageField(verbose_name="Bild", null=True, blank=True, upload_to="scenarios")
     provider = models.ForeignKey("Provider", default="1", verbose_name="Erstellt von", on_delete=models.CASCADE)
     categories = models.ManyToManyField("Category", through="ScenarioCategoryRating",
