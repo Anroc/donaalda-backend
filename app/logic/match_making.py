@@ -43,8 +43,10 @@ def implement_scenarios(scenarios, preference):
 
     # 2. case: meta brokers contain more then one element
     all_possible_solutions = set()
-    for meta_broker in meta_brokers:
-        res = frozenset(compute_matching_product_set(meta_broker, meta_endpoints, preference))
+
+    for meta_broker in list(meta_brokers):
+        updated_meta_endpoints = meta_endpoints.copy().union(meta_brokers.copy().difference({meta_broker}))
+        res = frozenset(compute_matching_product_set(meta_broker, updated_meta_endpoints, preference))
         if res:
             all_possible_solutions.add(res)
 
@@ -73,17 +75,23 @@ def __merge_meta_device(meta_devices, present_set):
         the merged set of the meta devices.
     """
     if not present_set:
-        return meta_devices
-    tmp = set()
+        present_set.add(meta_devices.pop())
+    tmp_add = set()
+    tmp_remove = set()
 
     # check if the given meta endpoint has features that are already satisfied by other meta endpoints
     for cme in meta_devices:
-        features_cme = cme.implementation_requires.all()
+        features_cme = set(cme.implementation_requires.values_list('name', flat=True))
         for me in present_set:
-            if not features_cme.issubset(me.implementation_requires.all()):
-                tmp.add(cme)
+            features_me = set(me.implementation_requires.values_list('name', flat=True))
+            if features_me.issubset(features_cme):
+                tmp_remove.add(me)
+                tmp_add.add(cme)
+            elif not features_cme.issubset(features_me):
+                tmp_add.add(cme)
+
     # add the meta_endpoints to the set of meta endpoints
-    return present_set.union(tmp)
+    return present_set.difference(tmp_remove).union(tmp_add)
 
 
 def compute_matching_product_set(meta_broker, meta_endpoints, preference):
