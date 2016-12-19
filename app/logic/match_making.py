@@ -12,7 +12,81 @@ PRODUCT_ID_HASH = hash('matching.product.cache')
 LOGGER = logging.getLogger(__name__)
 
 
-def implement_scenario(scenario, preference):
+def implement_scenarios(scenarios, preference):
+    """
+    This method takes a set of scenarios and merge them in that kind that
+    meta devices that provide the same feature set are just listed onces.
+
+    :param scenarios:
+        set of scenarios that should be implemented.
+        Most likely a set of scenarios in the shopping basekt union the new selected scenario
+    :param preference:
+        the user defined preference
+    :return:
+        best matching implementing product set
+    """
+    # merging the endpoints
+    meta_endpoints = set()
+    meta_brokers = set()
+    for scenario in scenarios:
+        # merge meta endpoints
+        meta_endpoints = __merge_meta_device(set(scenario.meta_endpoints.all()), meta_endpoints)
+
+        # merge meta broker
+        meta_brokers = __merge_meta_device({scenario.meta_broker}, meta_brokers)
+
+    # 1. case: meta brokers contain only one element
+    if len(meta_brokers) == 1:
+        # we are finished here
+        # call matching function to compute the reset
+        return compute_matching_product_set(meta_brokers.pop(), meta_endpoints, preference)
+
+    # 2. case: meta brokers contain more then one element
+    all_possible_solutions = set()
+    for meta_broker in meta_brokers:
+        res = frozenset(compute_matching_product_set(meta_broker, meta_endpoints, preference))
+        if res:
+            all_possible_solutions.add(res)
+
+    if len(all_possible_solutions) == 0:
+        # 2.1. if all possible solutions have no elements we return the empty set
+        return all_possible_solutions
+    elif len(all_possible_solutions) == 1:
+        # 2.2. if all possible solutions have only one solution we are done.
+        return all_possible_solutions.pop()
+    else:
+        # 2.3 if all possible solutions have more then one element we have to apply the cost function again
+        return __cost_function(all_possible_solutions, preference)
+
+
+def __merge_meta_device(meta_devices, present_set):
+    """
+    Merges a given set of meta_devices into a present_set of thous.
+    This method also checks if the current features of the meta devices can be already satisfied by
+    an element in the present set.
+
+    :param meta_devices:
+        the meta_devices that should be added in the set of present devices
+    :param present_set:
+        the set of present devices
+    :return:
+        the merged set of the meta devices.
+    """
+    if not present_set:
+        return meta_devices
+    tmp = set()
+
+    # check if the given meta endpoint has features that are already satisfied by other meta endpoints
+    for cme in meta_devices:
+        features_cme = cme.implementation_requires.all()
+        for me in present_set:
+            if not features_cme.issubset(me.implementation_requires.all()):
+                tmp.add(cme)
+    # add the meta_endpoints to the set of meta endpoints
+    return present_set.union(tmp)
+
+
+def compute_matching_product_set(meta_broker, meta_endpoints, preference):
     """
     1.  Call find_implementing_product for each meta device in the scenario
     2.  for each Broker -> Endpoint combination find paths with: find_communication_partner(endpoint, broker)
@@ -20,16 +94,14 @@ def implement_scenario(scenario, preference):
         If possible: create a product set of the current configuration
     4.  Apply U_pref on all product sets for each broker to find the current best solution for the current broker-product-set
     5.  Apply U_pref on all product sets for each different broker to find the overall best solution for the current scenario
-    :param scenario
-        the scenario where a implementation should be found
+    :param meta_broker:
+        the meta broker in the system
+    :param meta_endpoints:
+        the meta endpoints of the system
     :param preference
         the user preference that was passed by the client
     :return a set of implementing products that matches the user preferences optimally.
     """
-
-    LOGGER.debug('Scenario: %s' % scenario.name)
-    meta_broker = scenario.meta_broker
-    meta_endpoints = set(scenario.meta_endpoints.all())
 
     # 1. find implementing products
     impl_of_meta_device = dict()
@@ -91,7 +163,7 @@ def implement_scenario(scenario, preference):
     # 5. apply cost function U_pref to get the best product set
     product_sets = __cost_function(product_sets, preference)
 
-    LOGGER.info('Start matching for scenario: "%s", found matching product set "%s"' % (scenario.name, product_sets))
+    LOGGER.info('Found matching product set "%s"' % product_sets)
     # return the product set
     return product_sets
 

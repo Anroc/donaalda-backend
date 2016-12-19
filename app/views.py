@@ -15,7 +15,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import *
 from rest_framework.response import Response
 
-from .logic.match_making import implement_scenario
+from .logic.match_making import implement_scenarios
 from .logic.sorting import sort_scenarios
 from .forms import LoginForm
 from .permissions import *
@@ -144,7 +144,7 @@ class Suggestions(generics.ListAPIView):
         # call scenario sorting
         sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input)
         for scenario, rating in sorted_tuple_list:
-            product_set = implement_scenario(scenario, suggestions_input)
+            product_set = implement_scenarios({scenario}, suggestions_input)
             if product_set:
                 yield ScenarioImpl(product_set, scenario, rating)
 
