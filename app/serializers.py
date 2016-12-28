@@ -53,13 +53,23 @@ class ProductTypeSerializer(PkToIdSerializer):
         fields = ('id', 'type_name',)
 
 
+class ScenarioCategoryRatingSerializer(serializers.HyperlinkedModelSerializer):
+    name = serializers.ReadOnlyField(source='category.name')
+    id = serializers.ReadOnlyField(source='category.id')
+
+    class Meta:
+        model = ScenarioCategoryRating
+        fields = ('id', 'name', 'rating', )
+
+
 class ScenarioSerializer(PkToIdSerializer):
     provider = ProviderSerializer()
+    category_ratings = ScenarioCategoryRatingSerializer(source="scenariocategoryrating_set", many=True)
 
     class Meta:
         model = Scenario
         fields = (
-            'id', 'name', 'description', 'url_name', 'picture', 'provider',)
+            'id', 'name', 'description', 'url_name', 'picture', 'provider', 'category_ratings', )
 
 
 class SubCategorySerializer(PkToIdSerializer):
