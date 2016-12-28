@@ -104,9 +104,14 @@ class Scenario(models.Model):
 
     def save(self, *args, **kwargs):
         """Saves an instance of a Scenario and sets url_name to a cleaned version of name"""
-
         self.url_name = url_alias(self.name)
         super(Scenario, self).save(*args, **kwargs)
+
+        # for each rating create an rating for this element
+        category_ids = ScenarioCategoryRating.objects.filter(scenario=self).values_list('category')[0]
+        categories = {category for category in Category.objects.all() if category.id not in category_ids}
+        for category in categories:
+            ScenarioCategoryRating(category=category, scenario=self, rating=1).save()
 
     class Meta:
         verbose_name = "Szenario"
