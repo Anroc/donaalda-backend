@@ -59,7 +59,7 @@ class ScenarioSerializer(PkToIdSerializer):
     class Meta:
         model = Scenario
         fields = (
-            'id', 'name', 'description', 'url_name', 'picture', 'provider',)
+            'id', 'name', 'description', 'url_name', 'picture', 'provider', 'subcategory', )
 
 
 class SubCategorySerializer(PkToIdSerializer):
