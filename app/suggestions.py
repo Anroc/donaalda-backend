@@ -96,6 +96,7 @@ class ScenarioImpl(object):
         self.price = 0.0
         self.efficiency = 0
         self.extendability = 0
+        self.renovation_required = False
         self.product_types = set()
         self.compute_specs()
 
@@ -107,6 +108,7 @@ class ScenarioImpl(object):
             protocols = protocols.union(
                 set(product.leader_protocol.all()).union(set(product.follower_protocol.all())))
             self.product_types.add(product.product_type)
+            self.renovation_required |= product.renovation_required
         self.extendability = len(protocols)
 
 
@@ -117,6 +119,7 @@ class SuggestionsOutputSerializer(serializers.Serializer):
     efficiency = serializers.IntegerField()
     extendability = serializers.IntegerField()
     rating = serializers.FloatField()
+    renovation_required = serializers.BooleanField()
     product_types = ProductTypeSerializer(many=True)
 
 
