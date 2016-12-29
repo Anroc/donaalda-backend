@@ -11,6 +11,7 @@ from .validators import (
         validate_scenario_preference,
         validate_producttype_filter,
         validate_subcategory_filter,
+        validate_scenario_id,
 )
 
 
@@ -66,8 +67,15 @@ SuggestionsInput = collections.namedtuple(
             'renovation_preference',
             'product_type_filter',
             'subcategory_filter',
+            'shopping_basket',
         ])
 
+
+class ShoppingBasketEntrySerializer(serializers.Serializer):
+    scenario_id = serializers.IntegerField()
+    product_type_filter = serializers.ListField(
+            child=serializers.IntegerField()
+    )
 
 class SuggestionsInputSerializer(serializers.Serializer):
     scenario_preference = serializers.DictField(
@@ -78,11 +86,22 @@ class SuggestionsInputSerializer(serializers.Serializer):
     renovation_preference = serializers.BooleanField()
 
     product_type_filter = serializers.ListField(
+            required=False,
+            default=[],
             child=serializers.IntegerField(),
-            validators=[validate_producttype_filter])
+            validators=[validate_producttype_filter]
+    )
     subcategory_filter = serializers.ListField(
+            required=False,
+            default=[],
             child=serializers.IntegerField(),
             validators=[validate_subcategory_filter])
+    shopping_basket = serializers.ListField(
+            required=False,
+            default=[],
+            child=ShoppingBasketEntrySerializer(),
+            validators=[validate_scenario_id]
+    )
 
     def create(self, validated_data):
         return SuggestionsInput(**validated_data)
