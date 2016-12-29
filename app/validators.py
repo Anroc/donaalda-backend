@@ -2,6 +2,7 @@
 import re
 
 from django.core.exceptions import ValidationError
+from django.core.cache import cache
 
 import app.models
 
@@ -43,3 +44,12 @@ def validate_subcategory_filter(value):
     subcategory_ids = app.models.SubCategory.objects.values_list('pk', flat=True)
     if not set(value).issubset(set(subcategory_ids)):
         raise ValidationError(_ERR_SUBCATEGORIES)
+
+
+_ERR_SCENARIOS = 'Shopping basket may contain invalid scenario ids'
+
+
+def validate_scenario_id(value):
+    scenario_ids = cache.get_or_set('scenario_ids', app.models.Scenario.objects.values_list('pk', flat=True), 3)
+    if not set(value).issubset(scenario_ids):
+        raise ValidationError(_ERR_SCENARIOS)
