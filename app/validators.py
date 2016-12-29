@@ -2,7 +2,6 @@
 import re
 
 from django.core.exceptions import ValidationError
-from django.core.cache import cache
 
 import app.models
 
@@ -50,6 +49,12 @@ _ERR_SCENARIOS = 'Shopping basket may contain invalid scenario ids'
 
 
 def validate_scenario_id(value):
-    scenario_ids = cache.get_or_set('scenario_ids', app.models.Scenario.objects.values_list('pk', flat=True), 3)
-    if not set(value).issubset(scenario_ids):
+    scenario_ids = app.models.Scenario.objects.values_list('pk', flat=True)
+    basket_scenario_ids = set()
+    basket_product_type_filter = set()
+    for val in value:
+        basket_scenario_ids.add(val['scenario_id'])
+        basket_product_type_filter = basket_product_type_filter.union(set(val['product_type_filter']))
+    if not basket_scenario_ids.issubset(scenario_ids):
         raise ValidationError(_ERR_SCENARIOS)
+    validate_producttype_filter(basket_product_type_filter)
