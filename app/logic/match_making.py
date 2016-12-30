@@ -40,10 +40,11 @@ class DeviceMapping(object):
         scenarios = set()
         if product in self.products:
             scenarios = self.products[product]
-        if meta_device.is_broker:
+        if meta_device.is_broker and meta_device in self.broker:
             self.products[product] = self.broker[meta_device].union(scenarios)
-        else:
-            self.products[product] = self.endpoints[meta_device].union(scenarios)
+            return
+        # else: broker is shifted to endpoints
+        self.products[product] = self.endpoints[meta_device].union(scenarios)
 
     def add_products(self, meta_device, products):
         for product in products:
