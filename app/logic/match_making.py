@@ -144,13 +144,13 @@ def __merge_meta_device(meta_devices, meta_device_mapping, scenario):
     :return:
         the merge dict of meta devices to scenario
     """
-    meta_device_mapping = meta_device_mapping.copy()
-    merged_endpoints = set(meta_device_mapping.keys()).copy()
+    device_mapping = meta_device_mapping.copy()
+    merged_endpoints = set(device_mapping.keys()).copy()
 
     if not merged_endpoints:
         me = meta_devices.pop()
         merged_endpoints.add(me)
-        meta_device_mapping[me] = {scenario}
+        device_mapping[me] = {scenario}
     tmp_add_entries = dict()
     tmp_remove_keys = set()
 
@@ -162,15 +162,15 @@ def __merge_meta_device(meta_devices, meta_device_mapping, scenario):
             features_me = set(me.implementation_requires.values_list('pk', flat=True))
             if features_me.issubset(features_cme):
                 tmp_remove_keys.add(me)
-                tmp_add_entries[cme] = meta_device_mapping[me].add(scenario)
+                tmp_add_entries[cme] = device_mapping[me].union({scenario})
             elif not features_cme.issubset(features_me):
                 tmp_add_entries[cme] = {scenario}
 
     for tmp_remove_key in tmp_remove_keys:
-        del meta_device_mapping[tmp_remove_key]
+        del device_mapping[tmp_remove_key]
     # add the meta_endpoints to the set of meta endpoints
-    meta_device_mapping.update(tmp_add_entries)
-    return meta_device_mapping
+    device_mapping.update(tmp_add_entries)
+    return device_mapping
 
 
 def compute_matching_product_set(device_mapping, preference):
