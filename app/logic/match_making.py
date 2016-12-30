@@ -561,8 +561,25 @@ def __get_products(renovation_allowed=True):
     """
     input_hash = hash((PRODUCT_ID_HASH, renovation_allowed))
     if renovation_allowed:
-        return cache.get_or_set(input_hash, set(Product.objects.all()), EXPIRATION_TIME)
-    return cache.get_or_set(input_hash, set(Product.objects.filter(renovation_required=False)), EXPIRATION_TIME)
+        return cache.get_or_set(
+            input_hash,
+            set(Product.objects.prefetch_related(
+                'product_type',
+                'protocol_leader',
+                'protocol_follower',
+                'features'
+            ).all()),
+            EXPIRATION_TIME
+        )
+    return cache.get_or_set(
+        input_hash,
+        set(Product.objects.prefetch_related(
+                'product_type',
+                'leader_protocol',
+                'follower_protocol',
+                'features'
+            ).filter(renovation_required=False)),
+        EXPIRATION_TIME)
 
 
 def __get_broker_of_products(product_set):

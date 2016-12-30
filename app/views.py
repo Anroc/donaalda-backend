@@ -143,7 +143,10 @@ class Suggestions(generics.ListAPIView):
 
         # todo: maybe overwork
         scenario_ids = set()
-        scenarios = Scenario.objects.all()
+        scenarios = Scenario.objects.prefetch_related(
+            'meta_broker__implementation_requires',
+            'meta_endpoints__implementation_requires'
+        ).all()
         for basket_elem in suggestions_input.shopping_basket:
             scenario_ids.add(basket_elem[SHOPPING_BASKET_SCENARIO_ID])
 
