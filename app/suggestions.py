@@ -108,7 +108,7 @@ class SuggestionsInputSerializer(serializers.Serializer):
 
 
 class ScenarioImpl(object):
-    def __init__(self, product_set, scenario, rating):
+    def __init__(self, product_set, scenario, rating, product_mapping):
         self.scenario = scenario
         self.rating = rating
         self.product_set = product_set
@@ -116,6 +116,7 @@ class ScenarioImpl(object):
         self.efficiency = 0
         self.extendability = 0
         self.product_types = set()
+        self.product_mapping = product_mapping
         self.compute_specs()
 
     def compute_specs(self):
@@ -137,6 +138,7 @@ class SuggestionsOutputSerializer(serializers.Serializer):
     extendability = serializers.IntegerField()
     rating = serializers.FloatField()
     product_types = ProductTypeSerializer(many=True)
+    product_mapping = serializers.DictField()
 
 
 class InvalidGETException(exceptions.APIException):

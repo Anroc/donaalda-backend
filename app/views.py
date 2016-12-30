@@ -144,9 +144,12 @@ class Suggestions(generics.ListAPIView):
         # call scenario sorting
         sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input)
         for scenario, rating in sorted_tuple_list:
-            product_set = implement_scenarios({scenario}, suggestions_input)
+            product_set, device_mapping = implement_scenarios({scenario}, suggestions_input)
             if product_set:
-                yield ScenarioImpl(product_set, scenario, rating)
+                id_mapping = dict()
+                for (product, scenarios) in device_mapping.products.items():
+                    id_mapping[product.pk] = {scenario.pk for scenario in scenarios}
+                yield ScenarioImpl(product_set, scenario, rating, id_mapping)
 
     def get_serializer_class(self):
         return SuggestionsOutputSerializer

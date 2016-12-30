@@ -12,6 +12,61 @@ PRODUCT_ID_HASH = hash('matching.product.cache')
 LOGGER = logging.getLogger(__name__)
 
 
+class DeviceMapping(object):
+    """
+    Class for saving dicts of meta devices to scenarios and
+    product to scenarios.
+    """
+    endpoints = dict()
+    broker = dict()
+
+    products = dict()
+
+    def __init__(self, endpoints=None, broker=None, products=None):
+        if endpoints is None:
+            endpoints = dict()
+        if broker is None:
+            broker = dict()
+        if products is None:
+            products = dict()
+        self.endpoints = endpoints
+        self.broker = broker
+        self.products = products
+
+    def get_any_broker(self):
+        return list(self.broker.keys())[0]
+
+    def add_product(self, meta_device, product):
+        scenarios = set()
+        if product in self.products:
+            scenarios = self.products[product]
+        if meta_device.is_broker:
+            self.products[product] = self.broker[meta_device].union(scenarios)
+        else:
+            self.products[product] = self.endpoints[meta_device].union(scenarios)
+
+    def add_products(self, meta_device, products):
+        for product in products:
+            self.add_product(meta_device, product)
+
+    def shift_all_brokers_except(self, broker):
+        other = self.__copy__()
+        for b in self.broker.keys():
+            if b is not broker:
+                scenarios = other.broker.pop(broker)
+                other.endpoints[broker] = scenarios
+        return other
+
+    def __copy__(self):
+        return DeviceMapping(self.endpoints.copy(), self.broker.copy(), self.products.copy())
+
+    def intersect_products(self, products):
+        tmp = dict()
+        for product in products:
+            tmp[product] = self.products[product]
+        self.products = tmp
+
+
 def implement_scenarios(scenarios, preference):
     """
     This method takes a set of scenarios and merge them in that kind that
@@ -24,44 +79,56 @@ def implement_scenarios(scenarios, preference):
         the user defined preference
     :return:
         best matching implementing product set
+        todo change
     """
     # merging the endpoints
-    meta_endpoints = set()
-    meta_brokers = set()
+    meta_device_mapping = DeviceMapping()
     for scenario in scenarios:
-        # merge meta endpoints
-        meta_endpoints = __merge_meta_device(set(scenario.meta_endpoints.all()), meta_endpoints)
-
         # merge meta broker
-        meta_brokers = __merge_meta_device({scenario.meta_broker}, meta_brokers)
+        meta_device_mapping.broker = __merge_meta_device(
+                {scenario.meta_broker},
+                meta_device_mapping.broker,
+                scenario
+        )
+
+        # merge meta endpoints
+        meta_device_mapping.endpoints = __merge_meta_device(
+                set(scenario.meta_endpoints.all()),
+                meta_device_mapping.endpoints,
+                scenario
+        )
 
     # 1. case: meta brokers contain only one element
-    if len(meta_brokers) == 1:
+    if len(meta_device_mapping.broker) == 1:
         # we are finished here
         # call matching function to compute the reset
-        return compute_matching_product_set(meta_brokers.pop(), meta_endpoints, preference)
+        return compute_matching_product_set(meta_device_mapping, preference)
 
     # 2. case: meta brokers contain more then one element
-    all_possible_solutions = set()
+    all_possible_solutions = dict()
 
-    for meta_broker in list(meta_brokers):
-        updated_meta_endpoints = meta_endpoints.copy().union(meta_brokers.copy().difference({meta_broker}))
-        res = frozenset(compute_matching_product_set(meta_broker, updated_meta_endpoints, preference))
+    for meta_broker in meta_device_mapping.broker.keys():
+        res, device_mapping = compute_matching_product_set(
+                meta_device_mapping.shift_all_brokers_except(meta_broker),
+                preference
+            )
+        res = frozenset(res)
         if res:
-            all_possible_solutions.add(res)
+            all_possible_solutions[res] = device_mapping
 
     if len(all_possible_solutions) == 0:
         # 2.1. if all possible solutions have no elements we return the empty set
-        return all_possible_solutions
+        return set(), None
     elif len(all_possible_solutions) == 1:
         # 2.2. if all possible solutions have only one solution we are done.
-        return all_possible_solutions.pop()
+        return all_possible_solutions.popitem()
     else:
         # 2.3 if all possible solutions have more then one element we have to apply the cost function again
-        return __cost_function(all_possible_solutions, preference)
+        solution = __cost_function(set(all_possible_solutions.keys()), preference)
+        return solution, all_possible_solutions[frozenset(solution)]
 
 
-def __merge_meta_device(meta_devices, present_set):
+def __merge_meta_device(meta_devices, meta_device_mapping, scenario):
     """
     Merges a given set of meta_devices into a present_set of thous.
     This method also checks if the current features of the meta devices can be already satisfied by
@@ -69,32 +136,44 @@ def __merge_meta_device(meta_devices, present_set):
 
     :param meta_devices:
         the meta_devices that should be added in the set of present devices
-    :param present_set:
-        the set of present devices
+    :param meta_device_mapping:
+        a dictionary of either meta broker or meta endpoints to scenarios.
+        See the class DeviceMapping for more information.
+    :param scenario
+        the scenario of the meta_devices that should be added.
     :return:
-        the merged set of the meta devices.
+        the merge dict of meta devices to scenario
     """
-    if not present_set:
-        present_set.add(meta_devices.pop())
-    tmp_add = set()
-    tmp_remove = set()
+    meta_device_mapping = meta_device_mapping.copy()
+    merged_endpoints = set(meta_device_mapping.keys()).copy()
+
+    if not merged_endpoints:
+        me = meta_devices.pop()
+        merged_endpoints.add(me)
+        meta_device_mapping[me] = {scenario}
+    tmp_add_entries = dict()
+    tmp_remove_keys = set()
 
     # check if the given meta endpoint has features that are already satisfied by other meta endpoints
     for cme in meta_devices:
-        features_cme = set(cme.implementation_requires.values_list('name', flat=True))
-        for me in present_set:
-            features_me = set(me.implementation_requires.values_list('name', flat=True))
+        # matching on pk
+        features_cme = set(cme.implementation_requires.values_list('pk', flat=True))
+        for me in merged_endpoints:
+            features_me = set(me.implementation_requires.values_list('pk', flat=True))
             if features_me.issubset(features_cme):
-                tmp_remove.add(me)
-                tmp_add.add(cme)
+                tmp_remove_keys.add(me)
+                tmp_add_entries[cme] = meta_device_mapping[me].add(scenario)
             elif not features_cme.issubset(features_me):
-                tmp_add.add(cme)
+                tmp_add_entries[cme] = {scenario}
 
+    for tmp_remove_key in tmp_remove_keys:
+        del meta_device_mapping[tmp_remove_key]
     # add the meta_endpoints to the set of meta endpoints
-    return present_set.difference(tmp_remove).union(tmp_add)
+    meta_device_mapping.update(tmp_add_entries)
+    return meta_device_mapping
 
 
-def compute_matching_product_set(meta_broker, meta_endpoints, preference):
+def compute_matching_product_set(device_mapping, preference):
     """
     1.  Call find_implementing_product for each meta device in the scenario
     2.  for each Broker -> Endpoint combination find paths with: find_communication_partner(endpoint, broker)
@@ -102,14 +181,22 @@ def compute_matching_product_set(meta_broker, meta_endpoints, preference):
         If possible: create a product set of the current configuration
     4.  Apply U_pref on all product sets for each broker to find the current best solution for the current broker-product-set
     5.  Apply U_pref on all product sets for each different broker to find the overall best solution for the current scenario
-    :param meta_broker:
-        the meta broker in the system
-    :param meta_endpoints:
-        the meta endpoints of the system
+    :param device_mapping:
+        An instance of the class DeviceMapping that contains a dict of
+        meta endpoints and meta broker. This method will use this attributes to compute the matching
+        on thous.
+        It will also fill the product dictionary in this class and return a reference to this class.
     :param preference
         the user preference that was passed by the client
     :return a set of implementing products that matches the user preferences optimally.
+    change
     """
+    # validation:
+    if len(device_mapping.broker) != 1:
+        raise RuntimeError("Expected ONE broker as base of operations.")
+
+    meta_broker = device_mapping.get_any_broker()
+    meta_endpoints = set(device_mapping.endpoints.keys())
 
     # 1. find implementing products
     impl_of_meta_device = dict()
@@ -117,9 +204,6 @@ def compute_matching_product_set(meta_broker, meta_endpoints, preference):
     impl_of_meta_device[meta_broker] = __find_implementing_product(meta_broker, preference.renovation_preference)
 
     LOGGER.debug(impl_of_meta_device[meta_broker])
-    # no implementation was found
-    if len(impl_of_meta_device[meta_broker]) == 0:
-        return set()
 
     for meta_endpoint in meta_endpoints:
         LOGGER.debug('Metaendpoint: %s' % meta_endpoint)
@@ -127,11 +211,12 @@ def compute_matching_product_set(meta_broker, meta_endpoints, preference):
         LOGGER.debug('%s : %s' % (meta_endpoint, impl_of_meta_device[meta_endpoint]))
         # no implementation was found
         if len(impl_of_meta_device[meta_endpoint]) == 0:
-            return set()
+            return set(), device_mapping
 
+    # check product type filter
     if not __product_type_filter_satisfiable(
             impl_of_meta_device.values(), preference.product_type_filter):
-        return set()
+        return set(), device_mapping
 
     # 2. start running F
     # we already validated that each endpoint have at least one implementation
@@ -147,7 +232,7 @@ def compute_matching_product_set(meta_broker, meta_endpoints, preference):
                     # convert inner set to frozenset and list to set
                     res = set(
                         ((frozenset(e))
-                         for e in res
+                            for e in res
                          )
                     )
                     if meta_endpoint in possible_paths:
@@ -159,6 +244,12 @@ def compute_matching_product_set(meta_broker, meta_endpoints, preference):
         # check if current broker impl can reach every endpoint
         if len(meta_endpoints) != len(possible_paths):
             continue
+
+        # add products to DeviceMapping
+        device_mapping.add_product(meta_broker, broker_impl)
+        for me in meta_endpoints:
+            for path in possible_paths[me]:
+                device_mapping.add_products(me, path)
 
         merged_set = __merge_paths(meta_endpoints, possible_paths)
         # 3. apply cost function U_pref to get one product set
@@ -172,8 +263,12 @@ def compute_matching_product_set(meta_broker, meta_endpoints, preference):
     product_sets = __cost_function(product_sets, preference)
 
     LOGGER.info('Found matching product set "%s"' % product_sets)
+
+    # cleanup DeviceMapping
+    device_mapping.intersect_products(product_sets)
+
     # return the product set
-    return product_sets
+    return product_sets, device_mapping
 
 
 def __cost_function(product_sets, preference):
