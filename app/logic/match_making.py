@@ -68,37 +68,19 @@ class DeviceMapping(object):
         self.products = tmp
 
 
-def implement_scenario(scenario, preference, shopping_basket=None):
+def implement_scenario(scenarios, preference):
     """
     This method takes a set of scenarios and merge them in that kind that
     meta devices that provide the same feature set are just listed onces.
 
-    :param scenario:
-        the scenario that should be implemented with the current shopping basket
+    :param scenarios:
+        the scenarios that should be implemented with the current shopping basket
     :param preference:
         the user defined preference
-    :param shopping_basket: (optional)
-        set of scenarios that are in the shopping basket of the user
     :return:
         best matching implementing product set
         todo change
     """
-    if shopping_basket is None:
-        scenario_ids = set()
-        # get shopping basket elements
-        for basket_elem in preference.shopping_basket:
-            scenario_ids.add(basket_elem[SHOPPING_BASKET_SCENARIO_ID])
-            shopping_basket = set(
-                Scenario.objects.prefetch_related(
-                    'meta_broker__implementation_requires',
-                    'meta_endpoints__implementation_requires'
-                ).filter(id__in=scenario_ids)
-            )
-
-    # merge shopping basket with new scenario
-    scenarios = shopping_basket.copy()
-    scenarios.add(scenario)
-
     # merging the endpoints
     meta_device_mapping = DeviceMapping()
     for scenario in scenarios:
