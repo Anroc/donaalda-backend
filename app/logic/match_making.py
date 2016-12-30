@@ -367,8 +367,8 @@ def __product_type_filter_satisfiable(meta_implementations, preference):
     # TODO: maybe remove later
     filters = set()
     for basket_elem in preference.shopping_basket:
-        filters.union(set(basket_elem[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]))
-    filters.union(set(preference.product_type_filter))
+        filters = filters.union(set(basket_elem[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]))
+    filters = filters.union(set(preference.product_type_filter))
 
     # start by creating a set that contains a frozenset of the filters
     remaining_filters = set()
