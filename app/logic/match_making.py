@@ -68,20 +68,37 @@ class DeviceMapping(object):
         self.products = tmp
 
 
-def implement_scenarios(scenarios, preference):
+def implement_scenario(scenario, preference, shopping_basket=None):
     """
     This method takes a set of scenarios and merge them in that kind that
     meta devices that provide the same feature set are just listed onces.
 
-    :param scenarios:
-        set of scenarios that should be implemented.
-        Most likely a set of scenarios in the shopping basekt union the new selected scenario
+    :param scenario:
+        the scenario that should be implemented with the current shopping basket
     :param preference:
         the user defined preference
+    :param shopping_basket: (optional)
+        set of scenarios that are in the shopping basket of the user
     :return:
         best matching implementing product set
         todo change
     """
+    if shopping_basket is None:
+        scenario_ids = set()
+        # get shopping basket elements
+        for basket_elem in preference.shopping_basket:
+            scenario_ids.add(basket_elem[SHOPPING_BASKET_SCENARIO_ID])
+            shopping_basket = set(
+                Scenario.objects.prefetch_related(
+                    'meta_broker__implementation_requires',
+                    'meta_endpoints__implementation_requires'
+                ).filter(id__in=scenario_ids)
+            )
+
+    # merge shopping basket with new scenario
+    scenarios = shopping_basket.copy()
+    scenarios.add(scenario)
+
     # merging the endpoints
     meta_device_mapping = DeviceMapping()
     for scenario in scenarios:
@@ -215,8 +232,7 @@ def compute_matching_product_set(device_mapping, preference):
             return set(), device_mapping
 
     # check product type filter
-    if not __product_type_filter_satisfiable(
-            impl_of_meta_device.values(), preference.product_type_filter):
+    if not __product_type_filter_satisfiable(impl_of_meta_device.values(), preference):
         return set(), device_mapping
 
     # 2. start running F
@@ -288,7 +304,8 @@ def __cost_function(product_sets, preference):
 
     sorting = dict()
     for current_set in product_sets:
-        if not __matches_product_type_preference(current_set, preference.product_type_filter):
+        # we want to know exactly which set is not satisfiable (the reason of {current_set})
+        if not __product_type_filter_satisfiable({current_set}, preference):
             continue
         # will resolve in set that contains the master broker and other bridges; this set is at least on element big
         broker = __get_broker_of_products(current_set)
@@ -333,7 +350,7 @@ def __product(a, b):
     return ret
 
 
-def __product_type_filter_satisfiable(meta_implementations, filters):
+def __product_type_filter_satisfiable(meta_implementations, preference):
     """
     Checks if a given set of product implementations of meta devices contains a
     configuration that satisfies the given product type filter.
@@ -341,12 +358,18 @@ def __product_type_filter_satisfiable(meta_implementations, filters):
     :param meta_implementations:
         a set containing sets of all products that implement each meta device in
         a scenario
-    :param filters:
-        the set of product type filters
+    :param preference:
+        the user preference
     :return:
         whether or not there is a way to choose a product from each set so that
         all product types in the filters are satisfied by the choice
     """
+    # TODO: maybe remove later
+    filters = set()
+    for basket_elem in preference.shopping_basket:
+        filters.union(set(basket_elem[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]))
+    filters.union(set(preference.product_type_filter))
+
     # start by creating a set that contains a frozenset of the filters
     remaining_filters = set()
     remaining_filters.add(frozenset(filters))
@@ -369,35 +392,6 @@ def __product_type_filter_satisfiable(meta_implementations, filters):
                     for f in previous_filters)
 
     return frozenset() in remaining_filters
-
-
-def __matches_product_type_preference(product_set, product_type_filters):
-    """
-    Filters a given product set for the given product type filters.
-
-    :param product_set:
-        the given product set
-    :param product_type_filters:
-        the given product type filters (list of pk of product types)
-    :return:
-        if the product set contains all of the given product type filters
-    """
-    if not product_type_filters:
-        return True
-
-    input_hash = hash((frozenset(product_set), frozenset(product_type_filters)))
-
-    tmp = cache.get(input_hash)
-    if tmp is not None:
-        return tmp
-
-    product_types = set()
-    for product in product_set:
-        product_types.add(product.product_type_id)
-
-    res = all(product_type in product_types for product_type in product_type_filters)
-    cache.set(input_hash, res)
-    return res
 
 
 def __find_implementing_product(meta_device, renovation_allowed):

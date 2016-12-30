@@ -15,7 +15,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import *
 from rest_framework.response import Response
 
-from .logic.match_making import implement_scenarios
+from .logic.match_making import implement_scenario
 from .logic.sorting import sort_scenarios
 from .forms import LoginForm
 from .permissions import *
@@ -162,7 +162,7 @@ class Suggestions(generics.ListAPIView):
         sorted_tuple_list = sort_scenarios(sorting_scenarios, suggestions_input)
 
         for scenario, rating in sorted_tuple_list:
-            product_set, device_mapping = implement_scenarios(shopping_basket.union({scenario}), suggestions_input)
+            product_set, device_mapping = implement_scenario(scenario, suggestions_input, shopping_basket)
             if product_set:
                 id_mapping = dict()
                 for (product, scenarios) in device_mapping.products.items():
