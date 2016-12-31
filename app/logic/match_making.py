@@ -542,8 +542,8 @@ def __get_products(renovation_allowed=True):
             input_hash,
             set(Product.objects.prefetch_related(
                 'product_type',
-                'protocol_leader',
-                'protocol_follower',
+                'leader_protocol',
+                'follower_protocol',
                 'features'
             ).all()),
             EXPIRATION_TIME
