@@ -54,8 +54,8 @@ class DeviceMapping(object):
         other = self.__copy__()
         for b in self.broker.keys():
             if b is not broker:
-                scenarios = other.broker.pop(broker)
-                other.endpoints[broker] = scenarios
+                scenarios = other.broker.pop(b)
+                other.endpoints[b] = scenarios
         return other
 
     def __copy__(self):
