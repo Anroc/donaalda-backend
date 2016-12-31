@@ -1,0 +1,631 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Pastebin API",
+    "version": ""
+  },
+  "paths": {
+    "/api/swagger/suggestions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "suggestions_list",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "limit",
+            "description": "",
+            "required": false
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "offset",
+            "description": "",
+            "required": false
+          }
+        ],
+        "summary": "Retrieve another page of a previous query.",
+        "description": "Retrieve another page of a previous query.",
+        "tags": [
+          "swagger"
+        ]
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "operationId": "suggestions_create",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object",
+              "title": "User Preferences",
+              "properties": {
+                "scenario_preference": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "default": 5
+                  },
+                  "description": "A dictionary containing ratings in the (inclusive) range from 1 to 10 for each category",
+                  "default": {
+                    "Energie": 5,
+                    "Komfort": 5,
+                    "Gesundheit": 5,
+                    "Sicherheit": 5
+                  }
+                },
+                "product_preference": {
+                  "type": "string",
+                  "enum": ["Preis", "Efficiency", "Extendability"],
+                  "description": "One of \"Preis\",\"Efficiency\" or \"Extendability\""
+                },
+                "renovation_preference": {
+                  "type": "boolean",
+                  "description": "True if the user is fine with products that require destructive installation procedures"
+                },
+                "product_type_filter": {
+                  "type": "array",
+                  "description": "A set of product type ids that should be used to filter the suggested scenarios",
+                  "items": {
+                    "type": "number"
+                  },
+                  "default": []
+                },
+                "subcategory_filter": {
+                  "type": "array",
+                  "description": "A set of subcategory ids that should be used to filter the suggested scenarios",
+                  "items": {
+                    "type": "number"
+                  },
+                  "default": []
+                },
+                "shopping_basket": {
+                  "type": "array",
+                  "description": "A set of objects representing required meta information about the scenarios in the shopping basket",
+                  "items": {
+                    "type": "object",
+                    "title": "Shopping basket entry",
+                    "properties": {
+                      "scenario_id": {
+                        "type": "number",
+                        "description": "The id of the scenario"
+                      },
+                      "product_type_filter": {
+                        "type": "array",
+                        "description": "The set of product type filters that was used to select this scenario. This is required to make sure that the new implementation of the scenario also implements the product type filters",
+                        "items" : {
+                          "type": "number"
+                        },
+                        "default": []
+                      }
+                    },
+                    "required": ["scenario_id", "product_type_filter"]
+                  },
+                  "default": []
+                }
+              },
+              "required": [
+                "scenario_preference",
+                "product_preference",
+                "renovation_preference"
+              ]
+            },
+            "name": "data",
+            "in": "body"
+          }
+        ],
+        "summary": "Set the user preferences and return a page of scenario suggestions.",
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Set the user preferences and return a page of scenario suggestions.",
+        "tags": [
+          "swagger"
+        ]
+      }
+    },
+    "/api/v1/category/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "category_list",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "",
+            "required": false
+          }
+        ]
+      }
+    },
+    "/api/v1/category/{id}/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "category_read",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/comment/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "comment_list",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "",
+            "required": false
+          }
+        ]
+      }
+    },
+    "/api/v1/comment/{id}/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "comment_read",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true
+          }
+        ],
+        "summary": "Returns a single Comment item",
+        "description": "Returns a single Comment item",
+        "tags": [
+          "v1"
+        ]
+      }
+    },
+    "/api/v1/givenAnswers/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "givenAnswers_list",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "",
+            "required": false
+          }
+        ]
+      }
+    },
+    "/api/v1/givenAnswers/{id}/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "givenAnswers_read",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true
+          }
+        ],
+        "summary": "Returns a single GivenAnswers item",
+        "description": "Returns a single GivenAnswers item",
+        "tags": [
+          "v1"
+        ]
+      }
+    },
+    "/api/v1/product/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "product_list",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "",
+            "required": false
+          }
+        ]
+      }
+    },
+    "/api/v1/product/{id}/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "product_read",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/productType/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "productType_list",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "",
+            "required": false
+          }
+        ]
+      }
+    },
+    "/api/v1/productType/{id}/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "productType_read",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/provider/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "provider_list",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "",
+            "required": false
+          }
+        ]
+      }
+    },
+    "/api/v1/provider/{id}/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "provider_read",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/providerProfile/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "providerProfile_list",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "",
+            "required": false
+          }
+        ]
+      }
+    },
+    "/api/v1/providerProfile/{id}/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "providerProfile_read",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/questions/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "questions_list",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "",
+            "required": false
+          }
+        ]
+      }
+    },
+    "/api/v1/questions/{id}/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "questions_read",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/scenario/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "scenario_list",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "",
+            "required": false
+          }
+        ]
+      }
+    },
+    "/api/v1/scenario/{id}/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "scenario_read",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/subCategory/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "subCategory_list",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "",
+            "required": false
+          }
+        ]
+      }
+    },
+    "/api/v1/subCategory/{id}/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "subCategory_read",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/subCategoryDescription/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "subCategoryDescription_list",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "page",
+            "description": "",
+            "required": false
+          }
+        ]
+      }
+    },
+    "/api/v1/subCategoryDescription/{id}/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "operationId": "subCategoryDescription_read",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "",
+            "required": true
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basic": {
+      "type": "basic"
+    }
+  }
+}
