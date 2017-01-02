@@ -103,14 +103,16 @@ def implement_scenarios(scenarios, preference):
         meta_device_mapping.broker = __merge_meta_device(
                 {scenario.meta_broker},
                 meta_device_mapping.broker,
-                scenario
+                scenario,
+                meta_device_mapping.original_to_merged
         )
 
         # merge meta endpoints
         meta_device_mapping.endpoints = __merge_meta_device(
                 set(scenario.meta_endpoints.all()),
                 meta_device_mapping.endpoints,
-                scenario
+                scenario,
+                meta_device_mapping.original_to_merged
         )
 
     # 1. case: meta brokers contain only one element
@@ -143,7 +145,7 @@ def implement_scenarios(scenarios, preference):
         return solution, all_possible_solutions[frozenset(solution)]
 
 
-def __merge_meta_device(meta_devices, meta_device_mapping, scenario):
+def __merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_merged_mapping):
     """
     Merges a given set of meta_devices into a present_set of thous.
     This method also checks if the current features of the meta devices can be already satisfied by
@@ -151,13 +153,19 @@ def __merge_meta_device(meta_devices, meta_device_mapping, scenario):
 
     :param meta_devices:
         the meta_devices that should be added in the set of present devices
+
+        Note: The input meta devices are not going to be merged among themselves.
+        Because they come directly from a single scenario which is assumed to have no unmerged meta devices.
     :param meta_device_mapping:
         a dictionary of either meta broker or meta endpoints to scenarios.
         See the class DeviceMapping for more information.
     :param scenario
         the scenario of the meta_devices that should be added.
+    :param original_to_merged_mapping
+        dict of mappings from original meta devices to merged ones.
     :return:
-        the merge dict of meta devices to scenario
+        device_mapping: the merge dict of meta devices to scenario
+        original_to_merged_mapping: a dict of meta devices and their merged reference
     """
     device_mapping = meta_device_mapping.copy()
     merged_endpoints = set(device_mapping.keys()).copy()
@@ -166,6 +174,7 @@ def __merge_meta_device(meta_devices, meta_device_mapping, scenario):
         me = meta_devices.pop()
         merged_endpoints.add(me)
         device_mapping[me] = {scenario}
+        original_to_merged_mapping[me] = me
     tmp_add_entries = dict()
     tmp_remove_keys = set()
 
@@ -175,16 +184,28 @@ def __merge_meta_device(meta_devices, meta_device_mapping, scenario):
         features_cme = set(cme.implementation_requires.values_list('pk', flat=True))
         for me in merged_endpoints:
             features_me = set(me.implementation_requires.values_list('pk', flat=True))
-            if features_me.issubset(features_cme):
+            if cme in tmp_add_entries:
+                LOGGER.warning("Can't current meta endpoint has more than one possible merge option.")
+                if me in tmp_remove_keys:
+                    tmp_remove_keys.remove(me)
+                tmp_add_entries[cme] = None
+            elif features_me.issubset(features_cme):
                 tmp_remove_keys.add(me)
                 tmp_add_entries[cme] = device_mapping[me].union({scenario})
+                original_to_merged_mapping[cme] = me
+                for key in original_to_merged_mapping:
+                    if original_to_merged_mapping[key] is me:
+                        original_to_merged_mapping[key] = cme
             elif not features_cme.issubset(features_me):
                 tmp_add_entries[cme] = {scenario}
+                original_to_merged_mapping[cme] = cme
 
     for tmp_remove_key in tmp_remove_keys:
         del device_mapping[tmp_remove_key]
     # add the meta_endpoints to the set of meta endpoints
-    device_mapping.update(tmp_add_entries)
+    device_mapping.update(
+        {key: tmp_add_entries[key] for key in tmp_add_entries if tmp_add_entries[key] is not None}
+    )
     return device_mapping
 
 
