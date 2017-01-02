@@ -89,7 +89,7 @@ def implement_scenarios(scenarios, preference):
 
     :param scenarios:
         set of scenarios that should be implemented.
-        Most likely a set of scenarios in the shopping basekt union the new selected scenario
+        Most likely a set of scenarios in the shopping basket union the new selected scenario
     :param preference:
         the user defined preference
     :return:
@@ -264,7 +264,8 @@ def compute_matching_product_set(device_mapping, preference):
                 # 2.1 call f
                 # take an broker impl and an endpoint impl and find the matching ways
                 res = __find_communication_partner(endpoint_impl, broker_impl, preference.renovation_preference)
-                if __filter_paths_for_valid_broker(res):
+                res = __filter_paths_for_valid_broker(res, meta_endpoint, device_mapping, impl_of_meta_device)
+                if res:
                     # convert inner set to frozenset and list to set
                     res = set(
                         ((frozenset(e))
