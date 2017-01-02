@@ -3,6 +3,7 @@ import operator
 import logging
 from django.core.cache import cache
 from ..constants import *
+from django.core.exceptions import ValidationError
 
 # 1h
 EXPIRATION_TIME = 60 * 60
@@ -289,6 +290,18 @@ def compute_matching_product_set(device_mapping, preference):
                 device_mapping.add_products(me, path)
 
         merged_set = __dict_cross_product(possible_paths)
+
+        # filter for valid product filter of shopping basket
+        for basket_elem in preference.shopping_basket:
+            scenario = Scenario.objects.get(pk=basket_elem[SHOPPING_BASKET_SCENARIO_ID])
+            pt_preference = basket_elem[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]
+            remove_paths = set()
+            for p_set in merged_set:
+                scenario_p_set = {elem for elem in p_set if scenario in device_mapping.products[elem]}
+                if not __matches_product_type_preference(scenario_p_set, pt_preference):
+                    remove_paths.add(p_set)
+            merged_set = {elem for elem in merged_set if elem not in remove_paths}
+
         # 3. apply cost function U_pref to get one product set
         merged_set = __cost_function(merged_set, preference)
 
