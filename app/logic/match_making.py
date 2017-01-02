@@ -190,16 +190,18 @@ def __merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to
                 if me in tmp_remove_keys:
                     tmp_remove_keys.remove(me)
                 tmp_add_entries[cme] = None
+                continue
+            elif not features_cme.issubset(features_me):
+                device_mapping[cme] = {scenario}
+                original_to_merged_mapping[cme] = cme
+                continue
             elif features_me.issubset(features_cme):
                 tmp_remove_keys.add(me)
                 tmp_add_entries[cme] = device_mapping[me].union({scenario})
-                original_to_merged_mapping[cme] = me
-                for key in original_to_merged_mapping:
-                    if original_to_merged_mapping[key] is me:
-                        original_to_merged_mapping[key] = cme
-            elif not features_cme.issubset(features_me):
-                tmp_add_entries[cme] = {scenario}
-                original_to_merged_mapping[cme] = cme
+            original_to_merged_mapping[cme] = me
+            for key in original_to_merged_mapping:
+                if original_to_merged_mapping[key] is me:
+                    original_to_merged_mapping[key] = cme
 
     for tmp_remove_key in tmp_remove_keys:
         del device_mapping[tmp_remove_key]
