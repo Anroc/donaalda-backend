@@ -264,7 +264,7 @@ def compute_matching_product_set(device_mapping, preference):
                 # 2.1 call f
                 # take an broker impl and an endpoint impl and find the matching ways
                 res = __find_communication_partner(endpoint_impl, broker_impl, preference.renovation_preference)
-                if len(res) > 0:
+                if __filter_paths_for_valid_broker(res):
                     # convert inner set to frozenset and list to set
                     res = set(
                         ((frozenset(e))
@@ -287,7 +287,7 @@ def compute_matching_product_set(device_mapping, preference):
             for path in possible_paths[me]:
                 device_mapping.add_products(me, path)
 
-        merged_set = __merge_paths(meta_endpoints, possible_paths)
+        merged_set = __dict_cross_product(possible_paths)
         # 3. apply cost function U_pref to get one product set
         merged_set = __cost_function(merged_set, preference)
 
@@ -305,6 +305,66 @@ def compute_matching_product_set(device_mapping, preference):
 
     # return the product set
     return product_sets, device_mapping
+
+
+def __filter_paths_for_valid_broker(paths, meta_endpoint, device_mapping, impl_of_meta_device):
+    """
+    This method filters the given paths for every path that contains a broker that is a
+    valid implementation of the broker of the scenario of the current meta_endpoint.
+
+    :param paths:
+        all possible paths of an endpoint implementation to a master broker implementation
+    :param meta_endpoint:
+        the current endpoint that was implemented
+    :param device_mapping:
+        the mapping that contains a "original_to_merged" broker function
+    :param impl_of_meta_device:
+        the dict of a merged meta endpoint to all possible implementation of it
+    :return:
+        the filtered paths
+    """
+    if not paths:
+        return paths
+    else:
+        if meta_endpoint in device_mapping.bridges:
+            # nothing to validate because we only check if the endpoint is compatible with his broker
+            return paths
+        else:
+            # get all scenarios that this endpoint is implementing
+            scenarios = set().union(
+                *(device_mapping.endpoints[endpoint]
+                    for endpoint in device_mapping.originals_from_merged(meta_endpoint))
+            )
+            # get all brokers of the scenarios. This brokers are unmerged.
+            brokers = {
+                scenario.meta_broker for scenario in scenarios
+            }
+            # find the merged brokers and their implementing products
+            merged_broker_products = {
+                frozenset(
+                    impl_of_meta_device[device_mapping.original_to_merged[broker]]
+                ) for broker in brokers
+            }
+            # prepare a bucket for each broker implementation
+            paths_over_broker = {
+                broker: set()
+                for broker in merged_broker_products
+            }
+            # check each paths in paths
+            for path in paths:
+                # that a broker implementation existed
+                for broker in merged_broker_products:
+                    # that this one of the implementation
+                    for tmp_broker_impl in broker:
+                        # is contained in the current path
+                        if tmp_broker_impl in path:
+                            # if this is given then add this path into the bucket of the scenario
+                            paths_over_broker[broker].add(frozenset(path))
+                            break  # each other check will just add the same values in the bucket
+            # compute the cross product of each found bucket implementation.
+            # if one bucket was not filled this will return the empty set
+            # This is needed because each broker implementation have to be satisfied.
+            return __dict_cross_product(paths_over_broker)
 
 
 def __cost_function(product_sets, preference):
@@ -350,8 +410,8 @@ def __cost_function(product_sets, preference):
     return set()
 
 
-def __merge_paths(meta_endpoints, possible_paths):
-    endpoints = list(meta_endpoints.copy())
+def __dict_cross_product(possible_paths):
+    endpoints = list(possible_paths.keys())
     if len(endpoints) == 0:
         return set()
     ret = possible_paths[endpoints[0]]
