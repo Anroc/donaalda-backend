@@ -17,21 +17,23 @@ class DeviceMapping(object):
     Class for saving dicts of meta devices to scenarios and
     product to scenarios.
     """
-    endpoints = dict()
-    broker = dict()
 
-    products = dict()
-
-    def __init__(self, endpoints=None, broker=None, products=None):
+    def __init__(self, endpoints=None, broker=None, products=None, bridges=None, original_to_merged=None):
         if endpoints is None:
             endpoints = dict()
         if broker is None:
             broker = dict()
         if products is None:
             products = dict()
+        if bridges is None:
+            bridges = dict()
+        if original_to_merged is None:
+            original_to_merged = dict()
         self.endpoints = endpoints
         self.broker = broker
         self.products = products
+        self.bridges = bridges
+        self.original_to_merged = original_to_merged
 
     def get_any_broker(self):
         return list(self.broker.keys())[0]
@@ -40,8 +42,11 @@ class DeviceMapping(object):
         scenarios = set()
         if product in self.products:
             scenarios = self.products[product]
-        if meta_device.is_broker and meta_device in self.broker:
-            self.products[product] = self.broker[meta_device].union(scenarios)
+        if meta_device.is_broker:
+            if meta_device in self.broker:
+                self.products[product] = self.broker[meta_device].union(scenarios)
+            else:
+                self.products[product] = self.bridges[meta_device].union(scenarios)
             return
         # else: broker is shifted to endpoints
         self.products[product] = self.endpoints[meta_device].union(scenarios)
@@ -55,17 +60,26 @@ class DeviceMapping(object):
         for b in self.broker.keys():
             if b is not broker:
                 scenarios = other.broker.pop(broker)
-                other.endpoints[broker] = scenarios
+                other.bridges[broker] = scenarios
         return other
 
     def __copy__(self):
-        return DeviceMapping(self.endpoints.copy(), self.broker.copy(), self.products.copy())
+        return DeviceMapping(
+            self.endpoints.copy(),
+            self.broker.copy(),
+            self.products.copy(),
+            self.bridges.copy(),
+            self.original_to_merged.copy()
+        )
 
     def intersect_products(self, products):
         tmp = dict()
         for product in products:
             tmp[product] = self.products[product]
         self.products = tmp
+
+    def originals_from_merged(self, merged_device):
+        return {key for key in self.original_to_merged if merged_device is self.original_to_merged[key]}
 
 
 def implement_scenarios(scenarios, preference):
