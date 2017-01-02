@@ -232,7 +232,7 @@ def compute_matching_product_set(device_mapping, preference):
         raise RuntimeError("Expected ONE broker as base of operations.")
 
     meta_broker = device_mapping.get_any_broker()
-    meta_endpoints = set(device_mapping.endpoints.keys())
+    meta_endpoints = set(device_mapping.endpoints.keys()).union(set(device_mapping.bridges.keys()))
 
     # 1. find implementing products
     impl_of_meta_device = dict()
