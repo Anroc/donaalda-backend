@@ -24,7 +24,7 @@ from .serializers import *
 from .validators import *
 from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, \
     InvalidGETException, InvalidShoppingBasketException
-from .final_product_list import FinalProductListSerializer, FinalProductListElement
+from .final_product_list import FinalProductListSerializer, FinalProductListElement, NoShoppingBasketException
 from .constants import SUGGESTIONS_INPUT_SESSION_KEY, SHOPPING_BASKET_SCENARIO_ID, SHOPPING_BASKET_SESSION_KEY
 
 
@@ -184,12 +184,19 @@ class Suggestions(generics.ListAPIView):
 @permission_classes((permissions.AllowAny,))
 class FinalProductList(generics.ListAPIView):
     def get_queryset(self):
+        request_data = self.request.session.get(
+                SUGGESTIONS_INPUT_SESSION_KEY, None)
+        if request_data is None:
+            raise InvalidGETException
         device_mapping = cache.get(
-            shopping_basket_hash(self.request.session[SUGGESTIONS_INPUT_SESSION_KEY]['shopping_basket'])
+            shopping_basket_hash(request_data['shopping_basket']),
+            None
         )
+        if device_mapping is None:
+            raise NoShoppingBasketException
         return [
                 FinalProductListElement(product,
-                                            [scenario.id for scenario in scenarios]
+                                        [scenario.id for scenario in scenarios]
                                         )
                 for product, scenarios in device_mapping.products.items()
             ]
