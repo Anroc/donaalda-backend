@@ -1,6 +1,6 @@
 import logging
 
-from .merging import DeviceMapping, __merge_meta_device
+from .merging import DeviceMapping
 from .implementing import compute_matching_product_set
 
 
@@ -23,21 +23,7 @@ def implement_scenarios(scenarios, preference):
     # merging the endpoints
     meta_device_mapping = DeviceMapping()
     for scenario in scenarios:
-        # merge meta broker
-        meta_device_mapping.broker = __merge_meta_device(
-                {scenario.meta_broker},
-                meta_device_mapping.broker,
-                scenario,
-                meta_device_mapping.original_to_merged
-        )
-
-        # merge meta endpoints
-        meta_device_mapping.endpoints = __merge_meta_device(
-                set(scenario.meta_endpoints.all()),
-                meta_device_mapping.endpoints,
-                scenario,
-                meta_device_mapping.original_to_merged
-        )
+        meta_device_mapping.merge_scenario(scenario)
 
     # 1. case: meta brokers contain only one element
     if len(meta_device_mapping.broker) == 1:

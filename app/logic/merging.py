@@ -73,8 +73,29 @@ class DeviceMapping(object):
     def originals_from_merged(self, merged_device):
         return {key for key in self.original_to_merged if merged_device is self.original_to_merged[key]}
 
+    def merge_scenario(self, scenario):
+        # TODO: this seems like it could be simplified even further but my main
+        # conern here is to encapsulate these two method calls into an instance
+        # method.
 
-def __merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_merged_mapping):
+        # merge meta broker
+        self.broker = _merge_meta_device(
+                {scenario.meta_broker},
+                self.broker,
+                scenario,
+                self.original_to_merged
+        )
+
+        # merge meta endpoints
+        self.endpoints = _merge_meta_device(
+                set(scenario.meta_endpoints.all()),
+                self.endpoints,
+                scenario,
+                self.original_to_merged
+        )
+
+
+def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_merged_mapping):
     """
     Merges a given set of meta_devices into a present_set of thous.
     This method also checks if the current features of the meta devices can be already satisfied by
