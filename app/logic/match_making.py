@@ -83,7 +83,7 @@ class DeviceMapping(object):
         return {key for key in self.original_to_merged if merged_device is self.original_to_merged[key]}
 
 
-def implement_scenario(scenarios, preference):
+def implement_scenarios(scenarios, preference):
     """
     This method takes a set of scenarios and merge them in that kind that
     meta devices that provide the same feature set are just listed onces.
@@ -230,8 +230,7 @@ def compute_matching_product_set(device_mapping, preference):
     change
     """
     # validation:
-    if len(device_mapping.broker) != 1:
-        raise RuntimeError("Expected ONE broker as base of operations.")
+    assert len(device_mapping.broker) != 1, "Expected ONE broker as base of operations."
 
     meta_broker = device_mapping.get_any_broker()
     meta_endpoints = set(device_mapping.endpoints.keys()).union(set(device_mapping.bridges.keys()))
@@ -398,7 +397,7 @@ def __cost_function(product_sets, preference):
     sorting = dict()
     for current_set in product_sets:
         # we want to know exactly which set is not satisfiable (the reason of {current_set})
-        if not __product_type_filter_satisfiable({current_set}, preference):
+        if not  __matches_product_type_preference(current_set, preference.product_type_filter):
             continue
         # will resolve in set that contains the master broker and other bridges; this set is at least on element big
         broker = __get_broker_of_products(current_set)
@@ -443,7 +442,7 @@ def __product(a, b):
     return ret
 
 
-def __product_type_filter_satisfiable(meta_implementations, preference):
+def __product_type_filter_satisfiable(meta_implementations, filters):
     """
     Checks if a given set of product implementations of meta devices contains a
     configuration that satisfies the given product type filter.
@@ -451,18 +450,12 @@ def __product_type_filter_satisfiable(meta_implementations, preference):
     :param meta_implementations:
         a set containing sets of all products that implement each meta device in
         a scenario
-    :param preference:
-        the user preference
+     :param filters:
+        the set of product type filters
     :return:
         whether or not there is a way to choose a product from each set so that
         all product types in the filters are satisfied by the choice
     """
-    # TODO: maybe remove later
-    filters = set()
-    for basket_elem in preference.shopping_basket:
-        filters = filters.union(set(basket_elem[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]))
-    filters = filters.union(set(preference.product_type_filter))
-
     # start by creating a set that contains a frozenset of the filters
     remaining_filters = set()
     remaining_filters.add(frozenset(filters))
@@ -485,6 +478,35 @@ def __product_type_filter_satisfiable(meta_implementations, preference):
                     for f in previous_filters)
 
     return frozenset() in remaining_filters
+
+
+def __matches_product_type_preference(product_set, product_type_filters):
+    """
+    Filters a given product set for the given product type filters.
+
+    :param product_set:
+        the given product set
+    :param product_type_filters:
+        the given product type filters (list of pk of product types)
+    :return:
+        if the product set contains all of the given product type filters
+    """
+    if not product_type_filters:
+        return True
+
+    input_hash = hash((frozenset(product_set), frozenset(product_type_filters)))
+
+    tmp = cache.get(input_hash)
+    if tmp is not None:
+        return tmp
+
+    product_types = set()
+    for product in product_set:
+        product_types.add(product.product_type_id)
+
+    res = all(product_type in product_types for product_type in product_type_filters)
+    cache.set(input_hash, res)
+    return res
 
 
 def __find_implementing_product(meta_device, renovation_allowed):

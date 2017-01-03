@@ -15,7 +15,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import *
 from rest_framework.response import Response
 
-from .logic.match_making import implement_scenario
+from .logic.match_making import implement_scenarios
 from .logic.sorting import sort_scenarios
 from .forms import LoginForm
 from .permissions import *
@@ -141,7 +141,6 @@ class Suggestions(generics.ListAPIView):
         input_serializer.is_valid(raise_exception=True)
         suggestions_input = input_serializer.save()
 
-        # todo: maybe overwork
         scenario_ids = set()
         scenarios = Scenario.objects.prefetch_related(
             'meta_broker__implementation_requires',
@@ -161,14 +160,14 @@ class Suggestions(generics.ListAPIView):
         # call scenario sorting
         sorted_tuple_list = sort_scenarios(sorting_scenarios, suggestions_input)
 
-        old_product_set = implement_scenario(shopping_basket, suggestions_input)
+        old_product_set = implement_scenarios(shopping_basket, suggestions_input)
         if not old_product_set:
-            raise RuntimeError("Shopping basket ist not implementable.")
+            raise ValidationError("Shopping basket ist not implementable.")
         # don't need the device mappings
         old_product_set = old_product_set[0]
 
         for scenario, rating in sorted_tuple_list:
-            product_set, device_mapping = implement_scenario(shopping_basket.union({scenario}), suggestions_input)
+            product_set, device_mapping = implement_scenarios(shopping_basket.union({scenario}), suggestions_input)
             if product_set:
                 id_mapping = dict()
                 for (product, scenarios) in device_mapping.products.items():
