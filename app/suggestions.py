@@ -161,3 +161,9 @@ class InvalidGETException(exceptions.APIException):
     status_code = 400
     default_code = 'client error'
     default_detail = 'A POST requests that sets the onboarding preferences is required before a GET to the suggestions endpoint is possible'
+
+
+class InvalidShoppingBasketException(exceptions.APIException):
+    status_code = 400
+    default_code = 'client error'
+    default_detail = 'The given shopping basket is not implementable.'
