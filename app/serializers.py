@@ -53,13 +53,10 @@ class ProductTypeSerializer(PkToIdSerializer):
         fields = ('id', 'type_name',)
 
 
-class ScenarioSerializer(PkToIdSerializer):
-    provider = ProviderSerializer()
-
+class MinimalSubCategorySerializer(PkToIdSerializer):
     class Meta:
-        model = Scenario
-        fields = (
-            'id', 'name', 'description', 'url_name', 'picture', 'provider',)
+        model = SubCategory
+        fields = ('id', 'name', 'picture', )
 
 
 class SubCategorySerializer(PkToIdSerializer):
@@ -76,6 +73,16 @@ class SubCategoryDescriptionSerializer(PkToIdSerializer):
     class Meta:
         model = SubCategoryDescription
         fields = ('id', 'belongs_to_subcategory', 'description', 'image', 'left_right', 'order',)
+
+
+class ScenarioSerializer(PkToIdSerializer):
+    provider = ProviderSerializer()
+    subcategory = MinimalSubCategorySerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Scenario
+        fields = (
+            'id', 'name', 'description', 'url_name', 'picture', 'provider', 'subcategory', )
 
 
 class EmployeeSerializer(PkToIdSerializer):

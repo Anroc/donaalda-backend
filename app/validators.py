@@ -43,3 +43,18 @@ def validate_subcategory_filter(value):
     subcategory_ids = app.models.SubCategory.objects.values_list('pk', flat=True)
     if not set(value).issubset(set(subcategory_ids)):
         raise ValidationError(_ERR_SUBCATEGORIES)
+
+
+_ERR_SCENARIOS = 'Shopping basket may contain invalid scenario ids'
+
+
+def validate_scenario_id(value):
+    scenario_ids = app.models.Scenario.objects.values_list('pk', flat=True)
+    basket_scenario_ids = set()
+    basket_product_type_filter = set()
+    for val in value:
+        basket_scenario_ids.add(val['scenario_id'])
+        basket_product_type_filter = basket_product_type_filter.union(set(val['product_type_filter']))
+    if not basket_scenario_ids.issubset(scenario_ids):
+        raise ValidationError(_ERR_SCENARIOS)
+    validate_producttype_filter(basket_product_type_filter)

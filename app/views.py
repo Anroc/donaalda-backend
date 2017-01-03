@@ -15,14 +15,14 @@ from rest_framework import viewsets
 from rest_framework.decorators import *
 from rest_framework.response import Response
 
-from .logic.match_making import implement_scenario
+from .logic.match_making import implement_scenarios
 from .logic.sorting import sort_scenarios
 from .forms import LoginForm
 from .permissions import *
 from .serializers import *
 from .validators import *
 from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, InvalidGETException
-from .constants import SUGGESTIONS_INPUT_SESSION_KEY
+from .constants import SUGGESTIONS_INPUT_SESSION_KEY, SHOPPING_BASKET_SCENARIO_ID
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -141,12 +141,38 @@ class Suggestions(generics.ListAPIView):
         input_serializer.is_valid(raise_exception=True)
         suggestions_input = input_serializer.save()
 
+        scenario_ids = set()
+        scenarios = Scenario.objects.prefetch_related(
+            'meta_broker__implementation_requires',
+            'meta_endpoints__implementation_requires'
+        ).all()
+        for basket_elem in suggestions_input.shopping_basket:
+            scenario_ids.add(basket_elem[SHOPPING_BASKET_SCENARIO_ID])
+
+        shopping_basket = set()
+        sorting_scenarios = set()
+        for scenario in scenarios:
+            if scenario.pk in scenario_ids:
+                shopping_basket.add(scenario)
+            else:
+                sorting_scenarios.add(scenario)
+
         # call scenario sorting
-        sorted_tuple_list = sort_scenarios(Scenario.objects.all(), suggestions_input)
+        sorted_tuple_list = sort_scenarios(sorting_scenarios, suggestions_input)
+
+        old_product_set = implement_scenarios(shopping_basket, suggestions_input)
+        if not old_product_set:
+            raise ValidationError("Shopping basket ist not implementable.")
+        # don't need the device mappings
+        old_product_set = old_product_set[0]
+
         for scenario, rating in sorted_tuple_list:
-            product_set = implement_scenario(scenario, suggestions_input)
+            product_set, device_mapping = implement_scenarios(shopping_basket.union({scenario}), suggestions_input)
             if product_set:
-                yield ScenarioImpl(product_set, scenario, rating)
+                id_mapping = dict()
+                for (product, scenarios) in device_mapping.products.items():
+                    id_mapping[product.pk] = {scenario.pk for scenario in scenarios}
+                yield ScenarioImpl(product_set, old_product_set, scenario, rating, id_mapping)
 
     def get_serializer_class(self):
         return SuggestionsOutputSerializer

@@ -11,6 +11,7 @@ from .validators import (
         validate_scenario_preference,
         validate_producttype_filter,
         validate_subcategory_filter,
+        validate_scenario_id,
 )
 
 
@@ -66,8 +67,15 @@ SuggestionsInput = collections.namedtuple(
             'renovation_preference',
             'product_type_filter',
             'subcategory_filter',
+            'shopping_basket',
         ])
 
+
+class ShoppingBasketEntrySerializer(serializers.Serializer):
+    scenario_id = serializers.IntegerField()
+    product_type_filter = serializers.ListField(
+            child=serializers.IntegerField()
+    )
 
 class SuggestionsInputSerializer(serializers.Serializer):
     scenario_preference = serializers.DictField(
@@ -78,18 +86,29 @@ class SuggestionsInputSerializer(serializers.Serializer):
     renovation_preference = serializers.BooleanField()
 
     product_type_filter = serializers.ListField(
+            required=False,
+            default=[],
             child=serializers.IntegerField(),
-            validators=[validate_producttype_filter])
+            validators=[validate_producttype_filter]
+    )
     subcategory_filter = serializers.ListField(
+            required=False,
+            default=[],
             child=serializers.IntegerField(),
             validators=[validate_subcategory_filter])
+    shopping_basket = serializers.ListField(
+            required=False,
+            default=[],
+            child=ShoppingBasketEntrySerializer(),
+            validators=[validate_scenario_id]
+    )
 
     def create(self, validated_data):
         return SuggestionsInput(**validated_data)
 
 
 class ScenarioImpl(object):
-    def __init__(self, product_set, scenario, rating):
+    def __init__(self, product_set, old_product_set, scenario, rating, product_mapping):
         self.scenario = scenario
         self.rating = rating
         self.product_set = product_set
@@ -98,18 +117,33 @@ class ScenarioImpl(object):
         self.extendability = 0
         self.renovation_required = False
         self.product_types = set()
-        self.compute_specs()
+        self.product_mapping = product_mapping
+        self.compare_specs(old_product_set)
 
-    def compute_specs(self):
-        protocols = set()
-        for product in self.product_set:
-            self.price += product.price
-            self.efficiency += product.efficiency
-            protocols = protocols.union(
-                set(product.leader_protocol.all()).union(set(product.follower_protocol.all())))
-            self.product_types.add(product.product_type)
-            self.renovation_required |= product.renovation_required
-        self.extendability = len(protocols)
+    def compare_specs(self, old_product_set):
+        self.price, self.efficiency, self.product_types, self.extendability, self.renovation_required \
+            = compute_specs(self.product_set)
+        price, efficiency, unused, extendability, unused = compute_specs(old_product_set)
+        self.price -= price
+        self.efficiency -= efficiency
+        self.extendability -= extendability
+
+
+def compute_specs(product_set):
+    protocols = set()
+    price = 0
+    efficiency = 0
+    product_types = set()
+    renovation_required = False
+    for product in product_set:
+        price += product.price
+        efficiency += product.efficiency
+        protocols = protocols.union(
+            set(product.leader_protocol.all()).union(set(product.follower_protocol.all())))
+        product_types.add(product.product_type)
+        renovation_required |= product.renovation_required
+    extendability = len(protocols)
+    return price, efficiency, product_types, extendability, renovation_required
 
 
 class SuggestionsOutputSerializer(serializers.Serializer):
@@ -121,6 +155,7 @@ class SuggestionsOutputSerializer(serializers.Serializer):
     rating = serializers.FloatField()
     renovation_required = serializers.BooleanField()
     product_types = ProductTypeSerializer(many=True)
+    product_mapping = serializers.DictField()
 
 
 class InvalidGETException(exceptions.APIException):
