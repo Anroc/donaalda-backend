@@ -15,7 +15,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import *
 from rest_framework.response import Response
 
-from .logic.match_making import implement_scenarios
+from .logic import implement_scenarios
 from .logic.sorting import sort_scenarios
 from .forms import LoginForm
 from .permissions import *
