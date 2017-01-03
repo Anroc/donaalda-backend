@@ -77,6 +77,7 @@ class ShoppingBasketEntrySerializer(serializers.Serializer):
             child=serializers.IntegerField()
     )
 
+
 class SuggestionsInputSerializer(serializers.Serializer):
     scenario_preference = serializers.DictField(
             child=serializers.IntegerField(),
@@ -108,7 +109,7 @@ class SuggestionsInputSerializer(serializers.Serializer):
 
 
 class ScenarioImpl(object):
-    def __init__(self, product_set, old_product_set, scenario, rating, product_mapping):
+    def __init__(self, product_set, old_product_set, scenario, rating):
         self.scenario = scenario
         self.rating = rating
         self.product_set = product_set
@@ -117,7 +118,6 @@ class ScenarioImpl(object):
         self.extendability = 0
         self.renovation_required = False
         self.product_types = set()
-        self.product_mapping = product_mapping
         self.compare_specs(old_product_set)
 
     def compare_specs(self, old_product_set):
@@ -155,7 +155,6 @@ class SuggestionsOutputSerializer(serializers.Serializer):
     rating = serializers.FloatField()
     renovation_required = serializers.BooleanField()
     product_types = ProductTypeSerializer(many=True)
-    product_mapping = serializers.DictField()
 
 
 class InvalidGETException(exceptions.APIException):
