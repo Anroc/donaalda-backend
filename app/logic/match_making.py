@@ -3,7 +3,6 @@ import operator
 import logging
 from django.core.cache import cache
 from ..constants import *
-from django.core.exceptions import ValidationError
 
 # 1h
 EXPIRATION_TIME = 60 * 60
