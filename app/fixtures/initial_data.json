@@ -1232,7 +1232,7 @@
     "product_type": 34,
     "serial_number": "AEO_DSD31",
     "price": 49.99,
-    "efficiency": 8.90,
+    "efficiency": 8.9,
     "description": "<h4>Siren for alarms.<br> Siren for safety. </h4>\r\n\r\nMost sirens are made to be a part of a security system. They\u2019re designed to be placed outdoors in the hopes of deterring break-ins or to alert your neighbours that something\u2019s up. Siren from Aeotec works differently. It\u2019s been crafted to keep you safe and secure when you\u2019re home. The wellbeing of you and your family is its focus.\r\n\r\nThat\u2019s why Siren offers 5 different alert tones. They\u2019ve been designed for issues ranging from home intrusions to fire emergencies to falls. And they\u2019re all available to you through your Z-Wave gateway so that you can perfectly optimise Siren for your security and safety needs.",
     "specifications": "---",
     "image1": "products/aeon_alarm_1.jpg",
@@ -4028,6 +4028,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "1xhxndc8yiwc7sz9ivnqn12i3j2we44i",
+  "fields": {
+    "session_data": "YzAzMTVmYjRhZjUzZDlkZjhlMDQ2ODZmNDk1NGM1NjU4YWI1ZTg0Yzp7InN1Z2dlc3Rpb25zX2lucHV0Ijp7InN1YmNhdGVnb3J5X2ZpbHRlciI6W10sInByb2R1Y3RfdHlwZV9maWx0ZXIiOltdLCJyZW5vdmF0aW9uX3ByZWZlcmVuY2UiOmZhbHNlLCJzY2VuYXJpb19wcmVmZXJlbmNlIjp7IktvbWZvcnQiOjgsIkdlc3VuZGhlaXQiOjUsIlNpY2hlcmhlaXQiOjUsIkVuZXJnaWUiOjV9LCJwcm9kdWN0X3ByZWZlcmVuY2UiOiJQcmVpcyJ9fQ==",
+    "expire_date": "2017-01-16T11:40:45.485Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "1yskqb89lt7yiu61rf6opimk1hahfm23",
   "fields": {
     "session_data": "MzhjN2Q2OTRlZjE1OGYyMTQwNjA3Y2Y0OTdkNGUwNTE3ZmVhMGVhZDp7InN1Z2dlc3Rpb25zX2lucHV0Ijp7InByb2R1Y3RfdHlwZV9maWx0ZXIiOlsxLDVdLCJzY2VuYXJpb19wcmVmZXJlbmNlIjp7IkVuZXJnaWUiOjQsIlNpY2hlcmhlaXQiOjEwLCJLb21mb3J0IjoxLCJHZXN1bmRoZWl0IjoxfSwicHJvZHVjdF9wcmVmZXJlbmNlIjoiUHJlaXMiLCJyZW5vdmF0aW9uX3ByZWZlcmVuY2UiOnRydWUsInN1YmNhdGVnb3J5X2ZpbHRlciI6WzFdfX0=",
@@ -4646,8 +4654,8 @@
   "model": "sessions.session",
   "pk": "7rfp6joorn1xaoofmc23xseoky1qo1el",
   "fields": {
-    "session_data": "ZDA3YmEyZWE0NDRiMjI0YzdkOTliMDRhZmJhYWU4MTU4ZGQ5NWYwZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
-    "expire_date": "2017-01-11T17:22:18.283Z"
+    "session_data": "NWIxYjc1Yzc1YTJkNTk4ZDRhOTNiZTcxMjNkNjZhYzQxOWZiODhmMzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJzdWdnZXN0aW9uc19pbnB1dCI6eyJzaG9wcGluZ19iYXNrZXQiOltdLCJwcm9kdWN0X3R5cGVfZmlsdGVyIjpbXSwicHJvZHVjdF9wcmVmZXJlbmNlIjoiUHJlaXMiLCJzdWJjYXRlZ29yeV9maWx0ZXIiOltdLCJzY2VuYXJpb19wcmVmZXJlbmNlIjp7IktvbWZvcnQiOjUsIkdlc3VuZGhlaXQiOjUsIkVuZXJnaWUiOjUsIlNpY2hlcmhlaXQiOjV9LCJyZW5vdmF0aW9uX3ByZWZlcmVuY2UiOnRydWV9LCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
+    "expire_date": "2017-01-14T13:15:15.182Z"
   }
 },
 {
@@ -4910,8 +4918,8 @@
   "model": "sessions.session",
   "pk": "aldwx2y1n7mt878zw5be0pm1rj6qlqyd",
   "fields": {
-    "session_data": "YWY4OGUzOGQxOTY2NzUwMDY0ZWExNDY1MTgzNjMxOGEyZjBhZDEyNjp7InN1Z2dlc3Rpb25zX2lucHV0Ijp7InNjZW5hcmlvX3ByZWZlcmVuY2UiOnsiU2ljaGVyaGVpdCI6MTAsIkdlc3VuZGhlaXQiOjEsIkVuZXJnaWUiOjQsIktvbWZvcnQiOjF9LCJzaG9wcGluZ19iYXNrZXQiOltdLCJzdWJjYXRlZ29yeV9maWx0ZXIiOltdLCJwcm9kdWN0X3ByZWZlcmVuY2UiOiJQcmVpcyIsInByb2R1Y3RfdHlwZV9maWx0ZXIiOlsxOF0sInJlbm92YXRpb25fcHJlZmVyZW5jZSI6ZmFsc2V9fQ==",
-    "expire_date": "2017-01-14T12:38:35.325Z"
+    "session_data": "MzhhMjgyN2Q2ZjBmYzRmZjNlMzcwMjE3NDY3NjVmZWQ1ZjY3ZGFjMDp7InN1Z2dlc3Rpb25zX2lucHV0Ijp7InNob3BwaW5nX2Jhc2tldCI6W3sicHJvZHVjdF90eXBlX2ZpbHRlciI6WzI2XSwic2NlbmFyaW9faWQiOjN9LHsicHJvZHVjdF90eXBlX2ZpbHRlciI6W10sInNjZW5hcmlvX2lkIjo1fV0sInNjZW5hcmlvX3ByZWZlcmVuY2UiOnsiU2ljaGVyaGVpdCI6MTAsIkVuZXJnaWUiOjQsIkdlc3VuZGhlaXQiOjEsIktvbWZvcnQiOjF9LCJzdWJjYXRlZ29yeV9maWx0ZXIiOltdLCJwcm9kdWN0X3R5cGVfZmlsdGVyIjpbXSwicmVub3ZhdGlvbl9wcmVmZXJlbmNlIjpmYWxzZSwicHJvZHVjdF9wcmVmZXJlbmNlIjoiUHJlaXMifX0=",
+    "expire_date": "2017-01-17T10:30:37.815Z"
   }
 },
 {
@@ -6096,6 +6104,14 @@
   "fields": {
     "session_data": "M2ZmZjU0NWYzM2JkMDVhYTJhZDZjYWE0NDYwN2M3NWYxNWEwZDM4Mzp7InN1Z2dlc3Rpb25zX2lucHV0Ijp7InNjZW5hcmlvX3ByZWZlcmVuY2UiOnsiRW5lcmdpZSI6NSwiS29tZm9ydCI6NSwiU2ljaGVyaGVpdCI6NSwiR2VzdW5kaGVpdCI6NX0sInN1YmNhdGVnb3J5X2ZpbHRlciI6W10sInJlbm92YXRpb25fcHJlZmVyZW5jZSI6ZmFsc2UsInByb2R1Y3RfdHlwZV9maWx0ZXIiOltdLCJwcm9kdWN0X3ByZWZlcmVuY2UiOiJQcmVpcyJ9fQ==",
     "expire_date": "2016-12-29T20:06:08.797Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "mkbqxeaakq5me12pjcof1m2ft2vbx4pq",
+  "fields": {
+    "session_data": "YmI3MjNjOWRiNDRjYTJjZGI2ZDU3YTc5OTNkODJmNGU2OGFhZTYyYTp7InN1Z2dlc3Rpb25zX2lucHV0Ijp7InN1YmNhdGVnb3J5X2ZpbHRlciI6W10sInByb2R1Y3RfdHlwZV9maWx0ZXIiOltdLCJyZW5vdmF0aW9uX3ByZWZlcmVuY2UiOmZhbHNlLCJzY2VuYXJpb19wcmVmZXJlbmNlIjp7IktvbWZvcnQiOjUsIkdlc3VuZGhlaXQiOjUsIlNpY2hlcmhlaXQiOjUsIkVuZXJnaWUiOjR9LCJwcm9kdWN0X3ByZWZlcmVuY2UiOiJFcndlaXRlcmJhcmtlaXQifX0=",
+    "expire_date": "2017-01-16T11:31:24.871Z"
   }
 },
 {

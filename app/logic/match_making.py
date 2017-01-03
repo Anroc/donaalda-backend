@@ -3,6 +3,7 @@ import operator
 import logging
 from django.core.cache import cache
 from ..constants import *
+from django.core.exceptions import ValidationError
 
 # 1h
 EXPIRATION_TIME = 60 * 60
@@ -17,21 +18,23 @@ class DeviceMapping(object):
     Class for saving dicts of meta devices to scenarios and
     product to scenarios.
     """
-    endpoints = dict()
-    broker = dict()
 
-    products = dict()
-
-    def __init__(self, endpoints=None, broker=None, products=None):
+    def __init__(self, endpoints=None, broker=None, products=None, bridges=None, original_to_merged=None):
         if endpoints is None:
             endpoints = dict()
         if broker is None:
             broker = dict()
         if products is None:
             products = dict()
+        if bridges is None:
+            bridges = dict()
+        if original_to_merged is None:
+            original_to_merged = dict()
         self.endpoints = endpoints
         self.broker = broker
         self.products = products
+        self.bridges = bridges
+        self.original_to_merged = original_to_merged
 
     def get_any_broker(self):
         return list(self.broker.keys())[0]
@@ -40,8 +43,11 @@ class DeviceMapping(object):
         scenarios = set()
         if product in self.products:
             scenarios = self.products[product]
-        if meta_device.is_broker and meta_device in self.broker:
-            self.products[product] = self.broker[meta_device].union(scenarios)
+        if meta_device.is_broker:
+            if meta_device in self.broker:
+                self.products[product] = self.broker[meta_device].union(scenarios)
+            else:
+                self.products[product] = self.bridges[meta_device].union(scenarios)
             return
         # else: broker is shifted to endpoints
         self.products[product] = self.endpoints[meta_device].union(scenarios)
@@ -59,13 +65,22 @@ class DeviceMapping(object):
         return other
 
     def __copy__(self):
-        return DeviceMapping(self.endpoints.copy(), self.broker.copy(), self.products.copy())
+        return DeviceMapping(
+            self.endpoints.copy(),
+            self.broker.copy(),
+            self.products.copy(),
+            self.bridges.copy(),
+            self.original_to_merged.copy()
+        )
 
     def intersect_products(self, products):
         tmp = dict()
         for product in products:
             tmp[product] = self.products[product]
         self.products = tmp
+
+    def originals_from_merged(self, merged_device):
+        return {key for key in self.original_to_merged if merged_device is self.original_to_merged[key]}
 
 
 def implement_scenario(scenarios, preference):
@@ -88,14 +103,16 @@ def implement_scenario(scenarios, preference):
         meta_device_mapping.broker = __merge_meta_device(
                 {scenario.meta_broker},
                 meta_device_mapping.broker,
-                scenario
+                scenario,
+                meta_device_mapping.original_to_merged
         )
 
         # merge meta endpoints
         meta_device_mapping.endpoints = __merge_meta_device(
                 set(scenario.meta_endpoints.all()),
                 meta_device_mapping.endpoints,
-                scenario
+                scenario,
+                meta_device_mapping.original_to_merged
         )
 
     # 1. case: meta brokers contain only one element
@@ -128,7 +145,7 @@ def implement_scenario(scenarios, preference):
         return solution, all_possible_solutions[frozenset(solution)]
 
 
-def __merge_meta_device(meta_devices, meta_device_mapping, scenario):
+def __merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_merged_mapping):
     """
     Merges a given set of meta_devices into a present_set of thous.
     This method also checks if the current features of the meta devices can be already satisfied by
@@ -136,13 +153,19 @@ def __merge_meta_device(meta_devices, meta_device_mapping, scenario):
 
     :param meta_devices:
         the meta_devices that should be added in the set of present devices
+
+        Note: The input meta devices are not going to be merged among themselves.
+        Because they come directly from a single scenario which is assumed to have no unmerged meta devices.
     :param meta_device_mapping:
         a dictionary of either meta broker or meta endpoints to scenarios.
         See the class DeviceMapping for more information.
     :param scenario
         the scenario of the meta_devices that should be added.
+    :param original_to_merged_mapping
+        dict of mappings from original meta devices to merged ones.
     :return:
-        the merge dict of meta devices to scenario
+        device_mapping: the merge dict of meta devices to scenario
+        original_to_merged_mapping: a dict of meta devices and their merged reference
     """
     device_mapping = meta_device_mapping.copy()
     merged_endpoints = set(device_mapping.keys()).copy()
@@ -151,6 +174,7 @@ def __merge_meta_device(meta_devices, meta_device_mapping, scenario):
         me = meta_devices.pop()
         merged_endpoints.add(me)
         device_mapping[me] = {scenario}
+        original_to_merged_mapping[me] = me
     tmp_add_entries = dict()
     tmp_remove_keys = set()
 
@@ -160,16 +184,30 @@ def __merge_meta_device(meta_devices, meta_device_mapping, scenario):
         features_cme = set(cme.implementation_requires.values_list('pk', flat=True))
         for me in merged_endpoints:
             features_me = set(me.implementation_requires.values_list('pk', flat=True))
-            if features_me.issubset(features_cme):
+            if cme in tmp_add_entries:
+                LOGGER.warning("Can't current meta endpoint has more than one possible merge option.")
+                if me in tmp_remove_keys:
+                    tmp_remove_keys.remove(me)
+                tmp_add_entries[cme] = None
+                continue
+            elif not features_cme.issubset(features_me):
+                device_mapping[cme] = {scenario}
+                original_to_merged_mapping[cme] = cme
+                continue
+            elif features_me.issubset(features_cme):
                 tmp_remove_keys.add(me)
                 tmp_add_entries[cme] = device_mapping[me].union({scenario})
-            elif not features_cme.issubset(features_me):
-                tmp_add_entries[cme] = {scenario}
+            original_to_merged_mapping[cme] = me
+            for key in original_to_merged_mapping:
+                if original_to_merged_mapping[key] is me:
+                    original_to_merged_mapping[key] = cme
 
     for tmp_remove_key in tmp_remove_keys:
         del device_mapping[tmp_remove_key]
     # add the meta_endpoints to the set of meta endpoints
-    device_mapping.update(tmp_add_entries)
+    device_mapping.update(
+        {key: tmp_add_entries[key] for key in tmp_add_entries if tmp_add_entries[key] is not None}
+    )
     return device_mapping
 
 
@@ -196,7 +234,7 @@ def compute_matching_product_set(device_mapping, preference):
         raise RuntimeError("Expected ONE broker as base of operations.")
 
     meta_broker = device_mapping.get_any_broker()
-    meta_endpoints = set(device_mapping.endpoints.keys())
+    meta_endpoints = set(device_mapping.endpoints.keys()).union(set(device_mapping.bridges.keys()))
 
     # 1. find implementing products
     impl_of_meta_device = dict()
@@ -227,7 +265,8 @@ def compute_matching_product_set(device_mapping, preference):
                 # 2.1 call f
                 # take an broker impl and an endpoint impl and find the matching ways
                 res = __find_communication_partner(endpoint_impl, broker_impl, preference.renovation_preference)
-                if len(res) > 0:
+                res = __filter_paths_for_valid_broker(res, meta_endpoint, device_mapping, impl_of_meta_device)
+                if res:
                     # convert inner set to frozenset and list to set
                     res = set(
                         ((frozenset(e))
@@ -250,7 +289,19 @@ def compute_matching_product_set(device_mapping, preference):
             for path in possible_paths[me]:
                 device_mapping.add_products(me, path)
 
-        merged_set = __merge_paths(meta_endpoints, possible_paths)
+        merged_set = __dict_cross_product(possible_paths)
+
+        # filter for valid product filter of shopping basket
+        for basket_elem in preference.shopping_basket:
+            scenario = Scenario.objects.get(pk=basket_elem[SHOPPING_BASKET_SCENARIO_ID])
+            pt_preference = basket_elem[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]
+            remove_paths = set()
+            for p_set in merged_set:
+                scenario_p_set = {elem for elem in p_set if scenario in device_mapping.products[elem]}
+                if not __matches_product_type_preference(scenario_p_set, pt_preference):
+                    remove_paths.add(p_set)
+            merged_set = {elem for elem in merged_set if elem not in remove_paths}
+
         # 3. apply cost function U_pref to get one product set
         merged_set = __cost_function(merged_set, preference)
 
@@ -268,6 +319,66 @@ def compute_matching_product_set(device_mapping, preference):
 
     # return the product set
     return product_sets, device_mapping
+
+
+def __filter_paths_for_valid_broker(paths, meta_endpoint, device_mapping, impl_of_meta_device):
+    """
+    This method filters the given paths for every path that contains a broker that is a
+    valid implementation of the broker of the scenario of the current meta_endpoint.
+
+    :param paths:
+        all possible paths of an endpoint implementation to a master broker implementation
+    :param meta_endpoint:
+        the current endpoint that was implemented
+    :param device_mapping:
+        the mapping that contains a "original_to_merged" broker function
+    :param impl_of_meta_device:
+        the dict of a merged meta endpoint to all possible implementation of it
+    :return:
+        the filtered paths
+    """
+    if not paths:
+        return paths
+    else:
+        if meta_endpoint in device_mapping.bridges:
+            # nothing to validate because we only check if the endpoint is compatible with his broker
+            return paths
+        else:
+            # get all scenarios that this endpoint is implementing
+            scenarios = set().union(
+                *(device_mapping.endpoints[endpoint]
+                    for endpoint in device_mapping.originals_from_merged(meta_endpoint))
+            )
+            # get all brokers of the scenarios. This brokers are unmerged.
+            brokers = {
+                scenario.meta_broker for scenario in scenarios
+            }
+            # find the merged brokers and their implementing products
+            merged_broker_products = {
+                frozenset(
+                    impl_of_meta_device[device_mapping.original_to_merged[broker]]
+                ) for broker in brokers
+            }
+            # prepare a bucket for each broker implementation
+            paths_over_broker = {
+                broker: set()
+                for broker in merged_broker_products
+            }
+            # check each paths in paths
+            for path in paths:
+                # that a broker implementation existed
+                for broker in merged_broker_products:
+                    # that this one of the implementation
+                    for tmp_broker_impl in broker:
+                        # is contained in the current path
+                        if tmp_broker_impl in path:
+                            # if this is given then add this path into the bucket of the scenario
+                            paths_over_broker[broker].add(frozenset(path))
+                            break  # each other check will just add the same values in the bucket
+            # compute the cross product of each found bucket implementation.
+            # if one bucket was not filled this will return the empty set
+            # This is needed because each broker implementation have to be satisfied.
+            return __dict_cross_product(paths_over_broker)
 
 
 def __cost_function(product_sets, preference):
@@ -314,8 +425,8 @@ def __cost_function(product_sets, preference):
     return set()
 
 
-def __merge_paths(meta_endpoints, possible_paths):
-    endpoints = list(meta_endpoints.copy())
+def __dict_cross_product(possible_paths):
+    endpoints = list(possible_paths.keys())
     if len(endpoints) == 0:
         return set()
     ret = possible_paths[endpoints[0]]

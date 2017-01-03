@@ -90,9 +90,9 @@ class Scenario(models.Model):
     categories = models.ManyToManyField("Category", through="ScenarioCategoryRating",
                                         through_fields=('scenario', 'category'), verbose_name="Bewertung")
     meta_broker = models.ForeignKey("MetaDevice", default=None, verbose_name="Besteht aus einem Metabroker",
-                                    on_delete=models.CASCADE, null=True, blank=True, related_name="meta_broker")
+                                    on_delete=models.CASCADE, null=True, blank=True, related_name="broker_of_scenario")
     meta_endpoints = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaEndpointDevices",
-                                            related_name="meta_endpoint")
+                                            related_name="ednpoint_of_scenario")
     subcategory = models.ManyToManyField(to='SubCategory', verbose_name="Dieses Szenario ist Teil dieser Subkategorie")
     in_shopping_basket_of = models.ManyToManyField(to=Session,
                                                    verbose_name="Dieses Szenario liegt im Warenkorb von Session",
