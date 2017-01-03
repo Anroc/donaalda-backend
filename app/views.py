@@ -22,7 +22,7 @@ from .permissions import *
 from .serializers import *
 from .validators import *
 from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, InvalidGETException
-from .constants import SUGGESTIONS_INPUT_SESSION_KEY, SHOPPING_BASKET_SCENARIO_ID
+from .constants import SUGGESTIONS_INPUT_SESSION_KEY, SHOPPING_BASKET_SCENARIO_ID, SHOPPING_BASKET_SESSION_KEY
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -160,19 +160,16 @@ class Suggestions(generics.ListAPIView):
         # call scenario sorting
         sorted_tuple_list = sort_scenarios(sorting_scenarios, suggestions_input)
 
-        old_product_set = implement_scenarios(shopping_basket, suggestions_input)
+        old_product_set, unused = implement_scenarios(shopping_basket, suggestions_input)
+        # TODO: Save "unused" in cache to retrieve it later
         if not old_product_set:
             raise ValidationError("Shopping basket ist not implementable.")
-        # don't need the device mappings
-        old_product_set = old_product_set[0]
 
         for scenario, rating in sorted_tuple_list:
-            product_set, device_mapping = implement_scenarios(shopping_basket.union({scenario}), suggestions_input)
+            # don't need the device mappings
+            product_set = implement_scenarios(shopping_basket.union({scenario}), suggestions_input)[0]
             if product_set:
-                id_mapping = dict()
-                for (product, scenarios) in device_mapping.products.items():
-                    id_mapping[product.pk] = {scenario.pk for scenario in scenarios}
-                yield ScenarioImpl(product_set, old_product_set, scenario, rating, id_mapping)
+                yield ScenarioImpl(product_set, old_product_set, scenario, rating)
 
     def get_serializer_class(self):
         return SuggestionsOutputSerializer
