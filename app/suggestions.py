@@ -108,7 +108,7 @@ class SuggestionsInputSerializer(serializers.Serializer):
 
 
 class ScenarioImpl(object):
-    def __init__(self, product_set, scenario, rating):
+    def __init__(self, product_set, old_product_set, scenario, rating, product_mapping):
         self.scenario = scenario
         self.rating = rating
         self.product_set = product_set
@@ -116,17 +116,30 @@ class ScenarioImpl(object):
         self.efficiency = 0
         self.extendability = 0
         self.product_types = set()
-        self.compute_specs()
+        self.product_mapping = product_mapping
+        self.compare_specs(old_product_set)
 
-    def compute_specs(self):
-        protocols = set()
-        for product in self.product_set:
-            self.price += product.price
-            self.efficiency += product.efficiency
-            protocols = protocols.union(
-                set(product.leader_protocol.all()).union(set(product.follower_protocol.all())))
-            self.product_types.add(product.product_type)
-        self.extendability = len(protocols)
+    def compare_specs(self, old_product_set):
+        self.price, self.efficiency, self.product_types, self.extendability = compute_specs(self.product_set)
+        price, efficiency, unused, extendability = compute_specs(old_product_set)
+        self.price -= price
+        self.efficiency -= efficiency
+        self.extendability -= extendability
+
+
+def compute_specs(product_set):
+    protocols = set()
+    price = 0
+    efficiency = 0
+    product_types = set()
+    for product in product_set:
+        price += product.price
+        efficiency += product.efficiency
+        protocols = protocols.union(
+            set(product.leader_protocol.all()).union(set(product.follower_protocol.all())))
+        product_types.add(product.product_type)
+    extendability = len(protocols)
+    return price, efficiency, product_types, extendability
 
 
 class SuggestionsOutputSerializer(serializers.Serializer):
@@ -137,6 +150,7 @@ class SuggestionsOutputSerializer(serializers.Serializer):
     extendability = serializers.IntegerField()
     rating = serializers.FloatField()
     product_types = ProductTypeSerializer(many=True)
+    product_mapping = serializers.DictField()
 
 
 class InvalidGETException(exceptions.APIException):
