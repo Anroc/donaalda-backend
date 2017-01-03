@@ -21,7 +21,8 @@ from .forms import LoginForm
 from .permissions import *
 from .serializers import *
 from .validators import *
-from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, InvalidGETException
+from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, \
+    InvalidGETException, InvalidShoppingBasketException
 from .constants import SUGGESTIONS_INPUT_SESSION_KEY, SHOPPING_BASKET_SCENARIO_ID, SHOPPING_BASKET_SESSION_KEY
 
 
@@ -163,7 +164,7 @@ class Suggestions(generics.ListAPIView):
         old_product_set, unused = implement_scenarios(shopping_basket, suggestions_input)
         # TODO: Save "unused" in cache to retrieve it later
         if not old_product_set:
-            raise ValidationError("Shopping basket ist not implementable.")
+            raise InvalidShoppingBasketException
 
         for scenario, rating in sorted_tuple_list:
             # don't need the device mappings
