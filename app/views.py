@@ -161,10 +161,13 @@ class Suggestions(generics.ListAPIView):
         # call scenario sorting
         sorted_tuple_list = sort_scenarios(sorting_scenarios, suggestions_input)
 
-        old_product_set, unused = implement_scenarios(shopping_basket, suggestions_input)
-        # TODO: Save "unused" in cache to retrieve it later
-        if not old_product_set:
-            raise InvalidShoppingBasketException
+        if shopping_basket:
+            old_product_set, unused = implement_scenarios(shopping_basket, suggestions_input)
+            # TODO: Save "unused" in cache to retrieve it later
+            if not old_product_set:
+                raise InvalidShoppingBasketException
+        else:
+            old_product_set = None
 
         for scenario, rating in sorted_tuple_list:
             # don't need the device mappings

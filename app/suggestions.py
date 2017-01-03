@@ -121,12 +121,13 @@ class ScenarioImpl(object):
         self.compare_specs(old_product_set)
 
     def compare_specs(self, old_product_set):
-        self.price, self.efficiency, self.product_types, self.extendability, self.renovation_required \
-            = compute_specs(self.product_set)
-        price, efficiency, unused, extendability, unused = compute_specs(old_product_set)
-        self.price -= price
-        self.efficiency -= efficiency
-        self.extendability -= extendability
+        self.price, self.efficiency, self.product_types, self.extendability, self.renovation_required = \
+            compute_specs(self.product_set)
+        if old_product_set is not None:
+            price, efficiency, unused, extendability, unused = compute_specs(old_product_set)
+            self.price -= price
+            self.efficiency -= efficiency
+            self.extendability -= extendability
 
 
 def compute_specs(product_set):
