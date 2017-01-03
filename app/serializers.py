@@ -36,21 +36,25 @@ class CategorySerializer(PkToIdSerializer):
         fields = ('id', 'name', 'picture', 'backgroundPicture', 'short_description', 'description', 'iconString',)
 
 
-class ProductSerializer(PkToIdSerializer):
-    provider = ProviderSerializer()
-
-    class Meta:
-        model = Product
-        fields = ('id',
-                  'name', 'provider', 'product_type', 'serial_number', 'description', 'specifications', 'image1',
-                  'image2',
-                  'image3', 'end_of_life',)
-
-
 class ProductTypeSerializer(PkToIdSerializer):
     class Meta:
         model = ProductType
         fields = ('id', 'type_name',)
+
+
+class ProductSerializer(PkToIdSerializer):
+    provider = ProviderSerializer()
+    product_type = ProductTypeSerializer()
+    extendability = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'provider', 'product_type', 'serial_number', 'description', 'specifications',
+                  'image1', 'image2', 'image3', 'price', 'efficiency', 'extendability',
+                  'renovation_required', )
+
+    def get_extendability(self, obj):
+        return obj.leader_protocol.count() + obj.follower_protocol.count()
 
 
 class ScenarioCategoryRatingSerializer(serializers.HyperlinkedModelSerializer):
