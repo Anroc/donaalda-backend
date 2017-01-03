@@ -115,13 +115,15 @@ class ScenarioImpl(object):
         self.price = 0.0
         self.efficiency = 0
         self.extendability = 0
+        self.renovation_required = False
         self.product_types = set()
         self.product_mapping = product_mapping
         self.compare_specs(old_product_set)
 
     def compare_specs(self, old_product_set):
-        self.price, self.efficiency, self.product_types, self.extendability = compute_specs(self.product_set)
-        price, efficiency, unused, extendability = compute_specs(old_product_set)
+        self.price, self.efficiency, self.product_types, self.extendability, self.renovation_required \
+            = compute_specs(self.product_set)
+        price, efficiency, unused, extendability, unused = compute_specs(old_product_set)
         self.price -= price
         self.efficiency -= efficiency
         self.extendability -= extendability
@@ -132,14 +134,16 @@ def compute_specs(product_set):
     price = 0
     efficiency = 0
     product_types = set()
+    renovation_required = False
     for product in product_set:
         price += product.price
         efficiency += product.efficiency
         protocols = protocols.union(
             set(product.leader_protocol.all()).union(set(product.follower_protocol.all())))
         product_types.add(product.product_type)
+        renovation_required |= product.renovation_required
     extendability = len(protocols)
-    return price, efficiency, product_types, extendability
+    return price, efficiency, product_types, extendability, renovation_required
 
 
 class SuggestionsOutputSerializer(serializers.Serializer):
@@ -149,6 +153,7 @@ class SuggestionsOutputSerializer(serializers.Serializer):
     efficiency = serializers.IntegerField()
     extendability = serializers.IntegerField()
     rating = serializers.FloatField()
+    renovation_required = serializers.BooleanField()
     product_types = ProductTypeSerializer(many=True)
     product_mapping = serializers.DictField()
 
