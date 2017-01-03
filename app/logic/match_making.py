@@ -61,7 +61,7 @@ class DeviceMapping(object):
         for b in self.broker.keys():
             if b is not broker:
                 scenarios = other.broker.pop(b)
-                other.endpoints[b] = scenarios
+                other.bridges[b] = scenarios
         return other
 
     def __copy__(self):
@@ -230,7 +230,7 @@ def compute_matching_product_set(device_mapping, preference):
     change
     """
     # validation:
-    assert len(device_mapping.broker) != 1, "Expected ONE broker as base of operations."
+    assert len(device_mapping.broker) == 1, "Expected ONE broker as base of operations."
 
     meta_broker = device_mapping.get_any_broker()
     meta_endpoints = set(device_mapping.endpoints.keys()).union(set(device_mapping.bridges.keys()))
@@ -251,7 +251,7 @@ def compute_matching_product_set(device_mapping, preference):
             return set(), device_mapping
 
     # check product type filter
-    if not __product_type_filter_satisfiable(impl_of_meta_device.values(), preference):
+    if not __product_type_filter_satisfiable(impl_of_meta_device.values(), preference.product_type_filter):
         return set(), device_mapping
 
     # 2. start running F
