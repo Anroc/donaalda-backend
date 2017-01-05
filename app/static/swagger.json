@@ -134,6 +134,20 @@
         ]
       }
     },
+    "/api/swagger/final_product_list": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Returns the final product set bound to the session of the client."
+          }
+        },
+        "operationId": "final_product_list_detail",
+        "tags": [
+          "swagger"
+        ],
+        "parameters": []
+      }
+    },
     "/api/v1/category/": {
       "get": {
         "responses": {

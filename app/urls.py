@@ -52,6 +52,7 @@ urlpatterns = [
     # api
     # url(r'^api/v1/Category/(?P<pk>[0-9]+)/highlight/$', views.CategoryHighlight.as_view()),
     url(r'^api/swagger/suggestions', views.Suggestions.as_view()),
+    url(r'^api/swagger/final_product_list', views.FinalProductList.as_view()),
     url(r'^api/swagger/', static_swagger_view),
     url(r'^api/v1/', include(router.urls)),
     url(r'^api/docs/', include('rest_framework_docs.urls')),

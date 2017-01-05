@@ -10,7 +10,8 @@ from django.shortcuts import render
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
-from rest_framework import generics, status
+from django.core.cache import cache
+from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.decorators import *
 from rest_framework.response import Response
@@ -23,6 +24,7 @@ from .serializers import *
 from .validators import *
 from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, \
     InvalidGETException, InvalidShoppingBasketException
+from .final_product_list import FinalProductListSerializer, FinalProductListElement, NoShoppingBasketException
 from .constants import SUGGESTIONS_INPUT_SESSION_KEY, SHOPPING_BASKET_SCENARIO_ID, SHOPPING_BASKET_SESSION_KEY
 
 
@@ -162,8 +164,8 @@ class Suggestions(generics.ListAPIView):
         sorted_tuple_list = sort_scenarios(sorting_scenarios, suggestions_input)
 
         if shopping_basket:
-            old_product_set, unused = implement_scenarios(shopping_basket, suggestions_input)
-            # TODO: Save "unused" in cache to retrieve it later
+            old_product_set, device_mapping = implement_scenarios(shopping_basket, suggestions_input)
+            cache.set(shopping_basket_hash(request_data['shopping_basket']), device_mapping)
             if not old_product_set:
                 raise InvalidShoppingBasketException
         else:
@@ -177,6 +179,35 @@ class Suggestions(generics.ListAPIView):
 
     def get_serializer_class(self):
         return SuggestionsOutputSerializer
+
+
+@permission_classes((permissions.AllowAny,))
+class FinalProductList(generics.ListAPIView):
+    def get_queryset(self):
+        request_data = self.request.session.get(
+                SUGGESTIONS_INPUT_SESSION_KEY, None)
+        if request_data is None:
+            raise InvalidGETException
+        device_mapping = cache.get(
+            shopping_basket_hash(request_data['shopping_basket']),
+            None
+        )
+        if device_mapping is None:
+            raise NoShoppingBasketException
+        return [
+                FinalProductListElement(product,
+                                        [scenario.id for scenario in scenarios]
+                                        )
+                for product, scenarios in device_mapping.products.items()
+            ]
+
+    def get_serializer_class(self):
+        return FinalProductListSerializer
+
+
+def shopping_basket_hash(shopping_basket):
+    h = {hash((key, tuple(value))) for key, value in shopping_basket}
+    return hash(frozenset(h))
 
 
 class IndexView(generic.DetailView):
