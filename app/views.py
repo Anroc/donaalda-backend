@@ -131,7 +131,7 @@ class Suggestions(generics.ListAPIView):
     pagination_class = SuggestionsPagination
 
     def post(self, request, format=None):
-        self.request.session[SUGGESTIONS_INPUT_SESSION_KEY] = request.data
+        self.request.session[SUGGESTIONS_INPUT_SESSION_KEY] = hash(request.body), request.data
         return self.list(request)
 
     def get_queryset(self):
@@ -140,7 +140,7 @@ class Suggestions(generics.ListAPIView):
         if request_data is None:
             raise InvalidGETException
 
-        input_serializer = SuggestionsInputSerializer(data=request_data)
+        input_serializer = SuggestionsInputSerializer(data=request_data[1])
         input_serializer.is_valid(raise_exception=True)
         suggestions_input = input_serializer.save()
 
@@ -165,7 +165,7 @@ class Suggestions(generics.ListAPIView):
 
         if shopping_basket:
             old_product_set, device_mapping = implement_scenarios(shopping_basket, suggestions_input)
-            cache.set(shopping_basket_hash(request_data['shopping_basket']), device_mapping)
+            cache.set(request_data[0], device_mapping)
             if not old_product_set:
                 raise InvalidShoppingBasketException
         else:
@@ -189,7 +189,7 @@ class FinalProductList(generics.ListAPIView):
         if request_data is None:
             raise InvalidGETException
         device_mapping = cache.get(
-            shopping_basket_hash(request_data['shopping_basket']),
+            request_data[0],
             None
         )
         if device_mapping is None:
@@ -203,11 +203,6 @@ class FinalProductList(generics.ListAPIView):
 
     def get_serializer_class(self):
         return FinalProductListSerializer
-
-
-def shopping_basket_hash(shopping_basket):
-    h = {hash((key, tuple(value))) for key, value in shopping_basket}
-    return hash(frozenset(h))
 
 
 class IndexView(generic.DetailView):
