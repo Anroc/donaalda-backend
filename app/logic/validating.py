@@ -9,7 +9,7 @@ from ..constants import (
         PRODUCT_PREF_EXTENDABILITY
 )
 from .utils import __dict_cross_product
-from .data import __get_broker_of_products
+from .data import __get_broker_of_products, __get_protocols
 
 
 LOGGER = logging.getLogger(__name__)
