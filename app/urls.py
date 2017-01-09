@@ -15,13 +15,12 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from . import views
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
-from rest_framework_swagger.views import get_swagger_view
 from django.views.generic import RedirectView
 
-schema_view = get_swagger_view(title='Pastebin API')
+from .schema import static_swagger_view
+from . import views
 
 router = DefaultRouter(schema_title='Pastebin API')
 router.register(r'category', views.CategoryViewSet)
@@ -39,7 +38,8 @@ router.register(r'questions', views.QuestionViewSet)
 app_name = 'app'
 urlpatterns = [
     url(r'^api/swagger/suggestions', views.Suggestions.as_view()),
-    url(r'^api/swagger/', schema_view),
+    url(r'^api/swagger/final_product_list', views.FinalProductList.as_view()),
+    url(r'^api/swagger/', static_swagger_view),
     url(r'^api/v1/', include(router.urls)),
     # FIXME: login for api/v1/ browser, somehow not working yet
     # url(r'^api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),

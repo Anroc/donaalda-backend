@@ -90,9 +90,9 @@ class Scenario(models.Model):
     categories = models.ManyToManyField("Category", through="ScenarioCategoryRating",
                                         through_fields=('scenario', 'category'), verbose_name="Bewertung")
     meta_broker = models.ForeignKey("MetaDevice", default=None, verbose_name="Besteht aus einem Metabroker",
-                                    on_delete=models.CASCADE, null=True, blank=True, related_name="meta_broker")
+                                    on_delete=models.CASCADE, null=True, blank=True, related_name="broker_of_scenario")
     meta_endpoints = models.ManyToManyField(to="MetaDevice", verbose_name="Besteht aus MetaEndpointDevices",
-                                            related_name="meta_endpoint")
+                                            related_name="ednpoint_of_scenario")
     subcategory = models.ManyToManyField(to='SubCategory', verbose_name="Dieses Szenario ist Teil dieser Subkategorie")
     in_shopping_basket_of = models.ManyToManyField(to=Session,
                                                    verbose_name="Dieses Szenario liegt im Warenkorb von Session",
@@ -104,9 +104,14 @@ class Scenario(models.Model):
 
     def save(self, *args, **kwargs):
         """Saves an instance of a Scenario and sets url_name to a cleaned version of name"""
-
         self.url_name = url_alias(self.name)
         super(Scenario, self).save(*args, **kwargs)
+
+        # for each rating create an rating for this element
+        category_ids = ScenarioCategoryRating.objects.filter(scenario=self).values_list('category')[0]
+        categories = {category for category in Category.objects.all() if category.id not in category_ids}
+        for category in categories:
+            ScenarioCategoryRating(category=category, scenario=self, rating=1).save()
 
     class Meta:
         verbose_name = "Szenario"
@@ -150,7 +155,7 @@ class Product(models.Model):
                                      on_delete=models.SET_DEFAULT)
     serial_number = models.CharField(max_length=255, default="------", verbose_name="Artikelnummer")
     price = models.FloatField(verbose_name="Preis in Euro", default=0.0)
-    efficiency = models.IntegerField(verbose_name="Verbrauch in Watt", default=0)
+    efficiency = models.FloatField(verbose_name="Verbrauch in Watt", default=0.0)
     description = models.TextField(verbose_name="Berschreibung")
     specifications = models.TextField(default="---", verbose_name="Technische Details")
     image1 = models.ImageField(verbose_name="Bild 1", upload_to="products")
