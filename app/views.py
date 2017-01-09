@@ -8,7 +8,8 @@ from django.contrib.auth import login, logout
 from django.http import *
 from django.shortcuts import render
 from django.views import generic
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_http_methods
 from django.core.cache import cache
 from rest_framework import generics
@@ -127,6 +128,7 @@ class QuestionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 @permission_classes((permissions.AllowAny,))
+@method_decorator(csrf_exempt, name='dispatch')
 class Suggestions(generics.ListAPIView):
     pagination_class = SuggestionsPagination
 
