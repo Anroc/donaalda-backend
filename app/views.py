@@ -128,7 +128,7 @@ class QuestionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 @permission_classes((permissions.AllowAny,))
-@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(csrf_exempt, name='post')
 class Suggestions(generics.ListAPIView):
     pagination_class = SuggestionsPagination
 
@@ -184,8 +184,11 @@ class Suggestions(generics.ListAPIView):
 
 
 @permission_classes((permissions.AllowAny,))
-@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(csrf_exempt, name='post')
 class FinalProductList(generics.ListAPIView):
+    def post(self, request, format=None):
+        pass
+
     def get_queryset(self):
         request_data = self.request.session.get(
                 SUGGESTIONS_INPUT_SESSION_KEY, None)
