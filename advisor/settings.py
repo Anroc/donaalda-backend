@@ -198,6 +198,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'donaalda.baguette.management',
+	'api.donaalda.baguette.management',
 ]
 
 LOGGING = {
