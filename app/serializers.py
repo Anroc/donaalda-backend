@@ -39,7 +39,7 @@ class CategorySerializer(PkToIdSerializer):
 class ProductTypeSerializer(PkToIdSerializer):
     class Meta:
         model = ProductType
-        fields = ('id', 'type_name',)
+        fields = ('id', 'type_name', 'house_overlay_picture')
 
 
 class ProductSerializer(PkToIdSerializer):

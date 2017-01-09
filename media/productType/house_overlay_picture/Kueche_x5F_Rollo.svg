@@ -1,0 +1,43 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1133px" height="567px" viewBox="0 0 283.46 141.73" enable-background="new 0 0 283.46 141.73" xml:space="preserve">
+
+
+<g id="Kueche_x5F_Rollo">
+	<g>
+
+			<rect x="95.313" y="66.744" fill="#FFFFFF" stroke="#737B7A" stroke-width="2" stroke-miterlimit="10" width="20.275" height="0.84"/>
+		<polygon fill="#FFFFFF" stroke="#737B7A" stroke-width="2" stroke-miterlimit="10" points="115.221,68.503 95.667,68.503
+			95.313,67.663 115.589,67.663 		"/>
+		<polygon fill="#FFFFFF" stroke="#737B7A" stroke-width="2" stroke-miterlimit="10" points="115.589,69.422 95.313,69.422
+			95.667,68.582 115.221,68.582 		"/>
+		<polygon fill="#FFFFFF" stroke="#737B7A" stroke-width="2" stroke-miterlimit="10" points="115.221,70.34 95.667,70.34
+			95.313,69.5 115.589,69.5 		"/>
+		<polygon fill="#FFFFFF" stroke="#737B7A" stroke-width="2" stroke-miterlimit="10" points="115.589,71.272 95.313,71.272
+			95.667,70.432 115.221,70.432 		"/>
+		<polygon fill="#FFFFFF" stroke="#737B7A" stroke-width="2" stroke-miterlimit="10" points="115.221,72.19 95.667,72.19
+			95.313,71.35 115.589,71.35 		"/>
+		<polygon fill="#FFFFFF" stroke="#737B7A" stroke-width="2" stroke-miterlimit="10" points="115.589,73.109 95.313,73.109
+			95.667,72.269 115.221,72.269 		"/>
+
+			<rect x="95.3" y="66.705" fill="none" stroke="#4F4E49" stroke-width="0.7" stroke-miterlimit="10" width="20.341" height="13.137"/>
+		<path fill="#D3D6D5" stroke="#737B7A" stroke-width="0.7" stroke-miterlimit="10" d="M94.526,65.97v14.605h21.876V65.97H94.526z
+			 M115.641,79.842H95.3V66.705h20.341V79.842z"/>
+
+			<rect x="105.051" y="66.758" fill="#D3D6D5" stroke="#737B7A" stroke-width="0.7" stroke-miterlimit="10" width="0.84" height="13.044"/>
+		<g>
+			<circle fill="#D3D6D5" stroke="#737B7A" stroke-width="0.7" stroke-miterlimit="10" cx="106.547" cy="72.991" r="0.394"/>
+			<path fill="#D3D6D5" stroke="#737B7A" stroke-width="0.7" stroke-miterlimit="10" d="M106.665,74.487
+				c0,0.079-0.066,0.145-0.145,0.145l0,0c-0.079,0-0.144-0.065-0.144-0.145v-1.404c0-0.079,0.065-0.145,0.144-0.145l0,0
+				c0.079,0,0.145,0.065,0.145,0.145V74.487z"/>
+		</g>
+		<g>
+			<circle fill="#D3D6D5" stroke="#737B7A" stroke-width="0.7" stroke-miterlimit="10" cx="104.342" cy="72.991" r="0.394"/>
+			<path fill="#D3D6D5" stroke="#737B7A" stroke-width="0.7" stroke-miterlimit="10" d="M104.473,74.487
+				c0,0.079-0.065,0.145-0.144,0.145l0,0c-0.079,0-0.145-0.065-0.145-0.145v-1.404c0-0.079,0.066-0.145,0.145-0.145l0,0
+				c0.079,0,0.144,0.065,0.144,0.145V74.487z"/>
+		</g>
+	</g>
+</g>
+
+
+</svg>
