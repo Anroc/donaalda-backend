@@ -184,6 +184,7 @@ class Suggestions(generics.ListAPIView):
 
 
 @permission_classes((permissions.AllowAny,))
+@method_decorator(csrf_exempt, name='dispatch')
 class FinalProductList(generics.ListAPIView):
     def get_queryset(self):
         request_data = self.request.session.get(
