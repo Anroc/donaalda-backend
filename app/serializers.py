@@ -73,11 +73,11 @@ class MinimalSubCategorySerializer(PkToIdSerializer):
 
 
 class SubCategorySerializer(PkToIdSerializer):
-    belongs_to_category = CategorySerializer(read_only=True, many=True)
+    belongs_to_categories = CategorySerializer(read_only=True, many=True)
 
     class Meta:
         model = SubCategory
-        fields = ('id', 'belongs_to_category', 'name', 'url_name', 'short_description', 'picture',)
+        fields = ('id', 'belongs_to_categories', 'name', 'url_name', 'short_description', 'picture',)
 
 
 class SubCategoryDescriptionSerializer(PkToIdSerializer):
@@ -90,13 +90,13 @@ class SubCategoryDescriptionSerializer(PkToIdSerializer):
 
 class ScenarioSerializer(PkToIdSerializer):
     provider = ProviderSerializer()
-    subcategory = MinimalSubCategorySerializer(read_only=True, many=True)
+    subcategories = MinimalSubCategorySerializer(read_only=True, many=True)
     category_ratings = ScenarioCategoryRatingSerializer(source="scenariocategoryrating_set", many=True)
 
     class Meta:
         model = Scenario
         fields = (
-            'id', 'name', 'description', 'url_name', 'picture', 'provider', 'subcategory','category_ratings', )
+            'id', 'name', 'description', 'url_name', 'picture', 'provider', 'subcategories', 'category_ratings', )
 
 
 class EmployeeSerializer(PkToIdSerializer):
@@ -150,8 +150,8 @@ class QuestionSerializer(PkToIdSerializer):
 
 class GivenAnswersSerializer(PkToIdSerializer):
     user = UserSerializer()
-    user_answer = AnswerSerializer(read_only=True, many=True)
+    user_answers = AnswerSerializer(read_only=True, many=True)
 
     class Meta:
         model = GivenAnswers
-        fields = ('id', 'user', 'user_answer', 'rating_value',)
+        fields = ('id', 'user', 'user_answers', 'rating_value',)
