@@ -1,10 +1,7 @@
-from django.core.cache import cache
-
+from .cache import cached
 from ..models import Product
 
 
-# 1h
-EXPIRATION_TIME = 60 * 60
 BRIDGES_ID_HASH = hash('matching.bridges.cache')
 PRODUCT_ID_HASH = hash('matching.product.cache')
 
@@ -33,6 +30,7 @@ def __find_implementing_product(meta_device, renovation_allowed):
     return matching_products
 
 
+@cached(lambda bp, ep: hash((frozenset(bp), frozenset(ep))))
 def __direct_compatible(broker_protocols, endpoint_protocols):
     """
     Checks if the given broker_protocols can communicate with the given endpoint_protocols.
@@ -44,20 +42,15 @@ def __direct_compatible(broker_protocols, endpoint_protocols):
     :return:
         if the given broker_protocols can communicate with the given endpoint_protocols
     """
-    input_hash = hash((frozenset(broker_protocols), frozenset(endpoint_protocols)))
-    if cache.get(input_hash) is not None:
-        return cache.get(input_hash)
-
     # check if endpoint can talk directly with broker
     for protocol in endpoint_protocols:
         for broker_protocol in broker_protocols:
             if protocol.name == broker_protocol.name:
-                cache.set(input_hash, True, EXPIRATION_TIME)
                 return True
-    cache.set(input_hash, False)
     return False
 
 
+@cached(lambda p, l: hash((p, l)))
 def __get_protocols(product, leader):
     """
     Returns all the protocols of the given product that matches the given mode.
@@ -69,17 +62,13 @@ def __get_protocols(product, leader):
     :return:
         all spoken protocols by the product in the given mode.
     """
-    input_hash = hash((product, leader))
-    if cache.get(input_hash) is not None:
-        return cache.get(input_hash)
-
     if leader:
-        cache.set(input_hash, set(product.leader_protocol.all()), EXPIRATION_TIME)
+        return set(product.leader_protocol.all())
     else:
-        cache.set(input_hash, set(product.follower_protocol.all()), EXPIRATION_TIME)
-    return cache.get(input_hash)
+        return set(product.follower_protocol.all())
 
 
+@cached(lambda r: hash((BRIDGES_ID_HASH, r)))
 def __get_bridges(renovation_allowed=True):
     """
     Gets all bridges in the product query set.
@@ -87,19 +76,16 @@ def __get_bridges(renovation_allowed=True):
     :return:
         set of all bridges in the product query set.
     """
-    if cache.get(BRIDGES_ID_HASH) is not None:
-        return cache.get(BRIDGES_ID_HASH)
-
     products = __get_products(renovation_allowed)
     return_set = set()
     for product in products:
         if len(__get_protocols(product, True)) > 0 and len(__get_protocols(product, False)) > 0:
             return_set.add(product)
 
-    cache.set(BRIDGES_ID_HASH, return_set.copy(), EXPIRATION_TIME)
     return return_set
 
 
+@cached(lambda r: hash((PRODUCT_ID_HASH, r)))
 def __get_products(renovation_allowed=True):
     """
     Returns all the product as a set.
@@ -107,27 +93,17 @@ def __get_products(renovation_allowed=True):
     :return:
         A set of all known products.
     """
-    input_hash = hash((PRODUCT_ID_HASH, renovation_allowed))
     if renovation_allowed:
-        return cache.get_or_set(
-            input_hash,
-            set(Product.objects.prefetch_related(
-                'product_type',
-                'leader_protocol',
-                'follower_protocol',
-                'features'
-            ).all()),
-            EXPIRATION_TIME
-        )
-    return cache.get_or_set(
-        input_hash,
-        set(Product.objects.prefetch_related(
-                'product_type',
-                'leader_protocol',
-                'follower_protocol',
-                'features'
-            ).filter(renovation_required=False)),
-        EXPIRATION_TIME)
+        return set(Product.objects.prefetch_related(
+                   'product_type',
+                   'leader_protocol',
+                   'follower_protocol',
+                   'features').all())
+    return set(Product.objects.prefetch_related(
+               'product_type',
+               'leader_protocol',
+               'follower_protocol',
+               'features').filter(renovation_required=False))
 
 
 def __get_broker_of_products(product_set):

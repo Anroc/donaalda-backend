@@ -1,7 +1,7 @@
 import operator
 import logging
 
-from django.core.cache import cache
+from .cache import cached
 
 from ..constants import (
         PRODUCT_PREF_PRICE,
@@ -75,11 +75,10 @@ def __filter_paths_for_valid_broker(paths, meta_endpoint, device_mapping, impl_o
             return __dict_cross_product(paths_over_broker)
 
 
+@cached(lambda ps, ptf: hash((frozenset(ps), frozenset(ptf))))
 def __matches_product_type_preference(product_set, product_type_filters):
     """
     Filters a given product set for the given product type filters.
-
-    TODO: should this really be cached? Does it get used more than once
 
     :param product_set:
         the given product set
@@ -91,19 +90,11 @@ def __matches_product_type_preference(product_set, product_type_filters):
     if not product_type_filters:
         return True
 
-    input_hash = hash((frozenset(product_set), frozenset(product_type_filters)))
-
-    tmp = cache.get(input_hash)
-    if tmp is not None:
-        return tmp
-
     product_types = set()
     for product in product_set:
         product_types.add(product.product_type_id)
 
-    res = all(product_type in product_types for product_type in product_type_filters)
-    cache.set(input_hash, res)
-    return res
+    return all(product_type in product_types for product_type in product_type_filters)
 
 
 def __cost_function(product_sets, preference):
