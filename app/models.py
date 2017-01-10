@@ -204,11 +204,11 @@ class ProductType(models.Model):
     used_as_product_type_filter_by = models.ManyToManyField(
             to=Session, verbose_name="Als Produkttypfilter verwendet von",
             blank=True)
-    thumbnail = models.ImageField(
-            verbose_name="Thumbnail", null=True, blank=True,
-            upload_to="productType/thumbnail")
-    house_overlay_picture = models.ImageField(
-            verbose_name="Bildicon in der Hausvorschau", null=True, blank=True,
+    svg_id = models.CharField(
+            verbose_name="Id des SVG in der Hausvorschau", null=True, blank=True,
+            max_length=255)
+    icon = models.FileField(
+            verbose_name="Bildicon", null=True, blank=True,
             upload_to="productType/house_overlay_picture")
 
     def __str__(self):
