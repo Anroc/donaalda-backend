@@ -207,7 +207,7 @@ class ProductType(models.Model):
     thumbnail = models.ImageField(
             verbose_name="Thumbnail", null=True, blank=True,
             upload_to="productType/thumbnail")
-    house_overlay_picture = models.ImageField(
+    house_overlay_picture = models.FileField(
             verbose_name="Bildicon in der Hausvorschau", null=True, blank=True,
             upload_to="productType/house_overlay_picture")
 
