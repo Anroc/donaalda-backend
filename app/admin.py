@@ -18,7 +18,6 @@ from .models import (
     User,
     Question,
     Answer,
-    GivenAnswers,
     MetaDevice,
     Feature,
     ScenarioCategoryRating,
@@ -191,7 +190,6 @@ admin.site.register(Comment, CommentAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
-admin.site.register(GivenAnswers)
 admin.site.register(Feature)
 admin.site.register(MetaDevice)
 admin.site.register(ScenarioCategoryRating)

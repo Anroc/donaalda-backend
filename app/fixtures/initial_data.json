@@ -1357,8 +1357,8 @@
   "pk": 1,
   "fields": {
     "type_name": "Basisger\u00e4t",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "",
+    "icon": "productType/house_overlay_picture/HCC-message.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1367,8 +1367,8 @@
   "pk": 2,
   "fields": {
     "type_name": "K\u00fchlschrank",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Kueche_x5F_Kuehlschrank",
+    "icon": "productType/house_overlay_picture/fridge.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1377,8 +1377,8 @@
   "pk": 3,
   "fields": {
     "type_name": "Kamera",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Outdoor_x5F_Kamera",
+    "icon": "productType/house_overlay_picture/camera.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1387,8 +1387,8 @@
   "pk": 4,
   "fields": {
     "type_name": "CO2-Sensor",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Keller_x5F_Sensor_Decke",
+    "icon": "productType/house_overlay_picture/sensor-CO2.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1397,8 +1397,8 @@
   "pk": 5,
   "fields": {
     "type_name": "Thermostat/Temperatursensor",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Keller_x5F_Sensor_Decke",
+    "icon": "productType/house_overlay_picture/sensor-temp.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1407,8 +1407,8 @@
   "pk": 6,
   "fields": {
     "type_name": "Smart Plug/Smart Socket",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "",
+    "icon": "productType/house_overlay_picture/socket.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1417,8 +1417,8 @@
   "pk": 8,
   "fields": {
     "type_name": "Waage",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "",
+    "icon": "productType/house_overlay_picture/personal-scale.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1427,8 +1427,8 @@
   "pk": 10,
   "fields": {
     "type_name": "Bewegungsmelder/Lichtsensor",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Keller_x5F_Sensor_Decke",
+    "icon": "productType/house_overlay_picture/sensor-luminance.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1437,8 +1437,8 @@
   "pk": 11,
   "fields": {
     "type_name": "Rauchmelder",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Keller_x5F_Sensor_Decke",
+    "icon": "productType/house_overlay_picture/sensor-smoke.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1447,8 +1447,8 @@
   "pk": 12,
   "fields": {
     "type_name": "Router",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "",
+    "icon": "productType/house_overlay_picture/PC.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1457,8 +1457,8 @@
   "pk": 13,
   "fields": {
     "type_name": "T\u00fcr-/Fensterkontaktsensor",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Outdoor_x5F_Tuer",
+    "icon": "productType/house_overlay_picture/door.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1467,8 +1467,8 @@
   "pk": 15,
   "fields": {
     "type_name": "Luftfeuchtigkeitssensor (inkl. CO2-Messung)",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Keller_x5F_Sensor_Decke",
+    "icon": "productType/house_overlay_picture/sensor-humidity.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1477,8 +1477,8 @@
   "pk": 16,
   "fields": {
     "type_name": "Rollladen-Aktor",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Kueche_x5F_Rollo",
+    "icon": "productType/house_overlay_picture/window-blind.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1487,8 +1487,8 @@
   "pk": 17,
   "fields": {
     "type_name": "Schaltaktor",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "",
+    "icon": "productType/house_overlay_picture/sensor-rocker.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1497,8 +1497,8 @@
   "pk": 18,
   "fields": {
     "type_name": "Lichtsteuerung/Dimmer",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Wohnzimmer_x5F_LED",
+    "icon": "productType/house_overlay_picture/lamp-ceiling.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1507,8 +1507,8 @@
   "pk": 19,
   "fields": {
     "type_name": "Wetterstation",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "",
+    "icon": "productType/house_overlay_picture/weather-station.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1517,8 +1517,8 @@
   "pk": 20,
   "fields": {
     "type_name": "Geschirrsp\u00fcler",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "",
+    "icon": "productType/house_overlay_picture/dishwasher.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1527,8 +1527,8 @@
   "pk": 21,
   "fields": {
     "type_name": "Trockner",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Keller_x5F_Waschmaschine",
+    "icon": "productType/house_overlay_picture/dryer.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1537,8 +1537,8 @@
   "pk": 22,
   "fields": {
     "type_name": "Waschmaschine",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Keller_x5F_Waschmaschine",
+    "icon": "productType/house_overlay_picture/washing-machine.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1547,8 +1547,8 @@
   "pk": 23,
   "fields": {
     "type_name": "Ofen",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Kueche_x5F_Herd",
+    "icon": "productType/house_overlay_picture/oven.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1557,8 +1557,8 @@
   "pk": 24,
   "fields": {
     "type_name": "Kochfeld",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Kueche_x5F_Herd",
+    "icon": "productType/house_overlay_picture/hob.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1567,8 +1567,8 @@
   "pk": 25,
   "fields": {
     "type_name": "Dunstabzugshaube",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Keller_x5F_Sensor_Decke",
+    "icon": "productType/house_overlay_picture/hood.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1577,8 +1577,8 @@
   "pk": 26,
   "fields": {
     "type_name": "Kaffeemaschine",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": null,
+    "icon": "",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1587,8 +1587,8 @@
   "pk": 27,
   "fields": {
     "type_name": "Gateway",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "",
+    "icon": "productType/house_overlay_picture/surveillance.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1597,8 +1597,8 @@
   "pk": 28,
   "fields": {
     "type_name": "Herzfrequenzsensor",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "",
+    "icon": "productType/house_overlay_picture/blood-pressure_gjHRi9Y.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1607,8 +1607,8 @@
   "pk": 29,
   "fields": {
     "type_name": "Blutdruckmessger\u00e4t",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "",
+    "icon": "productType/house_overlay_picture/blood-pressure.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1617,8 +1617,8 @@
   "pk": 30,
   "fields": {
     "type_name": "Smarter Wecker",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "",
+    "icon": "productType/house_overlay_picture/clock.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1627,8 +1627,8 @@
   "pk": 31,
   "fields": {
     "type_name": "Lampe & Bridge",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Dach_x5F_Stehlampe",
+    "icon": "productType/house_overlay_picture/bulb.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1637,8 +1637,8 @@
   "pk": 33,
   "fields": {
     "type_name": "T\u00fcrklingel",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Outdoor_x5F_Tuer",
+    "icon": "productType/house_overlay_picture/door_iLZlrNO.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1647,8 +1647,8 @@
   "pk": 34,
   "fields": {
     "type_name": "Alarmsirene",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": null,
+    "icon": "",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1657,8 +1657,8 @@
   "pk": 35,
   "fields": {
     "type_name": "Wassersensor",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Keller_x5F_Wasser",
+    "icon": "productType/house_overlay_picture/sensor-water.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1667,8 +1667,8 @@
   "pk": 37,
   "fields": {
     "type_name": "Leuchtmittel",
-    "thumbnail": "",
-    "house_overlay_picture": "",
+    "svg_id": "Outdoor_x5F_Licht",
+    "icon": "productType/house_overlay_picture/hue.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -3736,17 +3736,6 @@
     "date_joined": "2016-06-30T14:30:57.624Z",
     "groups": [],
     "user_permissions": []
-  }
-},
-{
-  "model": "app.givenanswers",
-  "pk": 1,
-  "fields": {
-    "user": [
-      "admin"
-    ],
-    "rating_value": null,
-    "user_answer": []
   }
 },
 {

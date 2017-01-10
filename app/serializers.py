@@ -39,7 +39,7 @@ class CategorySerializer(PkToIdSerializer):
 class ProductTypeSerializer(PkToIdSerializer):
     class Meta:
         model = ProductType
-        fields = ('id', 'type_name',)
+        fields = ('id', 'type_name', 'svg_id', 'icon')
 
 
 class ProductSerializer(PkToIdSerializer):
@@ -146,12 +146,3 @@ class QuestionSerializer(PkToIdSerializer):
             'icon_name',
             'answer_set',
         )
-
-
-class GivenAnswersSerializer(PkToIdSerializer):
-    user = UserSerializer()
-    user_answer = AnswerSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = GivenAnswers
-        fields = ('id', 'user', 'user_answer', 'rating_value',)

@@ -236,52 +236,6 @@
         ]
       }
     },
-    "/api/v1/givenAnswers/": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "operationId": "givenAnswers_list",
-        "tags": [
-          "v1"
-        ],
-        "parameters": [
-          {
-            "type": "string",
-            "in": "query",
-            "name": "page",
-            "description": "",
-            "required": false
-          }
-        ]
-      }
-    },
-    "/api/v1/givenAnswers/{id}/": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "operationId": "givenAnswers_read",
-        "parameters": [
-          {
-            "type": "string",
-            "in": "path",
-            "name": "id",
-            "description": "",
-            "required": true
-          }
-        ],
-        "summary": "Returns a single GivenAnswers item",
-        "description": "Returns a single GivenAnswers item",
-        "tags": [
-          "v1"
-        ]
-      }
-    },
     "/api/v1/product/": {
       "get": {
         "responses": {
