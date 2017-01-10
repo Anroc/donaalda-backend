@@ -4,15 +4,93 @@
     "title": "Pastebin API",
     "version": ""
   },
+  "definitions": {
+    "matching_input": {
+      "type": "object",
+      "title": "User Preferences",
+      "properties": {
+        "scenario_preference": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 10,
+            "default": 5
+          },
+          "description": "A dictionary containing ratings in the (inclusive) range from 1 to 10 for each category",
+          "default": {
+            "Energie": 5,
+            "Komfort": 5,
+            "Gesundheit": 5,
+            "Sicherheit": 5
+          }
+        },
+        "product_preference": {
+          "type": "string",
+          "enum": ["Preis", "Efficiency", "Extendability"],
+          "description": "One of \"Preis\",\"Efficiency\" or \"Extendability\""
+        },
+        "renovation_preference": {
+          "type": "boolean",
+          "description": "True if the user is fine with products that require destructive installation procedures"
+        },
+        "product_type_filter": {
+          "type": "array",
+          "description": "A set of product type ids that should be used to filter the suggested scenarios",
+          "items": {
+            "type": "number"
+          },
+          "default": []
+        },
+        "subcategory_filter": {
+          "type": "array",
+          "description": "A set of subcategory ids that should be used to filter the suggested scenarios",
+          "items": {
+            "type": "number"
+          },
+          "default": []
+        },
+        "shopping_basket": {
+          "type": "array",
+          "description": "A set of objects representing required meta information about the scenarios in the shopping basket",
+          "items": {
+            "type": "object",
+            "title": "Shopping basket entry",
+            "properties": {
+              "scenario_id": {
+                "type": "number",
+                "description": "The id of the scenario"
+              },
+              "product_type_filter": {
+                "type": "array",
+                "description": "The set of product type filters that was used to select this scenario. This is required to make sure that the new implementation of the scenario also implements the product type filters",
+                "items" : {
+                  "type": "number"
+                },
+                "default": []
+              }
+            },
+            "required": ["scenario_id", "product_type_filter"]
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "scenario_preference",
+        "product_preference",
+        "renovation_preference"
+      ]
+    }
+  },
   "paths": {
     "/api/swagger/suggestions": {
-      "get": {
+      "post": {
         "responses": {
-          "200": {
+          "201": {
             "description": ""
           }
         },
-        "operationId": "suggestions_list",
+        "operationId": "suggestions_create",
         "parameters": [
           {
             "type": "string",
@@ -25,100 +103,12 @@
             "type": "string",
             "in": "query",
             "name": "offset",
-            "description": "",
+            "description": "Use this when requesting a certain page from the result list",
             "required": false
-          }
-        ],
-        "summary": "Retrieve another page of a previous query.",
-        "description": "Retrieve another page of a previous query.",
-        "tags": [
-          "swagger"
-        ]
-      },
-      "post": {
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "operationId": "suggestions_create",
-        "parameters": [
+          },
           {
             "schema": {
-              "type": "object",
-              "title": "User Preferences",
-              "properties": {
-                "scenario_preference": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "number",
-                    "minimum": 1,
-                    "maximum": 10,
-                    "default": 5
-                  },
-                  "description": "A dictionary containing ratings in the (inclusive) range from 1 to 10 for each category",
-                  "default": {
-                    "Energie": 5,
-                    "Komfort": 5,
-                    "Gesundheit": 5,
-                    "Sicherheit": 5
-                  }
-                },
-                "product_preference": {
-                  "type": "string",
-                  "enum": ["Preis", "Efficiency", "Extendability"],
-                  "description": "One of \"Preis\",\"Efficiency\" or \"Extendability\""
-                },
-                "renovation_preference": {
-                  "type": "boolean",
-                  "description": "True if the user is fine with products that require destructive installation procedures"
-                },
-                "product_type_filter": {
-                  "type": "array",
-                  "description": "A set of product type ids that should be used to filter the suggested scenarios",
-                  "items": {
-                    "type": "number"
-                  },
-                  "default": []
-                },
-                "subcategory_filter": {
-                  "type": "array",
-                  "description": "A set of subcategory ids that should be used to filter the suggested scenarios",
-                  "items": {
-                    "type": "number"
-                  },
-                  "default": []
-                },
-                "shopping_basket": {
-                  "type": "array",
-                  "description": "A set of objects representing required meta information about the scenarios in the shopping basket",
-                  "items": {
-                    "type": "object",
-                    "title": "Shopping basket entry",
-                    "properties": {
-                      "scenario_id": {
-                        "type": "number",
-                        "description": "The id of the scenario"
-                      },
-                      "product_type_filter": {
-                        "type": "array",
-                        "description": "The set of product type filters that was used to select this scenario. This is required to make sure that the new implementation of the scenario also implements the product type filters",
-                        "items" : {
-                          "type": "number"
-                        },
-                        "default": []
-                      }
-                    },
-                    "required": ["scenario_id", "product_type_filter"]
-                  },
-                  "default": []
-                }
-              },
-              "required": [
-                "scenario_preference",
-                "product_preference",
-                "renovation_preference"
-              ]
+              "$ref": "#/definitions/matching_input"
             },
             "name": "data",
             "in": "body"
@@ -135,17 +125,25 @@
       }
     },
     "/api/swagger/final_product_list": {
-      "get": {
+      "post": {
         "responses": {
           "200": {
             "description": "Returns the final product set bound to the session of the client."
           }
         },
-        "operationId": "final_product_list_detail",
+        "operationId": "final_product_list_create",
         "tags": [
           "swagger"
         ],
-        "parameters": []
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/matching_input"
+            },
+            "name": "data",
+            "in": "body"
+          }
+        ]
       }
     },
     "/api/v1/category/": {

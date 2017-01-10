@@ -158,10 +158,12 @@ class SuggestionsOutputSerializer(serializers.Serializer):
     product_types = ProductTypeSerializer(many=True)
 
 
-class InvalidGETException(exceptions.APIException):
+class WeAreRESTfulNowException(exceptions.APIException):
     status_code = 400
     default_code = 'client error'
-    default_detail = 'A POST requests that sets the onboarding preferences is required before a GET to the suggestions endpoint is possible'
+    default_detail = ('Context less GET requests are no longer supported.'
+            'All requests have to contain all the information needed to respond'
+            'to them (that means POST for most of them)')
 
 
 class InvalidShoppingBasketException(exceptions.APIException):
