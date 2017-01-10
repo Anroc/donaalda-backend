@@ -5494,8 +5494,8 @@
   "model": "sessions.session",
   "pk": "aldwx2y1n7mt878zw5be0pm1rj6qlqyd",
   "fields": {
-    "session_data": "MzFiZWMzNTY2YzU5MGQ2MjRhODFhNjhkMGUwOTM2OTNmZmIxZjFlNTp7InN1Z2dlc3Rpb25zX2lucHV0Ijp7InN1YmNhdGVnb3J5X2ZpbHRlciI6W10sInNjZW5hcmlvX3ByZWZlcmVuY2UiOnsiRW5lcmdpZSI6MSwiU2ljaGVyaGVpdCI6MTAsIkdlc3VuZGhlaXQiOjEsIktvbWZvcnQiOjF9LCJwcm9kdWN0X3R5cGVfZmlsdGVyIjpbXSwicHJvZHVjdF9wcmVmZXJlbmNlIjoiUHJlaXMiLCJzaG9wcGluZ19iYXNrZXQiOltdLCJyZW5vdmF0aW9uX3ByZWZlcmVuY2UiOnRydWV9fQ==",
-    "expire_date": "2017-01-24T14:09:19.393Z"
+    "session_data": "ODliNzE1NWMzMjM1NDBjNDRiMmNkZDhjMzBjZjQ2YzkwYmNmOGRlYTp7InN1Z2dlc3Rpb25zX2lucHV0Ijp7InByb2R1Y3RfcHJlZmVyZW5jZSI6IlByZWlzIiwic3ViY2F0ZWdvcnlfZmlsdGVyIjpbXSwicHJvZHVjdF90eXBlX2ZpbHRlciI6W10sInNob3BwaW5nX2Jhc2tldCI6W10sInNjZW5hcmlvX3ByZWZlcmVuY2UiOnsiR2VzdW5kaGVpdCI6MSwiS29tZm9ydCI6MSwiU2ljaGVyaGVpdCI6MTAsIkVuZXJnaWUiOjF9LCJyZW5vdmF0aW9uX3ByZWZlcmVuY2UiOnRydWV9fQ==",
+    "expire_date": "2017-01-24T14:50:45.372Z"
   }
 },
 {
