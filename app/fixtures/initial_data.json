@@ -7579,17 +7579,6 @@
   }
 },
 {
-  "model": "app.givenanswers",
-  "pk": 1,
-  "fields": {
-    "user": [
-      "admin"
-    ],
-    "rating_value": null,
-    "user_answer": []
-  }
-},
-{
   "model": "app.comment",
   "pk": 4,
   "fields": {
