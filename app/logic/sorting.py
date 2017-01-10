@@ -1,4 +1,5 @@
 from operator import itemgetter
+import math
 from ..models import Category
 from ..constants import MINIMAL_RATING_VALUE
 
@@ -29,15 +30,15 @@ def sort_scenarios(scenarios, preference):
             scenario_vector[category_rating.category.name] = category_rating.rating
 
         scenario_vector = __normalize(scenario_vector, category_names)
-        distance = 0
-        for key in user_category_pref.keys():
-            distance += (user_category_pref[key] - scenario_vector[key]) ** 2
-        distance **= 0.5
 
-        scenario_soring.append((scenario, distance))
+        # divide by pi/2 to get values between one and zero
+        # Invert the result to get 1 as the best and 0 as the worst
+        angle = 1. - __angle(user_category_pref, scenario_vector) / (math.pi / 2.)
+
+        scenario_soring.append((scenario, angle))
 
     # http://stackoverflow.com/a/10695161/6190424
-    return sorted(scenario_soring, key=itemgetter(1))
+    return sorted(scenario_soring, key=itemgetter(1), reverse=True)
 
 
 def __normalize(dictionary, default_key_set=None):
@@ -67,6 +68,18 @@ def __normalize(dictionary, default_key_set=None):
         ret[key] /= length
 
     return ret
+
+
+def __dot_product(dict1, dict2):
+    return sum(dict1[k]*dict2[k] for k in dict1.keys())
+
+
+def __length(dic):
+    return math.sqrt(__dot_product(dic, dic))
+
+
+def __angle(dict1, dict2):
+    return math.acos(__dot_product(dict1, dict2) / (__length(dict1) * __length(dict2)))
 
 
 def __filter_scenarios(scenarios, subcategory_filter):
