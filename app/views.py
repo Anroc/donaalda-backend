@@ -165,7 +165,7 @@ class Suggestions(generics.ListAPIView):
 
         if shopping_basket:
             old_product_set, device_mapping = implement_scenarios(shopping_basket, suggestions_input)
-            cache.set(shopping_basket_hash(request_data['shopping_basket']), device_mapping)
+            cache.set(hash(str(input_serializer.data)), device_mapping)
             if not old_product_set:
                 raise InvalidShoppingBasketException
         else:
@@ -188,8 +188,10 @@ class FinalProductList(generics.ListAPIView):
                 SUGGESTIONS_INPUT_SESSION_KEY, None)
         if request_data is None:
             raise InvalidGETException
+        input_serializer = SuggestionsInputSerializer(data=request_data)
+        input_serializer.is_valid(raise_exception=True)
         device_mapping = cache.get(
-            shopping_basket_hash(request_data['shopping_basket']),
+            hash(str(input_serializer.data)),
             None
         )
         if device_mapping is None:
@@ -203,11 +205,6 @@ class FinalProductList(generics.ListAPIView):
 
     def get_serializer_class(self):
         return FinalProductListSerializer
-
-
-def shopping_basket_hash(shopping_basket):
-    h = {hash((key, tuple(value))) for key, value in shopping_basket}
-    return hash(frozenset(h))
 
 
 class IndexView(generic.DetailView):
