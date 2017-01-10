@@ -25,7 +25,6 @@ advisor (also known as stepper), provider and user interaction.
     The advisor part includes:
         -- Question
         -- Answer
-        -- GivenAnswers
 
     The user interaction part includes:
         -- UserImage
@@ -378,30 +377,6 @@ class Answer(models.Model):
         verbose_name = "Antwort"
         verbose_name_plural = "Antworten"
         ordering = ['belongs_to_question_id', 'pk', ]
-
-
-class GivenAnswers(models.Model):
-    """
-    Used to pre-check answers a user has given the last time he was logged in and used the advisor.
-    This is independent of any session id that could expire
-    or something else that might have happend to the users computer.
-
-    It does not store a history the user could use to reuse old requests.
-    """
-
-    user = models.OneToOneField(to=User, on_delete=models.CASCADE, verbose_name="User")
-    user_answer = models.ManyToManyField(to="Answer", verbose_name="hat geantwortet")
-
-    # only for slider Answers
-    # TODO: add validation logic
-    rating_value = models.IntegerField(null=True, blank=True)
-
-    def __str__(self):
-        return '%s hat geantwortet: %s' % (self.user, str(list(self.user_answer.all())))
-
-    class Meta:
-        verbose_name = "beantwortete Antwort"
-        verbose_name_plural = "beantwortete Antworten"
 
 
 class Protocol(models.Model):

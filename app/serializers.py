@@ -146,12 +146,3 @@ class QuestionSerializer(PkToIdSerializer):
             'icon_name',
             'answer_set',
         )
-
-
-class GivenAnswersSerializer(PkToIdSerializer):
-    user = UserSerializer()
-    user_answer = AnswerSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = GivenAnswers
-        fields = ('id', 'user', 'user_answer', 'rating_value',)
