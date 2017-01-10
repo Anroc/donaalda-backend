@@ -39,10 +39,15 @@ class MinimalProviderProfileFromProviderSerializer(PkToIdSerializer):
         fields = ('id', 'name', 'logo',)
 
     def get_name(self, obj):
-        return obj.providerprofile.public_name
+        if hasattr(obj, 'providerprofile'):
+            return obj.providerprofile.public_name
+        return obj.name
 
     def get_logo(self, obj):
-        return obj.providerprofile.logo_image
+        if hasattr(obj, 'providerprofile'):
+            request = self.context.get('request')
+            return request.build_absolute_uri(obj.providerprofile.logo_image.url)
+        return None
 
 
 class CategorySerializer(PkToIdSerializer):
