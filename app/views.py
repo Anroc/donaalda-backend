@@ -7,16 +7,17 @@ from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.decorators import *
 
-from .logic import implement_scenarios
-from .logic.sorting import sort_scenarios
+from .logic import (
+        partition_scenarios,
+        sort_scenarios,
+        implement_scenarios)
 from .forms import LoginForm
 from .permissions import *
 from .serializers import *
 from .validators import *
 from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, \
-    InvalidGETException, InvalidShoppingBasketException
+    WeAreRESTfulNowException, InvalidShoppingBasketException
 from .final_product_list import FinalProductListSerializer, FinalProductListElement, NoShoppingBasketException
-from .constants import SUGGESTIONS_INPUT_SESSION_KEY, SHOPPING_BASKET_SCENARIO_ID, SHOPPING_BASKET_SESSION_KEY
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -74,36 +75,21 @@ class QuestionViewSet(viewsets.ReadOnlyModelViewSet):
 class Suggestions(generics.ListAPIView):
     pagination_class = SuggestionsPagination
 
+    def get(self, request, format=None):
+        raise WeAreRESTfulNowException
+
     def post(self, request, format=None):
-        self.request.session[SUGGESTIONS_INPUT_SESSION_KEY] = request.data
         return self.list(request)
 
     def get_queryset(self):
-        request_data = self.request.session.get(
-                SUGGESTIONS_INPUT_SESSION_KEY, None)
-        if request_data is None:
-            raise InvalidGETException
 
-        input_serializer = SuggestionsInputSerializer(data=request_data)
+        input_serializer = SuggestionsInputSerializer(data=self.request.data)
         input_serializer.is_valid(raise_exception=True)
         suggestions_input = input_serializer.save()
 
-        scenario_ids = set()
-        scenarios = Scenario.objects.prefetch_related(
-            'meta_broker__implementation_requires',
-            'meta_endpoints__implementation_requires'
-        ).all()
-        for basket_elem in suggestions_input.shopping_basket:
-            scenario_ids.add(basket_elem[SHOPPING_BASKET_SCENARIO_ID])
-
-        shopping_basket = set()
-        sorting_scenarios = set()
-        for scenario in scenarios:
-            if scenario.pk in scenario_ids:
-                shopping_basket.add(scenario)
-            else:
-                sorting_scenarios.add(scenario)
-
+        # partition scenarios into shopping basket and suggestable
+        shopping_basket, sorting_scenarios = partition_scenarios(
+                suggestions_input.shopping_basket)
         # call scenario sorting
         sorted_tuple_list = sort_scenarios(sorting_scenarios, suggestions_input)
 
@@ -127,19 +113,30 @@ class Suggestions(generics.ListAPIView):
 
 @permission_classes((permissions.AllowAny,))
 class FinalProductList(generics.ListAPIView):
+    def get(self, request, format=None):
+        raise WeAreRESTfulNowException
+
+    def post(self, request, format=None):
+        return self.list(request)
+
     def get_queryset(self):
-        request_data = self.request.session.get(
-                SUGGESTIONS_INPUT_SESSION_KEY, None)
-        if request_data is None:
-            raise InvalidGETException
-        input_serializer = SuggestionsInputSerializer(data=request_data)
+
+        input_serializer = SuggestionsInputSerializer(data=self.request.data)
         input_serializer.is_valid(raise_exception=True)
+        suggestions_input = input_serializer.save()
+
         device_mapping = cache.get(
             hash(str(input_serializer.data)),
             None
         )
+
         if device_mapping is None:
-            raise NoShoppingBasketException
+            shopping_basket, unused = partition_scenarios(
+                    suggestions_input.shopping_basket)
+            old_product_set, device_mapping = implement_scenarios(
+                    shopping_basket, suggestions_input)
+            if not old_product_set:
+                raise NoShoppingBasketException
         return [
                 FinalProductListElement(product,
                                         [scenario.id for scenario in scenarios]
