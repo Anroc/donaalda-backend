@@ -2,7 +2,12 @@ import logging
 
 from .merging import DeviceMapping
 from .implementing import compute_matching_product_set
+from .validating import __cost_function
 
+# These are just imported for encapsulation so that everywherre else in the code
+# just has to import stuff from the top level module
+from .sorting import sort_scenarios
+from .data import partition_scenarios
 
 LOGGER = logging.getLogger(__name__)
 

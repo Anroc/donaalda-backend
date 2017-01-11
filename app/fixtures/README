@@ -4,7 +4,7 @@ showmigrations` first and reading up on django migrations if there are some
 boxes without checkmarks)
 
 ```
-python manage.py dumpdata --natural-foreign --natural-primary --format=json --indent=2 -e auth.Permission app auth sessions -o app/fixtures/initial_data.json
+python manage.py dumpdata --natural-foreign --natural-primary --format=json --indent=2 -e auth.Permission app auth -o app/fixtures/initial_data.json
 ```
 
 Let's break this up a bit
@@ -18,8 +18,7 @@ Let's break this up a bit
 - `--indent=2` create human readable output
 - `-e auth.Permission` don't include the model auth.Permission in the dump (it
   gets automatically generated as mentioned above)
-- `app auth sessions` the apps to dump (app self explanatory, auth for user data
-  and sessions because some things in app refer to session)
+- `app auth` the apps to dump (app self explanatory and auth is for user data)
 - `-o ...` the file to dump to. This will create the file with the right
   encoding and show a nice progress bar
 
