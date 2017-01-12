@@ -1,5 +1,6 @@
 import logging
 
+from .cache import cached
 from .merging import DeviceMapping
 from .implementing import compute_matching_product_set
 from .validating import __cost_function
@@ -12,6 +13,7 @@ from .data import partition_scenarios
 LOGGER = logging.getLogger(__name__)
 
 
+@cached(lambda s, p: hash((s, p)))
 def implement_scenarios(scenarios, preference):
     """
     This method takes a set of scenarios and merge them in that kind that
