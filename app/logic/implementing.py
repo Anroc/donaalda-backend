@@ -89,11 +89,14 @@ def compute_matching_product_set(device_mapping, preference):
 
         merged_set = __dict_cross_product(possible_paths)
 
+        shopping_basket_scenario_ids = frozenset(
+                entry[SHOPPING_BASKET_SCENARIO_ID]
+                for entry in preference.shopping_basket)
+        shopping_basket_scenarios = Scenario.objects.filter(
+                pk__in=shopping_basket_scenario_ids)
         # filter for valid product filter of shopping basket
-        for basket_elem in preference.shopping_basket:
-            # TODO: resolve the shopping basket scenario id -> scenario
-            # reference at the view layer
-            scenario = Scenario.objects.get(pk=basket_elem[SHOPPING_BASKET_SCENARIO_ID])
+        for scenario, basket_elem in zip(shopping_basket_scenarios, preference.shopping_basket):
+            assert scenario.pk == basket_elem[SHOPPING_BASKET_SCENARIO_ID]
             pt_preference = basket_elem[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]
             remove_paths = set()
             for p_set in merged_set:
