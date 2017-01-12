@@ -1,7 +1,6 @@
 import logging
 
 from ..models import Scenario
-from ..constants import SHOPPING_BASKET_SCENARIO_ID, SHOPPING_BASKET_PRODUCT_TYPE_FILTER
 from .data import __find_implementing_product, __get_bridges, __get_protocols, __direct_compatible
 from .validating import __filter_paths_for_valid_broker, __matches_product_type_preference, __cost_function
 from .utils import __dict_cross_product
@@ -93,8 +92,8 @@ def compute_matching_product_set(device_mapping, preference):
         for basket_elem in preference.shopping_basket:
             # TODO: resolve the shopping basket scenario id -> scenario
             # reference at the view layer
-            scenario = Scenario.objects.get(pk=basket_elem[SHOPPING_BASKET_SCENARIO_ID])
-            pt_preference = basket_elem[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]
+            scenario = Scenario.objects.get(pk=basket_elem.scenario_id)
+            pt_preference = basket_elem.product_type_filter
             remove_paths = set()
             for p_set in merged_set:
                 scenario_p_set = {elem for elem in p_set if scenario in device_mapping.products[elem]}

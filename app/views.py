@@ -82,7 +82,6 @@ class Suggestions(generics.ListAPIView):
         return self.list(request)
 
     def get_queryset(self):
-
         input_serializer = SuggestionsInputSerializer(data=self.request.data)
         input_serializer.is_valid(raise_exception=True)
         suggestions_input = input_serializer.save()
