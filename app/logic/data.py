@@ -9,6 +9,26 @@ BRIDGES_ID_HASH = hash('matching.bridges.cache')
 PRODUCT_ID_HASH = hash('matching.product.cache')
 
 
+def __get_scenarios(scenario_ids, exclude=False):
+    """
+    Return a frozenset of prefetched scenarios with the given ids.
+
+    :param scenario_ids:
+        The set of scenario ids to filter for
+    :param exclude:
+        Whether to return scenarios whose ids are in the set (exclude=False)
+        or scenarios that aren't (exclude=True)
+    :return:
+        A frozenset of scenarios.
+    """
+    queryset = Scenario.objects.prefetch_related(
+            'meta_broker__implementation_requires',
+            'meta_endpoints__implementation_requires')
+    if exclude:
+        return frozenset(queryset.exclude(pk__in=scenario_ids))
+    return frozenset(queryset.filter(pk__in=scenario_ids))
+
+
 def partition_scenarios(shopping_basket):
     """
     Partition the set of scenarios in the database into those that are in the
@@ -19,27 +39,18 @@ def partition_scenarios(shopping_basket):
         The shopping basket part of the matching user input
     :return:
         A tuple consisting of
-        0: a set of scenarios that make up the given shopping basket, and
-        1: the rest of the scenarios.
+        0: a frozenset of scenarios that make up the given shopping basket, and
+        1: the rest of the scenarios (as frozenset).
         The returned scenarios have been prefetched with everything that is
         relevant to the matching algorithm (meta devices and features of the
         meta devices)
     """
-    scenarios = Scenario.objects.prefetch_related(
-        'meta_broker__implementation_requires',
-        'meta_endpoints__implementation_requires'
-    ).all()
     shopping_basket_scenario_ids = set(map(
-            operator.itemgetter(SHOPPING_BASKET_SCENARIO_ID),
+            operator.attrgetter(SHOPPING_BASKET_SCENARIO_ID),
             shopping_basket))
 
-    shoping_basket_scenarios = set()
-    suggestable_scenarios = set()
-    for scenario in scenarios:
-        if scenario.pk in shopping_basket_scenario_ids:
-            shoping_basket_scenarios.add(scenario)
-        else:
-            suggestable_scenarios.add(scenario)
+    shoping_basket_scenarios = __get_scenarios(shopping_basket_scenario_ids)
+    suggestable_scenarios = __get_scenarios(shopping_basket_scenario_ids, True)
 
     return shoping_basket_scenarios, suggestable_scenarios
 

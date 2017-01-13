@@ -60,6 +60,12 @@ class SuggestionsPagination(GeneratorPagination):
     default_limit = 6
 
 
+ShoppingBasketEntry = collections.namedtuple(
+        'ShoppingBasketEntry', [
+            SHOPPING_BASKET_SCENARIO_ID,
+            SHOPPING_BASKET_PRODUCT_TYPE_FILTER])
+
+
 SuggestionsInput = collections.namedtuple(
         'SuggestionsInput', [
             'scenario_preference',
@@ -105,6 +111,22 @@ class SuggestionsInputSerializer(serializers.Serializer):
     )
 
     def create(self, validated_data):
+        # We have to make the suggestions input hashable since that is required
+        # for some matching algorithms. In particular this means turning all
+        # lists into frozensets and the shopping basket entry objects into
+        # instances of the corresponding namedtuple
+        validated_data['product_type_filter'] = frozenset(
+                validated_data['product_type_filter'])
+        validated_data['subcategory_filter'] = frozenset(
+                validated_data['subcategory_filter'])
+        validated_data['scenario_preference'] = frozenset(
+                validated_data['scenario_preference'].items())
+        validated_data['shopping_basket'] = frozenset(
+                ShoppingBasketEntry(
+                        entry['scenario_id'],
+                        frozenset(entry['product_type_filter']))
+                for entry in validated_data['shopping_basket'])
+
         return SuggestionsInput(**validated_data)
 
 

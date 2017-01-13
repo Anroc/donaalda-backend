@@ -82,7 +82,6 @@ class Suggestions(generics.ListAPIView):
         return self.list(request)
 
     def get_queryset(self):
-
         input_serializer = SuggestionsInputSerializer(data=self.request.data)
         input_serializer.is_valid(raise_exception=True)
         suggestions_input = input_serializer.save()
@@ -91,11 +90,12 @@ class Suggestions(generics.ListAPIView):
         shopping_basket, sorting_scenarios = partition_scenarios(
                 suggestions_input.shopping_basket)
         # call scenario sorting
-        sorted_tuple_list = sort_scenarios(sorting_scenarios, suggestions_input)
+        sorted_tuple_list = sort_scenarios(
+                sorting_scenarios, suggestions_input)
 
         if shopping_basket:
-            old_product_set, device_mapping = implement_scenarios(shopping_basket, suggestions_input)
-            cache.set(hash(str(input_serializer.data)), device_mapping)
+            old_product_set, unused = implement_scenarios(
+                    shopping_basket, suggestions_input)
             if not old_product_set:
                 raise InvalidShoppingBasketException
         else:
@@ -103,7 +103,8 @@ class Suggestions(generics.ListAPIView):
 
         for scenario, rating in sorted_tuple_list:
             # don't need the device mappings
-            product_set = implement_scenarios(shopping_basket.union({scenario}), suggestions_input)[0]
+            product_set, unused = implement_scenarios(
+                    shopping_basket.union({scenario}), suggestions_input)
             if product_set:
                 yield ScenarioImpl(product_set, old_product_set, scenario, rating)
 
@@ -120,23 +121,20 @@ class FinalProductList(generics.ListAPIView):
         return self.list(request)
 
     def get_queryset(self):
-
         input_serializer = SuggestionsInputSerializer(data=self.request.data)
         input_serializer.is_valid(raise_exception=True)
         suggestions_input = input_serializer.save()
 
-        device_mapping = cache.get(
-            hash(str(input_serializer.data)),
-            None
-        )
+        shopping_basket_scenarios, unused = partition_scenarios(
+                suggestions_input.shopping_basket)
+        if not shopping_basket_scenarios:
+            raise NoShoppingBasketException
 
-        if device_mapping is None:
-            shopping_basket, unused = partition_scenarios(
-                    suggestions_input.shopping_basket)
-            old_product_set, device_mapping = implement_scenarios(
-                    shopping_basket, suggestions_input)
-            if not old_product_set:
-                raise NoShoppingBasketException
+        old_product_set, device_mapping = implement_scenarios(
+                shopping_basket_scenarios, suggestions_input)
+        if not old_product_set:
+            raise InvalidShoppingBasketException
+
         return [
                 FinalProductListElement(product,
                                         [scenario.id for scenario in scenarios]

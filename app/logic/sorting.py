@@ -1,4 +1,5 @@
 from operator import itemgetter
+
 import math
 from ..models import Category
 from ..constants import MINIMAL_RATING_VALUE
@@ -46,13 +47,16 @@ def __normalize(dictionary, default_key_set=None):
     Normalize the given dictionary values.
 
     :param dictionary:
-        the given dictionary
+        the given dictionary (may be an immutable dictionary, aka a frozenset of
+        (key, value) pairs
     :param default_key_set:
         the default key set. If they are not present their values will be set to 1.
     :return:
         a new reference to the dictionary with the normalized values.
     """
-    ret = dictionary.copy()
+    # create a new dictionary from the input. This method is better than
+    # dictionary.copy() because it correctly handles immutable dictionaries
+    ret = dict(dictionary)
 
     if default_key_set is None:
         default_key_set = ret.keys()
