@@ -1677,7 +1677,9 @@
   "pk": 1,
   "fields": {
     "name": "Connected Living",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Connected Living",
+    "logo_image": "provider/cl_logo.png"
   }
 },
 {
@@ -1685,7 +1687,9 @@
   "pk": 2,
   "fields": {
     "name": "avm",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "AVM",
+    "logo_image": "provider/avm_logo.png"
   }
 },
 {
@@ -1693,7 +1697,9 @@
   "pk": 3,
   "fields": {
     "name": "Eurotronic",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Eurotronic",
+    "logo_image": "provider/eurotronic_logo.jpg"
   }
 },
 {
@@ -1701,7 +1707,9 @@
   "pk": 4,
   "fields": {
     "name": "Fibaro",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Fibaro",
+    "logo_image": "provider/fibaro_logo.jpg"
   }
 },
 {
@@ -1709,7 +1717,9 @@
   "pk": 5,
   "fields": {
     "name": "Jung",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Jung",
+    "logo_image": "provider/jung_logo.png"
   }
 },
 {
@@ -1717,7 +1727,9 @@
   "pk": 6,
   "fields": {
     "name": "Withthings",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Withthings",
+    "logo_image": "provider/withings_logo.jpg"
   }
 },
 {
@@ -1725,7 +1737,9 @@
   "pk": 7,
   "fields": {
     "name": "Thermokon",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Thermokon Sensortechnik GmbH",
+    "logo_image": "provider/thermokon_logo.png"
   }
 },
 {
@@ -1733,7 +1747,9 @@
   "pk": 8,
   "fields": {
     "name": "NodOn",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "nodOn",
+    "logo_image": "provider/thermokon_logo_EcI0Ifz.png"
   }
 },
 {
@@ -1741,7 +1757,9 @@
   "pk": 9,
   "fields": {
     "name": "Permundo",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Permundo GmbH",
+    "logo_image": "provider/logo_permundo.jpg"
   }
 },
 {
@@ -1749,7 +1767,9 @@
   "pk": 11,
   "fields": {
     "name": "Miele",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Miele & Cie. KG",
+    "logo_image": "provider/High_Res_Miele_logo_2.jpg"
   }
 },
 {
@@ -1757,7 +1777,9 @@
   "pk": 12,
   "fields": {
     "name": "Polar",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Polar Electro GmbH Deutschland",
+    "logo_image": "provider/og-polar-logo.jpg"
   }
 },
 {
@@ -1765,7 +1787,9 @@
   "pk": 13,
   "fields": {
     "name": "Epson",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "SEIKO Epson CORPORATION",
+    "logo_image": "provider/epson_tagline_logo_blue_and_black.jpg"
   }
 },
 {
@@ -1773,7 +1797,9 @@
   "pk": 15,
   "fields": {
     "name": "Kingmak",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Kingmak",
+    "logo_image": ""
   }
 },
 {
@@ -1781,7 +1807,9 @@
   "pk": 16,
   "fields": {
     "name": "D-Link",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "D-Link (Deutschland) GmbH",
+    "logo_image": "provider/logo_f3M1Sze.jpg"
   }
 },
 {
@@ -1789,7 +1817,9 @@
   "pk": 17,
   "fields": {
     "name": "Philips",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Philips",
+    "logo_image": "provider/logo.jpg"
   }
 },
 {
@@ -1797,7 +1827,9 @@
   "pk": 19,
   "fields": {
     "name": "Beddi",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Witti Inc",
+    "logo_image": "provider/logo.jpeg"
   }
 },
 {
@@ -1805,7 +1837,9 @@
   "pk": 20,
   "fields": {
     "name": "eQ-3",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "eQ-3 AG",
+    "logo_image": "provider/logo.gif"
   }
 },
 {
@@ -1813,7 +1847,9 @@
   "pk": 21,
   "fields": {
     "name": "BMS \u2013 Building Management Systems",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "BMS \u2013 Building Management Systems",
+    "logo_image": ""
   }
 },
 {
@@ -1821,7 +1857,9 @@
   "pk": 22,
   "fields": {
     "name": "Gira",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Gira Giersiepen GmbH & Co. KG",
+    "logo_image": "provider/gira-logo.jpg"
   }
 },
 {
@@ -1829,7 +1867,9 @@
   "pk": 23,
   "fields": {
     "name": "Aeotec by Aeon Labs",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Aeotec by Aeon Labs",
+    "logo_image": "provider/logo_Tprhle9.jpg"
   }
 },
 {
@@ -1837,7 +1877,9 @@
   "pk": 25,
   "fields": {
     "name": "Danfoss",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "Danfoss GmbH",
+    "logo_image": "provider/logo_cCm6Ij0.jpg"
   }
 },
 {
@@ -1845,7 +1887,9 @@
   "pk": 26,
   "fields": {
     "name": "IOLITE",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "IOLITE",
+    "logo_image": ""
   }
 },
 {
@@ -1853,16 +1897,16 @@
   "pk": 27,
   "fields": {
     "name": "DONAALDA",
-    "is_visible": true
+    "is_visible": true,
+    "public_name": "DONAALDA",
+    "logo_image": ""
   }
 },
 {
   "model": "app.providerprofile",
   "pk": 1,
   "fields": {
-    "public_name": "AVM",
     "url_name": "avm",
-    "logo_image": "provider/avm_logo.png",
     "profile_image": "provider/avm_produkte.png",
     "banner_image": "provider/avm_banner.jpg",
     "introduction": "Die AVM Computersysteme Vertriebs GmbH ist ein deutscher Hersteller von Produkten aus dem Bereich der Telekommunikation und Netzwerktechnik (unter anderem DSL, LTE, ISDN, WLAN und Internettelefonie)",
@@ -1875,9 +1919,7 @@
   "model": "app.providerprofile",
   "pk": 2,
   "fields": {
-    "public_name": "Connected Living",
     "url_name": "connected_living",
-    "logo_image": "provider/cl_logo.png",
     "profile_image": "provider/cl_image.jpg",
     "banner_image": "provider/cl_banner.png",
     "introduction": "Im Leben der Zukunft wird alles einfach vernetzt sein. Wir betreten nicht mehr allein das Smarte Haus als Zentrum der Vernetzung von Menschen und Dingen. Das Vernetzte Leben geht dar\u00fcber hinaus. Die Anwendungsfelder Wohnen, Mobilit\u00e4t, Gesundheit, Geb\u00e4ude sowie St\u00e4dte konvergieren im zuk\u00fcnftigen Internet of Everything verst\u00e4rkt hin zu ganzheitlichen und branchen\u00fcbergreifenden L\u00f6sungen.",
@@ -1890,9 +1932,7 @@
   "model": "app.providerprofile",
   "pk": 3,
   "fields": {
-    "public_name": "Eurotronic",
     "url_name": "eurotronic",
-    "logo_image": "provider/eurotronic_logo.jpg",
     "profile_image": "provider/eurotronic_image.png",
     "banner_image": "provider/eurotronic_banner.jpg",
     "introduction": "Wir haben uns auf die Entwicklung innovativer L\u00f6sungen \r\nzur Reduzierung der Energiekosten spezialisiert.\r\n\r\nUnser mittelst\u00e4ndisches Familienunternehmen hat sich seit der Firmengr\u00fcndung im Mai 1998 kontinuierlich zu einem der marktf\u00fchrenden Unternehmen im Bereich der elektronischen Heizk\u00f6rperregler entwickelt. Unsere Produkte werden in den eigenen Werken in Hessen hergestellt. Ziel ist es, Produkte auf h\u00f6chstem technischen Niveau zu entwickeln, zu produzieren und anwenderfreundlich zu gestalten.",
@@ -1905,9 +1945,7 @@
   "model": "app.providerprofile",
   "pk": 4,
   "fields": {
-    "public_name": "Fibaro",
     "url_name": "fibaro",
-    "logo_image": "provider/fibaro_logo.jpg",
     "profile_image": "provider/fibaro_image.jpg",
     "banner_image": "provider/fibaro_banner.jpg",
     "introduction": "Zur Zeit ist das FIBARO-System die beste auf dem Markt verf\u00fcgbare Aufbau- Automationsl\u00f6sung.\r\n\r\nEs bietet einen nichtinvasiven Installationsprozess, durch den die Notwendigkeit von meterlangen Kabeln hinf\u00e4llig wird. Unsere Miniatur-Module k\u00f6nnen in jedem Wandschaltkasten installiert werden, hinter einem Lichtschalter, einem Rollladen-Schalter etc., und sind mit jedem elektrischen System kompatibel. \r\nEs ist das einzige auf dem Markt verf\u00fcgbare System, das in der Lage ist, LED-Licht oder fluoreszierendes Licht ohne Nulleiter in elektrischen Systemen zu kontrollieren (ehemals typische elektrische Systeme). \r\nFibaro-Ger\u00e4te werden nicht permanent an die Geb\u00e4udeinfrastruktur gekoppelt. Wenn Sie Ihre Wohnung also umdekorieren, einige W\u00e4nde einrei\u00dfen oder das Inneneinrichtungskonzept \u00e4ndern m\u00f6chten\u2026 Ist das kein Problem. Tun Sie es einfach. Nehmen Sie einfach jedes beliebige Modul aus der Wand und installieren es an einem neuen Platz. Durch das Maschennetzwerk aktualisiert das Modul seinen Standort und nimmt die Kooperation mit den \u00fcbrigen Systemkomponenten problemlos wieder auf.",
@@ -1920,9 +1958,7 @@
   "model": "app.providerprofile",
   "pk": 5,
   "fields": {
-    "public_name": "Jung",
     "url_name": "jung",
-    "logo_image": "provider/jung_logo.png",
     "profile_image": "provider/jung_image.jpg",
     "banner_image": "provider/jung_banner.jpg",
     "introduction": "Intelligente Haussteuerung mit dem zukunftssicheren KNX-System\r\nDie Aufgabe moderner Haustechnik ist es, Wohn- und Arbeitswelten intelligent zu steuern und dabei auf individuelle Gestaltungsw\u00fcnsche und Wohnqualit\u00e4t R\u00fccksicht zu nehmen. Von Bedeutung sind dabei die Aspekte Komfort, Wirtschaftlichkeit, Energieeffizienz und Repr\u00e4sentation. In diesem Sinne vernetzt KNX hier Funktionen wie Beleuchtung, Klima, Sicherheit und Multimedia f\u00fcr eine zentrale und smarte Steuerung.",
@@ -1935,9 +1971,7 @@
   "model": "app.providerprofile",
   "pk": 6,
   "fields": {
-    "public_name": "Withthings",
     "url_name": "withthings",
-    "logo_image": "provider/withings_logo.jpg",
     "profile_image": "provider/withthing_image.jpg",
     "banner_image": "provider/withthings_banner.jpg",
     "introduction": "Withings ist ein Hersteller, der...",
@@ -1950,9 +1984,7 @@
   "model": "app.providerprofile",
   "pk": 7,
   "fields": {
-    "public_name": "Thermokon Sensortechnik GmbH",
     "url_name": "thermokon_sensortechnik_gmbh",
-    "logo_image": "provider/thermokon_logo.png",
     "profile_image": "provider/thermokon_profile.jpg",
     "banner_image": "provider/thermokon_banner.png",
     "introduction": "Thermokon \u2013 Home of Sensor Technology\r\n\r\nVom einzelnen Produkt zur Systeml\u00f6sung f\u00fcr Sensorik\r\nWas 1987 mit der Gr\u00fcndung der Thermokon Sensortechnik GmbH durch Harald Zygan begann, entwickelte sich schnell zur Erfolgsgeschichte: Der anf\u00e4nglichen Spezialisierung auf Temperaturf\u00fchler f\u00fcr die Heizkesselindustrie folgte schon bald die schrittweise Erweiterung unseres Produktportfolios auf Sensorikl\u00f6sungen zur Erfassung von relativer Feuchte, Luftqualit\u00e4t und Helligkeit. Sie legte den Grundstein f\u00fcr die energieeffiziente Auslegung unserer Systeme und L\u00f6sungen.\r\n\r\nMit Kompetenz f\u00fcr den Erfolg unserer Kunden\r\nSeit fast 30 Jahren steht der Name Thermokon f\u00fcr die Aufwertung intelligenter Geb\u00e4ude mit Engineering, Innovation und Qualit\u00e4t \u201eMade in Germany\u201c. Mit der Entwicklung und Fertigung richtungsweisender Sensoren und Sensorsysteme schaffen wir Mehrwert f\u00fcr Kunden in aller Welt. Effizienz, Nachhaltigkeit und Offenheit f\u00fcr Neues stehen dabei ebenso im Fokus wie die enge Partnerschaft und der intensive Dialog mit unseren Kunden. \r\n\r\nAls Innovationstreiber mit breitgef\u00e4chertem Anwendungsspektrum entwickeln wir unser Produktportfolio stetig weiter und bieten entscheidende Vorteile durch produktbezogene Leistungen, Sonderl\u00f6sungen und Engineering. Unser gesamtes Portfolio ist auf energieeffiziente Geb\u00e4ude ausgelegt, die eine A-Klassifizierung nach DIN EN 15232 anstreben.",
@@ -1965,9 +1997,7 @@
   "model": "app.providerprofile",
   "pk": 8,
   "fields": {
-    "public_name": "nodOn",
     "url_name": "nodon",
-    "logo_image": "provider/thermokon_logo_EcI0Ifz.png",
     "profile_image": "provider/thermokon_profile_LUIqxNl.jpg",
     "banner_image": "provider/thermokon_banner_kk0Lzh1.png",
     "introduction": "Home Automation by nodOn\r\n\r\nThe Home automation uses are countless. At NodOn\u00ae, we always design products with multiple and upgradable uses.\r\nhome automation comfort\r\nCOMFORT\r\n\r\nWe believe in strong synergies between energy savings and wellbeing. Our outlook of Smart Home is to be able to control more to save more, without degrading your comfort and wellbeing. And who knows, why not improving it?\r\n\r\nhome automation energy savings\r\nENERGY SAVINGS\r\n\r\nBy connecting NodOn\u00ae products / modules on your existing appliances (lights, HVAC, home appliances, etc\u2026) you can monitor your energy consumption and then act on it. As a game with your family (\u201cwho will save the most energy this month?\u201d), or through intelligent scenarios\r\n\r\nhome automation security\r\nSECURITY\r\n\r\nYour home should always be the most confident and safe place on earth, as a little nest for you and your family. Using NodOn\u00ae products, you combine home control with non-intrusive security system. Safe and relax.",
@@ -1980,9 +2010,7 @@
   "model": "app.providerprofile",
   "pk": 9,
   "fields": {
-    "public_name": "Permundo GmbH",
     "url_name": "permundo_gmbh",
-    "logo_image": "provider/logo_permundo.jpg",
     "profile_image": "provider/profile_permundo.jpg",
     "banner_image": "provider/banner_permundo.jpg",
     "introduction": "permundo - the smart control company\r\n\r\npermundo is a supplier of \r\nadvanced smart-control components.\r\n\r\nThe company was founded in 2009 and is based in D\u00fcsseldorf, Germany.\r\n\r\nThe company focus is on Engineering & Design and on Marketing, by an international team of committed experts. Production is outsourced under licence to European-based electronics manufacturers.\r\n\r\nWe at permundo are convinced that cool and easy-to-use products will bring revolutionary new possibilities into our daily lifes. These will increase comfort and will help us to save energy.",
@@ -1995,9 +2023,7 @@
   "model": "app.providerprofile",
   "pk": 10,
   "fields": {
-    "public_name": "Gira Giersiepen GmbH & Co. KG",
     "url_name": "gira_giersiepen_gmbh___co__kg",
-    "logo_image": "provider/gira-logo.jpg",
     "profile_image": "provider/gira-profile.jpg",
     "banner_image": "provider/gira-banner.jpg",
     "introduction": "Das Unternehmen Gira\r\nDer Name Gira steht f\u00fcr moderne Geb\u00e4udetechnik mit System, die das Wohnen komfortabler, sicherer und energieeffizienter macht. Daf\u00fcr bietet Gira intelligente Funktionen und benutzerfreundliche Ger\u00e4te f\u00fcr die einfache und bequeme Steuerung von Beleuchtung, Heizung und Jalousien sowie von T\u00fcrkommunikations-, Multimedia- und Sicherheitssystemen. Den richtigen Rahmen f\u00fcr die Integration der verschiedenen L\u00f6sungen bieten ausgezeichnete Schalterprogramme mit hohem Designanspruch. Mit dem Gesch\u00e4ftsfeld Kunststofftechnik entwickelt und produziert Gira zudem auch spezielle L\u00f6sungen f\u00fcr die Medizin- und Pharmaindustrie.",
@@ -2010,9 +2036,7 @@
   "model": "app.providerprofile",
   "pk": 11,
   "fields": {
-    "public_name": "Miele & Cie. KG",
     "url_name": "miele___cie__kg",
-    "logo_image": "provider/High_Res_Miele_logo_2.jpg",
     "profile_image": "provider/High_Res_Miele_profile_2.jpg",
     "banner_image": "provider/miele_banner.jpg",
     "introduction": "Die Miele & Cie. KG ist ein deutscher Haushaltsger\u00e4te-Hersteller mit Sitz in G\u00fctersloh (Nordrhein-Westfalen). Das Unternehmen besch\u00e4ftigt nach eigenen Angaben weltweit 17.741 Mitarbeiter (Stand Gesch\u00e4ftsjahr 2014/2015). Der Umsatz betrug im Gesch\u00e4ftsjahr 2014/2015 3,49 Milliarden Euro. Gesch\u00e4ftsf\u00fchrer sind Markus Miele, Reinhard Zinkann junior, Eduard Sailer, Axel Kniehl und Olaf Bartsch. Seit der Gr\u00fcndung ist die Firma, mittlerweile in der vierten Generation, im Besitz der Familien Miele (51,1 %) und Zinkann (48,9 %). Das Unternehmen ist eine Kommanditgesellschaft. Die unbeschr\u00e4nkt haftenden Gesellschafter (Komplement\u00e4re) sind die Miele Verwaltungs-GmbH und die Zinkann Verwaltungs-GmbH.",
@@ -2025,9 +2049,7 @@
   "model": "app.providerprofile",
   "pk": 12,
   "fields": {
-    "public_name": "Polar Electro GmbH Deutschland",
     "url_name": "polar_electro_gmbh_deutschland",
-    "logo_image": "provider/og-polar-logo.jpg",
     "profile_image": "provider/og-polar-profile.jpg",
     "banner_image": "provider/og-polar-banner.jpg",
     "introduction": "Auf die Signale unseres K\u00f6rpers zu achten, ist das eine, diese auch richtig zu interpretieren etwas anderes. Polar hilft dir, dein Training zu verstehen und die richtigen Schl\u00fcsse f\u00fcr das Training zu ziehen. Garanten hierf\u00fcr sind unser Know-how in Sachen Sport, Physiologie und Elektronik sowie das Verst\u00e4ndnis f\u00fcr die Bed\u00fcrfnisse unserer Nutzer. Nicht zuletzt deshalb sind wir seit 1977 f\u00fchrend im Bereich der Entwicklung von Herzfrequenz-Messger\u00e4ten und technischen Innovationen.\r\n\r\nUnser umfangreiches Produktangebot erf\u00fcllt die hohen Anspr\u00fcche und unterschiedlichen sportlichen Ziele unserer Kunden in Sport und Fitness \u2013 ob Leistungsoptimierung f\u00fcr Wettkampfsportler, Unterst\u00fctzung eines ges\u00fcnderen Lebensstils, Hilfe bei der Rehabilitation oder dem Gewichtsmanagement.\r\n\r\nUnsere ambitionierten und kompetenten Mitarbeiter erm\u00f6glichen es durch ihren Ehrgeiz, Tag f\u00fcr Tag nach dem Besten und weiteren Innovationen zu streben. Seit mehr als 30 Jahren verfolgen wir unsere Ziele mit derselben Leidenschaft. Und unser Erfolg best\u00e4tigt dies. Gegenw\u00e4rtig besch\u00e4ftigt Polar 1.200 Menschen in 26 Tochtergesellschaften auf der ganzen Welt. Wir stellen unsere Produkte ausschlie\u00dflich in unseren eigenen Produktionsst\u00e4tten her und verf\u00fcgt \u00fcber ein Vertriebsnetz, das \u00fcber 35.000 Einzelhandelsgesch\u00e4fte in mehr als 80 L\u00e4ndern beliefert.",
@@ -2040,9 +2062,7 @@
   "model": "app.providerprofile",
   "pk": 13,
   "fields": {
-    "public_name": "SEIKO Epson CORPORATION",
     "url_name": "seiko_epson_corporation",
-    "logo_image": "provider/epson_tagline_logo_blue_and_black.jpg",
     "profile_image": "provider/epson_tagline_profile.jpg",
     "banner_image": "provider/epson_banner.jpg",
     "introduction": "Die Schnelllebigkeit und der gro\u00dfe Druck im Gesundheitswesen erfordern bedienerfreundliche Technologien, die vertrauliche Informationen zuverl\u00e4ssig sch\u00fctzen und jederzeit eine optimale Leistung liefern. Ein gutes Preis-Leistungs-Verh\u00e4ltnis steht hierbei im Vordergrund.\r\n\r\nGenau hier setzt Epson an. Von der Patientenverwaltung \u00fcber die Etikettierung von Medikamenten bis zum Drucken, Archivieren und Abrufen von Daten helfen Ihnen unsere Produkte, Kosten zu sparen, und schaffen mehr Zeit f\u00fcr das Wesentliche \u2013 die Versorgung Ihrer Patienten.",
@@ -2055,9 +2075,7 @@
   "model": "app.providerprofile",
   "pk": 14,
   "fields": {
-    "public_name": "eQ-3 AG",
     "url_name": "eq_3_ag",
-    "logo_image": "provider/logo.gif",
     "profile_image": "provider/profile.gif",
     "banner_image": "provider/banner.jpg",
     "introduction": "Smart Home vom Pionier\r\neQ-3 liefert seit mehr als 30 Jahren innovative Produkte und Technologien f\u00fcr den Home-Control-Bereich und z\u00e4hlt laut \u201eTechnologie Review\u201c zu den 50 innovativsten Unternehmen der Welt. Dar\u00fcber hinaus h\u00e4lt eQ-3 - laut \u201eBerg Insight\u201c - die Marktf\u00fchrerschaft im Bereich der Whole-Home-Systeme im europ\u00e4ischen Raum.\r\n \r\nAls deutsches Familienunternehmen mit Hauptsitz in Leer besch\u00e4ftigen wir weltweit mehr als 1000 Mitarbeiter, welche tagt\u00e4glich dazu beitragen, hochqualitative, innovative aber auch erschwingliche Produkte zu entwickeln und zu produzieren. Unsere vielf\u00e4ltige Vertriebskanalstruktur sorgt f\u00fcr eine breite Verf\u00fcgbarkeit unserer Produkte. Unsere Systeme k\u00f6nnen \u00fcber den Onlinehandel, den Installateur und \u00fcber unterschiedlichste H\u00e4ndler bezogen werden.\r\n\r\nNeben unseren Eigenmarken Homematic, Homematic IP und MAX! nutzen auch Unternehmen wie RWE, EWE, Mobilcom und die Telekom unsere Technologien f\u00fcr ihre Produkte. In der Qivicon Smart-Home-Plattform ist der Homematic Standard bereits ab Werk fest integriert.\r\n\r\n \r\n\r\n \r\nHomematic - Ein ganzes Haus voller guter Ideen\r\n\r\nMit Homematic stellen wir unseren Kunden eine umfangreiche Smart Home L\u00f6sung f\u00fcr nahezu alle Bereiche der Hausautomation zur Verf\u00fcgung. Mehr als 80 Komponenten erm\u00f6glichen das Steuern und Regeln der Beleuchtungs-, Beschattungs-, Sicherheits-, sowie der Heizungsanlage. Die CCU-2 Zentrale sorgt f\u00fcr eine intelligente Zusammenarbeit der verschiedenen Bereiche und stellt zus\u00e4tzlich offene Schnittstellen zu anderen Systemen, der eigenen Benutzeroberfl\u00e4che und zum Internet bereit. Dank dieser Schnittstellen k\u00f6nnen beispielsweise sogar K\u00e4rcher-Gartenbew\u00e4sserungssysteme automatisch den Garten bew\u00e4ssern, sobald der Boden Feuchtigkeit ben\u00f6tigt. Neben einem deutlich gesteigerten Wohnkomfort hilft das Homematic System somit auch beim Wassersparen und senkt dar\u00fcber hinaus die Heizkosten um bis zu 30 %.\r\n\r\n \r\n\r\n \r\nHomematic IP - Die neue Smart Home Generation\r\n\r\nHomematic IP stellt die n\u00e4chste Generation des Homematic Systems dar. Das System kombiniert die hohe Verarbeitungsqualit\u00e4t des Homematic Systems mit modernster IP-Kommunikationstechnologie und einer intuitiv nutzbaren, weltweit abrufbaren Smartphone-App-Benutzeroberfl\u00e4che. Das stetig wachsende Automationssystem umfasst derzeit Produkte zur Raumklima- und Heizungsregelung, mit deren Hilfe bis zu 30 % Heizkosten eingespart werden k\u00f6nnen, sowie Sicherheitskomponenten zur \u00dcberwachung. Wie auch beim Homematic System steht auch bei der neuen Ger\u00e4tegeneration eine offene Schnittstelle f\u00fcr Partner-Software- und Hardwarel\u00f6sungen zur Verf\u00fcgung.\r\n\r\n \r\nMAX! - Heizungssteuerung per Smartphone und Internet\r\n\r\nW\u00e4hrend Homematic nahezu alle Bereiche der Heimautomation abdeckt, ist das MAX! System auf die intelligente Heizungssteuerung spezialisiert. Das Funksystem zeichnet sich durch besonders leichte Handhabung aus, was es auch f\u00fcr Techniklaien interessant macht. Nahezu jedermann kann das System in wenigen Minuten installieren und per Smartphone App einrichten. Dabei beschr\u00e4nkt sich die App-Funktionalit\u00e4t nicht nur auf die eigenen vier W\u00e4nde. Per Onlinezugang \u00fcber den MAX! Cube kann die jeweilige Raumtemperatur auch unterwegs gepr\u00fcft und bei Bedarf angepasst werden. Dank der intelligenten Raumregelung, bei der neben der Raumluft auch T\u00fcren und Fenster \u00fcberwacht werden k\u00f6nnen, kann auch mit dem MAX! System bis zu 30 % Heizenergie eingespart werden. Auf Grund der geringen Anschaffungskosten, wird eine schnelle\r\nAmortisation erreicht.\r\n\r\n \r\n\r\n \r\neqiva\r\n\r\nBei den eqiva Produkten von eQ-3 handelt es sich um hochwertige Stand-Alone-L\u00f6sungen, die auf die Heimabsicherung und Heizungsregelung spezialisiert sind. Das Portfolio erstreckt sich von manuell programmierbaren Heizk\u00f6rperthermostaten, \u00fcber Rauchmelder bis hin zu per App steuer- und programmierbaren Bluetooth-Heizk\u00f6rperthermostaten. Diese Produkte werden \u201estand-alone\u201c, das hei\u00dft unabh\u00e4ngig von den Systemen MAX!, Homematic oder Homematic IP betrieben.",
@@ -2070,9 +2088,7 @@
   "model": "app.providerprofile",
   "pk": 15,
   "fields": {
-    "public_name": "Witti Inc",
     "url_name": "witti_inc",
-    "logo_image": "provider/logo.jpeg",
     "profile_image": "provider/witti_profile.jpeg",
     "banner_image": "provider/banner.jpeg",
     "introduction": "We are Witti Inc",
@@ -2085,9 +2101,7 @@
   "model": "app.providerprofile",
   "pk": 16,
   "fields": {
-    "public_name": "Philips",
     "url_name": "philips",
-    "logo_image": "provider/logo.jpg",
     "profile_image": "provider/profile.jpg",
     "banner_image": "provider/philips_banner.png",
     "introduction": "Philips Hue bietet eine Vielzahl an Funktionen, \u00fcber die einfache, komfortable Steuerung von unterwegs \u00fcber verschiedene Wei\u00dfnuancen f\u00fcr den Alltag bis hin zu einem bunten Farbenspiel f\u00fcr ein intensives Entertainment-Erlebnis. Entdecken Sie hier die Funktionen, die auf drei S\u00e4ulen aufbauen: Komfort & Sicherheit, Wohlf\u00fchlen im Alltag und Entertainment.",
@@ -2100,9 +2114,7 @@
   "model": "app.providerprofile",
   "pk": 17,
   "fields": {
-    "public_name": "D-Link (Deutschland) GmbH",
     "url_name": "d_link__deutschland__gmbh",
-    "logo_image": "provider/logo_f3M1Sze.jpg",
     "profile_image": "provider/profile_NkFC74m.jpg",
     "banner_image": "provider/banner.png",
     "introduction": "Die D-Link Corporation (chinesisch \u53cb\u8a0a\u79d1\u6280, Pinyin Y\u01d2ux\u00f9n K\u0113j\u00ec \u201afreundliche Signaltechnik\u2018) ist ein Hersteller von Ger\u00e4ten der Netzwerktechnik.",
@@ -2115,9 +2127,7 @@
   "model": "app.providerprofile",
   "pk": 18,
   "fields": {
-    "public_name": "Danfoss GmbH",
     "url_name": "danfoss_gmbh",
-    "logo_image": "provider/logo_cCm6Ij0.jpg",
     "profile_image": "provider/profile_w7jBLyX.jpg",
     "banner_image": "provider/banner_G2AqTP9.jpg",
     "introduction": "Die Danfoss A/S ist ein Unternehmen im Bereich W\u00e4rme- und K\u00e4ltetechnik mit Sitz in Nordborg, auf der s\u00fcdd\u00e4nischen Insel Alsen in der Kommune S\u00f8nderborg. Nach eigenen Angaben betr\u00e4gt der Umsatz 2013 3,248 Mrd. Euro. Das Unternehmen unterh\u00e4lt 53 Produktionsst\u00e4tten in 21 L\u00e4ndern und besch\u00e4ftigt weltweit etwa 22.500 Mitarbeiter.\r\nDie Tierart Microcebus danfossi ist nach der Firma benannt, da der Konzern die Patenschaft f\u00fcr diese Tiere \u00fcbernommen hat. Neben dem Stammsitz wurde 2006 der Vergn\u00fcgungspark Danfoss Universe er\u00f6ffnet.",
@@ -2130,9 +2140,7 @@
   "model": "app.providerprofile",
   "pk": 19,
   "fields": {
-    "public_name": "Aeotec by Aeon Labs",
     "url_name": "aeotec_by_aeon_labs",
-    "logo_image": "provider/logo_Tprhle9.jpg",
     "profile_image": "provider/profile_waEjEwM.jpg",
     "banner_image": "provider/AEON0415.jpg",
     "introduction": "A house becomes a home when you personalise it and make it your own. When you don't simply fill it with furniture but selectively place the things that mean something to you in each room. The furniture that appeals. The pictures that bring back memories. The things that make you happy. The things that make you comfortable.\r\n\r\nSeldom has technology done this, however. Sure, you can spend many an enjoyable hour in front of your home theatre, but most other technology doesn't make a house a home. It's just there and it's basic and it's the same as everyone else's. Home automation and control technology does away with that flaw, allowing you to create a home where the technology works for you. Whether it's for security or pleasure, whether it's installed for you or a retrofit installation you do yourself, it's automation for your safety, it's automation for your comfort.\r\n\r\nThis is the technology that inspires us at Aeotec. These are the home automation products that we make.",

@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProviderSerializer(PkToIdSerializer):
     class Meta:
         model = Provider
-        fields = ('id', 'name', 'is_visible', )
+        fields = ('id', 'name', 'is_visible', 'public_name', 'logo_image')
 
 
 class ProviderProfileSerializer(PkToIdSerializer):
@@ -28,26 +28,6 @@ class ProviderProfileSerializer(PkToIdSerializer):
                   'public_name', 'url_name', 'logo_image', 'profile_image', 'banner_image', 'introduction',
                   'contact_email',
                   'website', 'owner',)
-
-
-class MinimalProviderProfileFromProviderSerializer(PkToIdSerializer):
-    name = serializers.SerializerMethodField()
-    logo = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Provider
-        fields = ('id', 'name', 'logo',)
-
-    def get_name(self, obj):
-        if hasattr(obj, 'providerprofile'):
-            return obj.providerprofile.public_name
-        return obj.name
-
-    def get_logo(self, obj):
-        if hasattr(obj, 'providerprofile'):
-            request = self.context.get('request')
-            return request.build_absolute_uri(obj.providerprofile.logo_image.url)
-        return None
 
 
 class CategorySerializer(PkToIdSerializer):
@@ -63,7 +43,7 @@ class ProductTypeSerializer(PkToIdSerializer):
 
 
 class ProductSerializer(PkToIdSerializer):
-    provider = MinimalProviderProfileFromProviderSerializer()
+    provider = ProviderSerializer()
     product_type = ProductTypeSerializer()
     extendability = serializers.SerializerMethodField()
 
