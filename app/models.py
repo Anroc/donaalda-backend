@@ -221,12 +221,17 @@ class ProductType(models.Model):
 
 class Provider(models.Model):
     """
-    Used to decouple provider and their public representation (ProviderProfile). Every provider profile, employee and
-    everything, an employee can create, is connected to this.
+    Every provider profile, employee and everything, an employee can create, is
+    connected to this.
     """
 
     name = models.CharField(max_length=200, unique=False)
     is_visible = models.BooleanField(default=False, verbose_name="sichtbar")
+
+    # Fields migrated from ProviderProfile
+    public_name = models.CharField(max_length=200, unique=True, verbose_name="öffentlicher Name")
+    logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
+                                   help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt.")
 
     def __str__(self):
         return '%s' % self.name
@@ -239,15 +244,16 @@ class Provider(models.Model):
 
 class ProviderProfile(models.Model):
     """
-    The public representation of a provider on this website.
-    Contains information of the provider and also lists all products, product sets and scenarios
-    that are connected to the provider.
+    A relic from days long past. Originally, someone had the desire to decouple
+    Providers from their public representation. Probably because it is a tiny
+    bit more difficult to handle permissions for different fields (although I
+    would be surprised if it is not possible at all).
+
+    Anyway, we basically don't use this anymore. If we need fields from it, it
+    is probably best to just migrate them over to Provider.
     """
 
-    public_name = models.CharField(max_length=200, unique=True, verbose_name="öffentlicher Name")
     url_name = models.CharField(max_length=200, unique=True)
-    logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
-                                   help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt.")
     profile_image = models.ImageField(verbose_name="Bild für die Profilseite", upload_to="provider", null=True,
                                       blank=True)
     banner_image = models.ImageField(verbose_name="Banner für Profilseite", upload_to="provider")
@@ -268,7 +274,6 @@ class ProviderProfile(models.Model):
     class Meta:
         verbose_name = "Herstellerprofil"
         verbose_name_plural = "Herstellerprofile"
-        ordering = ["public_name"]
 
 
 class Employee(User):

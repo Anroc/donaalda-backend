@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProviderSerializer(PkToIdSerializer):
     class Meta:
         model = Provider
-        fields = ('id', 'name', 'is_visible',)
+        fields = ('id', 'name', 'is_visible', 'public_name', 'logo_image')
 
 
 class ProviderProfileSerializer(PkToIdSerializer):
