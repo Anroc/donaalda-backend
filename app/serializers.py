@@ -1,6 +1,12 @@
+import markdown
 from rest_framework import serializers
 from .models import *
 from django.contrib.auth.models import User
+
+
+class MarkdownField(serializers.CharField):
+    def to_representation(self, instance):
+        return markdown.markdown(instance)
 
 
 class PkToIdSerializer(serializers.ModelSerializer):
@@ -46,12 +52,13 @@ class ProductSerializer(PkToIdSerializer):
     provider = ProviderSerializer()
     product_type = ProductTypeSerializer()
     extendability = serializers.SerializerMethodField()
+    markdown_description = MarkdownField()
 
     class Meta:
         model = Product
         fields = ('id', 'name', 'provider', 'product_type', 'serial_number', 'description', 'specifications',
                   'image1', 'image2', 'image3', 'price', 'efficiency', 'extendability',
-                  'renovation_required', )
+                  'renovation_required', 'markdown_description')
 
     def get_extendability(self, obj):
         return obj.leader_protocol.count() + obj.follower_protocol.count()
