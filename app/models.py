@@ -107,8 +107,13 @@ class Scenario(models.Model):
         super(Scenario, self).save(*args, **kwargs)
 
         # for each rating create an rating for this element
-        category_ids = ScenarioCategoryRating.objects.filter(scenario=self).values_list('category')[0]
-        categories = {category for category in Category.objects.all() if category.id not in category_ids}
+        scenariocategoryrating_value_list = ScenarioCategoryRating.objects.filter(scenario=self).values_list('category')
+        if len(scenariocategoryrating_value_list) > 0:
+            category_ids = scenariocategoryrating_value_list[0]
+            categories = {category for category in Category.objects.all() if category.id not in category_ids}
+        else:
+            categories = {category for category in Category.objects.all()}
+
         for category in categories:
             ScenarioCategoryRating(category=category, scenario=self, rating=1).save()
 
