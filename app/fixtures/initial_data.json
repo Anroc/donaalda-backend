@@ -252,6 +252,27 @@
   }
 },
 {
+  "model": "app.scenario",
+  "pk": 15,
+  "fields": {
+    "name": "Schutz vor Einbruch durch Sensoren, Video\u00fcberwachung, Benachrichtigungen und Stillen Alarm",
+    "url_name": "schutz_vor_einbruch_durch_sensoren__videouberwachung__benachrichtigungen_und_stillen_alarm",
+    "description": "Konzentrieren Sie sich voll und ganz auf Ihren Gesch\u00e4ftstermin. \r\nIhre SmartHome App gibt Ihnen einen schnellen \u00dcberblick \u00fcber Ihr Zuhause. Sicherheitskameras, Bewegungsmelder und intelligente Zwischenstecker liefern aktuelle Statusberichte direkt auf Ihr Smartphone oder Tablet.\r\n\r\nBei aktiviertem Alarm und unerwarteten Bewegungen meldet das System einen stillen Alarm an die Polizei, benachrichtigt den Nutzer, Schaltet alle Lampen im Haus ein und aktiviert die Video-\u00dcbertragung.",
+    "picture": "scenarios/telekom-smart-home-szenario-einbrecher-750.jpg",
+    "provider": 1,
+    "meta_broker": 35,
+    "meta_endpoints": [
+      37,
+      38,
+      39
+    ],
+    "subcategory": [
+      16
+    ],
+    "in_shopping_basket_of": []
+  }
+},
+{
   "model": "app.product",
   "pk": 3,
   "fields": {
@@ -317,8 +338,14 @@
     "end_of_life": false,
     "renovation_required": false,
     "leader_protocol": [],
-    "follower_protocol": [],
-    "features": []
+    "follower_protocol": [
+      6
+    ],
+    "features": [
+      43,
+      48,
+      13
+    ]
   }
 },
 {
@@ -476,8 +503,13 @@
     "end_of_life": false,
     "renovation_required": false,
     "leader_protocol": [],
-    "follower_protocol": [],
-    "features": []
+    "follower_protocol": [
+      5
+    ],
+    "features": [
+      43,
+      13
+    ]
   }
 },
 {
@@ -1111,12 +1143,14 @@
     "image2": "products/dlink_kamera_2.png",
     "image3": "products/dlink_kamera_3.gif",
     "end_of_life": false,
-    "renovation_required": true,
+    "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
       3
     ],
     "features": [
+      44,
+      45,
       35,
       36,
       37,
@@ -1191,8 +1225,12 @@
     "end_of_life": false,
     "renovation_required": false,
     "leader_protocol": [],
-    "follower_protocol": [],
-    "features": []
+    "follower_protocol": [
+      6
+    ],
+    "features": [
+      42
+    ]
   }
 },
 {
@@ -1342,10 +1380,13 @@
     "renovation_required": false,
     "leader_protocol": [
       2,
-      3
+      3,
+      5,
+      6
     ],
     "follower_protocol": [],
     "features": [
+      41,
       1,
       12,
       14
@@ -2310,6 +2351,20 @@
   }
 },
 {
+  "model": "app.protocol",
+  "pk": 5,
+  "fields": {
+    "name": "radio_enocean"
+  }
+},
+{
+  "model": "app.protocol",
+  "pk": 6,
+  "fields": {
+    "name": "radio_z-wave"
+  }
+},
+{
   "model": "app.feature",
   "pk": 1,
   "fields": {
@@ -2573,6 +2628,62 @@
   "pk": 40,
   "fields": {
     "name": "misst CO2 Gehalt"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 41,
+  "fields": {
+    "name": "Dritte kontaktieren"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 42,
+  "fields": {
+    "name": "Bewegungssensor"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 43,
+  "fields": {
+    "name": "remote turn on"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 44,
+  "fields": {
+    "name": "video aufnehmen"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 45,
+  "fields": {
+    "name": "video \u00fcbertragen"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 46,
+  "fields": {
+    "name": "T\u00fcr-/Fensterkontaktsensor"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 47,
+  "fields": {
+    "name": "Video streamen"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 48,
+  "fields": {
+    "name": "Status \u00fcbertragen"
   }
 },
 {
@@ -2873,6 +2984,64 @@
     "is_broker": false,
     "implementation_requires": [
       40
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 35,
+  "fields": {
+    "is_broker": true,
+    "implementation_requires": [
+      41,
+      47,
+      1,
+      12,
+      14
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 36,
+  "fields": {
+    "is_broker": false,
+    "implementation_requires": [
+      43,
+      13
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 37,
+  "fields": {
+    "is_broker": false,
+    "implementation_requires": [
+      44,
+      45
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 38,
+  "fields": {
+    "is_broker": false,
+    "implementation_requires": [
+      42
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 39,
+  "fields": {
+    "is_broker": false,
+    "implementation_requires": [
+      43,
+      48,
+      13
     ]
   }
 },
@@ -3464,6 +3633,123 @@
   }
 },
 {
+  "model": "app.scenariocategoryrating",
+  "pk": 53,
+  "fields": {
+    "scenario": 15,
+    "category": 8,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 54,
+  "fields": {
+    "scenario": 15,
+    "category": 9,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 55,
+  "fields": {
+    "scenario": 15,
+    "category": 10,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 56,
+  "fields": {
+    "scenario": 15,
+    "category": 7,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 57,
+  "fields": {
+    "scenario": 15,
+    "category": 9,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 58,
+  "fields": {
+    "scenario": 15,
+    "category": 10,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 59,
+  "fields": {
+    "scenario": 15,
+    "category": 7,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 60,
+  "fields": {
+    "scenario": 15,
+    "category": 9,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 61,
+  "fields": {
+    "scenario": 15,
+    "category": 10,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 62,
+  "fields": {
+    "scenario": 15,
+    "category": 7,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 63,
+  "fields": {
+    "scenario": 15,
+    "category": 9,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 64,
+  "fields": {
+    "scenario": 15,
+    "category": 10,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 65,
+  "fields": {
+    "scenario": 15,
+    "category": 7,
+    "rating": 1
+  }
+},
+{
   "model": "auth.group",
   "fields": {
     "name": "Marketing",
@@ -3481,7 +3767,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$30000$1SNZTPCnQ5JQ$9UOgz+vmgt8/9wehyiy9uJUVhu0mBDwFrlcoF5RQhr4=",
-    "last_login": "2016-12-28T17:22:18.084Z",
+    "last_login": "2017-01-16T15:15:17.291Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Herr",
