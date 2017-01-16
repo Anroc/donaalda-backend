@@ -162,9 +162,7 @@ class Product(models.Model):
     serial_number = models.CharField(max_length=255, default="------", verbose_name="Artikelnummer")
     price = models.FloatField(verbose_name="Preis in Euro", default=0.0)
     efficiency = models.FloatField(verbose_name="Verbrauch in Watt", default=0.0)
-    markdown_description = MarkdownxField(verbose_name="Beschreibung")
-    description = models.TextField(verbose_name="Berschreibung")
-    specifications = models.TextField(default="---", verbose_name="Technische Details")
+    description = MarkdownxField(verbose_name="Beschreibung")
     image1 = models.ImageField(verbose_name="Bild 1", upload_to="products")
     image2 = models.ImageField(null=True, blank=True, verbose_name="Bild 2",
                                upload_to="products")

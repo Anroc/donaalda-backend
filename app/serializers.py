@@ -52,13 +52,13 @@ class ProductSerializer(PkToIdSerializer):
     provider = ProviderSerializer()
     product_type = ProductTypeSerializer()
     extendability = serializers.SerializerMethodField()
-    markdown_description = MarkdownField()
+    description = MarkdownField()
 
     class Meta:
         model = Product
-        fields = ('id', 'name', 'provider', 'product_type', 'serial_number', 'description', 'specifications',
+        fields = ('id', 'name', 'provider', 'product_type', 'serial_number', 'description',
                   'image1', 'image2', 'image3', 'price', 'efficiency', 'extendability',
-                  'renovation_required', 'markdown_description')
+                  'renovation_required', )
 
     def get_extendability(self, obj):
         return obj.leader_protocol.count() + obj.follower_protocol.count()
