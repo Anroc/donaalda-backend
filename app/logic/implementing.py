@@ -49,8 +49,8 @@ def compute_matching_product_set(device_mapping, preference):
             return set(), device_mapping
 
     # check product type filter
-    if not __product_type_filter_satisfiable(impl_of_meta_device.values(), preference.product_type_filter):
-        return set(), device_mapping
+    # if not __product_type_filter_satisfiable(impl_of_meta_device.values(), preference.product_type_filter):
+    #     return set(), device_mapping
 
     # 2. start running F
     # we already validated that each endpoint have at least one implementation
@@ -90,16 +90,16 @@ def compute_matching_product_set(device_mapping, preference):
 
         # filter for valid product filter of shopping basket
         for basket_elem in preference.shopping_basket:
-            # TODO: resolve the shopping basket scenario id -> scenario
             # reference at the view layer
             scenario = Scenario.objects.get(pk=basket_elem.scenario_id)
             pt_preference = basket_elem.product_type_filter
-            remove_paths = set()
-            for p_set in merged_set:
-                scenario_p_set = {elem for elem in p_set if scenario in device_mapping.products[elem]}
-                if not __matches_product_type_preference(scenario_p_set, pt_preference):
-                    remove_paths.add(p_set)
-            merged_set = {elem for elem in merged_set if elem not in remove_paths}
+            merged_set = __remove_mismatching_paths(scenario, device_mapping, pt_preference, merged_set)
+
+        # apply filter for current scenario
+        if device_mapping.suggested_scenario is not None:
+            merged_set = __remove_mismatching_paths(
+                device_mapping.suggested_scenario, device_mapping, preference.product_type_filter, merged_set
+            )
 
         # 3. apply cost function U_pref to get one product set
         merged_set = __cost_function(merged_set, preference)
@@ -118,6 +118,30 @@ def compute_matching_product_set(device_mapping, preference):
 
     # return the product set
     return product_sets, device_mapping
+
+
+def __remove_mismatching_paths(scenario, device_mapping, pt_preference, merged_set):
+    """
+    Removes all mismatching paths from a given merged path set.
+
+    :param scenario:
+        the scenario that is the filter indicator for each path that uses at least one device that is a valid
+        implemenation of a scenario meta device
+    :param device_mapping:
+        the well known device mapping
+    :param pt_preference:
+        the current product type preference either read from the shopping basket or the user product type preference
+    :param merged_set:
+        the set of sets of product paths
+    :return:
+        the new filtered sets of sets of product paths
+    """
+    remove_paths = set()
+    for p_set in merged_set:
+        scenario_p_set = {elem for elem in p_set if scenario in device_mapping.products[elem]}
+        if not __matches_product_type_preference(scenario_p_set, pt_preference):
+            remove_paths.add(p_set)
+    return {elem for elem in merged_set if elem not in remove_paths}
 
 
 def __find_communication_partner(endpoint, target, renovation_allowed,  path=None, max_depth=None, bridges_visited=None):

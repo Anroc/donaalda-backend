@@ -13,22 +13,30 @@ from .data import partition_scenarios
 LOGGER = logging.getLogger(__name__)
 
 
-@cached(lambda s, p: hash((s, p)))
-def implement_scenarios(scenarios, preference):
+@cached(lambda ss, s, p: hash((ss, s, p)))
+def implement_scenarios_from_input(suggested_scenario, shopping_basket, preference):
     """
     This method takes a set of scenarios and merge them in that kind that
     meta devices that provide the same feature set are just listed onces.
 
-    :param scenarios:
-        the scenarios that should be implemented with the current shopping basket
+    :param suggested_scenario:
+        the scenario that should be implemented with the current shopping basket
+    :param shopping_basket:
+        set of scenarios that matches the scenario id in the preference.shopping_basekt
     :param preference:
         the user defined preference
     :return:
         best matching implementing product set
         todo change
     """
+    # extract shopping basket from user input
+    if suggested_scenario is None:
+        scenarios = shopping_basket
+    else:
+        scenarios = shopping_basket.union({suggested_scenario})
+
     # merging the endpoints
-    meta_device_mapping = DeviceMapping()
+    meta_device_mapping = DeviceMapping(suggested_scenario)
     for scenario in scenarios:
         meta_device_mapping.merge_scenario(scenario)
 

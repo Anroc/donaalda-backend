@@ -8,9 +8,9 @@ from rest_framework import viewsets
 from rest_framework.decorators import *
 
 from .logic import (
-        partition_scenarios,
-        sort_scenarios,
-        implement_scenarios)
+    partition_scenarios,
+    sort_scenarios,
+    implement_scenarios_from_input)
 from .forms import LoginForm
 from .permissions import *
 from .serializers import *
@@ -94,8 +94,7 @@ class Suggestions(generics.ListAPIView):
                 sorting_scenarios, suggestions_input)
 
         if shopping_basket:
-            old_product_set, unused = implement_scenarios(
-                    shopping_basket, suggestions_input)
+            old_product_set, unused = implement_scenarios_from_input(None, shopping_basket, suggestions_input)
             if not old_product_set:
                 raise InvalidShoppingBasketException
         else:
@@ -103,8 +102,7 @@ class Suggestions(generics.ListAPIView):
 
         for scenario, rating in sorted_tuple_list:
             # don't need the device mappings
-            product_set, unused = implement_scenarios(
-                    shopping_basket.union({scenario}), suggestions_input)
+            product_set, unused = implement_scenarios_from_input(scenario, shopping_basket, suggestions_input)
             if product_set:
                 yield ScenarioImpl(product_set, old_product_set, scenario, rating)
 
@@ -130,8 +128,9 @@ class FinalProductList(generics.ListAPIView):
         if not shopping_basket_scenarios:
             raise NoShoppingBasketException
 
-        old_product_set, device_mapping = implement_scenarios(
-                shopping_basket_scenarios, suggestions_input)
+        old_product_set, device_mapping = implement_scenarios_from_input(
+            None, shopping_basket_scenarios, suggestions_input
+        )
         if not old_product_set:
             raise InvalidShoppingBasketException
 

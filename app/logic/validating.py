@@ -114,7 +114,7 @@ def __cost_function(product_sets, preference):
     sorting = dict()
     for current_set in product_sets:
         # we want to know exactly which set is not satisfiable (the reason of {current_set})
-        if not  __matches_product_type_preference(current_set, preference.product_type_filter):
+        if not __matches_product_type_preference(current_set, preference.product_type_filter):
             continue
         # will resolve in set that contains the master broker and other bridges; this set is at least on element big
         broker = __get_broker_of_products(current_set)
