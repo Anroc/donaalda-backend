@@ -107,10 +107,14 @@ class Scenario(models.Model):
         super(Scenario, self).save(*args, **kwargs)
 
         # for each rating create an rating for this element
-        category_ids = ScenarioCategoryRating.objects.filter(scenario=self).values_list('category')[0]
-        categories = {category for category in Category.objects.all() if category.id not in category_ids}
-        for category in categories:
-            ScenarioCategoryRating(category=category, scenario=self, rating=1).save()
+        # first, get the categories that this scenario is not rated in
+        unrated_categories = Category.objects.exclude(
+                pk__in=self.categories.values_list('pk', flat=True))
+
+        # then create a rating with the minimal value for each unrated category
+        for category in unrated_categories:
+            ScenarioCategoryRating(category=category, scenario=self,
+                    rating=MINIMAL_RATING_VALUE).save()
 
     class Meta:
         verbose_name = "Szenario"
@@ -426,11 +430,14 @@ class SubCategory(models.Model):
 
 
 class ScenarioCategoryRating(models.Model):
-    scenario = models.ForeignKey(to="Scenario", verbose_name="Szenario")
-    category = models.ForeignKey(to="Category", verbose_name="Kategorie")
+    scenario = models.ForeignKey(to="Scenario", verbose_name="Szenario", related_name="category_ratings", on_delete=models.CASCADE)
+    category = models.ForeignKey(to="Category", verbose_name="Kategorie", on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(MINIMAL_RATING_VALUE), MaxValueValidator(MAXIMAL_RATING_VALUE)],
         verbose_name="Passfaehigkeit")
 
     def __str__(self):
         return "%s passt zu %s mit rating %d" % (self.scenario, self.category, self.rating)
+
+    class Meta:
+        unique_together = ('scenario', 'category')
