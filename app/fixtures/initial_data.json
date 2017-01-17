@@ -2973,11 +2973,11 @@
   "fields": {
     "is_broker": true,
     "implementation_requires": [
-      41,
-      47,
       1,
       12,
-      14
+      14,
+      41,
+      47
     ]
   }
 },
@@ -2987,8 +2987,8 @@
   "fields": {
     "is_broker": false,
     "implementation_requires": [
-      43,
-      13
+      13,
+      43
     ]
   }
 },
@@ -3019,9 +3019,9 @@
   "fields": {
     "is_broker": false,
     "implementation_requires": [
+      13,
       43,
-      48,
-      13
+      48
     ]
   }
 },
