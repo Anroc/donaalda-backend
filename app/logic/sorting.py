@@ -25,7 +25,7 @@ def sort_scenarios(scenarios, preference):
     scenarios = __filter_scenarios(scenarios, preference.subcategory_filter)
 
     for scenario in scenarios:
-        category_ratings = scenario.scenariocategoryrating_set.all()
+        category_ratings = scenario.category_ratings.all()
         scenario_vector = dict()
         for category_rating in category_ratings:
             scenario_vector[category_rating.category.name] = category_rating.rating

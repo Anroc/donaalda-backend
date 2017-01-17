@@ -91,12 +91,12 @@ class SubCategoryDescriptionSerializer(PkToIdSerializer):
 class ScenarioSerializer(PkToIdSerializer):
     provider = ProviderSerializer()
     subcategory = MinimalSubCategorySerializer(read_only=True, many=True)
-    category_ratings = ScenarioCategoryRatingSerializer(source="scenariocategoryrating_set", many=True)
+    category_ratings = ScenarioCategoryRatingSerializer(many=True)
 
     class Meta:
         model = Scenario
         fields = (
-            'id', 'name', 'description', 'url_name', 'picture', 'provider', 'subcategory','category_ratings', )
+            'id', 'name', 'description', 'url_name', 'picture', 'provider', 'subcategory', 'category_ratings', )
 
 
 class EmployeeSerializer(PkToIdSerializer):
