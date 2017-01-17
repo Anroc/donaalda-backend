@@ -107,15 +107,14 @@ class Scenario(models.Model):
         super(Scenario, self).save(*args, **kwargs)
 
         # for each rating create an rating for this element
-        scenariocategoryrating_value_list = ScenarioCategoryRating.objects.filter(scenario=self).values_list('category')
-        if len(scenariocategoryrating_value_list) > 0:
-            category_ids = scenariocategoryrating_value_list[0]
-            categories = {category for category in Category.objects.all() if category.id not in category_ids}
-        else:
-            categories = {category for category in Category.objects.all()}
+        # first, get the categories that this scenario is not rated in
+        unrated_categories = Category.objects.exclude(
+                pk__in=self.categories.values_list('pk', flat=True))
 
-        for category in categories:
-            ScenarioCategoryRating(category=category, scenario=self, rating=1).save()
+        # then create a rating with the minimal value for each unrated category
+        for category in unrated_categories:
+            ScenarioCategoryRating(category=category, scenario=self,
+                    rating=MINIMAL_RATING_VALUE).save()
 
     class Meta:
         verbose_name = "Szenario"
