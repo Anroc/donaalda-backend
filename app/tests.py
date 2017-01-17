@@ -6,12 +6,17 @@ from django.test import Client
 from rest_framework.schemas import SchemaGenerator
 
 
+class IgnoreFilterFieldsSchemaGenerator(SchemaGenerator):
+    def get_filter_fields(*args, **kwargs):
+        return []
+
+
 class SchemaTest(unittest.TestCase):
     def setUp(self):
         # Every test needs a client.
         self.client = Client()
         # get the api schema
-        generator = SchemaGenerator()
+        generator = IgnoreFilterFieldsSchemaGenerator()
         self.schema = generator.get_schema()
 
     def test_v1_endpoints(self):
