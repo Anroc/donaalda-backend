@@ -431,11 +431,14 @@ class SubCategory(models.Model):
 
 
 class ScenarioCategoryRating(models.Model):
-    scenario = models.ForeignKey(to="Scenario", verbose_name="Szenario")
-    category = models.ForeignKey(to="Category", verbose_name="Kategorie")
+    scenario = models.ForeignKey(to="Scenario", verbose_name="Szenario", related_name="category_ratings", on_delete=models.CASCADE)
+    category = models.ForeignKey(to="Category", verbose_name="Kategorie", on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(MINIMAL_RATING_VALUE), MaxValueValidator(MAXIMAL_RATING_VALUE)],
         verbose_name="Passfaehigkeit")
 
     def __str__(self):
         return "%s passt zu %s mit rating %d" % (self.scenario, self.category, self.rating)
+
+    class Meta:
+        unique_together = ('scenario', 'category')

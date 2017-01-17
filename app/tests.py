@@ -66,8 +66,8 @@ class ScenarioCategoryRatingFixupTest(TestCase):
         scenario.save()
 
         # get the lists of rated categories (as ids)
-        scrs_manager = scenario.scenariocategoryrating_set
-        rated_categories = scrs_manager.values_list('category', flat=True)
+        scrs_manage = scenario.category_ratings
+        rated_categories = scrs_manage.values_list('category', flat=True)
 
         # assert that our scenario has been rated in every category
         self.assertEqual(set(rated_categories),
