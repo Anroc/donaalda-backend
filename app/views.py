@@ -6,6 +6,8 @@ from django.core.cache import cache
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.decorators import *
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 from .logic import (
         partition_scenarios,
@@ -72,6 +74,7 @@ class QuestionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 @permission_classes((permissions.AllowAny,))
+@method_decorator(csrf_exempt, name='post')
 class Suggestions(generics.ListAPIView):
     pagination_class = SuggestionsPagination
 
@@ -113,6 +116,7 @@ class Suggestions(generics.ListAPIView):
 
 
 @permission_classes((permissions.AllowAny,))
+@method_decorator(csrf_exempt, name='post')
 class FinalProductList(generics.ListAPIView):
     def get(self, request, format=None):
         raise WeAreRESTfulNowException
