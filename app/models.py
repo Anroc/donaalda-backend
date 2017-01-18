@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import re
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.core.validators import MinValueValidator, MaxValueValidator
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from markdownx.models import MarkdownxField
+
 from .validators import validate_legal_chars
 from .constants import MINIMAL_RATING_VALUE, MAXIMAL_RATING_VALUE
 
@@ -159,8 +162,7 @@ class Product(models.Model):
     serial_number = models.CharField(max_length=255, default="------", verbose_name="Artikelnummer")
     price = models.FloatField(verbose_name="Preis in Euro", default=0.0)
     efficiency = models.FloatField(verbose_name="Verbrauch in Watt", default=0.0)
-    description = models.TextField(verbose_name="Berschreibung")
-    specifications = models.TextField(default="---", verbose_name="Technische Details")
+    description = MarkdownxField(verbose_name="Beschreibung")
     image1 = models.ImageField(verbose_name="Bild 1", upload_to="products")
     image2 = models.ImageField(null=True, blank=True, verbose_name="Bild 2",
                                upload_to="products")
