@@ -260,11 +260,11 @@
     "description": "Konzentrieren Sie sich voll und ganz auf Ihren Gesch\u00e4ftstermin. \r\nIhre SmartHome App gibt Ihnen einen schnellen \u00dcberblick \u00fcber Ihr Zuhause. Sicherheitskameras, Bewegungsmelder und intelligente Zwischenstecker liefern aktuelle Statusberichte direkt auf Ihr Smartphone oder Tablet.\r\n\r\nBei aktiviertem Alarm und unerwarteten Bewegungen meldet das System einen stillen Alarm an die Polizei, benachrichtigt den Nutzer, Schaltet alle Lampen im Haus ein und aktiviert die Video-\u00dcbertragung.",
     "picture": "scenarios/telekom-smart-home-szenario-einbrecher-750.jpg",
     "provider": 1,
-    "meta_broker": 35,
+    "meta_broker": 43,
     "meta_endpoints": [
+      42,
       37,
-      38,
-      39
+      38
     ],
     "subcategory": [
       16
@@ -1336,10 +1336,10 @@
     ],
     "follower_protocol": [],
     "features": [
-      54,
       1,
       12,
       14,
+      27,
       47
     ]
   }
@@ -2743,13 +2743,6 @@
   }
 },
 {
-  "model": "app.feature",
-  "pk": 54,
-  "fields": {
-    "name": "Dritte kontaktieren"
-  }
-},
-{
   "model": "app.metadevice",
   "pk": 1,
   "fields": {
@@ -3098,13 +3091,36 @@
 },
 {
   "model": "app.metadevice",
-  "pk": 39,
+  "pk": 40,
+  "fields": {
+    "is_broker": false,
+    "implementation_requires": [
+      43
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 42,
   "fields": {
     "is_broker": false,
     "implementation_requires": [
       13,
-      43,
-      48
+      43
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 43,
+  "fields": {
+    "is_broker": true,
+    "implementation_requires": [
+      1,
+      12,
+      14,
+      27,
+      47
     ]
   }
 },
@@ -3749,7 +3765,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$30000$1SNZTPCnQ5JQ$9UOgz+vmgt8/9wehyiy9uJUVhu0mBDwFrlcoF5RQhr4=",
-    "last_login": "2017-01-19T21:07:03.556Z",
+    "last_login": "2017-01-19T23:05:03.573Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Herr",
@@ -8300,6 +8316,14 @@
   "fields": {
     "session_data": "ZmE4ZDQwNjllOTE1ODRiZDg2ZDlmOTUwYTM2ZTI3NmEyZjQ0Y2E0YTp7InN1Z2dlc3Rpb25zX2lucHV0Ijp7InNjZW5hcmlvX3ByZWZlcmVuY2UiOnsiS29tZm9ydCI6NSwiRW5lcmdpZSI6NSwiR2VzdW5kaGVpdCI6NSwiU2ljaGVyaGVpdCI6NX0sInByb2R1Y3RfcHJlZmVyZW5jZSI6IkVyd2VpdGVyYmFya2VpdCIsInN1YmNhdGVnb3J5X2ZpbHRlciI6W10sInJlbm92YXRpb25fcHJlZmVyZW5jZSI6ZmFsc2UsInByb2R1Y3RfdHlwZV9maWx0ZXIiOltdLCJzaG9wcGluZ19iYXNrZXQiOltdfX0=",
     "expire_date": "2017-01-19T23:05:52.562Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "pqfrcxtxcnwtcyhotq5iwxzfcrv5valg",
+  "fields": {
+    "session_data": "OWNkMjM4ZTY1ZTgzZDlmMGUwOWUxMWQzNGUzM2RkMzE0ZjIyN2EzMDp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2017-02-02T23:05:03.643Z"
   }
 },
 {
