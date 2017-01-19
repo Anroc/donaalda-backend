@@ -83,6 +83,8 @@ def __length(dic):
 
 
 def __angle(dict1, dict2):
+    if dict1 == dict2:
+        return 0
     return math.acos(__dot_product(dict1, dict2) / (__length(dict1) * __length(dict2)))
 
 
