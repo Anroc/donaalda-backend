@@ -14,3 +14,4 @@ future >= 0.16.0
 django-cors-headers >= 1.1.0
 python-memcached >= 1.58
 django-suit >= 0.2.23
+django-markdownx == 1.7

@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from markdownx.admin import MarkdownxModelAdmin
+
 from .adminForms import (EmployeeCreationForm,
                          EmployeeChangeForm)
 
@@ -59,7 +61,7 @@ class CommentAdmin(admin.ModelAdmin):
     actions = []
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(MarkdownxModelAdmin):
     actions = []
 
     exclude = []

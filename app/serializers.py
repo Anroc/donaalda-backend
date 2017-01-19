@@ -1,6 +1,12 @@
+import markdown
 from rest_framework import serializers
 from .models import *
 from django.contrib.auth.models import User
+
+
+class MarkdownField(serializers.CharField):
+    def to_representation(self, instance):
+        return markdown.markdown(instance)
 
 
 class PkToIdSerializer(serializers.ModelSerializer):
@@ -25,7 +31,7 @@ class ProviderProfileSerializer(PkToIdSerializer):
     class Meta:
         model = ProviderProfile
         fields = ('id',
-                  'public_name', 'url_name', 'logo_image', 'profile_image', 'banner_image', 'introduction',
+                  'url_name', 'profile_image', 'banner_image', 'introduction',
                   'contact_email',
                   'website', 'owner',)
 
@@ -46,10 +52,11 @@ class ProductSerializer(PkToIdSerializer):
     provider = ProviderSerializer()
     product_type = ProductTypeSerializer()
     extendability = serializers.SerializerMethodField()
+    description = MarkdownField()
 
     class Meta:
         model = Product
-        fields = ('id', 'name', 'provider', 'product_type', 'serial_number', 'description', 'specifications',
+        fields = ('id', 'name', 'provider', 'product_type', 'serial_number', 'description',
                   'image1', 'image2', 'image3', 'price', 'efficiency', 'extendability',
                   'renovation_required', )
 
@@ -91,12 +98,12 @@ class SubCategoryDescriptionSerializer(PkToIdSerializer):
 class ScenarioSerializer(PkToIdSerializer):
     provider = ProviderSerializer()
     subcategory = MinimalSubCategorySerializer(read_only=True, many=True)
-    category_ratings = ScenarioCategoryRatingSerializer(source="scenariocategoryrating_set", many=True)
+    category_ratings = ScenarioCategoryRatingSerializer(many=True)
 
     class Meta:
         model = Scenario
         fields = (
-            'id', 'name', 'description', 'url_name', 'picture', 'provider', 'subcategory','category_ratings', )
+            'id', 'name', 'description', 'url_name', 'picture', 'provider', 'subcategory', 'category_ratings', )
 
 
 class EmployeeSerializer(PkToIdSerializer):
