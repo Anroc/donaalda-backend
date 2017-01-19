@@ -31,7 +31,7 @@ class ProviderProfileSerializer(PkToIdSerializer):
     class Meta:
         model = ProviderProfile
         fields = ('id',
-                  'public_name', 'url_name', 'logo_image', 'profile_image', 'banner_image', 'introduction',
+                  'url_name', 'profile_image', 'banner_image', 'introduction',
                   'contact_email',
                   'website', 'owner',)
 
