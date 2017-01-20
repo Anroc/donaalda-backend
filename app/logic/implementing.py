@@ -48,10 +48,6 @@ def compute_matching_product_set(device_mapping, preference):
         if len(impl_of_meta_device[meta_endpoint]) == 0:
             return set(), device_mapping
 
-    # check product type filter
-    if not __product_type_filter_satisfiable(impl_of_meta_device.values(), preference.product_type_filter):
-        return set(), device_mapping
-
     # 2. start running F
     # we already validated that each endpoint have at least one implementation
     product_sets = set()
@@ -88,18 +84,19 @@ def compute_matching_product_set(device_mapping, preference):
 
         merged_set = __dict_cross_product(possible_paths)
 
+        # apply filter for current scenario
+        if device_mapping.suggested_scenario is not None:
+            merged_set = __remove_mismatching_paths(
+                device_mapping.suggested_scenario, device_mapping, preference.product_type_filter, merged_set
+            )
+
         # filter for valid product filter of shopping basket
         for basket_elem in preference.shopping_basket:
             # TODO: resolve the shopping basket scenario id -> scenario
             # reference at the view layer
             scenario = Scenario.objects.get(pk=basket_elem.scenario_id)
             pt_preference = basket_elem.product_type_filter
-            remove_paths = set()
-            for p_set in merged_set:
-                scenario_p_set = {elem for elem in p_set if scenario in device_mapping.products[elem]}
-                if not __matches_product_type_preference(scenario_p_set, pt_preference):
-                    remove_paths.add(p_set)
-            merged_set = {elem for elem in merged_set if elem not in remove_paths}
+            merged_set = __remove_mismatching_paths(scenario, device_mapping, pt_preference, merged_set)
 
         # 3. apply cost function U_pref to get one product set
         merged_set = __cost_function(merged_set, preference)
@@ -118,6 +115,30 @@ def compute_matching_product_set(device_mapping, preference):
 
     # return the product set
     return product_sets, device_mapping
+
+
+def __remove_mismatching_paths(scenario, device_mapping, pt_filter, merged_set):
+    """
+    Removes all mismatching paths from a given merged path set.
+
+    :param scenario:
+        the scenario that is the filter indicator for each path that uses at least one device that is a valid
+        implemenation of a scenario meta device
+    :param device_mapping:
+        the well known device mapping
+    :param pt_filter:
+        the current product type filter either read from the shopping basket or the user product type preference
+    :param merged_set:
+        the set of sets of product paths
+    :return:
+        the new filtered sets of sets of product paths
+    """
+    remove_paths = set()
+    for p_set in merged_set:
+        scenario_p_set = {elem for elem in p_set if scenario in device_mapping.products[elem]}
+        if not __matches_product_type_preference(scenario_p_set, pt_filter):
+            remove_paths.add(p_set)
+    return {elem for elem in merged_set if elem not in remove_paths}
 
 
 def __find_communication_partner(endpoint, target, renovation_allowed,  path=None, max_depth=None, bridges_visited=None):
@@ -180,41 +201,3 @@ def __find_communication_partner(endpoint, target, renovation_allowed,  path=Non
                 if len(next_path) != 0:
                     paths.extend(next_path)
     return paths
-
-
-def __product_type_filter_satisfiable(meta_implementations, filters):
-    """
-    Checks if a given set of product implementations of meta devices contains a
-    configuration that satisfies the given product type filter.
-
-    :param meta_implementations:
-        a set containing sets of all products that implement each meta device in
-        a scenario
-     :param filters:
-        the set of product type filters
-    :return:
-        whether or not there is a way to choose a product from each set so that
-        all product types in the filters are satisfied by the choice
-    """
-    # start by creating a set that contains a frozenset of the filters
-    remaining_filters = set()
-    remaining_filters.add(frozenset(filters))
-    # now go over each meta device that will be implemented
-    for ps in meta_implementations:
-        previous_filters = remaining_filters.copy()
-        # and over each product that implements this meta device
-        for p in ps:
-            # and see what product type filters we would still need to satisfy
-            # if we chose this product. (f - frozenset((p.product_type.id,)))
-            # The remaining_filters set represents the choices we already took.
-            # It is necessary because two implementations of a certain meta
-            # device might each be able to satisfy one of the product type
-            # filters but we can only choose one of them. In this case, the
-            # remaining_filters set (assuming the complete set of filters is
-            # {1,2}) would be {{1} if we chose the first product, {2} if we
-            # chose the second product, {1,2} if we chose neither}
-            remaining_filters |= set(
-                    f - frozenset((p.product_type.id,))
-                    for f in previous_filters)
-
-    return frozenset() in remaining_filters

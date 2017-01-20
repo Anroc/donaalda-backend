@@ -10,7 +10,10 @@ class DeviceMapping(object):
     product to scenarios.
     """
 
-    def __init__(self, endpoints=None, broker=None, products=None, bridges=None, original_to_merged=None):
+    def __init__(
+        self, suggested_scenario, endpoints=None, broker=None, products=None, bridges=None, original_to_merged=None
+    ):
+        self.suggested_scenario = suggested_scenario
         if endpoints is None:
             endpoints = dict()
         if broker is None:
@@ -57,6 +60,7 @@ class DeviceMapping(object):
 
     def __copy__(self):
         return DeviceMapping(
+            self.suggested_scenario,
             self.endpoints.copy(),
             self.broker.copy(),
             self.products.copy(),
