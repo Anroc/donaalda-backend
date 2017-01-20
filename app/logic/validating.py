@@ -99,10 +99,11 @@ def __matches_product_type_preference(product_set, product_type_filters):
 
 def __cost_function(product_sets, preference):
     """
-    Cost function which decides which product set matches the user preferences.
+    Cost function which decides which product set matches the user preferences
+    best.
 
     :param product_sets:
-        set of possible product implementations
+        set of possible product implementations, already checked for validity.
     :param preference:
         preference that was defined by the client; containing all the user preferences
     :return:
@@ -113,9 +114,6 @@ def __cost_function(product_sets, preference):
 
     sorting = dict()
     for current_set in product_sets:
-        # we want to know exactly which set is not satisfiable (the reason of {current_set})
-        if not __matches_product_type_preference(current_set, preference.product_type_filter):
-            continue
         # will resolve in set that contains the master broker and other bridges; this set is at least on element big
         broker = __get_broker_of_products(current_set)
 
