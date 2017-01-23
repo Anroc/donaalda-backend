@@ -396,12 +396,18 @@ class Protocol(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 
 class Feature(models.Model):
     name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['name']
 
 
 class MetaDevice(models.Model):
@@ -429,6 +435,9 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['name']
 
 
 class ScenarioCategoryRating(models.Model):
