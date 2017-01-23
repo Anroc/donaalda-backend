@@ -411,6 +411,7 @@ class Feature(models.Model):
 
 
 class MetaDevice(models.Model):
+    name = models.CharField(default="---", max_length=255)
     is_broker = models.BooleanField(default=True, verbose_name="Ist das Metadevice ein Broker")
     implementation_requires = models.ManyToManyField(to="Feature",
                                                      verbose_name="Definiert von folgender Featuresammlung")
@@ -420,7 +421,16 @@ class MetaDevice(models.Model):
             string = "Broker: "
         else:
             string = "Endpoint: "
+        if len(string) > 255:
+            string = string[:253] + '..'
         return string + ", ".join([i.name for i in self.implementation_requires.all()])
+
+    def save(self, *args, **kwargs):
+        self.name = self.__str__()
+        super(MetaDevice, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['name']
 
 
 class SubCategory(models.Model):
