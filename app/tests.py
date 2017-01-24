@@ -14,13 +14,12 @@ class IgnoreFilterFieldsSchemaGenerator(SchemaGenerator):
 
 
 class SchemaTest(TestCase):
-    def setUp(self):
+    def test_v1_endpoints(self):
         # get the api schema
         generator = IgnoreFilterFieldsSchemaGenerator()
-        self.schema = generator.get_schema()
+        schema = generator.get_schema()
 
-    def test_v1_endpoints(self):
-        v1_endpoints = self.schema['v1']
+        v1_endpoints = schema['v1']
 
         for name, obj in v1_endpoints.items():
             for method, link in obj.items():
