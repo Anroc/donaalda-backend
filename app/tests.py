@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+import json
 
 import openapi
+import jsonschema
+from jsonschema.validators import RefResolver
 from django.test import TestCase
 from rest_framework.schemas import SchemaGenerator
 
@@ -14,10 +17,27 @@ class IgnoreFilterFieldsSchemaGenerator(SchemaGenerator):
         return []
 
 
+# code shamelessly stolen from
+# https://python-jsonschema.readthedocs.io/en/latest/faq/#why-doesn-t-my-schema-that-has-a-default-property-actually-set-the-default-on-my-instance
+def set_defaults(validator, properties, instance, schema):
+    for property, subschema in properties.items():
+        if "default" in subschema:
+            instance.setdefault(property, subschema["default"])
+
+DefaultAddingValidator = jsonschema.validators.extend(
+    jsonschema.validators.Draft4Validator, {
+        "properties" : set_defaults,
+        "required" : lambda *args, **kwargs: None
+    },
+)
+
+
 class SchemaTest(TestCase):
     def test_swagger_endpoints(self):
         # get the static swagger schema
-        swagger = openapi.load(open("app/static/swagger.json"))
+        json_schema = json.load(open("app/static/swagger.json"))
+        resolver = jsonschema.validators.RefResolver.from_schema(json_schema)
+        swagger = openapi.Swagger(json_schema)
 
         swagger.validate()
 
@@ -36,6 +56,16 @@ class SchemaTest(TestCase):
                 operation['parameters']))
 
             self.assertEqual(len(body_params), 1)
+            request_schema = body_params[0]['schema']
+
+            # extract the default input that is shown in the swagger ui
+            default_data = {}
+            DefaultAddingValidator(
+                    request_schema, resolver=resolver).validate(default_data)
+
+            # validate it against the swagger schema
+            jsonschema.validate(
+                    default_data, request_schema, resolver=resolver)
 
     def test_v1_endpoints(self):
         # get the api schema
