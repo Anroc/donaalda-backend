@@ -2,6 +2,7 @@
 
 import unittest
 
+import openapi
 from django.test import TestCase
 from rest_framework.schemas import SchemaGenerator
 
@@ -14,6 +15,28 @@ class IgnoreFilterFieldsSchemaGenerator(SchemaGenerator):
 
 
 class SchemaTest(TestCase):
+    def test_swagger_endpoints(self):
+        # get the static swagger schema
+        swagger = openapi.load(open("app/static/swagger.json"))
+
+        swagger.validate()
+
+        for uri, path in swagger.paths.items():
+            # only test the post'able swagger endpoints
+            if 'post' not in path:
+                continue
+
+            operation = path['post']
+
+            if 'swagger' not in operation['tags']:
+                continue
+
+            body_params = list(filter(
+                lambda param: param['in'] == 'body',
+                operation['parameters']))
+
+            self.assertEqual(len(body_params), 1)
+
     def test_v1_endpoints(self):
         # get the api schema
         generator = IgnoreFilterFieldsSchemaGenerator()
