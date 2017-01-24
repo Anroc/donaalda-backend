@@ -28,10 +28,12 @@
         "product_preference": {
           "type": "string",
           "enum": ["Preis", "Efficiency", "Extendability"],
+          "default": "Preis",
           "description": "One of \"Preis\",\"Efficiency\" or \"Extendability\""
         },
         "renovation_preference": {
           "type": "boolean",
+          "default": true,
           "description": "True if the user is fine with products that require destructive installation procedures"
         },
         "product_type_filter": {
