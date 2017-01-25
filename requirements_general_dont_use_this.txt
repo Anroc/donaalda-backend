@@ -16,3 +16,5 @@ python-memcached >= 1.58
 django-suit >= 0.2.23
 django-markdownx == 1.7
 django-material == 0.10.1
+openapi == 0.5.0
+jsonschema == 2.5.1
