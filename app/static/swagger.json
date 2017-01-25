@@ -26,6 +26,11 @@
         "renovation_preference"
       ]
     },
+    "slot_id": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "minItems": 1
+    },
     "shopping_basket_entry": {
       "type": "object",
       "title": "Shopping basket entry",
@@ -102,6 +107,19 @@
           },
           "minItems": 1,
           "default": [{"scenario_id": 4, "product_type_filter": []}]
+        },
+        "locked_products" : {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot_id": { "$ref": "#/definitions/slot_id" },
+              "product_id": { "type": "integer" }
+            },
+            "additionalProperties": false,
+            "required": ["slot_id", "product_id"]
+          },
+          "default": []
         }
       },
       "required": ["shopping_basket"]

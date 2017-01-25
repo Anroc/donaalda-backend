@@ -3,10 +3,12 @@ import collections
 from django.core.validators import MinLengthValidator
 from rest_framework import serializers, exceptions
 
-from .validators import validate_scenario_id
+from .validators import validate_scenario_id, validate_lockedproducts
 from .constants import (
         SHOPPING_BASKET_SCENARIO_ID,
         SHOPPING_BASKET_PRODUCT_TYPE_FILTER,
+        LOCKEDPRODUCTS_SLOT_ID,
+        LOCKEDPRODUCTS_PRODUCT_ID,
 )
 from .serializers import (
         ProductSerializer,
@@ -38,7 +40,23 @@ ProductListInput = collections.namedtuple(
             'product_preference',
             'renovation_preference',
             'shopping_basket',
+            'locked_products',
         ])
+
+
+LockedProductEntry = collections.namedtuple(
+        'LockedProductEntry', [
+            LOCKEDPRODUCTS_SLOT_ID,
+            LOCKEDPRODUCTS_PRODUCT_ID,
+        ])
+
+
+class LockedProductEntrySerializer(serializers.Serializer):
+    slot_id = serializers.ListField(
+            child=serializers.IntegerField(),
+            validators=[MinLengthValidator(1)]
+    )
+    product_id = serializers.IntegerField()
 
 
 class ProductListInputSerializer(MatchingSerializerBase):
@@ -46,6 +64,12 @@ class ProductListInputSerializer(MatchingSerializerBase):
             required=True,
             child=ShoppingBasketEntrySerializer(),
             validators=[MinLengthValidator(1), validate_scenario_id]
+    )
+    locked_products = serializers.ListField(
+            required=False,
+            default=[],
+            child=LockedProductEntrySerializer(),
+            validators=[validate_lockedproducts]
     )
 
     def create(self, validated_data):
@@ -58,5 +82,10 @@ class ProductListInputSerializer(MatchingSerializerBase):
                         entry[SHOPPING_BASKET_SCENARIO_ID],
                         frozenset(entry[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]))
                 for entry in validated_data['shopping_basket'])
+        validated_data['locked_products'] = frozenset(
+                LockedProductEntry(
+                        frozenset(entry[LOCKEDPRODUCTS_SLOT_ID]),
+                        entry[LOCKEDPRODUCTS_PRODUCT_ID])
+                for entry in validated_data['locked_products'])
 
         return ProductListInput(**validated_data)
