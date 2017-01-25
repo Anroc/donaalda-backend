@@ -19,11 +19,16 @@ class IgnoreFilterFieldsSchemaGenerator(SchemaGenerator):
 
 # code shamelessly stolen from
 # https://python-jsonschema.readthedocs.io/en/latest/faq/#why-doesn-t-my-schema-that-has-a-default-property-actually-set-the-default-on-my-instance
+# slightly modified because I only need one validator and that one doesn't need
+# to validate the properties, only add the default values
 def set_defaults(validator, properties, instance, schema):
     for property, subschema in properties.items():
         if "default" in subschema:
             instance.setdefault(property, subschema["default"])
 
+# we have default values for everything (including required fields). Because of
+# this, we have to validate requied with a no op to ensure that missing required
+# fields (which are going to be added by defaults) don't throw exceptions
 DefaultAddingValidator = jsonschema.validators.extend(
     jsonschema.validators.Draft4Validator, {
         "properties" : set_defaults,
@@ -55,6 +60,7 @@ class SchemaTest(TestCase):
                 lambda param: param['in'] == 'body',
                 operation['parameters']))
 
+            # the swagger spec says that there should only be one body parameter
             self.assertEqual(len(body_params), 1)
             request_schema = body_params[0]['schema']
 
