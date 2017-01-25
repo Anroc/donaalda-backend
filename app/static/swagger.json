@@ -5,9 +5,9 @@
     "version": ""
   },
   "definitions": {
-    "matching_input": {
+    "matching_input_base": {
       "type": "object",
-      "title": "User Preferences",
+      "title": "Base User Preferences",
       "properties": {
         "scenario_preference": {
           "type": "object",
@@ -51,30 +51,6 @@
             "type": "number"
           },
           "default": []
-        },
-        "shopping_basket": {
-          "type": "array",
-          "description": "A set of objects representing required meta information about the scenarios in the shopping basket",
-          "items": {
-            "type": "object",
-            "title": "Shopping basket entry",
-            "properties": {
-              "scenario_id": {
-                "type": "number",
-                "description": "The id of the scenario"
-              },
-              "product_type_filter": {
-                "type": "array",
-                "description": "The set of product type filters that was used to select this scenario. This is required to make sure that the new implementation of the scenario also implements the product type filters",
-                "items" : {
-                  "type": "number"
-                },
-                "default": []
-              }
-            },
-            "required": ["scenario_id", "product_type_filter"]
-          },
-          "default": []
         }
       },
       "required": [
@@ -82,6 +58,54 @@
         "product_preference",
         "renovation_preference"
       ]
+    },
+    "shopping_basket_entry": {
+      "type": "object",
+      "title": "Shopping basket entry",
+      "properties": {
+        "scenario_id": {
+          "type": "number",
+          "description": "The id of the scenario"
+        },
+        "product_type_filter": {
+          "type": "array",
+          "description": "The set of product type filters that was used to select this scenario. This is required to make sure that the new implementation of the scenario also implements the product type filters",
+          "items" : {
+            "type": "number"
+          },
+          "default": []
+        }
+      },
+      "additionalProperties": false,
+      "required": ["scenario_id", "product_type_filter"]
+    },
+    "suggestions_input": {
+      "allOf": [{ "$ref": "#/definitions/matching_input_base" }],
+      "properties": {
+        "shopping_basket": {
+          "type": "array",
+          "description": "A set of objects representing required meta information about the scenarios in the shopping basket",
+          "items": {
+            "$ref": "#/definitions/shopping_basket_entry"
+          },
+          "default": []
+        }
+      }
+    },
+    "productlist_input": {
+      "allOf": [{ "$ref": "#/definitions/matching_input_base" }],
+      "properties": {
+        "shopping_basket": {
+          "type": "array",
+          "description": "A set of objects representing required meta information about the scenarios in the shopping basket",
+          "items": {
+            "$ref": "#/definitions/shopping_basket_entry"
+          },
+          "minItems": 1,
+          "default": [{"scenario_id": 4, "product_type_filter": []}]
+        }
+      },
+      "required": ["shopping_basket"]
     }
   },
   "paths": {
@@ -110,7 +134,7 @@
           },
           {
             "schema": {
-              "$ref": "#/definitions/matching_input"
+              "$ref": "#/definitions/suggestions_input"
             },
             "name": "data",
             "in": "body"
@@ -140,7 +164,7 @@
         "parameters": [
           {
             "schema": {
-              "$ref": "#/definitions/matching_input"
+              "$ref": "#/definitions/productlist_input"
             },
             "name": "data",
             "in": "body"
