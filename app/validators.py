@@ -4,6 +4,10 @@ import re
 from django.core.exceptions import ValidationError
 
 import app.models
+from .constants import (
+        SHOPPING_BASKET_PRODUCT_TYPE_FILTER,
+        SHOPPING_BASKET_SCENARIO_ID,
+)
 
 
 def validate_legal_chars(value):
@@ -48,13 +52,15 @@ def validate_subcategory_filter(value):
 _ERR_SCENARIOS = 'Shopping basket may contain invalid scenario ids'
 
 
+# TODO: this just validates a shopping basket. It should be renamed to
+# validate_shoppingbasket or something like that
 def validate_scenario_id(value):
     scenario_ids = app.models.Scenario.objects.values_list('pk', flat=True)
     basket_scenario_ids = set()
     basket_product_type_filter = set()
     for val in value:
-        basket_scenario_ids.add(val['scenario_id'])
-        basket_product_type_filter = basket_product_type_filter.union(set(val['product_type_filter']))
+        basket_scenario_ids.add(val[SHOPPING_BASKET_SCENARIO_ID])
+        basket_product_type_filter.update(val[SHOPPING_BASKET_PRODUCT_TYPE_FILTER])
     if not basket_scenario_ids.issubset(scenario_ids):
         raise ValidationError(_ERR_SCENARIOS)
     validate_producttype_filter(basket_product_type_filter)

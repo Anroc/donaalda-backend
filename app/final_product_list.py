@@ -4,6 +4,10 @@ from django.core.validators import MinLengthValidator
 from rest_framework import serializers, exceptions
 
 from .validators import validate_scenario_id
+from .constants import (
+        SHOPPING_BASKET_SCENARIO_ID,
+        SHOPPING_BASKET_PRODUCT_TYPE_FILTER,
+)
 from .serializers import (
         ProductSerializer,
         MatchingSerializerBase,
@@ -52,8 +56,8 @@ class ProductListInputSerializer(MatchingSerializerBase):
         # this in one place
         validated_data['shopping_basket'] = frozenset(
                 ShoppingBasketEntry(
-                        entry['scenario_id'],
-                        frozenset(entry['product_type_filter']))
+                        entry[SHOPPING_BASKET_SCENARIO_ID],
+                        frozenset(entry[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]))
                 for entry in validated_data['shopping_basket'])
 
         return ProductListInput(**validated_data)

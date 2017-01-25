@@ -113,8 +113,8 @@ class SuggestionsInputSerializer(MatchingSerializerBase):
                 validated_data['scenario_preference'].items())
         validated_data['shopping_basket'] = frozenset(
                 ShoppingBasketEntry(
-                        entry['scenario_id'],
-                        frozenset(entry['product_type_filter']))
+                        entry[SHOPPING_BASKET_SCENARIO_ID],
+                        frozenset(entry[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]))
                 for entry in validated_data['shopping_basket'])
 
         return SuggestionsInput(**validated_data)
