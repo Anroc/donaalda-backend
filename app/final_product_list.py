@@ -89,3 +89,14 @@ class ProductListInputSerializer(MatchingSerializerBase):
                 for entry in validated_data['locked_products'])
 
         return ProductListInput(**validated_data)
+
+
+class ProductAlternativesInputSerializer(ProductListInputSerializer):
+    replacement_slot = serializers.ListField(
+            child=serializers.IntegerField(),
+            validators=[MinLengthValidator(1)]
+    )
+
+    def create(self, validated_data):
+        prefs = super(ProductAlternativesInputSerializer, self).create(validated_data)
+        return prefs, validated_data['replacement_slot']
