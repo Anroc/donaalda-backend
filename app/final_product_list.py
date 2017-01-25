@@ -43,8 +43,7 @@ ProductListInput = collections.namedtuple(
 
 class ProductListInputSerializer(MatchingSerializerBase):
     shopping_basket = serializers.ListField(
-            required=False,
-            default=[],
+            required=True,
             child=ShoppingBasketEntrySerializer(),
             validators=[MinLengthValidator(1), validate_scenario_id]
     )
