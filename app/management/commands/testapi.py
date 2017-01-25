@@ -55,36 +55,39 @@ class SchemaTest(TestCase):
         swagger.validate()
 
         for uri, path in swagger.paths.items():
-            # only test the post'able swagger endpoints
-            if 'post' not in path:
-                continue
+            for method, operation in path.items():
+                # only test the post'able swagger endpoints
+                if 'swagger' not in operation['tags']:
+                    continue
+                with self.subTest(uri=uri, method=method):
+                    self.runOperation(uri, method, operation, resolver)
 
-            operation = path['post']
+    def runOperation(self, uri, method, operation, resolver):
+        # we might add other methods in the future but until then, this will
+        # ensure that we don't forget to update the tests
+        self.assertEqual(method, 'post')
 
-            if 'swagger' not in operation['tags']:
-                continue
+        body_params = list(filter(
+            lambda param: param['in'] == 'body',
+            operation['parameters']))
 
-            body_params = list(filter(
-                lambda param: param['in'] == 'body',
-                operation['parameters']))
+        # the swagger spec says that there should only be one body parameter
+        self.assertEqual(len(body_params), 1)
+        request_schema = body_params[0]['schema']
 
-            # the swagger spec says that there should only be one body parameter
-            self.assertEqual(len(body_params), 1)
-            request_schema = body_params[0]['schema']
+        # extract the default input that is shown in the swagger ui
+        default_data = {}
+        DefaultAddingValidator(
+                request_schema, resolver=resolver).validate(default_data)
 
-            # extract the default input that is shown in the swagger ui
-            default_data = {}
-            DefaultAddingValidator(
-                    request_schema, resolver=resolver).validate(default_data)
+        # validate it against the swagger schema
+        jsonschema.validate(
+                default_data, request_schema, resolver=resolver)
 
-            # validate it against the swagger schema
-            jsonschema.validate(
-                    default_data, request_schema, resolver=resolver)
-
-            # throw it against the test server
-            response = self.client.post(
-                    uri, json.dumps(default_data), content_type='application/json')
-            self.assertEqual(response.status_code, 200)
+        # throw it against the test server
+        response = self.client.post(
+                uri, json.dumps(default_data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
 
     def test_v1_endpoints(self):
         # get the api schema
