@@ -81,6 +81,11 @@ class SchemaTest(TestCase):
             jsonschema.validate(
                     default_data, request_schema, resolver=resolver)
 
+            # throw it against the test server
+            response = self.client.post(
+                    uri, json.dumps(default_data), content_type='application/json')
+            self.assertEqual(response.status_code, 200)
+
     def test_v1_endpoints(self):
         # get the api schema
         generator = IgnoreFilterFieldsSchemaGenerator()
