@@ -1,4 +1,5 @@
 import json
+import logging
 import unittest
 
 import openapi
@@ -42,7 +43,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         suite = unittest.TestLoader().loadTestsFromTestCase(SchemaTest)
+        logging.disable(logging.CRITICAL)
         unittest.TextTestRunner().run(suite)
+        logging.disable(logging.NOTSET)
 
 
 class SchemaTest(TestCase):
