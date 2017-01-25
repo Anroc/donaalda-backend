@@ -1,5 +1,15 @@
+import collections
+
+from django.core.validators import MinLengthValidator
 from rest_framework import serializers, exceptions
-from .serializers import ProductSerializer
+
+from .validators import validate_scenario_id
+from .serializers import (
+        ProductSerializer,
+        MatchingSerializerBase,
+        ShoppingBasketEntrySerializer,
+        ShoppingBasketEntry,
+)
 
 
 class FinalProductListElement(object):
@@ -17,3 +27,33 @@ class NoShoppingBasketException(exceptions.APIException):
     status_code = 400
     default_code = 'client error'
     default_detail = 'Need at least one scenario in the shopping basket.'
+
+
+ProductListInput = collections.namedtuple(
+        'ProductListInput', [
+            'product_preference',
+            'renovation_preference',
+            'shopping_basket',
+        ])
+
+
+class ProductListInputSerializer(MatchingSerializerBase):
+    shopping_basket = serializers.ListField(
+            required=False,
+            default=[],
+            child=ShoppingBasketEntrySerializer(),
+            validators=[MinLengthValidator(1), validate_scenario_id]
+    )
+
+    def create(self, validated_data):
+        # TODO: There is a little bit of code duplication here. Both this class
+        # and SuggestionsInputSerializer transform the shopping basket into a
+        # hashable representation. It would be nice if we found a way to handle
+        # this in one place
+        validated_data['shopping_basket'] = frozenset(
+                ShoppingBasketEntry(
+                        entry['scenario_id'],
+                        frozenset(entry['product_type_filter']))
+                for entry in validated_data['shopping_basket'])
+
+        return ProductListInput(**validated_data)

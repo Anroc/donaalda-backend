@@ -1,7 +1,17 @@
 import markdown
+import collections
+
 from rest_framework import serializers
-from .models import *
 from django.contrib.auth.models import User
+
+from .models import *
+from .constants import (
+        SHOPPING_BASKET_SCENARIO_ID,
+        SHOPPING_BASKET_PRODUCT_TYPE_FILTER,
+        PRODUCT_PREF_PRICE,
+        PRODUCT_PREF_EFFICIENCY,
+        PRODUCT_PREF_EXTENDABILITY,
+)
 
 
 class MarkdownField(serializers.CharField):
@@ -11,6 +21,33 @@ class MarkdownField(serializers.CharField):
 
 class PkToIdSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(source='pk')
+
+
+# TODO: the next 3 things don't really look like they belong here but I don't
+# know where else to put them. suggestions.py and final_product_list.py fall out
+# because they are used in both. logic also doesn't fit since they are mostly
+# relevant for gluing the view and logic levels together.
+ShoppingBasketEntry = collections.namedtuple(
+        'ShoppingBasketEntry', [
+            SHOPPING_BASKET_SCENARIO_ID,
+            SHOPPING_BASKET_PRODUCT_TYPE_FILTER])
+
+
+class ShoppingBasketEntrySerializer(serializers.Serializer):
+    scenario_id = serializers.IntegerField()
+    product_type_filter = serializers.ListField(
+            child=serializers.IntegerField()
+    )
+
+
+class MatchingSerializerBase(serializers.Serializer):
+    """
+    Contains fields that are needed for all endpoints throughout the
+    consultation process.
+    """
+    product_preference = serializers.ChoiceField(
+            choices=[PRODUCT_PREF_PRICE, PRODUCT_PREF_EFFICIENCY, PRODUCT_PREF_EXTENDABILITY])
+    renovation_preference = serializers.BooleanField()
 
 
 class UserSerializer(serializers.ModelSerializer):

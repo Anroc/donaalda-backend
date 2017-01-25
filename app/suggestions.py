@@ -5,7 +5,13 @@ from rest_framework import pagination, serializers, exceptions
 from rest_framework.utils.urls import replace_query_param
 
 from .constants import *
-from .serializers import ScenarioSerializer, ProductTypeSerializer
+from .serializers import (
+        ScenarioSerializer,
+        ProductTypeSerializer,
+        MatchingSerializerBase,
+        ShoppingBasketEntrySerializer,
+        ShoppingBasketEntry,
+)
 
 from .validators import (
         validate_scenario_preference,
@@ -60,12 +66,6 @@ class SuggestionsPagination(GeneratorPagination):
     default_limit = 6
 
 
-ShoppingBasketEntry = collections.namedtuple(
-        'ShoppingBasketEntry', [
-            SHOPPING_BASKET_SCENARIO_ID,
-            SHOPPING_BASKET_PRODUCT_TYPE_FILTER])
-
-
 SuggestionsInput = collections.namedtuple(
         'SuggestionsInput', [
             'scenario_preference',
@@ -77,20 +77,10 @@ SuggestionsInput = collections.namedtuple(
         ])
 
 
-class ShoppingBasketEntrySerializer(serializers.Serializer):
-    scenario_id = serializers.IntegerField()
-    product_type_filter = serializers.ListField(
-            child=serializers.IntegerField()
-    )
-
-
-class SuggestionsInputSerializer(serializers.Serializer):
+class SuggestionsInputSerializer(MatchingSerializerBase):
     scenario_preference = serializers.DictField(
             child=serializers.IntegerField(),
             validators=[validate_scenario_preference])
-    product_preference = serializers.ChoiceField(
-            choices=[PRODUCT_PREF_PRICE, PRODUCT_PREF_EFFICIENCY, PRODUCT_PREF_EXTENDABILITY])
-    renovation_preference = serializers.BooleanField()
 
     product_type_filter = serializers.ListField(
             required=False,
