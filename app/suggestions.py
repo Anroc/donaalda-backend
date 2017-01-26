@@ -5,9 +5,8 @@ from rest_framework import pagination, serializers, exceptions
 from rest_framework.utils.urls import replace_query_param
 
 from .constants import *
-from .serializers import (
-        ScenarioSerializer,
-        ProductTypeSerializer,
+from .serializers.v1 import ScenarioSerializer, ProductTypeSerializer
+from .serializers.matching import (
         MatchingSerializerBase,
         ShoppingBasketEntrySerializer,
         ShoppingBasketEntry,

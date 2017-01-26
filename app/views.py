@@ -13,7 +13,7 @@ from .logic import (
     implement_scenarios_from_input)
 from .forms import LoginForm
 from .permissions import *
-from .serializers import *
+from .serializers.v1 import *
 from .validators import *
 from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, \
     WeAreRESTfulNowException, InvalidShoppingBasketException

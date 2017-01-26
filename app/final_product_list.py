@@ -10,8 +10,8 @@ from .constants import (
         LOCKEDPRODUCTS_SLOT_ID,
         LOCKEDPRODUCTS_PRODUCT_ID,
 )
-from .serializers import (
-        ProductSerializer,
+from .serializers.v1 import ProductSerializer
+from .serializers.matching import (
         MatchingSerializerBase,
         ShoppingBasketEntrySerializer,
         ShoppingBasketEntry,
