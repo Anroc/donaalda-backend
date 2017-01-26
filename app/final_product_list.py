@@ -5,16 +5,14 @@ from rest_framework import serializers, exceptions
 
 from .validators import validate_scenario_id, validate_lockedproducts
 from .constants import (
-        SHOPPING_BASKET_SCENARIO_ID,
-        SHOPPING_BASKET_PRODUCT_TYPE_FILTER,
         LOCKEDPRODUCTS_SLOT_ID,
         LOCKEDPRODUCTS_PRODUCT_ID,
 )
 from .serializers.v1 import ProductSerializer
 from .serializers.matching import (
         MatchingSerializerBase,
+        MatchingInputBase,
         ShoppingBasketEntrySerializer,
-        ShoppingBasketEntry,
 )
 
 
@@ -36,12 +34,9 @@ class NoShoppingBasketException(exceptions.APIException):
 
 
 ProductListInput = collections.namedtuple(
-        'ProductListInput', [
-            'product_preference',
-            'renovation_preference',
-            'shopping_basket',
+        'ProductListInput', set(MatchingInputBase._fields).union({
             'locked_products',
-        ])
+        }))
 
 
 LockedProductEntry = collections.namedtuple(
@@ -60,6 +55,8 @@ class LockedProductEntrySerializer(serializers.Serializer):
 
 
 class ProductListInputSerializer(MatchingSerializerBase):
+    # we need to override the shopping bakset serializer from the super class
+    # because it is no longer optional.
     shopping_basket = serializers.ListField(
             required=True,
             child=ShoppingBasketEntrySerializer(),
@@ -73,15 +70,10 @@ class ProductListInputSerializer(MatchingSerializerBase):
     )
 
     def create(self, validated_data):
-        # TODO: There is a little bit of code duplication here. Both this class
-        # and SuggestionsInputSerializer transform the shopping basket into a
-        # hashable representation. It would be nice if we found a way to handle
-        # this in one place
-        validated_data['shopping_basket'] = frozenset(
-                ShoppingBasketEntry(
-                        entry[SHOPPING_BASKET_SCENARIO_ID],
-                        frozenset(entry[SHOPPING_BASKET_PRODUCT_TYPE_FILTER]))
-                for entry in validated_data['shopping_basket'])
+        # see app/suggestions.py for details why this is implemented this way
+        base = super().create(validated_data.copy())
+        validated_data.update(base._asdict())
+
         validated_data['locked_products'] = frozenset(
                 LockedProductEntry(
                         frozenset(entry[LOCKEDPRODUCTS_SLOT_ID]),
