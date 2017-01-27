@@ -80,6 +80,9 @@ class ProductListInputSerializer(MatchingSerializerBase):
                         entry[LOCKEDPRODUCTS_PRODUCT_ID])
                 for entry in validated_data['locked_products'])
 
+        for unused_key in validated_data.keys() - ProductListInput._fields:
+            del validated_data[unused_key]
+
         return ProductListInput(**validated_data)
 
 
@@ -90,5 +93,5 @@ class ProductAlternativesInputSerializer(ProductListInputSerializer):
     )
 
     def create(self, validated_data):
-        prefs = super(ProductAlternativesInputSerializer, self).create(validated_data)
+        prefs = super().create(validated_data.copy())
         return prefs, validated_data['replacement_slot']
