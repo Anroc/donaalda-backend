@@ -149,10 +149,17 @@ class FinalProductList(generics.ListAPIView):
         if not old_product_set:
             raise InvalidShoppingBasketException
 
+        # mockety mock mock mothermocker
+        # TODO: remove
+        import random
+
         return [
-                FinalProductListElement(product,
-                                        [scenario.id for scenario in scenarios]
-                                        )
+                FinalProductListElement(product, [
+                        # TODO: this should definitely be replaced with a real implementation
+                        random.choice(list(scenarios)).meta_broker.pk
+                ], [
+                        scenario.id for scenario in scenarios
+                ])
                 for product, scenarios in device_mapping.products.items()
             ]
 

@@ -17,13 +17,15 @@ from .serializers.matching import (
 
 
 class FinalProductListElement(object):
-    def __init__(self, product, scenarios):
+    def __init__(self, product, replacement_slot, scenarios):
         self.product = product
+        self.replacement_slot = replacement_slot
         self.scenarios = scenarios
 
 
 class FinalProductListSerializer(serializers.Serializer):
     product = ProductSerializer()
+    replacement_slot = serializers.ListField(child=serializers.IntegerField())
     scenarios = serializers.ListField(child=serializers.IntegerField())
 
 
