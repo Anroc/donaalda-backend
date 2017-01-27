@@ -100,6 +100,7 @@ class Scenario(models.Model):
                                                    verbose_name="Dieses Szenario liegt im Warenkorb von Session",
                                                    blank=True)
     thumbnail = ImageSpecField(source='picture', processors=[ResizeToFill(200, 100)], format='JPEG')
+    title = models.CharField(max_length=255, default="---")
 
     def __str__(self):
         return '%s' % self.name
@@ -109,7 +110,7 @@ class Scenario(models.Model):
         self.url_name = url_alias(self.name)
         super(Scenario, self).save(*args, **kwargs)
 
-        # for each rating create an rating for this element
+        # for each rating create a rating for this element
         # first, get the categories that this scenario is not rated in
         unrated_categories = Category.objects.exclude(
                 pk__in=self.categories.values_list('pk', flat=True))
@@ -396,6 +397,9 @@ class Protocol(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 
 class Feature(models.Model):
     name = models.CharField(max_length=255)
@@ -403,8 +407,12 @@ class Feature(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 
 class MetaDevice(models.Model):
+    name = models.CharField(default="---", max_length=255)
     is_broker = models.BooleanField(default=True, verbose_name="Ist das Metadevice ein Broker")
     implementation_requires = models.ManyToManyField(to="Feature",
                                                      verbose_name="Definiert von folgender Featuresammlung")
@@ -414,7 +422,16 @@ class MetaDevice(models.Model):
             string = "Broker: "
         else:
             string = "Endpoint: "
+        if len(string) > 255:
+            string = string[:253] + '..'
         return string + ", ".join([i.name for i in self.implementation_requires.all()])
+
+    def save(self, *args, **kwargs):
+        self.name = self.__str__()
+        super(MetaDevice, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['name']
 
 
 class SubCategory(models.Model):
@@ -429,6 +446,9 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['name']
 
 
 class ScenarioCategoryRating(models.Model):

@@ -53,7 +53,7 @@ class ProductSerializer(PkToIdSerializer):
         model = Product
         fields = ('id', 'name', 'provider', 'product_type', 'serial_number', 'description',
                   'image1', 'image2', 'image3', 'price', 'efficiency', 'extendability',
-                  'renovation_required', )
+                  'renovation_required',)
 
     def get_extendability(self, obj):
         return obj.leader_protocol.count() + obj.follower_protocol.count()
@@ -65,13 +65,13 @@ class ScenarioCategoryRatingSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ScenarioCategoryRating
-        fields = ('id', 'name', 'rating', )
+        fields = ('id', 'name', 'rating',)
 
 
 class MinimalSubCategorySerializer(PkToIdSerializer):
     class Meta:
         model = SubCategory
-        fields = ('id', 'name', 'picture', )
+        fields = ('id', 'name', 'picture',)
 
 
 class SubCategorySerializer(PkToIdSerializer):
@@ -98,7 +98,8 @@ class ScenarioSerializer(PkToIdSerializer):
     class Meta:
         model = Scenario
         fields = (
-            'id', 'name', 'description', 'url_name', 'picture', 'provider', 'subcategory', 'category_ratings', )
+            'id', 'name', 'description', 'url_name', 'picture', 'provider', 'subcategory', 'category_ratings',
+            'title',)
 
 
 class EmployeeSerializer(PkToIdSerializer):
