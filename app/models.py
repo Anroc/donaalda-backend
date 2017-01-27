@@ -100,8 +100,7 @@ class Scenario(models.Model):
                                                    verbose_name="Dieses Szenario liegt im Warenkorb von Session",
                                                    blank=True)
     thumbnail = ImageSpecField(source='picture', processors=[ResizeToFill(200, 100)], format='JPEG')
-    subcategory_descriptor = models.CharField(max_length=255, default="---")
-    short_description = models.CharField(max_length=255, default="---")
+    title = models.CharField(max_length=255, default="---")
 
     def __str__(self):
         return '%s' % self.name
@@ -109,7 +108,6 @@ class Scenario(models.Model):
     def save(self, *args, **kwargs):
         """Saves an instance of a Scenario and sets url_name to a cleaned version of name"""
         self.url_name = url_alias(self.name)
-        self.short_description = "%s - %s" % (self.subcategory, self.subcategory_descriptor)
         super(Scenario, self).save(*args, **kwargs)
 
         # for each rating create a rating for this element

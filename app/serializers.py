@@ -104,7 +104,7 @@ class ScenarioSerializer(PkToIdSerializer):
         model = Scenario
         fields = (
             'id', 'name', 'description', 'url_name', 'picture', 'provider', 'subcategory', 'category_ratings',
-            'subcategory_descriptor', 'short_description')
+            'title',)
 
 
 class EmployeeSerializer(PkToIdSerializer):
