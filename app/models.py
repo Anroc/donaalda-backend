@@ -100,6 +100,7 @@ class Scenario(models.Model):
                                                    verbose_name="Dieses Szenario liegt im Warenkorb von Session",
                                                    blank=True)
     thumbnail = ImageSpecField(source='picture', processors=[ResizeToFill(200, 100)], format='JPEG')
+    title = models.CharField(max_length=255, default="---")
 
     def __str__(self):
         return '%s' % self.name
@@ -109,7 +110,7 @@ class Scenario(models.Model):
         self.url_name = url_alias(self.name)
         super(Scenario, self).save(*args, **kwargs)
 
-        # for each rating create an rating for this element
+        # for each rating create a rating for this element
         # first, get the categories that this scenario is not rated in
         unrated_categories = Category.objects.exclude(
                 pk__in=self.categories.values_list('pk', flat=True))
