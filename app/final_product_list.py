@@ -23,10 +23,27 @@ class FinalProductListElement(object):
         self.scenarios = scenarios
 
 
+class ProductAlternativesElement(object):
+    def __init__(self, product):
+        self.product = product
+        # mockety mock mock
+        import math
+        self.price = math.e ** 3.28990
+        self.efficiency = -math.pi ** 2 * 1.2039
+        self.extendability = -27
+
+
 class FinalProductListSerializer(serializers.Serializer):
     product = ProductSerializer()
     replacement_slot = serializers.ListField(child=serializers.IntegerField())
     scenarios = serializers.ListField(child=serializers.IntegerField())
+
+
+class ProductAlternativesSerializer(serializers.Serializer):
+    product = ProductSerializer()
+    price = serializers.FloatField()
+    efficiency = serializers.FloatField()
+    extendability = serializers.IntegerField()
 
 
 class NoShoppingBasketException(exceptions.APIException):

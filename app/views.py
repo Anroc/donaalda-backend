@@ -28,6 +28,8 @@ from .final_product_list import (
         ProductAlternativesInputSerializer,
         FinalProductListSerializer,
         FinalProductListElement,
+        ProductAlternativesSerializer,
+        ProductAlternativesElement,
         NoShoppingBasketException,
 )
 
@@ -169,7 +171,7 @@ class FinalProductList(generics.ListAPIView):
 
 @permission_classes((permissions.AllowAny,))
 class ProductAlternatives(generics.ListAPIView):
-    serializer_class = ProductSerializer
+    serializer_class = ProductAlternativesSerializer
 
     def get(self, request, format=None):
         raise WeAreRESTfulNowException
@@ -183,4 +185,4 @@ class ProductAlternatives(generics.ListAPIView):
         productalternatives_input = input_serializer.save()
 
         # mockety mock mock mothermocker
-        return Product.objects.all()
+        return [ ProductAlternativesElement(p) for p in Product.objects.all()[:4] ]
