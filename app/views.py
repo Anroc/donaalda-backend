@@ -15,9 +15,21 @@ from .forms import LoginForm
 from .permissions import *
 from .serializers.v1 import *
 from .validators import *
-from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, \
-    WeAreRESTfulNowException, InvalidShoppingBasketException
-from .final_product_list import ProductListInputSerializer, FinalProductListSerializer, FinalProductListElement, NoShoppingBasketException
+from .suggestions import (
+        SuggestionsInputSerializer,
+        ScenarioImpl,
+        SuggestionsOutputSerializer,
+        SuggestionsPagination,
+        WeAreRESTfulNowException,
+        InvalidShoppingBasketException
+)
+from .final_product_list import (
+        ProductListInputSerializer,
+        ProductAlternativesInputSerializer,
+        FinalProductListSerializer,
+        FinalProductListElement,
+        NoShoppingBasketException,
+)
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -146,3 +158,22 @@ class FinalProductList(generics.ListAPIView):
 
     def get_serializer_class(self):
         return FinalProductListSerializer
+
+
+@permission_classes((permissions.AllowAny,))
+class ProductAlternatives(generics.ListAPIView):
+    serializer_class = ProductSerializer
+
+    def get(self, request, format=None):
+        raise WeAreRESTfulNowException
+
+    def post(self, request, format=None):
+        return self.list(request)
+
+    def get_queryset(self):
+        input_serializer = ProductAlternativesInputSerializer(data=self.request.data)
+        input_serializer.is_valid(raise_exception=True)
+        productalternatives_input = input_serializer.save()
+
+        # mockety mock mock mothermocker
+        return Product.objects.all()

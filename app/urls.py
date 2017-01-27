@@ -39,6 +39,7 @@ app_name = 'app'
 urlpatterns = [
     url(r'^api/swagger/suggestions', views.Suggestions.as_view()),
     url(r'^api/swagger/final_product_list', views.FinalProductList.as_view()),
+    url(r'^api/swagger/product_alternatives', views.ProductAlternatives.as_view()),
     url(r'^api/swagger/', static_swagger_view),
     url(r'^api/v1/', include(router.urls)),
     # FIXME: login for api/v1/ browser, somehow not working yet
