@@ -199,6 +199,7 @@ CORS_ORIGIN_REGEX_WHITELIST = (
 ALLOWED_HOSTS = [
     '::1',
     'localhost',
+    'testserver',
     '127.0.0.1',
     'donaalda.baguette.management',
     'api.donaalda.baguette.management',

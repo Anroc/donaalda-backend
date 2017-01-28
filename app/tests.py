@@ -1,37 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import unittest
-
 from django.test import TestCase
-from rest_framework.schemas import SchemaGenerator
 
 from .models import Provider, Scenario, Category, ScenarioCategoryRating
-
-
-class IgnoreFilterFieldsSchemaGenerator(SchemaGenerator):
-    def get_filter_fields(*args, **kwargs):
-        return []
-
-
-class SchemaTest(TestCase):
-    def setUp(self):
-        # get the api schema
-        generator = IgnoreFilterFieldsSchemaGenerator()
-        self.schema = generator.get_schema()
-
-    def test_v1_endpoints(self):
-        v1_endpoints = self.schema['v1']
-
-        for name, obj in v1_endpoints.items():
-            for method, link in obj.items():
-                # only test 'list' endpoints for now
-                if method != 'list':
-                    continue
-
-                #print("Testing endpoint %s (%s)" % (name, method))
-                self.assertFalse(any(field.required for field in link.fields))
-                response = getattr(self.client, link.action)(link.url)
-                self.assertEqual(response.status_code, 200)
 
 
 class ScenarioCategoryRatingFixupTest(TestCase):
