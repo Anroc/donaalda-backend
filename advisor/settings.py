@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'markdown',
     'material',
     'material.admin',
+    'simple_history',
     'django_filters',
     'markdownx',
     'django.contrib.admin',
@@ -64,6 +65,7 @@ INSTALLED_APPS = [
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'app.disable.DisableCSRF',
+    'simple_history.middleware.HistoryRequestMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from markdownx.admin import MarkdownxModelAdmin
+from simple_history.admin import SimpleHistoryAdmin
 
 from .adminForms import (EmployeeCreationForm,
                          EmployeeChangeForm)
@@ -28,7 +29,7 @@ from .models import (
 )
 
 
-class ScenarioAdmin(admin.ModelAdmin):
+class ScenarioAdmin(SimpleHistoryAdmin):
     actions = []
 
     exclude = ['url_name']
@@ -61,7 +62,7 @@ class CommentAdmin(admin.ModelAdmin):
     actions = []
 
 
-class ProductAdmin(MarkdownxModelAdmin):
+class ProductAdmin(SimpleHistoryAdmin):
     actions = []
 
     exclude = []
@@ -91,7 +92,7 @@ class ProductAdmin(MarkdownxModelAdmin):
         obj.save()
 
 
-class ProviderProfileAdmin(admin.ModelAdmin):
+class ProviderProfileAdmin(SimpleHistoryAdmin):
     actions = []
 
     exclude = ['url_name']
@@ -123,7 +124,7 @@ class UserImageInline(admin.StackedInline):
     model = UserImage
 
 
-class EmployeeAdmin(UserAdmin):
+class EmployeeAdmin(SimpleHistoryAdmin):
     actions = []
 
     add_form = EmployeeCreationForm
@@ -167,7 +168,7 @@ class EmployeeAdmin(UserAdmin):
         obj.save()
 
 
-class UserAdmin(UserAdmin):
+class UserAdmin(UserAdmin, SimpleHistoryAdmin):
     inlines = (UserImageInline,)
 
 
@@ -175,25 +176,25 @@ class QuestionAnswerInline(admin.StackedInline):
     model = Answer
 
 
-class QuestionAdmin(admin.ModelAdmin):
+class QuestionAdmin(SimpleHistoryAdmin):
     inlines = (QuestionAnswerInline,)
 
 
 admin.site.unregister(User)
-admin.site.register(Category)
+admin.site.register(Category, SimpleHistoryAdmin)
 admin.site.register(Scenario, ScenarioAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Employee, EmployeeAdmin)
-admin.site.register(Provider)
+admin.site.register(Provider, SimpleHistoryAdmin)
 admin.site.register(ProviderProfile, ProviderProfileAdmin)
-admin.site.register(ProductType)
-admin.site.register(SubCategoryDescription)
+admin.site.register(ProductType, SimpleHistoryAdmin)
+admin.site.register(SubCategoryDescription, SimpleHistoryAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Answer)
-admin.site.register(Feature)
-admin.site.register(MetaDevice)
-admin.site.register(ScenarioCategoryRating)
-admin.site.register(Protocol)
-admin.site.register(SubCategory)
+admin.site.register(Answer, SimpleHistoryAdmin)
+admin.site.register(Feature, SimpleHistoryAdmin)
+admin.site.register(MetaDevice, SimpleHistoryAdmin)
+admin.site.register(ScenarioCategoryRating, SimpleHistoryAdmin)
+admin.site.register(Protocol, SimpleHistoryAdmin)
+admin.site.register(SubCategory, SimpleHistoryAdmin)

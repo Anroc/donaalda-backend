@@ -10,6 +10,8 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from markdownx.models import MarkdownxField
 
+from simple_history.models import HistoricalRecords
+
 from .validators import validate_legal_chars
 from .constants import MINIMAL_RATING_VALUE, MAXIMAL_RATING_VALUE
 
@@ -67,6 +69,7 @@ class Category(models.Model):
     short_description = models.TextField(verbose_name="Kurzbeschreibung", max_length=170, default="---")
     description = models.TextField(verbose_name="Beschreibung", default="---")
     iconString = models.CharField(max_length=20, default="gift", verbose_name="Zu verwendenes Icon")
+    history = HistoricalRecords()
 
     def __str__(self):
         return '%s' % self.name
@@ -101,6 +104,7 @@ class Scenario(models.Model):
                                                    blank=True)
     thumbnail = ImageSpecField(source='picture', processors=[ResizeToFill(200, 100)], format='JPEG')
     title = models.CharField(max_length=255, default="---")
+    history = HistoricalRecords()
 
     def __str__(self):
         return '%s' % self.name
@@ -141,6 +145,7 @@ class SubCategoryDescription(models.Model):
                                format='JPEG')
     left_right = models.BooleanField(verbose_name="Bild auf der rechten Seite zeigen")
     order = models.IntegerField(verbose_name="Reihenfolge")
+    history = HistoricalRecords()
 
     def __str__(self):
         return '%s %s' % (self.belongs_to_subcategory, self.order)
@@ -179,6 +184,7 @@ class Product(models.Model):
     follower_protocol = models.ManyToManyField(to="Protocol", verbose_name="Spricht Protokoll im follower modus",
                                                related_name="protocol_follower", blank=True)
     features = models.ManyToManyField(to="Feature", verbose_name="Hat Features")
+    history = HistoricalRecords()
 
     def __str__(self):
         return '%s' % self.name
@@ -216,6 +222,7 @@ class ProductType(models.Model):
     icon = models.FileField(
             verbose_name="Bildicon", null=True, blank=True,
             upload_to="productType/house_overlay_picture")
+    history = HistoricalRecords()
 
     def __str__(self):
         return '%s' % self.type_name
@@ -239,6 +246,7 @@ class Provider(models.Model):
     public_name = models.CharField(max_length=200, unique=True, verbose_name="öffentlicher Name")
     logo_image = models.ImageField(verbose_name="Provider Logo für Szenarien und Produkte", upload_to="provider",
                                    help_text="Dieses Logo wird nur bei den Produkten als kleines Icon angezeigt.")
+    history = HistoricalRecords()
 
     def __str__(self):
         return '%s' % self.name
@@ -268,6 +276,7 @@ class ProviderProfile(models.Model):
     contact_email = models.EmailField(verbose_name="Kontakt-Email")
     website = models.URLField()
     owner = models.OneToOneField(Provider, default="1", verbose_name="Eigentümer", on_delete=models.CASCADE)
+    history = HistoricalRecords()
 
     def __str__(self):
         return '%s' % self.public_name
@@ -289,6 +298,7 @@ class Employee(User):
     """
 
     employer = models.ForeignKey("Provider", on_delete=models.CASCADE, verbose_name="Arbeitgeber")
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = "Angestellter"
@@ -322,6 +332,7 @@ class Comment(models.Model):
                                               validators=[MinValueValidator(0), MaxValueValidator(5)], default='0')
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name="Erstellungsdatum")
     page_url = models.CharField(default='', max_length=255, verbose_name="Seiten-URL")
+    history = HistoricalRecords()
 
     def __str__(self):
         return 'Where: %s | Title: %s | By: %s' % (self.page_url, self.comment_title, self.comment_from.username)
@@ -365,6 +376,7 @@ class Question(models.Model):
                                      null=True, blank=True)
     rating_max = models.IntegerField("Maximaler Wert für Antworten",
                                      null=True, blank=True)
+    history = HistoricalRecords()
 
     def __str__(self):
         return '%s -- %s' % (self.question_text, self.get_answer_presentation_display())
@@ -381,6 +393,7 @@ class Answer(models.Model):
     belongs_to_question = models.ForeignKey(to="Question", on_delete=models.CASCADE, verbose_name="gehört zu Frage")
     answer_text = models.CharField(max_length=255, null=False, blank=False, verbose_name="Anworttext")
     icon_name = models.CharField(max_length=100, null=True, blank=True)
+    history = HistoricalRecords()
 
     def __str__(self):
         return '%s zu "%s"' % (self.answer_text, self.belongs_to_question.question_text)
@@ -393,6 +406,7 @@ class Answer(models.Model):
 
 class Protocol(models.Model):
     name = models.CharField(max_length=255)
+    history = HistoricalRecords()
 
     def __str__(self):
         return self.name
@@ -403,6 +417,7 @@ class Protocol(models.Model):
 
 class Feature(models.Model):
     name = models.CharField(max_length=255)
+    history = HistoricalRecords()
 
     def __str__(self):
         return self.name
@@ -416,6 +431,7 @@ class MetaDevice(models.Model):
     is_broker = models.BooleanField(default=True, verbose_name="Ist das Metadevice ein Broker")
     implementation_requires = models.ManyToManyField(to="Feature",
                                                      verbose_name="Definiert von folgender Featuresammlung")
+    history = HistoricalRecords()
 
     def __str__(self):
         if self.is_broker:
@@ -443,6 +459,7 @@ class SubCategory(models.Model):
     used_as_filter_by = models.ManyToManyField(to=Session,
                                                verbose_name="Benutzer die diese Subkategorie als Szenariofilter verwenden",
                                                blank=True)
+    history = HistoricalRecords()
 
     def __str__(self):
         return self.name
@@ -457,6 +474,7 @@ class ScenarioCategoryRating(models.Model):
     rating = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(MINIMAL_RATING_VALUE), MaxValueValidator(MAXIMAL_RATING_VALUE)],
         verbose_name="Passfaehigkeit")
+    history = HistoricalRecords()
 
     def __str__(self):
         return "%s passt zu %s mit rating %d" % (self.scenario, self.category, self.rating)
