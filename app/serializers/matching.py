@@ -65,7 +65,7 @@ class MatchingSerializerBase(serializers.Serializer):
                 for entry in validated_data['shopping_basket'])
 
         # remove all unused keys not needed by the MatchingInputBase constructor
-        for unused_key in validated_data.keys() - MatchingInputBase._fields:
+        for unused_key in validated_data.keys() - set(MatchingInputBase._fields):
             del validated_data[unused_key]
 
         # technically, this isn't needed anywhere but it is consistent with the

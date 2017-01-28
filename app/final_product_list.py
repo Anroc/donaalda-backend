@@ -80,7 +80,7 @@ class ProductListInputSerializer(MatchingSerializerBase):
                         entry[LOCKEDPRODUCTS_PRODUCT_ID])
                 for entry in validated_data['locked_products'])
 
-        for unused_key in validated_data.keys() - ProductListInput._fields:
+        for unused_key in validated_data.keys() - set(ProductListInput._fields):
             del validated_data[unused_key]
 
         return ProductListInput(**validated_data)
