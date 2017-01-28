@@ -13,11 +13,11 @@ from .logic import (
     implement_scenarios_from_input)
 from .forms import LoginForm
 from .permissions import *
-from .serializers import *
+from .serializers.v1 import *
 from .validators import *
 from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, \
     WeAreRESTfulNowException, InvalidShoppingBasketException
-from .final_product_list import FinalProductListSerializer, FinalProductListElement, NoShoppingBasketException
+from .final_product_list import ProductListInputSerializer, FinalProductListSerializer, FinalProductListElement, NoShoppingBasketException
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -119,18 +119,21 @@ class FinalProductList(generics.ListAPIView):
         return self.list(request)
 
     def get_queryset(self):
-        input_serializer = SuggestionsInputSerializer(data=self.request.data)
+        input_serializer = ProductListInputSerializer(data=self.request.data)
         input_serializer.is_valid(raise_exception=True)
-        suggestions_input = input_serializer.save()
+        productlist_input = input_serializer.save()
 
         shopping_basket_scenarios, unused = partition_scenarios(
-                suggestions_input.shopping_basket)
-        if not shopping_basket_scenarios:
-            raise NoShoppingBasketException
+                productlist_input.shopping_basket)
+
+        # the serializer validates both that the basket is non empty and that
+        # the ids in it are valid
+        assert shopping_basket_scenarios
 
         old_product_set, device_mapping = implement_scenarios_from_input(
-            None, shopping_basket_scenarios, suggestions_input
+            None, shopping_basket_scenarios, productlist_input
         )
+
         if not old_product_set:
             raise InvalidShoppingBasketException
 

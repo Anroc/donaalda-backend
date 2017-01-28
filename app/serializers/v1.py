@@ -1,16 +1,11 @@
-import markdown
+"""This module contains modelSerializers for the models defined in app.models.
+"""
+
 from rest_framework import serializers
-from .models import *
 from django.contrib.auth.models import User
 
-
-class MarkdownField(serializers.CharField):
-    def to_representation(self, instance):
-        return markdown.markdown(instance)
-
-
-class PkToIdSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(source='pk')
+from ..models import *
+from .utils import MarkdownField, PkToIdSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -5,7 +5,11 @@ from rest_framework import pagination, serializers, exceptions
 from rest_framework.utils.urls import replace_query_param
 
 from .constants import *
-from .serializers import ScenarioSerializer, ProductTypeSerializer
+from .serializers.v1 import ScenarioSerializer, ProductTypeSerializer
+from .serializers.matching import (
+        MatchingSerializerBase,
+        MatchingInputBase,
+)
 
 from .validators import (
         validate_scenario_preference,
@@ -60,37 +64,20 @@ class SuggestionsPagination(GeneratorPagination):
     default_limit = 6
 
 
-ShoppingBasketEntry = collections.namedtuple(
-        'ShoppingBasketEntry', [
-            SHOPPING_BASKET_SCENARIO_ID,
-            SHOPPING_BASKET_PRODUCT_TYPE_FILTER])
-
-
+# Implementation note: we have no idea what order the fields of this tuple are
+# going to be in. We also don't care, it's basically a hashable dict anyway.
 SuggestionsInput = collections.namedtuple(
-        'SuggestionsInput', [
+        'SuggestionsInput', set(MatchingInputBase._fields).union({
             'scenario_preference',
-            'product_preference',
-            'renovation_preference',
             'product_type_filter',
             'subcategory_filter',
-            'shopping_basket',
-        ])
+        }))
 
 
-class ShoppingBasketEntrySerializer(serializers.Serializer):
-    scenario_id = serializers.IntegerField()
-    product_type_filter = serializers.ListField(
-            child=serializers.IntegerField()
-    )
-
-
-class SuggestionsInputSerializer(serializers.Serializer):
+class SuggestionsInputSerializer(MatchingSerializerBase):
     scenario_preference = serializers.DictField(
             child=serializers.IntegerField(),
             validators=[validate_scenario_preference])
-    product_preference = serializers.ChoiceField(
-            choices=[PRODUCT_PREF_PRICE, PRODUCT_PREF_EFFICIENCY, PRODUCT_PREF_EXTENDABILITY])
-    renovation_preference = serializers.BooleanField()
 
     product_type_filter = serializers.ListField(
             required=False,
@@ -103,29 +90,22 @@ class SuggestionsInputSerializer(serializers.Serializer):
             default=[],
             child=serializers.IntegerField(),
             validators=[validate_subcategory_filter])
-    shopping_basket = serializers.ListField(
-            required=False,
-            default=[],
-            child=ShoppingBasketEntrySerializer(),
-            validators=[validate_scenario_id]
-    )
 
     def create(self, validated_data):
-        # We have to make the suggestions input hashable since that is required
-        # for some matching algorithms. In particular this means turning all
-        # lists into frozensets and the shopping basket entry objects into
-        # instances of the corresponding namedtuple
+        # we need the .copy() because the base serializer throws away everything
+        # it does not need to fit into the BaseInput constructor. We could
+        # modify it so that it doesn't do that but I think it is cleaner this
+        # way because it keeps the method side effect free (if you copy the data
+        # beforehand)
+        base = super().create(validated_data.copy())
+        validated_data.update(base._asdict())
+
         validated_data['product_type_filter'] = frozenset(
                 validated_data['product_type_filter'])
         validated_data['subcategory_filter'] = frozenset(
                 validated_data['subcategory_filter'])
         validated_data['scenario_preference'] = frozenset(
                 validated_data['scenario_preference'].items())
-        validated_data['shopping_basket'] = frozenset(
-                ShoppingBasketEntry(
-                        entry['scenario_id'],
-                        frozenset(entry['product_type_filter']))
-                for entry in validated_data['shopping_basket'])
 
         return SuggestionsInput(**validated_data)
 
