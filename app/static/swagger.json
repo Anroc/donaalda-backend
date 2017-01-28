@@ -123,6 +123,16 @@
         }
       },
       "required": ["shopping_basket"]
+    },
+    "productalternatives_input": {
+      "allOf": [{ "$ref": "#/definitions/productlist_input" }],
+      "properties": {
+        "replacement_slot": {
+          "allOf": [{ "$ref": "#/definitions/slot_id" }],
+          "default": [1]
+        }
+      },
+      "required": ["replacement_slot"]
     }
   },
   "paths": {
@@ -182,6 +192,28 @@
           {
             "schema": {
               "$ref": "#/definitions/productlist_input"
+            },
+            "name": "data",
+            "in": "body"
+          }
+        ]
+      }
+    },
+    "/api/swagger/product_alternatives": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Returns a list of product alternatives for a given replacement slot."
+          }
+        },
+        "operationId": "product_alternatives_create",
+        "tags": [
+          "swagger"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/productalternatives_input"
             },
             "name": "data",
             "in": "body"

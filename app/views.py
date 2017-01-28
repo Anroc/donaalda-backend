@@ -15,9 +15,23 @@ from .forms import LoginForm
 from .permissions import *
 from .serializers.v1 import *
 from .validators import *
-from .suggestions import SuggestionsInputSerializer, ScenarioImpl, SuggestionsOutputSerializer, SuggestionsPagination, \
-    WeAreRESTfulNowException, InvalidShoppingBasketException
-from .final_product_list import ProductListInputSerializer, FinalProductListSerializer, FinalProductListElement, NoShoppingBasketException
+from .suggestions import (
+        SuggestionsInputSerializer,
+        ScenarioImpl,
+        SuggestionsOutputSerializer,
+        SuggestionsPagination,
+        WeAreRESTfulNowException,
+        InvalidShoppingBasketException
+)
+from .final_product_list import (
+        ProductListInputSerializer,
+        ProductAlternativesInputSerializer,
+        FinalProductListSerializer,
+        FinalProductListElement,
+        ProductAlternativesSerializer,
+        ProductAlternativesElement,
+        NoShoppingBasketException,
+)
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -137,12 +151,38 @@ class FinalProductList(generics.ListAPIView):
         if not old_product_set:
             raise InvalidShoppingBasketException
 
+        # mockety mock mock mothermocker
+        # TODO: remove
+        import random
+
         return [
-                FinalProductListElement(product,
-                                        [scenario.id for scenario in scenarios]
-                                        )
+                FinalProductListElement(product, [
+                        # TODO: this should definitely be replaced with a real implementation
+                        random.choice(list(scenarios)).meta_broker.pk
+                ], [
+                        scenario.id for scenario in scenarios
+                ])
                 for product, scenarios in device_mapping.products.items()
             ]
 
     def get_serializer_class(self):
         return FinalProductListSerializer
+
+
+@permission_classes((permissions.AllowAny,))
+class ProductAlternatives(generics.ListAPIView):
+    serializer_class = ProductAlternativesSerializer
+
+    def get(self, request, format=None):
+        raise WeAreRESTfulNowException
+
+    def post(self, request, format=None):
+        return self.list(request)
+
+    def get_queryset(self):
+        input_serializer = ProductAlternativesInputSerializer(data=self.request.data)
+        input_serializer.is_valid(raise_exception=True)
+        productalternatives_input = input_serializer.save()
+
+        # mockety mock mock mothermocker
+        return [ ProductAlternativesElement(p) for p in Product.objects.all()[:4] ]
