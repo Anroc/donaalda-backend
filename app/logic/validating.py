@@ -39,10 +39,8 @@ def __filter_paths_for_valid_broker(paths, meta_endpoint, device_mapping, impl_o
             return paths
         else:
             # get all scenarios that this endpoint is implementing
-            scenarios = set().union(
-                *(device_mapping.endpoints[endpoint]
-                    for endpoint in device_mapping.originals_from_merged(meta_endpoint))
-            )
+            scenarios = device_mapping.endpoints[meta_endpoint]
+
             # get all brokers of the scenarios. This brokers are unmerged.
             brokers = {
                 scenario.meta_broker for scenario in scenarios

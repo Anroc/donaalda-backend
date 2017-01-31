@@ -74,9 +74,6 @@ class DeviceMapping(object):
             tmp[product] = self.products[product]
         self.products = tmp
 
-    def originals_from_merged(self, merged_device):
-        return {key for key in self.original_to_merged if merged_device is self.original_to_merged[key]}
-
     def merge_scenario(self, scenario):
         # TODO: this seems like it could be simplified even further but my main
         # conern here is to encapsulate these two method calls into an instance
