@@ -74,9 +74,6 @@ class DeviceMapping(object):
             tmp[product] = self.products[product]
         self.products = tmp
 
-    def originals_from_merged(self, merged_device):
-        return {key for key in self.original_to_merged if merged_device is self.original_to_merged[key]}
-
     def merge_scenario(self, scenario):
         # TODO: this seems like it could be simplified even further but my main
         # conern here is to encapsulate these two method calls into an instance
@@ -148,13 +145,12 @@ def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_
                         tmp_remove_keys.remove(merged_endpoint)
                     tmp_add_entries[new_me] = None
                     # remove updated mapping by calling the same function with inverted values
-                    update_original_to_merged_mapping(original_to_merged_mapping, merged_endpoint, new_me)
-                    continue
+                    update_original_to_merged_mapping(original_to_merged_mapping, new_me, merged_endpoint)
                 else:
                     tmp_remove_keys.add(merged_endpoint)
                     tmp_add_entries[new_me] = device_mapping[merged_endpoint].union({scenario})
                     # update mappings with ne endpoint that was merged
-                    update_original_to_merged_mapping(original_to_merged_mapping, new_me, merged_endpoint)
+                    update_original_to_merged_mapping(original_to_merged_mapping, merged_endpoint, new_me)
 
         # if the new meta endpoint could not be used as a new merge partner
         if new_me not in tmp_add_entries:
@@ -178,7 +174,12 @@ def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_
 
 
 def update_original_to_merged_mapping(mapping, replacee, replacer):
+    if replacer in mapping:
+        replacee = replacer
+        replacer = mapping[replacer]
+    else:
+        mapping[replacer] = replacer
     mapping[replacee] = replacer
     for key in mapping:
-        if mapping[key] is replacer:
-            mapping[key] = replacee
+        if mapping[key] is replacee:
+            mapping[key] = replacer
