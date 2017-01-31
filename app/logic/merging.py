@@ -145,13 +145,12 @@ def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_
                         tmp_remove_keys.remove(merged_endpoint)
                     tmp_add_entries[new_me] = None
                     # remove updated mapping by calling the same function with inverted values
-                    update_original_to_merged_mapping(original_to_merged_mapping, merged_endpoint, new_me)
+                    update_original_to_merged_mapping(original_to_merged_mapping, new_me, merged_endpoint)
                 else:
                     tmp_remove_keys.add(merged_endpoint)
                     tmp_add_entries[new_me] = device_mapping[merged_endpoint].union({scenario})
                     # update mappings with ne endpoint that was merged
-                    update_original_to_merged_mapping(original_to_merged_mapping, new_me, merged_endpoint)
-                continue
+                    update_original_to_merged_mapping(original_to_merged_mapping, merged_endpoint, new_me)
 
         # if the new meta endpoint could not be used as a new merge partner
         if new_me not in tmp_add_entries:
@@ -174,7 +173,7 @@ def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_
     return device_mapping
 
 
-def update_original_to_merged_mapping(mapping, replacer, replacee):
+def update_original_to_merged_mapping(mapping, replacee, replacer):
     if replacer in mapping:
         replacee = replacer
         replacer = mapping[replacer]
