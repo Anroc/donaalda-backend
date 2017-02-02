@@ -7,6 +7,8 @@ import app.models
 from .constants import (
         SHOPPING_BASKET_PRODUCT_TYPE_FILTER,
         SHOPPING_BASKET_SCENARIO_ID,
+        LOCKEDPRODUCTS_PRODUCT_ID,
+        LOCKEDPRODUCTS_SLOT_ID
 )
 
 
