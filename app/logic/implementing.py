@@ -1,9 +1,10 @@
 import logging
+import collections
 
 from ..models import Scenario
 from .data import __find_implementing_product, __get_bridges, __get_protocols, __direct_compatible
-from .validating import __filter_paths_for_valid_broker, __matches_product_type_preference, __cost_function
-from .utils import __dict_cross_product
+from .validating import Path, __filter_paths_for_valid_broker, __matches_product_type_preference, __cost_function
+from .utils import __dict_cross_product, dict_cross_product
 
 
 LOGGER = logging.getLogger(__name__)
@@ -52,25 +53,22 @@ def compute_matching_product_set(device_mapping, preference):
     # we already validated that each endpoint have at least one implementation
     product_sets = set()
     for broker_impl in impl_of_meta_device[meta_broker]:
-        possible_paths = dict()
+        # this enables us to do paths[thing].add(thing) without having to check
+        # if thing is already a key in there.
+        possible_paths = collections.defaultdict(set)
+
         for meta_endpoint in meta_endpoints:
             for endpoint_impl in impl_of_meta_device[meta_endpoint]:
                 # 2.1 call f
                 # take an broker impl and an endpoint impl and find the matching ways
                 res = __find_communication_partner(endpoint_impl, broker_impl, preference.renovation_preference)
                 res = __filter_paths_for_valid_broker(res, meta_endpoint, device_mapping, impl_of_meta_device)
-                if res:
-                    # convert inner set to frozenset and list to set
-                    res = set(
-                        ((frozenset(e))
-                            for e in res
-                         )
-                    )
-                    if meta_endpoint in possible_paths:
-                        possible_paths[meta_endpoint] = possible_paths[meta_endpoint].union(res)
-                    else:
-                        possible_paths[meta_endpoint] = res
-                    LOGGER.debug('%s->%s: %s' % (endpoint_impl, broker_impl, res))
+                for path_set in res:
+                    path = Path(endpoint_impl, path_set)
+
+                    possible_paths[meta_endpoint].add(path)
+
+                    LOGGER.debug('%s->%s: %s' % (endpoint_impl, broker_impl, path))
 
         # check if current broker impl can reach every endpoint
         if len(meta_endpoints) != len(possible_paths):
@@ -80,9 +78,10 @@ def compute_matching_product_set(device_mapping, preference):
         device_mapping.add_product(meta_broker, broker_impl)
         for me in meta_endpoints:
             for path in possible_paths[me]:
-                device_mapping.add_products(me, path)
+                device_mapping.add_products(me, path.products)
 
-        merged_set = __dict_cross_product(possible_paths)
+        solutions = dict_cross_product(possible_paths)
+        merged_set = set(map(lambda thing: frozenset().union(*map(lambda d: d.products, thing.values())), solutions))
 
         # apply filter for current scenario
         if device_mapping.suggested_scenario is not None:

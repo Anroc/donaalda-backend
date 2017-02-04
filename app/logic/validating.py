@@ -15,6 +15,22 @@ from .data import __get_broker_of_products, __get_protocols
 LOGGER = logging.getLogger(__name__)
 
 
+class Path(object):
+    """Represents a path between a endpoint from the merged meta device set and
+    the current implementation of the master broker.
+
+    Because of the way compute_matching_product_set is implemented, we only need
+    to store the implementation of the meta device and the set of products
+    involved in the communication (including endpoint and broker). The meta
+    device, the meta broker are aparent from the context the paths are created
+    in.
+    """
+
+    def __init__(self, endpoint_impl, products):
+        self.endpoint_impl = endpoint_impl
+        self.products = products
+
+
 def __filter_paths_for_valid_broker(paths, meta_endpoint, device_mapping, impl_of_meta_device):
     """
     This method filters the given paths for every path that contains a broker that is a
