@@ -141,7 +141,7 @@ def __remove_mismatching_paths(scenario, device_mapping, pt_filter, merged_set):
     return {elem for elem in merged_set if elem not in remove_paths}
 
 
-def __find_communication_partner(endpoint, target, renovation_allowed,  path=None, max_depth=None, bridges_visited=None):
+def __find_communication_partner(endpoint, target, renovation_allowed,  path=None, max_depth=None):
     """
     This function will serve the purpose we called small "f". It will find all ways from a given endpoint
     to a given target (most likely the master broker in the scenario/system). For this it will recursively
@@ -157,8 +157,6 @@ def __find_communication_partner(endpoint, target, renovation_allowed,  path=Non
         the current path this method traveled, only used in recursive calls
     :param max_depth:
         the maximal depth the algorithms should search; in loops it may be stuck and can't escape.
-    :param bridges_visited:
-        the reference to product bridges which was already visited, only used in recursive calls
     :return:
         list of sets of all matching product sets that allow the endpoint to communicate with the target
     """
@@ -171,10 +169,6 @@ def __find_communication_partner(endpoint, target, renovation_allowed,  path=Non
         current_path = path.copy()
     if max_depth is None:
         max_depth = 5
-    if bridges_visited is None:
-        current_bridges_visited = set()
-    else:
-        current_bridges_visited = bridges_visited.copy()
 
     # begin of the algorithm
     if max_depth <= 0:
@@ -183,13 +177,16 @@ def __find_communication_partner(endpoint, target, renovation_allowed,  path=Non
 
     # define methods for follower/leader protocols
     endpoint_protocols = __get_protocols(endpoint, False)
-    bridges = __get_bridges(renovation_allowed).difference({endpoint}).difference(current_bridges_visited).union({target})
+
+    assert endpoint not in current_path
+    current_path.add(endpoint)
+    paths = list()
+
+    bridges = __get_bridges(renovation_allowed).difference(current_path).union({target})
 
     if len(bridges) == 0:
         return list()
 
-    current_path.add(endpoint)
-    paths = list()
     for bridge in bridges:
         if __direct_compatible(__get_protocols(bridge, True), endpoint_protocols):
             if bridge == target:
@@ -197,7 +194,7 @@ def __find_communication_partner(endpoint, target, renovation_allowed,  path=Non
                 paths.append(current_path)
             else:
                 # recursive call with the current bridge as a new endpoint
-                next_path = __find_communication_partner(bridge, target, renovation_allowed, current_path, max_depth - 1, bridges)
+                next_path = __find_communication_partner(bridge, target, renovation_allowed, current_path, max_depth - 1)
                 if len(next_path) != 0:
                     paths.extend(next_path)
     return paths
