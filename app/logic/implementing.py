@@ -78,6 +78,13 @@ def compute_matching_product_set(device_mapping, preference):
         possible_solutions = map(lambda path_choice: Solution(path_choice, meta_broker, broker_impl, device_mapping), path_choices)
 
         solutions = set()
+
+        # extract shopping basket scenarios outside of the following loop to reduce database calls.
+        basket_elems = set()
+        for basket_elem in preference.shopping_basket:
+            scenario = Scenario.objects.get(pk=basket_elem.scenario_id)
+            basket_elems.add((scenario, basket_elem.product_type_filter))
+
         for possible_solution in possible_solutions:
             # apply filter for current suggested scenario
             if (device_mapping.suggested_scenario is not None and
@@ -93,13 +100,9 @@ def compute_matching_product_set(device_mapping, preference):
                 continue
 
             # filter for valid product filter of shopping basket
-            for basket_elem in preference.shopping_basket:
-                # TODO: resolve the shopping basket scenario id -> scenario
+            for basket_elem in basket_elems:
                 # reference at the view layer
-                scenario = Scenario.objects.get(pk=basket_elem.scenario_id)
-                pt_preference = basket_elem.product_type_filter
-                if not possible_solution.validate_scenario_product_filter(
-                        scenario, pt_preference):
+                if not possible_solution.validate_scenario_product_filter(basket_elem[0], basket_elem[1]):
                     break
             else:
                 # if the shopping basket checking loop terminated normally
