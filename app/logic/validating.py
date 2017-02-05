@@ -1,5 +1,6 @@
 import operator
 import logging
+import collections
 
 from .cache import cached
 
@@ -9,7 +10,7 @@ from ..constants import (
         PRODUCT_PREF_EXTENDABILITY
 )
 from .utils import __dict_cross_product
-from .data import __get_broker_of_products, __get_protocols
+from .data import get_broker_of_products, __get_protocols
 
 
 LOGGER = logging.getLogger(__name__)
@@ -90,7 +91,7 @@ def __filter_paths_for_valid_broker(paths, meta_endpoint, device_mapping, impl_o
 
 
 @cached(lambda ps, ptf: hash((frozenset(ps), frozenset(ptf))))
-def __matches_product_type_preference(product_set, product_type_filters):
+def matches_product_type_preference(product_set, product_type_filters):
     """
     Filters a given product set for the given product type filters.
 
@@ -111,7 +112,7 @@ def __matches_product_type_preference(product_set, product_type_filters):
     return all(product_type in product_types for product_type in product_type_filters)
 
 
-def __cost_function(product_sets, preference):
+def __cost_function(solutions, preference):
     """
     Cost function which decides which product set matches the user preferences
     best.
@@ -123,31 +124,69 @@ def __cost_function(product_sets, preference):
     :return:
         The product set that will match the user preferences the best.
     """
-    if len(product_sets) == 0:
-        return set()
+    return max(solutions, default=None, key=lambda solution: solution.rating(preference))
 
-    sorting = dict()
-    for current_set in product_sets:
+
+SolutionProductMeta = collections.namedtuple(
+        'SolutionProductMeta', [
+            'meta_devices', 'scenarios'
+        ])
+
+
+class Solution(object):
+    """Represents a (not necessarily valid) Solution (which is a set of products
+    with some meta information attached)."""
+
+    def __init__(self, path_choice, meta_broker, broker_impl, device_mapping):
+        """Construct a solution from a path choice which maps every meta device
+        to a path to a possible implementation."""
+        self.products = collections.defaultdict(
+                lambda: SolutionProductMeta(set(), set()))
+        for metadevice, path in path_choice.items():
+            scenarios = device_mapping.endpoints[metadevice]
+            self.products[path.endpoint_impl].meta_devices.add(metadevice)
+            for product in path.products:
+                self.products[product].scenarios.update(scenarios)
+
+        # TODO: figure out how to extract what products implement the mandatory
+        # brokers in device_mapping.bridges. This information gets lost
+        # somewhere in __filter_paths_for_valid_broker
+
+        self.products[broker_impl].meta_devices.add(meta_broker)
+
+        # we need to remove the factory from the default dict to make the
+        # solution cachable
+        self.products.default_factory = None
+
+    def rating(self, preference):
+        """Return a (floating point) number representing the cost of this
+        solution according to the product preference (price, extendability,
+        ...).
+
+        Higher is better.
+        """
         # will resolve in set that contains the master broker and other bridges; this set is at least on element big
-        broker = __get_broker_of_products(current_set)
+        broker = get_broker_of_products(self.products.keys())
 
         x = 1
         if preference.product_preference == PRODUCT_PREF_EXTENDABILITY:
             x = 0
-            for product in current_set:
+            for product in self.products:
                 x += len(__get_protocols(product, True)) + len(__get_protocols(product, False))
-            sorting[current_set] = 1.0 / (float(len(broker)**2) / x)
+            return 1.0 / (float(len(broker)**2) / x)
         elif preference.product_preference == PRODUCT_PREF_PRICE:
-            for product in current_set:
+            for product in self.products:
                 x += product.price
-            sorting[current_set] = 1. / x * 0.95 ** len(broker)
+            return 1. / x * 0.95 ** len(broker)
         elif preference.product_preference == PRODUCT_PREF_EFFICIENCY:
-            for product in current_set:
+            for product in self.products:
                 x += product.efficiency
-            sorting[current_set] = 1. / x * 0.95 ** len(broker)
+            return 1. / x * 0.95 ** len(broker)
         else:
             raise(AttributeError("Unsupported preference %s" % preference.product_preference))
-        # search for minimum
-    if sorting:
-        return sorted(sorting.items(), key=operator.itemgetter(1))[-1][0]
-    return set()
+
+    def validate_scenario_product_filter(self, scenario, device_mapping, pt_filter):
+        scenario_p_set = {
+                elem for elem in self.products.keys()
+                if scenario in device_mapping.products[elem]}
+        return matches_product_type_preference(scenario_p_set, pt_filter)

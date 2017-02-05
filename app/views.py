@@ -108,17 +108,18 @@ class Suggestions(generics.ListAPIView):
                 sorting_scenarios, suggestions_input)
 
         if shopping_basket:
-            old_product_set, unused = implement_scenarios_from_input(None, shopping_basket, suggestions_input)
-            if not old_product_set:
+            old_solution = implement_scenarios_from_input(None, shopping_basket, suggestions_input)
+            if not old_solution:
                 raise InvalidShoppingBasketException
+            old_product_set = old_solution.products.keys()
         else:
             old_product_set = None
 
         for scenario, rating in sorted_tuple_list:
             # don't need the device mappings
-            product_set, unused = implement_scenarios_from_input(scenario, shopping_basket, suggestions_input)
-            if product_set:
-                yield ScenarioImpl(product_set, old_product_set, scenario, rating)
+            new_solution = implement_scenarios_from_input(scenario, shopping_basket, suggestions_input)
+            if new_solution:
+                yield ScenarioImpl(new_solution.products.keys(), old_product_set, scenario, rating)
 
     def get_serializer_class(self):
         return SuggestionsOutputSerializer
@@ -144,11 +145,11 @@ class FinalProductList(generics.ListAPIView):
         # the ids in it are valid
         assert shopping_basket_scenarios
 
-        old_product_set, device_mapping = implement_scenarios_from_input(
+        solution = implement_scenarios_from_input(
             None, shopping_basket_scenarios, productlist_input
         )
 
-        if not old_product_set:
+        if not solution:
             raise InvalidShoppingBasketException
 
         # mockety mock mock mothermocker
@@ -158,11 +159,11 @@ class FinalProductList(generics.ListAPIView):
         return [
                 FinalProductListElement(product, [
                         # TODO: this should definitely be replaced with a real implementation
-                        random.choice(list(scenarios)).meta_broker.pk
+                        random.choice(list(meta.scenarios)).meta_broker.pk
                 ], [
-                        scenario.id for scenario in scenarios
+                        scenario.id for scenario in meta.scenarios
                 ])
-                for product, scenarios in device_mapping.products.items()
+                for product, meta in solution.products.items()
             ]
 
     def get_serializer_class(self):
