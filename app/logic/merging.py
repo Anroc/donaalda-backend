@@ -122,11 +122,12 @@ def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_
             if merged_endpoint_features.issubset(new_md_features):
                 # check if current element is already in the merged list
                 if merged_endpoint in tmp_remove_keys:
+                    # We merge the meta device in the first slot we find.
+                    # This will happen anyways and we should think probably about a better solution here.
+                    # TODO: find best merging partner or return all possibilities.
+                    # Same applies for the warning logging below.
                     LOGGER.warning("Can't merge current meta device (" + str(merged_endpoint)
                                    + ") has more than one possible merge option.")
-                    # del tmp_remove_keys[merged_endpoint]
-                    # remove updated mapping by calling the same function with inverted values
-                    # update_original_to_merged_mapping(original_to_merged_mapping, new_me, merged_endpoint)
                 else:
                     tmp_remove_keys.add(merged_endpoint)
                     tmp_add_entries[new_me] = device_mapping[merged_endpoint].union({scenario})
@@ -136,10 +137,6 @@ def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_
                 if merged_endpoint in tmp_add_entries:
                     LOGGER.warning("Can't merge current meta device (" + str(new_me)
                                    + ") has more than one possible merge option.")
-                    # if merged_endpoint in tmp_remove_keys:
-                    #    del tmp_remove_keys[merged_endpoint]
-                    # remove updated mapping by calling the same function with inverted values
-                    # update_original_to_merged_mapping(original_to_merged_mapping, merged_endpoint, new_me)
                 else:
                     if new_me in device_mapping:
                         tmp_remove_keys.add(new_me)
