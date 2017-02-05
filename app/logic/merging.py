@@ -11,44 +11,33 @@ class DeviceMapping(object):
     """
 
     def __init__(
-        self, suggested_scenario, endpoints=None, broker=None, products=None, bridges=None, original_to_merged=None
+        self, suggested_scenario, endpoints=None, broker=None, bridges=None, original_to_merged=None
     ):
         self.suggested_scenario = suggested_scenario
         if endpoints is None:
             endpoints = dict()
         if broker is None:
             broker = dict()
-        if products is None:
-            products = dict()
         if bridges is None:
             bridges = dict()
         if original_to_merged is None:
             original_to_merged = dict()
         self.endpoints = endpoints
         self.broker = broker
-        self.products = products
         self.bridges = bridges
         self.original_to_merged = original_to_merged
 
     def get_any_broker(self):
         return list(self.broker.keys())[0]
 
-    def add_product(self, meta_device, product):
-        scenarios = set()
-        if product in self.products:
-            scenarios = self.products[product]
+    def get_scenarios_for_metadevice(self, meta_device):
         if meta_device.is_broker:
             if meta_device in self.broker:
-                self.products[product] = self.broker[meta_device].union(scenarios)
+                return self.broker[meta_device]
             else:
-                self.products[product] = self.bridges[meta_device].union(scenarios)
-            return
+                return self.bridges[meta_device]
         # else: broker is shifted to endpoints
-        self.products[product] = self.endpoints[meta_device].union(scenarios)
-
-    def add_products(self, meta_device, products):
-        for product in products:
-            self.add_product(meta_device, product)
+        return self.endpoints[meta_device]
 
     def shift_all_brokers_except(self, broker):
         other = self.__copy__()
@@ -63,16 +52,9 @@ class DeviceMapping(object):
             self.suggested_scenario,
             self.endpoints.copy(),
             self.broker.copy(),
-            self.products.copy(),
             self.bridges.copy(),
             self.original_to_merged.copy()
         )
-
-    def intersect_products(self, products):
-        tmp = dict()
-        for product in products:
-            tmp[product] = self.products[product]
-        self.products = tmp
 
     def merge_scenario(self, scenario):
         # TODO: this seems like it could be simplified even further but my main

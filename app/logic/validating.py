@@ -143,7 +143,7 @@ class Solution(object):
         self.products = collections.defaultdict(
                 lambda: SolutionProductMeta(set(), set()))
         for metadevice, path in path_choice.items():
-            scenarios = device_mapping.endpoints[metadevice]
+            scenarios = device_mapping.get_scenarios_for_metadevice(metadevice)
             self.products[path.endpoint_impl].meta_devices.add(metadevice)
             for product in path.products:
                 self.products[product].scenarios.update(scenarios)
@@ -152,6 +152,8 @@ class Solution(object):
         # brokers in device_mapping.bridges. This information gets lost
         # somewhere in __filter_paths_for_valid_broker
 
+        # set the meta device for the master broker (the scenarios are already
+        # set since it is included in every path)
         self.products[broker_impl].meta_devices.add(meta_broker)
 
         # we need to remove the factory from the default dict to make the
@@ -185,8 +187,8 @@ class Solution(object):
         else:
             raise(AttributeError("Unsupported preference %s" % preference.product_preference))
 
-    def validate_scenario_product_filter(self, scenario, device_mapping, pt_filter):
+    def validate_scenario_product_filter(self, scenario, pt_filter):
         scenario_p_set = {
-                elem for elem in self.products.keys()
-                if scenario in device_mapping.products[elem]}
+                elem for elem, meta in self.products.items()
+                if scenario in meta.scenarios}
         return matches_product_type_preference(scenario_p_set, pt_filter)

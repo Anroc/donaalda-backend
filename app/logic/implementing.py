@@ -74,12 +74,6 @@ def compute_matching_product_set(device_mapping, preference):
         if len(meta_endpoints) != len(possible_paths):
             continue
 
-        # add products to DeviceMapping
-        device_mapping.add_product(meta_broker, broker_impl)
-        for me in meta_endpoints:
-            for path in possible_paths[me]:
-                device_mapping.add_products(me, path.products)
-
         path_choices = dict_cross_product(possible_paths)
         possible_solutions = map(lambda path_choice: Solution(path_choice, meta_broker, broker_impl, device_mapping), path_choices)
 
@@ -89,7 +83,6 @@ def compute_matching_product_set(device_mapping, preference):
             if (device_mapping.suggested_scenario is not None and
                 not possible_solution.validate_scenario_product_filter(
                         device_mapping.suggested_scenario,
-                        device_mapping,
                         preference.product_type_filter)):
                 continue
 
@@ -100,7 +93,7 @@ def compute_matching_product_set(device_mapping, preference):
                 scenario = Scenario.objects.get(pk=basket_elem.scenario_id)
                 pt_preference = basket_elem.product_type_filter
                 if not possible_solution.validate_scenario_product_filter(
-                        scenario, device_mapping, pt_preference):
+                        scenario, pt_preference):
                     continue
 
             solutions.add(possible_solution)
