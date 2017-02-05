@@ -31,6 +31,7 @@ from .final_product_list import (
         ProductAlternativesSerializer,
         ProductAlternativesElement,
         NoShoppingBasketException,
+        InvalidReplacementSlotException,
 )
 
 
@@ -178,7 +179,26 @@ class ProductAlternatives(generics.ListAPIView):
     def get_queryset(self):
         input_serializer = ProductAlternativesInputSerializer(data=self.request.data)
         input_serializer.is_valid(raise_exception=True)
-        productalternatives_input = input_serializer.save()
+        productlist_input, slot_ids = input_serializer.save()
+
+        shopping_basket_scenarios, unused = partition_scenarios(
+                productlist_input.shopping_basket)
+
+        # the serializer validates both that the basket is non empty and that
+        # the ids in it are valid
+        assert shopping_basket_scenarios
+
+        solution = implement_scenarios_from_input(
+                None, shopping_basket_scenarios, productlist_input
+        )
+
+        if not solution:
+            raise InvalidShoppingBasketException
+
+        slot = frozenset(MetaDevice.objects.filter(pk__in=slot_ids))
+
+        if slot not in solution.slot_alternatives:
+            raise InvalidReplacementSlotException
 
         # mockety mock mock mothermocker
-        return [ ProductAlternativesElement(p) for p in Product.objects.all()[:4] ]
+        return [ ProductAlternativesElement(p) for p in solution.slot_alternatives[slot] ]

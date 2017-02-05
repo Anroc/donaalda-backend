@@ -144,6 +144,9 @@ def __cost_function(solutions, preference):
         if solution.rating(preference) > best.rating(preference):
             best = solution
 
+    # some sanity checking ([] is an invalid slot)
+    assert frozenset() not in alternatives
+
     # update the product alternatives of the found best solution
     best.slot_alternatives = alternatives
 
