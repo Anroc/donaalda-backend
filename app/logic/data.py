@@ -155,7 +155,7 @@ def __get_products(renovation_allowed=True):
                'features').filter(renovation_required=False))
 
 
-def __get_broker_of_products(product_set):
+def get_broker_of_products(product_set):
     return_set = set()
     for product in product_set:
         if len(__get_protocols(product, True)) > 0:

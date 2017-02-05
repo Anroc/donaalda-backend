@@ -129,7 +129,7 @@
       "properties": {
         "replacement_slot": {
           "allOf": [{ "$ref": "#/definitions/slot_id" }],
-          "default": [1]
+          "default": [13]
         }
       },
       "required": ["replacement_slot"]

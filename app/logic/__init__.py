@@ -26,8 +26,9 @@ def implement_scenarios_from_input(suggested_scenario, shopping_basket, preferen
     :param preference:
         the user defined preference
     :return:
-        best matching implementing product set
-        todo change
+        a Solution object representing the product set and meta information like
+        what scenarios they belong to and what replacement slots can be used to
+        replace them.
     """
     # extract shopping basket from user input
     if suggested_scenario is None:
@@ -47,24 +48,22 @@ def implement_scenarios_from_input(suggested_scenario, shopping_basket, preferen
         return compute_matching_product_set(meta_device_mapping, preference)
 
     # 2. case: meta brokers contain more then one element
-    all_possible_solutions = dict()
+    all_possible_solutions = set()
 
     for meta_broker in meta_device_mapping.broker.keys():
-        res, device_mapping = compute_matching_product_set(
+        solution = compute_matching_product_set(
                 meta_device_mapping.shift_all_brokers_except(meta_broker),
                 preference
             )
-        res = frozenset(res)
-        if res:
-            all_possible_solutions[res] = device_mapping
+        if solution:
+            all_possible_solutions.add(solution)
 
     if len(all_possible_solutions) == 0:
         # 2.1. if all possible solutions have no elements we return the empty set
-        return set(), None
+        return None
     elif len(all_possible_solutions) == 1:
         # 2.2. if all possible solutions have only one solution we are done.
-        return all_possible_solutions.popitem()
+        return all_possible_solutions.pop()
     else:
         # 2.3 if all possible solutions have more then one element we have to apply the cost function again
-        solution = __cost_function(set(all_possible_solutions.keys()), preference)
-        return solution, all_possible_solutions[frozenset(solution)]
+        return __cost_function(all_possible_solutions, preference)
