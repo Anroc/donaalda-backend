@@ -55,7 +55,8 @@ def implement_scenarios_from_input(suggested_scenario, shopping_basket, preferen
                 meta_device_mapping.shift_all_brokers_except(meta_broker),
                 preference
             )
-        all_possible_solutions.add(solution)
+        if solution:
+            all_possible_solutions.add(solution)
 
     if len(all_possible_solutions) == 0:
         # 2.1. if all possible solutions have no elements we return the empty set
