@@ -86,6 +86,12 @@ def compute_matching_product_set(device_mapping, preference):
                         preference.product_type_filter)):
                 continue
 
+            # check if the solution contains the locked products
+            if (hasattr(preference, 'locked_products') and
+                not possible_solution.satisfies_locked_products(
+                    preference.locked_products)):
+                continue
+
             # filter for valid product filter of shopping basket
             for basket_elem in preference.shopping_basket:
                 # TODO: resolve the shopping basket scenario id -> scenario

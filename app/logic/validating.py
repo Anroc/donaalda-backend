@@ -12,6 +12,8 @@ from ..constants import (
 from .utils import __dict_cross_product
 from .data import get_broker_of_products, __get_protocols
 
+from ..models import Product, MetaDevice
+
 
 LOGGER = logging.getLogger(__name__)
 
@@ -228,3 +230,15 @@ class Solution(object):
                 elem for elem, meta in self.products.items()
                 if scenario in meta.scenarios}
         return matches_product_type_preference(scenario_p_set, pt_filter)
+
+    def satisfies_locked_products(self, locked_products):
+        for slot_id, product_id in locked_products:
+            slot = frozenset(MetaDevice.objects.filter(pk__in=slot_id))
+            product = Product.objects.get(pk=product_id)
+            if slot not in self.slot_alternatives:
+                return False
+            if product not in self.products:
+                return False
+            if self.products[product].meta_devices != slot:
+                return False
+        return True
