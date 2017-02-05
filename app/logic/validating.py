@@ -124,28 +124,25 @@ def __cost_function(solutions, preference):
     :return:
         The product set that will match the user preferences the best.
     """
-    if not solutions:
-        return None
-
-    # this just selects the first element of the input set (afterwards iterator
-    # will allow for x in ying over the other elements of the set)
-    iterator = iter(solutions)
-    best = next(iterator)
+    best = None
 
     # kickstart our product alternatives collection
-    alternatives = collections.defaultdict(set, best.slot_alternatives)
+    alternatives = collections.defaultdict(set)
 
-    for solution in iterator:
+    for solution in solutions:
         # merge slot alternatives by adding the slot -> product mappings from the new solution
         for slot, products in solution.slot_alternatives.items():
             alternatives[slot].update(products)
 
         # continue with the new best solution
-        if solution.rating(preference) > best.rating(preference):
+        if not best or solution.rating(preference) > best.rating(preference):
             best = solution
 
     # some sanity checking ([] is an invalid slot)
     assert frozenset() not in alternatives
+
+    if not best:
+        return None
 
     # update the product alternatives of the found best solution
     best.slot_alternatives = alternatives
