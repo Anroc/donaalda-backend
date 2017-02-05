@@ -124,7 +124,31 @@ def __cost_function(solutions, preference):
     :return:
         The product set that will match the user preferences the best.
     """
-    return max(solutions, default=None, key=lambda solution: solution.rating(preference))
+    if not solutions:
+        return None
+
+    # this just selects the first element of the input set (afterwards iterator
+    # will allow for x in ying over the other elements of the set)
+    iterator = iter(solutions)
+    best = next(iterator)
+
+    # kickstart our product alternatives collection
+    alternatives = collections.defaultdict(set, best.slot_alternatives)
+
+    for solution in iterator:
+        # merge slot alternatives by adding the slot -> product mappings from the new solution
+        for slot, products in solution.slot_alternatives.items():
+            alternatives[slot].update(products)
+
+        # continue with the new best solution
+        if solution.rating(preference) > best.rating(preference):
+            best = solution
+
+    # update the product alternatives of the found best solution
+    best.slot_alternatives = alternatives
+
+    # and return it
+    return best
 
 
 SolutionProductMeta = collections.namedtuple(
@@ -142,6 +166,8 @@ class Solution(object):
         to a path to a possible implementation."""
         self.products = collections.defaultdict(
                 lambda: SolutionProductMeta(set(), set()))
+        self.slot_alternatives = collections.defaultdict(set)
+
         for metadevice, path in path_choice.items():
             scenarios = device_mapping.get_scenarios_for_metadevice(metadevice)
             self.products[path.endpoint_impl].meta_devices.add(metadevice)
@@ -156,9 +182,19 @@ class Solution(object):
         # set since it is included in every path)
         self.products[broker_impl].meta_devices.add(meta_broker)
 
+        # fill the slot alternatives (currently just with the products from this
+        # solution, they will be merged together with other solutions later)
+        for product, meta in self.products.items():
+            if meta.meta_devices != set():
+                self.slot_alternatives[frozenset(meta.meta_devices)].add(product)
+
         # we need to remove the factory from the default dict to make the
-        # solution cachable
+        # solution cachable (pickle can't serialize lambdas)
         self.products.default_factory = None
+        # we technically don't need to do this because the constructor of set is
+        # serializable but it is probably a good idea to do it anyway to avoid
+        # bugs
+        self.slot_alternatives.default_factory = None
 
     def rating(self, preference):
         """Return a (floating point) number representing the cost of this
