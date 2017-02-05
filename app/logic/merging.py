@@ -121,21 +121,34 @@ def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_
             # check if the current already merged endpoint is a subset of the current meta device
             if merged_endpoint_features.issubset(new_md_features):
                 # check if current element is already in the merged list
-                if new_me in tmp_add_entries:
-                    LOGGER.warning("Can't current meta device has more than one possible merge option.")
-                    if merged_endpoint in tmp_remove_keys:
-                        tmp_remove_keys.remove(merged_endpoint)
-                    tmp_add_entries[new_me] = None
+                if merged_endpoint in tmp_remove_keys:
+                    LOGGER.warning("Can't merge current meta device (" + str(merged_endpoint)
+                                   + ") has more than one possible merge option.")
+                    # del tmp_remove_keys[merged_endpoint]
                     # remove updated mapping by calling the same function with inverted values
-                    update_original_to_merged_mapping(original_to_merged_mapping, new_me, merged_endpoint)
+                    # update_original_to_merged_mapping(original_to_merged_mapping, new_me, merged_endpoint)
                 else:
                     tmp_remove_keys.add(merged_endpoint)
                     tmp_add_entries[new_me] = device_mapping[merged_endpoint].union({scenario})
                     # update mappings with ne endpoint that was merged
                     update_original_to_merged_mapping(original_to_merged_mapping, merged_endpoint, new_me)
+            elif new_md_features.issubset(merged_endpoint_features):
+                if merged_endpoint in tmp_add_entries:
+                    LOGGER.warning("Can't merge current meta device (" + str(new_me)
+                                   + ") has more than one possible merge option.")
+                    # if merged_endpoint in tmp_remove_keys:
+                    #    del tmp_remove_keys[merged_endpoint]
+                    # remove updated mapping by calling the same function with inverted values
+                    # update_original_to_merged_mapping(original_to_merged_mapping, merged_endpoint, new_me)
+                else:
+                    if new_me in device_mapping:
+                        tmp_remove_keys.add(new_me)
+                    tmp_add_entries[merged_endpoint] = device_mapping[merged_endpoint].union({scenario})
+                    # update mappings with ne endpoint that was merged
+                    update_original_to_merged_mapping(original_to_merged_mapping, new_me, merged_endpoint)
 
         # if the new meta endpoint could not be used as a new merge partner
-        if new_me not in tmp_add_entries:
+        if new_me not in original_to_merged_mapping:
             if new_me in device_mapping:
                 # meta device may be already in the set if included by other scenario
                 # can't be twice in tmp_add_entries since we only inspecting one scenario at time
@@ -149,18 +162,17 @@ def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_
         del device_mapping[tmp_remove_key]
 
     # add the meta_endpoints to the set of meta endpoints
-    device_mapping.update(
-        {key: tmp_add_entries[key] for key in tmp_add_entries if tmp_add_entries[key] is not None}
-    )
+    for key, value in tmp_add_entries.items():
+        if value is None:
+            device_mapping[key] = {scenario}
+        else:
+            device_mapping[key] = value
     return device_mapping
 
 
 def update_original_to_merged_mapping(mapping, replacee, replacer):
-    if replacer in mapping:
-        replacee = replacer
-        replacer = mapping[replacer]
-    else:
-        mapping[replacer] = replacer
+    if replacer not in mapping:
+        mapping[replacer] = replacee
     mapping[replacee] = replacer
     for key in mapping:
         if mapping[key] is replacee:
