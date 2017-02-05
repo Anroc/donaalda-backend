@@ -94,9 +94,10 @@ def compute_matching_product_set(device_mapping, preference):
                 pt_preference = basket_elem.product_type_filter
                 if not possible_solution.validate_scenario_product_filter(
                         scenario, pt_preference):
-                    continue
-
-            solutions.add(possible_solution)
+                    break
+            else:
+                # if the shopping basket checking loop terminated normally
+                solutions.add(possible_solution)
 
         # 3. apply cost function U_pref to get one product set
         solution = __cost_function(solutions, preference)
