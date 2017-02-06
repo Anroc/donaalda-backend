@@ -1,10 +1,10 @@
 import logging
 import collections
 
-from ..models import Scenario
-from .data import __find_implementing_product, __get_bridges, __get_protocols, __direct_compatible
+from ..models import Scenario, MetaDevice, Product
+from .data import __find_implementing_product, __get_bridges, get_protocols, __direct_compatible
 from .validating import Path, Solution, __filter_paths_for_valid_broker, __cost_function
-from .utils import __dict_cross_product, dict_cross_product
+from .utils import dict_cross_product
 
 
 LOGGER = logging.getLogger(__name__)
@@ -161,7 +161,7 @@ def __find_communication_partner(endpoint, target, renovation_allowed,  path=Non
         raise Exception("max_depth exceeded")
 
     # define methods for follower/leader protocols
-    endpoint_protocols = __get_protocols(endpoint, False)
+    endpoint_protocols = get_protocols(endpoint, False)
 
     assert endpoint not in current_path
     current_path.add(endpoint)
@@ -173,7 +173,7 @@ def __find_communication_partner(endpoint, target, renovation_allowed,  path=Non
         return list()
 
     for bridge in bridges:
-        if __direct_compatible(__get_protocols(bridge, True), endpoint_protocols):
+        if __direct_compatible(get_protocols(bridge, True), endpoint_protocols):
             if bridge == target:
                 current_path.add(target)
                 paths.append(current_path)
