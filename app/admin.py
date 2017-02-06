@@ -124,7 +124,7 @@ class UserImageInline(admin.StackedInline):
     model = UserImage
 
 
-class EmployeeAdmin(SimpleHistoryAdmin):
+class EmployeeAdmin(UserAdmin, SimpleHistoryAdmin):
     actions = []
 
     add_form = EmployeeCreationForm
