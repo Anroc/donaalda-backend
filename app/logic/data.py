@@ -155,6 +155,7 @@ def __get_products(renovation_allowed=True):
                'features').filter(renovation_required=False))
 
 
+@cached(lambda ps: hash(frozenset(ps)))
 def get_broker_of_products(product_set):
     return_set = set()
     for product in product_set:
