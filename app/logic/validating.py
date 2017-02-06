@@ -232,9 +232,7 @@ class Solution(object):
         return matches_product_type_preference(scenario_p_set, pt_filter)
 
     def satisfies_locked_products(self, locked_products):
-        for slot_id, product_id in locked_products:
-            slot = frozenset(MetaDevice.objects.filter(pk__in=slot_id))
-            product = Product.objects.get(pk=product_id)
+        for slot, product in locked_products:
             if slot not in self.slot_alternatives:
                 return False
             if product not in self.products:

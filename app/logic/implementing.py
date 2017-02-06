@@ -85,6 +85,13 @@ def compute_matching_product_set(device_mapping, preference):
             scenario = Scenario.objects.get(pk=basket_elem.scenario_id)
             basket_elems.add((scenario, basket_elem.product_type_filter))
 
+        locked_products = set()
+        if hasattr(preference, 'locked_products'):
+            for locked_product in preference.locked_products:
+                slot = frozenset(MetaDevice.objects.filter(pk__in=locked_product.slot_id))
+                product = Product.objects.get(pk=locked_product.product_id)
+                locked_products.add((slot, product))
+
         for possible_solution in possible_solutions:
             # apply filter for current suggested scenario
             if (device_mapping.suggested_scenario is not None and
@@ -94,9 +101,7 @@ def compute_matching_product_set(device_mapping, preference):
                 continue
 
             # check if the solution contains the locked products
-            if (hasattr(preference, 'locked_products') and
-                not possible_solution.satisfies_locked_products(
-                    preference.locked_products)):
+            if not possible_solution.satisfies_locked_products(locked_products):
                 continue
 
             # filter for valid product filter of shopping basket
@@ -122,8 +127,6 @@ def compute_matching_product_set(device_mapping, preference):
 
     # return the found solution
     return solution
-
-
 
 
 def __find_communication_partner(endpoint, target, renovation_allowed,  path=None, max_depth=None):
