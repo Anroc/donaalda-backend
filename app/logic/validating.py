@@ -10,7 +10,7 @@ from ..constants import (
         PRODUCT_PREF_EXTENDABILITY
 )
 from .utils import __dict_cross_product
-from .data import get_broker_of_products, __get_protocols
+from .data import get_broker_of_products, get_protocols
 
 from ..models import Product, MetaDevice
 
@@ -212,7 +212,7 @@ class Solution(object):
         if preference.product_preference == PRODUCT_PREF_EXTENDABILITY:
             x = 0
             for product in self.products:
-                x += len(__get_protocols(product, True)) + len(__get_protocols(product, False))
+                x += len(get_protocols(product, True)) + len(get_protocols(product, False))
             return 1.0 / (float(len(broker)**2) / x)
         elif preference.product_preference == PRODUCT_PREF_PRICE:
             for product in self.products:
@@ -232,9 +232,7 @@ class Solution(object):
         return matches_product_type_preference(scenario_p_set, pt_filter)
 
     def satisfies_locked_products(self, locked_products):
-        for slot_id, product_id in locked_products:
-            slot = frozenset(MetaDevice.objects.filter(pk__in=slot_id))
-            product = Product.objects.get(pk=product_id)
+        for slot, product in locked_products:
             if slot not in self.slot_alternatives:
                 return False
             if product not in self.products:

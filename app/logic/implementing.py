@@ -1,10 +1,10 @@
 import logging
 import collections
 
-from ..models import Scenario
-from .data import __find_implementing_product, __get_bridges, __get_protocols, __direct_compatible
+from ..models import Scenario, MetaDevice, Product
+from .data import __find_implementing_product, __get_bridges, get_protocols, __direct_compatible
 from .validating import Path, Solution, __filter_paths_for_valid_broker, __cost_function
-from .utils import __dict_cross_product, dict_cross_product
+from .utils import dict_cross_product
 
 
 LOGGER = logging.getLogger(__name__)
@@ -78,6 +78,20 @@ def compute_matching_product_set(device_mapping, preference):
         possible_solutions = map(lambda path_choice: Solution(path_choice, meta_broker, broker_impl, device_mapping), path_choices)
 
         solutions = set()
+
+        # extract shopping basket scenarios outside of the following loop to reduce database calls.
+        basket_elems = set()
+        for basket_elem in preference.shopping_basket:
+            scenario = Scenario.objects.get(pk=basket_elem.scenario_id)
+            basket_elems.add((scenario, basket_elem.product_type_filter))
+
+        locked_products = set()
+        if hasattr(preference, 'locked_products'):
+            for locked_product in preference.locked_products:
+                slot = frozenset(MetaDevice.objects.filter(pk__in=locked_product.slot_id))
+                product = Product.objects.get(pk=locked_product.product_id)
+                locked_products.add((slot, product))
+
         for possible_solution in possible_solutions:
             # apply filter for current suggested scenario
             if (device_mapping.suggested_scenario is not None and
@@ -87,19 +101,13 @@ def compute_matching_product_set(device_mapping, preference):
                 continue
 
             # check if the solution contains the locked products
-            if (hasattr(preference, 'locked_products') and
-                not possible_solution.satisfies_locked_products(
-                    preference.locked_products)):
+            if not possible_solution.satisfies_locked_products(locked_products):
                 continue
 
             # filter for valid product filter of shopping basket
-            for basket_elem in preference.shopping_basket:
-                # TODO: resolve the shopping basket scenario id -> scenario
+            for basket_elem in basket_elems:
                 # reference at the view layer
-                scenario = Scenario.objects.get(pk=basket_elem.scenario_id)
-                pt_preference = basket_elem.product_type_filter
-                if not possible_solution.validate_scenario_product_filter(
-                        scenario, pt_preference):
+                if not possible_solution.validate_scenario_product_filter(basket_elem[0], basket_elem[1]):
                     break
             else:
                 # if the shopping basket checking loop terminated normally
@@ -119,8 +127,6 @@ def compute_matching_product_set(device_mapping, preference):
 
     # return the found solution
     return solution
-
-
 
 
 def __find_communication_partner(endpoint, target, renovation_allowed,  path=None, max_depth=None):
@@ -158,7 +164,7 @@ def __find_communication_partner(endpoint, target, renovation_allowed,  path=Non
         raise Exception("max_depth exceeded")
 
     # define methods for follower/leader protocols
-    endpoint_protocols = __get_protocols(endpoint, False)
+    endpoint_protocols = get_protocols(endpoint, False)
 
     assert endpoint not in current_path
     current_path.add(endpoint)
@@ -170,7 +176,7 @@ def __find_communication_partner(endpoint, target, renovation_allowed,  path=Non
         return list()
 
     for bridge in bridges:
-        if __direct_compatible(__get_protocols(bridge, True), endpoint_protocols):
+        if __direct_compatible(get_protocols(bridge, True), endpoint_protocols):
             if bridge == target:
                 current_path.add(target)
                 paths.append(current_path)
