@@ -54,7 +54,7 @@
     "name": "Wenn die Waschmachine fertig ist, soll eine Lampe gruen leuchten.",
     "url_name": "wenn_die_waschmachine_fertig_ist__soll_eine_lampe_gruen_leuchten_",
     "description": "Um anzuzeigen, dass die Waschmaschine fertig ist, soll ein visueller Anreiz gegeben werden. Dazu soll eine Lampe im Haushalt gr\u00fcn aufleuchten. Dazu wird ein Regelwerk, eine Waschmaschine und eine Lampe ben\u00f6tigt.",
-    "picture": "scenarios/icon-home-auto-1.png",
+    "picture": "scenarios/WaMa.jpg",
     "provider": 27,
     "meta_broker": 1,
     "title": "Benachrichtigung f\u00fcr W\u00e4sche",
@@ -1564,9 +1564,9 @@
     "price": 147.99,
     "efficiency": 3700.0,
     "description": "#Beschreibung\r\n\r\nKaffeezubereitung fernbedienbar \u00fcber Wifi und App f\u00fcr iPhone (iOS) und Smartphones (Android OS) innerhalb der WLAN-Reichweite.\r\nFrische Bohnen mahlen und br\u00fchen und St\u00e4rke des Kaffees w\u00e4hlbar; Glaskanne fa\u00dft bis zu 1,5 Liter (ca. 12 Tassen); Zeitpunkt f\u00fcr Kaffeezubereitung terminieren.\r\nMahlgrad der Bohnen einstellbar; Tassenanzahl kann festlegt werden, ob 1, 2 oder gleich 12, nur soviel Wasser l\u00e4uft durch und soviele Bohnen werden gemahlen.\r\nWasserstandanzeiger teilt mit wieviele Tassen gebr\u00fcht werden k\u00f6nnen; W\u00e4rmeplatte verstellbar von 5-30 Minuten und schaltet sich sp\u00e4testens nach 30 Minuten automatisch aus.",
-    "image1": "products/smarter_SL1500_1.jpg",
-    "image2": "products/smarter_SL1500_2.jpg",
-    "image3": "products/smarter_SL1500_3.jpg",
+    "image1": "products/Unknown.jpeg",
+    "image2": "products/unknown2.jpg",
+    "image3": "",
     "end_of_life": false,
     "renovation_required": false,
     "leader_protocol": [
@@ -1961,7 +1961,7 @@
   "fields": {
     "type_name": "Alarmsirene",
     "svg_id": "Alarmsirene",
-    "icon": "productType/house_overlay_picture/noun_590000.svg",
+    "icon": "productType/house_overlay_picture/noun_133786.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -2142,6 +2142,16 @@
     "type_name": "Home Bot",
     "svg_id": "robot",
     "icon": "productType/house_overlay_picture/noun_22007.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 54,
+  "fields": {
+    "type_name": "Solaranlage",
+    "svg_id": "Solar_outdoor",
+    "icon": "productType/house_overlay_picture/noun_124567.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -3771,6 +3781,13 @@
   }
 },
 {
+  "model": "app.feature",
+  "pk": 121,
+  "fields": {
+    "name": "xProduziert Strom"
+  }
+},
+{
   "model": "app.metadevice",
   "pk": 1,
   "fields": {
@@ -4195,6 +4212,54 @@
     "implementation_requires": [
       54,
       50
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 46,
+  "fields": {
+    "name": "Broker: ",
+    "is_broker": true,
+    "implementation_requires": [
+      120
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 47,
+  "fields": {
+    "name": "Broker: ",
+    "is_broker": true,
+    "implementation_requires": [
+      119,
+      1
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 48,
+  "fields": {
+    "name": "Endpoint: ",
+    "is_broker": false,
+    "implementation_requires": [
+      101,
+      42
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 49,
+  "fields": {
+    "name": "Endpoint: ",
+    "is_broker": false,
+    "implementation_requires": [
+      94,
+      93,
+      121
     ]
   }
 },
