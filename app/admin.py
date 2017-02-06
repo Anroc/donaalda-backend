@@ -62,7 +62,7 @@ class CommentAdmin(admin.ModelAdmin):
     actions = []
 
 
-class ProductAdmin(SimpleHistoryAdmin):
+class ProductAdmin(MarkdownxModelAdmin, SimpleHistoryAdmin):
     actions = []
 
     exclude = []
