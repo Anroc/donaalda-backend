@@ -34,10 +34,24 @@ def compute_matching_product_set(device_mapping, preference):
     meta_broker = device_mapping.get_any_broker()
     meta_endpoints = set(device_mapping.endpoints.keys()).union(set(device_mapping.bridges.keys()))
 
+    locked_products = dict()
+    if hasattr(preference, 'locked_products'):
+        for locked_product in preference.locked_products:
+            slot = frozenset(MetaDevice.objects.filter(pk__in=locked_product.slot_id))
+            product = Product.objects.get(pk=locked_product.product_id)
+            for metadevice in slot:
+                assert metadevice not in locked_products
+                locked_products[metadevice] = product
+
+
     # 1. find implementing products
     impl_of_meta_device = dict()
     LOGGER.debug('Metabroker: %s' % meta_broker)
     impl_of_meta_device[meta_broker] = __find_implementing_product(meta_broker, preference.renovation_preference)
+    if meta_broker in locked_products:
+        if locked_products[meta_broker] not in impl_of_meta_device[meta_broker]:
+            return False
+        impl_of_meta_device[meta_broker] = set([locked_products[meta_broker]])
 
     LOGGER.debug(impl_of_meta_device[meta_broker])
 
@@ -48,6 +62,10 @@ def compute_matching_product_set(device_mapping, preference):
         # no implementation was found
         if len(impl_of_meta_device[meta_endpoint]) == 0:
             return None
+        if meta_endpoint in locked_products:
+            if locked_products[meta_endpoint] not in impl_of_meta_device[meta_endpoint]:
+                return False
+            impl_of_meta_device[meta_endpoint] = set([locked_products[meta_endpoint]])
 
     # 2. start running F
     # we already validated that each endpoint have at least one implementation
@@ -87,23 +105,12 @@ def compute_matching_product_set(device_mapping, preference):
             scenario = Scenario.objects.get(pk=basket_elem.scenario_id)
             basket_elems.add((scenario, basket_elem.product_type_filter))
 
-        locked_products = set()
-        if hasattr(preference, 'locked_products'):
-            for locked_product in preference.locked_products:
-                slot = frozenset(MetaDevice.objects.filter(pk__in=locked_product.slot_id))
-                product = Product.objects.get(pk=locked_product.product_id)
-                locked_products.add((slot, product))
-
         for possible_solution in possible_solutions:
             # apply filter for current suggested scenario
             if (device_mapping.suggested_scenario is not None and
                 not possible_solution.validate_scenario_product_filter(
                         device_mapping.suggested_scenario,
                         preference.product_type_filter)):
-                continue
-
-            # check if the solution contains the locked products
-            if not possible_solution.satisfies_locked_products(locked_products):
                 continue
 
             # filter for valid product filter of shopping basket
