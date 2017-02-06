@@ -185,7 +185,6 @@
     "meta_endpoints": [
       23,
       24,
-      21,
       22
     ],
     "subcategory": [
@@ -3885,15 +3884,6 @@
     "implementation_requires": [
       13
     ]
-  }
-},
-{
-  "model": "app.metadevice",
-  "pk": 21,
-  "fields": {
-    "name": "Endpoint: Fernseher remote turn on lock",
-    "is_broker": false,
-    "implementation_requires": []
   }
 },
 {
