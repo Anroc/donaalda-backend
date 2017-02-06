@@ -13,7 +13,16 @@ from .data import partition_scenarios
 LOGGER = logging.getLogger(__name__)
 
 
-@cached(lambda ss, s, p: hash((ss, s, p)))
+def implement_scenarios_cache_key(suggested_scenario, shopping_basket, preference):
+    key_base = (suggested_scenario, shopping_basket, preference.product_preference, preference.renovation_preference)
+    if suggested_scenario:
+        key_base += (preference.product_type_filter,)
+    else:
+        key_base += (getattr(preference, 'locked_products', frozenset()),)
+    return hash(key_base)
+
+
+@cached(implement_scenarios_cache_key)
 def implement_scenarios_from_input(suggested_scenario, shopping_basket, preference):
     """
     This method takes a set of scenarios and merge them in that kind that
