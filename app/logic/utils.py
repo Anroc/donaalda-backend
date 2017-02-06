@@ -1,16 +1,18 @@
+import itertools
+
+
+def dict_cross_product(atosetb):
+    """Takes a dictionary mapping values of type a to sets of values of type b
+    (think of it as having buckets of bs labeled with as) and return an iterable
+    of dicts representing all possible combinations of choosing one element out
+    of each bucket.
+    """
+    bucket_contents = (
+            frozenset((a,b) for b in bs)
+            for a,bs in atosetb.items())
+    return map(dict, itertools.product(*bucket_contents))
+
+
 def __dict_cross_product(possible_paths):
-    endpoints = list(possible_paths.keys())
-    if len(endpoints) == 0:
-        return set()
-    ret = possible_paths[endpoints[0]]
-    for elem in endpoints[1:]:
-        ret = __product(ret, possible_paths[elem])
-    return ret
-
-
-def __product(a, b):
-    ret = set()
-    for elem_a in a:
-        for elem_b in b:
-            ret.add(frozenset(elem_a.union(elem_b)))
-    return ret
+    dcp = dict_cross_product(possible_paths)
+    return set(map(lambda d: frozenset().union(*d.values()), dcp))

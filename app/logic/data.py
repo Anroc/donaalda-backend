@@ -74,7 +74,7 @@ def __find_implementing_product(meta_device, renovation_allowed):
     matching_products = set()
     for product in products:
         if meta_feature.issubset(set(product.features.all())):
-            if len(__get_protocols(product, meta_device.is_broker)) != 0:
+            if len(get_protocols(product, meta_device.is_broker)) != 0:
                 matching_products.add(product)
     return matching_products
 
@@ -100,7 +100,7 @@ def __direct_compatible(broker_protocols, endpoint_protocols):
 
 
 @cached(lambda p, l: hash((p, l)))
-def __get_protocols(product, leader):
+def get_protocols(product, leader):
     """
     Returns all the protocols of the given product that matches the given mode.
 
@@ -128,7 +128,7 @@ def __get_bridges(renovation_allowed=True):
     products = __get_products(renovation_allowed)
     return_set = set()
     for product in products:
-        if len(__get_protocols(product, True)) > 0 and len(__get_protocols(product, False)) > 0:
+        if len(get_protocols(product, True)) > 0 and len(get_protocols(product, False)) > 0:
             return_set.add(product)
 
     return return_set
@@ -155,10 +155,10 @@ def __get_products(renovation_allowed=True):
                'features').filter(renovation_required=False))
 
 
-def __get_broker_of_products(product_set):
+def get_broker_of_products(product_set):
     return_set = set()
     for product in product_set:
-        if len(__get_protocols(product, True)) > 0:
+        if len(get_protocols(product, True)) > 0:
             return_set.add(product)
 
     return return_set

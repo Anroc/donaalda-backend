@@ -52,6 +52,12 @@ class NoShoppingBasketException(exceptions.APIException):
     default_detail = 'Need at least one scenario in the shopping basket.'
 
 
+class InvalidReplacementSlotException(exceptions.APIException):
+    status_code = 400
+    default_code = 'client error'
+    default_detail = 'Invalid replacement slot id'
+
+
 ProductListInput = collections.namedtuple(
         'ProductListInput', set(MatchingInputBase._fields).union({
             'locked_products',

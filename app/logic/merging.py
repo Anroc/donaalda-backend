@@ -11,44 +11,33 @@ class DeviceMapping(object):
     """
 
     def __init__(
-        self, suggested_scenario, endpoints=None, broker=None, products=None, bridges=None, original_to_merged=None
+        self, suggested_scenario, endpoints=None, broker=None, bridges=None, original_to_merged=None
     ):
         self.suggested_scenario = suggested_scenario
         if endpoints is None:
             endpoints = dict()
         if broker is None:
             broker = dict()
-        if products is None:
-            products = dict()
         if bridges is None:
             bridges = dict()
         if original_to_merged is None:
             original_to_merged = dict()
         self.endpoints = endpoints
         self.broker = broker
-        self.products = products
         self.bridges = bridges
         self.original_to_merged = original_to_merged
 
     def get_any_broker(self):
         return list(self.broker.keys())[0]
 
-    def add_product(self, meta_device, product):
-        scenarios = set()
-        if product in self.products:
-            scenarios = self.products[product]
+    def get_scenarios_for_metadevice(self, meta_device):
         if meta_device.is_broker:
             if meta_device in self.broker:
-                self.products[product] = self.broker[meta_device].union(scenarios)
+                return self.broker[meta_device]
             else:
-                self.products[product] = self.bridges[meta_device].union(scenarios)
-            return
+                return self.bridges[meta_device]
         # else: broker is shifted to endpoints
-        self.products[product] = self.endpoints[meta_device].union(scenarios)
-
-    def add_products(self, meta_device, products):
-        for product in products:
-            self.add_product(meta_device, product)
+        return self.endpoints[meta_device]
 
     def shift_all_brokers_except(self, broker):
         other = self.__copy__()
@@ -63,19 +52,9 @@ class DeviceMapping(object):
             self.suggested_scenario,
             self.endpoints.copy(),
             self.broker.copy(),
-            self.products.copy(),
             self.bridges.copy(),
             self.original_to_merged.copy()
         )
-
-    def intersect_products(self, products):
-        tmp = dict()
-        for product in products:
-            tmp[product] = self.products[product]
-        self.products = tmp
-
-    def originals_from_merged(self, merged_device):
-        return {key for key in self.original_to_merged if merged_device is self.original_to_merged[key]}
 
     def merge_scenario(self, scenario):
         # TODO: this seems like it could be simplified even further but my main
@@ -142,22 +121,31 @@ def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_
             # check if the current already merged endpoint is a subset of the current meta device
             if merged_endpoint_features.issubset(new_md_features):
                 # check if current element is already in the merged list
-                if new_me in tmp_add_entries:
-                    LOGGER.warning("Can't current meta device has more than one possible merge option.")
-                    if merged_endpoint in tmp_remove_keys:
-                        tmp_remove_keys.remove(merged_endpoint)
-                    tmp_add_entries[new_me] = None
-                    # remove updated mapping by calling the same function with inverted values
-                    update_original_to_merged_mapping(original_to_merged_mapping, merged_endpoint, new_me)
-                    continue
+                if merged_endpoint in tmp_remove_keys:
+                    # We merge the meta device in the first slot we find.
+                    # This will happen anyways and we should think probably about a better solution here.
+                    # TODO: find best merging partner or return all possibilities.
+                    # Same applies for the warning logging below.
+                    LOGGER.warning("Can't merge current meta device (" + str(merged_endpoint)
+                                   + ") has more than one possible merge option.")
                 else:
                     tmp_remove_keys.add(merged_endpoint)
                     tmp_add_entries[new_me] = device_mapping[merged_endpoint].union({scenario})
                     # update mappings with ne endpoint that was merged
+                    update_original_to_merged_mapping(original_to_merged_mapping, merged_endpoint, new_me)
+            elif new_md_features.issubset(merged_endpoint_features):
+                if merged_endpoint in tmp_add_entries:
+                    LOGGER.warning("Can't merge current meta device (" + str(new_me)
+                                   + ") has more than one possible merge option.")
+                else:
+                    if new_me in device_mapping:
+                        tmp_remove_keys.add(new_me)
+                    tmp_add_entries[merged_endpoint] = device_mapping[merged_endpoint].union({scenario})
+                    # update mappings with ne endpoint that was merged
                     update_original_to_merged_mapping(original_to_merged_mapping, new_me, merged_endpoint)
 
         # if the new meta endpoint could not be used as a new merge partner
-        if new_me not in tmp_add_entries:
+        if new_me not in original_to_merged_mapping:
             if new_me in device_mapping:
                 # meta device may be already in the set if included by other scenario
                 # can't be twice in tmp_add_entries since we only inspecting one scenario at time
@@ -171,14 +159,16 @@ def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_
         del device_mapping[tmp_remove_key]
 
     # add the meta_endpoints to the set of meta endpoints
-    device_mapping.update(
-        {key: tmp_add_entries[key] for key in tmp_add_entries if tmp_add_entries[key] is not None}
-    )
+    for key, value in tmp_add_entries.items():
+        if value is None:
+            device_mapping[key] = {scenario}
+        else:
+            device_mapping[key] = value
     return device_mapping
 
 
 def update_original_to_merged_mapping(mapping, replacee, replacer):
     mapping[replacee] = replacer
     for key in mapping:
-        if mapping[key] is replacer:
-            mapping[key] = replacee
+        if mapping[key] is replacee:
+            mapping[key] = replacer

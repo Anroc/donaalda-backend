@@ -1,5 +1,6 @@
 import operator
 import logging
+import collections
 
 from .cache import cached
 
@@ -9,10 +10,28 @@ from ..constants import (
         PRODUCT_PREF_EXTENDABILITY
 )
 from .utils import __dict_cross_product
-from .data import __get_broker_of_products, __get_protocols
+from .data import get_broker_of_products, get_protocols
+
+from ..models import Product, MetaDevice
 
 
 LOGGER = logging.getLogger(__name__)
+
+
+class Path(object):
+    """Represents a path between a endpoint from the merged meta device set and
+    the current implementation of the master broker.
+
+    Because of the way compute_matching_product_set is implemented, we only need
+    to store the implementation of the meta device and the set of products
+    involved in the communication (including endpoint and broker). The meta
+    device, the meta broker are aparent from the context the paths are created
+    in.
+    """
+
+    def __init__(self, endpoint_impl, products):
+        self.endpoint_impl = endpoint_impl
+        self.products = products
 
 
 def __filter_paths_for_valid_broker(paths, meta_endpoint, device_mapping, impl_of_meta_device):
@@ -39,10 +58,8 @@ def __filter_paths_for_valid_broker(paths, meta_endpoint, device_mapping, impl_o
             return paths
         else:
             # get all scenarios that this endpoint is implementing
-            scenarios = set().union(
-                *(device_mapping.endpoints[endpoint]
-                    for endpoint in device_mapping.originals_from_merged(meta_endpoint))
-            )
+            scenarios = device_mapping.endpoints[meta_endpoint]
+
             # get all brokers of the scenarios. This brokers are unmerged.
             brokers = {
                 scenario.meta_broker for scenario in scenarios
@@ -76,7 +93,7 @@ def __filter_paths_for_valid_broker(paths, meta_endpoint, device_mapping, impl_o
 
 
 @cached(lambda ps, ptf: hash((frozenset(ps), frozenset(ptf))))
-def __matches_product_type_preference(product_set, product_type_filters):
+def matches_product_type_preference(product_set, product_type_filters):
     """
     Filters a given product set for the given product type filters.
 
@@ -97,7 +114,7 @@ def __matches_product_type_preference(product_set, product_type_filters):
     return all(product_type in product_types for product_type in product_type_filters)
 
 
-def __cost_function(product_sets, preference):
+def __cost_function(solutions, preference):
     """
     Cost function which decides which product set matches the user preferences
     best.
@@ -109,31 +126,117 @@ def __cost_function(product_sets, preference):
     :return:
         The product set that will match the user preferences the best.
     """
-    if len(product_sets) == 0:
-        return set()
+    best = None
 
-    sorting = dict()
-    for current_set in product_sets:
+    # kickstart our product alternatives collection
+    alternatives = collections.defaultdict(set)
+
+    for solution in solutions:
+        # merge slot alternatives by adding the slot -> product mappings from the new solution
+        for slot, products in solution.slot_alternatives.items():
+            alternatives[slot].update(products)
+
+        # continue with the new best solution
+        if not best or solution.rating(preference) > best.rating(preference):
+            best = solution
+
+    # some sanity checking ([] is an invalid slot)
+    assert frozenset() not in alternatives
+
+    if not best:
+        return None
+
+    # update the product alternatives of the found best solution
+    best.slot_alternatives = alternatives
+
+    # and return it
+    return best
+
+
+SolutionProductMeta = collections.namedtuple(
+        'SolutionProductMeta', [
+            'meta_devices', 'scenarios'
+        ])
+
+
+class Solution(object):
+    """Represents a (not necessarily valid) Solution (which is a set of products
+    with some meta information attached)."""
+
+    def __init__(self, path_choice, meta_broker, broker_impl, device_mapping):
+        """Construct a solution from a path choice which maps every meta device
+        to a path to a possible implementation."""
+        self.products = collections.defaultdict(
+                lambda: SolutionProductMeta(set(), set()))
+        self.slot_alternatives = collections.defaultdict(set)
+
+        for metadevice, path in path_choice.items():
+            scenarios = device_mapping.get_scenarios_for_metadevice(metadevice)
+            self.products[path.endpoint_impl].meta_devices.add(metadevice)
+            for product in path.products:
+                self.products[product].scenarios.update(scenarios)
+
+        # TODO: figure out how to extract what products implement the mandatory
+        # brokers in device_mapping.bridges. This information gets lost
+        # somewhere in __filter_paths_for_valid_broker
+
+        # set the meta device for the master broker (the scenarios are already
+        # set since it is included in every path)
+        self.products[broker_impl].meta_devices.add(meta_broker)
+
+        # fill the slot alternatives (currently just with the products from this
+        # solution, they will be merged together with other solutions later)
+        for product, meta in self.products.items():
+            if meta.meta_devices != set():
+                self.slot_alternatives[frozenset(meta.meta_devices)].add(product)
+
+        # we need to remove the factory from the default dict to make the
+        # solution cachable (pickle can't serialize lambdas)
+        self.products.default_factory = None
+        # we technically don't need to do this because the constructor of set is
+        # serializable but it is probably a good idea to do it anyway to avoid
+        # bugs
+        self.slot_alternatives.default_factory = None
+
+    def rating(self, preference):
+        """Return a (floating point) number representing the cost of this
+        solution according to the product preference (price, extendability,
+        ...).
+
+        Higher is better.
+        """
         # will resolve in set that contains the master broker and other bridges; this set is at least on element big
-        broker = __get_broker_of_products(current_set)
+        broker = get_broker_of_products(self.products.keys())
 
         x = 1
         if preference.product_preference == PRODUCT_PREF_EXTENDABILITY:
             x = 0
-            for product in current_set:
-                x += len(__get_protocols(product, True)) + len(__get_protocols(product, False))
-            sorting[current_set] = 1.0 / (float(len(broker)**2) / x)
+            for product in self.products:
+                x += len(get_protocols(product, True)) + len(get_protocols(product, False))
+            return 1.0 / (float(len(broker)**2) / x)
         elif preference.product_preference == PRODUCT_PREF_PRICE:
-            for product in current_set:
+            for product in self.products:
                 x += product.price
-            sorting[current_set] = 1. / x * 0.95 ** len(broker)
+            return 1. / x * 0.95 ** len(broker)
         elif preference.product_preference == PRODUCT_PREF_EFFICIENCY:
-            for product in current_set:
+            for product in self.products:
                 x += product.efficiency
-            sorting[current_set] = 1. / x * 0.95 ** len(broker)
+            return 1. / x * 0.95 ** len(broker)
         else:
             raise(AttributeError("Unsupported preference %s" % preference.product_preference))
-        # search for minimum
-    if sorting:
-        return sorted(sorting.items(), key=operator.itemgetter(1))[-1][0]
-    return set()
+
+    def validate_scenario_product_filter(self, scenario, pt_filter):
+        scenario_p_set = {
+                elem for elem, meta in self.products.items()
+                if scenario in meta.scenarios}
+        return matches_product_type_preference(scenario_p_set, pt_filter)
+
+    def satisfies_locked_products(self, locked_products):
+        for slot, product in locked_products:
+            if slot not in self.slot_alternatives:
+                return False
+            if product not in self.products:
+                return False
+            if self.products[product].meta_devices != slot:
+                return False
+        return True

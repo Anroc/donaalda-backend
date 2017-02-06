@@ -57,7 +57,7 @@
     "picture": "scenarios/icon-home-auto-1.png",
     "provider": 27,
     "meta_broker": 1,
-    "title": "---",
+    "title": "Benachrichtigung f\u00fcr W\u00e4sche",
     "meta_endpoints": [
       8,
       6
@@ -78,7 +78,7 @@
     "picture": "scenarios/how-to-wake-up.jpg",
     "provider": 27,
     "meta_broker": 1,
-    "title": "---",
+    "title": "Aufwachanreiz im Schlafzimmer",
     "meta_endpoints": [
       10,
       9
@@ -99,7 +99,7 @@
     "picture": "scenarios/Coffee_Machine_Controller_using_Arduino__-_Image_02.jpg",
     "provider": 27,
     "meta_broker": 1,
-    "title": "---",
+    "title": "Aufwachanreiz (Morgenkaffee)",
     "meta_endpoints": [
       11,
       9
@@ -114,13 +114,13 @@
   "model": "app.scenario",
   "pk": 4,
   "fields": {
-    "name": "In bestimten Zeitfenstern, schalte einzelne Ger\u00e4te aus. (Steady Standby)",
-    "url_name": "in_bestimten_zeitfenstern__schalte_einzelne_gerate_aus___steady_standby_",
+    "name": "In bestimten Zeitfenstern, schalte einzelne Ger\u00e4te aus.",
+    "url_name": "in_bestimten_zeitfenstern__schalte_einzelne_gerate_aus_",
     "description": "Do you really need the TV on standby in the middle of the night? Standby power is wasted by appliances awaiting to perform their primary function. How many power supplies do you have in your house plugged in right now converting AC into DC with no use? All these circuits and sensors awaiting to receive a remote signal, the bluetooth Speakers, displays and LED status lights.\r\nHow about having a system that controls the power usage of these devices and saving energy in your house indefinitely?",
     "picture": "scenarios/Energy_Smart_Logo.jpg",
     "provider": 27,
     "meta_broker": 13,
-    "title": "---",
+    "title": "Steady Standby",
     "meta_endpoints": [
       15
     ],
@@ -140,7 +140,7 @@
     "picture": "scenarios/mykie_news.jpg",
     "provider": 27,
     "meta_broker": 16,
-    "title": "---",
+    "title": "Checken von Verfallsdaten",
     "meta_endpoints": [
       17
     ],
@@ -160,7 +160,7 @@
     "picture": "scenarios/Smart-TV-Makers-Voice-Security_8bzcIP6.jpg",
     "provider": 27,
     "meta_broker": 18,
-    "title": "---",
+    "title": "Zeit f\u00fcr Tatort",
     "meta_endpoints": [
       19,
       20
@@ -177,15 +177,14 @@
   "fields": {
     "name": "Wenn mein Kind nach Hause kommt sollen einige elektronische Ger\u00e4te nicht mehr aktivierbar sein.",
     "url_name": "wenn_mein_kind_nach_hause_kommt_sollen_einige_elektronische_gerate_nicht_mehr_aktivierbar_sein_",
-    "description": "Da wir als Eltern beide arbeiten und unser Kind meist fr\u00fcher von der Schule nach Hause\r\nkommt wie wir, sollen sich alle Ger\u00e4te im Haushalt, die das Kind bewusst oder unbewusst\r\nbet\u00e4tigen k\u00f6nnte und an denen es sich verletzen k\u00f6nnte. Dies beinhaltet bspw. den Herd oder den Backofen.\r\nAuch m\u00f6chten wir Konrolle \u00fcber den Fernseher haben. Dieser darf nur 30 Minuten benutzt werden, wenn\r\ndas Kind alleine zu Hause ist. Um zu erkennen, dass das Kind nach Hause gekommen ist\r\nwird das manuelle Schloss durch ein Smart-Lock ersetzt, bei welchem das Kind seinen eigenen\r\nCode im Handy eingeben kann und das System erkennt, dass dieses die T\u00fcr ge\u00f6ffnet hat.",
+    "description": "Da mein F\u00fcnfj\u00e4hriger schon lange vor mir nach Hause kommt, kann ich ihn schwer aus der Ferne beaufsichtigen und meistens nur auf seine Vernunft und etwas Gl\u00fcck hoffen. Vor vielen Ger\u00e4ten im Haushalt wie Backofen oder Herd l\u00e4sst es sich aber schwer besch\u00fctzen.\r\nMit einem Smart-Lock wei\u00df ich, wenn das Kind zuhause ist. Mein Sohn gibt seinen Code ein und schon schaltet mein Zuhause die Kindersicherung an.\r\nAuch den Fernseher kann ich per App steuern, wenn es Zeit f\u00fcr Hausaufgaben wird.",
     "picture": "scenarios/house_with_heart_YFaJAko.jpg",
     "provider": 27,
     "meta_broker": 1,
-    "title": "---",
+    "title": "Kindersicherung f\u00fcr Unterwegs",
     "meta_endpoints": [
       23,
       24,
-      21,
       22
     ],
     "subcategory": [
@@ -204,7 +203,7 @@
     "picture": "scenarios/jpeg-148132007B3B12CD-20120425-img_36231964.original.large-4-3-800-0-311-2600-_NzxdzBk.jpg",
     "provider": 27,
     "meta_broker": 1,
-    "title": "---",
+    "title": "Notruf f\u00fcr Pflegebed\u00fcrftige",
     "meta_endpoints": [
       25
     ],
@@ -224,7 +223,7 @@
     "picture": "scenarios/co2-release-fast-environment-cope-geologists_66.jpg",
     "provider": 27,
     "meta_broker": 1,
-    "title": "---",
+    "title": "Schlafanreiz im Schlafzimmer",
     "meta_endpoints": [
       26,
       30,
@@ -244,13 +243,13 @@
   "model": "app.scenario",
   "pk": 10,
   "fields": {
-    "name": "Wenn der Raumpfleger kommt, soll der Tresor sich automatisch verschlie\u00dfen",
-    "url_name": "wenn_der_raumpfleger_kommt__soll_der_tresor_sich_automatisch_verschliessen",
+    "name": "Wenn die Putzkraft kommt, soll der Tresor sich automatisch verschlie\u00dfen",
+    "url_name": "wenn_die_putzkraft_kommt__soll_der_tresor_sich_automatisch_verschliessen",
     "description": "Leider kommt es Deutschland nach Kriminalstatistik von 2015 in 3 von ingesamt 128746 F\u00e4llen immer wieder zu Entleerungen des privaten Haustresors, wenn ein Raumpfleger die Treppe feudelt. Deswegen soll \u00fcber die Gesichtserkennung meiner Eingangskamera der Tresor automatisch verschlossen werden, wenn ein Raumpfleger das Anwesen betritt.",
     "picture": "scenarios/tresor1.jpg",
     "provider": 27,
     "meta_broker": 1,
-    "title": "---",
+    "title": "Smart Safe",
     "meta_endpoints": [
       32,
       33
@@ -271,7 +270,7 @@
     "picture": "scenarios/telekom-smart-home-szenario-einbrecher-750.jpg",
     "provider": 1,
     "meta_broker": 43,
-    "title": "---",
+    "title": "Schutz vor Einbruch",
     "meta_endpoints": [
       38,
       42,
@@ -293,7 +292,7 @@
     "picture": "scenarios/smart-home-app-brandschutz.jpg",
     "provider": 1,
     "meta_broker": 44,
-    "title": "---",
+    "title": "Warnung vor Feuer",
     "meta_endpoints": [
       45
     ],
@@ -491,21 +490,26 @@
   "model": "app.product",
   "pk": 11,
   "fields": {
-    "name": "Nodon STP-2-1-05 sensor",
+    "name": "Nodon STP-2-1-05 Temperatur sensor",
     "provider": 8,
     "product_type": 5,
-    "serial_number": "3700313920183",
-    "price": 4.11,
+    "serial_number": "STP-2-1-05",
+    "price": 49.9,
     "efficiency": 0.5,
-    "description": "#Beschreibung\n\n\"The NodOn\u00ae indoor temperature sensor is a wireless and battery-less sensor, EnOcean compliant.\r\nCombined with a Home Automation Gateway, the sensor sends the temperature of a room with a precision below 0.2\u00b0C, and a measure range from 0\u00b0C to 40\u00b0C.\r\nThe sensor checks the temperature every 100sec. If the temperature changed for more than 0.5\u00b0C compare to previous value, the new temperature is sent to the Gateway.\r\nWithout any variation, the temperature is sent every 15 minutes.\"\n\n#Spezifikationen\n\nPower source - Solar panel\r\nMeasurement range 0\u00b0C to 40\u00b0C (0.16\u00b0C resolution) - Indoor use\r\nWall mounting using adhesive bounding (included) or screws (not included)\r\nOptional CR1216 battery (not included) for dark are use (5years in total darkness)\r\nOperational temperature - 0\u00b0C to 40\u00b0C - Altitude - 2.000m\r\nRadio protocol - EnOcean 868.3MHz - EEP - A5-02-05\r\nRange: 30m indoor\r\nDimension : 80*26*18mm",
+    "description": "#Beschreibung\r\n\r\nTemperatur Sensor EnOcean, wei\u00df\r\n\r\nDer NodOn Indoor Temperature Sensor ist kabellos, batterielos und EnOcean-konform.\r\nIn Kombination mit einem Home Automation Gateway sendet der Sensor die Temperatur bis auf 0,2\u00b0C genau und mit einer Spanne von 0\u00b0C bis 40\u00b0C.\r\n\r\nDer Sensor misst die Temperature jede 100sec. Bei einer \u00c4nderung von \u00fcber 0.5\u00b0C wird die Messung zum Gateway versendet. Ohne Temperaturschwankung wird eine Messung jede 15 Min verschickt.\r\n\r\nOptional kann eine Batterie CR1216 (nicht im Lieferumfang enthalten) montiert werden. Lebensdauer bis zu 5 Jahren in vollkommener Dunkelheit.\r\n\r\n#Spezifikationen\r\n\r\n- Stromversorgung: Solar-Panel\r\n- Messbereich: 0 \u00b0C bis 40 \u00b0C (0,16 \u00b0C Genauigkeit) \u2013 f\u00fcr den Innenbereich\r\n- Betriebstemperatur: 0 \u00b0 bis 40 \u00b0C; max. H\u00f6he: 2000 m\r\n- EnOcean Funkprotokoll: 868,3 MHz; EEP: A5\u201302\u201305\r\n- Reichweite: 30 m im Innenbereich\r\n- Ma\u00dfe: 80 x 26 x 18 mm",
     "image1": "products/nodon-stp-2-1-05-temperatursensor.jpg",
     "image2": "products/nodon-stp-2-1-05-temperatursensor_2.jpg",
     "image3": "products/nodon-stp-2-1-05-temperatursensor_3.jpg",
     "end_of_life": false,
     "renovation_required": false,
     "leader_protocol": [],
-    "follower_protocol": [],
-    "features": []
+    "follower_protocol": [
+      5
+    ],
+    "features": [
+      16,
+      50
+    ]
   }
 },
 {
@@ -537,17 +541,24 @@
     "provider": 9,
     "product_type": 6,
     "serial_number": "PSC234",
-    "price": 15.0,
+    "price": 104.7,
     "efficiency": 2.0,
-    "description": "#Beschreibung\n\nDer permundo Smart Plug PSC234 ist ein SCHUKO-Zwischenstecker mit 16A-Schaltfunktion und Energiemessung nach dem bidirektionalen Enocean-Standard (868.3Mhz, Dolphin). Es sind bis zu 32 Sensoren/Schalter einlernbar: Zwei- oder Eintastbedienung EIN/AUS Schalter (Umschalten), Tastbedienung Schalter (Impuls), T\u00fcrsensor, Bewegungsmelder. Repeater: 1-Level/2-Level kann aktiviert werden. Remote Management: Ja EEPs: A5-38-08, A5-12-01, D2-01-09 Messfunktion: momentane Wirkleistung [W] und kumulierten Energieverbrauch [Wh]. Der Energieverbrauchswert wird bei Stromausfall gespeichert.\n\n#Spezifikationen\n\nPlug and socket type IEC type F \u201cSchuko\u201d (PSC234)\r\n IEC type E \u201cNF\u201d (PSC236)\r\nMaximum load power 3680 W / 16 A (2500 W continuous)\r\nElectrical 230V, 50 Hz\r\nPower dissipation standby < 0.5 W\r\nSafety protections over-temperature, average-overload, child-safety\r\nSafety rating IP20\r\nMeasurement power [W], energy (cumulative and power-fail safe) [Wh]\r\nWireless communication EnOcean-Dolphin standard (ISO/IEC 14543-3-10), RF 868 MHz, 2-way, EEPs: D2 01 09, A5 38 08, A5 12 01\r\nRange extension Repeating level 1 and level 2 EnOcean telegrams\r\nFirmware update supported",
+    "description": "#Beschreibung\r\n\r\nMit dem smarten Zwischenstecker PSC234 kannst du deine Beleuchtung und andere elektrische Verbraucher ganz einfach schalten. Der Zwischenstecker l\u00e4sst sich kinderleicht am wibutler anlernen, indem du den am Geh\u00e4use angebrachten Taster dr\u00fcckst. Mobil kannst du ihn danach ganz bequem mit den Ger\u00e4ten deiner Wahl verkn\u00fcpfen. Ob Taster, Handsender, Bewegungs- oder Rauchmelder, deiner Kreativit\u00e4t sind dabei keine Grenzen gesetzt. Verkn\u00fcpfe beispielsweise deine Stehlampe mit einem Handsender und integriere sie so in deine Lichtszenensteuerung. Zudem kannst du den Zwischenstecker auch als Zeitschaltuhr verwenden. Erstelle dazu ein Zeitprofil in deiner App. Die integrierte Energiemessfunktion erm\u00f6glicht es dir au\u00dferdem, den aktuellen Verbrauch, den Gesamtverbrauch und \u2013Kosten in einem Histogramm auszuweisen. Durch die bidirektionale Funktionsweise des Zwischensteckers k\u00f6nnen Real-Schaltzust\u00e4nde immer direkt \u00fcber die App abgerufen werden.\r\n\r\n#Spezifikationen\r\n\r\nDer permundo Smart Plug PSC234 ist ein SCHUKO-Zwischenstecker mit 16A-Schaltfunktion und Energiemessung nach dem bidirektionalen Enocean-Standard (868.3Mhz, Dolphin). Es sind bis zu 32 Sensoren/Schalter einlernbar: Zwei- oder Eintastbedienung EIN/AUS Schalter (Umschalten), Tastbedienung Schalter (Impuls), T\u00fcrsensor, Bewegungsmelder. Repeater: 1-Level/2-Level kann aktiviert werden. Remote Management: Ja EEPs: A5-38-08, A5-12-01, D2-01-09 Messfunktion: momentane Wirkleistung [W] und kumulierten Energieverbrauch [Wh]. Der Energieverbrauchswert wird bei Stromausfall gespeichert.",
     "image1": "products/PSC234_1.jpg",
     "image2": "products/PSC234_2.jpg",
     "image3": "products/PSC234_3.jpg",
     "end_of_life": false,
     "renovation_required": false,
     "leader_protocol": [],
-    "follower_protocol": [],
-    "features": []
+    "follower_protocol": [
+      5
+    ],
+    "features": [
+      63,
+      13,
+      43,
+      12
+    ]
   }
 },
 {
@@ -579,17 +590,22 @@
     "provider": 7,
     "product_type": 5,
     "serial_number": "SAB02",
-    "price": 0.99,
-    "efficiency": 10.1,
-    "description": "#Beschreibung\n\nDer Funk-Stellantrieb SAB02 wird eingesetzt um eine komfortable\r\nEinzelraumregelung mittels Radiator- oder Fu\u00dfbodenheizung zu\r\nrealisieren.\n\n#Spezifikationen\n\nBatterielaufzeit: ca. 2 Jahre*\r\nTechnologie: EnOcean\r\nSende-/Empfangsfrequenz: 868,3 MHz\r\nReichweite: ca. 30m in Geb\u00e4ude, ca. 300m Freifeld\r\nGeh\u00e4use:\r\nSchutzart IP20\r\nVersorgungsspannung: 2xBatterie AA (im Lieferumfang enthalten)\r\nKunststoff, wei\u00df\r\nAbmessungen (BxHxT): 48x64x75 mm\r\nVentil-Anschluss: Standard: M30x1,5\r\nMitgelieferte Adapter f\u00fcr:\r\nDanfoss RA, RAV und RAVL\r\nMax. Hub: 4 mm\r\nStellkraft: abh\u00e4ngig vom Ventil, max. 100 N\r\nStellzeit: 3s/mm\r\ngem\u00e4\u00df EN60529\r\nUmgebungstemperatur: 0...50\u00b0C\r\nMedientemperatur: 0...100\u00b0C\r\nTransport: -10...75\u00b0C / max. 70%rF, nicht kond.\r\nGewicht: Ca. 250g",
+    "price": 10.0,
+    "efficiency": 1.0,
+    "description": "#Beschreibung\r\n\r\nDer Funk-Stellantrieb SAB02 wird eingesetzt um eine komfortable\r\nEinzelraumregelung mittels Radiator- oder Fu\u00dfbodenheizung zu\r\nrealisieren.\r\n\r\n#Spezifikationen\r\n\r\nBatterielaufzeit: ca. 2 Jahre*\r\nTechnologie: EnOcean\r\nSende-/Empfangsfrequenz: 868,3 MHz\r\nReichweite: ca. 30m in Geb\u00e4ude, ca. 300m Freifeld\r\nVersorgungsspannung: 2xBatterie AA (im Lieferumfang enthalten)\r\nKunststoff, wei\u00df\r\nAbmessungen (BxHxT): 48x64x75 mm\r\nVentil-Anschluss: Standard: M30x1,5\r\nMitgelieferte Adapter f\u00fcr:\r\nDanfoss RA, RAV und RAVL\r\nMax. Hub: 4 mm\r\nStellkraft: abh\u00e4ngig vom Ventil, max. 100 N\r\nStellzeit: 3s/mm\r\ngem\u00e4\u00df EN60529\r\nUmgebungstemperatur: 0...50\u00b0C\r\nMedientemperatur: 0...100\u00b0C\r\nTransport: -10...75\u00b0C / max. 70%rF, nicht kond.\r\nGewicht: Ca. 250g",
     "image1": "products/tmk_SAB02_1.jpg",
     "image2": "products/tmk_SAB02_2.jpg",
     "image3": "products/tmk_SAB02_3.png",
     "end_of_life": false,
     "renovation_required": false,
-    "leader_protocol": [],
+    "leader_protocol": [
+      5
+    ],
     "follower_protocol": [],
-    "features": []
+    "features": [
+      16,
+      50
+    ]
   }
 },
 {
@@ -607,7 +623,7 @@
     "image2": "products/jung-2316_16_reghe_02.jpg",
     "image3": "products/jung-2316_16_reghe_03.jpg",
     "end_of_life": false,
-    "renovation_required": false,
+    "renovation_required": true,
     "leader_protocol": [],
     "follower_protocol": [
       10,
@@ -735,17 +751,18 @@
     "provider": 11,
     "product_type": 20,
     "serial_number": "G 6992 SCVi K2O",
-    "price": 468.0,
+    "price": 2198.0,
     "efficiency": 410.1,
-    "description": "#Beschreibung\n\nVollintegrierter Geschirrsp\u00fcler\r\n\u2212 der Miele Allesk\u00f6nner f\u00fcr griffloses K\u00fcchendesign.\r\nAutomatische T\u00fcr\u00f6ffnung bei 2maligem Klopfen \u2212 Knock2open\r\nEinfachste Kommunikation mit dem Ger\u00e4te - WiFi Conn@ct \r\nMotorische T\u00fcrschlie\u00dfung - AutoClose\r\nPerfekte Ausleuchtung f\u00fcr leichtes Beladen \u2212 BrilliantLight\r\nBeste Ergebnisse in weniger als einer Stunde - QuickPowerWash\n\n#Spezifikationen\n\nBauform \r\nVollintegrierter Geschirrsp\u00fcler        \r\n\u2022\r\n60er Geschirrsp\u00fcler        \r\n\u2022\r\nDesign \r\nFarbe        \r\nEdelstahl\r\nBlendenausf\u00fchrung        \r\nVollintegrierte Blende\r\nBedienungsart        \r\nTouch on metal\r\nDisplay        \r\n2-zeiliges Vi-Display mit Klartext\r\nDisplayfarbe        \r\nWei\u00df\r\nKomfort \r\nKnock2open        \r\n\u2022\r\nT\u00fcrschlie\u00dfhilfe        \r\nAutoClose\r\nRestzeitanzeige        \r\n\u2022\r\nBrilliantLight        \r\n\u2022\r\nBetriebsger\u00e4usch dB(A) re 1 pW        \r\n41\r\nSalzgef\u00e4\u00df in der T\u00fcr        \r\n\u2022\r\nStartvorwahl bis zu 24 h        \r\n\u2022\r\nTimeControl        \r\n\u2022\r\nFunktionskontrolle        \r\noptisch und akustisch\r\nGeschirr erg\u00e4nzen m\u00f6glich        \r\n\u2022\r\nWahl der Displaysprache        \r\n\u2022\r\nEffizienz und Nachhaltigkeit \r\nEnergieeffizienzklasse        \r\nA+++\r\nsparsamer als der Grenzwert der Energieeffizienzklasse A+++        \r\n20%\r\nTrocknungsklasse        \r\nA\r\nWasserverbrauch im Programm ECO in l        \r\n9,9\r\nStromverbrauch im Programm ECO in kWh        \r\n0,67\r\nJahreswasserverbrauch im Programm ECO in l        \r\n2.772\r\nJahresstromverbrauch im Programm ECO in kWh        \r\n189\r\nWasserverbrauch im Programm Automatic in l ab        \r\n6,5\r\nVerbrauchswert Warmwasseranschluss im Programm ECO in kWh        \r\n0,49\r\nStromverbrauch im Stand-by Modus in W        \r\n0,30\r\nFlexiTimer mit EcoStart        \r\n\u2022\r\nEcoFeedback        \r\n\u2022\r\nWarmwasseranschluss        \r\n\u2022\r\nWechselsp\u00fcl-Technologie        \r\n\u2022\r\nHalbe Beladung        \r\n\u2022\r\nGeschirr- und Gl\u00e4serschonung \r\nFrischwassersp\u00fcler        \r\n\u2022\r\nAutoOpen-Trocknung        \r\n\u2022\r\nSensorDry        \r\n\u2022\r\nUmluft-Turbothermic-Trocknung        \r\n\u2022\r\nPerfect GlassCare        \r\n\u2022\r\nReinigerAgent        \r\n\u2022\r\nSp\u00fclprogramme \r\nECO        \r\n\u2022\r\nAutomatic        \r\n\u2022\r\nIntensiv 75\u00b0C        \r\n\u2022\r\nNormal 55\u00b0C        \r\n\u2022\r\nFein        \r\n\u2022\r\nQuickPowerWash        \r\n\u2022\r\nSolarSpar        \r\n\u2022\r\nHygiene        \r\n\u2022\r\nExtraLeise 38 dB(A)        \r\n\u2022\r\nPasta/Paella        \r\n\u2022\r\nOhne Oberkorb 65\u00b0C        \r\n\u2022\r\nBiergl\u00e4ser warm        \r\n\u2022\r\nMaschinenreinigung        \r\n\u2022\r\nSp\u00fcloptionen \r\nKurz        \r\n\u2022\r\nUnten intensiv        \r\n\u2022\r\nExtra sparsam        \r\n\u2022\r\nExtra trocken        \r\n\u2022\r\nEinweichen        \r\n\u2022\r\nVorsp\u00fclen        \r\n\u2022\r\nKorbgestaltung \r\nBesteckunterbringung        \r\n3D-Besteckschublade +\r\nFlexCare-Gl\u00e4serhalter        \r\n4\r\nKorbgestaltung        \r\nMaxiComfort\r\nAnzahl Ma\u00dfgedecke        \r\n14\r\nHausger\u00e4te-Vernetzung \r\nMiele@home        \r\nausger\u00fcstet\r\nWifiConn@ct        \r\n\u2022\r\nMiele@mobile App        \r\n\u2022\r\nSuperVision-Anzeige        \r\n\u2022\r\nMobileControl        \r\n\u2022\r\nSmartStart        \r\n\u2022\r\nTechnik und Qualit\u00e4t \r\nSensorik        \r\nAutoSensor\r\nEcoTech W\u00e4rmespeicher        \r\n\u2022\r\nElektronische Profi-Pumpe f\u00fcr variablen Spr\u00fchdruck        \r\n\u2022\r\nSicherheit \r\nWaterproof-System        \r\n\u2022\r\nSieb-Kontrollanzeige        \r\n\u2022\r\nTechnische Daten \r\nNischenbreite in mm        \r\n600\r\n-\r\n600\r\nNischenh\u00f6he in mm        \r\n805\r\n-\r\n870\r\nNischentiefe in mm        \r\n570\r\nGer\u00e4tebreite in mm        \r\n598\r\nGer\u00e4teh\u00f6he in mm        \r\n805\r\nGer\u00e4tetiefe in mm        \r\n570\r\nGer\u00e4tetiefe bei ge\u00f6ffneter T\u00fcr in cm        \r\n116,5\r\nNettogewicht in kg        \r\n47,0\r\nGesamtanschlusswert in kW        \r\n2,1\r\nSpannung in V        \r\n230\r\nAbsicherung in A        \r\n10\r\nElektrische Frequenz Standard        \r\n50\r\nPhasenanzahl        \r\n1\r\nL\u00e4nge Wasserzulaufschlauch in m        \r\n1,50\r\nL\u00e4nge Wasserablaufschlauch in m        \r\n1,50\r\nL\u00e4nge der elektrischen Zuleitung in m        \r\n1,70",
+    "description": "#Beschreibung\r\n\r\nVollintegrierter Geschirrsp\u00fcler\r\n\u2212 der Miele Allesk\u00f6nner f\u00fcr griffloses K\u00fcchendesign.\r\nAutomatische T\u00fcr\u00f6ffnung bei 2maligem Klopfen \u2212 Knock2open\r\nEinfachste Kommunikation mit dem Ger\u00e4te - WiFi Conn@ct \r\nMotorische T\u00fcrschlie\u00dfung - AutoClose\r\nPerfekte Ausleuchtung f\u00fcr leichtes Beladen \u2212 BrilliantLight\r\nBeste Ergebnisse in weniger als einer Stunde - QuickPowerWash\r\n\r\n#Spezifikationen\r\n\r\nModellkennzeichen: G6992 SCVi D ED230 2,0 k2o\r\nProduktabmessungen: 57 x 59,8 x 81 cm\r\nModellnummer: G6992 SCVi D ED230 2,0 k2o\r\nEnergieeffizienzklasse: A+++\r\nGewichteter J\u00e4hrlicher Energieverbrauch: 189 Kilowattstunden pro Jahr\r\nTrocknungseffizienzklasse: A\r\nJ\u00e4hrlicher Wasserverbrauch pro vollst\u00e4ndigen Betriebszyklus: 2772 Liter pro Jahr\r\nInstallationstyp: Vollintegriert\r\nEAN / Artikelnummer: 4002515683293\r\nBesondere Funktionen: 3D Besteckschublade+, MultiComfort-Bereich, H\u00f6henverstellbarer Oberkorb, Programm QuickPowerWash, Glaspflegeprogramm Fein, Programm Hygiene, Programm SolarSpar, Programm ExtraLeise, Sp\u00fcloption kurz, Sp\u00fcloption unten intensiv, Sp\u00fcloption extra sparsam, extra trocken, AutoClose, Startvorwahl bis zu 24 h / Restzeitanzeige, Knock2open, TimeControl, BrilliantLight, Salzgef\u00e4\u00df in der T\u00fcr, Ger\u00e4uschwert 48 dB(A), Ger\u00e4uschwert 46 dB(A), Ger\u00e4uschwert 44 dB(A), Ger\u00e4uschwert = 41 dB(A), Waterproof System, Niedrigster Strom- und Wasserverbrauch, Warmwasseranschluss, FlexiTimer mit EcoStart, Halbe Beladung, AutoOpen-Trocknung, Perfect GlassCare, SensorDry, Miele@home, SmartStart, MobileControl, Vollintegrierter Geschirrsp\u00fcler, Wechselsp\u00fcl-Technologie",
     "image1": "products/Miele_G6992SCViK2O_1.jpg",
     "image2": "products/miele_g_6992_scvi_k2o_2.jpg",
     "image3": "products/miele_g_6992_scvi_k2o_3.jpg",
     "end_of_life": false,
-    "renovation_required": false,
+    "renovation_required": true,
     "leader_protocol": [],
     "follower_protocol": [
-      3
+      3,
+      1
     ],
     "features": [
       13
@@ -787,7 +804,7 @@
     "product_type": 22,
     "serial_number": "WMR861 WPS P",
     "price": 599.9,
-    "efficiency": 599.9,
+    "efficiency": 180.0,
     "description": "#Beschreibung\r\n\r\nW1 Waschmaschine Frontlader\r\nmit Miele@home und SteamCare f\u00fcr maximalen Komfort.\r\nF\u00fcr die gro\u00dfe W\u00e4sche - 9,0 kg Beladung\r\nSchneller sauber geht es nicht - QuickPowerWash\r\nBestes Fl\u00fcssigwaschmittel auf Knopfdruck - TwinDos\r\nDie perfekte Erg\u00e4nzung f\u00fcr spezielle Anwendungen - CapDosing\r\n50% weniger B\u00fcgeln plus maximale Anwendungsvielfalt - SteamCare\r\nBeste W\u00e4scheschonung - Thermo-Schontrommel\r\n\r\n#Spezifikationen\r\n\r\nProduktdetails - WMR861 WPS PWash 2.0 & TDos XL\r\n\r\nBauform \r\nS\u00e4ulenf\u00e4hig\t\r\n\u2022\r\nSide-by-Side\t\r\n\u2022\r\nUnterschiebbar\t\r\n\u2022\r\nT\u00fcranschlag\t\r\nrechts\r\nBauart \r\nProduktmarke\t\r\nW1 White Edition\r\nFrontlader\t\r\n\u2022\r\nSchleudern \r\nMax. Schleuderdrehzahl\t\r\n1.600\r\nSp\u00fclstop\t\r\n\u2022\r\nFunktion \"\"ohne Schleudern\"\"\t\r\n\u2022\r\nDesign \r\nGer\u00e4tefarbe\t\r\nLotoswei\u00df\r\nT\u00fcrdesign\t\r\nWei\u00df mit Chromring\r\nParameter-Tasten\t\r\nChrom\r\nBlendenfarbe\t\r\nLotoswei\u00df\r\nOptions-Tasten\t\r\nChrom\r\nFarbe Drehwahlschalter\t\r\nLotoswei\u00df / Ring Chrom\r\nBlendenausf\u00fchrung\t\r\n5\u00b0 geneigt\r\nBedienungsart\t\r\nDrehwahlschalter\r\nDisplay\t\r\n4-zeilig TFT\r\nReinigungsleistung \r\nPowerWash 2.0\t\r\n\u2022\r\nTwinDos\t\r\n\u2022\r\nCapDosing\t\r\n\u2022\r\nFleckenoption\t\r\n\u2022\r\nW\u00e4scheschonung \r\nThermo-Schontrommel\t\r\n\u2022\r\nBeladung in kg\t\r\n9,0\r\nBedienkomfort \r\nSteamCare\t\r\n\u2022\r\nStartvorwahl bis zu 24h\t\r\n\u2022\r\nRestzeitanzeige\t\r\n\u2022\r\nTageszeitanzeige\t\r\n\u2022\r\nProgrammablauf-Anzeige\t\r\n\u2022\r\nFavoriten-Programme\t\r\n\u2022\r\nTrommelbeleuchtung\t\r\nLED\r\nWahl der Displaysprache\t\r\n\u2022\r\nAutoClean Einsp\u00fclkasten\t\r\n\u2022\r\nEffizienz und Nachhaltigkeit \r\nEnergieeffizienzklasse\t\r\nA+++\r\nsparsamer als der Grenzwert der Energieeffizienzklasse A+++\t\r\n40%\r\nJahreswasserverbrauch in l\t\r\n11.000\r\nJahresstromverbrauch in kWh\t\r\n130,00\r\nSchleuderwirkungsklasse\t\r\nA\r\nGer\u00e4usch beim Waschen in db(A) re1pW\t\r\n46\r\nGer\u00e4usch beim Schleudern in db(A) re1pW\t\r\n72\r\nWasserverbrauch im Standardprogramm Baumwolle 60\u00b0 bei voller Beladung in l\t\r\n54\r\nStromverbrauch im Standardprogramm Baumwolle 60\u00b0 bei voller Beladung in kWh\t\r\n0,80\r\nEcoFeedback-Funktion\t\r\n\u2022\r\nMengenautomatik\t\r\n\u2022\r\nNiedrigtemperaturwaschen \"\"kalt\"\" und \"\"20\u00b0C\"\"\t\r\n\u2022\r\nWassermengenz\u00e4hler\t\r\n\u2022\r\nSchaumregulierung\t\r\n\u2022\r\nProfiEco Motor\t\r\n\u2022\r\nWaschprogramme \r\nQuickPowerWash\t\r\n\u2022\r\nAutomatic plus\t\r\n\u2022\r\nBaumwolle\t\r\n\u2022\r\nFeinw\u00e4sche\t\r\n\u2022\r\nPflegeleicht\t\r\n\u2022\r\nOberhemden\t\r\n\u2022\r\nSeide (Handw\u00e4sche)\t\r\n\u2022\r\nWolle (Handw\u00e4sche)\t\r\n\u2022\r\nEinzelteilemix\t\r\n\u2022\r\nFavoriten\t\r\n\u2022\r\nExpress 20\t\r\n\u2022\r\nDunkle W\u00e4sche\t\r\n\u2022\r\nJeans\t\r\n\u2022\r\nOutdoor\t\r\n\u2022\r\nImpr\u00e4gnieren\t\r\n\u2022\r\nSportw\u00e4sche\t\r\n\u2022\r\nFederbetten\t\r\n\u2022\r\nDaunen\t\r\n\u2022\r\nGardinen\t\r\n\u2022\r\nAuffrischen (Dampf)\t\r\n\u2022\r\nFinish Dampf\t\r\n\u2022\r\nMaschine reinigen\t\r\n\u2022\r\nNeue Textilien\t\r\n\u2022\r\nNur Sp\u00fclen\t\r\n\u2022\r\nSt\u00e4rken\t\r\n\u2022\r\nPumpen/Schleudern\t\r\n\u2022\r\nWaschoptionen \r\nProgrammManager\t\r\n\u2022\r\nKurz\t\r\n\u2022\r\nEinweichen\t\r\n\u2022\r\nVorw\u00e4sche\t\r\n\u2022\r\nWasser plus\t\r\n\u2022\r\nZus\u00e4tzlicher Sp\u00fclgang\t\r\n\u2022\r\nDampfgl\u00e4tten\t\r\n\u2022\r\nSummer\t\r\n\u2022\r\nHausger\u00e4te-Vernetzung \r\nVorger\u00fcstet f\u00fcr Miele@home\t\r\n\u2022\r\nSmartStart\t\r\n\u2022\r\nQualit\u00e4t \r\nLaugenbeh\u00e4lter\t\r\nEdelstahl\r\nEmaillierte Front\t\r\n\u2022\r\nKontergewichte aus Grauguss\t\r\n\u2022\r\nSicherheit \r\nWaterproof-System\t\r\n\u2022\r\nKindersicherung\t\r\n\u2022\r\nPIN-Code Verriegelung\t\r\n\u2022\r\nOptische Schnittstelle\t\r\n\u2022\r\nTechnische Daten \r\nAbmessungen in mm (Breite)\t\r\n596\r\nAbmessungen in mm (H\u00f6he)\t\r\n850\r\nAbmessungen in mm (Tiefe)\t\r\n643\r\nGer\u00e4tetiefe bei ge\u00f6ffneter T\u00fcr in mm\t\r\n1.077\r\nGewicht in kg\t\r\n96\r\nGesamtanschlusswert in kW\t\r\n2,10-2,40\r\nSpannung in V\t\r\n220-240\r\nFrequenz in HZ\t\r\n50\r\nAbsicherung in A\t\r\n10\r\nL\u00e4nge der elektrischen Zuleitung in mm\t\r\n2.000\r\nMitgeliefertes Zubeh\u00f6r \r\n3 Caps\t\r\n\u2022\r\nUltraPhase 1\t\r\n\u2022\r\nUltraPhase 2\t\r\n\u2022",
     "image1": "products/miele_WMR861WPSP_1.jpg",
     "image2": "products/miele_WMR861WPSP_2.png",
@@ -801,8 +818,8 @@
       1
     ],
     "features": [
-      6,
       13,
+      6,
       2
     ]
   }
@@ -828,6 +845,8 @@
       1
     ],
     "features": [
+      93,
+      91,
       22,
       13
     ]
@@ -867,17 +886,22 @@
     "provider": 11,
     "product_type": 25,
     "serial_number": "DA 6690 W",
-    "price": 57.0,
-    "efficiency": 50.0,
-    "description": "#Beschreibung\n\nWand-Dunstabzugshaube\r\nmit energiesparender LED-Beleuchtung und Touchbedienung f\u00fcr einfache Bedienung.\r\nFamiliendesign - abgestimmt auf Einbauger\u00e4tegeneration 6000\r\nEinzigartiger Bedienkomfort - Con@ctivity 2.0\r\nLeistungsstark - 640 m3/h in der Boosterstufe\r\nEnergiesparend und leise - leistungsstarker ECO-Motor\r\nAngenehm leise - Miele Akustikpaket\n\n#Spezifikationen\n\nProduktdetails - DA 6690 W Puristic Edition 6000\r\n\r\nBauform \r\nWand-Dunstabzugshaube\t\r\n\u2022\r\nDesign \r\nFarbe\t\r\nEdelstahl\r\nRAL-Farbe als Sonderanfertigung m\u00f6glich\t\r\n\u2022\r\nIndividuelle Anpassungen auf Kundenwunsch m\u00f6glich\t\r\n\u2022\r\nVariable H\u00f6he als Sonderanfertigung m\u00f6glich\t\r\n\u2022\r\nVariable Breite als Sonderanfertigung m\u00f6glich\t\r\n\u2022\r\nBetriebsarten \r\nArt der Luftf\u00fchrung\t\r\nUmr\u00fcstbar\r\nBedienkomfort \r\nElektronische Steuerung\t\r\n\u2022\r\nTouchbedienung auf Glas\t\r\n\u2022\r\nLeistungsstufen (Anzahl ohne Boosterstufe)\t\r\n3\r\nBoosterstufe\t\r\n\u2022\r\nBoosterstufenabschaltung programmierbar\t\r\n\u2022\r\nNachlaufzeit 5 o. 15 Min.\t\r\n\u2022\r\nFettfilter-S\u00e4ttigung programmierbar\t\r\n\u2022\r\nSilence-Paket\t\r\n\u2022\r\nAktivkohlefilter-S\u00e4ttigung programmierbar\t\r\n\u2022\r\nPflegekomfort \r\nReinigungsfreundlicher Haubeninnenraum CleanCover\t\r\n\u2022\r\nEffizienz und Nachhaltigkeit \r\nJ\u00e4hrlicher Energieverbrauch in kWh/Jahr\t\r\n30,8\r\nEnergieeffizienzklasse\t\r\nA+\r\nKlasse f\u00fcr fluiddynamische Effizienz\t\r\nA\r\nBeleuchtungseffizienzklasse\t\r\nA\r\nKlasse f\u00fcr den Fettabscheidegrad\t\r\nA\r\nPowerManagement System\t\r\n\u2022\r\nECO-Paket\t\r\n\u2022\r\nHausger\u00e4te-Vernetzung \r\nAutomatikfunktion Con@ctivity 2.0\t\r\n\u2022\r\nMiele@home\t\r\nausger\u00fcstet\r\nFiltersystem \r\nAnzahl sp\u00fclmaschinengeeign. EDST-Metallfettfilter (10-lagig)\t\r\n3\r\nBeleuchtung \r\nLED\t\r\n\u2022\r\nAnzahl x Watt\t\r\n3 x 3 W\r\nBeleuchtungsst\u00e4rke in Lx\t\r\n520\r\nFarbtemperatur in K\t\r\n3.500\r\nGebl\u00e4se \r\nDoppelseitig saugendes Gebl\u00e4se\t\r\n\u2022\r\nECO-Motor (Gleichstrommotor)\t\r\n\u2022\r\nLuftleistung bei max. Abluftquerschnitt f\u00fcr Abluftbetrieb (nicht bei externer Variante) \r\nLuftleistung Stufe 1 (m\u00b3/h) nach EN 61591\t\r\n200\r\nLuftleistung Stufe 2 (m\u00b3/h) nach EN 61591\t\r\n300\r\nLuftleistung Stufe 3 (m\u00b3/h) nach EN 61591\t\r\n400\r\nLuftleistung Boosterstufe (m\u00b3/h) nach EN 61591\t\r\n640\r\nSchallleistung Stufe 1 (dB(A) re1pW) nach EN 60704-3\t\r\n38\r\nSchallleistung Stufe 2 (dB(A) re1pW) nach EN 60704-3\t\r\n44\r\nSchallleistung Stufe 3 (dB(A) re1pW) nach EN 60704-3\t\r\n51\r\nSchallleistung Boosterstufe (dB(A) re1pW) n. EN 60704-3\t\r\n63\r\nSchalldruck Stufe 1 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n23\r\nSchalldruck Stufe 2 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n29\r\nSchalldruck Stufe 3 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n36\r\nSchalldruck Boosterstufe (dB(A) re20\u00b5Pa) n. EN 60704-2-13\t\r\n48\r\nLuftleistung f\u00fcr Umluftbetrieb \r\nLuftleistung Stufe 1 (m\u00b3/h) nach EN 61591\t\r\n120\r\nLuftleistung Stufe 2 (m\u00b3/h) nach EN 61591\t\r\n210\r\nLuftleistung Stufe 3 (m\u00b3/h) nach EN 61591\t\r\n330\r\nLuftleistung Boosterstufe (m\u00b3/h) nach EN 61591\t\r\n490\r\nSchallleistung Stufe 1 (dB(A) re1pW) nach EN 60704-3\t\r\n49\r\nSchallleistung Stufe 2 (dB(A) re1pW) nach EN 60704-3\t\r\n54\r\nSchallleistung Stufe 3 (dB(A) re1pW) nach EN 60704-3\t\r\n61\r\nSchallleistung Boosterstufe (dB(A) re1pW) n. EN 60704-3\t\r\n71\r\nSchalldruck Stufe 1 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n34\r\nSchalldruck Stufe 2 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n40\r\nSchalldruck Stufe 3 (dB(A) re20\u00b5Pa) nach EN 60704-2-13\t\r\n46\r\nSchalldruck Boosterstufe (dB(A) re20\u00b5Pa) n. EN 60704-2-13\t\r\n56\r\nSicherheit \r\nSicherheitsausschaltung\t\r\n\u2022\r\nEinscheibensicherheitsglas (ESG)\t\r\n\u2022\r\nTechnische Daten \r\nGesamthaubenh\u00f6he Abluft und Extern in mm\t\r\n710\r\n-\r\n1.030\r\nGesamthaubenh\u00f6he Umluft in mm\t\r\n840\r\n-\r\n1.160\r\nBreite des Haubenk\u00f6rpers in mm\t\r\n898\r\nH\u00f6he des Haubenk\u00f6rpers in mm\t\r\n85\r\nTiefe des Haubenk\u00f6rpers in mm\t\r\n500\r\nMindestabstand \u00fcber Elektrokochfeldern in mm\t\r\n450\r\nMindestabstand \u00fcber Gaskochstellen (max. 12,6 kW Gesamtleistung, Brenner \u2264 4,5 kW) in mm\t\r\n650\r\nNettogewicht in kg\t\r\n26,0\r\nL\u00e4nge der elektrischen Zuleitung in m\t\r\n1,5\r\nSchutzkontaktstecker\t\r\n\u2022\r\nGesamtanschlusswert in kW\t\r\n0,10\r\nSpannung in V\t\r\n230\r\nAbsicherung in A\t\r\n10\r\nFrequenz in Hz\t\r\n50\r\nPhasenanzahl\t\r\n1\r\nMontagehinweise \r\nAbluftanschluss oben\t\r\n\u2022\r\nAbluftanschluss oben und hinten\t\r\n\u2022\r\nDurchmesser des Abluftstutzens in mm\t\r\n150\r\nTeleskopierbarer Kamin\t\r\n\u2022\r\nTeleskopierbares Wandhalteblech\t\r\n\u2022\r\nMitgeliefertes Zubeh\u00f6r \r\nR\u00fcckstauklappe\t\r\n\u2022\r\nKommunikationsstick Con@ctivity 2.0 f\u00fcr KM\t\r\nXKS 3000 Z",
+    "price": 1649.0,
+    "efficiency": 9.0,
+    "description": "#Beschreibung\r\n\r\nWand-Dunstabzugshaube\r\nmit energiesparender LED-Beleuchtung und Touchbedienung f\u00fcr einfache Bedienung.\r\nFamiliendesign - abgestimmt auf Einbauger\u00e4tegeneration 6000\r\nEinzigartiger Bedienkomfort - Con@ctivity 2.0\r\nLeistungsstark - 640 m3/h in der Boosterstufe\r\nEnergiesparend und leise - leistungsstarker ECO-Motor\r\nAngenehm leise - Miele Akustikpaket\r\n\r\n#Spezifikationen\r\n\r\n- Wand-Dunstabzugshaube\r\n- 90 cm L\u00fcftungs-System Abluftbetrieb\r\n- Umluftbetrieb \u00fcber Sonderzubeh\u00f6r (Active AirClean-Filter DKF12-1, Umbausatz Umluft DUW20)\r\n- Einbauvarianten Zur freien Montage an der Wand \r\n- Elektronische Regelung mit Power Management \r\n- Conactivity 2.0 \r\n- Touch-Bedienung\r\n- 3 Leistungsstufen + Intensivstufe High-Power LED-Beleuchtung \r\n- 3 x 3 Watt 3 Metallfettfilter \r\n- Fettfilter-S\u00e4ttigungsanzeige (programmierbar) \r\n- Aktivkohlefilter-S\u00e4ttigungsanzeige \r\n- Nachlauffunktion (5/15 Min.) \r\n- Doppelseitig saugendes Gebl\u00e4se \r\n- DC-Motor f\u00fcr h\u00f6chstm\u00f6gliche Energieeinsparung \r\n- Abluftanschluss nach oben und zur Wand NW 150/125 \r\n- R\u00fcckstauklappe Miele CleanCover Gebl\u00e4seleistung / Schalleistung Abluft nach EN 61591/EN 60704-3, \u00d8 150 mm: Stufe 3 400 m3/h, 51 dB(A) re 1 pw (36 dB(A) re 20 \u03bcPa Schalldruck) Intensiv 640 m3/h, 63 dB(A) re 1 pw (48 dB(A) re 20 \u03bcPa Schalldruck) Umluft nach EN 61591/EN 60704-3, \u00d8 150 mm: Stufe 3 300 m3/h, 61 dB(A) re 1 pw (46 dB(A) re 20 \u03bcPa Schalldruck) Intensiv 490 m3/h, 71 dB(A) re 1 pw (56 dB(A) re 20 \u03bcPa Schalldruck)",
     "image1": "products/miele_dunst_1.jpg",
     "image2": "products/miele_dunst_2.jpg",
     "image3": "products/miele_dunst_3.jpg",
     "end_of_life": false,
-    "renovation_required": false,
+    "renovation_required": true,
     "leader_protocol": [],
-    "follower_protocol": [],
-    "features": []
+    "follower_protocol": [
+      16,
+      1
+    ],
+    "features": [
+      65
+    ]
   }
 },
 {
@@ -935,13 +959,13 @@
   "model": "app.product",
   "pk": 29,
   "fields": {
-    "name": "Miele@Home Gateway",
+    "name": "Miele Gateway",
     "provider": 11,
     "product_type": 27,
     "serial_number": "XGW 3000",
-    "price": 99.99,
-    "efficiency": 70.0,
-    "description": "#Beschreibung\n\nGateway\r\nzur Integration der vernetzbaren Hausger\u00e4te in Hausbussysteme f\u00fcr mehr Komfort.\r\nM\u00f6glichkeit der Kontrolle und Steuerung per Smartphone, Tablet PC\r\nNutzung von Smart Energy Systemen - z.B. Photovoltaikanlagen\r\nOptionale Nutzung von InfoService\n\n#Spezifikationen\n\n---",
+    "price": 349.99,
+    "efficiency": 12.0,
+    "description": "#Beschreibung\r\n\r\nGateway\r\nzur Integration der vernetzbaren Hausger\u00e4te in Hausbussysteme f\u00fcr mehr Komfort.\r\nM\u00f6glichkeit der Kontrolle und Steuerung per Smartphone, Tablet PC\r\nNutzung von Smart Energy Systemen - z.B. Photovoltaikanlagen\r\nOptionale Nutzung von InfoService\r\n\r\n#Spezifikationen\r\n\r\nzur Integration der vernetzbaren Hausger\u00e4te in Hausbussysteme f\u00fcr mehr Komfort\r\n\r\n-M\u00f6glichkeit der Kontrolle und Steuerung per Smartphone, Tablet PC\r\n-Nutzung von Smart Energy Systemen - z.B. Photovoltaikanlagen\r\n-Optionale Nutzung von InfoService",
     "image1": "products/miele_gate_1.jpg",
     "image2": "products/miele_gate_2.jpg",
     "image3": "",
@@ -966,19 +990,23 @@
   "fields": {
     "name": "Polar H7 Heart Rate Sensor",
     "provider": 12,
-    "product_type": 28,
+    "product_type": 1,
     "serial_number": "92044305-P",
-    "price": 44.0,
-    "efficiency": 10.1,
-    "description": "#Beschreibung\n\nHook up your fitness app or training device with Polar H7 and get live, accurate heart rate while you train. You can use Polar H7 with a number of Polar products and compatible gym equipment.\n\n#Spezifikationen\n\nBattery type CR 2025\r\nBattery sealing ring O-ring 20.0 x 1.0 Material FPM\r\nBattery lifetime 200 h\r\nOperating\r\ntemperature\r\n14 \u00b0F to 122 \u00b0F/ -10 \u00b0C to\r\n+50 \u00b0C\r\nConnector material Polyamide\r\nStrap material 38% Polyamide, 29%\r\nPolyurethane, 20% Elastane,\r\n13% Polyester",
+    "price": 59.95,
+    "efficiency": 1.0,
+    "description": "#Beschreibung\r\nDer neue Polar Wearlink H7 Transmitter + Bluetooth Smart M-XXl Sender-Set \u00fcbertr\u00e4gt die Herzfrequenzdaten via Bluetooth Smart auf ihr angeschlosssenes Endger\u00e4t.\r\n\r\n#Spezifikationen\r\n\r\nBatterietyp: CR 2025\r\nDichtungsring der Batterie: O-Ring 20,0 x 1,0,\r\nLebensdauer der Batterie ca. 200 Betriebsstunden\r\nUmgebungstemperatur -10\u00b0 C bis +50\u00b0 C\r\nMaterial der Sendeeinheit: Polyamid\r\nGurtmaterial 38 % Polyamid,\r\n29 % Polyurethan,\r\n20 % Elastan,\r\n13 % Polyester",
     "image1": "products/polar_92044305-P_1.jpg",
     "image2": "products/polar_92044305-P_2.jpg",
     "image3": "products/polar_92044305-P_3.png",
     "end_of_life": false,
     "renovation_required": false,
-    "leader_protocol": [],
+    "leader_protocol": [
+      15
+    ],
     "follower_protocol": [],
-    "features": []
+    "features": [
+      56
+    ]
   }
 },
 {
@@ -1121,8 +1149,8 @@
     "product_type": 31,
     "serial_number": "426353",
     "price": 23.3,
-    "efficiency": 5.0,
-    "description": "#Beschreibung\n\nPhilips hue signals a new era in home lighting both in the way we think about and experience light in our homes. It allows you to create and control the light using your smartphone or tablet. Bringing endless possibilities to help you get creative and help you personalize your lighting to suit yours and your family's lifestyle. A starter pack includes three bulbs that simply screw into your existing lamps and a bridge that you plug into your home Wi-Fi router. Simply download the hue app to start experiencing light in a completely new way.\n\n#Spezifikationen\n\n---",
+    "efficiency": 10.0,
+    "description": "#Beschreibung\r\n\r\nPhilips Hue ist ein App-gesteuertes Lichtsystem, das bis zu 50 Lichtquellen gleichzeitig bedienen und 16 Millionen Farben steuern kann - und das alles \u00fcber Ihr Android oder iOS Smartphone oder Tablet. Hue kann zu einem Bestandteil Ihres Alltags werden. Mit Weckzeiten. Mit Timern. Mit Warnsignalen. Mit Schutz f\u00fcr Ihr Zuhause.\r\n\r\nSteuern Sie Licht mit Ihrer Stimme\r\nDurch die Verbindung von Hue mit Amazon Alexa erleben Sie Lichtsteuerung mit h\u00f6chstem Komfort. Zum Einrichten befolgen Sie einfach die wenigen Schritten in der Alexa App und schon k\u00f6nnen Sie Ihr Licht per bequemer Sprachsteuerung pers\u00f6nlichen Bed\u00fcrfnissen anpassen.\r\n\r\n#Spezifikationen\r\n\r\n- Sockel: E27\r\n- Brillantes LED Licht\r\n- 16 Millionen Farben\r\n- Lichtstrom: 806 Lumen\r\n- Hue Starter Kit f\u00fcr alle Einsteiger\r\n- Einfache Lichtsteuerung \u00fcber das Internet: Verbinden Sie hue mit digitalen Diensten oder Ihrem Posteingang",
     "image1": "products/hue_start_1.jpg",
     "image2": "products/hue_start_2.jpg",
     "image3": "products/hue_start_3.jpg",
@@ -1149,8 +1177,8 @@
     "product_type": 37,
     "serial_number": "426361 PHHUESB",
     "price": 57.7,
-    "efficiency": 6.0,
-    "description": "#Beschreibung\n\nPhilips hue signals a new era in home lighting both in the way we think about and experience light in our homes. It allows you to create and control the light using your smartphone or tablet. Bringing endless possibilities to help you get creative and help you personalize your lighting to suit yours and your family's lifestyle. A starter pack includes three bulbs that simply screw into your existing lamps and a bridge that you plug into your home Wi-Fi router. Simply download the hue app to start experiencing light in a completely new way.\n\n#Spezifikationen\n\n---",
+    "efficiency": 9.0,
+    "description": "#Beschreibung\r\n\r\n- Erweitern Sie Ihr Starter Kit und bedienen Sie Ihre Leuchte mobil\r\n- Plug and Play - einfach einsetzen und los geht es\r\n- Steuern sie Ihre Beleuchtung, wenn sie unterwegs sind. Dass erh\u00f6ht die Einbruchsicherheit\r\n- Sagen Sie hue was es machen soll via \"IFTTT\" \"if this than that\" (App Store)\r\n- Es sind 2 Verpackungen f\u00fcr den identischen Artikel m\u00f6glich: Standardverpackung und frustfreie Artikel\r\n\r\n#Spezifikationen\r\n\r\nArtikelgewicht: 200 g\r\nProduktabmessungen:10,2 x 6 x 6 cm\r\nModellnummer: 426361\r\nEAN / Artikelnummer: PHHUESB\r\nSchutzart: IP44\r\nAnzahl Lampen: 1\r\nForm: Kegel\r\nSpannung: 120 Volt\r\nAnwendungsbereich: Nur zum Gebrauch in geschlossenen R\u00e4umen\r\nBatterien notwendig: Nein\r\nLampentyp: LED\r\nFassung: E27\r\nEnergieeffizienzklasse: A+\r\nLichtleistung\t600 lumen\r\nLeuchtmitteleigenschaften: Dimmbar\r\nFarbwiedergabeindex: 80\r\nDurchschnittliche Lebensdauer\t15000 Stunden",
     "image1": "products/hue_single_1.jpg",
     "image2": "products/hue_single_2.jpg",
     "image3": "products/hue_single_3.jpg",
@@ -1208,14 +1236,18 @@
     "product_type": 33,
     "serial_number": "WR230",
     "price": 30.8,
-    "efficiency": 4.0,
-    "description": "#Beschreibung\n\n---\n\n#Spezifikationen\n\n---",
+    "efficiency": 12.0,
+    "description": "#Beschreibung\r\nDie WiFi T\u00fcrklingel verbindet sich \u00fcber WLAN oder Netzwerkkabel an dem Router. Mobile Ger\u00e4te wie Smartphones oder Tablets k\u00f6nnen sich mit der Klingel verbinden. Mit Alarmfunktion, Nachtvision und Schutz vor Manipulation l\u00e4sst sich das Ger\u00e4t sicher und nutzerfreundlich bedienen\r\n---\r\n\r\n#Spezifikationen\r\n\r\n- Bewegungserkennung, PIR Funktion, Einbruchmelderzone.\r\n- Unterst\u00fctzt Android und iOS\r\n-Eine WIFI T\u00fcrklingel kann 8 Benutzerterminals unterst\u00fctzen.\r\n-Unterst\u00fctzt Echtzeit-Video-und Audio-Chat mit dem Besucher.\r\n-Unterst\u00fctzt Screenshot- und Videoaufzeichnung.\r\n-Kamera: 2.0 Megapixel; Sichtfeld: 120 \u00b0 super Weitwinkel.\r\n-Geh\u00e4use: wasserdicht\r\n-Entriegelungsfunktionen: Haushalte m\u00fcssen nicht zur T\u00fcr zum \u00d6ffnen der T\u00fcr direkt laufen",
     "image1": "products/kingmak_klingel_1.jpg",
     "image2": "products/kingmak_klingel_2.jpg",
     "image3": "products/kingmak_klingel_3.jpg",
     "end_of_life": false,
     "renovation_required": false,
-    "leader_protocol": [],
+    "leader_protocol": [
+      14,
+      13,
+      12
+    ],
     "follower_protocol": [
       3
     ],
@@ -1295,8 +1327,7 @@
     "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
-      6,
-      3
+      6
     ],
     "features": [
       29,
@@ -1315,7 +1346,7 @@
     "serial_number": "AEO_DSD31",
     "price": 46.99,
     "efficiency": 8.0,
-    "description": "#Beschreibung\r\n\r\n<h4>Siren for alarms.<br> Siren for safety. </h4>\r\n\r\nMost sirens are made to be a part of a security system. They\u2019re designed to be placed outdoors in the hopes of deterring break-ins or to alert your neighbours that something\u2019s up. Siren from Aeotec works differently. It\u2019s been crafted to keep you safe and secure when you\u2019re home. The wellbeing of you and your family is its focus.\r\n\r\nThat\u2019s why Siren offers 5 different alert tones. They\u2019ve been designed for issues ranging from home intrusions to fire emergencies to falls. And they\u2019re all available to you through your Z-Wave gateway so that you can perfectly optimise Siren for your security and safety needs.\r\n\r\n#Spezifikationen\r\n\r\n---",
+    "description": "#Beschreibung\r\n\r\n<h4>Siren for alarms.<br> Siren for safety. </h4>\r\n\r\nMost sirens are made to be a part of a security system. They\u2019re designed to be placed outdoors in the hopes of deterring break-ins or to alert your neighbours that something\u2019s up. Siren from Aeotec works differently. It\u2019s been crafted to keep you safe and secure when you\u2019re home. The wellbeing of you and your family is its focus.\r\n\r\nThat\u2019s why Siren offers 5 different alert tones. They\u2019ve been designed for issues ranging from home intrusions to fire emergencies to falls. And they\u2019re all available to you through your Z-Wave gateway so that you can perfectly optimise Siren for your security and safety needs.",
     "image1": "products/aeon_alarm_1.jpg",
     "image2": "products/aeon_alarm_2.jpg",
     "image3": "products/aeon_alarm_3.jpg",
@@ -1327,6 +1358,8 @@
       3
     ],
     "features": [
+      93,
+      67,
       25,
       13
     ]
@@ -1371,7 +1404,7 @@
     "serial_number": "Aeotec ZW100-C, GTIN: 1220000013100",
     "price": 44.9,
     "efficiency": 12.0,
-    "description": "#Beschreibung\r\n\r\nMachen Sie Ihr Zuhause wirklich intelligent - Mit einem kleinen Ger\u00e4t, vollgepackt mit intelligenten Funktionen. Ein Zuhause ist erst dann intelligent, wenn es anstelle von starren Zeitpl\u00e4nen auf die Ereignisse im Haus in Echtzeit reagieren kann. Der Multisensor mit 6 Sensoren ist ab sofort die Grundlage Ihres modernen Smart Home. Der Multisensor von Aeotec vereint gleich 6 Sensoren in einem Ger\u00e4t: Bewegungssensor; Temperatursensor; Lichtsensor; Luftfeuchtigkeitssensor; Vibrationssensor; UV Sensor; Der Multisensor 6 wird mit 2 x CR123A Batterien betrieben. Dies erm\u00f6glicht Ihnen eine flexible Positionierung im Raum. Im Batteriemodus wacht das Ger\u00e4t in einem definierten Zeitintervall auf und \u00fcbermittelt die Messdaten an die Smart Home Zentrale. Im Lieferumfang finden Sie ein USB auf Micro USB Kabel um den Multisensor 6 auch per USB Spannung betrieben zu k\u00f6nnen. Dann ist der Multisensor in der Lage die Messdaten in Echtzeit an Ihre Smart Home Zentrale zu \u00fcbermitteln.\r\n\r\n#Spezifikationen\r\n\r\n---",
+    "description": "#Beschreibung\r\n\r\nMachen Sie Ihr Zuhause wirklich intelligent - Mit einem kleinen Ger\u00e4t, vollgepackt mit intelligenten Funktionen. Ein Zuhause ist erst dann intelligent, wenn es anstelle von starren Zeitpl\u00e4nen auf die Ereignisse im Haus in Echtzeit reagieren kann. Der Multisensor ist ab sofort die Grundlage Ihres modernen Smart Home. Der Multisensor von Aeotec vereint gleich 6 Sensoren in einem Ger\u00e4t: Bewegungssensor; Temperatursensor; Lichtsensor; Luftfeuchtigkeitssensor; Vibrationssensor; UV Sensor; Der Multisensor 6 wird mit 2 x CR123A Batterien betrieben. Dies erm\u00f6glicht Ihnen eine flexible Positionierung im Raum. Im Batteriemodus wacht das Ger\u00e4t in einem definierten Zeitintervall auf und \u00fcbermittelt die Messdaten an die Smart Home Zentrale. Im Lieferumfang finden Sie ein USB auf Micro USB Kabel um den Multisensor 6 auch per USB Spannung betrieben zu k\u00f6nnen. Dann ist der Multisensor in der Lage die Messdaten in Echtzeit an Ihre Smart Home Zentrale zu \u00fcbermitteln.\r\n\r\n#Spezifikationen\r\n\r\nProduktgewicht inkl. Verpackung: 181 g\r\nBatterien 2 CR123A Batterien erforderlich.",
     "image1": "products/aeon_multi_1.jpg",
     "image2": "products/aeon_multi_2.jpg",
     "image3": "products/aeon_multi_3.jpg",
@@ -1382,6 +1415,11 @@
       6
     ],
     "features": [
+      101,
+      100,
+      115,
+      113,
+      110,
       42,
       49,
       51,
@@ -1401,7 +1439,7 @@
     "serial_number": "ZW098",
     "price": 59.99,
     "efficiency": 9.0,
-    "description": "#Beschreibung\r\n\r\n---\r\n\r\n#Spezifikationen\r\n\r\n---",
+    "description": "#Beschreibung\r\nMit der neuen und intelligenten RGB-Gl\u00fchlampe kommt Aeotec ins Spiel. Die Aeotec-Lampe passt in jeden E27-Gl\u00fchlampenhalter und ist durch eine Z-Wave-Funktechnik mit einem Smart Home Center verbunden. Es ist in der Lage, Helligkeit und helle Farbe als auch variieren. Tageslicht, Kerzenlicht oder Partyatmosph\u00e4re: Ab jetzt k\u00f6nnen Sie Lichtatmosph\u00e4re nach Ihren W\u00fcnschen definieren.\r\n\r\n#Spezifikationen\r\nCold white: 4745K to 7050K\r\nNatural white: 3710K to 4745 K\r\nWarm white: 2580K to 3710K",
     "image1": "products/aeon_led_1.jpg",
     "image2": "products/aeon_led_2.png",
     "image3": "products/aeon_led_3.jpg",
@@ -1413,6 +1451,9 @@
       3
     ],
     "features": [
+      94,
+      93,
+      81,
       7,
       5,
       8,
@@ -1439,13 +1480,16 @@
     "leader_protocol": [
       8,
       9,
+      14,
       10,
       11,
       5,
       6,
       2,
+      13,
       7,
       3,
+      12,
       1,
       4
     ],
@@ -1460,11 +1504,156 @@
   }
 },
 {
+  "model": "app.product",
+  "pk": 48,
+  "fields": {
+    "name": "ENTR Dongle",
+    "provider": 35,
+    "product_type": 13,
+    "serial_number": "10264739",
+    "price": 39.95,
+    "efficiency": 0.5,
+    "description": "#Beschreibung\r\n<h4>verbindet das T\u00fcrschloss ENTR mit SmartHome</h4>\r\nENTR Bluetooth Low Energy Dongle ist mit allen g\u00e4ngigen T\u00fcrschl\u00f6ssern kompatibel. Daf\u00fcr vor der Bestellung einfach Schlie\u00dfzylinder ausmessen und passend dazubestellen. In freien USB-Anschluss der innogy SmartHome Zentrale stecken \u00fcber die ENTR-eigene und innogy SmartHome ENTR-App mit innogy SmartHome verbinden\r\n\r\n#<a href=\"https://www.innogy.com/INTERSHOP/web/WFS/RWEEffizienz-RWESmartStore-Site/de_DE/-/EUR/ViewProductAttachment-OpenFile?LocaleId=&DirectoryPath=Produktanlagen+SmartHome%2FLeistungsbeschreibung+Hardware&FileName=QIG\">Handbuch</a>",
+    "image1": "products/Dongle_Front_frei.jpg",
+    "image2": "products/blob.jpg",
+    "image3": "",
+    "end_of_life": false,
+    "renovation_required": false,
+    "leader_protocol": [],
+    "follower_protocol": [
+      9
+    ],
+    "features": [
+      85
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 49,
+  "fields": {
+    "name": "ENTR Funkfernbedienung",
+    "provider": 35,
+    "product_type": 1,
+    "serial_number": "10264981",
+    "price": 34.95,
+    "efficiency": 0.0,
+    "description": "#Beschreibung\r\n<h4>ENTR Funkfernbedienung: Bequemes \u00d6ffnen und Schlie\u00dfen Ihres ENTR T\u00fcrschlosses</h4>\r\nMit der ENTR Funkfernbedienung \u00f6ffnen und schlie\u00dfen Sie Ihr ENTR T\u00fcrschloss komfortabel und einfach wie eine Autot\u00fcr. Das ist sehr bequem, wenn Sie z. B. vollbeladen vom Wochenendeinkauf heimkehren: Einfach die T\u00fcr mit der Fernbedienung \u00f6ffnen statt lange mit einem Schl\u00fcssel zu hantieren.\r\n\r\n<h4>Einfach anwenden</h4>\r\nIdeal bei mehrere Familienmitgliedern\r\nEinfach \u00fcber Ihr ENTR T\u00fcrschloss hinzuzuf\u00fcgen\r\nbis zu 20 Funkfernbedienungen mit einem ENTR T\u00fcrschloss koppelbar\r\n\r\n#Spezifikationen\r\nAbmessungen: 60x30x8 mm (LxBxH)\r\nStromversorgung: Lithium-Batterie CR2032\r\nGewicht: 30 g\r\nFarbe: Schwarz\r\n\r\n#<a href=\"https://www.innogy.com/INTERSHOP/web/WFS/RWEEffizienz-RWESmartStore-Site/de_DE/-/EUR/ViewProductAttachment-OpenFile?LocaleId=&DirectoryPath=Produktanlagen+SmartHome%2FLeistungsbeschreibung+Hardware&FileName=QIG\">Handbuch</a>",
+    "image1": "products/Entr_Fernbedienung_1000x1000.jpg",
+    "image2": "",
+    "image3": "",
+    "end_of_life": false,
+    "renovation_required": false,
+    "leader_protocol": [],
+    "follower_protocol": [
+      19
+    ],
+    "features": [
+      94,
+      93,
+      85
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 50,
+  "fields": {
+    "name": "Wifi Kaffeemaschine mit Mahlwerk",
+    "provider": 37,
+    "product_type": 26,
+    "serial_number": "SMC10EU",
+    "price": 147.99,
+    "efficiency": 3700.0,
+    "description": "#Beschreibung\r\n\r\nKaffeezubereitung fernbedienbar \u00fcber Wifi und App f\u00fcr iPhone (iOS) und Smartphones (Android OS) innerhalb der WLAN-Reichweite.\r\nFrische Bohnen mahlen und br\u00fchen und St\u00e4rke des Kaffees w\u00e4hlbar; Glaskanne fa\u00dft bis zu 1,5 Liter (ca. 12 Tassen); Zeitpunkt f\u00fcr Kaffeezubereitung terminieren.\r\nMahlgrad der Bohnen einstellbar; Tassenanzahl kann festlegt werden, ob 1, 2 oder gleich 12, nur soviel Wasser l\u00e4uft durch und soviele Bohnen werden gemahlen.\r\nWasserstandanzeiger teilt mit wieviele Tassen gebr\u00fcht werden k\u00f6nnen; W\u00e4rmeplatte verstellbar von 5-30 Minuten und schaltet sich sp\u00e4testens nach 30 Minuten automatisch aus.",
+    "image1": "products/smarter_SL1500_1.jpg",
+    "image2": "products/smarter_SL1500_2.jpg",
+    "image3": "products/smarter_SL1500_3.jpg",
+    "end_of_life": false,
+    "renovation_required": false,
+    "leader_protocol": [
+      13,
+      12
+    ],
+    "follower_protocol": [
+      15
+    ],
+    "features": [
+      94,
+      93,
+      72,
+      79
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 51,
+  "fields": {
+    "name": "Krups EA860E Kaffeevollautomat",
+    "provider": 38,
+    "product_type": 26,
+    "serial_number": "EA860E",
+    "price": 539.99,
+    "efficiency": 3590.0,
+    "description": "#Beschreibung\r\n\r\nF\u00fcr eine lange Lebensdauer ist dieser Kaffeevollautomat mit einer aus Edelstahl gefertigten Br\u00fchgruppe ausgestattet, und sorgt mit einem hocheffizienten Selbstreinigungssystem f\u00fcr eine vollautomatische Reinigung inklusive Br\u00fchgruppe.\r\nKompakter App gesteuerter OTC-Kaffee-Vollautomat der Extraklasse mit einfachem Bedienkonzept dank Smartphone-App (Bluetooth) und Video-Tutorials.\r\nLieblingsgetr\u00e4nke in Echtzeit per Drag & Drop auf das Display des Kaffeevollautomaten \u00fcbertragen - f\u00fcr direkten Zugriff und sofortigen Kaffeegenuss; kompatibel mit IOS (> 4S) und Adroid (< 4.3).\r\nNeues Innovatives Quattro Force System f\u00fcr 4fach besseren Kaffee: Express-Edelstahl-Kegelmahlwerk, Tamping-System, Br\u00fchoptimierungs-System und Autoclean-System.",
+    "image1": "products/krups_EA860E_1.jpg",
+    "image2": "products/krups_EA860E_2.jpg",
+    "image3": "products/krups_EA860E_3.jpg",
+    "end_of_life": false,
+    "renovation_required": false,
+    "leader_protocol": [
+      13,
+      12
+    ],
+    "follower_protocol": [
+      15
+    ],
+    "features": [
+      94,
+      93,
+      72,
+      79
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 52,
+  "fields": {
+    "name": "WAWH8690 Waschmaschine mit intelligenter Dosierautomatik",
+    "provider": 36,
+    "product_type": 22,
+    "serial_number": "WAWH8690-W-F23-Pi",
+    "price": 1299.0,
+    "efficiency": 137.0,
+    "description": "#Beschreibung\r\n\r\nDie Waschmaschine mit intelligenter Dosierautomatik und Home Connect: Steuern Sie Ihre Waschmaschine bequem per Smartphone oder Tablet PC.\r\ni-DOS\u2122: Dosiert voll automatisch die richtige Menge Fl\u00fcssigwaschmittel f\u00fcr perfekte Waschergebnisse.\r\nHome Connect: Vernetzte Hausger\u00e4te von Bosch f\u00fcr einen leichteren Alltag.\r\nBetriebsger\u00e4usch 47dB/71dB: w\u00e4scht und schleudert \u00fcberragend leise.\r\nVarioTrommel: Schonend und effizient Waschen dank einzigartiger Trommel-Struktur.\r\nComfortControl mit Verbrauchsanzeige: einfache Bedienung und Angabe zu Strom- und Wasserverbrauch.\r\n\r\n#Spezifikation\r\n\r\nProduktdetails\r\n\r\n\u2022 \r\nLeistung und Verbrauch\r\nNennkapazit\u00e4t: 9 kg\r\nEnergieeffizienzklasse: A+++\r\nEnergieverbrauch von 152 kWh/Jahr auf der Grundlage von 220 Standard-Waschzyklen f\u00fcr 60\u00b0C- und 40\u00b0C- Baumwollprogramme bei vollst\u00e4ndiger Bef\u00fcllung und Teilbef\u00fcllung sowie dem Verbrauch der Betriebsarten mit geringer Leistungsaufnahme. Der tats\u00e4chliche Energieverbrauch h\u00e4ngt von der Art der Nutzung des Ger\u00e4ts ab.\r\n30% sparsamer (152kWh /Jahr) als der Grenzwert (217 kWh/Jahr) der Energieeffizienzklasse A+++ in der Kategorie 9 kg nach der EU-Verordnung 1061/2010\r\nEnergieverbrauch des Standardprogramms Baumwolle 60\u00b0C 0.92 kWh bei vollst\u00e4ndiger Bef\u00fcllung und 0.6 kWh bei Teilbef\u00fcllung sowie 0.42 kWh im Standardprogramm Baumwolle 40\u00b0C bei Teilbef\u00fcllung\r\ngewichtete Leistungsaufnahme im Aus-Zustand / unausgeschaltetem Zustand: 0.12 W / 0.43 W\r\nWasserverbrauch von 11220 Liter/Jahr auf der Grundlage von 220 Standard-Waschzyklen f\u00fcr 60\u00b0C- und 40\u00b0C-Baumwollprogramme bei vollst\u00e4ndiger Bef\u00fcllung und Teilbef\u00fcllung. Der tats\u00e4chliche Wasserverbrauch h\u00e4ngt von der Art der Nutzung des Ger\u00e4ts ab.\r\nSchleudereffizienzklasse: B\r\nmax. Schleuderdrehzahl: 1400 U/min\r\nRestfeuchte: 53 %\r\nDie Standard-Waschprogramme, auf die sich die Informationen auf dem Etikett und im Datenblatt beziehen, sind Baumwolle 60\u00b0 Eco und Baumwolle Eco 40\u00b0. Diese Programme eignen sich zur Reinigung normal verschmutzter Baumwollw\u00e4sche und sind in Bezug auf den kombinierten Energie- und Wasserverbrauch am effizientesten. Die tats\u00e4chliche Temperatur kann bei dieser Kombination von der angegebenen Programmtemperatur abweichen, Waschzeiten werden zugunsten eines niedrigeren Energieverbrauchs verl\u00e4ngert. Dabei ist immer eine Waschwirkung A sichergestellt.\r\nProgrammdauer des Standardprogramms Baumwolle 60 \u00b0C 275 min bei vollst\u00e4ndiger Bef\u00fcllung und 270 min bei Teilbef\u00fcllung sowie im Standardprogramm Baumwolle 40 \u00b0C 270 min bei Teilbef\u00fcllung\r\nDauer des unausgeschalteten Zustands: 15 min\r\nGer\u00e4uschwert Waschen im Standardprogramm Baumwolle 60\u00b0C bei vollst\u00e4ndiger Bef\u00fcllung in dB (A) re 1 pW: 47\r\nGer\u00e4uschwert Schleudern im Standardprogramm Baumwolle 60\u00b0C bei vollst\u00e4ndiger Bef\u00fcllung in dB (A) re 1 pW: 71\r\n\u2022 \r\nProgramme\r\nSpezialprogramme: Jeans/Dunkle W\u00e4sche, Hemden/Blusen, Extra Kurz 15', Schnell/Mix, Automatik Sanft, AllergiePlus, Automatik Intensiv, Trommel reinigen (mit Erinnerungsfunktion), Wolle-Handw\u00e4sche, Fein/Seide\r\n\u2022 \r\nOptionen\r\nHome Connect f\u00e4hig\r\nVarioPerfect: zeit- oder energieoptimierte Programme mit perfektem Waschergebnis\r\nTouchControl-Tasten: Temperatur, Drehzahlabwahl, Vorw\u00e4sche, EcoPerfect, SpeedPerfect, i-DOS 1, i-DOS 2 und 24 h Start in\r\ni-DOS: dosiert vollautomatisch Fl\u00fcssigwaschmittel und Weichsp\u00fcler\r\n\u2022 \r\nKomfort und Sicherheit\r\nTrommelinnenbeleuchtung: LED\r\nVarioTrommel: schonendes und effizientes Waschen\r\nTrommelreinigung mit Erinnerungsfunktion\r\n32 cm-Bullauge, Alu-Look, wei\u00df mit 171\u00b0 T\u00fcr\u00f6ffnungswinkel\r\nKomfortverschluss\r\nNachlegefunktion\r\nEcoSilence Drive: leiser Motor mit langer Lebensdauer\r\nAntiVibration Design: mehr Stabilit\u00e4t und Laufruhe\r\nGer\u00e4uschd\u00e4mmung\r\nAquaSensor f\u00fcr optimale Sp\u00fclergebnisse\r\nDurchflusssensor f\u00fcr optimalen Wasserverbrauch\r\nActiveWaterPlus: ressourcenschonendes Wassermanagement\r\nAquaStop mit lebenslanger Garantie gegen Wassersch\u00e4den\r\nStufenlose Mengenautomatik\r\nVerbrauchsanzeige: Angabe zu Strom- und Wasserverbrauch\r\nProgrammw\u00e4hler mit integriertem Ein-/Ausschalter\r\nGro\u00dfes, \u00fcbersichtliches LED-Display f\u00fcr Programmablauf, Temperaturwahl, max. Schleuderdrehzahl, Restzeitanzeige und 24 h Endezeitvorwahl, i-Dos Einstellungen und Verbrauchsanzeige\r\nSchaumerkennung\r\nUnwuchtkontrolle\r\nKindersicherung\r\nSummer\r\nSelbstreinigungsschublade",
+    "image1": "products/bosch_WAWH8690_1.jpg",
+    "image2": "products/bosch_WAWH869_2.jpg",
+    "image3": "products/bosch_WAWH869_3.jpg",
+    "end_of_life": false,
+    "renovation_required": false,
+    "leader_protocol": [
+      7
+    ],
+    "follower_protocol": [
+      15
+    ],
+    "features": [
+      94,
+      93,
+      71,
+      72,
+      86
+    ]
+  }
+},
+{
   "model": "app.producttype",
   "pk": 1,
   "fields": {
-    "type_name": "Basisger\u00e4t",
-    "svg_id": "",
+    "type_name": "SmartHome Basisger\u00e4t",
+    "svg_id": "router",
     "icon": "productType/house_overlay_picture/HCC-message.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1474,7 +1663,7 @@
   "pk": 2,
   "fields": {
     "type_name": "K\u00fchlschrank",
-    "svg_id": "Kueche_x5F_Kuehlschrank",
+    "svg_id": "Kuehlschrank",
     "icon": "productType/house_overlay_picture/fridge.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1484,7 +1673,7 @@
   "pk": 3,
   "fields": {
     "type_name": "Kamera",
-    "svg_id": "Outdoor_x5F_Kamera",
+    "svg_id": "Kamera",
     "icon": "productType/house_overlay_picture/camera.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1493,8 +1682,8 @@
   "model": "app.producttype",
   "pk": 4,
   "fields": {
-    "type_name": "CO2-Sensor",
-    "svg_id": "Keller_x5F_Sensor_Decke",
+    "type_name": "CO2 Sensor",
+    "svg_id": "sensor_CO2",
     "icon": "productType/house_overlay_picture/sensor-CO2.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1503,8 +1692,8 @@
   "model": "app.producttype",
   "pk": 5,
   "fields": {
-    "type_name": "Thermostat/Temperatursensor",
-    "svg_id": "Keller_x5F_Sensor_Decke",
+    "type_name": "Temperatursensor/Thermostat",
+    "svg_id": "Thermometer_Thermostat",
     "icon": "productType/house_overlay_picture/sensor-temp.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1514,7 +1703,7 @@
   "pk": 6,
   "fields": {
     "type_name": "Smart Plug/Smart Socket",
-    "svg_id": "",
+    "svg_id": "smart_socket",
     "icon": "productType/house_overlay_picture/socket.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1524,7 +1713,7 @@
   "pk": 8,
   "fields": {
     "type_name": "Waage",
-    "svg_id": "",
+    "svg_id": "Waage",
     "icon": "productType/house_overlay_picture/personal-scale.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1533,8 +1722,8 @@
   "model": "app.producttype",
   "pk": 10,
   "fields": {
-    "type_name": "Bewegungsmelder/Lichtsensor",
-    "svg_id": "Keller_x5F_Sensor_Decke",
+    "type_name": "Lichtsensor/Bewegungsmelder",
+    "svg_id": "Bewegungsmelder",
     "icon": "productType/house_overlay_picture/sensor-luminance.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1544,7 +1733,7 @@
   "pk": 11,
   "fields": {
     "type_name": "Rauchmelder",
-    "svg_id": "Keller_x5F_Sensor_Decke",
+    "svg_id": "sensor-smoke",
     "icon": "productType/house_overlay_picture/sensor-smoke.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1554,7 +1743,7 @@
   "pk": 12,
   "fields": {
     "type_name": "Router",
-    "svg_id": "",
+    "svg_id": "router",
     "icon": "productType/house_overlay_picture/PC.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1564,7 +1753,7 @@
   "pk": 13,
   "fields": {
     "type_name": "T\u00fcr-/Fensterkontaktsensor",
-    "svg_id": "Outdoor_x5F_Tuer",
+    "svg_id": "tuer_Fensterkontakt",
     "icon": "productType/house_overlay_picture/door.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1573,8 +1762,8 @@
   "model": "app.producttype",
   "pk": 15,
   "fields": {
-    "type_name": "Luftfeuchtigkeitssensor (inkl. CO2-Messung)",
-    "svg_id": "Keller_x5F_Sensor_Decke",
+    "type_name": "CO2-Messger\u00e4t/Luftfeuchtigkeitssensor",
+    "svg_id": "sensor-humidity",
     "icon": "productType/house_overlay_picture/sensor-humidity.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1583,8 +1772,8 @@
   "model": "app.producttype",
   "pk": 16,
   "fields": {
-    "type_name": "Rollladen-Aktor",
-    "svg_id": "Kueche_x5F_Rollo",
+    "type_name": "Rollladenaktor",
+    "svg_id": "rolladenaktor",
     "icon": "productType/house_overlay_picture/window-blind.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1594,7 +1783,7 @@
   "pk": 17,
   "fields": {
     "type_name": "Schaltaktor",
-    "svg_id": "",
+    "svg_id": "Schaltaktor_knx",
     "icon": "productType/house_overlay_picture/sensor-rocker.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1603,8 +1792,8 @@
   "model": "app.producttype",
   "pk": 18,
   "fields": {
-    "type_name": "Lichtsteuerung/Dimmer",
-    "svg_id": "Wohnzimmer_x5F_LED",
+    "type_name": "Lichtsteuerung & Dimmer",
+    "svg_id": "Lichtsteuerung_Dimmer",
     "icon": "productType/house_overlay_picture/lamp-ceiling.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1614,7 +1803,7 @@
   "pk": 19,
   "fields": {
     "type_name": "Wetterstation",
-    "svg_id": "",
+    "svg_id": "sensor_weather-station",
     "icon": "productType/house_overlay_picture/weather-station.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1624,7 +1813,7 @@
   "pk": 20,
   "fields": {
     "type_name": "Geschirrsp\u00fcler",
-    "svg_id": "",
+    "svg_id": "Geschirrspueler",
     "icon": "productType/house_overlay_picture/dishwasher.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1634,7 +1823,7 @@
   "pk": 21,
   "fields": {
     "type_name": "Trockner",
-    "svg_id": "Keller_x5F_Waschmaschine",
+    "svg_id": "Trockner",
     "icon": "productType/house_overlay_picture/dryer.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1644,7 +1833,7 @@
   "pk": 22,
   "fields": {
     "type_name": "Waschmaschine",
-    "svg_id": "Keller_x5F_Waschmaschine",
+    "svg_id": "Waschmaschine",
     "icon": "productType/house_overlay_picture/washing-machine.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1654,7 +1843,7 @@
   "pk": 23,
   "fields": {
     "type_name": "Ofen",
-    "svg_id": "Kueche_x5F_Herd",
+    "svg_id": "Kochfeld_Herd_Ofen",
     "icon": "productType/house_overlay_picture/oven.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1664,7 +1853,7 @@
   "pk": 24,
   "fields": {
     "type_name": "Kochfeld",
-    "svg_id": "Kueche_x5F_Herd",
+    "svg_id": "Kochfeld_Herd_Ofen",
     "icon": "productType/house_overlay_picture/hob.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1674,7 +1863,7 @@
   "pk": 25,
   "fields": {
     "type_name": "Dunstabzugshaube",
-    "svg_id": "Keller_x5F_Sensor_Decke",
+    "svg_id": "Dunstabzugshaube",
     "icon": "productType/house_overlay_picture/hood.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1684,8 +1873,8 @@
   "pk": 26,
   "fields": {
     "type_name": "Kaffeemaschine",
-    "svg_id": null,
-    "icon": "",
+    "svg_id": "Kaffeemaschine",
+    "icon": "productType/house_overlay_picture/noun_506772.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1693,19 +1882,9 @@
   "model": "app.producttype",
   "pk": 27,
   "fields": {
-    "type_name": "Gateway",
-    "svg_id": "",
+    "type_name": "SmartHome Gateway",
+    "svg_id": "Basisgeraet",
     "icon": "productType/house_overlay_picture/surveillance.svg",
-    "used_as_product_type_filter_by": []
-  }
-},
-{
-  "model": "app.producttype",
-  "pk": 28,
-  "fields": {
-    "type_name": "Herzfrequenzsensor",
-    "svg_id": "",
-    "icon": "productType/house_overlay_picture/blood-pressure_gjHRi9Y.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -1713,8 +1892,8 @@
   "model": "app.producttype",
   "pk": 29,
   "fields": {
-    "type_name": "Blutdruckmessger\u00e4t",
-    "svg_id": "",
+    "type_name": "Blutdruckmessger\u00e4t/Herzfrequenzsensor",
+    "svg_id": "Blutdruckmessegeraet_HerzfreqSensor",
     "icon": "productType/house_overlay_picture/blood-pressure.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1724,7 +1903,7 @@
   "pk": 30,
   "fields": {
     "type_name": "Smarter Wecker",
-    "svg_id": "",
+    "svg_id": "smart_alarm",
     "icon": "productType/house_overlay_picture/clock.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1734,7 +1913,7 @@
   "pk": 31,
   "fields": {
     "type_name": "Lampe & Bridge",
-    "svg_id": "Dach_x5F_Stehlampe",
+    "svg_id": "Lampe_Bridge",
     "icon": "productType/house_overlay_picture/bulb.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1744,7 +1923,7 @@
   "pk": 33,
   "fields": {
     "type_name": "T\u00fcrklingel",
-    "svg_id": "Outdoor_x5F_Tuer",
+    "svg_id": "tuerklingel",
     "icon": "productType/house_overlay_picture/door_iLZlrNO.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1754,7 +1933,7 @@
   "pk": 34,
   "fields": {
     "type_name": "Alarmsirene",
-    "svg_id": null,
+    "svg_id": "Alarmsirene",
     "icon": "",
     "used_as_product_type_filter_by": []
   }
@@ -1764,7 +1943,7 @@
   "pk": 35,
   "fields": {
     "type_name": "Wassersensor",
-    "svg_id": "Keller_x5F_Wasser",
+    "svg_id": "Wassersensor_pipe",
     "icon": "productType/house_overlay_picture/sensor-water.svg",
     "used_as_product_type_filter_by": []
   }
@@ -1773,9 +1952,169 @@
   "model": "app.producttype",
   "pk": 37,
   "fields": {
-    "type_name": "Leuchtmittel",
-    "svg_id": "Outdoor_x5F_Licht",
+    "type_name": "Leuchtmittel (vernetzbar)",
+    "svg_id": "leuchtmittel_hue",
     "icon": "productType/house_overlay_picture/hue.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 38,
+  "fields": {
+    "type_name": "HiFi",
+    "svg_id": "HiFi",
+    "icon": "productType/house_overlay_picture/noun_544750.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 39,
+  "fields": {
+    "type_name": "Stromz\u00e4hler",
+    "svg_id": "meter",
+    "icon": "productType/house_overlay_picture/noun_609583.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 40,
+  "fields": {
+    "type_name": "Sauerstoffmessger\u00e4t",
+    "svg_id": "Sensor-O2",
+    "icon": "",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 41,
+  "fields": {
+    "type_name": "Smart Safe",
+    "svg_id": "Vault_koffer",
+    "icon": "productType/house_overlay_picture/noun_836683.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 42,
+  "fields": {
+    "type_name": "Fitnessger\u00e4t",
+    "svg_id": "Hometrainer",
+    "icon": "productType/house_overlay_picture/cycling.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 43,
+  "fields": {
+    "type_name": "Fernseher",
+    "svg_id": "Fernseher",
+    "icon": "productType/house_overlay_picture/noun_645896.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 44,
+  "fields": {
+    "type_name": "Uhr",
+    "svg_id": "clock_kueche",
+    "icon": "productType/house_overlay_picture/noun_683270.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 45,
+  "fields": {
+    "type_name": "Heizungsteuerung",
+    "svg_id": "Heizungsteuerung",
+    "icon": "productType/house_overlay_picture/noun_545339.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 46,
+  "fields": {
+    "type_name": "Microwelle",
+    "svg_id": "Mikrowelle",
+    "icon": "productType/house_overlay_picture/noun_417965.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 47,
+  "fields": {
+    "type_name": "Radio",
+    "svg_id": "Radio_kueche",
+    "icon": "productType/house_overlay_picture/noun_839840.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 48,
+  "fields": {
+    "type_name": "Dusche",
+    "svg_id": "Dusche",
+    "icon": "productType/house_overlay_picture/noun_742334.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 49,
+  "fields": {
+    "type_name": "-sHome_??",
+    "svg_id": "Anlage_keller",
+    "icon": "",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 50,
+  "fields": {
+    "type_name": "Smartphone/Tablet",
+    "svg_id": "Tablet_smartphone",
+    "icon": "productType/house_overlay_picture/noun_125655.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 51,
+  "fields": {
+    "type_name": "Photovoltaikanlage",
+    "svg_id": "solar_outdoor",
+    "icon": "productType/house_overlay_picture/noun_719500.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 52,
+  "fields": {
+    "type_name": "Toaster",
+    "svg_id": "Mikrowelle",
+    "icon": "productType/house_overlay_picture/noun_526158.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 53,
+  "fields": {
+    "type_name": "Home Bot",
+    "svg_id": "robot",
+    "icon": "productType/house_overlay_picture/noun_22007.svg",
     "used_as_product_type_filter_by": []
   }
 },
@@ -2077,6 +2416,46 @@
     "is_visible": true,
     "public_name": "UMAN Universal Media Access Networks GmbH",
     "logo_image": "provider/uman.png"
+  }
+},
+{
+  "model": "app.provider",
+  "pk": 35,
+  "fields": {
+    "name": "Innogy",
+    "is_visible": true,
+    "public_name": "Innogy",
+    "logo_image": "provider/favicon-310x310.png"
+  }
+},
+{
+  "model": "app.provider",
+  "pk": 36,
+  "fields": {
+    "name": "Bosch",
+    "is_visible": false,
+    "public_name": "Bosch Smart Home",
+    "logo_image": "provider/bosch_logo.jpg"
+  }
+},
+{
+  "model": "app.provider",
+  "pk": 37,
+  "fields": {
+    "name": "Smarter",
+    "is_visible": false,
+    "public_name": "Smarter GmbH",
+    "logo_image": "provider/smarter_logo.jpg"
+  }
+},
+{
+  "model": "app.provider",
+  "pk": 38,
+  "fields": {
+    "name": "Krups",
+    "is_visible": false,
+    "public_name": "Krups GmbH",
+    "logo_image": "provider/krups_logo.jpg"
   }
 },
 {
@@ -2518,7 +2897,7 @@
   "model": "app.protocol",
   "pk": 9,
   "fields": {
-    "name": "bluetooth-unknown_eq3-CC-RT-BLE"
+    "name": "bluetooth-eq3"
   }
 },
 {
@@ -2536,437 +2915,808 @@
   }
 },
 {
+  "model": "app.protocol",
+  "pk": 12,
+  "fields": {
+    "name": "wlan_iOS_homekit"
+  }
+},
+{
+  "model": "app.protocol",
+  "pk": 13,
+  "fields": {
+    "name": "wlan_android"
+  }
+},
+{
+  "model": "app.protocol",
+  "pk": 14,
+  "fields": {
+    "name": "kabel_ethernet_universal"
+  }
+},
+{
+  "model": "app.protocol",
+  "pk": 15,
+  "fields": {
+    "name": "bluetooth_universal"
+  }
+},
+{
+  "model": "app.protocol",
+  "pk": 16,
+  "fields": {
+    "name": "kabel_Miele_Con@ctivity"
+  }
+},
+{
+  "model": "app.protocol",
+  "pk": 17,
+  "fields": {
+    "name": "radio_ZigBee"
+  }
+},
+{
+  "model": "app.protocol",
+  "pk": 18,
+  "fields": {
+    "name": "radio_HomeMatic"
+  }
+},
+{
+  "model": "app.protocol",
+  "pk": 19,
+  "fields": {
+    "name": "radio_RWE"
+  }
+},
+{
   "model": "app.feature",
   "pk": 1,
   "fields": {
-    "name": "Regelwerk"
+    "name": "xRegelwerk"
   }
 },
 {
   "model": "app.feature",
   "pk": 2,
   "fields": {
-    "name": "w\u00e4sche waschen"
+    "name": "xw\u00e4sche waschen"
   }
 },
 {
   "model": "app.feature",
   "pk": 5,
   "fields": {
-    "name": "leuchtet gruen"
+    "name": "xleuchtet gruen"
   }
 },
 {
   "model": "app.feature",
   "pk": 6,
   "fields": {
-    "name": "dampf w\u00e4sche"
+    "name": "xW\u00e4sche dampfen"
   }
 },
 {
   "model": "app.feature",
   "pk": 7,
   "fields": {
-    "name": "leuchtet blau"
+    "name": "xleuchtet blau"
   }
 },
 {
   "model": "app.feature",
   "pk": 8,
   "fields": {
-    "name": "leuchtet rot"
+    "name": "xleuchtet rot"
   }
 },
 {
   "model": "app.feature",
   "pk": 9,
   "fields": {
-    "name": "wecker timer event"
+    "name": "xwecker timer event"
   }
 },
 {
   "model": "app.feature",
   "pk": 10,
   "fields": {
-    "name": "jalousien remote control"
+    "name": "xJalousien Remote Control"
   }
 },
 {
   "model": "app.feature",
   "pk": 11,
   "fields": {
-    "name": "kaffeemaschine remote control"
+    "name": "xkaffeemaschine remote control"
   }
 },
 {
   "model": "app.feature",
   "pk": 12,
   "fields": {
-    "name": "Zeitschalter"
+    "name": "xZeitschalter"
   }
 },
 {
   "model": "app.feature",
   "pk": 13,
   "fields": {
-    "name": "remote turn off"
+    "name": "xremote turn off"
   }
 },
 {
   "model": "app.feature",
   "pk": 14,
   "fields": {
-    "name": "Benachrichtigungsfunktion"
+    "name": "xBenachrichtigungsfunktion"
   }
 },
 {
   "model": "app.feature",
   "pk": 15,
   "fields": {
-    "name": "Lebensmittel tracking"
+    "name": "xLebensmittel tracking"
   }
 },
 {
   "model": "app.feature",
   "pk": 16,
   "fields": {
-    "name": "temperatur auslesen"
+    "name": "xtemperatur auslesen"
   }
 },
 {
   "model": "app.feature",
   "pk": 17,
   "fields": {
-    "name": "dimmung"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 18,
-  "fields": {
-    "name": "Online Fernseh Programmauskunft"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 19,
-  "fields": {
-    "name": "Fernsteuerbare Programmauswahl"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 20,
-  "fields": {
-    "name": "Fernseher remote turn on lock"
+    "name": "xDimmung"
   }
 },
 {
   "model": "app.feature",
   "pk": 21,
   "fields": {
-    "name": "Herd remote turn on lock"
+    "name": "xHerd Remote turn on Lock"
   }
 },
 {
   "model": "app.feature",
   "pk": 22,
   "fields": {
-    "name": "backofen remote turn on lock"
+    "name": "xBackofen Remote turn on Lock"
   }
 },
 {
   "model": "app.feature",
   "pk": 23,
   "fields": {
-    "name": "\u00f6ffnet t\u00fcr"
+    "name": "x\u00f6ffnet t\u00fcr"
   }
 },
 {
   "model": "app.feature",
   "pk": 24,
   "fields": {
-    "name": "erkennt person"
+    "name": "xerkennt Person"
   }
 },
 {
   "model": "app.feature",
   "pk": 25,
   "fields": {
-    "name": "Alarmtongenegierung"
+    "name": "xAlarmtongenegierung"
   }
 },
 {
   "model": "app.feature",
   "pk": 26,
   "fields": {
-    "name": "Sturzerkennung"
+    "name": "xSturzerkennung"
   }
 },
 {
   "model": "app.feature",
   "pk": 27,
   "fields": {
-    "name": "Dritten kontaktieren"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 28,
-  "fields": {
-    "name": "Eingabem\u00f6glichkeit"
+    "name": "xDritten kontaktieren"
   }
 },
 {
   "model": "app.feature",
   "pk": 29,
   "fields": {
-    "name": "Fenster remote control"
+    "name": "xFenster Remote Control"
   }
 },
 {
   "model": "app.feature",
   "pk": 30,
   "fields": {
-    "name": "Rolladen remote control"
+    "name": "xRolladen remote control"
   }
 },
 {
   "model": "app.feature",
   "pk": 31,
   "fields": {
-    "name": "Stufenlose L\u00fcftunsregelung"
+    "name": "xStufenlose L\u00fcftunsregelung"
   }
 },
 {
   "model": "app.feature",
   "pk": 32,
   "fields": {
-    "name": "k\u00fchlung"
+    "name": "xK\u00fchlung"
   }
 },
 {
   "model": "app.feature",
   "pk": 33,
   "fields": {
-    "name": "heizen"
+    "name": "xheizen"
   }
 },
 {
   "model": "app.feature",
   "pk": 34,
   "fields": {
-    "name": "luft umw\u00e4lzen"
+    "name": "xluft umw\u00e4lzen"
   }
 },
 {
   "model": "app.feature",
   "pk": 35,
   "fields": {
-    "name": "filmen"
+    "name": "xfilmen"
   }
 },
 {
   "model": "app.feature",
   "pk": 36,
   "fields": {
-    "name": "aufzeichnen"
+    "name": "xaufzeichnen"
   }
 },
 {
   "model": "app.feature",
   "pk": 37,
   "fields": {
-    "name": "gesichtserkennung"
+    "name": "xGesichtserkennung"
   }
 },
 {
   "model": "app.feature",
   "pk": 38,
   "fields": {
-    "name": "Ann\u00e4herungserkennung"
+    "name": "xAnn\u00e4herungserkennung"
   }
 },
 {
   "model": "app.feature",
   "pk": 39,
   "fields": {
-    "name": "verschlie\u00dfen von Tresor"
+    "name": "xverschlie\u00dfen von Tresor"
   }
 },
 {
   "model": "app.feature",
   "pk": 40,
   "fields": {
-    "name": "misst CO2 Gehalt"
-  }
-},
-{
-  "model": "app.feature",
-  "pk": 41,
-  "fields": {
-    "name": "Dritte kontaktieren"
+    "name": "xmisst CO2 Gehalt"
   }
 },
 {
   "model": "app.feature",
   "pk": 42,
   "fields": {
-    "name": "Bewegungssensor"
+    "name": "xBewegungssensor"
   }
 },
 {
   "model": "app.feature",
   "pk": 43,
   "fields": {
-    "name": "remote turn on"
+    "name": "xremote turn on"
   }
 },
 {
   "model": "app.feature",
   "pk": 44,
   "fields": {
-    "name": "video aufnehmen"
+    "name": "xVideo aufnehmen"
   }
 },
 {
   "model": "app.feature",
   "pk": 45,
   "fields": {
-    "name": "video \u00fcbertragen"
+    "name": "xvideo \u00fcbertragen"
   }
 },
 {
   "model": "app.feature",
   "pk": 46,
   "fields": {
-    "name": "T\u00fcr-/Fensterkontaktsensor"
+    "name": "xT\u00fcr-/Fensterkontaktsensor"
   }
 },
 {
   "model": "app.feature",
   "pk": 47,
   "fields": {
-    "name": "Video streamen"
+    "name": "xVideo streamen"
   }
 },
 {
   "model": "app.feature",
   "pk": 48,
   "fields": {
-    "name": "Status \u00fcbertragen"
+    "name": "xStatus \u00fcbertragen"
   }
 },
 {
   "model": "app.feature",
   "pk": 49,
   "fields": {
-    "name": "Lichtsensor"
+    "name": "xLichtsensor"
   }
 },
 {
   "model": "app.feature",
   "pk": 50,
   "fields": {
-    "name": "Temperatursensor"
+    "name": "xTemperatursensor"
   }
 },
 {
   "model": "app.feature",
   "pk": 51,
   "fields": {
-    "name": "Luftfeuchtigkeitssensor"
+    "name": "xLuftfeuchtigkeitssensor"
   }
 },
 {
   "model": "app.feature",
   "pk": 52,
   "fields": {
-    "name": "Vibrationssensor"
+    "name": "xVibrationssensor"
   }
 },
 {
   "model": "app.feature",
   "pk": 53,
   "fields": {
-    "name": "UV Sensor"
+    "name": "xUV Sensor"
   }
 },
 {
   "model": "app.feature",
   "pk": 54,
   "fields": {
-    "name": "Rauchsensor"
+    "name": "xRauchsensor"
   }
 },
 {
   "model": "app.feature",
   "pk": 55,
   "fields": {
-    "name": "Heizungssteuerung"
+    "name": "xHeizungssteuerung"
   }
 },
 {
   "model": "app.feature",
   "pk": 56,
   "fields": {
-    "name": "Herzfrequenzmessung"
+    "name": "xHerzfrequenzmessung"
   }
 },
 {
   "model": "app.feature",
   "pk": 57,
   "fields": {
-    "name": "Schrittzahlmessung"
+    "name": "xSchrittzahlmessung"
   }
 },
 {
   "model": "app.feature",
   "pk": 58,
   "fields": {
-    "name": "Kalorienverbrauchz\u00e4hler"
+    "name": "xKalorienverbrauchz\u00e4hler"
   }
 },
 {
   "model": "app.feature",
   "pk": 59,
   "fields": {
-    "name": "\u00dcberflutungssensor"
+    "name": "x\u00dcberflutungssensor"
   }
 },
 {
   "model": "app.feature",
   "pk": 60,
   "fields": {
-    "name": "Neigungssensor"
+    "name": "xNeigungssensor"
   }
 },
 {
   "model": "app.feature",
   "pk": 61,
   "fields": {
-    "name": "Regulierung Fu\u00dfbodenheizung"
+    "name": "xRegulierung Fu\u00dfbodenheizung"
   }
 },
 {
   "model": "app.feature",
   "pk": 62,
   "fields": {
-    "name": "Helligkeitssensor"
+    "name": "xHelligkeitssensor"
   }
 },
 {
   "model": "app.feature",
   "pk": 63,
   "fields": {
-    "name": "Kurzschlussschutz"
+    "name": "xKurzschlussschutz"
   }
 },
 {
   "model": "app.feature",
   "pk": 64,
   "fields": {
-    "name": "W\u00e4sche trocknen"
+    "name": "xW\u00e4sche trocknen"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 65,
+  "fields": {
+    "name": "xDunstabzugshaube"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 66,
+  "fields": {
+    "name": "operates_sirene"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 67,
+  "fields": {
+    "name": "notifies_Audio t\u00e4tigen"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 68,
+  "fields": {
+    "name": "notifies_Anruf t\u00e4tigen"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 69,
+  "fields": {
+    "name": "notifies_visuelles"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 70,
+  "fields": {
+    "name": "notifies_sendEmail"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 71,
+  "fields": {
+    "name": "notifies_sendPushNotif"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 72,
+  "fields": {
+    "name": "notifies_sendSMS"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 73,
+  "fields": {
+    "name": "operates_Fenster"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 74,
+  "fields": {
+    "name": "operates_Heizung"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 75,
+  "fields": {
+    "name": "operates_Herd"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 76,
+  "fields": {
+    "name": "operates_Backofen"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 77,
+  "fields": {
+    "name": "operates_Hifi"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 78,
+  "fields": {
+    "name": "operates_jalousien"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 79,
+  "fields": {
+    "name": "operates_kaffeemaschine"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 80,
+  "fields": {
+    "name": "operates_K\u00fchlschrank"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 81,
+  "fields": {
+    "name": "operates_Licht(farbig)"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 82,
+  "fields": {
+    "name": "operates_Licht(standard)"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 83,
+  "fields": {
+    "name": "operates_Ofen"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 84,
+  "fields": {
+    "name": "operates_Safe"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 85,
+  "fields": {
+    "name": "operates_T\u00fcr"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 86,
+  "fields": {
+    "name": "operates_Waschmaschine"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 87,
+  "fields": {
+    "name": "records_audio"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 88,
+  "fields": {
+    "name": "records_Daten"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 89,
+  "fields": {
+    "name": "records_video"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 91,
+  "fields": {
+    "name": "controls remotely_Schloss"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 92,
+  "fields": {
+    "name": "senses-Bewegung_GPS"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 93,
+  "fields": {
+    "name": "controls remotely_AUS"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 94,
+  "fields": {
+    "name": "controls remotely_AN"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 97,
+  "fields": {
+    "name": "senses_Strom"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 98,
+  "fields": {
+    "name": "senses-Luft_CO2"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 99,
+  "fields": {
+    "name": "senses-Luft_O2"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 100,
+  "fields": {
+    "name": "senses-Licht_Intensit\u00e4t"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 101,
+  "fields": {
+    "name": "senses-Bewegung"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 102,
+  "fields": {
+    "name": "senses-Bewegung_N\u00e4he"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 103,
+  "fields": {
+    "name": "senses-Bewegung_Neigung"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 104,
+  "fields": {
+    "name": "senses-Vitaldaten_Blutdruck"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 105,
+  "fields": {
+    "name": "senses-Videocam_Gesichtserkennung"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 106,
+  "fields": {
+    "name": "operates_klimaanlage"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 108,
+  "fields": {
+    "name": "senses-NFC"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 109,
+  "fields": {
+    "name": "senses-Strom_kurzschlussschutz"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 110,
+  "fields": {
+    "name": "senses-Luft_Temperatur"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 111,
+  "fields": {
+    "name": "controls remotely_Regler"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 112,
+  "fields": {
+    "name": "senses-Luft_Rauch"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 113,
+  "fields": {
+    "name": "senses-Luft_Feutchtigkeit"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 114,
+  "fields": {
+    "name": "senses-Wasser"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 115,
+  "fields": {
+    "name": "senses-Licht_UV"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 116,
+  "fields": {
+    "name": "senses-Vitaldaten_Schrittbewegung"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 117,
+  "fields": {
+    "name": "operates_wecker"
+  }
+},
+{
+  "model": "app.feature",
+  "pk": 118,
+  "fields": {
+    "name": "senses-Vitaldaten_Kalorienverbrauch"
   }
 },
 {
@@ -3110,7 +3860,6 @@
     "name": "Broker: Online Fernseh Programmauskunft, Regelwerk",
     "is_broker": true,
     "implementation_requires": [
-      18,
       1
     ]
   }
@@ -3133,19 +3882,7 @@
     "name": "Endpoint: Fernsteuerbare Programmauswahl, remote turn off",
     "is_broker": false,
     "implementation_requires": [
-      19,
       13
-    ]
-  }
-},
-{
-  "model": "app.metadevice",
-  "pk": 21,
-  "fields": {
-    "name": "Endpoint: Fernseher remote turn on lock",
-    "is_broker": false,
-    "implementation_requires": [
-      20
     ]
   }
 },
@@ -3192,7 +3929,6 @@
     "implementation_requires": [
       25,
       27,
-      28,
       26
     ]
   }
@@ -3307,7 +4043,6 @@
     "is_broker": true,
     "implementation_requires": [
       14,
-      41,
       1,
       47,
       12
@@ -4090,7 +4825,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$30000$1SNZTPCnQ5JQ$9UOgz+vmgt8/9wehyiy9uJUVhu0mBDwFrlcoF5RQhr4=",
-    "last_login": "2017-01-28T13:36:59.892Z",
+    "last_login": "2017-02-05T17:40:53.974Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Herr",
@@ -4353,6 +5088,94 @@
     "date_joined": "2016-06-30T14:30:57.624Z",
     "groups": [],
     "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "0oh5vf5kp01kvaqevsc3lvte74b2rgbn",
+  "fields": {
+    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
+    "expire_date": "2017-02-11T15:28:03.037Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "3tsdkacdbs1u0e7zzuejoh9c8ubfovwg",
+  "fields": {
+    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
+    "expire_date": "2017-02-11T14:22:56.929Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "3zlz31s76hplqcmzc47e9l6j5mks8boo",
+  "fields": {
+    "session_data": "OWNkMjM4ZTY1ZTgzZDlmMGUwOWUxMWQzNGUzM2RkMzE0ZjIyN2EzMDp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2017-02-19T17:40:53.979Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "efz275d47clbt77h5o5e3sla8nk5n5sd",
+  "fields": {
+    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
+    "expire_date": "2017-02-17T23:09:33.020Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "fo7p5p2o0rlfvp1m6r1amh1l8vcz0gz7",
+  "fields": {
+    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
+    "expire_date": "2017-02-17T10:10:13.599Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "inn0w2o6hhkv1rynb252my9tks4wszua",
+  "fields": {
+    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
+    "expire_date": "2017-02-12T16:14:46.781Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "lbcnirn1x8unq9nmc8wdgegqx6p2bd0j",
+  "fields": {
+    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
+    "expire_date": "2017-02-15T13:17:36.289Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "owm3gfzgz4075pphdr3zcr06mlpeodfs",
+  "fields": {
+    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
+    "expire_date": "2017-02-16T17:38:30.728Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "prvgykxfhqm17y6wbgx26ubtrik7p56k",
+  "fields": {
+    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
+    "expire_date": "2017-02-14T15:11:10.363Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "qi70n27et4210y256991db84a59k0hki",
+  "fields": {
+    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
+    "expire_date": "2017-02-11T14:23:37.144Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "un61otve35uhe7akl8rfuatxn7j5zn04",
+  "fields": {
+    "session_data": "ZDA3YmEyZWE0NDRiMjI0YzdkOTliMDRhZmJhYWU4MTU4ZGQ5NWYwZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
+    "expire_date": "2017-02-13T17:13:30.337Z"
   }
 },
 {
