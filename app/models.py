@@ -427,6 +427,7 @@ class MetaDevice(models.Model):
         return string + ", ".join([i.name for i in self.implementation_requires.all()])
 
     def save(self, *args, **kwargs):
+        super(MetaDevice, self).save(*args, **kwargs)
         self.name = self.__str__()
         super(MetaDevice, self).save(*args, **kwargs)
 
