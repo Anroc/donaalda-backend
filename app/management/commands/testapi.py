@@ -109,3 +109,18 @@ class SchemaTest(TestCase):
                 self.assertFalse(any(field.required for field in link.fields))
                 response = getattr(self.client, link.action)(link.url)
                 self.assertEqual(response.status_code, 200)
+
+    def test_performance(self):
+        request = { "scenario_preference":{ "Energie":1, "Komfort":1, "Sicherheit":1, "Gesundheit":1 }, "product_preference":"Preis", "renovation_preference":False, "product_type_filter":[ ], "subcategory_filter":[ ], "shopping_basket":[ { "scenario_id":1, "product_type_filter":[ ] } ] }
+        request_str = json.dumps(request)
+        response = self.client.post('/api/swagger/suggestions', request_str, content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+
+        request = {  "scenario_preference":{ "Energie":1, "Komfort":1, "Sicherheit":1, "Gesundheit":1 }, "product_preference":"Preis", "renovation_preference":False, "product_type_filter":[     ], "subcategory_filter":[     ], "shopping_basket":[ { "scenario_id":1, "product_type_filter":[           ] }, { "scenario_id":4, "product_type_filter":[           ] }, { "scenario_id":5, "product_type_filter":[           ] } ] }
+        request_str = json.dumps(request)
+        response = self.client.post('/api/swagger/suggestions', request_str,content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+
+        request_str = '{"shopping_basket":[{"scenario_id":1,"product_type_filter":[]}],"locked_products":[{"product_id":53,"slot_id":[6]},{"product_id":37,"slot_id":[8]}],"product_preference":"Preis","renovation_preference":false}'
+        response = self.client.post('/api/swagger/final_product_list', request_str,content_type='application/json')
+        self.assertEqual(response.status_code, 200)
