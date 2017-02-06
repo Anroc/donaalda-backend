@@ -168,8 +168,6 @@ def _merge_meta_device(meta_devices, meta_device_mapping, scenario, original_to_
 
 
 def update_original_to_merged_mapping(mapping, replacee, replacer):
-    if replacer not in mapping:
-        mapping[replacer] = replacee
     mapping[replacee] = replacer
     for key in mapping:
         if mapping[key] is replacee:
