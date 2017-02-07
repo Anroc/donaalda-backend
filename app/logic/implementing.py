@@ -87,8 +87,6 @@ def compute_matching_product_set(device_mapping, preference):
                     possible_paths[meta_endpoint].add(path)
 
                     LOGGER.debug('%s->%s: %s' % (endpoint_impl, broker_impl, path))
-                    # TODO: remove after presentation
-                    break
 
         # check if current broker impl can reach every endpoint
         if len(meta_endpoints) != len(possible_paths):
