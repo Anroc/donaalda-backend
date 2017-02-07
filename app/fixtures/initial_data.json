@@ -2371,8 +2371,8 @@
   "fields": {
     "name": "IOLITE",
     "is_visible": true,
-    "public_name": "IOLITE",
-    "logo_image": ""
+    "public_name": "IOLITE GmbH",
+    "logo_image": "provider/iolite_logo.jpeg"
   }
 },
 {
@@ -2503,6 +2503,16 @@
     "is_visible": false,
     "public_name": "Samsung Group AG",
     "logo_image": "provider/samsung_logo.jpg"
+  }
+},
+{
+  "model": "app.provider",
+  "pk": 40,
+  "fields": {
+    "name": "Qivicon",
+    "is_visible": true,
+    "public_name": "Qivicon",
+    "logo_image": "provider/Unknown_SSHy5FU.png"
   }
 },
 {
@@ -4941,7 +4951,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$30000$1SNZTPCnQ5JQ$9UOgz+vmgt8/9wehyiy9uJUVhu0mBDwFrlcoF5RQhr4=",
-    "last_login": "2017-02-06T18:54:11.335Z",
+    "last_login": "2017-02-07T16:35:35.176Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Herr",
@@ -5228,6 +5238,14 @@
   "fields": {
     "session_data": "OWNkMjM4ZTY1ZTgzZDlmMGUwOWUxMWQzNGUzM2RkMzE0ZjIyN2EzMDp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
     "expire_date": "2017-02-19T17:40:53.979Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "6zytjp0i9vqk2g8k2m6iojz92nkynosb",
+  "fields": {
+    "session_data": "ZDA3YmEyZWE0NDRiMjI0YzdkOTliMDRhZmJhYWU4MTU4ZGQ5NWYwZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
+    "expire_date": "2017-02-21T16:35:35.182Z"
   }
 },
 {
