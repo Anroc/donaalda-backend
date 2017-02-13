@@ -202,10 +202,10 @@
     "description": "Meine Oma ist sehr gebrechlich, m\u00f6chte aber nicht ins Heim, weswegen sie bei mir wohnt.\r\nWenn ich unterwegs bin habe ich immer Angst, dass sie hinf\u00e4llt und keine Hilfe mehr rufen kann.\r\nDewegen soll meine Oma nun ein SmartWatch tragen, welche erkennt, ob sie gest\u00fcrzt ist und \r\nden Notruf bescheid geben. Um Fehlalrame zu vermeiden meldet sich das SmartWatch mit einem lauten \r\nAlarmtom und falls nach 2 Minuten keine Eingabe erfolgt wird der Notruf benachrichtigt.",
     "picture": "scenarios/jpeg-148132007B3B12CD-20120425-img_36231964.original.large-4-3-800-0-311-2600-_NzxdzBk.jpg",
     "provider": 27,
-    "meta_broker": 1,
+    "meta_broker": 44,
     "title": "Notruf f\u00fcr Pflegebed\u00fcrftige",
     "meta_endpoints": [
-      25
+      51
     ],
     "subcategory": [
       1
@@ -415,7 +415,7 @@
     "serial_number": "FGSS-101",
     "price": 52.89,
     "efficiency": 5.0,
-    "description": "#Beschreibung\r\n\r\nDer Fiabro Rauchsensor ist mit qualitativ guten Komponenten bestens ausgestattet. Seine Perforation l\u00e4sst den Rauch in die Sensorkammer eindringen. Je besser dies erfolgen kann, desto kleinere Rauchmengen sind n\u00f6tig, um eine Gefahr zu entdecken und den Alarm auszul\u00f6sen.\r\nDas Sensorgitter besteht aus einem hochwertigen Material mit einer Vielzahl von L\u00f6chern. Jedes einzelne von ihnen wurde elektrochemisch so geformt, dass der eindringende Rauch direkt in die Sensorkammer geleitet wird. Aufgrund der schnellen Branderkennung bietet der FIBARO Rauchsensor ultimativen Schutz und maximale Schadensbegrenzung.\r\n\r\n#Spezifikationen\r\n\r\n---",
+    "description": "#Beschreibung\r\n\r\nDer Fibaro Rauchsensor ist mit qualitativ guten Komponenten bestens ausgestattet. Seine Perforation l\u00e4sst den Rauch in die Sensorkammer eindringen. Je besser dies erfolgen kann, desto kleinere Rauchmengen sind n\u00f6tig, um eine Gefahr zu entdecken und den Alarm auszul\u00f6sen.\r\nDas Sensorgitter besteht aus einem hochwertigen Material mit einer Vielzahl von L\u00f6chern. Jedes einzelne von ihnen wurde elektrochemisch so geformt, dass der eindringende Rauch direkt in die Sensorkammer geleitet wird. Aufgrund der schnellen Branderkennung bietet der FIBARO Rauchsensor ultimativen Schutz und maximale Schadensbegrenzung.\r\n\r\n#Spezifikationen\r\n\r\n---",
     "image1": "products/fibaro_smoke_1.png",
     "image2": "products/Fiabro_Smoke_Sensor_3.jpg",
     "image3": "products/Fiabro_Smoke_Sensor_1.jpg",
@@ -910,9 +910,9 @@
     "provider": 11,
     "product_type": 26,
     "serial_number": "CVA 6805",
-    "price": 3369.0,
-    "efficiency": 3680.0,
-    "description": "#Beschreibung\r\n\r\n\"Einbau-Kaffeevollautomat\r\nmit Bohnensystem - der Miele Allesk\u00f6nner f\u00fcr h\u00f6chste Anspr\u00fcche.\r\nPerfekte Ergebnisse und intensives Kaffeearoma - AromaticSystem\r\nVollautomatische Perfektion - OneTouch for Two\r\nEinzigartige automatische Tassenh\u00f6henerkennung - CupSensor\r\nInnovatives und komfortables Milchsystem - EasyClick-Milksystem\r\nKomfortable Reinigung f\u00fcr Pflege und Erhalt - Reinigungsprogramme\"\r\n\r\n#Spezifikationen\r\n\r\nProduktdetails - CVA 6805\r\n\r\nBauform \r\nEinbau-Kaffeevollautomat mit Bohnensystem\t\r\n\u2022\r\nDesign \r\nPureLine\t\r\n\u2022\r\nFarbe\t\r\nHavannabraun\r\nDisplay\t\r\nM Touch\r\nGetr\u00e4nkespezialit\u00e4ten \r\nEspresso\t\r\n\u2022\r\nKaffee\t\r\n\u2022\r\nKaffee lang\t\r\n\u2022\r\nCappuccino\t\r\n\u2022\r\nLatte Macchiato\t\r\n\u2022\r\nCaff\u00e8 Latte\t\r\n\u2022\r\nHei\u00dfwasser\t\r\n\u2022\r\nHei\u00dfe Milch\t\r\n\u2022\r\nMilchschaum\t\r\n\u2022\r\nGenussvorteile \r\nOne-Touch-Zubereitung\t\r\n\u2022\r\nOneTouch for Two-Zubereitung\t\r\n\u2022\r\nAromaschonendes Kegelmahlwerk\t\r\n\u2022\r\nZweite Kaffeesorte in Form von Pulver m\u00f6glich\t\r\n\u2022\r\nGenie\u00dferprofile programmierbar\t\r\n11\r\nMahlgrad einstellbar\t\r\n\u2022\r\nMahlmenge programmierbar\t\r\n\u2022\r\nWassermenge programmierbar\t\r\n\u2022\r\nWassertemperatur programmierbar\t\r\n\u2022\r\nMilchmenge programmierbar\t\r\n\u2022\r\nMilchschaummenge programmierbar\t\r\n\u2022\r\nVorbr\u00fchen programmierbar\t\r\n\u2022\r\nKaffeekannenfunktion\t\r\n\u2022\r\nBedienkomfort \r\nIndividuelle Sprachauswahl\t\r\n\u2022\r\nAnzeige Datum\t\r\n\u2022\r\nTageszeitanzeige\t\r\n\u2022\r\nCupSensor\t\r\n\u2022\r\nStufenlos h\u00f6henverstellbarer Getr\u00e4nkeauslauf in cm\t\r\n8,3\r\n-\r\n16,5\r\nComfortDoor\t\r\n\u2022\r\nBrilliantLight\t\r\n\u2022\r\nVersteckter T\u00fcrgriff\t\r\n\u2022\r\nLeicht zug\u00e4ngliche Versorgungsbeh\u00e4lter\t\r\n\u2022\r\nEntnehmbarer Bohnenbeh\u00e4lter\t\r\n\u2022\r\nFassungsverm\u00f6gen Kaffeebohnen-Beh\u00e4lter in g\t\r\n500\r\nFassungsverm\u00f6gen Wassertank in l\t\r\n2,3\r\nFassungsverm\u00f6gen Restebeh\u00e4lter in St\u00fcck\t\r\n15\r\nEinschaltzeit programmierbar\t\r\n\u2022\r\nAusschaltzeit programmierbar\t\r\n\u2022\r\nStand-by-Zeit programmierbar\t\r\n\u2022\r\nOptionaler Anschluss f\u00fcr Einbaugeschirrw\u00e4rmer\t\r\n\u2022\r\nUhrzeitspeicher in h\t\r\n200\r\nFestwasseranschluss\t\r\n\u2022\r\nPflegekomfort \r\nKomfortable Reinigungsprogramme\t\r\n\u2022\r\nAutomatische Sp\u00fclfunktion\t\r\n\u2022\r\nAutomatische Sp\u00fclung der Milchleitung aus dem Wassertank\t\r\n\u2022\r\nComfortClean\t\r\n\u2022\r\nEntnehmbare Milchleitung\t\r\n\u2022\r\nEntnehmbare Br\u00fcheinheit\t\r\n\u2022\r\nWasserh\u00e4rte einstellbar\t\r\n\u2022\r\nEffizienz und Nachhaltigkeit \r\nEnergiesparender Eco-Mode einschaltbar\t\r\n\u2022\r\nNachtabschaltung\t\r\n\u2022\r\nHausger\u00e4te-Vernetzung \r\nMiele@Home\t\r\nvorger\u00fcstet\r\nSuperVision-Anzeige\t\r\n\u2022\r\nSicherheit \r\nInbetriebnahmesperre\t\r\n\u2022\r\nWasserschutzsystem\t\r\n\u2022\r\nTechnische Daten \r\nNischenbreite in mm\t\r\n560\r\n-\r\n568\r\nNischenh\u00f6he in mm\t\r\n450\r\n-\r\n452\r\nNischentiefe in mm\t\r\n550\r\nGer\u00e4tebreite in mm\t\r\n595\r\nGer\u00e4teh\u00f6he in mm\t\r\n452\r\nGer\u00e4tetiefe in mm\t\r\n496\r\nTiefe bei ge\u00f6ffneter T\u00fcr in cm\t\r\n106,0\r\nGesamtanschlusswert in kW\t\r\n3,5\r\nSpannung in V\t\r\n220-240\r\nAbsicherung in A\t\r\n16\r\nPhasenanzahl\t\r\n1\r\nL\u00e4nge Wasserzulaufschlauch in m\t\r\n1,5\r\nL\u00e4nge der elektrischen Zuleitung in m\t\r\n2,0\r\nMitgeliefertes Zubeh\u00f6r \r\nMilchbeh\u00e4lter - Glas\t\r\n\u2022\r\nMilchbeh\u00e4lter - Kompaktverschluss\t\r\n\u2022\r\nEntkalkungsmittel\t\r\n\u2022\r\nReinigungstabletten\t\r\n\u2022\r\nReiniger f\u00fcr Milchleitungen\t\r\n\u2022\r\nKaffeel\u00f6ffel f\u00fcr Pulverkaffee\t\r\n\u2022\r\nTeststreifen zur Bestimmung der Wasserh\u00e4rte\t\r\n\u2022",
+    "price": 2299.0,
+    "efficiency": 680.0,
+    "description": "#Beschreibung\r\n\r\n\"Einbau-Kaffeevollautomat\r\nmit Bohnensystem - der Miele Allesk\u00f6nner f\u00fcr h\u00f6chste Anspr\u00fcche.\r\nPerfekte Ergebnisse und intensives Kaffeearoma - AromaticSystem\r\nVollautomatische Perfektion - OneTouch for Two\r\nEinzigartige automatische Tassenh\u00f6henerkennung - CupSensor\r\nInnovatives und komfortables Milchsystem - EasyClick-Milksystem\r\nKomfortable Reinigung f\u00fcr Pflege und Erhalt - Reinigungsprogramme\"\r\n\r\n#Spezifikationen\r\n\r\nProduktdetails - CVA 6805\r\n\r\nBauform \r\nEinbau-Kaffeevollautomat mit Bohnensystem\t\r\n\u2022\r\nDesign \r\nPureLine\t\r\n\u2022\r\nFarbe\t\r\nHavannabraun\r\nDisplay\t\r\nM Touch\r\nGetr\u00e4nkespezialit\u00e4ten \r\nEspresso\t\r\n\u2022\r\nKaffee\t\r\n\u2022\r\nKaffee lang\t\r\n\u2022\r\nCappuccino\t\r\n\u2022\r\nLatte Macchiato\t\r\n\u2022\r\nCaff\u00e8 Latte\t\r\n\u2022\r\nHei\u00dfwasser\t\r\n\u2022\r\nHei\u00dfe Milch\t\r\n\u2022\r\nMilchschaum\t\r\n\u2022\r\nGenussvorteile \r\nOne-Touch-Zubereitung\t\r\n\u2022\r\nOneTouch for Two-Zubereitung\t\r\n\u2022\r\nAromaschonendes Kegelmahlwerk\t\r\n\u2022\r\nZweite Kaffeesorte in Form von Pulver m\u00f6glich\t\r\n\u2022\r\nGenie\u00dferprofile programmierbar\t\r\n11\r\nMahlgrad einstellbar\t\r\n\u2022\r\nMahlmenge programmierbar\t\r\n\u2022\r\nWassermenge programmierbar\t\r\n\u2022\r\nWassertemperatur programmierbar\t\r\n\u2022\r\nMilchmenge programmierbar\t\r\n\u2022\r\nMilchschaummenge programmierbar\t\r\n\u2022\r\nVorbr\u00fchen programmierbar\t\r\n\u2022\r\nKaffeekannenfunktion\t\r\n\u2022\r\nBedienkomfort \r\nIndividuelle Sprachauswahl\t\r\n\u2022\r\nAnzeige Datum\t\r\n\u2022\r\nTageszeitanzeige\t\r\n\u2022\r\nCupSensor\t\r\n\u2022\r\nStufenlos h\u00f6henverstellbarer Getr\u00e4nkeauslauf in cm\t\r\n8,3\r\n-\r\n16,5\r\nComfortDoor\t\r\n\u2022\r\nBrilliantLight\t\r\n\u2022\r\nVersteckter T\u00fcrgriff\t\r\n\u2022\r\nLeicht zug\u00e4ngliche Versorgungsbeh\u00e4lter\t\r\n\u2022\r\nEntnehmbarer Bohnenbeh\u00e4lter\t\r\n\u2022\r\nFassungsverm\u00f6gen Kaffeebohnen-Beh\u00e4lter in g\t\r\n500\r\nFassungsverm\u00f6gen Wassertank in l\t\r\n2,3\r\nFassungsverm\u00f6gen Restebeh\u00e4lter in St\u00fcck\t\r\n15\r\nEinschaltzeit programmierbar\t\r\n\u2022\r\nAusschaltzeit programmierbar\t\r\n\u2022\r\nStand-by-Zeit programmierbar\t\r\n\u2022\r\nOptionaler Anschluss f\u00fcr Einbaugeschirrw\u00e4rmer\t\r\n\u2022\r\nUhrzeitspeicher in h\t\r\n200\r\nFestwasseranschluss\t\r\n\u2022\r\nPflegekomfort \r\nKomfortable Reinigungsprogramme\t\r\n\u2022\r\nAutomatische Sp\u00fclfunktion\t\r\n\u2022\r\nAutomatische Sp\u00fclung der Milchleitung aus dem Wassertank\t\r\n\u2022\r\nComfortClean\t\r\n\u2022\r\nEntnehmbare Milchleitung\t\r\n\u2022\r\nEntnehmbare Br\u00fcheinheit\t\r\n\u2022\r\nWasserh\u00e4rte einstellbar\t\r\n\u2022\r\nEffizienz und Nachhaltigkeit \r\nEnergiesparender Eco-Mode einschaltbar\t\r\n\u2022\r\nNachtabschaltung\t\r\n\u2022\r\nHausger\u00e4te-Vernetzung \r\nMiele@Home\t\r\nvorger\u00fcstet\r\nSuperVision-Anzeige\t\r\n\u2022\r\nSicherheit \r\nInbetriebnahmesperre\t\r\n\u2022\r\nWasserschutzsystem\t\r\n\u2022\r\nTechnische Daten \r\nNischenbreite in mm\t\r\n560\r\n-\r\n568\r\nNischenh\u00f6he in mm\t\r\n450\r\n-\r\n452\r\nNischentiefe in mm\t\r\n550\r\nGer\u00e4tebreite in mm\t\r\n595\r\nGer\u00e4teh\u00f6he in mm\t\r\n452\r\nGer\u00e4tetiefe in mm\t\r\n496\r\nTiefe bei ge\u00f6ffneter T\u00fcr in cm\t\r\n106,0\r\nGesamtanschlusswert in kW\t\r\n3,5\r\nSpannung in V\t\r\n220-240\r\nAbsicherung in A\t\r\n16\r\nPhasenanzahl\t\r\n1\r\nL\u00e4nge Wasserzulaufschlauch in m\t\r\n1,5\r\nL\u00e4nge der elektrischen Zuleitung in m\t\r\n2,0\r\nMitgeliefertes Zubeh\u00f6r \r\nMilchbeh\u00e4lter - Glas\t\r\n\u2022\r\nMilchbeh\u00e4lter - Kompaktverschluss\t\r\n\u2022\r\nEntkalkungsmittel\t\r\n\u2022\r\nReinigungstabletten\t\r\n\u2022\r\nReiniger f\u00fcr Milchleitungen\t\r\n\u2022\r\nKaffeel\u00f6ffel f\u00fcr Pulverkaffee\t\r\n\u2022\r\nTeststreifen zur Bestimmung der Wasserh\u00e4rte",
     "image1": "products/miele_kaffee_1.jpg",
     "image2": "products/miele_kaffee_2.jpg",
     "image3": "products/miele_kaffee_3.jpg",
@@ -972,9 +972,7 @@
     "leader_protocol": [
       1
     ],
-    "follower_protocol": [
-      3
-    ],
+    "follower_protocol": [],
     "features": [
       14,
       1,
@@ -988,7 +986,7 @@
   "fields": {
     "name": "Polar H7 Heart Rate Sensor",
     "provider": 12,
-    "product_type": 1,
+    "product_type": 29,
     "serial_number": "92044305-P",
     "price": 59.95,
     "efficiency": 1.0,
@@ -998,10 +996,11 @@
     "image3": "products/polar_92044305-P_3.png",
     "end_of_life": false,
     "renovation_required": false,
-    "leader_protocol": [
-      15
+    "leader_protocol": [],
+    "follower_protocol": [
+      15,
+      3
     ],
-    "follower_protocol": [],
     "features": [
       56
     ]
@@ -1063,13 +1062,13 @@
   "model": "app.product",
   "pk": 33,
   "fields": {
-    "name": "Beddi Smart Alarm Clock",
+    "name": "Beddi Smart Alarm Wecker",
     "provider": 19,
     "product_type": 30,
     "serial_number": "6901-WH00E00",
     "price": 99.99,
     "efficiency": 24.0,
-    "description": "#Beschreibung\r\n\r\nBeddi is an alarm clock/Bluetooth speaker for your smartphone that does so much more than just wake you up.\r\n\r\n#Spezifikationen\r\n\r\n---",
+    "description": "#Beschreibung\r\n\r\nBeddi ist ein Alarmwecker und Bluetooth-Speaker in einem. Passt perfekt f\u00fcr Deine Smart Home Funktionen wie morgiges Aufwachen und  Deine Smartphone oder Tablet Aufladestation. Es simuliert das nat\u00fcrliche Tageslicht f\u00fcr Dein unbeschwertes Aufwachen und sendet gleichzeitig eine Nachricht an Deine Kaffeemaschine und macht sie automatisch an. Damit macht es viel-viel mehr als nur Dich morgens aufzuwachen.\r\n\r\n#Spezifikationen\r\n\r\n\u2022  Einfach zu bedienender App-kontrollierter Wecker mit automatischer Zeitsynchronisation\r\n\u2022  Schlaf besser mit wei\u00dfem Soundgenerator und wache nat\u00fcrlich mit dem Sonnenaufgang-Simulation WecklichtCharge auf\r\n\u2022  Lade Dein Telefon und Tablet mit 2 USB-Ladeanschl\u00fcsse (2.1A + 1A) auf\r\n\u2022  H\u00f6re Deine Lieblingsmusik mit zwei hochwertigen Bluetooth-Lautsprechern und Spotify-Integration\r\n\u2022  Personifiziere Dein BEDDI mit drei leicht bedinebaren Kn\u00f6pfen, die mit Deinen anderen intelligenten Hauptger\u00e4ten interagieren",
     "image1": "products/beddi_1.jpg",
     "image2": "products/beddi_2.jpg",
     "image3": "products/beddi_3.jpg",
@@ -1402,7 +1401,7 @@
     "serial_number": "Aeotec ZW100-C, GTIN: 1220000013100",
     "price": 44.9,
     "efficiency": 12.0,
-    "description": "#Beschreibung\r\n\r\nMachen Sie Ihr Zuhause wirklich intelligent - Mit einem kleinen Ger\u00e4t, vollgepackt mit intelligenten Funktionen. Ein Zuhause ist erst dann intelligent, wenn es anstelle von starren Zeitpl\u00e4nen auf die Ereignisse im Haus in Echtzeit reagieren kann. Der Multisensor ist ab sofort die Grundlage Ihres modernen Smart Home. Der Multisensor von Aeotec vereint gleich 6 Sensoren in einem Ger\u00e4t: Bewegungssensor; Temperatursensor; Lichtsensor; Luftfeuchtigkeitssensor; Vibrationssensor; UV Sensor; Der Multisensor 6 wird mit 2 x CR123A Batterien betrieben. Dies erm\u00f6glicht Ihnen eine flexible Positionierung im Raum. Im Batteriemodus wacht das Ger\u00e4t in einem definierten Zeitintervall auf und \u00fcbermittelt die Messdaten an die Smart Home Zentrale. Im Lieferumfang finden Sie ein USB auf Micro USB Kabel um den Multisensor 6 auch per USB Spannung betrieben zu k\u00f6nnen. Dann ist der Multisensor in der Lage die Messdaten in Echtzeit an Ihre Smart Home Zentrale zu \u00fcbermitteln.\r\n\r\n#Spezifikationen\r\n\r\nProduktgewicht inkl. Verpackung: 181 g\r\nBatterien 2 CR123A Batterien erforderlich.",
+    "description": "#Beschreibung\r\n\r\nMach Dein Zuhause wirklich intelligent - mit einem kleinen Ger\u00e4t, vollgepackt mit intelligenten Funktionen. Ein Zuhause ist erst dann intelligent, wenn es anstelle von starren Zeitpl\u00e4nen auf die Ereignisse im Haus in Echtzeit reagieren kann. Der Multisensor ist ab sofort die Grundlage Deines modernen Smart Homes. Der Multisensor von Aeotec vereint gleich 6 Sensoren in einem Ger\u00e4t: Bewegungssensor; Temperatursensor; Lichtsensor; Luftfeuchtigkeitssensor; Vibrationssensor; UV Sensor. Der Multisensor 6 wird mit 2 x CR123A Batterien betrieben. Dies erm\u00f6glicht Ihnen eine flexible Positionierung im Raum. Im Batteriemodus wacht das Ger\u00e4t in einem definierten Zeitintervall auf und \u00fcbermittelt die Messdaten an die Smart Home Zentrale. Im Lieferumfang finden Sie ein USB auf Micro USB Kabel, um den Multisensor 6 auch per USB Spannung betreiben zu k\u00f6nnen. Dann ist der Multisensor in der Lage die Messdaten in Echtzeit an Deine Smart Home Zentrale zu \u00fcbermitteln.\r\n\r\n#Spezifikationen\r\n\r\nProduktgewicht inkl. Verpackung: 181 g\r\nBatterien: 2 CR123A Batterien erforderlich.",
     "image1": "products/aeon_multi_1.jpg",
     "image2": "products/aeon_multi_2.jpg",
     "image3": "products/aeon_multi_3.jpg",
@@ -1410,7 +1409,8 @@
     "renovation_required": false,
     "leader_protocol": [],
     "follower_protocol": [
-      6
+      6,
+      3
     ],
     "features": [
       101,
@@ -1437,7 +1437,7 @@
     "serial_number": "ZW098",
     "price": 59.99,
     "efficiency": 9.0,
-    "description": "#Beschreibung\r\nMit der neuen und intelligenten RGB-Gl\u00fchlampe kommt Aeotec ins Spiel. Die Aeotec-Lampe passt in jeden E27-Gl\u00fchlampenhalter und ist durch eine Z-Wave-Funktechnik mit einem Smart Home Center verbunden. Es ist in der Lage, Helligkeit und helle Farbe als auch variieren. Tageslicht, Kerzenlicht oder Partyatmosph\u00e4re: Ab jetzt k\u00f6nnen Sie Lichtatmosph\u00e4re nach Ihren W\u00fcnschen definieren.\r\n\r\n#Spezifikationen\r\nCold white: 4745K to 7050K\r\nNatural white: 3710K to 4745 K\r\nWarm white: 2580K to 3710K",
+    "description": "#Beschreibung\r\nMit der neuen und intelligenten RGB-Gl\u00fchlampe kommt Aeotec ins Spiel. Die Aeotec-Lampe passt in jeden E27-Gl\u00fchlampenhalter und ist durch eine Z-Wave-Funktechnik mit einem Smart Home Center verbunden. Es ist in der Lage, Helligkeit und helle Farbe zu reproduzieren als auch variieren. Tageslicht, Kerzenlicht oder Partyatmosph\u00e4re: ab jetzt kannst Du die Lichtatmosph\u00e4re nach Deinen W\u00fcnschen definieren.\r\n\r\n#Spezifikationen\r\nCold white: 4745K to 7050K\r\nNatural white: 3710K to 4745 K\r\nWarm white: 2580K to 3710K",
     "image1": "products/aeon_led_1.jpg",
     "image2": "products/aeon_led_2.png",
     "image3": "products/aeon_led_3.jpg",
@@ -1469,7 +1469,7 @@
     "serial_number": "------",
     "price": 199.99,
     "efficiency": 77.0,
-    "description": "#Beschreibung\r\n\r\nOur solution enables elderly to continue their normal lifes in their known homes as long as possible. This comfortable and safe support is powered by a range of assisting applications and the high compatibility towards existing devices in the field of ambient assisted living.\r\n\r\n#Spezifikationen\r\n\r\n---",
+    "description": "#Beschreibung\r\n\r\nDurch generische Abstraktion werden alle angeschlossene Ger\u00e4te im Smart Home nutzbar, unabh\u00e4ngig von Herstellern und Protokollen, alles nach dem Plug and Play Prinzip.\r\n\r\n#Spezifikationen\r\n\r\n---",
     "image1": "products/IOLITE_gateway.png",
     "image2": "products/IOLITE_all-devices.png",
     "image3": "products/IOLITE-LOGO_Complex.png",
@@ -1561,9 +1561,9 @@
     "provider": 37,
     "product_type": 26,
     "serial_number": "SMC10EU",
-    "price": 147.99,
-    "efficiency": 3700.0,
-    "description": "#Beschreibung\r\n\r\nKaffeezubereitung fernbedienbar \u00fcber Wifi und App f\u00fcr iPhone (iOS) und Smartphones (Android OS) innerhalb der WLAN-Reichweite.\r\nFrische Bohnen mahlen und br\u00fchen und St\u00e4rke des Kaffees w\u00e4hlbar; Glaskanne fa\u00dft bis zu 1,5 Liter (ca. 12 Tassen); Zeitpunkt f\u00fcr Kaffeezubereitung terminieren.\r\nMahlgrad der Bohnen einstellbar; Tassenanzahl kann festlegt werden, ob 1, 2 oder gleich 12, nur soviel Wasser l\u00e4uft durch und soviele Bohnen werden gemahlen.\r\nWasserstandanzeiger teilt mit wieviele Tassen gebr\u00fcht werden k\u00f6nnen; W\u00e4rmeplatte verstellbar von 5-30 Minuten und schaltet sich sp\u00e4testens nach 30 Minuten automatisch aus.",
+    "price": 347.99,
+    "efficiency": 800.0,
+    "description": "#Beschreibung\r\n\r\nKaffeezubereitung fernbedienbar \u00fcber Wifi und App f\u00fcr iPhone (iOS) und Smartphones (Android OS) innerhalb der WLAN-Reichweite.\r\nFrische Bohnen mahlen und br\u00fchen und St\u00e4rke des Kaffees w\u00e4hlbar; Glaskanne fa\u00dft bis zu 1,5 Liter (ca. 12 Tassen); Zeitpunkt f\u00fcr Kaffeezubereitung terminieren.\r\nMahlgrad der Bohnen einstellbar; Tassenanzahl kann festlegt werden, ob 1, 2 oder gleich 12, nur soviel Wasser l\u00e4uft durch und soviele Bohnen werden gemahlen.\r\nWasserstandanzeiger teilt mit wieviele Tassen gebr\u00fcht werden k\u00f6nnen; W\u00e4rmeplatte verstellbar von 5-30 Minuten und schaltet sich sp\u00e4testens nach 30 Minuten automatisch aus.\r\n\r\n#Spezifikationen\r\n\r\nTECHNISCHE DETAILS:\r\n\r\n\u2022 Triblade Stabmixer, 800W, 1 Geschwindigkeit + Turbo, Wei\u00df\r\n\u2022 Typ: P\u00fcrierstab\r\n\u2022 Produktfarbe: Wei\u00df\r\n\u2022 Sch\u00fcsselkapazit\u00e4t: 0,75 l\r\n\u2022 Entfernbare Sch\u00fcssel: Ja\r\n\u2022 Anzahl Geschwindigkeiten: 1\r\n\u2022 Dirac-Sto\u00df: Ja\r\n\u2022 Eis-Crusher: Ja\r\n\u2022 Sp\u00fclmaschinenfeste Teile: Ja\r\n\u2022 Turbotaste: Ja\r\n\u2022 Zerkleinerer: Ja\r\n\u2022 Anzahl der Klingen: 3\r\n\u2022 Fassungsverm\u00f6gen Zerkleinerer: 0.\r\n\r\nMATERIAL:\r\n\u2022  Geh\u00e4usematerial: Kunststoff\r\n\u2022  Sch\u00fcsselmaterial: Kunststoff\r\n\u2022  Material Messer: Edelstahl\r\n\r\nGEWICHT & ABMESSUNGEN:\r\n\u2022  Breite: 73 mm\r\n\r\nVERPACKUNGSINHALT:\r\n\u2022 Schneebesen: Ja\r\n\u2022  Zubeh\u00f6rp\u00fcree: Ja\r\n\r\nGEWICHT & ABMESSUNGEN:\r\n\u2022  Gewicht: 2 kg\r\n\u2022  Tiefe: 73 mm\r\n\u2022  H\u00f6he: 420 mm",
     "image1": "products/Unknown.jpeg",
     "image2": "products/unknown2.jpg",
     "image3": "",
@@ -1676,6 +1676,41 @@
   }
 },
 {
+  "model": "app.product",
+  "pk": 54,
+  "fields": {
+    "name": "QIVICON Home Base",
+    "provider": 40,
+    "product_type": 1,
+    "serial_number": "------",
+    "price": 149.0,
+    "efficiency": 0.0,
+    "description": "#Beschreibung\r\n\r\nDie Qivicon Home Base ist quasi das Gateway, das ben\u00f6tigt wird um die einzelnen Endger\u00e4te anzusteuern, die genannten Protokolle unterst\u00fctzt das System\r\n\r\n#Spezifikationen\r\n\r\nNetzwerkverbindung: LAN(Ethernet)IEEE802.3u10/100Mbps, RJ45 / WLANIEEE802.11b/g/n,2.4GHz                 PAN/Funkschnittstellen: \r\nHomeMatic / Homematic IP* 868.3 MHz/869.525 MHz\r\nZigBeePro / Thread* IEEE802.15.4, 2.4GHz\r\nDECTULE* EN300175-2/3/4/5/7, 1.9GHz\r\nBluetooth Smart Ready* IEEE802.15.1 Bluetooth 4.1, 2.4GHz\"",
+    "image1": "products/smarthome-home-base-neue-generation-details.png",
+    "image2": "",
+    "image3": "",
+    "end_of_life": false,
+    "renovation_required": false,
+    "leader_protocol": [
+      14,
+      18,
+      17
+    ],
+    "follower_protocol": [],
+    "features": [
+      94,
+      93,
+      111,
+      67,
+      86,
+      27,
+      54,
+      1,
+      46
+    ]
+  }
+},
+{
   "model": "app.producttype",
   "pk": 1,
   "fields": {
@@ -1709,7 +1744,7 @@
   "model": "app.producttype",
   "pk": 4,
   "fields": {
-    "type_name": "CO2 Sensor",
+    "type_name": "CO2-Sensor",
     "svg_id": "sensor_CO2",
     "icon": "productType/house_overlay_picture/sensor-CO2.svg",
     "used_as_product_type_filter_by": []
@@ -1719,7 +1754,7 @@
   "model": "app.producttype",
   "pk": 5,
   "fields": {
-    "type_name": "Temperatursensor/Thermostat",
+    "type_name": "Temperatursensor",
     "svg_id": "Thermometer_Thermostat",
     "icon": "productType/house_overlay_picture/sensor-temp.svg",
     "used_as_product_type_filter_by": []
@@ -1729,7 +1764,7 @@
   "model": "app.producttype",
   "pk": 6,
   "fields": {
-    "type_name": "Smart Plug/Smart Socket",
+    "type_name": "Smart Plug",
     "svg_id": "smart_socket",
     "icon": "productType/house_overlay_picture/socket.svg",
     "used_as_product_type_filter_by": []
@@ -1749,7 +1784,7 @@
   "model": "app.producttype",
   "pk": 10,
   "fields": {
-    "type_name": "Lichtsensor/Bewegungsmelder",
+    "type_name": "Bewegungsmelder",
     "svg_id": "Bewegungsmelder",
     "icon": "productType/house_overlay_picture/sensor-luminance.svg",
     "used_as_product_type_filter_by": []
@@ -1779,7 +1814,7 @@
   "model": "app.producttype",
   "pk": 13,
   "fields": {
-    "type_name": "T\u00fcr-/Fensterkontaktsensor",
+    "type_name": "Kontaktsensor",
     "svg_id": "tuer_Fensterkontakt",
     "icon": "productType/house_overlay_picture/door.svg",
     "used_as_product_type_filter_by": []
@@ -1789,7 +1824,7 @@
   "model": "app.producttype",
   "pk": 15,
   "fields": {
-    "type_name": "CO2-Messger\u00e4t/Luftfeuchtigkeitssensor",
+    "type_name": "Luftfeuchtigkeitssensor",
     "svg_id": "sensor-humidity",
     "icon": "productType/house_overlay_picture/sensor-humidity.svg",
     "used_as_product_type_filter_by": []
@@ -1919,7 +1954,7 @@
   "model": "app.producttype",
   "pk": 29,
   "fields": {
-    "type_name": "Blutdruckmessger\u00e4t/Herzfrequenzsensor",
+    "type_name": "Blutdruckmessger\u00e4t",
     "svg_id": "Blutdruckmessegeraet_HerzfreqSensor",
     "icon": "productType/house_overlay_picture/blood-pressure.svg",
     "used_as_product_type_filter_by": []
@@ -2097,19 +2132,9 @@
 },
 {
   "model": "app.producttype",
-  "pk": 49,
-  "fields": {
-    "type_name": "-sHome_??",
-    "svg_id": "Anlage_keller",
-    "icon": "",
-    "used_as_product_type_filter_by": []
-  }
-},
-{
-  "model": "app.producttype",
   "pk": 50,
   "fields": {
-    "type_name": "Smartphone/Tablet",
+    "type_name": "Smartphone / Tablet",
     "svg_id": "Tablet_smartphone",
     "icon": "productType/house_overlay_picture/noun_125655.svg",
     "used_as_product_type_filter_by": []
@@ -4274,6 +4299,29 @@
   }
 },
 {
+  "model": "app.metadevice",
+  "pk": 50,
+  "fields": {
+    "name": "Endpoint: ",
+    "is_broker": false,
+    "implementation_requires": [
+      72,
+      56
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 51,
+  "fields": {
+    "name": "Endpoint: ",
+    "is_broker": false,
+    "implementation_requires": [
+      56
+    ]
+  }
+},
+{
   "model": "app.subcategory",
   "pk": 1,
   "fields": {
@@ -4951,7 +4999,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$30000$1SNZTPCnQ5JQ$9UOgz+vmgt8/9wehyiy9uJUVhu0mBDwFrlcoF5RQhr4=",
-    "last_login": "2017-02-07T16:35:35.176Z",
+    "last_login": "2017-02-11T09:57:07.607Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Herr",
@@ -4979,10 +5027,10 @@
     "date_joined": "2016-06-22T22:18:58Z",
     "groups": [
       [
-        "Marketing"
+        "Personalverwaltung"
       ],
       [
-        "Personalverwaltung"
+        "Marketing"
       ]
     ],
     "user_permissions": []
@@ -5037,10 +5085,10 @@
     "date_joined": "2016-06-12T11:35:56Z",
     "groups": [
       [
-        "Marketing"
+        "Personalverwaltung"
       ],
       [
-        "Personalverwaltung"
+        "Marketing"
       ]
     ],
     "user_permissions": []
@@ -5318,6 +5366,14 @@
   "fields": {
     "session_data": "ZDA3YmEyZWE0NDRiMjI0YzdkOTliMDRhZmJhYWU4MTU4ZGQ5NWYwZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
     "expire_date": "2017-02-13T17:13:30.337Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "unu71r9pf7l6l6q5u1w8u48s9sq0jxtq",
+  "fields": {
+    "session_data": "OWNkMjM4ZTY1ZTgzZDlmMGUwOWUxMWQzNGUzM2RkMzE0ZjIyN2EzMDp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2017-02-25T09:57:07.628Z"
   }
 },
 {
