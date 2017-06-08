@@ -54,7 +54,7 @@
     "name": "Wenn die Waschmachine fertig ist, soll eine Lampe gruen leuchten.",
     "url_name": "wenn_die_waschmachine_fertig_ist__soll_eine_lampe_gruen_leuchten_",
     "description": "Um anzuzeigen, dass die Waschmaschine fertig ist, soll ein visueller Anreiz gegeben werden. Dazu soll eine Lampe im Haushalt gr\u00fcn aufleuchten. Dazu wird ein Regelwerk, eine Waschmaschine und eine Lampe ben\u00f6tigt.",
-    "picture": "scenarios/WaMa.jpg",
+    "picture": "scenarios/ScenarioPicWasch.jpg",
     "provider": 27,
     "meta_broker": 1,
     "title": "Benachrichtigung f\u00fcr W\u00e4sche",
@@ -72,9 +72,9 @@
   "model": "app.scenario",
   "pk": 2,
   "fields": {
-    "name": "Wenn mein Wecker klingelt, sollen die Jalousien hochgefahren werden.",
-    "url_name": "wenn_mein_wecker_klingelt__sollen_die_jalousien_hochgefahren_werden_",
-    "description": "Um besser in den Tag zu starten, werden einem grundlegende Routinearbeiten abgenommen.",
+    "name": "Wenn mein Wecker am Morgen klingelt, sollen die Jalousien hochgefahren werden.",
+    "url_name": "wenn_mein_wecker_am_morgen_klingelt__sollen_die_jalousien_hochgefahren_werden_",
+    "description": "Um besser in den Tag zu starten, werden einem grundlegende Routinearbeiten abgenommen. So ist es auch, wenn man morgens fr\u00fch aufsteht und mit dem nat\u00fcrlichen Tageslicht geweckt sein m\u00f6chte. Es wird vom Smart Home f\u00fcr  einen besonderen Komfort und gesunden Aufwachen intelligent gesorgt.",
     "picture": "scenarios/how-to-wake-up.jpg",
     "provider": 27,
     "meta_broker": 1,
@@ -96,7 +96,7 @@
     "name": "Wenn mein Wecker klingelt, soll die Kaffemaschine angeschaltet werden.",
     "url_name": "wenn_mein_wecker_klingelt__soll_die_kaffemaschine_angeschaltet_werden_",
     "description": "Um besser in den Tag zu starten, werden einem grundlegende Routinearbeiten abgenommen.",
-    "picture": "scenarios/Coffee_Machine_Controller_using_Arduino__-_Image_02.jpg",
+    "picture": "scenarios/ScenarioPicCoffee.jpg",
     "provider": 27,
     "meta_broker": 1,
     "title": "Aufwachanreiz (Morgenkaffee)",
@@ -117,7 +117,7 @@
     "name": "In bestimten Zeitfenstern, schalte einzelne Ger\u00e4te aus.",
     "url_name": "in_bestimten_zeitfenstern__schalte_einzelne_gerate_aus_",
     "description": "Do you really need the TV on standby in the middle of the night? Standby power is wasted by appliances awaiting to perform their primary function. How many power supplies do you have in your house plugged in right now converting AC into DC with no use? All these circuits and sensors awaiting to receive a remote signal, the bluetooth Speakers, displays and LED status lights.\r\nHow about having a system that controls the power usage of these devices and saving energy in your house indefinitely?",
-    "picture": "scenarios/Energy_Smart_Logo.jpg",
+    "picture": "scenarios/ScenarioPicUnplug.jpg",
     "provider": 27,
     "meta_broker": 13,
     "title": "Steady Standby",
@@ -137,7 +137,7 @@
     "name": "Tracke meine Lebensmittel nach Verfallsdatum.",
     "url_name": "tracke_meine_lebensmittel_nach_verfallsdatum_",
     "description": "Ein Smart Assistent wei\u00df, was der K\u00fchlschrank hat und merkt sich (zum Beispiel) wann die Milch schlecht wird.",
-    "picture": "scenarios/mykie_news.jpg",
+    "picture": "scenarios/ScenarioPicVerfallsdaten.jpg",
     "provider": 27,
     "meta_broker": 16,
     "title": "Checken von Verfallsdaten",
@@ -157,11 +157,12 @@
     "name": "Wenn meine Lieblingsserie im Fernsehen l\u00e4uft soll der Fernseher angeschaltet und der Raum abgedunkelt werden.",
     "url_name": "wenn_meine_lieblingsserie_im_fernsehen_lauft_soll_der_fernseher_angeschaltet_und_der_raum_abgedunkelt_werden_",
     "description": "Wenn man sowieso jede Woche zur selben Uhrzeit den Fernseher anschaltet kann das ja auch automatisch passieren. Dazu braucht man ein Regelwerk, eine online Programmauskunft (z.b. als app im smart home control center), einen fern steuerbaren Fernseher und Dimmbare Lampen.",
-    "picture": "scenarios/Smart-TV-Makers-Voice-Security_8bzcIP6.jpg",
+    "picture": "scenarios/ScenarioPicTV2.jpg",
     "provider": 27,
     "meta_broker": 18,
     "title": "Zeit f\u00fcr Tatort",
     "meta_endpoints": [
+      52,
       19,
       20
     ],
@@ -199,8 +200,8 @@
   "fields": {
     "name": "Falls meine Oma hinf\u00e4llt m\u00f6chte ich, dass der Krankenwagen gerufen wird.",
     "url_name": "falls_meine_oma_hinfallt_mochte_ich__dass_der_krankenwagen_gerufen_wird_",
-    "description": "Meine Oma ist sehr gebrechlich, m\u00f6chte aber nicht ins Heim, weswegen sie bei mir wohnt.\r\nWenn ich unterwegs bin habe ich immer Angst, dass sie hinf\u00e4llt und keine Hilfe mehr rufen kann.\r\nDewegen soll meine Oma nun ein SmartWatch tragen, welche erkennt, ob sie gest\u00fcrzt ist und \r\nden Notruf bescheid geben. Um Fehlalrame zu vermeiden meldet sich das SmartWatch mit einem lauten \r\nAlarmtom und falls nach 2 Minuten keine Eingabe erfolgt wird der Notruf benachrichtigt.",
-    "picture": "scenarios/jpeg-148132007B3B12CD-20120425-img_36231964.original.large-4-3-800-0-311-2600-_NzxdzBk.jpg",
+    "description": "Meine Oma ist sehr gebrechlich, m\u00f6chte aber nicht ins Heim, weswegen sie bei mir wohnt.\r\nWenn ich unterwegs bin habe ich immer Angst, dass sie hinf\u00e4llt und keine Hilfe mehr rufen kann.\r\nDewegen soll meine Oma nun ein SmartWatch tragen, welche erkennt, ob sie gest\u00fcrzt ist und \r\nden Notruf bescheid geben. Um Fehlalrame zu vermeiden meldet sich das SmartWatch mit einem lauten \r\nAlarmton innerhalb des Hauses und falls nach 2 Minuten keine Eingabe erfolgt wird der Notruf benachrichtigt.",
+    "picture": "scenarios/SchenarioPfelege.jpg",
     "provider": 27,
     "meta_broker": 44,
     "title": "Notruf f\u00fcr Pflegebed\u00fcrftige",
@@ -246,7 +247,7 @@
     "name": "Wenn die Putzkraft kommt, soll der Tresor sich automatisch verschlie\u00dfen",
     "url_name": "wenn_die_putzkraft_kommt__soll_der_tresor_sich_automatisch_verschliessen",
     "description": "Leider kommt es Deutschland nach Kriminalstatistik von 2015 in 3 von ingesamt 128746 F\u00e4llen immer wieder zu Entleerungen des privaten Haustresors, wenn ein Raumpfleger die Treppe feudelt. Deswegen soll \u00fcber die Gesichtserkennung meiner Eingangskamera der Tresor automatisch verschlossen werden, wenn ein Raumpfleger das Anwesen betritt.",
-    "picture": "scenarios/tresor1.jpg",
+    "picture": "scenarios/ScenarioSafe.jpg",
     "provider": 27,
     "meta_broker": 1,
     "title": "Smart Safe",
@@ -267,7 +268,7 @@
     "name": "Schutz vor Einbruch durch Sensoren, Video\u00fcberwachung, Benachrichtigungen und Stillen Alarm",
     "url_name": "schutz_vor_einbruch_durch_sensoren__videouberwachung__benachrichtigungen_und_stillen_alarm",
     "description": "Konzentrieren Sie sich voll und ganz auf Ihren Gesch\u00e4ftstermin. \r\nIhre SmartHome App gibt Ihnen einen schnellen \u00dcberblick \u00fcber Ihr Zuhause. Sicherheitskameras, Bewegungsmelder und intelligente Zwischenstecker liefern aktuelle Statusberichte direkt auf Ihr Smartphone oder Tablet.\r\n\r\nBei aktiviertem Alarm und unerwarteten Bewegungen meldet das System einen stillen Alarm an die Polizei, benachrichtigt den Nutzer, Schaltet alle Lampen im Haus ein und aktiviert die Video-\u00dcbertragung.",
-    "picture": "scenarios/telekom-smart-home-szenario-einbrecher-750.jpg",
+    "picture": "scenarios/ScenarioPicBurglar.jpg",
     "provider": 1,
     "meta_broker": 43,
     "title": "Schutz vor Einbruch",
@@ -289,7 +290,7 @@
     "name": "Bei Feuer soll die Feuerwehr automatisch alarmiert werden und eine Benachrichtigung an mich gesendet werden",
     "url_name": "bei_feuer_soll_die_feuerwehr_automatisch_alarmiert_werden_und_eine_benachrichtigung_an_mich_gesendet_werden",
     "description": "Man f\u00e4hrt in den Urlaub \u2013 und zuhause l\u00f6st ein defekter K\u00fchlschrank einen Brand aus\u2026 Eine Vorstellung, die man sich gar nicht weiter ausmalen m\u00f6chte. Dennoch hilft nur genau das: Sich vor dem Urlaub Gedanken machen und vorbeugen. Denn zu den h\u00e4ufigsten Brandursachen z\u00e4hlen eben nicht nur das vergessene B\u00fcgeleisen und die heruntergefallene Zigarette, sondern auch defekte Elektroger\u00e4te.\r\n\r\nSch\u00fctzen Sie Ihr Zuhause mit intelligenter Technik vor dem Schlimmsten: Der Rauchmelder \u00fcberwacht Ihre R\u00e4ume zuverl\u00e4ssig. Haben Sie mehrere Rauchmelder miteinander vernetzt, schlagen diese gleichzeitig an \u2013  un\u00fcberh\u00f6rbar f\u00fcr Ihre Nachbarn, die sofort die Feuerwehr informieren und damit vielleicht Schlimmeres verhindern k\u00f6nnen.\r\n\r\nGehen Sie mit auf Nummer Sicher: Lassen Sie sich im Fall eines Rauchmelder-Alarms automatisch per SMS oder E-Mail informieren \u2013 und legen Sie gleich mit fest, dass auch Ihr Nachbar oder Freunde eine Nachricht erhalten. Das sichert die schnelle Hilfe durch die Feuerwehr und bringt einen wertvollen Zeitvorsprung. Den intelligenten Rauchmelder k\u00f6nnen Sie au\u00dferdem sinnvoll zum Einbruchschutz nutzen.",
-    "picture": "scenarios/smart-home-app-brandschutz.jpg",
+    "picture": "scenarios/ScenarioFire.jpg",
     "provider": 1,
     "meta_broker": 44,
     "title": "Warnung vor Feuer",
@@ -298,6 +299,28 @@
     ],
     "subcategory": [
       13
+    ],
+    "in_shopping_basket_of": []
+  }
+},
+{
+  "model": "app.scenario",
+  "pk": 17,
+  "fields": {
+    "name": "Der Raum wird nicht stickig wenn ich zuhause Sport treibe.",
+    "url_name": "der_raum_wird_nicht_stickig_wenn_ich_zuhause_sport_treibe_",
+    "description": "Schon mit ein Paar Hanteln wird das eigene Wohnzimmer zu einem Fitnessraum. Um ein effektives Heimtraining durchziehen zu k\u00f6nnen, braucht man nat\u00fcrlich frische Luft und angenehmes Raumklima, wenn man stark ins Schwitzen kommt.\r\n\r\nAnhand des Pulsmessers (bzw. Smart-Watch) und die Hometrainer erkennt die Wohnung wann das Workout beginen soll und stellt sich dementsprechend darauf ein. Ob es frische Luft oder Boost-Musik oder Beleuchtung sein soll um den inneren Schweinehund \u00fcberhaupt von der Couch abzukriegen, kein Problem!",
+    "picture": "scenarios/ScenarioWorkout.jpg",
+    "provider": 1,
+    "meta_broker": 18,
+    "title": "Home Fitness",
+    "meta_endpoints": [
+      51,
+      53,
+      38
+    ],
+    "subcategory": [
+      10
     ],
     "in_shopping_basket_of": []
   }
@@ -312,7 +335,7 @@
     "serial_number": "CO2 LS 2178",
     "price": 225.36,
     "efficiency": 2.0,
-    "description": "#Beschreibung\r\n\r\nBestimmungsgem\u00e4\u00dfer Gebrauch\r\n\r\n    Messen von CO2-Konzentration, relativer Luftfeuchte und Lufttemperatur\r\n\r\n    Ausgabe der gemessenen Werte als Telegramm auf den Bus, z.B. zum Steuern von L\u00fcftern oder Fensterantrieben \u00fcber KNX-Telegramme\r\n\r\n    Einzelraum-Temperaturregelung in KNX-Installationen\r\n\r\n    Montage in Ger\u00e4tedose nach DIN 49073\r\n\r\n\r\nProdukteigenschaften\r\n\r\n    Grenzwert\u00fcberwachung f\u00fcr CO2-Konzentration (max. 4 Grenzwerte) und Luftfeuchte (max. 2 Grenzwerte)\r\n    Taupunktalarmierung z.B. f\u00fcr K\u00fchldecken und Winterg\u00e4rten, zur Vermeidung von Schimmelbildung\r\n    Zwei Bin\u00e4reing\u00e4nge zum Anschluss potentialfreier Kontakte, z.B. Taster, Schalter, Fensterkontakte\r\n    Logikgatter f\u00fcr einfache Verkn\u00fcpfungsfunktionen\r\n\r\n#Spezifikationen\r\n\r\n---",
+    "description": "#Beschreibung\r\n\r\n* Bestimmungsgem\u00e4\u00dfer Gebrauch\r\n* Messen von CO2-Konzentration, relativer Luftfeuchte und Lufttemperatur\r\n* Ausgabe der gemessenen Werte als Telegramm auf den Bus, z.B. zum Steuern von L\u00fcftern oder Fensterantrieben \u00fcber KNX-Telegramme\r\n* Einzelraum-Temperaturregelung in KNX-Installationen\r\n* Montage in Ger\u00e4tedose nach DIN 49073\r\n\r\n#Spezifikationen\r\n\r\n  * Grenzwert\u00fcberwachung f\u00fcr CO2-Konzentration (max. 4 Grenzwerte) und Luftfeuchte (max. 2 Grenzwerte)\r\n  * Taupunktalarmierung z.B. f\u00fcr K\u00fchldecken und Winterg\u00e4rten, zur Vermeidung von Schimmelbildung\r\n  * Zwei Bin\u00e4reing\u00e4nge zum Anschluss potentialfreier Kontakte, z.B. Taster, Schalter, Fensterkontakte\r\n  * Logikgatter f\u00fcr einfache Verkn\u00fcpfungsfunktionen",
     "image1": "products/jung_co2_1.png",
     "image2": "products/Jung_CO2-Sensor_2.jpg",
     "image3": "products/Jung_CO2-Sensor_3.png",
@@ -320,7 +343,7 @@
     "renovation_required": true,
     "leader_protocol": [],
     "follower_protocol": [
-      10
+      3
     ],
     "features": [
       40
@@ -725,10 +748,10 @@
     "name": "BMS Weather controller Quadra",
     "provider": 21,
     "product_type": 19,
-    "serial_number": "------",
+    "serial_number": "541892",
     "price": 19.8,
     "efficiency": 5.6,
-    "description": "#Beschreibung\n\nDie Wetterzentrale Quadra\u00ae ist gleichzeitig eine\r\nWetterstation und eine Sonnenschutzzentrale f\u00fcr\r\nacht Sektoren/Fassadenabschnitte.\r\nDie Wetterzentrale erfasst mit ihren Sensoren\r\n\u2022 Wind und Windrichtung\r\n\u2022 5 x Helligkeit (Nord, Ost, S\u00fcd, West, Sky)\r\n\u2022 5 x Globalstrahlung (Nord, Ost, S\u00fcd, West, Sky)\r\n\u2022 Temperatur\r\n\u2022 Niederschlag\r\ndas Wettergeschehen aufs Genauste.\r\nNeben ihren zahlreichen Sicherheits- und Komfortprogrammen\r\nbietet die Wetterzentrale zus\u00e4tzliche\r\nBesonderheiten wie Globalstrahlungserfassung,\r\nSonnenstandsnachf\u00fchrung, verschlei\u00dffreie Windrichtungsdiagnose,\r\nBeleuchtungsautomatik und die\r\nneuartige BMS-Fuzzylogik.\r\nUnd bei allem ist die Quadra\u00ae kinderleicht in Betrieb\r\nzu nehmen.\n\n#Spezifikationen\n\nKomfortprogramme\r\n4 x Beschattung\r\n1 x Temperatur\r\n1 x Hitze\r\n1 x Beleuchtung\r\n1 x D\u00e4mmerung\r\n2 x Zeit\r\n16 x Eingang\r\n\r\nWeitere Funktionen\r\n\u2022 Grenzwerte \u00fcber EIB/KNX \u00e4nderbar\r\n\u2022 Sonnenstandsnachf\u00fchrung\r\n\u2022 Serviceintervall-Meldung\r\n\u2022 St\u00f6rungsmeldungen der Sensoren\r\n\u2022 Positionierung je Programm m\u00f6glich\r\n\u2022 8 Sektoren/Fassadenabschnitte\r\n\r\nSicherheitspogramme\r\n2 x Wind\r\n2 x Niederschlag\r\n2 x Frost\r\n1 x Globalstrahlung",
+    "description": "#Beschreibung\r\n\r\nDie Wetterzentrale Quadra\u00ae ist gleichzeitig eine\r\nWetterstation und eine Sonnenschutzzentrale f\u00fcr\r\nacht Sektoren/Fassadenabschnitte.\r\nDie Wetterzentrale erfasst mit ihren Sensoren\r\n\u2022 Wind und Windrichtung\r\n\u2022 5 x Helligkeit (Nord, Ost, S\u00fcd, West, Sky)\r\n\u2022 5 x Globalstrahlung (Nord, Ost, S\u00fcd, West, Sky)\r\n\u2022 Temperatur\r\n\u2022 Niederschlag\r\ndas Wettergeschehen aufs Genauste.\r\nNeben ihren zahlreichen Sicherheits- und Komfortprogrammen\r\nbietet die Wetterzentrale zus\u00e4tzliche\r\nBesonderheiten wie Globalstrahlungserfassung,\r\nSonnenstandsnachf\u00fchrung, verschlei\u00dffreie Windrichtungsdiagnose,\r\nBeleuchtungsautomatik und die\r\nneuartige BMS-Fuzzylogik.\r\nUnd bei allem ist die Quadra\u00ae kinderleicht in Betrieb\r\nzu nehmen.\r\n\r\n#Spezifikationen\r\n\r\nKomfortprogramme:\r\n- 4 x Beschattung\r\n- 1 x Temperatur\r\n- 1 x Hitze\r\n- 1 x Beleuchtung\r\n- 1 x D\u00e4mmerung\r\n- 2 x Zeit\r\n- 16 x Eingang\r\n\r\nWeitere Funktionen:\r\n\u2022 Grenzwerte \u00fcber EIB/KNX \u00e4nderbar\r\n\u2022 Sonnenstandsnachf\u00fchrung\r\n\u2022 Serviceintervall-Meldung\r\n\u2022 St\u00f6rungsmeldungen der Sensoren\r\n\u2022 Positionierung je Programm m\u00f6glich\r\n\u2022 8 Sektoren/Fassadenabschnitte\r\n\r\nSicherheitspogramme:\r\n- 2 x Wind\r\n- 2 x Niederschlag\r\n- 2 x Frost\r\n- 1 x Globalstrahlung",
     "image1": "products/bms_quadra_1.jpg",
     "image2": "products/bms_quadra_2.jpg",
     "image3": "products/bms_quadra_3.png",
@@ -1240,13 +1263,12 @@
     "image3": "products/kingmak_klingel_3.jpg",
     "end_of_life": false,
     "renovation_required": false,
-    "leader_protocol": [
+    "leader_protocol": [],
+    "follower_protocol": [
       14,
       13,
+      3,
       12
-    ],
-    "follower_protocol": [
-      3
     ],
     "features": [
       24,
@@ -1463,10 +1485,10 @@
   "model": "app.product",
   "pk": 47,
   "fields": {
-    "name": "IOLITE",
+    "name": "IOLITE Gateway",
     "provider": 26,
     "product_type": 1,
-    "serial_number": "------",
+    "serial_number": "275538",
     "price": 199.99,
     "efficiency": 77.0,
     "description": "#Beschreibung\r\n\r\nDurch generische Abstraktion werden alle angeschlossene Ger\u00e4te im Smart Home nutzbar, unabh\u00e4ngig von Herstellern und Protokollen, alles nach dem Plug and Play Prinzip.\r\n\r\n#Spezifikationen\r\n\r\n---",
@@ -1479,8 +1501,6 @@
       8,
       9,
       14,
-      10,
-      11,
       5,
       6,
       2,
@@ -1569,18 +1589,18 @@
     "image3": "",
     "end_of_life": false,
     "renovation_required": false,
-    "leader_protocol": [
-      13,
-      12
-    ],
+    "leader_protocol": [],
     "follower_protocol": [
-      15
+      15,
+      11,
+      13
     ],
     "features": [
-      94,
-      93,
       72,
-      79
+      79,
+      11,
+      13,
+      43
     ]
   }
 },
@@ -1625,7 +1645,7 @@
     "serial_number": "WAWH8690-W-F23-Pi",
     "price": 1299.0,
     "efficiency": 137.0,
-    "description": "#Beschreibung\r\n\r\nDie Waschmaschine mit intelligenter Dosierautomatik und Home Connect: Steuern Sie Ihre Waschmaschine bequem per Smartphone oder Tablet PC.\r\ni-DOS\u2122: Dosiert voll automatisch die richtige Menge Fl\u00fcssigwaschmittel f\u00fcr perfekte Waschergebnisse.\r\nHome Connect: Vernetzte Hausger\u00e4te von Bosch f\u00fcr einen leichteren Alltag.\r\nBetriebsger\u00e4usch 47dB/71dB: w\u00e4scht und schleudert \u00fcberragend leise.\r\nVarioTrommel: Schonend und effizient Waschen dank einzigartiger Trommel-Struktur.\r\nComfortControl mit Verbrauchsanzeige: einfache Bedienung und Angabe zu Strom- und Wasserverbrauch.\r\n\r\n#Spezifikationen\r\n\r\nProduktdetails\r\n\r\n\u2022 \r\nLeistung und Verbrauch\r\nNennkapazit\u00e4t: 9 kg\r\nEnergieeffizienzklasse: A+++\r\nEnergieverbrauch von 152 kWh/Jahr auf der Grundlage von 220 Standard-Waschzyklen f\u00fcr 60\u00b0C- und 40\u00b0C- Baumwollprogramme bei vollst\u00e4ndiger Bef\u00fcllung und Teilbef\u00fcllung sowie dem Verbrauch der Betriebsarten mit geringer Leistungsaufnahme. Der tats\u00e4chliche Energieverbrauch h\u00e4ngt von der Art der Nutzung des Ger\u00e4ts ab.\r\n30% sparsamer (152kWh /Jahr) als der Grenzwert (217 kWh/Jahr) der Energieeffizienzklasse A+++ in der Kategorie 9 kg nach der EU-Verordnung 1061/2010\r\nEnergieverbrauch des Standardprogramms Baumwolle 60\u00b0C 0.92 kWh bei vollst\u00e4ndiger Bef\u00fcllung und 0.6 kWh bei Teilbef\u00fcllung sowie 0.42 kWh im Standardprogramm Baumwolle 40\u00b0C bei Teilbef\u00fcllung\r\ngewichtete Leistungsaufnahme im Aus-Zustand / unausgeschaltetem Zustand: 0.12 W / 0.43 W\r\nWasserverbrauch von 11220 Liter/Jahr auf der Grundlage von 220 Standard-Waschzyklen f\u00fcr 60\u00b0C- und 40\u00b0C-Baumwollprogramme bei vollst\u00e4ndiger Bef\u00fcllung und Teilbef\u00fcllung. Der tats\u00e4chliche Wasserverbrauch h\u00e4ngt von der Art der Nutzung des Ger\u00e4ts ab.\r\nSchleudereffizienzklasse: B\r\nmax. Schleuderdrehzahl: 1400 U/min\r\nRestfeuchte: 53 %\r\nDie Standard-Waschprogramme, auf die sich die Informationen auf dem Etikett und im Datenblatt beziehen, sind Baumwolle 60\u00b0 Eco und Baumwolle Eco 40\u00b0. Diese Programme eignen sich zur Reinigung normal verschmutzter Baumwollw\u00e4sche und sind in Bezug auf den kombinierten Energie- und Wasserverbrauch am effizientesten. Die tats\u00e4chliche Temperatur kann bei dieser Kombination von der angegebenen Programmtemperatur abweichen, Waschzeiten werden zugunsten eines niedrigeren Energieverbrauchs verl\u00e4ngert. Dabei ist immer eine Waschwirkung A sichergestellt.\r\nProgrammdauer des Standardprogramms Baumwolle 60 \u00b0C 275 min bei vollst\u00e4ndiger Bef\u00fcllung und 270 min bei Teilbef\u00fcllung sowie im Standardprogramm Baumwolle 40 \u00b0C 270 min bei Teilbef\u00fcllung\r\nDauer des unausgeschalteten Zustands: 15 min\r\nGer\u00e4uschwert Waschen im Standardprogramm Baumwolle 60\u00b0C bei vollst\u00e4ndiger Bef\u00fcllung in dB (A) re 1 pW: 47\r\nGer\u00e4uschwert Schleudern im Standardprogramm Baumwolle 60\u00b0C bei vollst\u00e4ndiger Bef\u00fcllung in dB (A) re 1 pW: 71\r\n\u2022 \r\nProgramme\r\nSpezialprogramme: Jeans/Dunkle W\u00e4sche, Hemden/Blusen, Extra Kurz 15', Schnell/Mix, Automatik Sanft, AllergiePlus, Automatik Intensiv, Trommel reinigen (mit Erinnerungsfunktion), Wolle-Handw\u00e4sche, Fein/Seide\r\n\u2022 \r\nOptionen\r\nHome Connect f\u00e4hig\r\nVarioPerfect: zeit- oder energieoptimierte Programme mit perfektem Waschergebnis\r\nTouchControl-Tasten: Temperatur, Drehzahlabwahl, Vorw\u00e4sche, EcoPerfect, SpeedPerfect, i-DOS 1, i-DOS 2 und 24 h Start in\r\ni-DOS: dosiert vollautomatisch Fl\u00fcssigwaschmittel und Weichsp\u00fcler\r\n\u2022 \r\nKomfort und Sicherheit\r\nTrommelinnenbeleuchtung: LED\r\nVarioTrommel: schonendes und effizientes Waschen\r\nTrommelreinigung mit Erinnerungsfunktion\r\n32 cm-Bullauge, Alu-Look, wei\u00df mit 171\u00b0 T\u00fcr\u00f6ffnungswinkel\r\nKomfortverschluss\r\nNachlegefunktion\r\nEcoSilence Drive: leiser Motor mit langer Lebensdauer\r\nAntiVibration Design: mehr Stabilit\u00e4t und Laufruhe\r\nGer\u00e4uschd\u00e4mmung\r\nAquaSensor f\u00fcr optimale Sp\u00fclergebnisse\r\nDurchflusssensor f\u00fcr optimalen Wasserverbrauch\r\nActiveWaterPlus: ressourcenschonendes Wassermanagement\r\nAquaStop mit lebenslanger Garantie gegen Wassersch\u00e4den\r\nStufenlose Mengenautomatik\r\nVerbrauchsanzeige: Angabe zu Strom- und Wasserverbrauch\r\nProgrammw\u00e4hler mit integriertem Ein-/Ausschalter\r\nGro\u00dfes, \u00fcbersichtliches LED-Display f\u00fcr Programmablauf, Temperaturwahl, max. Schleuderdrehzahl, Restzeitanzeige und 24 h Endezeitvorwahl, i-Dos Einstellungen und Verbrauchsanzeige\r\nSchaumerkennung\r\nUnwuchtkontrolle\r\nKindersicherung\r\nSummer\r\nSelbstreinigungsschublade",
+    "description": "#Beschreibung\r\n\r\nDie Waschmaschine mit intelligenter Dosierautomatik und Home Connect:\r\ni-DOS\u2122: Dosiert voll automatisch die richtige Menge Fl\u00fcssigwaschmittel f\u00fcr perfekte Waschergebnisse.\r\nHome Connect: Vernetzte Hausger\u00e4te von Bosch f\u00fcr einen leichteren Alltag.\r\nBetriebsger\u00e4usch 47dB/71dB: w\u00e4scht und schleudert \u00fcberragend leise.\r\nVarioTrommel: Schonend und effizient Waschen dank einzigartiger Trommel-Struktur.\r\nComfortControl mit Verbrauchsanzeige: einfache Bedienung und Angabe zu Strom- und Wasserverbrauch.\r\n\r\n#Spezifikationen\r\nNennkapazit\u00e4t: 9 kg\r\nEnergieeffizienzklasse: A+++\r\n30% sparsamer (152kWh /Jahr) als der Grenzwert (217 kWh/Jahr) der Energieeffizienzklasse A+++ in der Kategorie 9 kg nach der EU-Verordnung 1061/2010\r\nEnergieverbrauch des Standardprogramms Baumwolle 60\u00b0C 0.92 kWh bei vollst\u00e4ndiger Bef\u00fcllung und 0.6 kWh bei Teilbef\u00fcllung sowie 0.42 kWh im Standardprogramm Baumwolle 40\u00b0C bei Teilbef\u00fcllung\r\ngewichtete Leistungsaufnahme im Aus-Zustand / unausgeschaltetem Zustand: 0.12 W / 0.43 W\r\nWasserverbrauch von 11220 Liter/Jahr auf der Grundlage von 220 Standard-Waschzyklen f\u00fcr 60\u00b0C- und 40\u00b0C-Baumwollprogramme bei vollst\u00e4ndiger Bef\u00fcllung und Teilbef\u00fcllung. Der tats\u00e4chliche Wasserverbrauch h\u00e4ngt von der Art der Nutzung des Ger\u00e4ts ab.\r\nSchleudereffizienzklasse: B\r\nmax. Schleuderdrehzahl: 1400 U/min\r\nRestfeuchte: 53 %\r\nDie Standard-Waschprogramme, auf die sich die Informationen auf dem Etikett und im Datenblatt beziehen, sind Baumwolle 60\u00b0 Eco und Baumwolle Eco 40\u00b0. Diese Programme eignen sich zur Reinigung normal verschmutzter Baumwollw\u00e4sche und sind in Bezug auf den kombinierten Energie- und Wasserverbrauch am effizientesten. Die tats\u00e4chliche Temperatur kann bei dieser Kombination von der angegebenen Programmtemperatur abweichen, Waschzeiten werden zugunsten eines niedrigeren Energieverbrauchs verl\u00e4ngert. Dabei ist immer eine Waschwirkung A sichergestellt.\r\nProgrammdauer des Standardprogramms Baumwolle 60 \u00b0C 275 min bei vollst\u00e4ndiger Bef\u00fcllung und 270 min bei Teilbef\u00fcllung sowie im Standardprogramm Baumwolle 40 \u00b0C 270 min bei Teilbef\u00fcllung\r\nDauer des unausgeschalteten Zustands: 15 min\r\nGer\u00e4uschwert Waschen im Standardprogramm Baumwolle 60\u00b0C bei vollst\u00e4ndiger Bef\u00fcllung in dB (A) re 1 pW: 47\r\nGer\u00e4uschwert Schleudern im Standardprogramm Baumwolle 60\u00b0C bei vollst\u00e4ndiger Bef\u00fcllung in dB (A) re 1 pW: 71\r\n\u2022 \r\nProgramme\r\nSpezialprogramme: Jeans/Dunkle W\u00e4sche, Hemden/Blusen, Extra Kurz 15', Schnell/Mix, Automatik Sanft, AllergiePlus, Automatik Intensiv, Trommel reinigen (mit Erinnerungsfunktion), Wolle-Handw\u00e4sche, Fein/Seide\r\n\u2022 \r\nOptionen\r\nHome Connect f\u00e4hig\r\nVarioPerfect: zeit- oder energieoptimierte Programme mit perfektem Waschergebnis\r\nTouchControl-Tasten: Temperatur, Drehzahlabwahl, Vorw\u00e4sche, EcoPerfect, SpeedPerfect, i-DOS 1, i-DOS 2 und 24 h Start in\r\ni-DOS: dosiert vollautomatisch Fl\u00fcssigwaschmittel und Weichsp\u00fcler\r\n\u2022 \r\nKomfort und Sicherheit\r\nTrommelinnenbeleuchtung: LED\r\nVarioTrommel: schonendes und effizientes Waschen\r\nTrommelreinigung mit Erinnerungsfunktion\r\n32 cm-Bullauge, Alu-Look, wei\u00df mit 171\u00b0 T\u00fcr\u00f6ffnungswinkel\r\nKomfortverschluss\r\nNachlegefunktion\r\nEcoSilence Drive: leiser Motor mit langer Lebensdauer\r\nAntiVibration Design: mehr Stabilit\u00e4t und Laufruhe\r\nGer\u00e4uschd\u00e4mmung\r\nAquaSensor f\u00fcr optimale Sp\u00fclergebnisse\r\nDurchflusssensor f\u00fcr optimalen Wasserverbrauch\r\nActiveWaterPlus: ressourcenschonendes Wassermanagement\r\nAquaStop mit lebenslanger Garantie gegen Wassersch\u00e4den\r\nStufenlose Mengenautomatik\r\nVerbrauchsanzeige: Angabe zu Strom- und Wasserverbrauch\r\nProgrammw\u00e4hler mit integriertem Ein-/Ausschalter\r\nGro\u00dfes, \u00fcbersichtliches LED-Display f\u00fcr Programmablauf, Temperaturwahl, max. Schleuderdrehzahl, Restzeitanzeige und 24 h Endezeitvorwahl, i-Dos Einstellungen und Verbrauchsanzeige\r\nSchaumerkennung\r\nUnwuchtkontrolle\r\nKindersicherung\r\nSummer\r\nSelbstreinigungsschublade",
     "image1": "products/bosch_WAWH8690_1.jpg",
     "image2": "products/bosch_WAWH869_2.jpg",
     "image3": "products/bosch_WAWH869_3.jpg",
@@ -1682,10 +1702,10 @@
     "name": "QIVICON Home Base",
     "provider": 40,
     "product_type": 1,
-    "serial_number": "------",
+    "serial_number": "544178",
     "price": 149.0,
-    "efficiency": 0.0,
-    "description": "#Beschreibung\r\n\r\nDie Qivicon Home Base ist quasi das Gateway, das ben\u00f6tigt wird um die einzelnen Endger\u00e4te anzusteuern, die genannten Protokolle unterst\u00fctzt das System\r\n\r\n#Spezifikationen\r\n\r\nNetzwerkverbindung: LAN(Ethernet)IEEE802.3u10/100Mbps, RJ45 / WLANIEEE802.11b/g/n,2.4GHz                 PAN/Funkschnittstellen: \r\nHomeMatic / Homematic IP* 868.3 MHz/869.525 MHz\r\nZigBeePro / Thread* IEEE802.15.4, 2.4GHz\r\nDECTULE* EN300175-2/3/4/5/7, 1.9GHz\r\nBluetooth Smart Ready* IEEE802.15.1 Bluetooth 4.1, 2.4GHz\"",
+    "efficiency": 7.0,
+    "description": "#Beschreibung\r\n\r\nDie Qivicon Home Base ist quasi das Gateway, das ben\u00f6tigt wird um die einzelnen Endger\u00e4te anzusteuern, die genannten Protokolle unterst\u00fctzt das System\r\n\r\n#Spezifikationen\r\n\r\n- Netzwerkverbindung: LAN(Ethernet)IEEE802.3u10/100Mbps, RJ45 / WLANIEEE802.11b/g/n,2.4GHz\r\n- PAN/Funkschnittstellen: \r\n- HomeMatic / Homematic IP* 868.3 MHz/869.525 MHz\r\n- ZigBeePro / Thread* IEEE802.15.4, 2.4GHz\r\n- DECTULE* EN300175-2/3/4/5/7, 1.9GHz\r\n- Bluetooth Smart Ready* IEEE802.15.1 Bluetooth 4.1, 2.4GHz\"",
     "image1": "products/smarthome-home-base-neue-generation-details.png",
     "image2": "",
     "image3": "",
@@ -1707,6 +1727,93 @@
       54,
       1,
       46
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 55,
+  "fields": {
+    "name": "Jung Smart Radio Wecker",
+    "provider": 5,
+    "product_type": 30,
+    "serial_number": "RAD A 508",
+    "price": 97.25,
+    "efficiency": 3.0,
+    "description": "#Beschreibung\r\n\r\nOb als Weckruf, musikalische Unterhaltung im Bad oder unterhaltend beim Fr\u00fchst\u00fcck: Das neue Smart Radio ist ein treuer Begleiter - den ganzen Tag. Das JUNG Smart Radio im Schalterdesign ist durch das Touch-Display in Schwarz oder Wei\u00df und seiner einzigartigen Glasfront optisch ein Highlight. Shortcuts erm\u00f6glichen den schnellen Zugriff aus Weck- und Sleep-Timer-Funktion sowie die Favoritenliste. Die Helligkeit des Displays und der Tasten l\u00e4sst sich nach Bedarf auf den Radiobetrieb oder den Nachtmodus einstellen.\r\n\r\n#Spezifikationen\r\n\r\n--------------------------",
+    "image1": "products/Jung_smart_wecker_1.JPG",
+    "image2": "products/Jung_smart_wecker_2.JPG",
+    "image3": "products/Jung_smart_wecker_33.JPG",
+    "end_of_life": false,
+    "renovation_required": false,
+    "leader_protocol": [],
+    "follower_protocol": [
+      11
+    ],
+    "features": [
+      13,
+      43,
+      9
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 56,
+  "fields": {
+    "name": "Jung Visu Pro Server",
+    "provider": 5,
+    "product_type": 1,
+    "serial_number": "JVP-SERVER-H",
+    "price": 2754.0,
+    "efficiency": 7.0,
+    "description": "#Beschreibung\r\n\r\n* Visualisieren und Bedienen von Anlagenzust\u00e4nden in der Geb\u00e4udeautomation in Verbindung mit Software JUNG Visu Pro ist jetzt ganz einfach\r\n* Tischger\u00e4t, Montage auf Hutschiene nach DIN EN 60715 m\u00f6glich\r\n* Max. Umfang des Visualisierungsprojektes wie Vorlage aus dem JUNG Smart Assistant\r\n* Anbindung an den KNX-Bus oder KNX IP-Schnittstelle\r\n\r\n#Spezifikationen\r\n\r\n* L\u00fcfterloser Mini-PC/Basisger\u00e4t\r\n* JUNG Visu Pro Software vorinstalliert und freigeschaltet\r\n* Datenschnittstelle zum KNX (z.B. IPS 200 REG)\r\n* Windows 10 Home (64-Bit) vorinstalliert\r\n* Quadcore Intel Atom Prozessor\r\n* 2 GB RAM\r\n* 32 GB Interner Speicher, teilweise durch Betriebssystem belegt\r\n* 1 x HDMI 1.4\r\n* 2 x USB 2.0\r\n* 1 x USB 3.0\r\n* 1 x LAN RJ45\r\n* Dualband WLAN, KNX und Kabel-KNX\r\n* Steckernetzteil 100 ... 240 V AC / 5 V DC / 2 A (im Lieferumfang)\r\n* Die Visualisierung ist \u00fcber Endger\u00e4te mit HTML5-f\u00e4higem Browser (z.B. Chrome, Firefox oder Safari in der aktuellen Version) m\u00f6glich\r\n* Zugriff von max. 10 unterschiedlichen Clients m\u00f6glich",
+    "image1": "products/Jung_visu_server_1.jpg",
+    "image2": "products/Jung_visu_server_2.jpg",
+    "image3": "",
+    "end_of_life": false,
+    "renovation_required": false,
+    "leader_protocol": [
+      14,
+      10,
+      11
+    ],
+    "follower_protocol": [],
+    "features": [
+      14,
+      27,
+      1,
+      13,
+      43,
+      47,
+      12
+    ]
+  }
+},
+{
+  "model": "app.product",
+  "pk": 57,
+  "fields": {
+    "name": "Samsung Curved-LED-Fernseher",
+    "provider": 39,
+    "product_type": 55,
+    "serial_number": "UE65KU6179UXZG",
+    "price": 1399.99,
+    "efficiency": 153.0,
+    "description": "#Beschreibung\r\n\r\nDer 65 Zoll (163 cm)-Curved-LED-TV ist ein Ger\u00e4t von Samsung. Die beeindruckende SUHD-Bildqualit\u00e4t des Samsung UE65KU6179UXZG mit einer Aufl\u00f6sung von 3840 x 2160, gew\u00e4hrt ein Entertainment-Erlebnis der Spitzenklasse. Noch tiefer in das Fernseherlebnis eintauchen: Das innovative Curved-LED-Panel des Samsung UE65KU6179UXZG fasziniert mit seinem Panorama-Effekt. Das Ger\u00e4t kann mit WLAN kabellos auf Smart-TV-Funktionen wie Apps zugreifen. Auch das Surfen im Internet mithilfe des Browsers ist kein Problem. Dieser Fernseher bringt ein WLAN-Modul mit. Mit dem Doppeltuner bietet dieses Ger\u00e4t digitalen Kabelempfang (DVB-C) und digitale HD-Satellitenprogramme (DVB-S2).\r\n\r\n#Spezifikationen\r\n\r\n* 163 cm (65\"), 4k Ultra HD, LED TV\r\n* Smart TV, PQI: 1400, Wide Color Enhancer (Plus)\r\n* Gebogener Curved-LED-TV f\u00fcr ein revolution\u00e4res Seh-Erlebnis\r\n* DLNA, CI+, WLAN, HbbTV, 3x HDMI, 2x USB, Dolby Digital Plus\r\n* Energieeffizienzklasse: A\r\n* Bildschirmdiagonale in cm: 163\r\n* Bildschirmdiagonale in Zoll: 65\r\n* Leistungsaufnahme im Standby: 0,3 W\r\n* Aufl\u00f6sung in Pixel (Horizontal x Vertikal): 3840 x 2160\r\n* Betriebsspannung: 220-240 Volt",
+    "image1": "products/fernser.jpg",
+    "image2": "products/17172588.jpeg",
+    "image3": "products/Samsung_fernseher_3.JPG",
+    "end_of_life": false,
+    "renovation_required": false,
+    "leader_protocol": [],
+    "follower_protocol": [
+      3
+    ],
+    "features": [
+      13,
+      47,
+      45
     ]
   }
 },
@@ -2074,7 +2181,7 @@
   "model": "app.producttype",
   "pk": 43,
   "fields": {
-    "type_name": "Fernseher",
+    "type_name": "Smart-Fernseher",
     "svg_id": "Fernseher",
     "icon": "productType/house_overlay_picture/noun_645896.svg",
     "used_as_product_type_filter_by": []
@@ -2177,6 +2284,16 @@
     "type_name": "Solaranlage",
     "svg_id": "Solar_outdoor",
     "icon": "productType/house_overlay_picture/noun_124567.svg",
+    "used_as_product_type_filter_by": []
+  }
+},
+{
+  "model": "app.producttype",
+  "pk": 55,
+  "fields": {
+    "type_name": "Smart TV",
+    "svg_id": "Fernseher",
+    "icon": "productType/house_overlay_picture/noun_645897.png",
     "used_as_product_type_filter_by": []
   }
 },
@@ -3823,6 +3940,13 @@
   }
 },
 {
+  "model": "app.feature",
+  "pk": 122,
+  "fields": {
+    "name": "operates_Hometrainer"
+  }
+},
+{
   "model": "app.metadevice",
   "pk": 1,
   "fields": {
@@ -4318,6 +4442,30 @@
     "is_broker": false,
     "implementation_requires": [
       56
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 52,
+  "fields": {
+    "name": "Endpoint: ",
+    "is_broker": false,
+    "implementation_requires": [
+      47,
+      45
+    ]
+  }
+},
+{
+  "model": "app.metadevice",
+  "pk": 53,
+  "fields": {
+    "name": "Endpoint: ",
+    "is_broker": false,
+    "implementation_requires": [
+      77,
+      122
     ]
   }
 },
@@ -4982,6 +5130,42 @@
   }
 },
 {
+  "model": "app.scenariocategoryrating",
+  "pk": 61,
+  "fields": {
+    "scenario": 17,
+    "category": 8,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 62,
+  "fields": {
+    "scenario": 17,
+    "category": 10,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 63,
+  "fields": {
+    "scenario": 17,
+    "category": 7,
+    "rating": 1
+  }
+},
+{
+  "model": "app.scenariocategoryrating",
+  "pk": 64,
+  "fields": {
+    "scenario": 17,
+    "category": 9,
+    "rating": 1
+  }
+},
+{
   "model": "auth.group",
   "fields": {
     "name": "Marketing",
@@ -4999,7 +5183,7 @@
   "model": "auth.user",
   "fields": {
     "password": "pbkdf2_sha256$30000$1SNZTPCnQ5JQ$9UOgz+vmgt8/9wehyiy9uJUVhu0mBDwFrlcoF5RQhr4=",
-    "last_login": "2017-02-11T09:57:07.607Z",
+    "last_login": "2017-03-31T15:36:54.570Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Herr",
@@ -5027,10 +5211,10 @@
     "date_joined": "2016-06-22T22:18:58Z",
     "groups": [
       [
-        "Personalverwaltung"
+        "Marketing"
       ],
       [
-        "Marketing"
+        "Personalverwaltung"
       ]
     ],
     "user_permissions": []
@@ -5085,10 +5269,10 @@
     "date_joined": "2016-06-12T11:35:56Z",
     "groups": [
       [
-        "Personalverwaltung"
+        "Marketing"
       ],
       [
-        "Marketing"
+        "Personalverwaltung"
       ]
     ],
     "user_permissions": []
@@ -5262,126 +5446,6 @@
     "date_joined": "2016-06-30T14:30:57.624Z",
     "groups": [],
     "user_permissions": []
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "0oh5vf5kp01kvaqevsc3lvte74b2rgbn",
-  "fields": {
-    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
-    "expire_date": "2017-02-11T15:28:03.037Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "3tsdkacdbs1u0e7zzuejoh9c8ubfovwg",
-  "fields": {
-    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
-    "expire_date": "2017-02-11T14:22:56.929Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "3zlz31s76hplqcmzc47e9l6j5mks8boo",
-  "fields": {
-    "session_data": "OWNkMjM4ZTY1ZTgzZDlmMGUwOWUxMWQzNGUzM2RkMzE0ZjIyN2EzMDp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
-    "expire_date": "2017-02-19T17:40:53.979Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "6zytjp0i9vqk2g8k2m6iojz92nkynosb",
-  "fields": {
-    "session_data": "ZDA3YmEyZWE0NDRiMjI0YzdkOTliMDRhZmJhYWU4MTU4ZGQ5NWYwZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
-    "expire_date": "2017-02-21T16:35:35.182Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "efz275d47clbt77h5o5e3sla8nk5n5sd",
-  "fields": {
-    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
-    "expire_date": "2017-02-17T23:09:33.020Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "fo7p5p2o0rlfvp1m6r1amh1l8vcz0gz7",
-  "fields": {
-    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
-    "expire_date": "2017-02-17T10:10:13.599Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "inn0w2o6hhkv1rynb252my9tks4wszua",
-  "fields": {
-    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
-    "expire_date": "2017-02-12T16:14:46.781Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "lbcnirn1x8unq9nmc8wdgegqx6p2bd0j",
-  "fields": {
-    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
-    "expire_date": "2017-02-15T13:17:36.289Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "mhfj1xumuanfgcxnf406wdqt2rjq2j2k",
-  "fields": {
-    "session_data": "ZDA3YmEyZWE0NDRiMjI0YzdkOTliMDRhZmJhYWU4MTU4ZGQ5NWYwZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
-    "expire_date": "2017-02-20T18:14:57.852Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "owm3gfzgz4075pphdr3zcr06mlpeodfs",
-  "fields": {
-    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
-    "expire_date": "2017-02-16T17:38:30.728Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "prvgykxfhqm17y6wbgx26ubtrik7p56k",
-  "fields": {
-    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
-    "expire_date": "2017-02-14T15:11:10.363Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "qi70n27et4210y256991db84a59k0hki",
-  "fields": {
-    "session_data": "MDQ1OTQ3NWI5NTRmNjhmYzliMmVjZTE1ZWJmNGE4ZWQzMDEzZjgxNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZDYyY2M0NWJjYjQzYjFiMTYyMTQzMThjMjA1ZDkxM2MwNzNiZTEwIn0=",
-    "expire_date": "2017-02-11T14:23:37.144Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "un61otve35uhe7akl8rfuatxn7j5zn04",
-  "fields": {
-    "session_data": "ZDA3YmEyZWE0NDRiMjI0YzdkOTliMDRhZmJhYWU4MTU4ZGQ5NWYwZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
-    "expire_date": "2017-02-13T17:13:30.337Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "unu71r9pf7l6l6q5u1w8u48s9sq0jxtq",
-  "fields": {
-    "session_data": "OWNkMjM4ZTY1ZTgzZDlmMGUwOWUxMWQzNGUzM2RkMzE0ZjIyN2EzMDp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
-    "expire_date": "2017-02-25T09:57:07.628Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "wjemhbzosturx1hzk5l4auzg0tto8ayn",
-  "fields": {
-    "session_data": "ZDA3YmEyZWE0NDRiMjI0YzdkOTliMDRhZmJhYWU4MTU4ZGQ5NWYwZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImNkNjJjYzQ1YmNiNDNiMWIxNjIxNDMxOGMyMDVkOTEzYzA3M2JlMTAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
-    "expire_date": "2017-02-20T18:22:23.757Z"
   }
 },
 {
